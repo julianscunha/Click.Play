@@ -170,13 +170,38 @@
     "semantic_hash": ""
   },
   "docs/IMPLEMENTATION-PLAN.md": {
-    "mtime": 1786653115.8504083,
-    "ast_hash": "9b18da605741dbc66a9dc0721d6507f5",
+    "mtime": 1786655373.0928931,
+    "ast_hash": "51fd8d03b21d16d00793c7335ea5bf13",
     "semantic_hash": ""
   },
   "pnpm-workspace.yaml": {
     "mtime": 1786653350.0474992,
     "ast_hash": "516da3041ff18104e3d8ec8014a973e3",
+    "semantic_hash": ""
+  },
+  ".claude/agents/agents-orchestrator.md": {
+    "mtime": 1786655474.8631072,
+    "ast_hash": "a47e509bb98047195f93ae3dbae2d453",
+    "semantic_hash": ""
+  },
+  ".claude/agents/marketing-content-creator.md": {
+    "mtime": 1786655555.5989099,
+    "ast_hash": "9e2ade728189a0685228c2a64113c864",
+    "semantic_hash": ""
+  },
+  ".claude/agents/marketing-short-video-editing-coach.md": {
+    "mtime": 1786655571.5786245,
+    "ast_hash": "b3530d252459aa424fcefc98a026eca1",
+    "semantic_hash": ""
+  },
+  ".claude/agents/marketing-social-media-strategist.md": {
+    "mtime": 1786655577.8826044,
+    "ast_hash": "681cc9869f74852d38972c106ed88b1d",
+    "semantic_hash": ""
+  },
+  ".claude/agents/marketing-video-optimization-specialist.md": {
+    "mtime": 1786655583.3606162,
+    "ast_hash": "8f703f9e970993942668c069c1c28701",
     "semantic_hash": ""
   }
 }

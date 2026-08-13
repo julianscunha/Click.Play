@@ -1,16 +1,16 @@
 # Graph Report - Click.Play  (2026-08-13)
 
 ## Corpus Check
-- 34 files · ~3,586 words
+- 39 files · ~13,912 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 285 nodes · 265 edges · 29 communities (28 shown, 1 thin omitted)
+- 404 nodes · 379 edges · 34 communities (33 shown, 1 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `504cfd7f`
+- Built from commit: `5f49150f`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -35,18 +35,23 @@
 - video-engine/tsconfig.json
 - api/src/index.ts
 - App
+- AgentsOrchestrator Agent Personality
+- Core Mission
+- Social Media Strategist Agent
+- Marketing Video Optimization Specialist Agent
+- Marketing Content Creator Agent
 
 ## God Nodes (most connected - your core abstractions)
 1. `Click.Play — Implementation Plan` - 13 edges
-2. `compilerOptions` - 13 edges
-3. `scripts` - 7 edges
-4. `scripts` - 7 edges
-5. `scripts` - 7 edges
-6. `compilerOptions` - 5 edges
-7. `createConsoleLogger()` - 5 edges
-8. `compilerOptions` - 4 edges
-9. `lib` - 4 edges
-10. `scripts` - 4 edges
+2. `AgentsOrchestrator Agent Personality` - 13 edges
+3. `Social Media Strategist Agent` - 13 edges
+4. `compilerOptions` - 13 edges
+5. `Core Mission` - 10 edges
+6. `🤖 Available Specialist Agents` - 8 edges
+7. `Marketing Video Optimization Specialist Agent` - 8 edges
+8. `0.2 Correção arquitetural: estratégia de produção visual (não é slideshow)` - 7 edges
+9. `Marketing Short-Video Editing Coach` - 7 edges
+10. `scripts` - 7 edges
 
 ## Surprising Connections (you probably didn't know these)
 - None detected - all connections are within the same source files.
@@ -54,7 +59,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (29 total, 1 thin omitted)
+## Communities (34 total, 1 thin omitted)
 
 ### Community 0 - "scripts"
 Cohesion: 0.12
@@ -101,8 +106,8 @@ Cohesion: 0.15
 Nodes (13): devDependencies, @types/react, @types/react-dom, typescript, vite, @vitejs/plugin-react, vitest, typescript (+5 more)
 
 ### Community 11 - "Click.Play — Implementation Plan"
-Cohesion: 0.12
-Nodes (15): 0.1 Público-alvo e decisões de produto derivadas, 0. Resumo da decisão, 10. Critérios de aceite, 1. Arquitetura proposta, 2. Matriz de reaproveitamento, 3. Componentes reutilizados (quase sem mudança), 4. Componentes adaptados (reescrita parcial), 5. Componentes removidos (+7 more)
+Cohesion: 0.08
+Nodes (24): 0.1 Público-alvo e decisões de produto derivadas, 0.2 Correção arquitetural: estratégia de produção visual (não é slideshow), 0. Resumo da decisão, 10. Critérios de aceite, 1. Arquitetura proposta, 2. Matriz de reaproveitamento, 3. Componentes reutilizados (quase sem mudança), 4. Componentes adaptados (reescrita parcial) (+16 more)
 
 ### Community 12 - "web/tsconfig.json"
 Cohesion: 0.17
@@ -132,8 +137,28 @@ Nodes (7): compilerOptions, outDir, rootDir, extends, include, src, ../../tsconf
 Cohesion: 0.47
 Nodes (3): app, port, buildServer()
 
+### Community 29 - "AgentsOrchestrator Agent Personality"
+Cohesion: 0.05
+Nodes (37): 🚀 Advanced Pipeline Capabilities, AgentsOrchestrator Agent Personality, Autonomous Operation, 🤖 Available Specialist Agents, Completion Summary Template, Context-Aware Agent Spawning, 🚨 Critical Rules You Must Follow, 🎨 Design & UX Agents (+29 more)
+
+### Community 30 - "Core Mission"
+Cohesion: 0.07
+Nodes (26): AI-Assisted Editing, Audio Engineering, Audio Matters as Much as Video, Color Grading & Correction, Communication Style, Composition & Camera Language, Core Mission, Critical Rules (+18 more)
+
+### Community 31 - "Social Media Strategist Agent"
+Cohesion: 0.11
+Nodes (18): Campaign Management, Campaign Planning, Communication Style, Core Capabilities, Cross-Platform Integration, Decision Framework, Example Use Cases, Learning & Memory (+10 more)
+
+### Community 32 - "Marketing Video Optimization Specialist Agent"
+Cohesion: 0.11
+Nodes (18): Algorithmic Optimization, Analytics & Monetization, Clickability Without Clickbait, Content & Visual Strategy, 🚨 Critical Rules You Must Follow, Marketing Video Optimization Specialist Agent, Retention First, Step 1: Research & Discovery (+10 more)
+
+### Community 33 - "Marketing Content Creator Agent"
+Cohesion: 0.29
+Nodes (6): Core Capabilities, Decision Framework, Identity & Role Definition, Marketing Content Creator Agent, Specialized Skills, Success Metrics
+
 ## Knowledge Gaps
-- **167 isolated node(s):** `Arquétipos novos (Click.Play)`, `TTS: default remoto`, `0. Resumo da decisão`, `1. Arquitetura proposta`, `2. Matriz de reaproveitamento` (+162 more)
+- **258 isolated node(s):** `Arquétipos novos (Click.Play)`, `TTS: múltiplos providers, default remoto grátis`, `Terminologia (não confundir)`, `As duas abstrações (substituindo "AssetProvider" como abstração principal)`, `Modelo de Scene: de "1 visual" para composição` (+253 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **1 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -141,11 +166,11 @@ Nodes (3): app, port, buildServer()
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `dependencies` connect `dependencies` to `api/package.json`?**
-  _High betweenness centrality (0.009) - this node is a cross-community bridge._
+  _High betweenness centrality (0.005) - this node is a cross-community bridge._
 - **Why does `devDependencies` connect `devDependencies` to `web/package.json`?**
-  _High betweenness centrality (0.007) - this node is a cross-community bridge._
-- **What connects `Arquétipos novos (Click.Play)`, `TTS: default remoto`, `0. Resumo da decisão` to the rest of the system?**
-  _167 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _High betweenness centrality (0.003) - this node is a cross-community bridge._
+- **What connects `Arquétipos novos (Click.Play)`, `TTS: múltiplos providers, default remoto grátis`, `Terminologia (não confundir)` to the rest of the system?**
+  _258 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `scripts` be split into smaller, more focused modules?**
   _Cohesion score 0.125 - nodes in this community are weakly interconnected._
 - **Should `providers/package.json` be split into smaller, more focused modules?**
