@@ -1,6 +1,31 @@
 # Click.Play — Implementation Plan
 
-Status: Fase 0 concluída. Nenhum código de produto escrito ainda.
+Status: Fase 0+1 concluídas. Decisões de produto (arquétipos) alinhadas com o usuário. Código de domínio ainda não escrito.
+
+## 0.1 Público-alvo e decisões de produto derivadas
+
+Foco de conteúdo: vídeos educativos, vídeos infantis, animações, conteúdo divertido/brincadeiras — além dos casos genéricos (documentário, storytelling, tech, editorial) já cobertos pelos arquétipos do OpenReels. Isso não muda a arquitetura, mas define:
+
+- Arquétipos visuais (§6, `archetype-registry`): usar os **14 do OpenReels + 5 novos** voltados a infantil/educativo/divertido, definidos abaixo. Nenhum corte nos 14 originais — cobrem os casos genéricos que também usaremos.
+- Fase 4 deve criar os 5 JSONs novos em `src/config/archetypes/` (mesmo schema do `ArchetypeConfig`: scenePacing, defaultTransition, transitionDurationFrames, captionStyle, captionChunkSize, captionLingerS, colorPalette, textCardFont, motionIntensity, artStyle, lighting, compositionRules, culturalMarkers, mood, antiArtifactGuidance, visualColorPalette).
+
+### Arquétipos novos (Click.Play)
+
+| id | pacing | transição | legenda | mood | paleta | estilo visual |
+|---|---|---|---|---|---|---|
+| `kids-cartoon` | fast | slide_left | bold_outline | Alegre, brincalhão, energético, engraçado | amarelo-sol, vermelho-cereja, azul-céu, verde-limão, rosa-chiclete | cartoon 2D flat, formas arredondadas, olhos grandes, traço grosso, sem sombra realista |
+| `storybook-picturebook` | moderate | crossfade | gradient_rise | Aconchegante, mágico, gentil, encantador | pastel-lavanda, pêssego suave, verde-sálvia, creme, dourado-suave | ilustração de livro infantil, aquarela+nanquim, texturado à mão, luz suave |
+| `edu-explainer` | fast | slide_left | box_highlight | Curioso, claro, amigável, animado | branco, azul-turquesa, laranja-vívido, roxo-suave, amarelo-canário | vetor flat estilo explicativo (tipo Kurzgesagt), ícones simples, formas geométricas, sem textura |
+| `claymation-playful` | moderate | wipe | color_highlight | Divertido, tátil, peculiar, caloroso | terracota, mostarda, verde-oliva, creme, marrom-chocolate | stop-motion massinha/feltro, textura tátil visível, luz de estúdio suave, imperfeições propositais |
+| `musical-singalong` | fast | zoom | karaoke_sweep | Alegre, saltitante, festivo, contagiante | rosa-chiclete, amarelo-sol, azul-céu, verde-grama, laranja-vivo | animação de recorte/fantoche (cutout), formas bouncy, movimento no ritmo da música |
+
+`musical-singalong` usa `karaoke_sweep` (destaque palavra-por-palavra já existente no motor de legendas) — encaixe natural pra conteúdo cantado.
+
+### TTS: default remoto
+
+Sem Tavily/web search no research (item confirmado — LLM usa conhecimento próprio, sem dependência/custo extra).
+
+TTS: múltiplos providers disponíveis via `TTSProvider` (interface já reaproveitada do OpenReels: `openai.ts`, `elevenlabs.ts`, `kokoro.ts`, `gemini.ts`, `inworld.ts` — trocar é config, não código novo). **Default = OpenAI TTS** (remoto, custo baixo por vídeo, sem risco de build nativo quebrar no Windows). ElevenLabs disponível como upgrade de qualidade para quem quiser pagar mais. Kokoro (local) fica disponível mas não é o default — evita depender de build nativo (`onnxruntime-node`/`sharp`) logo de cara.
 
 ## 0. Resumo da decisão
 
