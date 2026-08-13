@@ -1,0 +1,22 @@
+{
+  "scenePacing": "moderate",
+  "defaultTransition": "wipe",
+  "transitionDurationFrames": 14,
+  "captionStyle": "color_highlight",
+  "captionChunkSize": 5,
+  "captionLingerS": 0.3,
+  "colorPalette": {
+    "background": "#f2e4d0",
+    "accent": "#b5651d",
+    "text": "#3a2a1a"
+  },
+  "textCardFont": "Baloo 2",
+  "motionIntensity": 1.0,
+  "artStyle": "Stop-motion claymation/felt look, visible tactile texture, hand-crafted imperfections, soft rounded forms.",
+  "lighting": "Soft studio lighting, gentle shadows, warm tabletop-photography feel.",
+  "compositionRules": "Tabletop/diorama framing, tactile foreground props, upper third kept clear for captions.",
+  "culturalMarkers": "Handmade, cozy craft-room settings — neutral, playful, not tied to a specific culture unless the topic requires it.",
+  "mood": "Divertido, tátil, peculiar, caloroso.",
+  "antiArtifactGuidance": "Consistent clay/felt texture across scenes, visible but not distracting fingerprints/imperfections, proportional character sculpting.",
+  "visualColorPalette": ["terracota", "mostarda", "verde-oliva", "creme", "marrom-chocolate"]
+}

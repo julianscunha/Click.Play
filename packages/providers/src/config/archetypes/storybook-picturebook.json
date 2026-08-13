@@ -1,0 +1,22 @@
+{
+  "scenePacing": "moderate",
+  "defaultTransition": "crossfade",
+  "transitionDurationFrames": 18,
+  "captionStyle": "gradient_rise",
+  "captionChunkSize": 5,
+  "captionLingerS": 0.4,
+  "colorPalette": {
+    "background": "#f6efe4",
+    "accent": "#c9a86a",
+    "text": "#3a3226"
+  },
+  "textCardFont": "Fredoka",
+  "motionIntensity": 0.8,
+  "artStyle": "Children's picture-book illustration, watercolor and ink, hand-textured brushwork, soft edges, gentle imperfection.",
+  "lighting": "Soft diffuse light, warm gentle glow, no harsh shadows.",
+  "compositionRules": "Centered storybook framing, generous whitespace/margins, upper third kept clear for captions.",
+  "culturalMarkers": "Timeless, cozy settings — cottages, forests, bedtime scenes — matching a gentle bedtime-story tone.",
+  "mood": "Aconchegante, mágico, gentil, encantador.",
+  "antiArtifactGuidance": "Consistent watercolor texture across scenes, no photorealistic intrusion, soft consistent linework, proportional characters.",
+  "visualColorPalette": ["pastel-lavanda", "pêssego suave", "verde-sálvia", "creme", "dourado-suave"]
+}

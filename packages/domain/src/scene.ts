@@ -55,7 +55,8 @@ export type VisualElement = z.infer<typeof VisualElement>;
 export const Scene = z
   .object({
     id: z.string().min(1),
-    durationSeconds: z.number().positive(),
+    // Duração real vem do alinhamento de TTS (Fase 5), não é autorada pelo Creative Director.
+    durationSeconds: z.number().positive().optional(),
     visualStrategy: VisualStrategy,
     elements: z.array(VisualElement).min(1),
     scriptLine: z.string().min(1),

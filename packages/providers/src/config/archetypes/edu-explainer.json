@@ -1,0 +1,22 @@
+{
+  "scenePacing": "fast",
+  "defaultTransition": "slide_left",
+  "transitionDurationFrames": 10,
+  "captionStyle": "box_highlight",
+  "captionChunkSize": 5,
+  "captionLingerS": 0.25,
+  "colorPalette": {
+    "background": "#ffffff",
+    "accent": "#ff8c00",
+    "text": "#1c1c2e"
+  },
+  "textCardFont": "Inter",
+  "motionIntensity": 1.2,
+  "artStyle": "Flat vector explainer style (Kurzgesagt-like), simple geometric shapes, clean iconography, no texture.",
+  "lighting": "Flat, no shading, uniform color fills.",
+  "compositionRules": "Clear diagrammatic layout, icons/labels legible at small scale, upper third kept clear for captions.",
+  "culturalMarkers": "Neutral, universally legible iconography — avoid culturally specific imagery unless the topic requires it.",
+  "mood": "Curioso, claro, amigável, animado.",
+  "antiArtifactGuidance": "Consistent stroke width, no gradient bleed, precise geometric shapes, legible labels.",
+  "visualColorPalette": ["branco", "azul-turquesa", "laranja-vívido", "roxo-suave", "amarelo-canário"]
+}

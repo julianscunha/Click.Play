@@ -1,0 +1,22 @@
+{
+  "scenePacing": "fast",
+  "defaultTransition": "slide_left",
+  "transitionDurationFrames": 12,
+  "captionStyle": "bold_outline",
+  "captionChunkSize": 4,
+  "captionLingerS": 0.3,
+  "colorPalette": {
+    "background": "#fff8e6",
+    "accent": "#ff4d4d",
+    "text": "#1a1a1a"
+  },
+  "textCardFont": "Baloo 2",
+  "motionIntensity": 1.6,
+  "artStyle": "Flat 2D cartoon illustration, rounded shapes, big expressive eyes, thick clean outlines, no realistic shading or texture.",
+  "lighting": "Flat even lighting, no realistic shadows, bright and cheerful.",
+  "compositionRules": "Large simple foreground subjects, bold silhouettes readable at small scale, upper third kept clear for captions.",
+  "culturalMarkers": "Playful, universally friendly settings — playgrounds, homes, nature — avoiding culturally specific detail unless the topic requires it.",
+  "mood": "Alegre, brincalhão, energético, engraçado.",
+  "antiArtifactGuidance": "Consistent line weight, no melted/extra fingers, proportional rounded character design, no photorealistic textures leaking in.",
+  "visualColorPalette": ["amarelo-sol", "vermelho-cereja", "azul-céu", "verde-limão", "rosa-chiclete"]
+}

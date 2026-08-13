@@ -17,7 +17,7 @@ Foco de conteúdo: vídeos educativos, vídeos infantis, animações, conteúdo 
 | `storybook-picturebook` | moderate | crossfade | gradient_rise | Aconchegante, mágico, gentil, encantador | pastel-lavanda, pêssego suave, verde-sálvia, creme, dourado-suave | ilustração de livro infantil, aquarela+nanquim, texturado à mão, luz suave |
 | `edu-explainer` | fast | slide_left | box_highlight | Curioso, claro, amigável, animado | branco, azul-turquesa, laranja-vívido, roxo-suave, amarelo-canário | vetor flat estilo explicativo (tipo Kurzgesagt), ícones simples, formas geométricas, sem textura |
 | `claymation-playful` | moderate | wipe | color_highlight | Divertido, tátil, peculiar, caloroso | terracota, mostarda, verde-oliva, creme, marrom-chocolate | stop-motion massinha/feltro, textura tátil visível, luz de estúdio suave, imperfeições propositais |
-| `musical-singalong` | fast | zoom | karaoke_sweep | Alegre, saltitante, festivo, contagiante | rosa-chiclete, amarelo-sol, azul-céu, verde-grama, laranja-vivo | animação de recorte/fantoche (cutout), formas bouncy, movimento no ritmo da música |
+| `musical-singalong` | fast | flip | karaoke_sweep | Alegre, saltitante, festivo, contagiante | rosa-chiclete, amarelo-sol, azul-céu, verde-grama, laranja-vivo | animação de recorte/fantoche (cutout), formas bouncy, movimento no ritmo da música |
 
 `musical-singalong` usa `karaoke_sweep` (destaque palavra-por-palavra já existente no motor de legendas) — encaixe natural pra conteúdo cantado.
 

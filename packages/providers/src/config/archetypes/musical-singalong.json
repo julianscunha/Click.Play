@@ -1,0 +1,22 @@
+{
+  "scenePacing": "fast",
+  "defaultTransition": "flip",
+  "transitionDurationFrames": 10,
+  "captionStyle": "karaoke_sweep",
+  "captionChunkSize": 3,
+  "captionLingerS": 0.2,
+  "colorPalette": {
+    "background": "#fff0f5",
+    "accent": "#ff69b4",
+    "text": "#1a1a1a"
+  },
+  "textCardFont": "Baloo 2",
+  "motionIntensity": 1.8,
+  "artStyle": "Cutout/puppet paper-collage animation, bouncy shapes, bold flat colors, playful jointed characters.",
+  "lighting": "Flat bright lighting, no realistic shadow, high contrast and cheerful.",
+  "compositionRules": "Bouncy centered characters synced to a musical beat, upper third kept clear for captions.",
+  "culturalMarkers": "Universal sing-along settings — stages, backyards, playrooms — bright and inclusive.",
+  "mood": "Alegre, saltitante, festivo, contagiante.",
+  "antiArtifactGuidance": "Consistent cutout-paper texture, clean joint/hinge points on characters, no melted shapes.",
+  "visualColorPalette": ["rosa-chiclete", "amarelo-sol", "azul-céu", "verde-grama", "laranja-vivo"]
+}
