@@ -21,11 +21,15 @@ Foco de conteúdo: vídeos educativos, vídeos infantis, animações, conteúdo 
 
 `musical-singalong` usa `karaoke_sweep` (destaque palavra-por-palavra já existente no motor de legendas) — encaixe natural pra conteúdo cantado.
 
-### TTS: default remoto
+### TTS: múltiplos providers, default remoto grátis
 
 Sem Tavily/web search no research (item confirmado — LLM usa conhecimento próprio, sem dependência/custo extra).
 
-TTS: múltiplos providers disponíveis via `TTSProvider` (interface já reaproveitada do OpenReels: `openai.ts`, `elevenlabs.ts`, `kokoro.ts`, `gemini.ts`, `inworld.ts` — trocar é config, não código novo). **Default = OpenAI TTS** (remoto, custo baixo por vídeo, sem risco de build nativo quebrar no Windows). ElevenLabs disponível como upgrade de qualidade para quem quiser pagar mais. Kokoro (local) fica disponível mas não é o default — evita depender de build nativo (`onnxruntime-node`/`sharp`) logo de cara.
+TTS: múltiplos providers selecionáveis na UI (dropdown provider+voz, como MoneyPrinterTurbo). Via `TTSProvider` (interface já reaproveitada do OpenReels): `openai.ts`, `elevenlabs.ts`, `kokoro.ts`, `gemini.ts`, `inworld.ts` — trocar é config, não código novo.
+
+**Componente novo (não existe no OpenReels):** provider `edge-tts` — confirmado por auditoria do `app/services/voice.py` do MoneyPrinterTurbo que o "Azure TTS V1" da UI é na verdade edge-tts (vozes Microsoft Edge), **sem conta Azure, sem API key, grátis**. Cobertura confirmada em `azure_voices.json`: pt-BR (Antonio-M, Francisca-F, Thalita-F) + en-US (~21 vozes, M/F balanceado). **Este é o TTS default do Click.Play** (grátis, cobre pt-BR/en, sem risco de build nativo). Implementar em `packages/providers/src/tts/edge.ts` usando client Node de edge-tts, seguindo a mesma interface `TTSProvider`.
+
+OpenAI TTS e ElevenLabs disponíveis como upgrade pago de qualidade. Kokoro (local) disponível mas não é default — evita depender de build nativo (`onnxruntime-node`/`sharp`) logo de cara.
 
 ## 0. Resumo da decisão
 
@@ -125,14 +129,16 @@ Atribuição MIT (copyright OpenReels/Talha Jubair Siam) mantida em `NOTICE`/cab
 - Job state machine com os estados exatos do spec §23 (QUEUED→...→COMPLETED/FAILED/CANCELLED) — Task Manager do MPT e worker do OpenReels têm noções parecidas mas não esse enum exato
 - Quality Control determinístico pós-render (spec §27) — nenhum dos dois valida o MP4 final de forma estruturada
 - WebUI React própria (`apps/web`) — campos vêm do MPT, componentes são novos
+- `packages/providers/src/tts/edge.ts` — provider edge-tts grátis (pt-BR+en, M/F), não existe no OpenReels, é o TTS default do Click.Play
+- 5 arquétipos novos infantil/educativo/divertido (`kids-cartoon`, `storybook-picturebook`, `edu-explainer`, `claymation-playful`, `musical-singalong`) — ver §0.1
 
 ## 7. Dependências
 
 Manter (via OpenReels): `fastify`, `@fastify/cors`, `@fastify/static`, `remotion` + `@remotion/*` (bundler/cli/player/renderer/transitions/google-fonts), `ai` (Vercel AI SDK) + `@ai-sdk/openai-compatible` + `@openrouter/ai-sdk-provider`, `zod`, `kokoro-js`, `wavefile`, `commander` (só CLI, se mantivermos), `p-limit`.
 
-Adicionar: `drizzle-orm` + `drizzle-kit` + `better-sqlite3` (dev) / `pg` (prod-ready), `vite`, `react`/`react-dom` (frontend, versão já usada pelo OpenReels — 19.x), `vitest` (já usado).
+Adicionar: `drizzle-orm` + `drizzle-kit` + `better-sqlite3` (dev) / `pg` (prod-ready), `vite`, `react`/`react-dom` (frontend, versão já usada pelo OpenReels — 19.x), `vitest` (já usado), client Node de edge-tts (ex: `@andresaya/edge-tts` ou `msedge-tts` — validar qual mantém `WordBoundary` para timestamps, na Fase 5).
 
-Remover: `@mastra/core`, `bullmq`, `ioredis`. Avaliar remoção: `@tavily/ai-sdk`, `@fal-ai/client`, `@huggingface/transformers` (peso — `@huggingface/transformers` é usado só por Kokoro local; manter se Kokoro for o TTS default).
+Remover: `@mastra/core`, `bullmq`, `ioredis`, `@tavily/ai-sdk` (confirmado — sem web search no research). Avaliar remoção: `@fal-ai/client`, `@huggingface/transformers` (peso — `@huggingface/transformers` é usado só por Kokoro local; Kokoro não é mais o TTS default, avaliar se mantém como opção ou remove).
 
 Risco de build nativo (Windows): `esbuild`, `onnxruntime-node`, `sharp` estão em `pnpm.onlyBuiltDependencies` do OpenReels — exigem build nativo. Kokoro/Whisper local também. Ver riscos.
 

@@ -1,16 +1,16 @@
 # Graph Report - Click.Play  (2026-08-13)
 
 ## Corpus Check
-- 34 files · ~3,586 words
+- 34 files · ~3,187 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 285 nodes · 265 edges · 29 communities (28 shown, 1 thin omitted)
+- 282 nodes · 262 edges · 29 communities (28 shown, 1 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `504cfd7f`
+- Built from commit: `558e06f1`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -37,8 +37,8 @@
 - App
 
 ## God Nodes (most connected - your core abstractions)
-1. `Click.Play — Implementation Plan` - 13 edges
-2. `compilerOptions` - 13 edges
+1. `compilerOptions` - 13 edges
+2. `Click.Play — Implementation Plan` - 12 edges
 3. `scripts` - 7 edges
 4. `scripts` - 7 edges
 5. `scripts` - 7 edges
@@ -101,8 +101,8 @@ Cohesion: 0.15
 Nodes (13): devDependencies, @types/react, @types/react-dom, typescript, vite, @vitejs/plugin-react, vitest, typescript (+5 more)
 
 ### Community 11 - "Click.Play — Implementation Plan"
-Cohesion: 0.12
-Nodes (15): 0.1 Público-alvo e decisões de produto derivadas, 0. Resumo da decisão, 10. Critérios de aceite, 1. Arquitetura proposta, 2. Matriz de reaproveitamento, 3. Componentes reutilizados (quase sem mudança), 4. Componentes adaptados (reescrita parcial), 5. Componentes removidos (+7 more)
+Cohesion: 0.15
+Nodes (12): 0. Resumo da decisão, 10. Critérios de aceite, 1. Arquitetura proposta, 2. Matriz de reaproveitamento, 3. Componentes reutilizados (quase sem mudança), 4. Componentes adaptados (reescrita parcial), 5. Componentes removidos, 6. Componentes novos (não existem em nenhum dos dois) (+4 more)
 
 ### Community 12 - "web/tsconfig.json"
 Cohesion: 0.17
@@ -133,7 +133,7 @@ Cohesion: 0.47
 Nodes (3): app, port, buildServer()
 
 ## Knowledge Gaps
-- **167 isolated node(s):** `Arquétipos novos (Click.Play)`, `TTS: default remoto`, `0. Resumo da decisão`, `1. Arquitetura proposta`, `2. Matriz de reaproveitamento` (+162 more)
+- **165 isolated node(s):** `name`, `version`, `private`, `type`, `dev` (+160 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **1 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -141,11 +141,11 @@ Nodes (3): app, port, buildServer()
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `dependencies` connect `dependencies` to `api/package.json`?**
-  _High betweenness centrality (0.009) - this node is a cross-community bridge._
+  _High betweenness centrality (0.010) - this node is a cross-community bridge._
 - **Why does `devDependencies` connect `devDependencies` to `web/package.json`?**
   _High betweenness centrality (0.007) - this node is a cross-community bridge._
-- **What connects `Arquétipos novos (Click.Play)`, `TTS: default remoto`, `0. Resumo da decisão` to the rest of the system?**
-  _167 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **What connects `name`, `version`, `private` to the rest of the system?**
+  _165 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `scripts` be split into smaller, more focused modules?**
   _Cohesion score 0.125 - nodes in this community are weakly interconnected._
 - **Should `providers/package.json` be split into smaller, more focused modules?**
