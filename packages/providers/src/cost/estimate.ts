@@ -20,13 +20,13 @@ export interface CostEstimateOptions {
   musicProvider: string;
 }
 
-interface SceneCounts {
+export interface SceneCounts {
   aiImages: number;
   aiVideos: number;
   ttsCharacters: number;
 }
 
-function countScenes(scenes: Scene[]): SceneCounts {
+export function countScenes(scenes: Scene[]): SceneCounts {
   let aiImages = 0;
   let aiVideos = 0;
   let ttsCharacters = 0;

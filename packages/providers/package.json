@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@clickplay/domain": "workspace:*",
+    "@clickplay/video-engine": "workspace:*",
     "@fal-ai/client": "^1.9.5",
     "@google/genai": "^1.47.0",
     "@openrouter/ai-sdk-provider": "^2.5.1",
