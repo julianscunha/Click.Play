@@ -1,5 +1,6 @@
 import type { CostBreakdown } from "../cost/index.js";
 import type { PipelineOptions } from "../pipeline/types.js";
+import type { QcReport } from "../qc/types.js";
 import type { jobs, JobStatus, projects } from "./schema.js";
 
 /** Campos de PipelineOptions que não são instância de provider/runtime — o que sobra fica no `config` do Project. */
@@ -25,6 +26,7 @@ export interface Job {
   outputPath: string | null;
   estimatedCost: CostBreakdown | null;
   actualCost: CostBreakdown | null;
+  qcReport: QcReport | null;
   error: string | null;
   createdAt: Date;
   updatedAt: Date;
@@ -53,6 +55,7 @@ export function jobFromRow(row: JobRow): Job {
     outputPath: row.outputPath,
     estimatedCost: (row.estimatedCost as CostBreakdown | null) ?? null,
     actualCost: (row.actualCost as CostBreakdown | null) ?? null,
+    qcReport: (row.qcReport as QcReport | null) ?? null,
     error: row.error,
     createdAt: row.createdAt,
     updatedAt: row.updatedAt,

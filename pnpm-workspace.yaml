@@ -4,5 +4,7 @@ packages:
 allowBuilds:
   '@google/genai': true
   esbuild: true
+  ffmpeg-static: true
+  ffprobe-static: true
   msedge-tts: true
   protobufjs: true

@@ -10,6 +10,7 @@ import {
   setJobError,
   setJobEstimatedCost,
   setJobOutputPath,
+  setJobQcReport,
   updateJobStatus,
 } from "./repository.js";
 import type { ProjectConfig } from "./types.js";
@@ -84,5 +85,22 @@ describe("persistence repository", () => {
     expect(fetched?.actualCost).toEqual(actual);
     expect(fetched?.outputPath).toBe("/tmp/run-3/output/output.mp4");
     expect(fetched?.error).toBe("boom");
+  });
+
+  it("persists qc report", async () => {
+    const project = await createProject(db, { topic: "t", config });
+    const job = await createJob(db, { projectId: project.id, runDir: "/tmp/run-4" });
+
+    expect((await getJob(db, job.id))?.qcReport).toBeNull();
+
+    const qcReport = {
+      decision: "WARNING" as const,
+      checks: [{ id: "output_exists", severity: "block" as const, passed: true, message: "ok" }],
+      generatedAt: new Date().toISOString(),
+    };
+    await setJobQcReport(db, job.id, qcReport);
+
+    const fetched = await getJob(db, job.id);
+    expect(fetched?.qcReport).toEqual(qcReport);
   });
 });

@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS jobs (
   output_path TEXT,
   estimated_cost TEXT,
   actual_cost TEXT,
+  qc_report TEXT,
   error TEXT,
   created_at INTEGER NOT NULL,
   updated_at INTEGER NOT NULL

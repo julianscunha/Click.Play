@@ -1,6 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { eq } from "drizzle-orm";
 import type { CostBreakdown } from "../cost/index.js";
+import type { QcReport } from "../qc/types.js";
 import type { ClickPlayDb } from "./client.js";
 import { PROGRESS_BY_STATUS } from "./job-state-machine.js";
 import { jobs, type JobStatus, projects } from "./schema.js";
@@ -29,6 +30,7 @@ export async function createJob(db: ClickPlayDb, input: { projectId: string; run
     outputPath: null,
     estimatedCost: null,
     actualCost: null,
+    qcReport: null,
     error: null,
     createdAt: now,
     updatedAt: now,
@@ -64,6 +66,10 @@ export async function setJobEstimatedCost(db: ClickPlayDb, id: string, cost: Cos
 
 export async function setJobActualCost(db: ClickPlayDb, id: string, cost: CostBreakdown): Promise<void> {
   await db.update(jobs).set({ actualCost: cost, updatedAt: new Date() }).where(eq(jobs.id, id));
+}
+
+export async function setJobQcReport(db: ClickPlayDb, id: string, qcReport: QcReport): Promise<void> {
+  await db.update(jobs).set({ qcReport, updatedAt: new Date() }).where(eq(jobs.id, id));
 }
 
 export async function setJobOutputPath(db: ClickPlayDb, id: string, outputPath: string): Promise<void> {
