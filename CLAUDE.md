@@ -15,4 +15,6 @@ Repos de referência auditáveis em `D:\Github\_research\{MoneyPrinterTurbo,Open
 Toda dependência nova com script nativo (esbuild, msedge-tts, @google/genai, protobufjs...) trava `pnpm install` com `[ERR_PNPM_IGNORED_BUILDS]`. Editar `allowBuilds` em `pnpm-workspace.yaml` (`true`/`false` por pacote) e rodar `pnpm install` de novo — não usar `pnpm approve-builds` (interativo, quebra em non-tty).
 
 ## Workflow
-Commit + push ao final de cada fase de implementação, sem esperar pedido.
+Commit + push ao final de cada fase de implementação, sem esperar pedido. Trabalhar sempre na `main` — sem branch/worktree nova por fase (worktrees de sessão em background são exceção técnica, mas o trabalho é sempre fundido/pushado direto pra `main` ao fim da fase, não deixado numa branch separada).
+
+Antes de começar a implementação de uma fase nova, perguntar ao usuário como ele quer que seja feito (escopo, o que entra agora vs depois, dependências novas) antes do primeiro código escrito.
