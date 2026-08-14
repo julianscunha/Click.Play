@@ -278,7 +278,7 @@ Fase 1 — Bootstrap do monorepo (`apps/web`, `apps/api`, `packages/*`), import 
 Fase 2 — `packages/domain`: `VideoProject`/`Scene` (composição, §0.2)/`VisualElement`/`Asset`/`AudioTrack`/`Caption`, estendendo `DirectorScore` com o novo modelo de cena (não é extensão aditiva simples — `visual_type` único é substituído).
 Fase 3 — OpenRouter como `LLMProvider` default (já existe no OpenReels, validar/ajustar).
 Fase 4 — Script + Creative Director + Script QA (adaptar `research.ts`/`creative-director.ts`/`critic.ts` pra emitir `visualStrategy`+`elements`, §0.2).
-Fase 5 — TTS (Kokoro default + decorator de alinhamento).
+Fase 5 — TTS (edge-tts default grátis, §0.1 + decorator de alinhamento Whisper para providers sem timestamp nativo).
 Fase 6 — Produção visual: `VisualCompositionProvider` (motion graphics, elementos compostos por cena) + `VideoGenerationProvider` (Veo/Kling, renomeado do `VideoProvider` existente) + stock/imagem como fonte de `VisualElement`, não como cena inteira (§0.2).
 Fase 7 — Música (bundled default).
 Fase 8 — Captions (motor + estilos reaproveitados, expor config do MPT).

@@ -7,3 +7,5 @@ export * from "./config/archetype-registry.js";
 export * from "./agents/research.js";
 export * from "./agents/creative-director.js";
 export * from "./agents/critic.js";
+export * from "./tts/types.js";
+export * from "./tts/edge.js";
