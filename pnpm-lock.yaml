@@ -20,9 +20,6 @@ importers:
       '@clickplay/providers':
         specifier: workspace:*
         version: link:../../packages/providers
-      '@clickplay/shared':
-        specifier: workspace:*
-        version: link:../../packages/shared
       '@clickplay/video-engine':
         specifier: workspace:*
         version: link:../../packages/video-engine
@@ -79,9 +76,6 @@ importers:
 
   packages/domain:
     dependencies:
-      '@clickplay/shared':
-        specifier: workspace:*
-        version: link:../shared
       zod:
         specifier: ^4.3.6
         version: 4.4.3
@@ -98,9 +92,6 @@ importers:
       '@clickplay/domain':
         specifier: workspace:*
         version: link:../domain
-      '@clickplay/shared':
-        specifier: workspace:*
-        version: link:../shared
       '@fal-ai/client':
         specifier: ^1.9.5
         version: 1.10.1
@@ -127,26 +118,11 @@ importers:
         specifier: ^3.0.0
         version: 3.2.7(@types/node@24.13.3)(tsx@4.23.12)
 
-  packages/shared:
-    devDependencies:
-      '@types/node':
-        specifier: ^24.0.0
-        version: 24.13.3
-      typescript:
-        specifier: ^5.7.0
-        version: 5.9.3
-      vitest:
-        specifier: ^3.0.0
-        version: 3.2.7(@types/node@24.13.3)(tsx@4.23.12)
-
   packages/video-engine:
     dependencies:
       '@clickplay/domain':
         specifier: workspace:*
         version: link:../domain
-      '@clickplay/shared':
-        specifier: workspace:*
-        version: link:../shared
       '@remotion/google-fonts':
         specifier: 4.0.441
         version: 4.0.441(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
