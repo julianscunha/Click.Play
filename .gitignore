@@ -4,6 +4,7 @@ dist/
 .env.*
 !.env.example
 storage/
+apps/api/data/
 *.log
 *.tsbuildinfo
 .DS_Store

@@ -69,6 +69,7 @@ export async function runJobOnce(
     async onCostEstimate(estimate) {
       await transition("REVIEWING");
       await setJobEstimatedCost(db, jobId, estimate);
+      await transition("AWAITING_COST_APPROVAL");
       const approve = opts.approveCost ?? (() => true);
       return approve(estimate);
     },

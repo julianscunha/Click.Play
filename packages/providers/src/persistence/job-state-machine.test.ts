@@ -8,6 +8,7 @@ describe("assertTransition", () => {
       "RESEARCHING",
       "PLANNING",
       "REVIEWING",
+      "AWAITING_COST_APPROVAL",
       "GENERATING",
       "RENDERING",
       "COMPLETED",
@@ -26,13 +27,29 @@ describe("assertTransition", () => {
   });
 
   it("allows FAILED from any non-terminal state", () => {
-    for (const from of ["QUEUED", "RESEARCHING", "PLANNING", "REVIEWING", "GENERATING", "RENDERING"] as const) {
+    for (const from of [
+      "QUEUED",
+      "RESEARCHING",
+      "PLANNING",
+      "REVIEWING",
+      "AWAITING_COST_APPROVAL",
+      "GENERATING",
+      "RENDERING",
+    ] as const) {
       expect(() => assertTransition(from, "FAILED")).not.toThrow();
     }
   });
 
   it("allows CANCELLED from any non-terminal state", () => {
-    for (const from of ["QUEUED", "RESEARCHING", "PLANNING", "REVIEWING", "GENERATING", "RENDERING"] as const) {
+    for (const from of [
+      "QUEUED",
+      "RESEARCHING",
+      "PLANNING",
+      "REVIEWING",
+      "AWAITING_COST_APPROVAL",
+      "GENERATING",
+      "RENDERING",
+    ] as const) {
       expect(() => assertTransition(from, "CANCELLED")).not.toThrow();
     }
   });
@@ -45,7 +62,16 @@ describe("assertTransition", () => {
   });
 
   it("keeps progress monotonic across the happy path", () => {
-    const path = ["QUEUED", "RESEARCHING", "PLANNING", "REVIEWING", "GENERATING", "RENDERING", "COMPLETED"] as const;
+    const path = [
+      "QUEUED",
+      "RESEARCHING",
+      "PLANNING",
+      "REVIEWING",
+      "AWAITING_COST_APPROVAL",
+      "GENERATING",
+      "RENDERING",
+      "COMPLETED",
+    ] as const;
     const values = path.map((s) => PROGRESS_BY_STATUS[s]);
     for (let i = 1; i < values.length; i++) {
       expect(values[i]!).toBeGreaterThan(values[i - 1]!);

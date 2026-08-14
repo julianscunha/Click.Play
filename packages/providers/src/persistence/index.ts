@@ -4,3 +4,4 @@ export * from "./types.js";
 export * from "./job-state-machine.js";
 export * from "./repository.js";
 export * from "./job-runner.js";
+export * from "./cost-approval-gate.js";

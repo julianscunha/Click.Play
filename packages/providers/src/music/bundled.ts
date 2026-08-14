@@ -3,7 +3,7 @@ import * as path from "node:path";
 import { fileURLToPath } from "node:url";
 import type { MusicMood } from "@clickplay/domain";
 
-interface ManifestTrack {
+export interface ManifestTrack {
   id: string;
   mood: string;
   filename: string;
@@ -42,6 +42,11 @@ function loadManifest(): MusicManifest {
   const raw = fs.readFileSync(MANIFEST_PATH, "utf-8");
   cachedManifest = JSON.parse(raw) as MusicManifest;
   return cachedManifest;
+}
+
+/** Lista todas as faixas do manifest — usado por `GET /music` (metadados, sem stream de áudio nesta fase). */
+export function listTracks(): ManifestTrack[] {
+  return loadManifest().tracks;
 }
 
 /**
