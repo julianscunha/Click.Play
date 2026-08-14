@@ -2,7 +2,7 @@
 
 Web app (não instalável), produção automatizada de vídeo. Base técnica: OpenReels (MIT, reaproveitado direto). Base UX/produto: MoneyPrinterTurbo (MIT, referência só, código Python não portável).
 
-**Sempre ler `docs/IMPLEMENTATION-PLAN.md` antes de decisão de arquitetura** — plano vivo, contradizer sem checar gera retrabalho.
+**Sempre checar `docs/IMPLEMENTATION-PLAN.md` antes de decisão de arquitetura** — plano vivo, contradizer sem checar gera retrabalho. Usar skill `/plan-status` pra visão barata (status + índice + grep de termo); ler doc inteiro só quando decisão real depender do texto de uma seção específica.
 
 Repos de referência auditáveis em `D:\Github\_research\{MoneyPrinterTurbo,OpenReels}` — ler código-fonte real antes de reaproveitar/assumir, não confiar em resumo de doc antigo (achados já corrigidos: `TransitionType` não tem "zoom"; `VideoProvider`/Veo/Kling já existia no OpenReels antes de eu supor "componente novo").
 
