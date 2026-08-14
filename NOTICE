@@ -13,6 +13,7 @@ Código portado/adaptado em:
 - packages/providers/src/music/* (bundled, bundled-adapter, lyria) + assets/music/*
 - packages/providers/src/agents/* (research, creative-director, critic, image-prompter, music-prompter)
 - packages/video-engine/src/captions/* (motor de legendas: 7 estilos + CaptionWrapper + caption-utils + fonts)
+- packages/video-engine/src/render/* (VideoRenderer/RemotionRenderer, adaptado de score-to-props.ts + OpenReelsVideo.tsx pra composição multi-elemento por cena)
 - packages/providers/src/config/* (archetype-registry + presets)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy

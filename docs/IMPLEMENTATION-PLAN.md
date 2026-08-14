@@ -1,6 +1,6 @@
 # Click.Play — Implementation Plan
 
-Status: Fases 0–8 concluídas (auditoria, bootstrap, domain, LLM provider, Creative Director, TTS, produção visual, música, captions). Próxima: Fase 9 (VideoRenderer/RemotionRenderer).
+Status: Fases 0–9 concluídas (auditoria, bootstrap, domain, LLM provider, Creative Director, TTS, produção visual, música, captions, VideoRenderer/RemotionRenderer). Próxima: Fase 10 (Job pipeline).
 
 ## 0.1 Público-alvo e decisões de produto derivadas
 
@@ -153,8 +153,8 @@ Resultado: não é greenfield, não é fork 1:1 de nenhum dos dois. É consolida
   /domain         VideoProject, Scene (composição, ver §0.2), VisualElement, Asset, AudioTrack, Caption — zero dependência de Remotion/FFmpeg/OpenRouter
   /video-engine   VideoRenderer + VisualCompositionProvider (interfaces) + RemotionRenderer (adaptado de score-to-props.ts + OpenReelsVideo.tsx, estendido p/ múltiplos elementos por cena)
   /providers      LLMProvider/TTSProvider/ImageProvider/StockProvider/VideoGenerationProvider (ex-VideoProvider)/MusicProvider/StorageProvider — interfaces + implementações (portadas do OpenReels + OpenRouter como default LLM)
-  /shared         Result, Logger, tipos comuns
 ```
+`packages/shared` (Result/Logger) foi removido — nunca teve chamador real (achado do ponytail-audit, Fase 8→9).
 
 Pipeline (ver §0.2 pra detalhe de Visual Plan):
 ```
@@ -286,7 +286,7 @@ Fase 5 — TTS (edge-tts default grátis, §0.1 + decorator de alinhamento Whisp
 Fase 6 — Produção visual: `VisualCompositionProvider` (motion graphics, elementos compostos por cena) + `VideoGenerationProvider` (Veo/Kling, renomeado do `VideoProvider` existente) + stock/imagem como fonte de `VisualElement`, não como cena inteira (§0.2).
 Fase 7 — Música (bundled default). **Concluída.** `packages/providers/src/music/{types,bundled,bundled-adapter,lyria}.ts` portados do OpenReels; 25 faixas + manifest copiados para `packages/providers/assets/`; resolução de path trocada de `process.cwd()` pra `import.meta.url` (robusto em monorepo, `process.cwd()` do OpenReels assumia app único). Pricing do Lyria confirmado pago — bundled segue default. Gap `playful_kids` sem faixas documentado acima, pendente de curadoria de conteúdo.
 Fase 8 — Captions. **Concluída.** Motor portado de OpenReels/MIT pra `packages/video-engine/src/captions/`: `caption-utils.ts` (lógica pura de chunking/timing, 29 testes) + `CaptionWrapper.tsx` (timing/spring via Remotion) + 7 estilos (`styles/BoldOutline.tsx` etc) + `CAPTION_STYLE_COMPONENTS` (registry `CaptionStyleKey`→componente) + `fonts.ts` (Google Fonts via `@remotion/google-fonts`). Decisão do usuário: motor completo agora (não só a lógica pura), o que antecipou `remotion`/`react`/`react-dom`/`@remotion/google-fonts` como dependência do `video-engine` (originalmente previsto só na Fase 9). `NOTICE` criado na raiz (atribuição MIT, cobre todo código portado até aqui). Decisão adicional: dropdown de estilo na WebUI ganha preview visual pequeno (sem custo, render local) — mecanismo exato fica pra Fase 11, motor já suporta via componentes isolados.
-Fase 9 — `VideoRenderer`/`RemotionRenderer` (envolver `score-to-props.ts`, estendido pra compor N `VisualElement` por cena via `VisualCompositionProvider`, §0.2).
+Fase 9 — `VideoRenderer`/`RemotionRenderer`. **Concluída.** `packages/video-engine/src/render/`: `types.ts` (`ResolvedElement`/`ResolvedScene`/`RenderInput` — Scene com assets já resolvidos, não prompt), `project-to-props.ts` (mapeamento + cálculo de duração total com overlap de transição, testado), `elements/` (`ImageElement`/`VideoElement`/`TextElement`/`UnsupportedElement` + registry `ELEMENT_COMPONENTS`), `SceneLayer.tsx` (empilha `elements[]` por z-order — decisão do usuário: camadas simultâneas, não sub-timeline sequencial), `ClickPlayVideo.tsx` (composição raiz: `TransitionSeries` + `CaptionWrapper` no nível absoluto + áudio), `video-renderer.ts` (`VideoRenderer` interface + `RemotionRenderer` via `@remotion/bundler`+`@remotion/renderer`). Decisões do usuário: (1) Fase 9 só renderiza assets já resolvidos — resolver `prompt`→arquivo via `ImageProvider`/`VideoGenerationProvider` fica pra Fase 10; (2) escopo MVP cobre `ai_image/stock_image/stock_video/ai_video_clip/animated_text` — `svg/shape/icon/particle_system/diagram/map` renderizam como placeholder visível (`UnsupportedElement`), sem crashar o render.
 Fase 10 — Job pipeline (state machine própria, sem BullMQ/Redis).
 Fase 11 — WebUI (campos do MPT, fluxo próprio, React+Vite). Inclui seletor de música com preview de áudio (lista do manifest bundled, escolha manual substitui/complementa default por mood — ver §0.1 Música) e dropdown de legenda com preview visual pequeno por estilo (ver §Legendas).
 Fase 12 — Quality Control determinístico.
