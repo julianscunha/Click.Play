@@ -5,6 +5,7 @@ import * as path from "node:path";
 import { promisify } from "node:util";
 import ffmpegPath from "ffmpeg-static";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { knownUsd } from "../cost/types.js";
 import { runQc } from "./run-qc.js";
 
 const execFileAsync = promisify(execFile);
@@ -87,5 +88,18 @@ describe("runQc", () => {
     expect(report.decision).toBe("BLOCK");
     const durCheck = report.checks.find((c) => c.id === "duration_match");
     expect(durCheck?.passed).toBe(false);
+  });
+
+  it("WARNING quando custo diverge, resto passa", async () => {
+    const report = await runQc({
+      outputPath: mp4Path,
+      expectedDurationInFrames: 25,
+      fps: 25,
+      width: 320,
+      height: 240,
+      cost: { estimated: knownUsd(1), actual: knownUsd(2) },
+    });
+
+    expect(report.decision).toBe("WARNING");
   });
 });

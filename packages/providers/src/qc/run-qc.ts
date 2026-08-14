@@ -1,7 +1,12 @@
 import * as fs from "node:fs";
+import type { CostAmount } from "../cost/types.js";
+import type { RevisionLogEntry } from "../pipeline/types.js";
+import { checkCostDeviation } from "./checks/cost-deviation.js";
+import { checkCriticScore } from "./checks/critic-score.js";
 import { checkDurationMatch } from "./checks/duration-match.js";
 import { checkOutputExists } from "./checks/output-exists.js";
 import { checkResolutionMatch } from "./checks/resolution-match.js";
+import { checkTtsCoverage } from "./checks/tts-coverage.js";
 import { probeMedia } from "./media-tools/probe.js";
 import type { QcCheckResult, QcDecision, QcReport } from "./types.js";
 
@@ -12,6 +17,10 @@ export interface RunQcInput {
   fps: number;
   width: number;
   height: number;
+  /** Checks WARNING — opcionais, rodam independente do output existir. */
+  ttsCoverage?: { scriptWordCount: number; coveredWordCount: number };
+  revisions?: RevisionLogEntry[];
+  cost?: { estimated: CostAmount; actual: CostAmount };
 }
 
 function computeDecision(checks: QcCheckResult[]): QcDecision {
@@ -40,6 +49,16 @@ export async function runQc(input: RunQcInput): Promise<QcReport> {
         { width: probed.width, height: probed.height, fps: probed.fps },
       ),
     );
+  }
+
+  if (input.ttsCoverage) {
+    checks.push(checkTtsCoverage(input.ttsCoverage.scriptWordCount, input.ttsCoverage.coveredWordCount));
+  }
+  if (input.revisions) {
+    checks.push(checkCriticScore(input.revisions));
+  }
+  if (input.cost) {
+    checks.push(checkCostDeviation(input.cost.estimated, input.cost.actual));
   }
 
   return { decision: computeDecision(checks), checks, generatedAt: new Date().toISOString() };

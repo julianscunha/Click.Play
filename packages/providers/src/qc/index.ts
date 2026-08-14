@@ -3,4 +3,7 @@ export * from "./media-tools/index.js";
 export * from "./checks/output-exists.js";
 export * from "./checks/duration-match.js";
 export * from "./checks/resolution-match.js";
+export * from "./checks/tts-coverage.js";
+export * from "./checks/critic-score.js";
+export * from "./checks/cost-deviation.js";
 export * from "./run-qc.js";
