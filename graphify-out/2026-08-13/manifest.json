@@ -60,13 +60,13 @@
     "semantic_hash": ""
   },
   "packages/domain/package.json": {
-    "mtime": 1786653477.526603,
-    "ast_hash": "f3be1bd0c442923632c848cd4e0b7814",
+    "mtime": 1786663772.4876325,
+    "ast_hash": "8ea61fd1c6568e8990f7c7fc3461e378",
     "semantic_hash": ""
   },
   "packages/domain/src/index.ts": {
-    "mtime": 1786653178.9946067,
-    "ast_hash": "aa7afa77664183ae5eb51d457aa8074b",
+    "mtime": 1786663759.9029498,
+    "ast_hash": "d65384c2bb799b33f11cdb3a37456d2c",
     "semantic_hash": ""
   },
   "packages/domain/tsconfig.json": {
@@ -75,13 +75,13 @@
     "semantic_hash": ""
   },
   "packages/providers/package.json": {
-    "mtime": 1786653481.619402,
-    "ast_hash": "7885033c405426b4640b1e8feaa9f54b",
+    "mtime": 1786668346.2370522,
+    "ast_hash": "1ebe1c14234e9f412c896764078e0df1",
     "semantic_hash": ""
   },
   "packages/providers/src/index.ts": {
-    "mtime": 1786653192.473521,
-    "ast_hash": "5140b0248eb14ac9804dcf3d57ed212c",
+    "mtime": 1786668323.5151975,
+    "ast_hash": "815b4eabdfa2abaabbf08cef01a639c6",
     "semantic_hash": ""
   },
   "packages/providers/tsconfig.json": {
@@ -125,8 +125,8 @@
     "semantic_hash": ""
   },
   "packages/video-engine/src/index.ts": {
-    "mtime": 1786653207.7319129,
-    "ast_hash": "5de29a1cdd9ec5cf414d3894a07806ef",
+    "mtime": 1786668317.349868,
+    "ast_hash": "c1e192747a3daa511afefc724c34ca28",
     "semantic_hash": ""
   },
   "packages/video-engine/tsconfig.json": {
@@ -170,13 +170,13 @@
     "semantic_hash": ""
   },
   "docs/IMPLEMENTATION-PLAN.md": {
-    "mtime": 1786655373.0928931,
-    "ast_hash": "51fd8d03b21d16d00793c7335ea5bf13",
+    "mtime": 1786667956.8086245,
+    "ast_hash": "62f2f9469e1e93372988133c02532340",
     "semantic_hash": ""
   },
   "pnpm-workspace.yaml": {
-    "mtime": 1786653350.0474992,
-    "ast_hash": "516da3041ff18104e3d8ec8014a973e3",
+    "mtime": 1786668371.8688045,
+    "ast_hash": "1e1be83bd6df28ddffb2c2f14b2d4667",
     "semantic_hash": ""
   },
   ".claude/agents/agents-orchestrator.md": {
@@ -202,6 +202,246 @@
   ".claude/agents/marketing-video-optimization-specialist.md": {
     "mtime": 1786655583.3606162,
     "ast_hash": "8f703f9e970993942668c069c1c28701",
+    "semantic_hash": ""
+  },
+  "packages/domain/src/asset.ts": {
+    "mtime": 1786663732.930135,
+    "ast_hash": "f4b452b3f2b3fdc9a8f04d391f23d73c",
+    "semantic_hash": ""
+  },
+  "packages/domain/src/audio.ts": {
+    "mtime": 1786663739.31828,
+    "ast_hash": "4eb5d2f5a8e1b9321c4e8e2f2d14bea2",
+    "semantic_hash": ""
+  },
+  "packages/domain/src/caption.ts": {
+    "mtime": 1786663746.7379096,
+    "ast_hash": "bed50e8b5c88597274bfa60d5f40d296",
+    "semantic_hash": ""
+  },
+  "packages/domain/src/scene.test.ts": {
+    "mtime": 1786663767.8922503,
+    "ast_hash": "4aeb91d7d2c913f42f765bb5e44b1d76",
+    "semantic_hash": ""
+  },
+  "packages/domain/src/scene.ts": {
+    "mtime": 1786664134.933672,
+    "ast_hash": "0064491beb9ddee4aecbb7ced4f5f855",
+    "semantic_hash": ""
+  },
+  "packages/domain/src/video-project.ts": {
+    "mtime": 1786663754.5271294,
+    "ast_hash": "b179b2b6556986baf4efc60ced9afbbb",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/llm/base.test.ts": {
+    "mtime": 1786663884.6988108,
+    "ast_hash": "0f6af747d1b0361b191fb552ee4235bd",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/llm/base.ts": {
+    "mtime": 1786663868.8358147,
+    "ast_hash": "c1725cf5b2684b803a8f4b91e5b1ecdf",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/llm/openrouter.ts": {
+    "mtime": 1786663874.169997,
+    "ast_hash": "4dbdd5fb106cc1306c1cefd69e7ca372",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/llm/types.ts": {
+    "mtime": 1786663860.5152745,
+    "ast_hash": "8d11c43ce2997378716e6900935b90b3",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/agents/creative-director.test.ts": {
+    "mtime": 1786664232.882521,
+    "ast_hash": "b171949768e06d61547ee05b0e79ec50",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/agents/creative-director.ts": {
+    "mtime": 1786664205.0353904,
+    "ast_hash": "907e5f0d41d8662d2c3d0deab41b30ae",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/agents/critic.ts": {
+    "mtime": 1786664219.217615,
+    "ast_hash": "36ae250e893dc9c9b63343b0f316c659",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/agents/research.ts": {
+    "mtime": 1786664152.2421143,
+    "ast_hash": "4cefcc983229f860be7840545b919622",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/config/archetype-registry.test.ts": {
+    "mtime": 1786664111.433254,
+    "ast_hash": "6980066eb23e6fd2870adeb04dc3eadc",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/config/archetype-registry.ts": {
+    "mtime": 1786664104.467283,
+    "ast_hash": "8f3512e2cbd1d26f8840325e5032cd6a",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/config/archetype.ts": {
+    "mtime": 1786664092.0972674,
+    "ast_hash": "80aeca04dfa7cfcde610f0ac06a7d3c9",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/config/archetypes/anime-illustration.json": {
+    "mtime": 1786664017.026212,
+    "ast_hash": "6beabd543da366d0fda513a856cc517a",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/config/archetypes/bold-illustration.json": {
+    "mtime": 1786664017.038457,
+    "ast_hash": "04d63b55af20fb5a58546757e509f598",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/config/archetypes/cinematic-documentary.json": {
+    "mtime": 1786664017.049672,
+    "ast_hash": "38823883c835cf03e5b5aaf5331de363",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/config/archetypes/claymation-playful.json": {
+    "mtime": 1786664053.1710377,
+    "ast_hash": "eb57f27f4f2850f0b7c91e4a57db0df5",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/config/archetypes/comic-book.json": {
+    "mtime": 1786664017.0593612,
+    "ast_hash": "e7dccf8127b720253dbeaa795a3d5bc7",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/config/archetypes/editorial-caricature.json": {
+    "mtime": 1786664017.0679576,
+    "ast_hash": "49369436c2d6c93a369d002bf5432dfb",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/config/archetypes/edu-explainer.json": {
+    "mtime": 1786664044.961449,
+    "ast_hash": "b667874ee0178a72674811f35f04a32a",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/config/archetypes/gothic-fantasy.json": {
+    "mtime": 1786664017.081491,
+    "ast_hash": "23c847e7200ece66dba8b3b523e077db",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/config/archetypes/infographic.json": {
+    "mtime": 1786664017.0942204,
+    "ast_hash": "f2126c926c039deca93ff233762f13a8",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/config/archetypes/kids-cartoon.json": {
+    "mtime": 1786664029.7139695,
+    "ast_hash": "e4b72652eedb719d7687706222827bfa",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/config/archetypes/moody-cinematic.json": {
+    "mtime": 1786664017.1043394,
+    "ast_hash": "a17dd4f7e2986465113e011af9e6cfc4",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/config/archetypes/musical-singalong.json": {
+    "mtime": 1786664075.7234478,
+    "ast_hash": "c0d4e0d285e249560e90708611e86be9",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/config/archetypes/pastoral-watercolor.json": {
+    "mtime": 1786664017.118034,
+    "ast_hash": "69f6cdfb7d41fd29104f64f28ebfd158",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/config/archetypes/storybook-picturebook.json": {
+    "mtime": 1786664037.7546637,
+    "ast_hash": "d17508463bec7b02a596af83c21c203a",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/config/archetypes/studio-realism.json": {
+    "mtime": 1786664017.118034,
+    "ast_hash": "6180196e443aa6095c342ea5a033bf31",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/config/archetypes/surreal-dreamscape.json": {
+    "mtime": 1786664017.1409228,
+    "ast_hash": "2114457dd74618bfa7f2dd72f13ccc63",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/config/archetypes/vintage-snapshot.json": {
+    "mtime": 1786664017.1523075,
+    "ast_hash": "d20a649baf89f65b15603fcd326d1db8",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/config/archetypes/warm-editorial.json": {
+    "mtime": 1786664017.1641154,
+    "ast_hash": "eecd18550aec0ca40028ac6a7fa0bca2",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/config/archetypes/warm-narrative.json": {
+    "mtime": 1786664017.1737077,
+    "ast_hash": "82991561f42ffdd82a8250fc01b5f200",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/tts/edge.test.ts": {
+    "mtime": 1786668092.4385538,
+    "ast_hash": "dce5b7eb4b47aa37e00f5e9c46d02dab",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/tts/edge.ts": {
+    "mtime": 1786668084.716726,
+    "ast_hash": "f1e4299862cc148cda61d0a1c39bfe9c",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/tts/types.ts": {
+    "mtime": 1786668071.5844018,
+    "ast_hash": "2f6792c179f376bcca0fe0be6be50d7b",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/image/gemini.ts": {
+    "mtime": 1786668294.0812993,
+    "ast_hash": "ee1f5df42fc3244d7e5f2d7ca35defd2",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/image/types.ts": {
+    "mtime": 1786668286.7019718,
+    "ast_hash": "aa058230179b34e17d215e307507272e",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/video/fal.ts": {
+    "mtime": 1786668281.3595243,
+    "ast_hash": "b0dcc55254f33b781381ab53d489cd05",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/video/gemini.ts": {
+    "mtime": 1786668270.35224,
+    "ast_hash": "07177995842001d56b6a05540dc727eb",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/video/resolve-provider.test.ts": {
+    "mtime": 1786668340.087333,
+    "ast_hash": "2ae19a9a60ace6a386d5bc0768e96fb4",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/video/resolve-provider.ts": {
+    "mtime": 1786668333.1041589,
+    "ast_hash": "e42b64ee482201e5a797d1c317d34616",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/video/types.ts": {
+    "mtime": 1786668259.4486163,
+    "ast_hash": "0b65fd104c0d79be6a2748dfdea635d6",
+    "semantic_hash": ""
+  },
+  "packages/video-engine/src/visual-composition-provider.ts": {
+    "mtime": 1786668312.4482422,
+    "ast_hash": "a7a47402f6838cccedf72cc2f0ba98c5",
+    "semantic_hash": ""
+  },
+  "CLAUDE.md": {
+    "mtime": 1786668842.5847554,
+    "ast_hash": "736118bd49ff95f6131c28be1b42c02c",
     "semantic_hash": ""
   }
 }

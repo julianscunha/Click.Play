@@ -1,31 +1,31 @@
 # Graph Report - Click.Play  (2026-08-13)
 
 ## Corpus Check
-- 39 files · ~12,323 words
+- 87 files · ~23,122 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 395 nodes · 370 edges · 34 communities (33 shown, 1 thin omitted)
+- 533 nodes · 609 edges · 34 communities (32 shown, 2 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `8e308988`
+- Built from commit: `8db121bf`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - scripts
-- providers/package.json
-- api/package.json
 - domain/package.json
+- dependencies
+- dependencies
 - video-engine/package.json
 - shared/package.json
 - web/package.json
-- dependencies
+- video/types.ts
 - logger.ts
 - compilerOptions
-- devDependencies
+- image/gemini.ts
 - Click.Play — Implementation Plan
 - web/tsconfig.json
 - compilerOptions
@@ -35,6 +35,9 @@
 - video-engine/tsconfig.json
 - api/src/index.ts
 - App
+- video-project.ts
+- creative-director.ts
+- Click.Play
 - AgentsOrchestrator Agent Personality
 - Core Mission
 - Social Media Strategist Agent
@@ -42,40 +45,49 @@
 - Marketing Content Creator Agent
 
 ## God Nodes (most connected - your core abstractions)
-1. `AgentsOrchestrator Agent Personality` - 13 edges
-2. `Social Media Strategist Agent` - 13 edges
-3. `Click.Play — Implementation Plan` - 13 edges
+1. `Click.Play — Implementation Plan` - 13 edges
+2. `AgentsOrchestrator Agent Personality` - 13 edges
+3. `Social Media Strategist Agent` - 13 edges
 4. `compilerOptions` - 13 edges
 5. `Core Mission` - 10 edges
-6. `🤖 Available Specialist Agents` - 8 edges
-7. `Marketing Video Optimization Specialist Agent` - 8 edges
-8. `Marketing Short-Video Editing Coach` - 7 edges
-9. `scripts` - 7 edges
-10. `scripts` - 7 edges
+6. `BaseLLM` - 8 edges
+7. `LLMProvider` - 8 edges
+8. `🤖 Available Specialist Agents` - 8 edges
+9. `Marketing Video Optimization Specialist Agent` - 8 edges
+10. `0.2 Correção arquitetural: estratégia de produção visual (não é slideshow)` - 7 edges
 
 ## Surprising Connections (you probably didn't know these)
-- None detected - all connections are within the same source files.
+- `staticScene()` --references--> `Scene`  [EXTRACTED]
+  packages/domain/src/scene.test.ts → packages/domain/src/scene.ts
+- `toScenes()` --references--> `Scene`  [EXTRACTED]
+  packages/providers/src/agents/creative-director.ts → packages/domain/src/scene.ts
+- `evaluate()` --calls--> `getArchetype()`  [EXTRACTED]
+  packages/providers/src/agents/critic.ts → packages/providers/src/config/archetype-registry.ts
+- `GeminiImage` --implements--> `ImageProvider`  [EXTRACTED]
+  packages/providers/src/image/gemini.ts → packages/providers/src/image/types.ts
+- `FalVideo` --implements--> `VideoGenerationProvider`  [EXTRACTED]
+  packages/providers/src/video/fal.ts → packages/providers/src/video/types.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (34 total, 1 thin omitted)
+## Communities (34 total, 2 thin omitted)
 
 ### Community 0 - "scripts"
 Cohesion: 0.12
 Nodes (15): devDependencies, typescript, engines, node, typescript, name, private, scripts (+7 more)
 
-### Community 1 - "providers/package.json"
-Cohesion: 0.09
-Nodes (22): dependencies, @clickplay/domain, @clickplay/shared, zod, devDependencies, typescript, vitest, @clickplay/domain (+14 more)
+### Community 1 - "domain/package.json"
+Cohesion: 0.07
+Nodes (28): devDependencies, typescript, vitest, main, name, private, scripts, lint (+20 more)
 
-### Community 2 - "api/package.json"
-Cohesion: 0.10
-Nodes (20): devDependencies, tsx, @types/node, typescript, vitest, @types/node, typescript, vitest (+12 more)
+### Community 2 - "dependencies"
+Cohesion: 0.06
+Nodes (35): dependencies, @clickplay/domain, @clickplay/providers, @clickplay/shared, @clickplay/video-engine, fastify, @fastify/cors, @fastify/static (+27 more)
 
-### Community 3 - "domain/package.json"
-Cohesion: 0.10
-Nodes (20): dependencies, @clickplay/shared, zod, devDependencies, typescript, vitest, @clickplay/shared, typescript (+12 more)
+### Community 3 - "dependencies"
+Cohesion: 0.11
+Nodes (20): ai, @clickplay/domain, @clickplay/shared, @fal-ai/client, @google/genai, msedge-tts, @openrouter/ai-sdk-provider, dependencies (+12 more)
 
 ### Community 4 - "video-engine/package.json"
 Cohesion: 0.10
@@ -86,12 +98,12 @@ Cohesion: 0.11
 Nodes (17): devDependencies, @types/node, typescript, vitest, @types/node, typescript, vitest, main (+9 more)
 
 ### Community 6 - "web/package.json"
-Cohesion: 0.12
-Nodes (16): dependencies, react, react-dom, name, private, scripts, build, dev (+8 more)
+Cohesion: 0.07
+Nodes (29): dependencies, react, react-dom, devDependencies, @types/react, @types/react-dom, typescript, vite (+21 more)
 
-### Community 7 - "dependencies"
-Cohesion: 0.13
-Nodes (15): dependencies, @clickplay/domain, @clickplay/providers, @clickplay/shared, @clickplay/video-engine, fastify, @fastify/cors, @fastify/static (+7 more)
+### Community 7 - "video/types.ts"
+Cohesion: 0.21
+Nodes (6): FalVideo, GeminiVideo, resolveVideoGenerationProvider(), VideoGenerationProvider, VideoGenerationProviderKey, VideoResult
 
 ### Community 8 - "logger.ts"
 Cohesion: 0.18
@@ -101,13 +113,9 @@ Nodes (6): createConsoleLogger(), LogFields, Logger, redact(), SENSITIVE_KEYS, R
 Cohesion: 0.13
 Nodes (14): compilerOptions, declaration, esModuleInterop, forceConsistentCasingInFileNames, isolatedModules, lib, module, moduleResolution (+6 more)
 
-### Community 10 - "devDependencies"
-Cohesion: 0.15
-Nodes (13): devDependencies, @types/react, @types/react-dom, typescript, vite, @vitejs/plugin-react, vitest, typescript (+5 more)
-
 ### Community 11 - "Click.Play — Implementation Plan"
-Cohesion: 0.12
-Nodes (15): 0.1 Público-alvo e decisões de produto derivadas, 0. Resumo da decisão, 10. Critérios de aceite, 1. Arquitetura proposta, 2. Matriz de reaproveitamento, 3. Componentes reutilizados (quase sem mudança), 4. Componentes adaptados (reescrita parcial), 5. Componentes removidos (+7 more)
+Cohesion: 0.08
+Nodes (24): 0.1 Público-alvo e decisões de produto derivadas, 0.2 Correção arquitetural: estratégia de produção visual (não é slideshow), 0. Resumo da decisão, 10. Critérios de aceite, 1. Arquitetura proposta, 2. Matriz de reaproveitamento, 3. Componentes reutilizados (quase sem mudança), 4. Componentes adaptados (reescrita parcial) (+16 more)
 
 ### Community 12 - "web/tsconfig.json"
 Cohesion: 0.17
@@ -137,6 +145,18 @@ Nodes (7): compilerOptions, outDir, rootDir, extends, include, src, ../../tsconf
 Cohesion: 0.47
 Nodes (3): app, port, buildServer()
 
+### Community 25 - "video-project.ts"
+Cohesion: 0.06
+Nodes (28): Asset, AssetType, AudioTrack, MusicMood, MusicTrack, NarrationTrack, WordTimestamp, Caption (+20 more)
+
+### Community 26 - "creative-director.ts"
+Cohesion: 0.08
+Nodes (33): buildDefaultPrompt(), buildPacingInstruction(), DirectorScore, DirectorScoreOutput, DirectorScoreRaw, generateDirectorScore(), loadDirectorSystemPrompt(), PACING_CONFIG (+25 more)
+
+### Community 27 - "Click.Play"
+Cohesion: 0.40
+Nodes (4): Click.Play, Comandos, pnpm gotcha (Windows), Workflow
+
 ### Community 29 - "AgentsOrchestrator Agent Personality"
 Cohesion: 0.05
 Nodes (37): 🚀 Advanced Pipeline Capabilities, AgentsOrchestrator Agent Personality, Autonomous Operation, 🤖 Available Specialist Agents, Completion Summary Template, Context-Aware Agent Spawning, 🚨 Critical Rules You Must Follow, 🎨 Design & UX Agents (+29 more)
@@ -158,24 +178,24 @@ Cohesion: 0.29
 Nodes (6): Core Capabilities, Decision Framework, Identity & Role Definition, Marketing Content Creator Agent, Specialized Skills, Success Metrics
 
 ## Knowledge Gaps
-- **250 isolated node(s):** `🧠 Your Identity & Memory`, `Orchestrate Complete Development Pipeline`, `Implement Continuous Quality Loops`, `Autonomous Operation`, `Quality Gate Enforcement` (+245 more)
+- **286 isolated node(s):** `Comandos`, `pnpm gotcha (Windows)`, `Workflow`, `name`, `version` (+281 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **1 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **2 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `dependencies` connect `dependencies` to `api/package.json`?**
-  _High betweenness centrality (0.005) - this node is a cross-community bridge._
-- **Why does `devDependencies` connect `devDependencies` to `web/package.json`?**
-  _High betweenness centrality (0.003) - this node is a cross-community bridge._
-- **What connects `🧠 Your Identity & Memory`, `Orchestrate Complete Development Pipeline`, `Implement Continuous Quality Loops` to the rest of the system?**
-  _250 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Why does `dependencies` connect `dependencies` to `domain/package.json`?**
+  _High betweenness centrality (0.045) - this node is a cross-community bridge._
+- **Why does `msedge-tts` connect `dependencies` to `video-project.ts`?**
+  _High betweenness centrality (0.042) - this node is a cross-community bridge._
+- **What connects `Comandos`, `pnpm gotcha (Windows)`, `Workflow` to the rest of the system?**
+  _286 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `scripts` be split into smaller, more focused modules?**
   _Cohesion score 0.125 - nodes in this community are weakly interconnected._
-- **Should `providers/package.json` be split into smaller, more focused modules?**
-  _Cohesion score 0.08695652173913043 - nodes in this community are weakly interconnected._
-- **Should `api/package.json` be split into smaller, more focused modules?**
-  _Cohesion score 0.09523809523809523 - nodes in this community are weakly interconnected._
 - **Should `domain/package.json` be split into smaller, more focused modules?**
-  _Cohesion score 0.09523809523809523 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.06896551724137931 - nodes in this community are weakly interconnected._
+- **Should `dependencies` be split into smaller, more focused modules?**
+  _Cohesion score 0.05555555555555555 - nodes in this community are weakly interconnected._
+- **Should `dependencies` be split into smaller, more focused modules?**
+  _Cohesion score 0.10526315789473684 - nodes in this community are weakly interconnected._
