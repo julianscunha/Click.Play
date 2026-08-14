@@ -15,3 +15,7 @@ export * from "./video/fal.js";
 export * from "./image/types.js";
 export * from "./image/gemini.js";
 export * from "./video/resolve-provider.js";
+export * from "./music/types.js";
+export * from "./music/bundled.js";
+export * from "./music/bundled-adapter.js";
+export * from "./music/lyria.js";

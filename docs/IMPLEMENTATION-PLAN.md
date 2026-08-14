@@ -1,6 +1,6 @@
 # Click.Play — Implementation Plan
 
-Status: Fase 0+1 concluídas. Decisões de produto (arquétipos) alinhadas com o usuário. **Correção arquitetural em andamento (§0.2): modelo visual de "1 asset por cena" rejeitado — plano sendo revisado para motion graphics + AI video generation compostos. Fase 2 pausada até aprovação da nova arquitetura.** Código de domínio ainda não escrito.
+Status: Fases 0–7 concluídas (auditoria, bootstrap, domain, LLM provider, Creative Director, TTS, produção visual, música). Próxima: Fase 8 (Captions).
 
 ## 0.1 Público-alvo e decisões de produto derivadas
 
@@ -120,9 +120,9 @@ Proibido tratar `imagem → imagem → imagem → imagem` (ou `stock_video → s
 
 Regra do usuário: se existir opção de geração por IA realmente grátis, usar como default; senão, default = biblioteca bundled. Manter ambas sempre disponíveis como opção.
 
-`lyria.ts` (OpenReels) usa `GOOGLE_API_KEY` no modelo `lyria-3-pro-preview` (Gemini API). **Custo não confirmado nesta auditoria** — modelos de geração de áudio/música tendem a ficar fora do tier grátis mesmo quando texto é grátis, mas não há dado de pricing verificado aqui. **Decisão: default = bundled agora; verificar pricing real do Lyria na Fase 7 e promover a default se confirmado grátis.**
+`lyria.ts` (OpenReels) usa `GOOGLE_API_KEY` no modelo `lyria-3-pro-preview` (Gemini API). **Pricing confirmado na Fase 7 (ago/2026): $0.08/música completa (30s = $0.04/clip) — não é grátis.** Decisão confirmada: `BundledMusic` é e continua sendo o `MusicProvider` default; `LyriaMusic` fica disponível só como upgrade pago manual, nunca promovido a default.
 
-Gap encontrado na biblioteca bundled (25 faixas Pixabay, grátis, ver `assets/music-manifest.json`): cobre 8 moods (`chill_lofi, dark_cinematic, dreamy_ethereal, epic_cinematic, mysterious_ambient, tense_electronic, uplifting_pop, warm_acoustic`) — **nenhum é infantil/brincalhão**. `uplifting_pop` é o fallback mais próximo hoje, mas fraco pra `kids-cartoon`/`musical-singalong`. Fase 7 precisa somar faixas mood `playful_kids` (mesma fonte Pixabay, licença grátis) ao manifest.
+Gap encontrado na biblioteca bundled (25 faixas Pixabay, grátis, ver `packages/providers/assets/music-manifest.json`): cobre 8 moods (`chill_lofi, dark_cinematic, dreamy_ethereal, epic_cinematic, mysterious_ambient, tense_electronic, uplifting_pop, warm_acoustic`) — **nenhum é infantil/brincalhão**. `playful_kids` já existe no enum `MusicMood` do domínio, mas **ainda sem faixas próprias** — `selectTrack()` cai no fallback genérico (qualquer mood, `fallback: true`) pra esse caso, então `kids-cartoon`/`musical-singalong` funcionam mas com música fora do tom. Curadoria de faixas reais (Pixabay, licença grátis) fica pendente — não é trabalho de código, é seleção de conteúdo; abrir quando houver tempo pra ouvir/escolher faixas.
 
 ### Legendas: 7 estilos disponíveis, default por arquétipo
 
@@ -280,7 +280,7 @@ Fase 3 — OpenRouter como `LLMProvider` default (já existe no OpenReels, valid
 Fase 4 — Script + Creative Director + Script QA (adaptar `research.ts`/`creative-director.ts`/`critic.ts` pra emitir `visualStrategy`+`elements`, §0.2).
 Fase 5 — TTS (edge-tts default grátis, §0.1 + decorator de alinhamento Whisper para providers sem timestamp nativo).
 Fase 6 — Produção visual: `VisualCompositionProvider` (motion graphics, elementos compostos por cena) + `VideoGenerationProvider` (Veo/Kling, renomeado do `VideoProvider` existente) + stock/imagem como fonte de `VisualElement`, não como cena inteira (§0.2).
-Fase 7 — Música (bundled default).
+Fase 7 — Música (bundled default). **Concluída.** `packages/providers/src/music/{types,bundled,bundled-adapter,lyria}.ts` portados do OpenReels; 25 faixas + manifest copiados para `packages/providers/assets/`; resolução de path trocada de `process.cwd()` pra `import.meta.url` (robusto em monorepo, `process.cwd()` do OpenReels assumia app único). Pricing do Lyria confirmado pago — bundled segue default. Gap `playful_kids` sem faixas documentado acima, pendente de curadoria de conteúdo.
 Fase 8 — Captions (motor + estilos reaproveitados, expor config do MPT).
 Fase 9 — `VideoRenderer`/`RemotionRenderer` (envolver `score-to-props.ts`, estendido pra compor N `VisualElement` por cena via `VisualCompositionProvider`, §0.2).
 Fase 10 — Job pipeline (state machine própria, sem BullMQ/Redis).
