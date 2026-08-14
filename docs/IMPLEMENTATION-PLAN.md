@@ -301,6 +301,7 @@ Fase 11 — WebUI (React+Vite+Tailwind v4). **Concluída (escopo MVP)**, decisã
 Fase 12 — Quality Control determinístico.
 Fase 13 — Docker.
 Fase 14 — Hardening (segurança, logging, docs, testes críticos).
+Fase 15+ — evolução Studio → SaaS, ver §11 (Roadmap de produto).
 
 (Task list já criada no tracker de tarefas da sessão, tasks #2–#15, mapeando 1:1 com as fases acima.)
 
@@ -313,3 +314,44 @@ Os do spec §49 (fluxo completo: título → briefing → duração → idioma �
 - Pipeline roda sem Redis/BullMQ instalado.
 - Testes críticos do spec §43 passando (domain, providers, job state machine, script validation).
 - `NOTICE` de atribuição MIT presente para código herdado de OpenReels.
+
+## 11. Roadmap de produto — Studio → SaaS
+
+Visão de longo prazo (pós-MVP, não é Fase 12-14): evoluir o Click.Play de "AI Video Generator" (produção 1:1, wizard→job→vídeo, sem memória entre execuções) pra "Mini Video Studio + Content Factory", com potencial de virar SaaS. Este roadmap **não é implementado agora** — só projeta a arquitetura pra que estas fases não exijam reconstruir o núcleo (`runPipeline`, `job-state-machine`, `RemotionRenderer`, providers).
+
+Cadeia de evolução: **Studio → Projeto → Template → Variáveis → Scheduler → AI Content Factory → QC → Publication → SaaS.**
+
+### Separação MVP / Evolução Studio / SaaS
+
+- **MVP** (Fases 0-14, concluídas até 11 + 12/13/14 em andamento): geração 1:1, sem persistir "identidade de produção" reutilizável. Não muda.
+- **Evolução Studio** (Fases 15-21 abaixo): Projeto como contêiner, Template, Variáveis, Scheduler, Content Factory, Publication real.
+- **SaaS** (Fase 22, não detalhada em profundidade — fora de escopo próximo): multi-tenant, auth, billing. Depende de todas as fases acima estarem estáveis.
+
+### Fases propostas (15+)
+
+- **Fase 15 — Studio UX.** Wizard visual robusto (10-20min), telas: Briefing → Roteiro → Visual → Música/Som → Narração → Legendas → Efeitos/Transições → Abertura/Fechamento → Providers/Configuração → Revisão/Custo → Geração → QC → Publicação. Não é editor tipo Premiere/DaVinci, não é "prompt→gerar" puro. Depende só da Fase 11 (WebUI MVP) já existente; fazer depois de Projeto/Template (16-17) estarem no schema, pra já desenhar a tela "salvar como template" sabendo que a entidade existe.
+- **Fase 16 — Projeto (entidade contêiner).** Nova tabela topo `content_projects` (nome novo — a tabela `projects` atual representa uma *config de produção* 1:1, não um contêiner; ver decisão #1 abaixo). Contém produções, templates, agendamentos, metadados de publicação de um mesmo "canal"/série (ex.: "Histórias do Joãozinho"). WebUI ganha navegação Projeto → Produções/Templates/Agendamentos.
+- **Fase 17 — Template.** Nova tabela `templates`: `id, contentProjectId, name, version, config (json), sourceProductionId, createdAt, updatedAt`. `config` é o mesmo shape json já persistido em `projects.config`/`PipelineOptions` (Fase 10D) — decisão da Fase 10 de manter esse objeto serializável e livre de instância de provider paga dividendo aqui sem mudança nenhuma. "Salvar como template" na WebUI só copia esse `config` de uma produção concluída. Template preserva as decisões de produção listadas pelo usuário (briefing, arquétipo, estilo visual, música, narração/voz, legendas, transições, providers/modelos, regras de QC etc) porque todas já vivem dentro de `PipelineOptions`/`ProjectConfig` hoje — não precisa de campo novo por decisão, só o container.
+- **Fase 18 — Variáveis de template.** `templates.variableSchema` (json: lista de `{key, label, kind: "literal" | "generative"}`). Resolução acontece **antes** de chamar `runPipeline`, numa função pura `resolveTemplate(template, bindings) → PipelineOptions`: interpolação de string (`{{PERSONAGEM_PRINCIPAL}}` etc) em `topic`/`direction` para `kind: "literal"`; para `kind: "generative"`, um passo de LLM expande a instrução numa `topic`/`direction` concreta antes do pipeline rodar. Ver decisão #2.
+- **Fase 19 — Scheduler.** Nova tabela `schedules`: `id, templateId, cron, variableBindings (json), enabled, nextRunAt, lastRunAt`. Runner (cron in-process — biblioteca a avaliar na hora, sem decidir dependência agora) dispara, resolve o template (18) → cria `production`+`job` novos → chama `startJob` (10D) sem nenhuma mudança no job-runner. Depende de 17+18.
+- **Fase 20 — AI Content Factory.** Sem tabela nova — é Scheduler (19) + variáveis `generative` (18) rodando sem intervenção humana, em lote. "Ligar o automático": decisão de produto sobre rate limit/custo de geração automática entra aqui, não antes.
+- **Fase 12 (já em andamento, sem mudança de escopo) — QC determinístico.** Seu `qcReport` é o sinal que Content Factory (20) e Publication (21) vão consumir pra auto-aprovar/descartar. Ver decisão #4.
+- **Fase 21 — Publication.** `PublishingProvider` já é interface prevista desde a Fase 0 (§6, stub não implementado). Fase 21 implementa de verdade (YouTube primeiro), com `qcReport.decision === "PASS"` como gate de auto-publicação. Nova tabela `publications`: `id, jobId, platform, status, externalUrl, publishedAt, error`.
+- **Fase 22 — SaaS.** Multi-tenant (auth, billing, orgs). Ver decisão #3 — nenhuma tabela ganha `ownerId` antes desta fase.
+
+### Dependências entre fases
+
+`16 (Projeto)` → `17 (Template)` → `18 (Variáveis)` → `19 (Scheduler)` → `20 (Content Factory)`. `12 (QC)` é independente, mas seu shape de saída é consumido por `20` e `21`. `21 (Publication)` depende de `12` (gate de qualidade) e da interface `PublishingProvider` já existente. `15 (Studio UX)` só depende da Fase 11, pode ser feita em paralelo, mas ganha mais sentido depois de `16-17` existirem. `22 (SaaS)` depende de tudo acima.
+
+### Decisões a tomar agora (evitar refatoração futura)
+
+1. **Renomear tabela `projects` → `productions`** antes de introduzir `content_projects` (Fase 16) — colisão de nome com o novo conceito de "Projeto" do roadmap. Só o nome muda; shape e `jobs.projectId`→`jobs.productionId` seguem iguais.
+2. **Resolução de template/variável fica fora do `runPipeline`/`orchestrator.ts`** — função pura pré-pipeline, mesmo padrão "quem chama decide" já usado pra aprovação de custo (10C/10D). Não tocar o orchestrator quando as Fases 17-18 chegarem.
+3. **Todo schema novo (`content_projects`, `templates`, `schedules`, `publications`) usa PK `text` (uuid), nunca autoincrement** — mesmo padrão de `jobs`/`projects` hoje. Torna a futura migração multi-tenant (Fase 22, adicionar `ownerId`+índice) aditiva, não destrutiva.
+4. **`qcReport` (Fase 12) deve ter campo topo `decision: "PASS" | "WARNING" | "BLOCK"`** — contrato consumido por Content Factory (20) e Publication (21). Decidir isso já na implementação da Fase 12 evita retrabalho depois.
+5. **`PublishingProvider` continua interface-only até a Fase 21** — não implementar YouTube real antes da hora, só manter a interface (já prevista desde a Fase 0) estável.
+6. **Scheduler reaproveita `startJob`/`job-runner.ts` sem mudança** — cria `production`+`job` novos e delega; não construir um segundo pipeline paralelo pra execução agendada.
+
+### O que não muda / não é reimplementado
+
+`runPipeline`, `job-state-machine.ts`, `RemotionRenderer`, providers existentes (LLM/TTS/Image/Video/Stock/Music) — núcleo intocado por este roadmap. Fases 0-11 concluídas permanecem como estão; Fases 12-14 seguem o plano já aprovado, sem interferência deste roadmap.
