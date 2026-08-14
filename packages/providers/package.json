@@ -24,6 +24,7 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@types/ffprobe-static": "^2.0.3",
     "typescript": "^5.7.0",
     "vitest": "^3.0.0"
   }
