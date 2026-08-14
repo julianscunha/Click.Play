@@ -20,3 +20,5 @@ export * from "./music/bundled.js";
 export * from "./music/bundled-adapter.js";
 export * from "./music/lyria.js";
 export * from "./cost/index.js";
+export * from "./stock/index.js";
+export * from "./visual/index.js";

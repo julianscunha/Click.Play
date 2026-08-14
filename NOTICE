@@ -15,6 +15,7 @@ Código portado/adaptado em:
 - packages/video-engine/src/captions/* (motor de legendas: 7 estilos + CaptionWrapper + caption-utils + fonts)
 - packages/video-engine/src/render/* (VideoRenderer/RemotionRenderer, adaptado de score-to-props.ts + OpenReelsVideo.tsx pra composição multi-elemento por cena)
 - packages/providers/src/config/* (archetype-registry + presets)
+- packages/providers/src/stock/* (PexelsStock, PixabayStock)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to
