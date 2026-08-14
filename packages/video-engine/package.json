@@ -7,14 +7,20 @@
   "types": "./src/index.ts",
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "test": "vitest run --passWithNoTests",
+    "test": "vitest run",
     "lint": "biome check src"
   },
   "dependencies": {
     "@clickplay/domain": "workspace:*",
-    "@clickplay/shared": "workspace:*"
+    "@clickplay/shared": "workspace:*",
+    "@remotion/google-fonts": "4.0.441",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "remotion": "^4.0.441"
   },
   "devDependencies": {
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.4",
     "typescript": "^5.7.0",
     "vitest": "^3.0.0"
   }

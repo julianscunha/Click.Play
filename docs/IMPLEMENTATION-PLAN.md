@@ -1,6 +1,6 @@
 # Click.Play — Implementation Plan
 
-Status: Fases 0–7 concluídas (auditoria, bootstrap, domain, LLM provider, Creative Director, TTS, produção visual, música). Próxima: Fase 8 (Captions).
+Status: Fases 0–8 concluídas (auditoria, bootstrap, domain, LLM provider, Creative Director, TTS, produção visual, música, captions). Próxima: Fase 9 (VideoRenderer/RemotionRenderer).
 
 ## 0.1 Público-alvo e decisões de produto derivadas
 
@@ -129,6 +129,8 @@ Gap encontrado na biblioteca bundled (25 faixas Pixabay, grátis, ver `packages/
 ### Legendas: 7 estilos disponíveis, default por arquétipo
 
 Motor de captions do OpenReels tem 7 estilos (`BoldOutline`, `Clean`, `GradientRise`, `KaraokeSweep`, `ColorHighlight`, `BlockImpact`, `BoxHighlight`). Cada `ArchetypeConfig` já mapeia um `captionStyle` default (ex: `kids-cartoon`→bold_outline, `musical-singalong`→karaoke_sweep). UI: campo de legenda vem pré-selecionado com o default do arquétipo escolhido, mas o usuário pode trocar pra qualquer um dos 7 manualmente (dropdown, igual seleção de fonte/cor/posição do MoneyPrinterTurbo). Também expõe os campos de estilo herdados do MPT (fonte, cor, tamanho, contorno, fundo) por cima do preset do arquétipo.
+
+**Decisão do usuário (Fase 8):** dropdown de estilo ganha um **preview visual pequeno** na tela de configuração — sem custo (render local via Remotion/Player, sem API/IA), mesma lógica do preview de áudio decidido pra música (§0.1 Música). Mecanismo exato (still renderizado por estilo vs `@remotion/player` ao vivo com frase de exemplo) fica pra decidir na Fase 11 quando a WebUI for implementada; motor de captions da Fase 8 já expõe os 7 estilos como componentes isolados (`packages/video-engine/src/captions/styles/*`), o que viabiliza qualquer uma das duas abordagens sem mudança no motor.
 
 ## 0. Resumo da decisão
 
@@ -283,10 +285,10 @@ Fase 4 — Script + Creative Director + Script QA (adaptar `research.ts`/`creati
 Fase 5 — TTS (edge-tts default grátis, §0.1 + decorator de alinhamento Whisper para providers sem timestamp nativo).
 Fase 6 — Produção visual: `VisualCompositionProvider` (motion graphics, elementos compostos por cena) + `VideoGenerationProvider` (Veo/Kling, renomeado do `VideoProvider` existente) + stock/imagem como fonte de `VisualElement`, não como cena inteira (§0.2).
 Fase 7 — Música (bundled default). **Concluída.** `packages/providers/src/music/{types,bundled,bundled-adapter,lyria}.ts` portados do OpenReels; 25 faixas + manifest copiados para `packages/providers/assets/`; resolução de path trocada de `process.cwd()` pra `import.meta.url` (robusto em monorepo, `process.cwd()` do OpenReels assumia app único). Pricing do Lyria confirmado pago — bundled segue default. Gap `playful_kids` sem faixas documentado acima, pendente de curadoria de conteúdo.
-Fase 8 — Captions (motor + estilos reaproveitados, expor config do MPT).
+Fase 8 — Captions. **Concluída.** Motor portado de OpenReels/MIT pra `packages/video-engine/src/captions/`: `caption-utils.ts` (lógica pura de chunking/timing, 29 testes) + `CaptionWrapper.tsx` (timing/spring via Remotion) + 7 estilos (`styles/BoldOutline.tsx` etc) + `CAPTION_STYLE_COMPONENTS` (registry `CaptionStyleKey`→componente) + `fonts.ts` (Google Fonts via `@remotion/google-fonts`). Decisão do usuário: motor completo agora (não só a lógica pura), o que antecipou `remotion`/`react`/`react-dom`/`@remotion/google-fonts` como dependência do `video-engine` (originalmente previsto só na Fase 9). `NOTICE` criado na raiz (atribuição MIT, cobre todo código portado até aqui). Decisão adicional: dropdown de estilo na WebUI ganha preview visual pequeno (sem custo, render local) — mecanismo exato fica pra Fase 11, motor já suporta via componentes isolados.
 Fase 9 — `VideoRenderer`/`RemotionRenderer` (envolver `score-to-props.ts`, estendido pra compor N `VisualElement` por cena via `VisualCompositionProvider`, §0.2).
 Fase 10 — Job pipeline (state machine própria, sem BullMQ/Redis).
-Fase 11 — WebUI (campos do MPT, fluxo próprio, React+Vite). Inclui seletor de música com preview de áudio (lista do manifest bundled, escolha manual substitui/complementa default por mood — ver §0.1 Música).
+Fase 11 — WebUI (campos do MPT, fluxo próprio, React+Vite). Inclui seletor de música com preview de áudio (lista do manifest bundled, escolha manual substitui/complementa default por mood — ver §0.1 Música) e dropdown de legenda com preview visual pequeno por estilo (ver §Legendas).
 Fase 12 — Quality Control determinístico.
 Fase 13 — Docker.
 Fase 14 — Hardening (segurança, logging, docs, testes críticos).

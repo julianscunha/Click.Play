@@ -1,0 +1,40 @@
+Click.Play reutiliza e adapta código de terceiros sob licença MIT.
+
+## OpenReels
+
+Copyright (c) 2026 Talha Jubair Siam
+Fonte: https://github.com/tsensei/OpenReels
+Licença: MIT (texto completo em https://github.com/tsensei/OpenReels/blob/main/LICENSE)
+
+Código portado/adaptado em:
+- packages/providers/src/llm/* (OpenRouter e demais LLM providers)
+- packages/providers/src/tts/* (kokoro, aligned-tts-provider, whisper-aligner)
+- packages/providers/src/image/*, packages/providers/src/video/* (gemini/Veo, fal/Kling)
+- packages/providers/src/music/* (bundled, bundled-adapter, lyria) + assets/music/*
+- packages/providers/src/agents/* (research, creative-director, critic, image-prompter, music-prompter)
+- packages/video-engine/src/captions/* (motor de legendas: 7 estilos + CaptionWrapper + caption-utils + fonts)
+- packages/providers/src/config/* (archetype-registry + presets)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to
+deal in the Software without restriction, including without limitation the
+rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+sell copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+DEALINGS IN THE SOFTWARE.
+
+## MoneyPrinterTurbo
+
+Usado somente como referência de UX/produto (código Python, não portado). Ver
+docs/IMPLEMENTATION-PLAN.md para detalhe.
+Fonte: https://github.com/harry0703/MoneyPrinterTurbo — Licença: MIT
