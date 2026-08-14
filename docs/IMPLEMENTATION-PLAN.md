@@ -122,7 +122,9 @@ Regra do usuário: se existir opção de geração por IA realmente grátis, usa
 
 `lyria.ts` (OpenReels) usa `GOOGLE_API_KEY` no modelo `lyria-3-pro-preview` (Gemini API). **Pricing confirmado na Fase 7 (ago/2026): $0.08/música completa (30s = $0.04/clip) — não é grátis.** Decisão confirmada: `BundledMusic` é e continua sendo o `MusicProvider` default; `LyriaMusic` fica disponível só como upgrade pago manual, nunca promovido a default.
 
-Gap encontrado na biblioteca bundled (25 faixas Pixabay, grátis, ver `packages/providers/assets/music-manifest.json`): cobre 8 moods (`chill_lofi, dark_cinematic, dreamy_ethereal, epic_cinematic, mysterious_ambient, tense_electronic, uplifting_pop, warm_acoustic`) — **nenhum é infantil/brincalhão**. `playful_kids` já existe no enum `MusicMood` do domínio, mas **ainda sem faixas próprias** — `selectTrack()` cai no fallback genérico (qualquer mood, `fallback: true`) pra esse caso, então `kids-cartoon`/`musical-singalong` funcionam mas com música fora do tom. Curadoria de faixas reais (Pixabay, licença grátis) fica pendente — não é trabalho de código, é seleção de conteúdo; abrir quando houver tempo pra ouvir/escolher faixas.
+Gap encontrado na biblioteca bundled (25 faixas Pixabay, grátis, ver `packages/providers/assets/music-manifest.json`): cobre 8 moods (`chill_lofi, dark_cinematic, dreamy_ethereal, epic_cinematic, mysterious_ambient, tense_electronic, uplifting_pop, warm_acoustic`) — **nenhum é infantil/brincalhão**. `playful_kids` já existe no enum `MusicMood` do domínio, mas **ainda sem faixas próprias** — `selectTrack()` cai no fallback genérico (qualquer mood, `fallback: true`) pra esse caso.
+
+**Decisão do usuário (Fase 7, revisão pós-conclusão):** em vez de curadoria fixa por mood, a WebUI (Fase 11) expõe a lista de faixas do manifest com **player de preview** na etapa de configuração do vídeo — usuário ouve e escolhe manualmente, `selectTrack()`/mood vira só o default sugerido, não obrigatório. Isso cobre o gap `playful_kids` sem precisar curar faixa "certa" agora (e vale pra qualquer mood, não só esse). Curadoria de faixas novas por mood fica opcional/futura, não bloqueia nenhuma fase.
 
 ### Legendas: 7 estilos disponíveis, default por arquétipo
 
@@ -284,7 +286,7 @@ Fase 7 — Música (bundled default). **Concluída.** `packages/providers/src/mu
 Fase 8 — Captions (motor + estilos reaproveitados, expor config do MPT).
 Fase 9 — `VideoRenderer`/`RemotionRenderer` (envolver `score-to-props.ts`, estendido pra compor N `VisualElement` por cena via `VisualCompositionProvider`, §0.2).
 Fase 10 — Job pipeline (state machine própria, sem BullMQ/Redis).
-Fase 11 — WebUI (campos do MPT, fluxo próprio, React+Vite).
+Fase 11 — WebUI (campos do MPT, fluxo próprio, React+Vite). Inclui seletor de música com preview de áudio (lista do manifest bundled, escolha manual substitui/complementa default por mood — ver §0.1 Música).
 Fase 12 — Quality Control determinístico.
 Fase 13 — Docker.
 Fase 14 — Hardening (segurança, logging, docs, testes críticos).
