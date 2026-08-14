@@ -19,3 +19,4 @@ export * from "./music/types.js";
 export * from "./music/bundled.js";
 export * from "./music/bundled-adapter.js";
 export * from "./music/lyria.js";
+export * from "./cost/index.js";
