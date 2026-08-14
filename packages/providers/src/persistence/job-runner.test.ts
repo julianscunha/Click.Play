@@ -1,0 +1,158 @@
+import * as fs from "node:fs";
+import * as os from "node:os";
+import * as path from "node:path";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import type { RenderInput, VideoRenderer } from "@clickplay/video-engine";
+import type { ImageProvider } from "../image/types.js";
+import type { LLMProvider } from "../llm/types.js";
+import type { MusicProvider } from "../music/types.js";
+import type { TTSProvider } from "../tts/types.js";
+import { createDb } from "./client.js";
+import { runJobOnce } from "./job-runner.js";
+import { createJob, createProject, getJob } from "./repository.js";
+import type { ProjectConfig } from "./types.js";
+
+const RESEARCH_RESULT = { summary: "sum", key_facts: ["fact"], mood: "curious" };
+
+function sceneRaw(overrides: Record<string, unknown> = {}) {
+  return {
+    visualStrategy: "motion_graphics",
+    elements: [{ type: "animated_text", text: "hello" }],
+    scriptLine: "Hello world this is a test scene.",
+    transition: null,
+    ...overrides,
+  };
+}
+
+function directorPayload() {
+  return {
+    emotional_arc: "curiosity-to-wonder",
+    archetype: "cinematic_documentary",
+    music_mood: "epic_cinematic",
+    scenes: [sceneRaw(), sceneRaw(), sceneRaw()],
+  };
+}
+
+function critiquePayload(score: number) {
+  return {
+    score,
+    strengths: ["ok"],
+    weaknesses: [],
+    revision_needed: score < 7,
+    revision_instructions: null,
+    weakest_scene_index: null,
+  };
+}
+
+function usage() {
+  return { inputTokens: 10, outputTokens: 5 };
+}
+
+function fakeLLM(...responses: unknown[]): LLMProvider {
+  const generate = vi.fn();
+  for (const data of responses) generate.mockResolvedValueOnce({ data, usage: usage() });
+  return { id: "openrouter", generate };
+}
+
+function fakeTTS(): TTSProvider {
+  return {
+    generate: vi.fn().mockResolvedValue({
+      audio: Buffer.from("fake-audio"),
+      words: [
+        { word: "Hello", start: 0, end: 0.3 },
+        { word: "world", start: 0.3, end: 0.6 },
+      ],
+    }),
+  };
+}
+
+function fakeMusic(): MusicProvider {
+  return { generate: vi.fn().mockResolvedValue({ filePath: "/tmp/music.mp3" }) };
+}
+
+function fakeImageProvider(): ImageProvider {
+  return { generate: vi.fn().mockRejectedValue(new Error("not used in these tests")) };
+}
+
+function fakeVideoRenderer(): VideoRenderer {
+  return {
+    id: "fake",
+    render: vi.fn(async (_input: RenderInput, outputPath: string) => ({ outputPath, durationInFrames: 90 })),
+  };
+}
+
+function fakeDeps(llm: LLMProvider) {
+  return {
+    llm,
+    ttsProvider: fakeTTS(),
+    musicProvider: fakeMusic(),
+    resolveElementCtx: {
+      imageProvider: fakeImageProvider(),
+      videoProviders: {},
+      hasGoogleKey: false,
+      hasFalKey: false,
+      stockProviders: [],
+    },
+    videoRenderer: fakeVideoRenderer(),
+  };
+}
+
+const config: ProjectConfig = {
+  cost: { llmModel: "openai/gpt-4.1", ttsProvider: "edge", imageProvider: "gemini", musicProvider: "bundled" },
+};
+
+let runDir: string;
+let db: ReturnType<typeof createDb>;
+
+beforeEach(() => {
+  runDir = fs.mkdtempSync(path.join(os.tmpdir(), "cp-job-runner-"));
+  db = createDb(":memory:");
+});
+
+afterEach(() => {
+  fs.rmSync(runDir, { recursive: true, force: true });
+});
+
+describe("runJobOnce", () => {
+  it("drives a job QUEUED→...→COMPLETED and persists cost/output", async () => {
+    const llm = fakeLLM(RESEARCH_RESULT, directorPayload(), critiquePayload(8));
+    const project = await createProject(db, { topic: "Apollo 11", config });
+    const job = await createJob(db, { projectId: project.id, runDir });
+
+    await runJobOnce(db, job.id, fakeDeps(llm));
+
+    const finalJob = await getJob(db, job.id);
+    expect(finalJob?.status).toBe("COMPLETED");
+    expect(finalJob?.progress).toBe(1);
+    expect(finalJob?.outputPath).toContain("output.mp4");
+    expect(finalJob?.estimatedCost).not.toBeNull();
+    expect(finalJob?.actualCost).not.toBeNull();
+  });
+
+  it("moves a job to CANCELLED and records the reason when approveCost rejects", async () => {
+    const llm = fakeLLM(RESEARCH_RESULT, directorPayload(), critiquePayload(8));
+    const project = await createProject(db, { topic: "Apollo 11", config });
+    const job = await createJob(db, { projectId: project.id, runDir });
+
+    await runJobOnce(db, job.id, fakeDeps(llm), { approveCost: () => false });
+
+    const finalJob = await getJob(db, job.id);
+    expect(finalJob?.status).toBe("CANCELLED");
+    expect(finalJob?.error).toMatch(/custo/);
+    expect(finalJob?.estimatedCost).not.toBeNull();
+  });
+
+  it("moves a job to FAILED and records the stage+error when a stage throws", async () => {
+    const llm = fakeLLM(RESEARCH_RESULT, directorPayload(), critiquePayload(8));
+    const project = await createProject(db, { topic: "Apollo 11", config });
+    const job = await createJob(db, { projectId: project.id, runDir });
+    const deps = fakeDeps(llm);
+    deps.ttsProvider.generate = vi.fn().mockRejectedValue(new Error("tts exploded"));
+
+    await runJobOnce(db, job.id, deps);
+
+    const finalJob = await getJob(db, job.id);
+    expect(finalJob?.status).toBe("FAILED");
+    expect(finalJob?.error).toBe("[tts] tts exploded");
+  });
+});

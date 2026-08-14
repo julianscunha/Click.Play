@@ -29,15 +29,15 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
   try {
     if (callbacks.isCancelled?.()) return { status: "cancelled" };
 
-    callbacks.onStageStart?.(stage);
+    await callbacks.onStageStart?.(stage);
     const researchOut = await research(opts.llm, opts.topic);
     usages.push(researchOut.usage);
-    callbacks.onStageComplete?.(stage);
+    await callbacks.onStageComplete?.(stage);
 
     if (callbacks.isCancelled?.()) return { status: "cancelled" };
 
     stage = "director";
-    callbacks.onStageStart?.(stage);
+    await callbacks.onStageStart?.(stage);
     const revisions: RevisionLogEntry[] = [];
     const directorOpts = {
       archetype: opts.archetype,
@@ -53,7 +53,7 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
     let critiqueOut = await evaluate(opts.llm, score, opts.topic, opts.pacing);
     usages.push(critiqueOut.usage);
     revisions.push({ round: 0, score: critiqueOut.data.score, critique: critiqueOut.data });
-    callbacks.onRevision?.(revisions[0]!);
+    await callbacks.onRevision?.(revisions[0]!);
 
     let round = 0;
     while (critiqueOut.data.score < 7 && round < MAX_REVISION_ROUNDS) {
@@ -73,9 +73,9 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
       usages.push(critiqueOut.usage);
       const entry: RevisionLogEntry = { round, score: critiqueOut.data.score, critique: critiqueOut.data };
       revisions.push(entry);
-      callbacks.onRevision?.(entry);
+      await callbacks.onRevision?.(entry);
     }
-    callbacks.onStageComplete?.(stage);
+    await callbacks.onStageComplete?.(stage);
 
     const costEstimate = estimateCost(score.scenes, opts.cost);
     const approved = await callbacks.onCostEstimate(costEstimate);
@@ -86,19 +86,19 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
     if (callbacks.isCancelled?.()) return { status: "cancelled" };
 
     stage = "tts";
-    callbacks.onStageStart?.(stage);
+    await callbacks.onStageStart?.(stage);
     const fullScript = score.scenes.map((s) => s.scriptLine).join(" ");
     const ttsResult = await opts.ttsProvider.generate(fullScript);
     const audioDir = path.join(opts.runDir, "audio");
     await fs.promises.mkdir(audioDir, { recursive: true });
     const voiceoverPath = path.join(audioDir, "voiceover.mp3");
     await fs.promises.writeFile(voiceoverPath, ttsResult.audio);
-    callbacks.onStageComplete?.(stage);
+    await callbacks.onStageComplete?.(stage);
 
     if (callbacks.isCancelled?.()) return { status: "cancelled" };
 
     stage = "visuals";
-    callbacks.onStageStart?.(stage);
+    await callbacks.onStageStart?.(stage);
     const assetsDir = path.join(opts.runDir, "assets");
     const durationsInFrames = splitWordsIntoScenes(score.scenes, ttsResult.words, fps);
     const transitionDurationFrames = opts.transitionDurationFrames ?? Math.round(fps * 0.4);
@@ -128,14 +128,14 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
         transitionDurationFrames,
       });
     }
-    callbacks.onStageComplete?.(stage);
+    await callbacks.onStageComplete?.(stage);
 
     const musicResult = await opts.musicProvider.generate(researchOut.data.mood, score.music_mood);
 
     if (callbacks.isCancelled?.()) return { status: "cancelled" };
 
     stage = "render";
-    callbacks.onStageStart?.(stage);
+    await callbacks.onStageStart?.(stage);
     const renderInput: RenderInput = {
       scenes: resolvedScenes,
       fps,
@@ -153,7 +153,7 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
     await fs.promises.mkdir(outputDir, { recursive: true });
     const outputPath = path.join(outputDir, "output.mp4");
     const renderResult = await opts.videoRenderer.render(renderInput, outputPath);
-    callbacks.onStageComplete?.(stage);
+    await callbacks.onStageComplete?.(stage);
 
     let aiImages = 0;
     let aiVideos = 0;
@@ -192,7 +192,7 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
     };
   } catch (err) {
     const error = err instanceof Error ? err : new Error(String(err));
-    callbacks.onStageError?.(stage, error);
+    await callbacks.onStageError?.(stage, error);
     return { status: "failed", stage, error };
   }
 }

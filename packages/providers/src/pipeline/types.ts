@@ -18,12 +18,13 @@ export interface RevisionLogEntry {
 }
 
 export interface PipelineCallbacks {
-  onStageStart?(stage: PipelineStage): void;
-  onStageComplete?(stage: PipelineStage): void;
-  onStageError?(stage: PipelineStage, error: Error): void;
+  /** Retorno `Promise<void>` opcional — orchestrator sempre aguarda (10D persiste transição de estado antes do próximo estágio rodar). */
+  onStageStart?(stage: PipelineStage): void | Promise<void>;
+  onStageComplete?(stage: PipelineStage): void | Promise<void>;
+  onStageError?(stage: PipelineStage, error: Error): void | Promise<void>;
   /** Orchestrator não decide política de aprovação — quem chama decide (CLI confirma, teste sempre aprova, API espera usuário). */
   onCostEstimate(estimate: CostBreakdown): Promise<boolean>;
-  onRevision?(entry: RevisionLogEntry): void;
+  onRevision?(entry: RevisionLogEntry): void | Promise<void>;
   onLog?(message: string): void;
   onProgress?(fraction: number): void;
   isCancelled?(): boolean;

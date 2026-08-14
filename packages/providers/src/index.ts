@@ -23,3 +23,4 @@ export * from "./cost/index.js";
 export * from "./stock/index.js";
 export * from "./visual/index.js";
 export * from "./pipeline/index.js";
+export * from "./persistence/index.js";

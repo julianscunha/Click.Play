@@ -139,7 +139,7 @@ describe("runPipeline", () => {
       critiquePayload(9),
     );
     const revisionLog: number[] = [];
-    const callbacks = approvingCallbacks({ onRevision: (entry) => revisionLog.push(entry.round) });
+    const callbacks = approvingCallbacks({ onRevision: (entry) => void revisionLog.push(entry.round) });
 
     const result = await runPipeline(baseOptions(runDir, llm), callbacks);
 
