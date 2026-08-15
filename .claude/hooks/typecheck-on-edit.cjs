@@ -22,11 +22,20 @@ process.stdin.on("end", () => {
   const cwd = process.env.CLAUDE_PROJECT_DIR || process.cwd();
 
   try {
-    execFileSync("pnpm", ["--filter", `./${pkgDir}`, "typecheck"], { cwd, stdio: "pipe" });
+    // --incremental reaproveita .tsbuildinfo entre chamadas — sem isso, tsc
+    // recompila pacote inteiro do zero em CADA edit (custo tempo+tokens alto
+    // em sessão longa).
+    execFileSync(
+      "pnpm",
+      ["--filter", `./${pkgDir}`, "exec", "tsc", "--noEmit", "--incremental", "--tsBuildInfoFile", "hook.tsbuildinfo"],
+      { cwd, stdio: "pipe" },
+    );
     process.exit(0);
   } catch (err) {
     const out = [err.stdout, err.stderr].filter(Boolean).join("\n");
-    console.error(`[typecheck] ${pkgDir} falhou:\n${out}`);
+    const lines = out.split("\n");
+    const truncated = lines.length > 40 ? `${lines.slice(0, 40).join("\n")}\n... (+${lines.length - 40} linhas)` : out;
+    console.error(`[typecheck] ${pkgDir} falhou:\n${truncated}`);
     process.exit(2);
   }
 });
