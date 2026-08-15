@@ -123,10 +123,12 @@ const costOptions: CostEstimateOptions = {
 };
 
 let runsDir: string;
+let envFilePath: string;
 let db: ClickPlayDb;
 
 beforeEach(() => {
   runsDir = fs.mkdtempSync(path.join(os.tmpdir(), "cp-api-"));
+  envFilePath = path.join(runsDir, ".env");
   db = createDb(":memory:");
 });
 
@@ -141,14 +143,26 @@ afterEach(() => {
 
 describe("server", () => {
   it("responds ok on /health", async () => {
-    const app = buildServer({ db, jobRunnerDeps: fakeJobRunnerDeps(fakeLLM()), costOptions, runsDir });
+    const app = buildServer({
+      db,
+      buildJobRunnerDeps: () => fakeJobRunnerDeps(fakeLLM()),
+      buildCostOptions: () => costOptions,
+      runsDir,
+      envFilePath,
+    });
     const res = await app.inject({ method: "GET", url: "/health" });
     expect(res.statusCode).toBe(200);
     expect(res.json()).toEqual({ status: "ok" });
   });
 
   it("lists form config and music manifest", async () => {
-    const app = buildServer({ db, jobRunnerDeps: fakeJobRunnerDeps(fakeLLM()), costOptions, runsDir });
+    const app = buildServer({
+      db,
+      buildJobRunnerDeps: () => fakeJobRunnerDeps(fakeLLM()),
+      buildCostOptions: () => costOptions,
+      runsDir,
+      envFilePath,
+    });
 
     const config = await app.inject({ method: "GET", url: "/config" });
     expect(config.statusCode).toBe(200);
@@ -161,21 +175,39 @@ describe("server", () => {
   });
 
   it("rejects POST /jobs with invalid body", async () => {
-    const app = buildServer({ db, jobRunnerDeps: fakeJobRunnerDeps(fakeLLM()), costOptions, runsDir });
+    const app = buildServer({
+      db,
+      buildJobRunnerDeps: () => fakeJobRunnerDeps(fakeLLM()),
+      buildCostOptions: () => costOptions,
+      runsDir,
+      envFilePath,
+    });
     const res = await app.inject({ method: "POST", url: "/jobs", payload: {} });
     expect(res.statusCode).toBe(422);
     expect(res.json().error.code).toBe("VALIDATION_ERROR");
   });
 
   it("404s GET /jobs/:id for an unknown job", async () => {
-    const app = buildServer({ db, jobRunnerDeps: fakeJobRunnerDeps(fakeLLM()), costOptions, runsDir });
+    const app = buildServer({
+      db,
+      buildJobRunnerDeps: () => fakeJobRunnerDeps(fakeLLM()),
+      buildCostOptions: () => costOptions,
+      runsDir,
+      envFilePath,
+    });
     const res = await app.inject({ method: "GET", url: "/jobs/does-not-exist" });
     expect(res.statusCode).toBe(404);
   });
 
   it("drives a job end to end: create → awaits cost approval → approve → completed", async () => {
     const llm = fakeLLM(RESEARCH_RESULT, directorPayload(), critiquePayload(8));
-    const app = buildServer({ db, jobRunnerDeps: fakeJobRunnerDeps(llm), costOptions, runsDir });
+    const app = buildServer({
+      db,
+      buildJobRunnerDeps: () => fakeJobRunnerDeps(llm),
+      buildCostOptions: () => costOptions,
+      runsDir,
+      envFilePath,
+    });
 
     const create = await app.inject({ method: "POST", url: "/jobs", payload: { topic: "Apollo 11" } });
     expect(create.statusCode).toBe(201);
@@ -216,4 +248,33 @@ describe("server", () => {
     });
     expect(secondApprove.json().applied).toBe(false);
   }, 30_000);
+
+  it("GET /settings masks secrets and reflects PUT without exposing full values", async () => {
+    const app = buildServer({
+      db,
+      buildJobRunnerDeps: () => fakeJobRunnerDeps(fakeLLM()),
+      buildCostOptions: () => costOptions,
+      runsDir,
+      envFilePath,
+    });
+
+    const empty = await app.inject({ method: "GET", url: "/settings" });
+    expect(empty.json().OPENROUTER_API_KEY).toEqual({ set: false });
+    expect(empty.json().OPENROUTER_MODEL).toBe("");
+
+    const put = await app.inject({
+      method: "PUT",
+      url: "/settings",
+      payload: { OPENROUTER_API_KEY: "sk-or-v1-abcd1234", OPENROUTER_MODEL: "openrouter/free" },
+    });
+    expect(put.statusCode).toBe(200);
+    expect(put.json().applied).toBe(true);
+
+    const after = await app.inject({ method: "GET", url: "/settings" });
+    expect(after.json().OPENROUTER_API_KEY).toEqual({ set: true, masked: "••••1234" });
+    expect(after.json().OPENROUTER_MODEL).toBe("openrouter/free");
+
+    const rawFile = fs.readFileSync(envFilePath, "utf-8");
+    expect(rawFile).toContain("OPENROUTER_API_KEY=sk-or-v1-abcd1234");
+  });
 });

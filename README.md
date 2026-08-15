@@ -78,6 +78,16 @@ Preencha em `apps/api/.env`:
 
 Sem `GOOGLE_API_KEY`/`FAL_API_KEY`/chaves de stock, o pipeline ainda roda de ponta a ponta — só as cenas que pedem imagem/vídeo IA falham na resolução de elemento.
 
+### Onde conseguir cada chave
+
+- **OpenRouter** (`OPENROUTER_API_KEY`) — crie conta em [openrouter.ai](https://openrouter.ai/), vá em [Settings → API Keys](https://openrouter.ai/settings/keys) → **Create Key**. Modelo padrão do projeto é `openrouter/free` (roteador gratuito, sem custo); pra usar outro modelo, veja a lista em [openrouter.ai/models](https://openrouter.ai/models) e copie o `id` exato (ex.: `anthropic/claude-sonnet-4`) pra `OPENROUTER_MODEL`.
+- **Google Gemini** (`GOOGLE_API_KEY`, opcional) — [aistudio.google.com/apikey](https://aistudio.google.com/apikey) → **Create API key**. Tem cota gratuita.
+- **Fal.ai** (`FAL_API_KEY`, opcional) — crie conta em [fal.ai](https://fal.ai/), vá em [fal.ai/dashboard/keys](https://fal.ai/dashboard/keys) → **Add key**.
+- **Pexels** (`PEXELS_API_KEY`, opcional) — [pexels.com/api](https://www.pexels.com/api/) → **Get Started**, cria a chave na hora, sem cartão.
+- **Pixabay** (`PIXABAY_API_KEY`, opcional) — crie conta em [pixabay.com](https://pixabay.com/), a chave fica em [pixabay.com/api/docs](https://pixabay.com/api/docs/) (seção "Getting started", já logado).
+
+Nenhum desses serviços pede cartão de crédito só pra gerar a chave (planos gratuitos cobrem os testes).
+
 ## Uso
 
 Suba API e front-end em dois terminais:

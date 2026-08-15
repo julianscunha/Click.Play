@@ -20,22 +20,26 @@ import * as url from "node:url";
 
 const REMOTION_ENTRY = path.join(path.dirname(url.fileURLToPath(import.meta.url)), "remotion", "entry.tsx");
 
-const hasGoogleKey = Boolean(process.env.GOOGLE_API_KEY);
-const hasFalKey = Boolean(process.env.FAL_API_KEY);
-
-/** Estratégia de custo default do MVP (edge/gemini/bundled grátis-first) — ver packages/providers/src/cost/pricing.ts. */
-export const costOptions: CostEstimateOptions = {
-  llmModel: process.env.OPENROUTER_MODEL || "openai/gpt-4.1",
-  ttsProvider: "edge",
-  imageProvider: "gemini",
-  videoProvider: hasGoogleKey ? "gemini" : hasFalKey ? "fal" : undefined,
-  musicProvider: "bundled",
-};
+/**
+ * Estratégia de custo default do MVP (edge/gemini/bundled grátis-first) — ver
+ * packages/providers/src/cost/pricing.ts. Função (não const) — lida por job,
+ * assim a tela de settings (PUT /settings) reflete em process.env pro
+ * próximo job sem exigir reiniciar a API.
+ */
+export function buildCostOptions(): CostEstimateOptions {
+  return {
+    llmModel: process.env.OPENROUTER_MODEL || "openai/gpt-4.1",
+    ttsProvider: "edge",
+    imageProvider: "gemini",
+    videoProvider: process.env.GOOGLE_API_KEY ? "gemini" : process.env.FAL_API_KEY ? "fal" : undefined,
+    musicProvider: "bundled",
+  };
+}
 
 function buildVideoProviders(): Partial<Record<"gemini" | "fal", VideoGenerationProvider>> {
   const providers: Partial<Record<"gemini" | "fal", VideoGenerationProvider>> = {};
-  if (hasGoogleKey) providers.gemini = new GeminiVideo();
-  if (hasFalKey) providers.fal = new FalVideo();
+  if (process.env.GOOGLE_API_KEY) providers.gemini = new GeminiVideo();
+  if (process.env.FAL_API_KEY) providers.fal = new FalVideo();
   return providers;
 }
 
@@ -65,8 +69,8 @@ export function buildJobRunnerDeps(): JobRunnerDeps {
   const resolveElementCtx: Omit<ResolveElementContext, "writeAsset" | "assetId"> = {
     imageProvider: buildImageProvider(),
     videoProviders: buildVideoProviders(),
-    hasGoogleKey,
-    hasFalKey,
+    hasGoogleKey: Boolean(process.env.GOOGLE_API_KEY),
+    hasFalKey: Boolean(process.env.FAL_API_KEY),
     stockProviders: buildStockProviders(),
   };
 

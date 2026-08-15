@@ -81,3 +81,24 @@ export function approveCost(id: string, approved: boolean): Promise<void> {
 export function outputUrl(output: string): string {
   return `${API_BASE}${output}`;
 }
+
+export type SecretField = { set: true; masked: string } | { set: false };
+
+export interface Settings {
+  OPENROUTER_API_KEY: SecretField;
+  OPENROUTER_MODEL: string;
+  TTS_PROVIDER: string;
+  TTS_API_KEY: SecretField;
+  GOOGLE_API_KEY: SecretField;
+  FAL_API_KEY: SecretField;
+  PEXELS_API_KEY: SecretField;
+  PIXABAY_API_KEY: SecretField;
+}
+
+export function getSettings(): Promise<Settings> {
+  return request("/settings");
+}
+
+export function putSettings(updates: Partial<Record<keyof Settings, string>>): Promise<{ applied: boolean }> {
+  return request("/settings", { method: "PUT", body: JSON.stringify(updates) });
+}

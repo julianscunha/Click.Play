@@ -3,6 +3,7 @@ import { approveCost, createJob, getFormConfig, getJob, type CreateJobInput, typ
 import { CreateForm } from "./components/CreateForm.js";
 import { ProgressView } from "./components/ProgressView.js";
 import { ResultPlayer } from "./components/ResultPlayer.js";
+import { SettingsView } from "./components/SettingsView.js";
 
 const POLL_INTERVAL_MS = 2000;
 
@@ -14,6 +15,7 @@ export function App() {
   const [submitting, setSubmitting] = useState(false);
   const [approving, setApproving] = useState(false);
   const [createError, setCreateError] = useState<string | null>(null);
+  const [showSettings, setShowSettings] = useState(false);
 
   useEffect(() => {
     getFormConfig()
@@ -73,23 +75,32 @@ export function App() {
 
   return (
     <div className="min-h-screen bg-neutral-950 px-4 py-12 text-neutral-50">
-      <header className="mx-auto mb-10 max-w-xl">
-        <h1 className="text-xl font-semibold">Click.Play</h1>
-        <p className="text-sm text-neutral-400">Descreva o vídeo, acompanhe a produção, assista o resultado.</p>
+      <header className="mx-auto mb-10 flex max-w-xl items-start justify-between">
+        <div>
+          <h1 className="text-xl font-semibold">Click.Play</h1>
+          <p className="text-sm text-neutral-400">Descreva o vídeo, acompanhe a produção, assista o resultado.</p>
+        </div>
+        {!showSettings && (
+          <button onClick={() => setShowSettings(true)} className="text-sm text-neutral-400 underline">
+            Configurações
+          </button>
+        )}
       </header>
 
       <main>
-        {configError && (
+        {showSettings && <SettingsView onClose={() => setShowSettings(false)} />}
+
+        {!showSettings && configError && (
           <p role="alert" className="mx-auto max-w-xl text-sm text-red-400">
             Não foi possível carregar as opções do formulário: {configError}
           </p>
         )}
 
-        {!configError && !config && (
+        {!showSettings && !configError && !config && (
           <p className="mx-auto max-w-xl text-sm text-neutral-400">Carregando...</p>
         )}
 
-        {config && !jobId && (
+        {!showSettings && config && !jobId && (
           <div className="mx-auto flex max-w-xl flex-col gap-3">
             <CreateForm config={config} onSubmit={handleCreate} submitting={submitting} />
             {createError && (
@@ -100,11 +111,11 @@ export function App() {
           </div>
         )}
 
-        {job && job.status !== "COMPLETED" && (
+        {!showSettings && job && job.status !== "COMPLETED" && (
           <ProgressView job={job} onApprove={handleApprove} approving={approving} />
         )}
 
-        {job && job.status === "COMPLETED" && job.output && (
+        {!showSettings && job && job.status === "COMPLETED" && job.output && (
           <ResultPlayer output={job.output} onCreateAnother={reset} />
         )}
       </main>

@@ -10,8 +10,8 @@
     "semantic_hash": ""
   },
   "apps/api/package.json": {
-    "mtime": 1786734713.4153936,
-    "ast_hash": "7c0c7a4e0406802776b850fc0a2615d6",
+    "mtime": 1786752661.2034342,
+    "ast_hash": "48857f2d8b8ec9b79ca095ab48f04478",
     "semantic_hash": ""
   },
   "apps/api/src/index.ts": {
@@ -20,8 +20,8 @@
     "semantic_hash": ""
   },
   "apps/api/src/server.test.ts": {
-    "mtime": 1786733954.9722817,
-    "ast_hash": "404094fea31018bd91add0b23ee8d3ce",
+    "mtime": 1786752753.1631973,
+    "ast_hash": "09ddd1aa654fb7120d6326b4923abe4a",
     "semantic_hash": ""
   },
   "apps/api/src/server.ts": {
@@ -125,8 +125,8 @@
     "semantic_hash": ""
   },
   "docs/IMPLEMENTATION-PLAN.md": {
-    "mtime": 1786748790.0570145,
-    "ast_hash": "2bc77193cdf2f52e4846b95480c94ce0",
+    "mtime": 1786764862.9738965,
+    "ast_hash": "f409d695106500b9094ed100cc42232e",
     "semantic_hash": ""
   },
   "pnpm-workspace.yaml": {
@@ -475,13 +475,13 @@
     "semantic_hash": ""
   },
   "packages/providers/src/persistence/job-runner.test.ts": {
-    "mtime": 1786730898.5996256,
-    "ast_hash": "84493e78280afaec9c1faa66d9d23070",
+    "mtime": 1786752549.9074936,
+    "ast_hash": "508fc05c1cc4f00bd8b202b12fb94580",
     "semantic_hash": ""
   },
   "packages/providers/src/persistence/job-runner.ts": {
-    "mtime": 1786733309.498047,
-    "ast_hash": "56440f73718692e2399b86a8f2a96a1f",
+    "mtime": 1786752420.6530447,
+    "ast_hash": "f078da9bf499694d43a5a6c39c5088bb",
     "semantic_hash": ""
   },
   "packages/providers/src/persistence/job-state-machine.test.ts": {
@@ -525,8 +525,8 @@
     "semantic_hash": ""
   },
   "packages/providers/src/pipeline/orchestrator.ts": {
-    "mtime": 1786730899.5187125,
-    "ast_hash": "096d0b285444fe97859be3583c3203b0",
+    "mtime": 1786752403.8165207,
+    "ast_hash": "a1b9f9dcf2b3b3b2443e9ede6a7c877f",
     "semantic_hash": ""
   },
   "packages/providers/src/pipeline/scene-timing.ts": {
@@ -535,8 +535,8 @@
     "semantic_hash": ""
   },
   "packages/providers/src/pipeline/types.ts": {
-    "mtime": 1786730899.5187125,
-    "ast_hash": "880cbe2f47cc44c8943ee63ddeda84d6",
+    "mtime": 1786752398.9542334,
+    "ast_hash": "6bb2841ad032474391f82f1005fee4be",
     "semantic_hash": ""
   },
   "packages/providers/src/stock/index.ts": {

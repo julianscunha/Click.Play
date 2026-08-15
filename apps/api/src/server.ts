@@ -4,12 +4,14 @@ import Fastify from "fastify";
 import { createCostApprovalGate, type ClickPlayDb, type CostEstimateOptions, type JobRunnerDeps } from "@clickplay/providers";
 import { registerJobsRoutes } from "./routes/jobs.js";
 import { registerMetaRoutes } from "./routes/meta.js";
+import { registerSettingsRoutes } from "./routes/settings.js";
 
 export interface BuildServerOptions {
   db: ClickPlayDb;
-  jobRunnerDeps: JobRunnerDeps;
-  costOptions: CostEstimateOptions;
+  buildJobRunnerDeps(): JobRunnerDeps;
+  buildCostOptions(): CostEstimateOptions;
   runsDir: string;
+  envFilePath: string;
   /** Injetável pra testes reaproveitarem o mesmo gate entre chamadas HTTP simuladas. Default: novo gate por servidor. */
   gate?: ReturnType<typeof createCostApprovalGate>;
 }
@@ -24,10 +26,11 @@ export function buildServer(opts: BuildServerOptions) {
   app.get("/health", async () => ({ status: "ok" }));
 
   registerMetaRoutes(app);
+  registerSettingsRoutes(app, { envFilePath: opts.envFilePath });
   registerJobsRoutes(app, {
     db: opts.db,
-    jobRunnerDeps: opts.jobRunnerDeps,
-    costOptions: opts.costOptions,
+    buildJobRunnerDeps: opts.buildJobRunnerDeps,
+    buildCostOptions: opts.buildCostOptions,
     runsDir: opts.runsDir,
     gate,
   });

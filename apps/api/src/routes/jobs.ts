@@ -41,8 +41,9 @@ const STAGE_BY_STATUS: Record<JobStatus, string> = {
 
 export interface JobsRouteDeps {
   db: ClickPlayDb;
-  jobRunnerDeps: JobRunnerDeps;
-  costOptions: CostEstimateOptions;
+  /** Chamado por job (não montado uma vez no boot) — reflete keys/modelo salvos via PUT /settings sem exigir restart. */
+  buildJobRunnerDeps(): JobRunnerDeps;
+  buildCostOptions(): CostEstimateOptions;
   runsDir: string;
   gate: ReturnType<typeof createCostApprovalGate>;
 }
@@ -75,12 +76,12 @@ export function registerJobsRoutes(app: FastifyInstance, deps: JobsRouteDeps): v
 
     const project = await createProject(deps.db, {
       topic,
-      config: { cost: deps.costOptions, direction, archetype, pacing, videoEnabled, captionStyle },
+      config: { cost: deps.buildCostOptions(), direction, archetype, pacing, videoEnabled, captionStyle },
     });
     const runDir = path.join(deps.runsDir, project.id);
     const job = await createJob(deps.db, { projectId: project.id, runDir });
 
-    startJob(deps.db, job.id, deps.jobRunnerDeps, {
+    startJob(deps.db, job.id, deps.buildJobRunnerDeps(), {
       approveCost: (estimate) => deps.gate.waitForApproval(job.id),
       onLog: (message) => app.log.info({ jobId: job.id }, message),
     });
