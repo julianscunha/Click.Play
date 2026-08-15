@@ -1,8 +1,13 @@
+import { execFile } from "node:child_process";
 import * as fs from "node:fs";
 import * as os from "node:os";
 import * as path from "node:path";
+import { promisify } from "node:util";
+import ffmpegPath from "ffmpeg-static";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import type { RenderInput, VideoRenderer } from "@clickplay/video-engine";
+
+const execFileAsync = promisify(execFile);
 import type { ImageProvider } from "../image/types.js";
 import type { LLMProvider } from "../llm/types.js";
 import type { MusicProvider } from "../music/types.js";
@@ -74,10 +79,28 @@ function fakeImageProvider(): ImageProvider {
   return { generate: vi.fn().mockRejectedValue(new Error("not used in these tests")) };
 }
 
+const FAKE_RENDER_DURATION_FRAMES = 90;
+
+/** Escreve um mp4 real (via ffmpeg lavfi) — QC (Fase 12) roda ffprobe/blackdetect de verdade no output. */
 function fakeVideoRenderer(): VideoRenderer {
   return {
     id: "fake",
-    render: vi.fn(async (_input: RenderInput, outputPath: string) => ({ outputPath, durationInFrames: 90 })),
+    render: vi.fn(async (input: RenderInput, outputPath: string) => {
+      const durationSeconds = FAKE_RENDER_DURATION_FRAMES / input.fps;
+      await execFileAsync(ffmpegPath!, [
+        "-y",
+        "-f",
+        "lavfi",
+        "-i",
+        `testsrc=size=${input.width}x${input.height}:rate=${input.fps}`,
+        "-t",
+        String(durationSeconds),
+        "-pix_fmt",
+        "yuv420p",
+        outputPath,
+      ]);
+      return { outputPath, durationInFrames: FAKE_RENDER_DURATION_FRAMES };
+    }),
   };
 }
 
@@ -99,6 +122,10 @@ function fakeDeps(llm: LLMProvider) {
 
 const config: ProjectConfig = {
   cost: { llmModel: "openai/gpt-4.1", ttsProvider: "edge", imageProvider: "gemini", musicProvider: "bundled" },
+  // fps/resolução pequenos — teste gera mp4 real via ffmpeg, mantém rápido.
+  fps: 25,
+  width: 320,
+  height: 240,
 };
 
 let runDir: string;
@@ -127,7 +154,10 @@ describe("runJobOnce", () => {
     expect(finalJob?.outputPath).toContain("output.mp4");
     expect(finalJob?.estimatedCost).not.toBeNull();
     expect(finalJob?.actualCost).not.toBeNull();
-  });
+    // WARNING, não PASS: fakeTTS só cobre 2 das 18 palavras do script (stub
+    // simples, não um TTS real) — tts_coverage pega isso corretamente.
+    expect(finalJob?.qcReport?.decision).toBe("WARNING");
+  }, 20_000);
 
   it("moves a job to CANCELLED and records the reason when approveCost rejects", async () => {
     const llm = fakeLLM(RESEARCH_RESULT, directorPayload(), critiquePayload(8));
@@ -140,6 +170,26 @@ describe("runJobOnce", () => {
     expect(finalJob?.status).toBe("CANCELLED");
     expect(finalJob?.error).toMatch(/custo/);
     expect(finalJob?.estimatedCost).not.toBeNull();
+  });
+
+  it("moves a job to FAILED when QC BLOCKs (output not actually written)", async () => {
+    const llm = fakeLLM(RESEARCH_RESULT, directorPayload(), critiquePayload(8));
+    const project = await createProject(db, { topic: "Apollo 11", config });
+    const job = await createJob(db, { projectId: project.id, runDir });
+    const deps = fakeDeps(llm);
+    deps.videoRenderer = {
+      id: "fake-broken",
+      render: vi.fn(async (_input: RenderInput, outputPath: string) => ({ outputPath, durationInFrames: 90 })),
+    };
+
+    await runJobOnce(db, job.id, deps);
+
+    const finalJob = await getJob(db, job.id);
+    expect(finalJob?.status).toBe("FAILED");
+    expect(finalJob?.error).toMatch(/QC reprovou/);
+    expect(finalJob?.qcReport?.decision).toBe("BLOCK");
+    // output_path continua persistido mesmo em BLOCK (útil pra diagnóstico).
+    expect(finalJob?.outputPath).toContain("output.mp4");
   });
 
   it("moves a job to FAILED and records the stage+error when a stage throws", async () => {

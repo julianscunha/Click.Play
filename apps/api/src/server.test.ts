@@ -1,11 +1,16 @@
+import { execFile } from "node:child_process";
 import * as fs from "node:fs";
 import * as os from "node:os";
 import * as path from "node:path";
+import { promisify } from "node:util";
+import ffmpegPath from "ffmpeg-static";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { createDb, type ClickPlayDb, type CostEstimateOptions, type JobRunnerDeps } from "@clickplay/providers";
 import type { RenderInput, VideoRenderer } from "@clickplay/video-engine";
 import type { ImageProvider, LLMProvider, MusicProvider, TTSProvider } from "@clickplay/providers";
 import { buildServer } from "./server.js";
+
+const execFileAsync = promisify(execFile);
 
 const RESEARCH_RESULT = { summary: "sum", key_facts: ["fact"], mood: "curious" };
 
@@ -69,10 +74,28 @@ function fakeImageProvider(): ImageProvider {
   return { generate: vi.fn().mockRejectedValue(new Error("not used in these tests")) };
 }
 
+const FAKE_RENDER_DURATION_FRAMES = 90;
+
+/** Escreve um mp4 real (via ffmpeg lavfi) — QC (Fase 12) roda ffprobe/blackdetect de verdade no output. */
 function fakeVideoRenderer(): VideoRenderer {
   return {
     id: "fake",
-    render: vi.fn(async (_input: RenderInput, outputPath: string) => ({ outputPath, durationInFrames: 90 })),
+    render: vi.fn(async (input: RenderInput, outputPath: string) => {
+      const durationSeconds = FAKE_RENDER_DURATION_FRAMES / input.fps;
+      await execFileAsync(ffmpegPath!, [
+        "-y",
+        "-f",
+        "lavfi",
+        "-i",
+        `testsrc=size=${input.width}x${input.height}:rate=${input.fps}`,
+        "-t",
+        String(durationSeconds),
+        "-pix_fmt",
+        "yuv420p",
+        outputPath,
+      ]);
+      return { outputPath, durationInFrames: FAKE_RENDER_DURATION_FRAMES };
+    }),
   };
 }
 
@@ -108,7 +131,12 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  fs.rmSync(runsDir, { recursive: true, force: true });
+  // Windows às vezes ainda segura o handle do mp4 recém-escrito pelo ffmpeg — não falhar o teste por isso.
+  try {
+    fs.rmSync(runsDir, { recursive: true, force: true });
+  } catch {
+    // ignore
+  }
 });
 
 describe("server", () => {
@@ -170,8 +198,9 @@ describe("server", () => {
     expect(approve.statusCode).toBe(200);
     expect(approve.json().applied).toBe(true);
 
-    for (let i = 0; i < 50 && status !== "COMPLETED"; i++) {
-      await new Promise((r) => setTimeout(r, 10));
+    // Render real via ffmpeg (QC pós-render, Fase 12) demora mais que os outros estágios — janela maior.
+    for (let i = 0; i < 400 && status !== "COMPLETED" && status !== "FAILED"; i++) {
+      await new Promise((r) => setTimeout(r, 20));
       const res = await app.inject({ method: "GET", url: `/jobs/${jobId}` });
       status = res.json().status;
     }
@@ -186,5 +215,5 @@ describe("server", () => {
       payload: { approved: true },
     });
     expect(secondApprove.json().applied).toBe(false);
-  });
+  }, 30_000);
 });

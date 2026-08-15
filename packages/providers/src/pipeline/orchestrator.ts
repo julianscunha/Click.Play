@@ -189,6 +189,11 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
       costEstimate,
       costActual,
       revisions,
+      scriptWordCount: fullScript.trim().split(/\s+/).filter(Boolean).length,
+      coveredWordCount: ttsResult.words.length,
+      fps,
+      width,
+      height,
     };
   } catch (err) {
     const error = err instanceof Error ? err : new Error(String(err));

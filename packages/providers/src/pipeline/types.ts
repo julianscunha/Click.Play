@@ -64,6 +64,13 @@ export type PipelineResult =
       costEstimate: CostBreakdown;
       costActual: CostBreakdown;
       revisions: RevisionLogEntry[];
+      /** Contagem de palavras do script vs `ttsResult.words.length` — pro check `tts_coverage` do QC (Fase 12), não duplicado em outro lugar. */
+      scriptWordCount: number;
+      coveredWordCount: number;
+      /** fps/width/height efetivos do render (após aplicar default) — pro check `resolution_match` do QC. */
+      fps: number;
+      width: number;
+      height: number;
     }
   | {
       status: "cancelled_cost";

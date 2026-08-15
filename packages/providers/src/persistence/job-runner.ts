@@ -1,6 +1,8 @@
 import type { CostBreakdown } from "../cost/index.js";
 import { runPipeline } from "../pipeline/orchestrator.js";
 import type { PipelineCallbacks, PipelineOptions } from "../pipeline/types.js";
+import { runQc } from "../qc/run-qc.js";
+import type { QcReport } from "../qc/types.js";
 import type { ClickPlayDb } from "./client.js";
 import { assertTransition } from "./job-state-machine.js";
 import {
@@ -10,6 +12,7 @@ import {
   setJobError,
   setJobEstimatedCost,
   setJobOutputPath,
+  setJobQcReport,
   updateJobStatus,
 } from "./repository.js";
 import type { JobStatus } from "./schema.js";
@@ -89,11 +92,34 @@ export async function runJobOnce(
   const result = await runPipeline(pipelineOptions, callbacks);
 
   switch (result.status) {
-    case "completed":
+    case "completed": {
       await setJobActualCost(db, jobId, result.costActual);
       await setJobOutputPath(db, jobId, result.outputPath);
-      await transition("COMPLETED");
+
+      const qcReport: QcReport = await runQc({
+        outputPath: result.outputPath,
+        expectedDurationInFrames: result.durationInFrames,
+        fps: result.fps,
+        width: result.width,
+        height: result.height,
+        ttsCoverage: { scriptWordCount: result.scriptWordCount, coveredWordCount: result.coveredWordCount },
+        revisions: result.revisions,
+        cost: { estimated: result.costEstimate.total, actual: result.costActual.total },
+      });
+      await setJobQcReport(db, jobId, qcReport);
+
+      if (qcReport.decision === "BLOCK") {
+        const failedBlocks = qcReport.checks
+          .filter((c) => !c.passed && c.severity === "block")
+          .map((c) => c.message)
+          .join("; ");
+        await setJobError(db, jobId, `QC reprovou o vídeo: ${failedBlocks}`);
+        await transition("FAILED");
+      } else {
+        await transition("COMPLETED");
+      }
       break;
+    }
     case "cancelled_cost":
       await setJobError(db, jobId, "Job cancelado: custo estimado não aprovado");
       await transition("CANCELLED");
