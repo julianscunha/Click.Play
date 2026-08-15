@@ -15,6 +15,7 @@ const app = buildServer({
   buildCostOptions,
   runsDir,
   envFilePath,
+  apiToken: process.env.API_TOKEN || undefined,
 });
 const port = Number(process.env.PORT ?? 8787);
 

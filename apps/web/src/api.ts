@@ -1,5 +1,18 @@
 const API_BASE = import.meta.env.VITE_API_URL ?? "http://localhost:8787";
 
+const TOKEN_KEY = "clickplay_api_token";
+
+export function getStoredToken(): string {
+  return localStorage.getItem(TOKEN_KEY) ?? "";
+}
+
+export function setStoredToken(value: string): void {
+  if (value) localStorage.setItem(TOKEN_KEY, value);
+  else localStorage.removeItem(TOKEN_KEY);
+}
+
+export class UnauthorizedError extends Error {}
+
 export type CostAmount = { status: "known"; usd: number } | { status: "unknown"; reason: string };
 
 export interface CostBreakdown {
@@ -51,10 +64,16 @@ export interface CreateJobInput {
 }
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
+  const token = getStoredToken();
   const res = await fetch(`${API_BASE}${path}`, {
     ...init,
-    headers: { "Content-Type": "application/json", ...init?.headers },
+    headers: {
+      "Content-Type": "application/json",
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      ...init?.headers,
+    },
   });
+  if (res.status === 401) throw new UnauthorizedError("Token inválido ou ausente");
   if (!res.ok) {
     const body = await res.json().catch(() => null);
     throw new Error(body?.error?.message ?? `Falha na requisição (${res.status})`);

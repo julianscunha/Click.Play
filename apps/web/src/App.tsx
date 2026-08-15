@@ -1,15 +1,26 @@
 import { useEffect, useState } from "react";
-import { approveCost, createJob, getFormConfig, getJob, type CreateJobInput, type FormConfig, type JobView } from "./api.js";
+import {
+  approveCost,
+  createJob,
+  getFormConfig,
+  getJob,
+  UnauthorizedError,
+  type CreateJobInput,
+  type FormConfig,
+  type JobView,
+} from "./api.js";
 import { CreateForm } from "./components/CreateForm.js";
 import { ProgressView } from "./components/ProgressView.js";
 import { ResultPlayer } from "./components/ResultPlayer.js";
 import { SettingsView } from "./components/SettingsView.js";
+import { TokenGate } from "./components/TokenGate.js";
 
 const POLL_INTERVAL_MS = 2000;
 
 export function App() {
   const [config, setConfig] = useState<FormConfig | null>(null);
   const [configError, setConfigError] = useState<string | null>(null);
+  const [needsToken, setNeedsToken] = useState(false);
   const [jobId, setJobId] = useState<string | null>(null);
   const [job, setJob] = useState<JobView | null>(null);
   const [submitting, setSubmitting] = useState(false);
@@ -20,7 +31,10 @@ export function App() {
   useEffect(() => {
     getFormConfig()
       .then(setConfig)
-      .catch((err) => setConfigError(err instanceof Error ? err.message : String(err)));
+      .catch((err) => {
+        if (err instanceof UnauthorizedError) setNeedsToken(true);
+        else setConfigError(err instanceof Error ? err.message : String(err));
+      });
   }, []);
 
   useEffect(() => {
@@ -88,15 +102,17 @@ export function App() {
       </header>
 
       <main>
-        {showSettings && <SettingsView onClose={() => setShowSettings(false)} />}
+        {needsToken && <TokenGate onSaved={() => window.location.reload()} />}
 
-        {!showSettings && configError && (
+        {!needsToken && showSettings && <SettingsView onClose={() => setShowSettings(false)} />}
+
+        {!needsToken && !showSettings && configError && (
           <p role="alert" className="mx-auto max-w-xl text-sm text-red-400">
             Não foi possível carregar as opções do formulário: {configError}
           </p>
         )}
 
-        {!showSettings && !configError && !config && (
+        {!needsToken && !showSettings && !configError && !config && (
           <p className="mx-auto max-w-xl text-sm text-neutral-400">Carregando...</p>
         )}
 

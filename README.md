@@ -75,6 +75,8 @@ Preencha em `apps/api/.env`:
 | `DATABASE_URL` | Não | Caminho do SQLite (default: `./data/clickplay.sqlite`) |
 | `RUNS_DIR` | Não | Diretório de saída dos jobs (default: `./data/runs`) |
 | `PORT` | Não | Porta da API (default: `8787`) |
+| `API_TOKEN` | Não (recomendado se expor além de localhost) | Se preenchido, toda rota (exceto `/health` e `/files/*`) exige `Authorization: Bearer <API_TOKEN>`. O WebUI pede o token na primeira vez e guarda no navegador (localStorage) |
+| `LOG_LEVEL` | Não | Nível de log do Fastify/pino (`trace`\|`debug`\|`info`\|`warn`\|`error`\|`fatal`), default `info` |
 
 Sem `GOOGLE_API_KEY`/`FAL_API_KEY`/chaves de stock, o pipeline ainda roda de ponta a ponta — só as cenas que pedem imagem/vídeo IA falham na resolução de elemento.
 
@@ -115,7 +117,7 @@ docker compose up --build
 
 Acesse o front-end, preencha o formulário (tópico, direção livre, arquétipo, ritmo, estilo de legenda), acompanhe o progresso do job e, ao final, assista/baixe o vídeo gerado.
 
-> **Segurança:** a API não tem autenticação em nenhuma rota (inclusive `/settings`, que grava credenciais em `apps/api/.env`) — é feita pra rodar em `localhost`, uso pessoal, não pra expor na rede/internet sem colocar autenticação na frente (proxy, VPN, etc.).
+> **Segurança:** por padrão a API não tem autenticação (uso `localhost`/pessoal). Pra expor além de `localhost`, preencha `API_TOKEN` em `apps/api/.env` — toda rota (exceto `/health` e `/files/*`, que serve os vídeos direto pro `<video>`, sem como anexar header) passa a exigir `Authorization: Bearer <API_TOKEN>`. O WebUI detecta e pede o token automaticamente. A API também já vem com rate limit (1000 req/min por cliente) e headers de segurança padrão (`@fastify/helmet`).
 
 ### Comandos
 

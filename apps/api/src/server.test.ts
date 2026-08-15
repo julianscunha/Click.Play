@@ -155,6 +155,21 @@ describe("server", () => {
     expect(res.json()).toEqual({ status: "ok" });
   });
 
+  it("sets security headers without blocking cross-origin video loads", async () => {
+    const app = buildServer({
+      db,
+      buildJobRunnerDeps: () => fakeJobRunnerDeps(fakeLLM()),
+      buildCostOptions: () => costOptions,
+      runsDir,
+      envFilePath,
+    });
+    const res = await app.inject({ method: "GET", url: "/health" });
+    expect(res.headers["x-content-type-options"]).toBe("nosniff");
+    expect(res.headers["x-frame-options"]).toBe("SAMEORIGIN");
+    // "same-origin" (default do helmet) bloquearia <video src> vindo do web (outra origem/porta).
+    expect(res.headers["cross-origin-resource-policy"]).toBe("cross-origin");
+  });
+
   it("lists form config and music manifest", async () => {
     const app = buildServer({
       db,
@@ -277,4 +292,47 @@ describe("server", () => {
     const rawFile = fs.readFileSync(envFilePath, "utf-8");
     expect(rawFile).toContain("OPENROUTER_API_KEY=sk-or-v1-abcd1234");
   });
+
+  describe("apiToken", () => {
+    function appWithToken(apiToken: string) {
+      return buildServer({
+        db,
+        buildJobRunnerDeps: () => fakeJobRunnerDeps(fakeLLM()),
+        buildCostOptions: () => costOptions,
+        runsDir,
+        envFilePath,
+        apiToken,
+      });
+    }
+
+    it("rejects requests without a token", async () => {
+      const app = appWithToken("secret");
+      const res = await app.inject({ method: "GET", url: "/config" });
+      expect(res.statusCode).toBe(401);
+    });
+
+    it("rejects requests with the wrong token", async () => {
+      const app = appWithToken("secret");
+      const res = await app.inject({ method: "GET", url: "/config", headers: { authorization: "Bearer wrong" } });
+      expect(res.statusCode).toBe(401);
+    });
+
+    it("accepts requests with the correct token", async () => {
+      const app = appWithToken("secret");
+      const res = await app.inject({ method: "GET", url: "/config", headers: { authorization: "Bearer secret" } });
+      expect(res.statusCode).toBe(200);
+    });
+
+    it("leaves /health open regardless of token", async () => {
+      const app = appWithToken("secret");
+      const res = await app.inject({ method: "GET", url: "/health" });
+      expect(res.statusCode).toBe(200);
+    });
+  });
+
+  // Sem teste automatizado pro rate limit: @fastify/rate-limit não intercepta
+  // requisições via app.inject() sob vitest (hook registra mas nunca dispara —
+  // bug de compatibilidade vitest/decorators do Fastify, reproduzido isolado
+  // e ausente rodando via tsx puro). Verificado manualmente: script standalone
+  // com tsx (max:3) devolve 429 a partir da 4ª chamada, como esperado.
 });
