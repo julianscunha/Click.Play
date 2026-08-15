@@ -13,7 +13,7 @@
   "11": "Click.Play — Implementation Plan",
   "12": "compilerOptions",
   "13": "compilerOptions",
-  "14": "cost-approval-gate.ts",
+  "14": "edge.ts",
   "15": "domain/tsconfig.json",
   "16": "providers/tsconfig.json",
   "17": "video-engine/tsconfig.json",
@@ -22,12 +22,11 @@
   "20": "AGENTS.md",
   "21": "vite.config.ts",
   "23": "copilot-instructions.md",
-  "25": "domain/src/index.ts",
+  "25": "bundled.ts",
   "26": "creative-director.ts",
   "27": "Click.Play",
   "34": "new-provider",
   "35": "verify-package",
   "36": "typecheck-on-edit.cjs",
-  "37": "block-env-edit.cjs",
-  "38": "bundled.ts"
+  "37": "block-env-edit.cjs"
 }
