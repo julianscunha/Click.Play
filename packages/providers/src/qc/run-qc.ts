@@ -1,12 +1,14 @@
 import * as fs from "node:fs";
 import type { CostAmount } from "../cost/types.js";
 import type { RevisionLogEntry } from "../pipeline/types.js";
+import { checkBlackdetect } from "./checks/blackdetect.js";
 import { checkCostDeviation } from "./checks/cost-deviation.js";
 import { checkCriticScore } from "./checks/critic-score.js";
 import { checkDurationMatch } from "./checks/duration-match.js";
 import { checkOutputExists } from "./checks/output-exists.js";
 import { checkResolutionMatch } from "./checks/resolution-match.js";
 import { checkTtsCoverage } from "./checks/tts-coverage.js";
+import { detectBlackSegments } from "./media-tools/blackdetect.js";
 import { probeMedia } from "./media-tools/probe.js";
 import type { QcCheckResult, QcDecision, QcReport } from "./types.js";
 
@@ -49,6 +51,10 @@ export async function runQc(input: RunQcInput): Promise<QcReport> {
         { width: probed.width, height: probed.height, fps: probed.fps },
       ),
     );
+
+    const minBlackDurationSeconds = 1.0;
+    const blackSegments = await detectBlackSegments(input.outputPath, minBlackDurationSeconds);
+    checks.push(checkBlackdetect(blackSegments, minBlackDurationSeconds));
   }
 
   if (input.ttsCoverage) {
