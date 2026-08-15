@@ -1,7 +1,7 @@
 {
   ".claude/settings.local.json": {
-    "mtime": 1786732226.1403918,
-    "ast_hash": "ad9a18cfcde9843b4357aca6af7eefe0",
+    "mtime": 1786810356.2275913,
+    "ast_hash": "589a017a15c7c8b655ee3521e5420b54",
     "semantic_hash": ""
   },
   "package.json": {
@@ -10,23 +10,23 @@
     "semantic_hash": ""
   },
   "apps/api/package.json": {
-    "mtime": 1786752661.2034342,
-    "ast_hash": "48857f2d8b8ec9b79ca095ab48f04478",
+    "mtime": 1786812155.1288588,
+    "ast_hash": "c1a4c4c66d350589f409d5f7662e0fa5",
     "semantic_hash": ""
   },
   "apps/api/src/index.ts": {
-    "mtime": 1786765771.564603,
-    "ast_hash": "4fecd5d1264e41240253eb997d7645b0",
+    "mtime": 1786809059.051406,
+    "ast_hash": "1cc8ae3c8b2396c4428b54eaddc4668e",
     "semantic_hash": ""
   },
   "apps/api/src/server.test.ts": {
-    "mtime": 1786765825.0600603,
-    "ast_hash": "722b1c4ce6c008ad37847745266de644",
+    "mtime": 1786812235.9813735,
+    "ast_hash": "62e526ee71f8a9d2f27f201a8cff012d",
     "semantic_hash": ""
   },
   "apps/api/src/server.ts": {
-    "mtime": 1786765762.1332822,
-    "ast_hash": "b8ec3cbf621ab3efe36a810fdfbd4f00",
+    "mtime": 1786812270.8486266,
+    "ast_hash": "2ba5f8f9ab1aaa638dfcb5a4c11ef95e",
     "semantic_hash": ""
   },
   "apps/api/tsconfig.json": {
@@ -40,8 +40,8 @@
     "semantic_hash": ""
   },
   "apps/web/src/App.tsx": {
-    "mtime": 1786765896.6276646,
-    "ast_hash": "7784c66c8a585965f231e19aed09b9e6",
+    "mtime": 1786809115.375624,
+    "ast_hash": "ce8dd497f61a7957d45df79428394505",
     "semantic_hash": ""
   },
   "apps/web/src/main.tsx": {
@@ -125,8 +125,8 @@
     "semantic_hash": ""
   },
   "docs/IMPLEMENTATION-PLAN.md": {
-    "mtime": 1786764862.9738965,
-    "ast_hash": "f409d695106500b9094ed100cc42232e",
+    "mtime": 1786812669.9340534,
+    "ast_hash": "d27248d5e7ffc70c4b8c0ca5255559d9",
     "semantic_hash": ""
   },
   "pnpm-workspace.yaml": {
@@ -380,8 +380,8 @@
     "semantic_hash": ""
   },
   ".claude/hooks/typecheck-on-edit.cjs": {
-    "mtime": 1786669406.3673086,
-    "ast_hash": "2be1650f50b6ed32ff8f94d04707589b",
+    "mtime": 1786805809.2426991,
+    "ast_hash": "b6c8bfa2c9f4aa2b04ec2c28c35a75fe",
     "semantic_hash": ""
   },
   ".claude/settings.json": {
@@ -875,8 +875,8 @@
     "semantic_hash": ""
   },
   "apps/web/src/api.ts": {
-    "mtime": 1786765831.9571147,
-    "ast_hash": "5263035d12da0fed9180864c3745e91b",
+    "mtime": 1786809080.1196928,
+    "ast_hash": "bd106ccbe2a23bd6a5c6902100af814d",
     "semantic_hash": ""
   },
   "apps/web/src/components/CreateForm.tsx": {
@@ -1020,8 +1020,8 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1786802171.0000315,
-    "ast_hash": "d7e4aa79efd75f7237b1e66d72f4645c",
+    "mtime": 1786812649.0531952,
+    "ast_hash": "fde2636f1dd626463df2fb07ed2b222e",
     "semantic_hash": ""
   },
   "apps/api/src/env-file.test.ts": {
@@ -1042,6 +1042,21 @@
   "apps/web/src/components/SettingsView.tsx": {
     "mtime": 1786765860.365348,
     "ast_hash": "59f4702b90bc54ab003f689497d11dd3",
+    "semantic_hash": ""
+  },
+  "docker-compose.yml": {
+    "mtime": 1786806059.9488382,
+    "ast_hash": "fef4b17ef360df81f2ed5e85595248d8",
+    "semantic_hash": ""
+  },
+  "apps/web/src/components/TokenGate.tsx": {
+    "mtime": 1786809087.3414643,
+    "ast_hash": "194a898d928bbd1881e601cf56d48d11",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/pipeline/scene-timing.test.ts": {
+    "mtime": 1786812534.7467473,
+    "ast_hash": "ef10c6946e26e4b191f1282ec5c96bdc",
     "semantic_hash": ""
   }
 }

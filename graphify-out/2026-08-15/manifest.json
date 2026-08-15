@@ -1,7 +1,7 @@
 {
   ".claude/settings.local.json": {
-    "mtime": 1786732226.1403918,
-    "ast_hash": "ad9a18cfcde9843b4357aca6af7eefe0",
+    "mtime": 1786806368.677765,
+    "ast_hash": "4d51e16140f48b71d3732047dbf0a88d",
     "semantic_hash": ""
   },
   "package.json": {
@@ -10,8 +10,8 @@
     "semantic_hash": ""
   },
   "apps/api/package.json": {
-    "mtime": 1786752661.2034342,
-    "ast_hash": "48857f2d8b8ec9b79ca095ab48f04478",
+    "mtime": 1786807320.0748608,
+    "ast_hash": "d627edc21cf13233d1723eaa0cc685b1",
     "semantic_hash": ""
   },
   "apps/api/src/index.ts": {
@@ -125,8 +125,8 @@
     "semantic_hash": ""
   },
   "docs/IMPLEMENTATION-PLAN.md": {
-    "mtime": 1786764862.9738965,
-    "ast_hash": "f409d695106500b9094ed100cc42232e",
+    "mtime": 1786808644.3084822,
+    "ast_hash": "d53659a94469388aea550d114dc629d4",
     "semantic_hash": ""
   },
   "pnpm-workspace.yaml": {
@@ -380,8 +380,8 @@
     "semantic_hash": ""
   },
   ".claude/hooks/typecheck-on-edit.cjs": {
-    "mtime": 1786669406.3673086,
-    "ast_hash": "2be1650f50b6ed32ff8f94d04707589b",
+    "mtime": 1786805809.2426991,
+    "ast_hash": "b6c8bfa2c9f4aa2b04ec2c28c35a75fe",
     "semantic_hash": ""
   },
   ".claude/settings.json": {
@@ -1020,28 +1020,33 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1786765421.1981347,
-    "ast_hash": "3adad2083c9aaa80ea8c6bc2efcd2114",
+    "mtime": 1786806070.8383172,
+    "ast_hash": "8f9c3b55b29ec7baaf69da4d1071c987",
     "semantic_hash": ""
   },
   "apps/api/src/env-file.test.ts": {
-    "mtime": 1786765808.9895222,
-    "ast_hash": "24a2b77dff9493534681198291309d68",
+    "mtime": 1786766093.3429847,
+    "ast_hash": "31b7e5e31b0dd51a356fdee44f5435e9",
     "semantic_hash": ""
   },
   "apps/api/src/env-file.ts": {
-    "mtime": 1786765697.571788,
-    "ast_hash": "38de959b97c97707753a04550542275f",
+    "mtime": 1786766086.9039216,
+    "ast_hash": "9ea8b5cb65eba5692d2549c14ae25c72",
     "semantic_hash": ""
   },
   "apps/api/src/routes/settings.ts": {
-    "mtime": 1786765708.5007532,
-    "ast_hash": "efd62320f9a3cab979d0c22e780169e8",
+    "mtime": 1786766080.8761487,
+    "ast_hash": "fa0a653ec7a16576336b419c946ddda5",
     "semantic_hash": ""
   },
   "apps/web/src/components/SettingsView.tsx": {
     "mtime": 1786765860.365348,
     "ast_hash": "59f4702b90bc54ab003f689497d11dd3",
+    "semantic_hash": ""
+  },
+  "docker-compose.yml": {
+    "mtime": 1786806059.9488382,
+    "ast_hash": "fef4b17ef360df81f2ed5e85595248d8",
     "semantic_hash": ""
   }
 }
