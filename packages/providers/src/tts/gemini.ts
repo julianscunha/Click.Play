@@ -22,7 +22,7 @@ export class GeminiTTS implements TTSProvider {
   private model: string;
   private voice: string;
 
-  constructor(model = "gemini-2.5-flash-preview-tts", voice = "Kore", apiKey?: string) {
+  constructor(model = "gemini-3.1-flash-tts-preview", voice = "Kore", apiKey?: string) {
     const key = apiKey ?? process.env["GOOGLE_API_KEY"];
     if (!key) throw new Error("GOOGLE_API_KEY environment variable is required");
     this.client = new GoogleGenAI({ apiKey: key });
