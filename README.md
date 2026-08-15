@@ -99,6 +99,8 @@ pnpm dev:web   # front-end (Vite dev server)
 
 Acesse o front-end, preencha o formulário (tópico, direção livre, arquétipo, ritmo, estilo de legenda), acompanhe o progresso do job e, ao final, assista/baixe o vídeo gerado.
 
+> **Segurança:** a API não tem autenticação em nenhuma rota (inclusive `/settings`, que grava credenciais em `apps/api/.env`) — é feita pra rodar em `localhost`, uso pessoal, não pra expor na rede/internet sem colocar autenticação na frente (proxy, VPN, etc.).
+
 ### Comandos
 
 ```bash

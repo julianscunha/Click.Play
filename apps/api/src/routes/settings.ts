@@ -14,15 +14,19 @@ const SECRET_FIELDS = [
 
 const PLAIN_FIELDS = ["OPENROUTER_MODEL", "TTS_PROVIDER"] as const;
 
+// Sem \r\n: writeEnvFile grava "KEY=valor\n" cru — um valor com quebra de
+// linha injetaria uma linha .env nova (ex.: sobrescrever outra chave).
+const noNewlines = z.string().regex(/^[^\r\n]*$/, "não pode conter quebra de linha");
+
 const SettingsBody = z.object({
-  OPENROUTER_API_KEY: z.string().optional(),
-  OPENROUTER_MODEL: z.string().optional(),
-  TTS_PROVIDER: z.string().optional(),
-  TTS_API_KEY: z.string().optional(),
-  GOOGLE_API_KEY: z.string().optional(),
-  FAL_API_KEY: z.string().optional(),
-  PEXELS_API_KEY: z.string().optional(),
-  PIXABAY_API_KEY: z.string().optional(),
+  OPENROUTER_API_KEY: noNewlines.optional(),
+  OPENROUTER_MODEL: noNewlines.optional(),
+  TTS_PROVIDER: noNewlines.optional(),
+  TTS_API_KEY: noNewlines.optional(),
+  GOOGLE_API_KEY: noNewlines.optional(),
+  FAL_API_KEY: noNewlines.optional(),
+  PEXELS_API_KEY: noNewlines.optional(),
+  PIXABAY_API_KEY: noNewlines.optional(),
 });
 
 function mask(value: string): string {

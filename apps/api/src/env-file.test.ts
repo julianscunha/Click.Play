@@ -43,4 +43,10 @@ describe("env-file", () => {
     writeEnvFile(filePath, { NEW_KEY: "value" });
     expect(readEnvFile(filePath)).toEqual({ FOO: "bar", NEW_KEY: "value" });
   });
+
+  it("rejects a value with an embedded newline (would inject a new .env line)", () => {
+    fs.writeFileSync(filePath, "FOO=bar\n");
+    expect(() => writeEnvFile(filePath, { FOO: "evil\nINJECTED=1" })).toThrow();
+    expect(readEnvFile(filePath)).toEqual({ FOO: "bar" });
+  });
 });

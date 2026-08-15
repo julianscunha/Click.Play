@@ -16,6 +16,10 @@ export function readEnvFile(filePath: string): Record<string, string> {
 }
 
 export function writeEnvFile(filePath: string, updates: Record<string, string>): void {
+  for (const value of Object.values(updates)) {
+    if (/[\r\n]/.test(value)) throw new Error("valor de env não pode conter quebra de linha");
+  }
+
   const lines = fs.existsSync(filePath) ? fs.readFileSync(filePath, "utf-8").split(/\r?\n/) : [];
   const remaining = new Set(Object.keys(updates));
 
