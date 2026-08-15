@@ -1,5 +1,28 @@
-import { describe, expect, it } from "vitest";
-import { parseWordBoundaries } from "./edge.js";
+import { Readable } from "node:stream";
+import { describe, expect, it, vi } from "vitest";
+import { EdgeTTS, parseWordBoundaries } from "./edge.js";
+
+let attempt = 0;
+let failuresBeforeSuccess = 0;
+
+vi.mock("msedge-tts", () => ({
+  OUTPUT_FORMAT: { AUDIO_24KHZ_48KBITRATE_MONO_MP3: "audio-24khz-48kbitrate-mono-mp3" },
+  MsEdgeTTS: class {
+    async setMetadata() {}
+    toStream() {
+      attempt++;
+      if (attempt <= failuresBeforeSuccess) {
+        const failing = new Readable({
+          read() {
+            this.destroy(new Error("Premature close"));
+          },
+        });
+        return { audioStream: failing, metadataStream: Readable.from([]) };
+      }
+      return { audioStream: Readable.from([Buffer.from("audio")]), metadataStream: Readable.from([]) };
+    }
+  },
+}));
 
 function metadataLine(word: string, offsetTicks: number, durationTicks: number): string {
   return JSON.stringify({
@@ -30,4 +53,21 @@ describe("parseWordBoundaries", () => {
     expect(parseWordBoundaries("")).toEqual([]);
     expect(parseWordBoundaries("not json\n\n")).toEqual([]);
   });
+});
+
+describe("EdgeTTS.generate", () => {
+  it("retries on a transient stream error (e.g. Premature close) and succeeds", async () => {
+    attempt = 0;
+    failuresBeforeSuccess = 2;
+    const result = await new EdgeTTS().generate("hello");
+    expect(result.audio.toString()).toBe("audio");
+    expect(attempt).toBe(3);
+  }, 15_000); // backoff entre retries (3s, 6s) — vitest default de 5s não basta
+
+  it("gives up and throws after exhausting retries", async () => {
+    attempt = 0;
+    failuresBeforeSuccess = 99;
+    await expect(new EdgeTTS().generate("hello")).rejects.toThrow("Premature close");
+    expect(attempt).toBe(3);
+  }, 15_000);
 });

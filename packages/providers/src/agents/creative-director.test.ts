@@ -43,6 +43,19 @@ describe("generateDirectorScore", () => {
     expect(result.data.archetype).toBe("cinematic_documentary");
   });
 
+  it("downgrades ai_video scenes missing an ai_video_clip element to motion_graphics instead of failing", async () => {
+    const brokenAiVideo = sceneRaw({
+      visualStrategy: "ai_video",
+      elements: [{ type: "stock_image", prompt: "rocket launch" }],
+    });
+    const llm = fakeLLM([sceneRaw(), sceneRaw(), brokenAiVideo]);
+
+    const result = await generateDirectorScore(llm, "Apollo 11", research);
+
+    expect(result.data.scenes[2]!.visualStrategy).toBe("motion_graphics");
+    expect(llm.generate).toHaveBeenCalledTimes(1);
+  });
+
   it("retries and eventually throws when scenes keep violating the anti-slideshow rule", async () => {
     const staticScene = sceneRaw({ elements: [{ type: "stock_image", prompt: "moon" }] });
     // 3 cenas consecutivas só com imagem estática viola violatesSlideshowRule (domain).
@@ -52,5 +65,5 @@ describe("generateDirectorScore", () => {
       "Creative Director failed after 3 attempts",
     );
     expect(llm.generate).toHaveBeenCalledTimes(3);
-  });
+  }, 15_000); // backoff entre retries (4s, 8s) — vitest default de 5s não basta
 });

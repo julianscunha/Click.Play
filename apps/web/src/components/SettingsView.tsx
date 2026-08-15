@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getSettings, putSettings, type Settings } from "../api.js";
+import { getFormConfig, getSettings, putSettings, type Settings } from "../api.js";
 
 interface SecretFieldConfig {
   key: keyof Settings;
@@ -16,22 +16,86 @@ const SECRET_FIELDS: SecretFieldConfig[] = [
   { key: "PIXABAY_API_KEY", label: "Pixabay API Key", helpUrl: "https://pixabay.com/api/docs/" },
 ];
 
+interface ModelSelectProps {
+  id: string;
+  label: string;
+  value: string;
+  options: string[];
+  allowEmpty?: boolean;
+  custom: boolean;
+  onCustomChange(custom: boolean): void;
+  onChange(value: string): void;
+}
+
+function ModelSelect({ id, label, value, options, allowEmpty, custom, onCustomChange, onChange }: ModelSelectProps) {
+  return (
+    <div className="flex flex-col gap-1.5">
+      <label htmlFor={id} className="text-sm font-medium text-neutral-200">
+        {label}
+      </label>
+      {!custom ? (
+        <select
+          id={id}
+          value={value}
+          onChange={(e) => {
+            if (e.target.value === "__custom__") {
+              onCustomChange(true);
+              onChange("");
+            } else {
+              onChange(e.target.value);
+            }
+          }}
+          className="rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-neutral-50 focus:border-neutral-400 focus:outline-none"
+        >
+          {allowEmpty && <option value="">Nenhum</option>}
+          {options.map((m) => (
+            <option key={m} value={m}>
+              {m}
+            </option>
+          ))}
+          <option value="__custom__">Outro (digitar manualmente)</option>
+        </select>
+      ) : (
+        <input
+          id={id}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          placeholder="ex.: mistralai/mistral-large"
+          className="rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-neutral-50 placeholder:text-neutral-500 focus:border-neutral-400 focus:outline-none"
+        />
+      )}
+    </div>
+  );
+}
+
 export interface SettingsViewProps {
   onClose(): void;
 }
 
 export function SettingsView({ onClose }: SettingsViewProps) {
   const [settings, setSettings] = useState<Settings | null>(null);
+  const [recommendedModels, setRecommendedModels] = useState<string[]>([]);
+  const [customModel, setCustomModel] = useState(false);
+  const [customFallbackModel, setCustomFallbackModel] = useState(false);
   const [inputs, setInputs] = useState<Record<string, string>>({});
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [saved, setSaved] = useState(false);
 
   useEffect(() => {
-    getSettings()
-      .then((s) => {
+    Promise.all([getSettings(), getFormConfig()])
+      .then(([s, config]) => {
         setSettings(s);
-        setInputs({ OPENROUTER_MODEL: s.OPENROUTER_MODEL, TTS_PROVIDER: s.TTS_PROVIDER });
+        setRecommendedModels(config.recommendedModels);
+        setInputs({
+          OPENROUTER_MODEL: s.OPENROUTER_MODEL,
+          OPENROUTER_MODEL_FALLBACK: s.OPENROUTER_MODEL_FALLBACK,
+          TTS_PROVIDER: s.TTS_PROVIDER,
+        });
+        setCustomModel(s.OPENROUTER_MODEL !== "" && !config.recommendedModels.includes(s.OPENROUTER_MODEL));
+        setCustomFallbackModel(
+          s.OPENROUTER_MODEL_FALLBACK !== "" && !config.recommendedModels.includes(s.OPENROUTER_MODEL_FALLBACK),
+        );
       })
       .catch((err) => setError(err instanceof Error ? err.message : String(err)));
   }, []);
@@ -50,7 +114,11 @@ export function SettingsView({ onClose }: SettingsViewProps) {
       await putSettings(updates);
       const fresh = await getSettings();
       setSettings(fresh);
-      setInputs({ OPENROUTER_MODEL: fresh.OPENROUTER_MODEL, TTS_PROVIDER: fresh.TTS_PROVIDER });
+      setInputs({
+        OPENROUTER_MODEL: fresh.OPENROUTER_MODEL,
+        OPENROUTER_MODEL_FALLBACK: fresh.OPENROUTER_MODEL_FALLBACK,
+        TTS_PROVIDER: fresh.TTS_PROVIDER,
+      });
       setSaved(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : String(err));
@@ -87,19 +155,39 @@ export function SettingsView({ onClose }: SettingsViewProps) {
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div className="flex flex-col gap-1.5">
-          <label htmlFor="OPENROUTER_MODEL" className="text-sm font-medium text-neutral-200">
-            Modelo (OpenRouter)
-          </label>
-          <input
+          <ModelSelect
             id="OPENROUTER_MODEL"
+            label="Modelo primário (OpenRouter)"
             value={inputs.OPENROUTER_MODEL ?? ""}
-            onChange={(e) => setField("OPENROUTER_MODEL", e.target.value)}
-            placeholder="openrouter/free"
-            className="rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-neutral-50 placeholder:text-neutral-500 focus:border-neutral-400 focus:outline-none"
+            options={recommendedModels}
+            custom={customModel}
+            onCustomChange={setCustomModel}
+            onChange={(v) => setField("OPENROUTER_MODEL", v)}
           />
+          <p className="text-xs text-neutral-500">
+            Sugeridos: preço conhecido e testado com saída estruturada. Modelo "preview"/experimental ou sem suporte a
+            structured output pode falhar com erro genérico ("No output generated").
+          </p>
           <a href="https://openrouter.ai/models" target="_blank" rel="noreferrer" className="text-xs text-neutral-500 underline">
-            ver modelos disponíveis
+            ver todos os modelos disponíveis
           </a>
+        </div>
+
+        <div className="flex flex-col gap-1.5">
+          <ModelSelect
+            id="OPENROUTER_MODEL_FALLBACK"
+            label="Modelo de fallback (opcional)"
+            value={inputs.OPENROUTER_MODEL_FALLBACK ?? ""}
+            options={recommendedModels}
+            allowEmpty
+            custom={customFallbackModel}
+            onCustomChange={setCustomFallbackModel}
+            onChange={(v) => setField("OPENROUTER_MODEL_FALLBACK", v)}
+          />
+          <p className="text-xs text-neutral-500">
+            Usado automaticamente se o primário falhar (quota, erro, "No output generated"). "Nenhum" desativa —
+            campo vazio ao salvar não altera um fallback já configurado (limpar exige digitar outro valor por cima).
+          </p>
         </div>
 
         <div className="flex flex-col gap-1.5">

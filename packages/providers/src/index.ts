@@ -2,6 +2,7 @@
 export * from "./llm/types.js";
 export * from "./llm/base.js";
 export * from "./llm/openrouter.js";
+export * from "./llm/fallback.js";
 export * from "./config/archetype.js";
 export * from "./config/archetype-registry.js";
 export * from "./agents/research.js";

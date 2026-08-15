@@ -155,6 +155,27 @@ describe("server", () => {
     expect(res.json()).toEqual({ status: "ok" });
   });
 
+  it("allows PUT in CORS preflight (web on another origin saves settings)", async () => {
+    const app = buildServer({
+      db,
+      buildJobRunnerDeps: () => fakeJobRunnerDeps(fakeLLM()),
+      buildCostOptions: () => costOptions,
+      runsDir,
+      envFilePath,
+    });
+    const res = await app.inject({
+      method: "OPTIONS",
+      url: "/settings",
+      headers: {
+        origin: "http://localhost:5173",
+        "access-control-request-method": "PUT",
+        "access-control-request-headers": "content-type",
+      },
+    });
+    expect(res.statusCode).toBe(204);
+    expect(res.headers["access-control-allow-methods"]).toContain("PUT");
+  });
+
   it("sets security headers without blocking cross-origin video loads", async () => {
     const app = buildServer({
       db,

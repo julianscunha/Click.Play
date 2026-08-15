@@ -31,7 +31,11 @@ export function buildServer(opts: BuildServerOptions) {
   });
   const gate = opts.gate ?? createCostApprovalGate();
 
-  app.register(cors, { origin: true });
+  // methods explícito: default do @fastify/cors não incluiu PUT no preflight
+  // (bug real achado em teste manual — PUT /settings falhava com "Failed to
+  // fetch" no navegador porque o preflight OPTIONS não listava PUT em
+  // access-control-allow-methods; curl não reproduz pois CORS é só do browser).
+  app.register(cors, { origin: true, methods: ["GET", "POST", "PUT", "DELETE"] });
   app.register(rateLimit, { max: 1000, timeWindow: "1 minute" });
   // contentSecurityPolicy: false — API só serve JSON/arquivo, não HTML, CSP não se aplica.
   // crossOriginResourcePolicy "cross-origin" — vídeo (/files/*) é consumido via <video src>

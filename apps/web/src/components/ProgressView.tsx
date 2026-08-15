@@ -14,6 +14,30 @@ const STAGE_LABELS: Record<string, string> = {
   cancelled: "Cancelado",
 };
 
+/** Erros de provider (LLM/TTS) vêm crus — stack técnica, JSON de validação, URLs de doc.
+ * Traduz os padrões mais comuns pra mensagem acionável; resto cai no fallback truncado. */
+function friendlyError(raw: string): { title: string; hint?: string } {
+  if (/quota|rate.?limit|429/i.test(raw)) {
+    return {
+      title: "Limite de uso do provedor de IA atingido (rate limit / quota).",
+      hint: "Espere alguns segundos e tente de novo, ou troque a chave/modelo em Configurações.",
+    };
+  }
+  if (/no output generated/i.test(raw)) {
+    return {
+      title: "O modelo de IA não retornou resposta.",
+      hint: "Tente de novo — se persistir, troque o modelo em Configurações (modelos \"preview\"/experimentais falham mais).",
+    };
+  }
+  if (/premature close|econnreset|fetch failed|network/i.test(raw)) {
+    return {
+      title: "Falha de conexão com um provedor externo.",
+      hint: "Geralmente é falha pontual de rede — tente criar o vídeo de novo.",
+    };
+  }
+  return { title: raw.length > 200 ? `${raw.slice(0, 200)}…` : raw };
+}
+
 function costLine(label: string, amount: CostBreakdown[keyof CostBreakdown]) {
   return (
     <div key={label} className="flex justify-between text-sm text-neutral-300">
@@ -91,11 +115,23 @@ export function ProgressView({ job, onApprove, approving }: ProgressViewProps) {
         </div>
       )}
 
-      {job.status === "FAILED" && (
-        <div role="alert" className="rounded-md border border-red-900 bg-red-950/40 p-4 text-sm text-red-300">
-          {job.error ?? "Falha desconhecida."}
-        </div>
-      )}
+      {job.status === "FAILED" &&
+        (() => {
+          const raw = job.error ?? "Falha desconhecida.";
+          const { title, hint } = friendlyError(raw);
+          return (
+            <div role="alert" className="flex flex-col gap-2 rounded-md border border-red-900 bg-red-950/40 p-4 text-sm text-red-300">
+              <p className="font-medium">{title}</p>
+              {hint && <p className="text-red-300/80">{hint}</p>}
+              {title !== raw && (
+                <details className="text-xs text-red-400/70">
+                  <summary className="cursor-pointer select-none">ver detalhes técnicos</summary>
+                  <pre className="mt-2 max-h-40 overflow-auto whitespace-pre-wrap break-words">{raw}</pre>
+                </details>
+              )}
+            </div>
+          );
+        })()}
 
       {job.status === "CANCELLED" && (
         <div role="status" className="rounded-md border border-neutral-700 bg-neutral-900 p-4 text-sm text-neutral-300">

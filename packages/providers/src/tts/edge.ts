@@ -15,10 +15,38 @@ export const EDGE_TTS_VOICES = {
   "en-US": { female: "en-US-AriaNeural", male: "en-US-GuyNeural" },
 } as const;
 
+function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 export class EdgeTTS implements TTSProvider {
   constructor(private voice: string = EDGE_TTS_VOICES["pt-BR"].female) {}
 
   async generate(text: string): Promise<TTSResult> {
+    const maxAttempts = 3;
+    let lastError: unknown;
+
+    for (let attempt = 0; attempt < maxAttempts; attempt++) {
+      // Achado em teste manual: 3 tentativas em sequência, sem espera, falharam
+      // idênticas ("Premature close") — provável janela curta de instabilidade
+      // de rede; um pequeno backoff dá tempo dela passar (mesma lógica do LLM).
+      if (attempt > 0) await sleep(attempt * 3000);
+      try {
+        return await this.generateOnce(text);
+      } catch (err) {
+        // WebSocket do Edge TTS fecha sem aviso ocasionalmente ("Premature
+        // close", achado em teste manual) — sem retry, 1 flake de rede derruba
+        // o job inteiro depois de já ter passado por research/director/critic.
+        lastError = err;
+        const msg = err instanceof Error ? err.message : String(err);
+        console.warn(`[edge-tts] Attempt ${attempt + 1} failed: ${msg}`);
+      }
+    }
+
+    throw lastError instanceof Error ? lastError : new Error(String(lastError));
+  }
+
+  private async generateOnce(text: string): Promise<TTSResult> {
     const tts = new MsEdgeTTS();
     await tts.setMetadata(this.voice, OUTPUT_FORMAT.AUDIO_24KHZ_48KBITRATE_MONO_MP3, {
       wordBoundaryEnabled: true,

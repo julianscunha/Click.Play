@@ -33,10 +33,26 @@ export async function research(llm: LLMProvider, topic: string): Promise<Researc
     // Use default prompt if file doesn't exist
   }
 
-  const result = await llm.generate({
-    systemPrompt,
-    userMessage: `Research this topic for a short-form video script: ${topic}`,
-    schema: ResearchResult,
-  });
-  return { data: result.data, usage: result.usage };
+  const userMessage = `Research this topic for a short-form video script: ${topic}`;
+  const maxRetries = 3;
+  let lastError: Error | null = null;
+
+  for (let attempt = 0; attempt < maxRetries; attempt++) {
+    try {
+      const result = await llm.generate({
+        systemPrompt,
+        userMessage: attempt > 0 ? `${userMessage}\n\nPREVIOUS ATTEMPT FAILED: ${lastError?.message}. Try again.` : userMessage,
+        schema: ResearchResult,
+      });
+      return { data: result.data, usage: result.usage };
+    } catch (err) {
+      // Achado em teste manual: llm.generate() ocasionalmente devolve "No
+      // output generated" (flake do provider) — research() era o único
+      // estágio sem retry, matava o job na primeira chamada do pipeline.
+      lastError = err instanceof Error ? err : new Error(String(err));
+      console.warn(`[research] Attempt ${attempt + 1} failed: ${lastError.message}`);
+    }
+  }
+
+  throw new Error(`Research failed after ${maxRetries} attempts: ${lastError?.message}`);
 }

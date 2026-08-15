@@ -12,7 +12,7 @@ const SECRET_FIELDS = [
   "PIXABAY_API_KEY",
 ] as const;
 
-const PLAIN_FIELDS = ["OPENROUTER_MODEL", "TTS_PROVIDER"] as const;
+const PLAIN_FIELDS = ["OPENROUTER_MODEL", "OPENROUTER_MODEL_FALLBACK", "TTS_PROVIDER"] as const;
 
 // Sem \r\n: writeEnvFile grava "KEY=valor\n" cru — um valor com quebra de
 // linha injetaria uma linha .env nova (ex.: sobrescrever outra chave).
@@ -21,6 +21,7 @@ const noNewlines = z.string().regex(/^[^\r\n]*$/, "não pode conter quebra de li
 const SettingsBody = z.object({
   OPENROUTER_API_KEY: noNewlines.optional(),
   OPENROUTER_MODEL: noNewlines.optional(),
+  OPENROUTER_MODEL_FALLBACK: noNewlines.optional(),
   TTS_PROVIDER: noNewlines.optional(),
   TTS_API_KEY: noNewlines.optional(),
   GOOGLE_API_KEY: noNewlines.optional(),

@@ -52,6 +52,7 @@ export interface FormConfig {
   archetypes: string[];
   pacingTiers: readonly string[];
   captionStyles: readonly string[];
+  recommendedModels: string[];
 }
 
 export interface CreateJobInput {
@@ -106,6 +107,7 @@ export type SecretField = { set: true; masked: string } | { set: false };
 export interface Settings {
   OPENROUTER_API_KEY: SecretField;
   OPENROUTER_MODEL: string;
+  OPENROUTER_MODEL_FALLBACK: string;
   TTS_PROVIDER: string;
   TTS_API_KEY: SecretField;
   GOOGLE_API_KEY: SecretField;

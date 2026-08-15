@@ -85,6 +85,37 @@ describe("resolveElement — ai_video_clip", () => {
     const element: VisualElement = { type: "ai_video_clip", provider: "fal", prompt: "rocket launch" };
     await expect(resolveElement(element, baseCtx())).rejects.toThrow('"fal" não configurado');
   });
+
+  it("falls back to the other configured provider when 'auto' and the resolved one fails", async () => {
+    const gemini: VideoGenerationProvider = {
+      supportedDurations: [5],
+      generate: vi.fn().mockRejectedValue(new Error("Premature close")),
+    };
+    const fal: VideoGenerationProvider = {
+      supportedDurations: [5],
+      generate: vi.fn().mockResolvedValue({ filePath: "/out/fal-clip.mp4", durationSeconds: 5 }),
+    };
+    const element: VisualElement = { type: "ai_video_clip", provider: "auto", prompt: "rocket launch" };
+    const result = await resolveElement(
+      element,
+      baseCtx({ videoProviders: { gemini, fal }, hasGoogleKey: true, hasFalKey: true }),
+    );
+    expect(result).toEqual({ type: "ai_video_clip", assetPath: "/out/fal-clip.mp4", sourceDurationSeconds: 5 });
+    expect(fal.generate).toHaveBeenCalled();
+  });
+
+  it("does not fall back when a specific provider was explicitly requested (not 'auto')", async () => {
+    const gemini: VideoGenerationProvider = {
+      supportedDurations: [5],
+      generate: vi.fn().mockRejectedValue(new Error("Premature close")),
+    };
+    const fal: VideoGenerationProvider = { supportedDurations: [5], generate: vi.fn() };
+    const element: VisualElement = { type: "ai_video_clip", provider: "gemini", prompt: "rocket launch" };
+    await expect(
+      resolveElement(element, baseCtx({ videoProviders: { gemini, fal }, hasGoogleKey: true, hasFalKey: true })),
+    ).rejects.toThrow("Premature close");
+    expect(fal.generate).not.toHaveBeenCalled();
+  });
 });
 
 describe("resolveElement — stock_image", () => {

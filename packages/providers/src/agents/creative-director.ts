@@ -54,9 +54,26 @@ export interface DirectorScoreOutput {
   usage: LLMUsage;
 }
 
-/** Atribui id sequencial (a LLM não produz ids únicos de forma confiável). */
+/**
+ * Atribui id sequencial (a LLM não produz ids únicos de forma confiável) e
+ * corrige visualStrategy "ai_video" sem elemento "ai_video_clip" rebaixando
+ * pra "motion_graphics" — mesmo com o prompt explícito sobre a exigência,
+ * modelos erram essa combinação (achado em teste manual, reproduzido 3/3
+ * em dois modelos diferentes); reparar é mais confiável que reprompt.
+ */
 function toScenes(raw: z.infer<typeof SceneRaw>[]): Scene[] {
-  return raw.map((scene, i) => Scene.parse({ id: String(i + 1), ...scene }));
+  return raw.map((scene, i) => {
+    const hasAiVideoClip = scene.elements.some((e) => e.type === "ai_video_clip");
+    const visualStrategy = scene.visualStrategy === "ai_video" && !hasAiVideoClip ? "motion_graphics" : scene.visualStrategy;
+    return Scene.parse({ id: String(i + 1), ...scene, visualStrategy });
+  });
+}
+
+/** Backoff antes de cada retry — achado em teste manual: rate limit do provider
+ * (ex. "Google AI Studio... Please retry in ~7s") derruba o job porque as 3
+ * tentativas disparavam sem espera, todas dentro da mesma janela de limite. */
+function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 function loadDirectorSystemPrompt(): string {
@@ -82,7 +99,7 @@ export async function generateDirectorScore(
 
   const videoEnabled = options?.videoEnabled ?? true;
   const strategyGuidance = videoEnabled
-    ? 'Use visualStrategy "motion_graphics" for most scenes (composed elements: animated_text, svg, shape, icon, particle_system, diagram, ai_image, stock_image/stock_video). Use "ai_video" or "hybrid" (add an "ai_video_clip" element) for 1-3 scenes where MOTION is the story (explosions, flowing water, launches, transformations). ai_video_clip costs ~$0.30/scene vs ~$0.04 for ai_image — use selectively.'
+    ? 'Use visualStrategy "motion_graphics" for most scenes (composed elements: animated_text, svg, shape, icon, particle_system, diagram, ai_image, stock_image/stock_video). Use "ai_video" or "hybrid" for 1-3 scenes where MOTION is the story (explosions, flowing water, launches, transformations) — BOTH require at least one element of type "ai_video_clip" in the elements array (a scene with visualStrategy "ai_video" and no "ai_video_clip" element is INVALID and will be rejected). ai_video_clip costs ~$0.30/scene vs ~$0.04 for ai_image — use selectively.'
     : 'Use visualStrategy "motion_graphics" for every scene (composed elements: animated_text, svg, shape, icon, particle_system, diagram, ai_image, stock_image/stock_video). ai_video is disabled for this project.';
 
   const pacingInstruction = buildPacingInstruction(options?.archetype, options?.pacing);
@@ -115,6 +132,7 @@ If over budget, cut a scene rather than cramming.`;
   const totalUsage: LLMUsage = { inputTokens: 0, outputTokens: 0 };
 
   for (let attempt = 0; attempt < maxRetries; attempt++) {
+    if (attempt > 0) await sleep(attempt * 4000);
     try {
       const result = await llm.generate({
         systemPrompt,
@@ -151,7 +169,7 @@ You must output a DirectorScore with:
 - emotional_arc: A journey descriptor (e.g., "curiosity-to-wisdom", "shock-to-understanding")
 - archetype: Visual style that drives transitions, colors, and captions
 - music_mood: MUST be exactly one of: "epic_cinematic", "tense_electronic", "chill_lofi", "uplifting_pop", "mysterious_ambient", "warm_acoustic", "dark_cinematic", "dreamy_ethereal", "playful_kids"
-- scenes: Array of scenes following the archetype's recommended pacing tier. Each scene has visualStrategy ("motion_graphics" | "ai_video" | "hybrid") and elements (1+ composed visual elements).
+- scenes: Array of scenes following the archetype's recommended pacing tier. Each scene has visualStrategy ("motion_graphics" | "ai_video" | "hybrid") and elements (1+ composed visual elements). visualStrategy "ai_video" or "hybrid" REQUIRES at least one element of type "ai_video_clip" in elements — without it, the scene is invalid.
 
 GOLDEN RULE: Never reduce more than 2 consecutive scenes to a single static image/stock clip. Compose with animated_text, svg, shape, icon, particle_system, and diagram elements for visual variety and movement.
 
@@ -248,6 +266,7 @@ Keep the same archetype. Maintain the GOLDEN RULE: never reduce more than 2 cons
   const totalUsage: LLMUsage = { inputTokens: 0, outputTokens: 0 };
 
   for (let attempt = 0; attempt < maxRetries; attempt++) {
+    if (attempt > 0) await sleep(attempt * 4000);
     try {
       const result = await llm.generate({
         systemPrompt,

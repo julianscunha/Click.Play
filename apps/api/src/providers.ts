@@ -1,6 +1,7 @@
 import {
   BundledMusic,
   EdgeTTS,
+  FallbackLLM,
   GeminiImage,
   GeminiVideo,
   FalVideo,
@@ -9,6 +10,7 @@ import {
   PixabayStock,
   type CostEstimateOptions,
   type ImageProvider,
+  type LLMProvider,
   type ResolveElementContext,
   type StockProvider,
   type VideoGenerationProvider,
@@ -57,6 +59,18 @@ function buildImageProvider(): ImageProvider {
   }
 }
 
+/** Modelo de fallback (OPENROUTER_MODEL_FALLBACK) opcional — se setado, troca
+ * pra ele quando o primário falhar (quota/erro/"No output generated", achados
+ * em teste manual real). */
+function buildLLM(): LLMProvider {
+  const primary = new OpenRouterLLM(process.env.OPENROUTER_MODEL, process.env.OPENROUTER_API_KEY);
+  const fallbackModel = process.env.OPENROUTER_MODEL_FALLBACK;
+  if (!fallbackModel) return primary;
+
+  const fallback = new OpenRouterLLM(fallbackModel, process.env.OPENROUTER_API_KEY);
+  return new FallbackLLM(primary, fallback);
+}
+
 function buildStockProviders(): StockProvider[] {
   const providers: StockProvider[] = [];
   if (process.env.PEXELS_API_KEY) providers.push(new PexelsStock());
@@ -77,7 +91,7 @@ export function buildJobRunnerDeps(): JobRunnerDeps {
   const videoRenderer: VideoRenderer = new RemotionRenderer({ entryPoint: REMOTION_ENTRY });
 
   return {
-    llm: new OpenRouterLLM(process.env.OPENROUTER_MODEL, process.env.OPENROUTER_API_KEY),
+    llm: buildLLM(),
     ttsProvider: new EdgeTTS(),
     musicProvider: new BundledMusic(),
     resolveElementCtx,
