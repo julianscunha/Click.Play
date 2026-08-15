@@ -15,18 +15,18 @@
     "semantic_hash": ""
   },
   "apps/api/src/index.ts": {
-    "mtime": 1786733913.463977,
-    "ast_hash": "33026227977631177ef5f6724b914cbe",
+    "mtime": 1786765771.564603,
+    "ast_hash": "4fecd5d1264e41240253eb997d7645b0",
     "semantic_hash": ""
   },
   "apps/api/src/server.test.ts": {
-    "mtime": 1786752753.1631973,
-    "ast_hash": "09ddd1aa654fb7120d6326b4923abe4a",
+    "mtime": 1786765825.0600603,
+    "ast_hash": "722b1c4ce6c008ad37847745266de644",
     "semantic_hash": ""
   },
   "apps/api/src/server.ts": {
-    "mtime": 1786733896.9288323,
-    "ast_hash": "b1ea7fcc6028146fb3bb37db2d29b35e",
+    "mtime": 1786765762.1332822,
+    "ast_hash": "b8ec3cbf621ab3efe36a810fdfbd4f00",
     "semantic_hash": ""
   },
   "apps/api/tsconfig.json": {
@@ -40,8 +40,8 @@
     "semantic_hash": ""
   },
   "apps/web/src/App.tsx": {
-    "mtime": 1786734162.0349271,
-    "ast_hash": "2c72102d544050ec0a78515ccabd9cb0",
+    "mtime": 1786765896.6276646,
+    "ast_hash": "7784c66c8a585965f231e19aed09b9e6",
     "semantic_hash": ""
   },
   "apps/web/src/main.tsx": {
@@ -855,8 +855,8 @@
     "semantic_hash": ""
   },
   "apps/api/src/providers.ts": {
-    "mtime": 1786735138.162309,
-    "ast_hash": "07900798a3be4f2536ad00ed8a7629b8",
+    "mtime": 1786765734.3966973,
+    "ast_hash": "1c812ad75e88e6b18aacdaedfb737f0f",
     "semantic_hash": ""
   },
   "apps/api/src/remotion/entry.tsx": {
@@ -865,8 +865,8 @@
     "semantic_hash": ""
   },
   "apps/api/src/routes/jobs.ts": {
-    "mtime": 1786733869.8022666,
-    "ast_hash": "6b4a111fe28b74cf5658488fdad1f333",
+    "mtime": 1786765747.3623245,
+    "ast_hash": "1b918e7c96a8711e6dbecfa22d0d31c4",
     "semantic_hash": ""
   },
   "apps/api/src/routes/meta.ts": {
@@ -875,8 +875,8 @@
     "semantic_hash": ""
   },
   "apps/web/src/api.ts": {
-    "mtime": 1786734108.2817934,
-    "ast_hash": "2cf056c1ede0dbcae4ef055378452b2c",
+    "mtime": 1786765831.9571147,
+    "ast_hash": "5263035d12da0fed9180864c3745e91b",
     "semantic_hash": ""
   },
   "apps/web/src/components/CreateForm.tsx": {
@@ -1020,8 +1020,28 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1786765188.9807186,
-    "ast_hash": "b8887752b8a9c8a2146df1e0bdc7dc74",
+    "mtime": 1786765421.1981347,
+    "ast_hash": "3adad2083c9aaa80ea8c6bc2efcd2114",
+    "semantic_hash": ""
+  },
+  "apps/api/src/env-file.test.ts": {
+    "mtime": 1786765808.9895222,
+    "ast_hash": "24a2b77dff9493534681198291309d68",
+    "semantic_hash": ""
+  },
+  "apps/api/src/env-file.ts": {
+    "mtime": 1786765697.571788,
+    "ast_hash": "38de959b97c97707753a04550542275f",
+    "semantic_hash": ""
+  },
+  "apps/api/src/routes/settings.ts": {
+    "mtime": 1786765708.5007532,
+    "ast_hash": "efd62320f9a3cab979d0c22e780169e8",
+    "semantic_hash": ""
+  },
+  "apps/web/src/components/SettingsView.tsx": {
+    "mtime": 1786765860.365348,
+    "ast_hash": "59f4702b90bc54ab003f689497d11dd3",
     "semantic_hash": ""
   }
 }

@@ -1020,23 +1020,23 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1786765421.1981347,
-    "ast_hash": "3adad2083c9aaa80ea8c6bc2efcd2114",
+    "mtime": 1786802171.0000315,
+    "ast_hash": "d7e4aa79efd75f7237b1e66d72f4645c",
     "semantic_hash": ""
   },
   "apps/api/src/env-file.test.ts": {
-    "mtime": 1786765808.9895222,
-    "ast_hash": "24a2b77dff9493534681198291309d68",
+    "mtime": 1786766093.3429847,
+    "ast_hash": "31b7e5e31b0dd51a356fdee44f5435e9",
     "semantic_hash": ""
   },
   "apps/api/src/env-file.ts": {
-    "mtime": 1786765697.571788,
-    "ast_hash": "38de959b97c97707753a04550542275f",
+    "mtime": 1786766086.9039216,
+    "ast_hash": "9ea8b5cb65eba5692d2549c14ae25c72",
     "semantic_hash": ""
   },
   "apps/api/src/routes/settings.ts": {
-    "mtime": 1786765708.5007532,
-    "ast_hash": "efd62320f9a3cab979d0c22e780169e8",
+    "mtime": 1786766080.8761487,
+    "ast_hash": "fa0a653ec7a16576336b419c946ddda5",
     "semantic_hash": ""
   },
   "apps/web/src/components/SettingsView.tsx": {
