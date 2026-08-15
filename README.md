@@ -90,12 +90,28 @@ Nenhum desses serviços pede cartão de crédito só pra gerar a chave (planos g
 
 ## Uso
 
+### Local (Node/pnpm)
+
 Suba API e front-end em dois terminais:
 
 ```bash
 pnpm dev:api   # http://localhost:8787
 pnpm dev:web   # front-end (Vite dev server)
 ```
+
+### Docker
+
+Alternativa sem instalar Node/pnpm no host:
+
+```bash
+cp .env.example apps/api/.env   # precisa existir antes do primeiro up (bind mount)
+docker compose up --build
+```
+
+- API: http://localhost:8787
+- Front-end: http://localhost:5173
+
+`apps/api/.env` é montado direto do host — preencha as chaves nele ou pela tela **Configurações** do front-end (grava no mesmo arquivo, sem precisar rebuildar a imagem). Job/DB persistem em volume nomeado (`clickplay-data`). Imagem só `linux/amd64` por ora.
 
 Acesse o front-end, preencha o formulário (tópico, direção livre, arquétipo, ritmo, estilo de legenda), acompanhe o progresso do job e, ao final, assista/baixe o vídeo gerado.
 

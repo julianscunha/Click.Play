@@ -1,6 +1,6 @@
 # Click.Play — Implementation Plan
 
-Status: Fases 0–12 concluídas (auditoria, bootstrap, domain, LLM provider, Creative Director, TTS, produção visual, música, captions, VideoRenderer/RemotionRenderer, Job pipeline, WebUI MVP, QC determinístico). Próxima: Fase 13 (Docker).
+Status: Fases 0–13 concluídas (auditoria, bootstrap, domain, LLM provider, Creative Director, TTS, produção visual, música, captions, VideoRenderer/RemotionRenderer, Job pipeline, WebUI MVP, QC determinístico, Docker). Próxima: Fase 14 (Hardening).
 
 ## 0.1 Público-alvo e decisões de produto derivadas
 
@@ -299,7 +299,7 @@ Fase 11 — WebUI (React+Vite+Tailwind v4). **Concluída (escopo MVP)**, decisã
 - `apps/web`: sem lib de UI pesada (decisão do usuário) — Tailwind v4 (`@tailwindcss/vite`) + componentes próprios (`CreateForm`/`ProgressView`/`ResultPlayer`). Campos do form limitados ao que o domínio já suporta de verdade: `topic`, `direction` (briefing livre), `archetype`, `pacing`, `videoEnabled`, `captionStyle` — decisão do usuário, investigação mostrou que público-alvo/idioma/narração(voz)/música(escolha manual) não têm nenhum suporte no domínio hoje; ficaram fora em vez de virar campo decorativo sem efeito real, ver §0.1 (adiado pra quando houver suporte real). Polling a cada 2s em `GET /jobs/:id` (decisão do usuário: não acoplar o domínio a polling — a API já expõe status/progresso como recurso simples, trocar por SSE/WebSocket depois não muda `Pipeline`/`JobStateMachine`). Build de produção verificado (`vite build`); verificação visual em navegador real não foi possível neste ambiente (sem ferramenta de browser disponível) — front-end validado via build limpo + contrato de API confirmado ponta a ponta com o backend real rodando.
 - Adiado pra depois (fora do MVP): seletor de música com preview de áudio, dropdown de legenda com preview visual por estilo, campos público-alvo/idioma/narração/música manual (nenhum tem suporte de domínio ainda).
 Fase 12 — Quality Control determinístico. **Concluída.** `packages/providers/src/qc/`: 7 checks (3 block: output_exists, duration_match, resolution_match; 4 warning: tts_coverage, critic_score, cost_deviation, blackdetect) + `media-tools/` (ffprobe-static, ffmpeg blackdetect), agregados em `runQc()`. `qcReport` persistido em `jobs.qc_report` (JSON), contrato: PASS/WARNING→Job COMPLETED, BLOCK→Job FAILED (output preservado pra diagnóstico). Slideshow check descartado — já coberto por `DirectorScore.refine()` no Creative Director (redundante). Workspace inteiro verde (`pnpm -r typecheck && pnpm -r test`).
-Fase 13 — Docker.
+Fase 13 — Docker. **Concluída.** `apps/api/Dockerfile` (node:22-bookworm-slim + libs Chrome headless pro Remotion) e `apps/web/Dockerfile` (build Vite → nginx), `docker-compose.yml` sobe os dois; `apps/api/.env` bind-mount do host (settings/PUT grava direto nele, sem rebuild de imagem), job/DB em volume nomeado `clickplay-data`. Corrigido bug pré-existente (fora do Docker também): `apps/api` `start` chamava `node dist/index.js`, mas `domain`/`providers`/`video-engine` nunca tiveram build (main aponta pro `.ts` fonte) — trocado pra `tsx` (mesmo runtime do `dev`). Testado: build + up + `/health` + `/settings` reais via curl. Só `linux/amd64` por ora.
 Fase 14 — Hardening (segurança, logging, docs, testes críticos).
 Fase 15+ — evolução Studio → SaaS, ver §11 (Roadmap de produto).
 
