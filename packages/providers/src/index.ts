@@ -10,6 +10,8 @@ export * from "./agents/creative-director.js";
 export * from "./agents/critic.js";
 export * from "./tts/types.js";
 export * from "./tts/edge.js";
+export * from "./tts/gemini.js";
+export * from "./tts/fallback.js";
 export * from "./video/types.js";
 export * from "./video/gemini.js";
 export * from "./video/fal.js";

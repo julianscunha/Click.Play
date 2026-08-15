@@ -2,7 +2,9 @@ import {
   BundledMusic,
   EdgeTTS,
   FallbackLLM,
+  FallbackTTS,
   GeminiImage,
+  GeminiTTS,
   GeminiVideo,
   FalVideo,
   OpenRouterLLM,
@@ -13,6 +15,7 @@ import {
   type LLMProvider,
   type ResolveElementContext,
   type StockProvider,
+  type TTSProvider,
   type VideoGenerationProvider,
 } from "@clickplay/providers";
 import { RemotionRenderer, type VideoRenderer } from "@clickplay/video-engine";
@@ -71,6 +74,17 @@ function buildLLM(): LLMProvider {
   return new FallbackLLM(primary, fallback);
 }
 
+/** EdgeTTS (grátis, ilimitado, já tem retry+backoff próprio) continua padrão.
+ * Gemini TTS entra só como fallback quando GOOGLE_API_KEY existe — achado em
+ * teste manual real: WebSocket do Edge cai intermitentemente ("Premature
+ * close"), REST do Gemini não tem esse modo de falha. */
+function buildTTS(): TTSProvider {
+  const primary = new EdgeTTS();
+  if (!process.env.GOOGLE_API_KEY) return primary;
+
+  return new FallbackTTS(primary, new GeminiTTS(undefined, undefined, process.env.GOOGLE_API_KEY));
+}
+
 function buildStockProviders(): StockProvider[] {
   const providers: StockProvider[] = [];
   if (process.env.PEXELS_API_KEY) providers.push(new PexelsStock());
@@ -92,7 +106,7 @@ export function buildJobRunnerDeps(): JobRunnerDeps {
 
   return {
     llm: buildLLM(),
-    ttsProvider: new EdgeTTS(),
+    ttsProvider: buildTTS(),
     musicProvider: new BundledMusic(),
     resolveElementCtx,
     videoRenderer,
