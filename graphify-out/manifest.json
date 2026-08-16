@@ -80,8 +80,8 @@
     "semantic_hash": ""
   },
   "packages/providers/src/index.ts": {
-    "mtime": 1786833710.9798203,
-    "ast_hash": "db9c4bcece6d9b1ba5e465ef683a15c6",
+    "mtime": 1786845104.308896,
+    "ast_hash": "0f4702fd07f281f7e30767b7fb3dc23c",
     "semantic_hash": ""
   },
   "packages/providers/tsconfig.json": {
@@ -855,8 +855,8 @@
     "semantic_hash": ""
   },
   "apps/api/src/providers.ts": {
-    "mtime": 1786833736.731207,
-    "ast_hash": "06d3a42a418eebbbab590d7a1ebb0598",
+    "mtime": 1786845117.0688243,
+    "ast_hash": "6e09ccbfd4b08eaa5703ecee9f0bc41c",
     "semantic_hash": ""
   },
   "apps/api/src/remotion/entry.tsx": {
@@ -1097,6 +1097,26 @@
   ".claude/agents/engineering-voice-ai-integration-engineer.md": {
     "mtime": 1786833196.638756,
     "ast_hash": "e0b2fb51ad9f57901a04c1ab47f51362",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/image/fallback.test.ts": {
+    "mtime": 1786845100.1874027,
+    "ast_hash": "de6947ed133c1200500581ea2fbca75a",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/image/fallback.ts": {
+    "mtime": 1786845090.2430077,
+    "ast_hash": "0e68f18059a7cef7e1f5e0ab1bc5ed39",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/image/openrouter.test.ts": {
+    "mtime": 1786845051.4517398,
+    "ast_hash": "aea7745b9cd660db0ba259f6ad9985eb",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/image/openrouter.ts": {
+    "mtime": 1786845038.711214,
+    "ast_hash": "98b533162c3dd55c9333d2cf6d98eb56",
     "semantic_hash": ""
   }
 }

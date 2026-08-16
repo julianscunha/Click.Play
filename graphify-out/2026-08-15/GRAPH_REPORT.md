@@ -1,16 +1,16 @@
 # Graph Report - Click.Play  (2026-08-15)
 
 ## Corpus Check
-- 187 files · ~46,488 words
+- 192 files · ~50,838 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 734 nodes · 1131 edges · 34 communities (32 shown, 2 thin omitted)
+- 748 nodes · 1160 edges · 36 communities (33 shown, 3 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 3 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `354c4f02`
+- Built from commit: `d1eb8367`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -37,10 +37,12 @@
 - api.ts
 - server.test.ts
 - dependencies
-- domain/src/index.ts
+- providers/src/index.ts
 - creative-director.ts
 - Click.Play
 - @clickplay/video-engine
+- video-project.ts
+- PipelineCallbacks
 - cost-approval-gate.ts
 - new-provider
 - verify-package
@@ -73,7 +75,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (34 total, 2 thin omitted)
+## Communities (36 total, 3 thin omitted)
 
 ### Community 0 - "scripts"
 Cohesion: 0.12
@@ -108,7 +110,7 @@ Cohesion: 0.10
 Nodes (15): GeminiImage, ImageProvider, FalVideo, GeminiVideo, resolveVideoGenerationProvider(), VideoGenerationProvider, VideoGenerationProviderKey, VideoResult (+7 more)
 
 ### Community 8 - "run-qc.ts"
-Cohesion: 0.08
+Cohesion: 0.09
 Nodes (25): checkBlackdetect(), checkCostDeviation(), checkCriticScore(), checkDurationMatch(), checkOutputExists(), checkResolutionMatch(), ExpectedFormat, checkTtsCoverage() (+17 more)
 
 ### Community 9 - "compilerOptions"
@@ -133,7 +135,7 @@ Nodes (13): compilerOptions, jsx, lib, module, moduleResolution, outDir, rootDir
 
 ### Community 14 - "api/src/index.ts"
 Cohesion: 0.16
-Nodes (13): openDb(), app, envFilePath, port, runsDir, buildCostOptions(), buildImageProvider(), buildJobRunnerDeps() (+5 more)
+Nodes (14): openDb(), app, envFilePath, port, runsDir, buildCostOptions(), buildImageProvider(), buildJobRunnerDeps() (+6 more)
 
 ### Community 15 - "domain/tsconfig.json"
 Cohesion: 0.25
@@ -163,13 +165,13 @@ Nodes (34): CAPTION_STYLES, getFormConfig(), getRecommendedModels(), PACING_TIER
 Cohesion: 0.33
 Nodes (6): zod, dependencies, @clickplay/shared, zod, zod, zod
 
-### Community 25 - "domain/src/index.ts"
-Cohesion: 0.05
-Nodes (29): Asset, AssetType, AudioTrack, MusicMood, MusicTrack, NarrationTrack, WordTimestamp, Caption (+21 more)
+### Community 25 - "providers/src/index.ts"
+Cohesion: 0.08
+Nodes (15): Asset, AssetType, EDGE_TTS_VOICES, EdgeTTS, parseWordBoundaries(), sleep(), streamToBuffer(), FallbackTTS (+7 more)
 
 ### Community 26 - "creative-director.ts"
-Cohesion: 0.05
-Nodes (45): buildDefaultPrompt(), buildPacingInstruction(), DirectorScore, DirectorScoreOutput, DirectorScoreRaw, generateDirectorScore(), loadDirectorSystemPrompt(), PACING_CONFIG (+37 more)
+Cohesion: 0.06
+Nodes (43): buildDefaultPrompt(), buildPacingInstruction(), DirectorScore, DirectorScoreOutput, DirectorScoreRaw, generateDirectorScore(), loadDirectorSystemPrompt(), PACING_CONFIG (+35 more)
 
 ### Community 27 - "Click.Play"
 Cohesion: 0.40
@@ -178,6 +180,10 @@ Nodes (4): Click.Play, Comandos, pnpm gotcha (Windows), Workflow
 ### Community 28 - "@clickplay/video-engine"
 Cohesion: 0.67
 Nodes (3): @clickplay/video-engine, @clickplay/video-engine, @clickplay/video-engine
+
+### Community 29 - "video-project.ts"
+Cohesion: 0.11
+Nodes (18): AudioTrack, MusicMood, MusicTrack, NarrationTrack, WordTimestamp, Caption, CaptionStyleKey, CameraMotion (+10 more)
 
 ### Community 34 - "new-provider"
 Cohesion: 0.50
@@ -188,9 +194,9 @@ Cohesion: 0.50
 Nodes (3): Passos, Uso, verify-package
 
 ## Knowledge Gaps
-- **265 isolated node(s):** `REMOTION_ENTRY`, `SECRET_FIELDS`, `PLAIN_FIELDS`, `noNewlines`, `SettingsRouteDeps` (+260 more)
+- **265 isolated node(s):** `REMOTION_ENTRY`, `Arquétipos novos (Click.Play)`, `TTS: múltiplos providers, default remoto grátis`, `Terminologia (não confundir)`, `As duas abstrações (substituindo "AssetProvider" como abstração principal)` (+260 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **2 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **3 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
@@ -199,9 +205,9 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.012) - this node is a cross-community bridge._
 - **Why does `dependencies` connect `dependencies` to `dependencies`, `providers/package.json`, `dependencies`, `@clickplay/video-engine`?**
   _High betweenness centrality (0.008) - this node is a cross-community bridge._
-- **Why does `PipelineCallbacks` connect `creative-director.ts` to `job-runner.ts`?**
+- **Why does `PipelineCallbacks` connect `PipelineCallbacks` to `creative-director.ts`, `job-runner.ts`?**
   _High betweenness centrality (0.008) - this node is a cross-community bridge._
-- **What connects `REMOTION_ENTRY`, `SECRET_FIELDS`, `PLAIN_FIELDS` to the rest of the system?**
+- **What connects `REMOTION_ENTRY`, `Arquétipos novos (Click.Play)`, `TTS: múltiplos providers, default remoto grátis` to the rest of the system?**
   _265 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `scripts` be split into smaller, more focused modules?**
   _Cohesion score 0.125 - nodes in this community are weakly interconnected._

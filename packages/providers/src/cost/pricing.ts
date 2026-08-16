@@ -20,15 +20,18 @@ export const TTS_PRICING_PER_CHAR: Record<string, number> = {
   edge: 0, // grátis — TTS default do Click.Play (Fase 5), sem conta/API key
   elevenlabs: 0.00018,
   "openai-tts": 0.00005,
+  openrouter: 0.00005, // Gemini TTS via OpenRouter (Pós-Fase 14) — estimativa (preço por token de áudio, não por char; sem correspondência direta)
 };
 
 export const IMAGE_PRICING_PER_IMAGE: Record<string, number> = {
   gemini: 0.101, // Gemini 3.1 Flash Image @ 1080x1920 (Fase 6)
+  openrouter: 0.006, // Gemini 3.1 Flash Lite Image via OpenRouter (Pós-Fase 14) — ~4175 completion tokens @ $1.5/1M
 };
 
 export const VIDEO_PRICING_PER_SECOND: Record<string, number> = {
   gemini: 0.05, // Veo 3.1 Lite (Fase 6)
   fal: 0.07, // Kling v2.6 Pro via fal.ai (Fase 6)
+  openrouter: 0.05, // Veo 3.1 Lite via OpenRouter (Pós-Fase 14) — mesmo modelo do "gemini" acima, preço não exposto na Models API, assume paridade
 };
 
 export const MUSIC_PRICING_PER_TRACK: Record<string, number> = {

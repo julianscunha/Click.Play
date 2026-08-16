@@ -1,4 +1,4 @@
-export type VideoGenerationProviderKey = "gemini" | "fal";
+export type VideoGenerationProviderKey = "gemini" | "fal" | "openrouter";
 
 export interface VideoResult {
   filePath: string;

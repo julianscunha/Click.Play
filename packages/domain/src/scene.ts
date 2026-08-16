@@ -16,7 +16,7 @@ export type CameraMotion = z.infer<typeof CameraMotion>;
 export const VisualStrategy = z.enum(["motion_graphics", "ai_video", "hybrid"]);
 export type VisualStrategy = z.infer<typeof VisualStrategy>;
 
-export const VideoGenerationProviderKey = z.enum(["gemini", "fal", "auto"]);
+export const VideoGenerationProviderKey = z.enum(["gemini", "fal", "openrouter", "auto"]);
 export type VideoGenerationProviderKey = z.infer<typeof VideoGenerationProviderKey>;
 
 /** Elemento composto dentro de uma Scene. Múltiplos podem coexistir (visualStrategy: "hybrid"). */

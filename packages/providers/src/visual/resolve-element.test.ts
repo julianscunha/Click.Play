@@ -86,7 +86,11 @@ describe("resolveElement — ai_video_clip", () => {
     await expect(resolveElement(element, baseCtx())).rejects.toThrow('"fal" não configurado');
   });
 
-  it("falls back to the other configured provider when 'auto' and the resolved one fails", async () => {
+  it("falls back to another configured provider when 'auto' and the resolved (openrouter) one fails", async () => {
+    const openrouter: VideoGenerationProvider = {
+      supportedDurations: [5],
+      generate: vi.fn().mockRejectedValue(new Error("quota exceeded")),
+    };
     const gemini: VideoGenerationProvider = {
       supportedDurations: [5],
       generate: vi.fn().mockRejectedValue(new Error("Premature close")),
@@ -98,7 +102,7 @@ describe("resolveElement — ai_video_clip", () => {
     const element: VisualElement = { type: "ai_video_clip", provider: "auto", prompt: "rocket launch" };
     const result = await resolveElement(
       element,
-      baseCtx({ videoProviders: { gemini, fal }, hasGoogleKey: true, hasFalKey: true }),
+      baseCtx({ videoProviders: { openrouter, gemini, fal }, hasGoogleKey: true, hasFalKey: true }),
     );
     expect(result).toEqual({ type: "ai_video_clip", assetPath: "/out/fal-clip.mp4", sourceDurationSeconds: 5 });
     expect(fal.generate).toHaveBeenCalled();

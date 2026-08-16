@@ -53,10 +53,7 @@ async function resolveAiVideoClip(
   element: Extract<VisualElement, { type: "ai_video_clip" }>,
   ctx: ResolveElementContext,
 ): Promise<ResolvedElement> {
-  const providerKey = resolveVideoGenerationProvider(element.provider, {
-    hasGoogleKey: ctx.hasGoogleKey,
-    hasFalKey: ctx.hasFalKey,
-  });
+  const providerKey = resolveVideoGenerationProvider(element.provider);
   const provider = ctx.videoProviders[providerKey];
   if (!provider) {
     throw new Error(`VideoGenerationProvider "${providerKey}" não configurado`);
@@ -65,22 +62,31 @@ async function resolveAiVideoClip(
   const sourceImage = await ctx.imageProvider.generate(element.sourceImagePrompt ?? element.prompt);
 
   // Se o provider "auto"/pedido falhar em runtime (não só indisponível), tenta
-  // o outro provider de vídeo configurado antes de desistir — mesma ideia do
-  // fallback de stock acima, achado como necessário em teste manual real
+  // os demais providers de vídeo configurados antes de desistir — mesma ideia
+  // do fallback de stock acima, achado como necessário em teste manual real
   // (conexão instável com provider de IA derrubando o job inteiro).
-  const otherKey = providerKey === "gemini" ? "fal" : "gemini";
-  const otherProvider = element.provider === "auto" ? ctx.videoProviders[otherKey] : undefined;
+  const fallbackProviders =
+    element.provider === "auto"
+      ? Object.entries(ctx.videoProviders).filter(([key]) => key !== providerKey)
+      : [];
 
   try {
     const result = await provider.generate({ sourceImage, prompt: element.prompt });
     return { type: "ai_video_clip", assetPath: result.filePath, sourceDurationSeconds: result.durationSeconds };
   } catch (err) {
-    if (!otherProvider) throw err;
-    console.warn(
-      `[ai_video_clip] provider "${providerKey}" failed (${err instanceof Error ? err.message : String(err)}), trying "${otherKey}"`,
-    );
-    const result = await otherProvider.generate({ sourceImage, prompt: element.prompt });
-    return { type: "ai_video_clip", assetPath: result.filePath, sourceDurationSeconds: result.durationSeconds };
+    let lastError = err;
+    for (const [key, fallbackProvider] of fallbackProviders) {
+      console.warn(
+        `[ai_video_clip] provider "${providerKey}" failed (${lastError instanceof Error ? lastError.message : String(lastError)}), trying "${key}"`,
+      );
+      try {
+        const result = await fallbackProvider!.generate({ sourceImage, prompt: element.prompt });
+        return { type: "ai_video_clip", assetPath: result.filePath, sourceDurationSeconds: result.durationSeconds };
+      } catch (fallbackErr) {
+        lastError = fallbackErr;
+      }
+    }
+    throw lastError;
   }
 }
 

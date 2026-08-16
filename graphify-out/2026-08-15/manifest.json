@@ -80,8 +80,8 @@
     "semantic_hash": ""
   },
   "packages/providers/src/index.ts": {
-    "mtime": 1786827124.5222385,
-    "ast_hash": "48a22dee1a9ce3c00e7f3e63fe0ea113",
+    "mtime": 1786833710.9798203,
+    "ast_hash": "db9c4bcece6d9b1ba5e465ef683a15c6",
     "semantic_hash": ""
   },
   "packages/providers/tsconfig.json": {
@@ -125,8 +125,8 @@
     "semantic_hash": ""
   },
   "docs/IMPLEMENTATION-PLAN.md": {
-    "mtime": 1786829430.4384263,
-    "ast_hash": "c9724186c976b727eb544e80e7e0368b",
+    "mtime": 1786836077.7177105,
+    "ast_hash": "08dc8a1d0e2e355edbccf6e87593a3d8",
     "semantic_hash": ""
   },
   "pnpm-workspace.yaml": {
@@ -855,8 +855,8 @@
     "semantic_hash": ""
   },
   "apps/api/src/providers.ts": {
-    "mtime": 1786827145.9089122,
-    "ast_hash": "a7dc2e5ce6701ed2fa3ee32fcf0def4f",
+    "mtime": 1786833736.731207,
+    "ast_hash": "06d3a42a418eebbbab590d7a1ebb0598",
     "semantic_hash": ""
   },
   "apps/api/src/remotion/entry.tsx": {
@@ -1072,6 +1072,31 @@
   "packages/providers/src/llm/fallback.ts": {
     "mtime": 1786827054.740101,
     "ast_hash": "c6c2017d86b1f4db1020336f1bd1ece7",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/tts/fallback.test.ts": {
+    "mtime": 1786835189.8538282,
+    "ast_hash": "62fdc735b18bc1a3c32b93972782c5f9",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/tts/fallback.ts": {
+    "mtime": 1786833700.7229366,
+    "ast_hash": "e81625c159ced24186d61d0dbed7be72",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/tts/gemini.test.ts": {
+    "mtime": 1786835126.0375025,
+    "ast_hash": "5be73d90755b02f4bd3ff4947c3eea60",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/tts/gemini.ts": {
+    "mtime": 1786836066.3793747,
+    "ast_hash": "9565271b2fc015c9853235ee744c96f6",
+    "semantic_hash": ""
+  },
+  ".claude/agents/engineering-voice-ai-integration-engineer.md": {
+    "mtime": 1786833196.638756,
+    "ast_hash": "e0b2fb51ad9f57901a04c1ab47f51362",
     "semantic_hash": ""
   }
 }

@@ -1,7 +1,6 @@
-import { spawn } from "node:child_process";
 import { GoogleGenAI, Modality } from "@google/genai";
-import ffmpegPath from "ffmpeg-static";
 import type { WordTimestamp } from "@clickplay/domain";
+import { pcmToMp3 } from "./pcm-to-mp3.js";
 import type { TTSProvider, TTSResult } from "./types.js";
 
 const SAMPLE_RATE = 24000;
@@ -64,30 +63,3 @@ export function estimateWordTimestamps(text: string, durationSeconds: number): W
   });
 }
 
-/** Gemini devolve PCM cru (s16le, mono) — o pipeline escreve sempre em voiceover.mp3 (orchestrator.ts), então recodifica aqui em vez de mudar o contrato pro resto do código por causa de 1 provider. */
-function pcmToMp3(pcm: Buffer, sampleRate: number): Promise<Buffer> {
-  return new Promise((resolve, reject) => {
-    const proc = spawn(ffmpegPath!, [
-      "-f",
-      "s16le",
-      "-ar",
-      String(sampleRate),
-      "-ac",
-      "1",
-      "-i",
-      "pipe:0",
-      "-f",
-      "mp3",
-      "pipe:1",
-    ]);
-    const chunks: Buffer[] = [];
-    proc.stdout.on("data", (chunk: Buffer) => chunks.push(chunk));
-    proc.on("error", reject);
-    proc.on("close", (code) => {
-      if (code !== 0) reject(new Error(`ffmpeg pcm->mp3 falhou (code ${code})`));
-      else resolve(Buffer.concat(chunks));
-    });
-    proc.stdin.write(pcm);
-    proc.stdin.end();
-  });
-}

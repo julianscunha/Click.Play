@@ -10,6 +10,8 @@ import {
   FalVideo,
   OpenRouterImage,
   OpenRouterLLM,
+  OpenRouterTTS,
+  OpenRouterVideo,
   PexelsStock,
   PixabayStock,
   type CostEstimateOptions,
@@ -37,14 +39,16 @@ export function buildCostOptions(): CostEstimateOptions {
   return {
     llmModel: process.env.OPENROUTER_MODEL || "openai/gpt-4.1",
     ttsProvider: "edge",
-    imageProvider: "gemini",
-    videoProvider: process.env.GOOGLE_API_KEY ? "gemini" : process.env.FAL_API_KEY ? "fal" : undefined,
+    imageProvider: "openrouter",
+    videoProvider: "openrouter",
     musicProvider: "bundled",
   };
 }
 
-function buildVideoProviders(): Partial<Record<"gemini" | "fal", VideoGenerationProvider>> {
-  const providers: Partial<Record<"gemini" | "fal", VideoGenerationProvider>> = {};
+function buildVideoProviders(): Partial<Record<"gemini" | "fal" | "openrouter", VideoGenerationProvider>> {
+  const providers: Partial<Record<"gemini" | "fal" | "openrouter", VideoGenerationProvider>> = {
+    openrouter: new OpenRouterVideo(undefined, process.env.OPENROUTER_API_KEY),
+  };
   if (process.env.GOOGLE_API_KEY) providers.gemini = new GeminiVideo();
   if (process.env.FAL_API_KEY) providers.fal = new FalVideo();
   return providers;
@@ -84,14 +88,20 @@ function buildLLM(): LLMProvider {
 }
 
 /** EdgeTTS (grátis, ilimitado, já tem retry+backoff próprio) continua padrão.
- * Gemini TTS entra só como fallback quando GOOGLE_API_KEY existe — achado em
- * teste manual real: WebSocket do Edge cai intermitentemente ("Premature
- * close"), REST do Gemini não tem esse modo de falha. */
+ * Fallback é OpenRouterTTS (mesma OPENROUTER_API_KEY já obrigatória, REST sem
+ * o modo de falha do WebSocket do Edge — achado em teste manual real:
+ * "Premature close"). GeminiTTS direto entra como 3º nível só se
+ * GOOGLE_API_KEY existir (raramente necessário agora). */
 function buildTTS(): TTSProvider {
   const primary = new EdgeTTS();
-  if (!process.env.GOOGLE_API_KEY) return primary;
+  const openRouterFallback = new OpenRouterTTS(undefined, undefined, process.env.OPENROUTER_API_KEY);
 
-  return new FallbackTTS(primary, new GeminiTTS(undefined, undefined, process.env.GOOGLE_API_KEY));
+  if (!process.env.GOOGLE_API_KEY) return new FallbackTTS(primary, openRouterFallback);
+
+  return new FallbackTTS(
+    primary,
+    new FallbackTTS(openRouterFallback, new GeminiTTS(undefined, undefined, process.env.GOOGLE_API_KEY)),
+  );
 }
 
 function buildStockProviders(): StockProvider[] {
