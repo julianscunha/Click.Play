@@ -126,6 +126,7 @@ const config: ProjectConfig = {
   fps: 25,
   width: 320,
   height: 240,
+  videoMode: "motion_graphics_only", // cenas fake não têm ai_video_clip — default "hybrid" violaria o piso
 };
 
 let runDir: string;

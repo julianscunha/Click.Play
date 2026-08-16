@@ -1,4 +1,4 @@
-import type { CaptionStyleKey, WordTimestamp } from "@clickplay/domain";
+import type { CaptionStyleKey, VideoMode, WordTimestamp } from "@clickplay/domain";
 import type { DirectorScore } from "../agents/creative-director.js";
 import type { CritiqueResult } from "../agents/critic.js";
 import type { ResearchResult } from "../agents/research.js";
@@ -59,7 +59,7 @@ export interface PipelineOptions {
   cost: CostEstimateOptions;
   archetype?: string;
   pacing?: string;
-  videoEnabled?: boolean;
+  videoMode?: VideoMode;
   direction?: string;
   fps?: number;
   width?: number;

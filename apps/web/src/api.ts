@@ -63,7 +63,7 @@ export interface CreateJobInput {
   direction?: string;
   archetype?: string;
   pacing?: string;
-  videoEnabled?: boolean;
+  videoMode?: "motion_graphics_only" | "ai_video_only" | "hybrid";
   captionStyle?: string;
 }
 

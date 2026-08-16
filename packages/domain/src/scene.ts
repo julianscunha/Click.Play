@@ -16,6 +16,17 @@ export type CameraMotion = z.infer<typeof CameraMotion>;
 export const VisualStrategy = z.enum(["motion_graphics", "ai_video", "hybrid"]);
 export type VisualStrategy = z.infer<typeof VisualStrategy>;
 
+/**
+ * Modo de vídeo do projeto inteiro (docs/IMPLEMENTATION-PLAN.md §11A Bloco 1)
+ * — substitui o antigo booleano `videoEnabled`, que era só sugestão textual
+ * pro LLM sem piso imposto (resultado real: 0 cenas em vídeo mesmo com
+ * "permitir vídeo" marcado). `motion_graphics_only` = sem vídeo por IA,
+ * `ai_video_only` = toda cena precisa de `ai_video_clip`, `hybrid` = piso
+ * mínimo de cenas em vídeo, resto livre.
+ */
+export const VideoMode = z.enum(["motion_graphics_only", "ai_video_only", "hybrid"]);
+export type VideoMode = z.infer<typeof VideoMode>;
+
 export const VideoGenerationProviderKey = z.enum(["gemini", "fal", "openrouter", "auto"]);
 export type VideoGenerationProviderKey = z.infer<typeof VideoGenerationProviderKey>;
 
@@ -83,4 +94,17 @@ export function violatesSlideshowRule(scenes: Scene[]): boolean {
     if (streak > 2) return true;
   }
   return false;
+}
+
+/** Quantas cenas com `ai_video_clip` o VideoMode exige no total (docs/IMPLEMENTATION-PLAN.md §11A Bloco 1). */
+export function minAiVideoScenes(totalScenes: number, mode: VideoMode): number {
+  if (mode === "motion_graphics_only") return 0;
+  if (mode === "ai_video_only") return totalScenes;
+  return Math.ceil(totalScenes * 0.3); // hybrid: piso de 30% das cenas em vídeo
+}
+
+/** Verdadeiro se o roteiro não atinge o piso de cenas em vídeo exigido pelo VideoMode escolhido. */
+export function violatesVideoModeRule(scenes: Scene[], mode: VideoMode): boolean {
+  const aiVideoScenes = scenes.filter((s) => s.elements.some((e) => e.type === "ai_video_clip")).length;
+  return aiVideoScenes < minAiVideoScenes(scenes.length, mode);
 }

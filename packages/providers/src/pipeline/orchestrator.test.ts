@@ -98,6 +98,7 @@ function baseOptions(runDir: string, llm: LLMProvider): PipelineOptions {
     },
     videoRenderer: fakeVideoRenderer(),
     cost: { llmModel: "openai/gpt-4.1", ttsProvider: "edge", imageProvider: "gemini", musicProvider: "bundled" },
+    videoMode: "motion_graphics_only", // cenas fake não têm ai_video_clip — default "hybrid" violaria o piso
   };
 }
 

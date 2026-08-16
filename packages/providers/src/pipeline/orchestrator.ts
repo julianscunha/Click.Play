@@ -68,7 +68,7 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
       const directorOpts = {
         archetype: opts.archetype,
         pacing: opts.pacing,
-        videoEnabled: opts.videoEnabled,
+        videoMode: opts.videoMode,
         direction: opts.direction,
       };
 

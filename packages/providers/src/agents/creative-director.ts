@@ -1,7 +1,17 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
 import { z } from "zod";
-import { MusicMood, Scene, TransitionType, VisualElement, VisualStrategy, violatesSlideshowRule } from "@clickplay/domain";
+import {
+  MusicMood,
+  Scene,
+  TransitionType,
+  VideoMode,
+  VisualElement,
+  VisualStrategy,
+  minAiVideoScenes,
+  violatesSlideshowRule,
+  violatesVideoModeRule,
+} from "@clickplay/domain";
 import { getArchetype, listArchetypes } from "../config/archetype-registry.js";
 import type { ScenePacing } from "../config/archetype.js";
 import type { LLMProvider, LLMUsage } from "../llm/types.js";
@@ -84,11 +94,39 @@ function loadDirectorSystemPrompt(): string {
   }
 }
 
+/**
+ * Instrução de prompt por VideoMode (docs/IMPLEMENTATION-PLAN.md §11A Bloco 1).
+ * O piso mínimo de cenas em vídeo é IMPOSTO depois (assertVideoMode), não só
+ * sugerido — o booleano `videoEnabled` antigo permitia 0 cenas em vídeo mesmo
+ * "habilitado", porque era só texto de prompt sem validação.
+ */
+function buildVideoModeGuidance(mode: VideoMode): string {
+  const noPlaceholders =
+    "do NOT use svg/shape/icon/particle_system/diagram, they have no renderer yet and render as blank";
+  if (mode === "motion_graphics_only") {
+    return `Use visualStrategy "motion_graphics" for every scene (composed elements: animated_text, ai_image, stock_image/stock_video — ${noPlaceholders}). ai_video is disabled for this project.`;
+  }
+  if (mode === "ai_video_only") {
+    return `Use visualStrategy "ai_video" for every scene — every scene REQUIRES at least one element of type "ai_video_clip" in the elements array, no exceptions. This project has real motion video in every scene, not motion graphics.`;
+  }
+  return `Use visualStrategy "motion_graphics" for most scenes (composed elements: animated_text, ai_image, stock_image/stock_video — ${noPlaceholders}). Use "ai_video" or "hybrid" for at least 30% of scenes where MOTION is the story (explosions, flowing water, launches, transformations) — BOTH require at least one element of type "ai_video_clip" in the elements array (a scene with visualStrategy "ai_video" and no "ai_video_clip" element is INVALID and will be rejected). ai_video_clip costs ~$0.30/scene vs ~$0.04 for ai_image — use selectively, but the 30% floor is mandatory.`;
+}
+
+/** Lança se o roteiro não atinge o piso de vídeo do VideoMode — pego pelo mesmo retry-with-feedback dos outros erros de validação. */
+function assertVideoMode(scenes: Scene[], mode: VideoMode): void {
+  if (violatesVideoModeRule(scenes, mode)) {
+    const needed = minAiVideoScenes(scenes.length, mode);
+    throw new Error(
+      `VideoMode "${mode}" requer ao menos ${needed} cena(s) com elemento "ai_video_clip" em ${scenes.length} cena(s) totais — roteiro não atinge o piso.`,
+    );
+  }
+}
+
 export async function generateDirectorScore(
   llm: LLMProvider,
   topic: string,
   researchContext: ResearchResult,
-  options?: { archetype?: string; pacing?: string; videoEnabled?: boolean; direction?: string },
+  options?: { archetype?: string; pacing?: string; videoMode?: VideoMode; direction?: string },
 ): Promise<DirectorScoreOutput> {
   const systemPrompt = loadDirectorSystemPrompt();
 
@@ -97,10 +135,8 @@ export async function generateDirectorScore(
     ? `Use the "${options.archetype}" archetype.`
     : `Choose from: ${archetypes.join(", ")}`;
 
-  const videoEnabled = options?.videoEnabled ?? true;
-  const strategyGuidance = videoEnabled
-    ? 'Use visualStrategy "motion_graphics" for most scenes (composed elements: animated_text, ai_image, stock_image/stock_video — do NOT use svg/shape/icon/particle_system/diagram, they have no renderer yet and render as blank). Use "ai_video" or "hybrid" for 1-3 scenes where MOTION is the story (explosions, flowing water, launches, transformations) — BOTH require at least one element of type "ai_video_clip" in the elements array (a scene with visualStrategy "ai_video" and no "ai_video_clip" element is INVALID and will be rejected). ai_video_clip costs ~$0.30/scene vs ~$0.04 for ai_image — use selectively.'
-    : 'Use visualStrategy "motion_graphics" for every scene (composed elements: animated_text, ai_image, stock_image/stock_video — do NOT use svg/shape/icon/particle_system/diagram, they have no renderer yet and render as blank). ai_video is disabled for this project.';
+  const videoMode = options?.videoMode ?? "hybrid";
+  const strategyGuidance = buildVideoModeGuidance(videoMode);
 
   const pacingInstruction = buildPacingInstruction(options?.archetype, options?.pacing);
 
@@ -150,6 +186,7 @@ If over budget, cut a scene rather than cramming.`;
         ...result.data,
         scenes: toScenes(result.data.scenes),
       });
+      assertVideoMode(validated.scenes, videoMode);
       return { data: validated, usage: totalUsage };
     } catch (err) {
       lastError = err instanceof Error ? err : new Error(String(err));
@@ -222,9 +259,10 @@ export async function reviseDirectorScore(
   researchContext: ResearchResult,
   originalScore: DirectorScore,
   critique: CritiqueResult,
-  options?: { archetype?: string; pacing?: string; videoEnabled?: boolean; direction?: string },
+  options?: { archetype?: string; pacing?: string; videoMode?: VideoMode; direction?: string },
 ): Promise<DirectorScoreOutput> {
   const systemPrompt = loadDirectorSystemPrompt();
+  const videoMode = options?.videoMode ?? "hybrid";
   const revisionGuidance = critique.revision_instructions ?? `Address these weaknesses: ${critique.weaknesses.join("; ")}`;
   const pacingInstruction = buildPacingInstruction(options?.archetype, options?.pacing);
 
@@ -291,6 +329,7 @@ Keep the same archetype. Maintain the GOLDEN RULE: never reduce more than 2 cons
         (validated as { archetype: string }).archetype = originalScore.archetype;
       }
 
+      assertVideoMode(validated.scenes, videoMode);
       return { data: validated, usage: totalUsage };
     } catch (err) {
       lastError = err instanceof Error ? err : new Error(String(err));

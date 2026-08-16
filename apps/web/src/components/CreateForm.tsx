@@ -16,7 +16,7 @@ export function CreateForm({ config, onSubmit, submitting }: CreateFormProps) {
   const [direction, setDirection] = useState("");
   const [archetype, setArchetype] = useState("");
   const [pacing, setPacing] = useState("");
-  const [videoEnabled, setVideoEnabled] = useState(true);
+  const [videoMode, setVideoMode] = useState<"motion_graphics_only" | "ai_video_only" | "hybrid">("hybrid");
   const [captionStyle, setCaptionStyle] = useState("");
 
   const canSubmit = topic.trim().length > 0 && !submitting;
@@ -29,7 +29,7 @@ export function CreateForm({ config, onSubmit, submitting }: CreateFormProps) {
       direction: direction.trim() || undefined,
       archetype: archetype || undefined,
       pacing: pacing || undefined,
-      videoEnabled,
+      videoMode,
       captionStyle: captionStyle || undefined,
     });
   }
@@ -122,16 +122,21 @@ export function CreateForm({ config, onSubmit, submitting }: CreateFormProps) {
           </select>
         </div>
 
-        <label htmlFor="videoEnabled" className="flex items-center gap-2 self-end pb-2 text-sm text-neutral-200">
-          <input
-            id="videoEnabled"
-            type="checkbox"
-            checked={videoEnabled}
-            onChange={(e) => setVideoEnabled(e.target.checked)}
-            className="h-4 w-4 rounded border-neutral-600 bg-neutral-900"
-          />
-          Permitir vídeo gerado por IA
-        </label>
+        <div className="flex flex-col gap-1.5">
+          <label htmlFor="videoMode" className="text-sm font-medium text-neutral-200">
+            Vídeo
+          </label>
+          <select
+            id="videoMode"
+            value={videoMode}
+            onChange={(e) => setVideoMode(e.target.value as typeof videoMode)}
+            className="rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-neutral-50 focus:border-neutral-400 focus:outline-none"
+          >
+            <option value="hybrid">Híbrido (imagem + vídeo onde faz sentido)</option>
+            <option value="motion_graphics_only">Só imagem (mais barato)</option>
+            <option value="ai_video_only">Só vídeo (mais caro)</option>
+          </select>
+        </div>
       </div>
 
       <button

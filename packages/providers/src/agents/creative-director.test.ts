@@ -37,7 +37,7 @@ function fakeLLM(scenes: unknown[]): LLMProvider {
 describe("generateDirectorScore", () => {
   it("assigns sequential ids to scenes and validates against DirectorScore", async () => {
     const llm = fakeLLM([sceneRaw(), sceneRaw(), sceneRaw()]);
-    const result = await generateDirectorScore(llm, "Apollo 11", research);
+    const result = await generateDirectorScore(llm, "Apollo 11", research, { videoMode: "motion_graphics_only" });
 
     expect(result.data.scenes.map((s) => s.id)).toEqual(["1", "2", "3"]);
     expect(result.data.archetype).toBe("cinematic_documentary");
@@ -50,7 +50,7 @@ describe("generateDirectorScore", () => {
     });
     const llm = fakeLLM([sceneRaw(), sceneRaw(), brokenAiVideo]);
 
-    const result = await generateDirectorScore(llm, "Apollo 11", research);
+    const result = await generateDirectorScore(llm, "Apollo 11", research, { videoMode: "motion_graphics_only" });
 
     expect(result.data.scenes[2]!.visualStrategy).toBe("motion_graphics");
     expect(llm.generate).toHaveBeenCalledTimes(1);

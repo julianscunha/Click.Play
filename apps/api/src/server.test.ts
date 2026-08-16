@@ -245,7 +245,12 @@ describe("server", () => {
       envFilePath,
     });
 
-    const create = await app.inject({ method: "POST", url: "/jobs", payload: { topic: "Apollo 11" } });
+    // videoMode explícito: cenas fake não têm ai_video_clip, default "hybrid" violaria o piso mínimo.
+    const create = await app.inject({
+      method: "POST",
+      url: "/jobs",
+      payload: { topic: "Apollo 11", videoMode: "motion_graphics_only" },
+    });
     expect(create.statusCode).toBe(201);
     const { id: jobId } = create.json();
 

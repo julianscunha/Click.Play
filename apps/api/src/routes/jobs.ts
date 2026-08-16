@@ -1,6 +1,7 @@
 import * as path from "node:path";
 import type { FastifyInstance } from "fastify";
 import { z } from "zod";
+import { VideoMode } from "@clickplay/domain";
 import {
   createCostApprovalGate,
   createJob,
@@ -20,7 +21,7 @@ const CreateJobBody = z.object({
   direction: z.string().optional(),
   archetype: z.string().optional(),
   pacing: z.enum(PACING_TIERS).optional(),
-  videoEnabled: z.boolean().optional(),
+  videoMode: VideoMode.optional(),
   captionStyle: z.enum(CAPTION_STYLES).optional(),
 });
 
@@ -73,11 +74,11 @@ export function registerJobsRoutes(app: FastifyInstance, deps: JobsRouteDeps): v
         .status(422)
         .send({ error: { code: "VALIDATION_ERROR", message: "Corpo inválido", details: parsed.error.flatten() } });
     }
-    const { topic, direction, archetype, pacing, videoEnabled, captionStyle } = parsed.data;
+    const { topic, direction, archetype, pacing, videoMode, captionStyle } = parsed.data;
 
     const project = await createProject(deps.db, {
       topic,
-      config: { cost: deps.buildCostOptions(), direction, archetype, pacing, videoEnabled, captionStyle },
+      config: { cost: deps.buildCostOptions(), direction, archetype, pacing, videoMode, captionStyle },
     });
     const runDir = path.join(deps.runsDir, project.id);
     const job = await createJob(deps.db, { projectId: project.id, runDir });
