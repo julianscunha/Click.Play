@@ -1,3 +1,4 @@
+import type { PipelineCheckpoint } from "../pipeline/types.js";
 import type { JobStatus } from "./schema.js";
 
 /** Próximo estado do fluxo linear feliz (spec §23). */
@@ -29,6 +30,20 @@ export function assertTransition(from: JobStatus, to: JobStatus): void {
   if (NEXT[from] !== to) {
     throw new Error(`Transição de job inválida: ${from} → ${to}`);
   }
+}
+
+/**
+ * Status de onde retomar um job FAILED, derivado do checkpoint (não é
+ * transição normal do fluxo — reset administrativo, bypassa `assertTransition`).
+ * Precisa "voltar" pro status que antecede o próximo `onStageStart` que vai
+ * rodar de verdade, senão a transição normal do pipeline rejeita (ex: sem
+ * isso, retomar com TTS já concluído tentaria GENERATING→GENERATING de novo).
+ */
+export function resumeStatusForCheckpoint(checkpoint: PipelineCheckpoint | null): JobStatus {
+  if (!checkpoint?.research) return "QUEUED";
+  if (!checkpoint.director) return "RESEARCHING";
+  if (!checkpoint.tts) return "AWAITING_COST_APPROVAL";
+  return "GENERATING";
 }
 
 /** Progresso derivado do status — não é input livre, evita divergência status/progresso. */

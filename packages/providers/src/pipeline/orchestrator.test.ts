@@ -7,6 +7,7 @@ import type { ImageProvider } from "../image/types.js";
 import type { LLMProvider } from "../llm/types.js";
 import type { MusicProvider } from "../music/types.js";
 import type { TTSProvider } from "../tts/types.js";
+import { estimateCost } from "../cost/index.js";
 import { runPipeline } from "./orchestrator.js";
 import type { PipelineCallbacks, PipelineOptions } from "./types.js";
 
@@ -178,6 +179,33 @@ describe("runPipeline", () => {
     expect(result.status).toBe("cancelled_cost");
     expect(options.ttsProvider.generate).not.toHaveBeenCalled();
     expect(options.videoRenderer.render).not.toHaveBeenCalled();
+  });
+
+  it("resumes from a checkpoint, skipping stages that were already paid for", async () => {
+    const llm = fakeLLM(); // nenhuma resposta — research/director não podem ser chamados de novo
+    const options = baseOptions(runDir, llm);
+    const score = directorPayload();
+    const resume = {
+      research: { data: RESEARCH_RESULT, usage: usage() },
+      director: {
+        score: score as never,
+        revisions: [{ round: 0, score: 8, critique: critiquePayload(8) as never }],
+        costEstimate: estimateCost(score.scenes as never, options.cost),
+      },
+      tts: { words: [{ word: "Hello", start: 0, end: 0.3 }], voiceoverPath: "/tmp/voiceover.mp3", fullScript: "Hello world" },
+    };
+    options.resume = resume;
+    const checkpoints: unknown[] = [];
+    const callbacks = approvingCallbacks({ onCheckpoint: (cp) => void checkpoints.push(structuredClone(cp)) });
+
+    const result = await runPipeline(options, callbacks);
+
+    expect(result.status).toBe("completed");
+    expect(llm.generate).not.toHaveBeenCalled();
+    expect(options.ttsProvider.generate).not.toHaveBeenCalled();
+    expect(options.videoRenderer.render).toHaveBeenCalled();
+    expect(checkpoints).toHaveLength(4); // research, director, tts, visuals
+    expect((checkpoints[3] as { visuals?: unknown }).visuals).toBeDefined();
   });
 
   it("returns a structured failed result tagged with the stage that threw", async () => {

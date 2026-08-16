@@ -8,7 +8,9 @@ import { assertTransition } from "./job-state-machine.js";
 import {
   getJob,
   getProject,
+  resetJobForRetry,
   setJobActualCost,
+  setJobCheckpoint,
   setJobError,
   setJobEstimatedCost,
   setJobOutputPath,
@@ -41,6 +43,24 @@ export function startJob(db: ClickPlayDb, jobId: string, deps: JobRunnerDeps, op
     // sem lançar — isto só cobre falha inesperada fora do pipeline (ex: DB).
     void setJobError(db, jobId, err instanceof Error ? err.message : String(err));
   });
+}
+
+/**
+ * Retoma um job FAILED a partir do checkpoint persistido (Fase 15+, retry por
+ * estágio) — reseta o status pro ponto de retomada e roda o mesmo ciclo de
+ * `startJob` (background, fire-and-forget). No-op se o job não está FAILED.
+ */
+export async function retryJob(
+  db: ClickPlayDb,
+  jobId: string,
+  deps: JobRunnerDeps,
+  opts: StartJobOptions = {},
+): Promise<boolean> {
+  const job = await getJob(db, jobId);
+  if (!job || job.status !== "FAILED") return false;
+  await resetJobForRetry(db, jobId);
+  startJob(db, jobId, deps, opts);
+  return true;
 }
 
 /** Mesma execução de `startJob`, mas retorna a Promise — usado por testes que precisam aguardar o ciclo completo determinístico. */
@@ -79,6 +99,9 @@ export async function runJobOnce(
     async onStageError(stageName, error) {
       opts.onLog?.(`[${stageName}] ${error.message}`);
     },
+    async onCheckpoint(checkpoint) {
+      await setJobCheckpoint(db, jobId, checkpoint);
+    },
     onLog: opts.onLog,
   };
 
@@ -86,6 +109,7 @@ export async function runJobOnce(
     ...project.config,
     topic: project.topic,
     runDir: job.runDir,
+    resume: job.checkpoint ?? undefined,
     ...deps,
   };
 

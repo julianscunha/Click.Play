@@ -13,7 +13,7 @@ import type { LLMProvider } from "../llm/types.js";
 import type { MusicProvider } from "../music/types.js";
 import type { TTSProvider } from "../tts/types.js";
 import { createDb } from "./client.js";
-import { runJobOnce } from "./job-runner.js";
+import { retryJob, runJobOnce } from "./job-runner.js";
 import { createJob, createProject, getJob } from "./repository.js";
 import type { ProjectConfig } from "./types.js";
 
@@ -204,5 +204,44 @@ describe("runJobOnce", () => {
     const finalJob = await getJob(db, job.id);
     expect(finalJob?.status).toBe("FAILED");
     expect(finalJob?.error).toBe("[tts] tts exploded");
+  });
+
+  it("retryJob resumes a FAILED job from its checkpoint without re-running the LLM", async () => {
+    const llm = fakeLLM(RESEARCH_RESULT, directorPayload(), critiquePayload(8));
+    const project = await createProject(db, { topic: "Apollo 11", config });
+    const job = await createJob(db, { projectId: project.id, runDir });
+    const deps = fakeDeps(llm);
+    deps.ttsProvider.generate = vi.fn().mockRejectedValue(new Error("tts exploded"));
+
+    await runJobOnce(db, job.id, deps);
+    const failedJob = await getJob(db, job.id);
+    expect(failedJob?.status).toBe("FAILED");
+    expect(failedJob?.checkpoint?.director).toBeDefined();
+    expect(failedJob?.checkpoint?.tts).toBeUndefined();
+
+    const workingDeps = fakeDeps(llm); // mesmo mock LLM — não deve ser chamado de novo
+    const retried = await retryJob(db, job.id, workingDeps);
+    expect(retried).toBe(true);
+    // startJob (dentro de retryJob) é fire-and-forget — espera terminar via poll no DB.
+    for (let i = 0; i < 100; i++) {
+      const current = await getJob(db, job.id);
+      if (current?.status === "COMPLETED" || current?.status === "FAILED") break;
+      await new Promise((r) => setTimeout(r, 50));
+    }
+
+    const finalJob = await getJob(db, job.id);
+    expect(finalJob?.status).toBe("COMPLETED");
+    // research+director não rodaram de novo: só as 3 chamadas originais (research/director/critic).
+    expect(llm.generate).toHaveBeenCalledTimes(3);
+  }, 20_000);
+
+  it("retryJob is a no-op when the job is not FAILED", async () => {
+    const llm = fakeLLM(RESEARCH_RESULT, directorPayload(), critiquePayload(8));
+    const project = await createProject(db, { topic: "Apollo 11", config });
+    const job = await createJob(db, { projectId: project.id, runDir }); // QUEUED
+
+    const retried = await retryJob(db, job.id, fakeDeps(llm));
+
+    expect(retried).toBe(false);
   });
 });

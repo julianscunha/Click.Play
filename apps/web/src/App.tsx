@@ -4,6 +4,7 @@ import {
   createJob,
   getFormConfig,
   getJob,
+  retryJob,
   UnauthorizedError,
   type CreateJobInput,
   type FormConfig,
@@ -25,6 +26,7 @@ export function App() {
   const [job, setJob] = useState<JobView | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [approving, setApproving] = useState(false);
+  const [retrying, setRetrying] = useState(false);
   const [createError, setCreateError] = useState<string | null>(null);
   const [showSettings, setShowSettings] = useState(false);
 
@@ -81,6 +83,16 @@ export function App() {
     }
   }
 
+  async function handleRetry() {
+    if (!jobId) return;
+    setRetrying(true);
+    try {
+      await retryJob(jobId);
+    } finally {
+      setRetrying(false);
+    }
+  }
+
   function reset() {
     setJobId(null);
     setJob(null);
@@ -128,7 +140,13 @@ export function App() {
         )}
 
         {!showSettings && job && job.status !== "COMPLETED" && (
-          <ProgressView job={job} onApprove={handleApprove} approving={approving} />
+          <ProgressView
+            job={job}
+            onApprove={handleApprove}
+            approving={approving}
+            onRetry={handleRetry}
+            retrying={retrying}
+          />
         )}
 
         {!showSettings && job && job.status === "COMPLETED" && job.output && (

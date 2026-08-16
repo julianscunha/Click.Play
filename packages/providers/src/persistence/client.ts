@@ -33,6 +33,15 @@ CREATE TABLE IF NOT EXISTS jobs (
 );
 `;
 
+/** Coluna adicionada após o deploy inicial — bancos existentes não ganham via CREATE TABLE IF NOT EXISTS. */
+function addCheckpointColumnIfMissing(sqlite: DatabaseSync): void {
+  try {
+    sqlite.exec("ALTER TABLE jobs ADD COLUMN checkpoint TEXT");
+  } catch {
+    // já existe
+  }
+}
+
 /**
  * `drizzle-orm/node-sqlite` ainda não existe na versão estável do pacote (só
  * em pre-release `1.0.0-beta`) — usa o adapter genérico `sqlite-proxy` com
@@ -51,6 +60,7 @@ export function createDb(sqliteFilePath: string): ClickPlayDb {
   const sqlite = new DatabaseSync(sqliteFilePath);
   if (sqliteFilePath !== ":memory:") sqlite.exec("PRAGMA journal_mode = WAL");
   sqlite.exec(DDL);
+  addCheckpointColumnIfMissing(sqlite);
 
   return drizzle(async (sqlText, params, method) => {
     const stmt = sqlite.prepare(sqlText);

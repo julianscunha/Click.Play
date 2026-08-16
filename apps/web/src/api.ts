@@ -101,6 +101,10 @@ export function approveCost(id: string, approved: boolean): Promise<void> {
   return request(`/jobs/${id}/approve-cost`, { method: "POST", body: JSON.stringify({ approved }) });
 }
 
+export function retryJob(id: string): Promise<{ id: string; status: string }> {
+  return request(`/jobs/${id}/retry`, { method: "POST" });
+}
+
 export function outputUrl(output: string): string {
   return `${API_BASE}${output}`;
 }

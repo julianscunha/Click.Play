@@ -47,6 +47,8 @@ export const jobs = sqliteTable("jobs", {
   actualCost: text("actual_cost", { mode: "json" }).$type<unknown>(),
   /** Resultado do QC pós-render (Fase 12) — null até o render completar. */
   qcReport: text("qc_report", { mode: "json" }).$type<unknown>(),
+  /** Output de estágios já concluídos (PipelineCheckpoint) — permite retry retomar sem repagar estágios já pagos. */
+  checkpoint: text("checkpoint", { mode: "json" }).$type<unknown>(),
   error: text("error"),
   createdAt: integer("created_at", { mode: "timestamp_ms" }).notNull(),
   updatedAt: integer("updated_at", { mode: "timestamp_ms" }).notNull(),

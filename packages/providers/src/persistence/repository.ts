@@ -1,9 +1,10 @@
 import { randomUUID } from "node:crypto";
 import { eq } from "drizzle-orm";
 import type { CostBreakdown } from "../cost/index.js";
+import type { PipelineCheckpoint } from "../pipeline/types.js";
 import type { QcReport } from "../qc/types.js";
 import type { ClickPlayDb } from "./client.js";
-import { PROGRESS_BY_STATUS } from "./job-state-machine.js";
+import { PROGRESS_BY_STATUS, resumeStatusForCheckpoint } from "./job-state-machine.js";
 import { jobs, type JobStatus, projects } from "./schema.js";
 import { type Job, jobFromRow, type Project, type ProjectConfig, projectFromRow } from "./types.js";
 
@@ -31,6 +32,7 @@ export async function createJob(db: ClickPlayDb, input: { projectId: string; run
     estimatedCost: null,
     actualCost: null,
     qcReport: null,
+    checkpoint: null,
     error: null,
     createdAt: now,
     updatedAt: now,
@@ -78,4 +80,25 @@ export async function setJobOutputPath(db: ClickPlayDb, id: string, outputPath: 
 
 export async function setJobError(db: ClickPlayDb, id: string, error: string): Promise<void> {
   await db.update(jobs).set({ error, updatedAt: new Date() }).where(eq(jobs.id, id));
+}
+
+export async function setJobCheckpoint(db: ClickPlayDb, id: string, checkpoint: PipelineCheckpoint): Promise<void> {
+  await db.update(jobs).set({ checkpoint, updatedAt: new Date() }).where(eq(jobs.id, id));
+}
+
+/**
+ * Reset administrativo pra retomar um job FAILED (Fase 15+, retry por
+ * estágio) — não é transição do pipeline, por isso não passa por
+ * `assertTransition`. Só age sobre job em FAILED (idempotente/no-op fora
+ * disso); status alvo é derivado do checkpoint já persistido, não input livre.
+ */
+export async function resetJobForRetry(db: ClickPlayDb, id: string): Promise<Job> {
+  const job = await getJob(db, id);
+  if (!job) throw new Error(`Job "${id}" não encontrado`);
+  if (job.status !== "FAILED") return job;
+
+  const status = resumeStatusForCheckpoint(job.checkpoint);
+  const progress = PROGRESS_BY_STATUS[status];
+  await db.update(jobs).set({ status, progress, error: null, updatedAt: new Date() }).where(eq(jobs.id, id));
+  return { ...job, status, progress, error: null };
 }

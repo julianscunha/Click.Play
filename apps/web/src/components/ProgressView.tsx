@@ -51,9 +51,11 @@ export interface ProgressViewProps {
   job: JobView;
   onApprove(approved: boolean): void;
   approving: boolean;
+  onRetry(): void;
+  retrying: boolean;
 }
 
-export function ProgressView({ job, onApprove, approving }: ProgressViewProps) {
+export function ProgressView({ job, onApprove, approving, onRetry, retrying }: ProgressViewProps) {
   const [decided, setDecided] = useState(false);
   const percent = Math.round(job.progress * 100);
 
@@ -129,6 +131,14 @@ export function ProgressView({ job, onApprove, approving }: ProgressViewProps) {
                   <pre className="mt-2 max-h-40 overflow-auto whitespace-pre-wrap break-words">{raw}</pre>
                 </details>
               )}
+              <button
+                type="button"
+                disabled={retrying}
+                onClick={onRetry}
+                className="mt-1 self-start rounded-md bg-red-100 px-3 py-1.5 font-medium text-red-950 hover:bg-red-200 disabled:opacity-50"
+              >
+                {retrying ? "Tentando de novo…" : "Tentar de novo"}
+              </button>
             </div>
           );
         })()}

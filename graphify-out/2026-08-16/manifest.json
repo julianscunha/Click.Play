@@ -1110,23 +1110,23 @@
     "semantic_hash": ""
   },
   "packages/providers/src/image/openrouter.test.ts": {
-    "mtime": 1786848983.1053736,
-    "ast_hash": "facbeb6d4cb6e7804f2318e877330b2c",
+    "mtime": 1786845051.4517398,
+    "ast_hash": "aea7745b9cd660db0ba259f6ad9985eb",
     "semantic_hash": ""
   },
   "packages/providers/src/image/openrouter.ts": {
-    "mtime": 1786848964.775634,
-    "ast_hash": "f1a8d2277bbb3bf4da71373cbe3ec91a",
+    "mtime": 1786845038.711214,
+    "ast_hash": "98b533162c3dd55c9333d2cf6d98eb56",
     "semantic_hash": ""
   },
   "packages/providers/src/tts/openrouter.test.ts": {
-    "mtime": 1786849043.872467,
-    "ast_hash": "af0ca380e6527ef36bee25d0f74c1118",
+    "mtime": 1786845644.080632,
+    "ast_hash": "2e82032d9b4906e958218abf471b948e",
     "semantic_hash": ""
   },
   "packages/providers/src/tts/openrouter.ts": {
-    "mtime": 1786849033.5350733,
-    "ast_hash": "5734b7c787772a98c7db1d3fc3722118",
+    "mtime": 1786845634.751327,
+    "ast_hash": "c5bd1d3ca23b2da875c2ccf971977918",
     "semantic_hash": ""
   },
   "packages/providers/src/tts/pcm-to-mp3.ts": {
@@ -1135,13 +1135,13 @@
     "semantic_hash": ""
   },
   "packages/providers/src/video/openrouter.test.ts": {
-    "mtime": 1786849017.561585,
-    "ast_hash": "eb00581057d079f593f01252264cffa9",
+    "mtime": 1786846087.9592268,
+    "ast_hash": "79e4ba8c20e0f9e8a7da4180658644b9",
     "semantic_hash": ""
   },
   "packages/providers/src/video/openrouter.ts": {
-    "mtime": 1786849004.577065,
-    "ast_hash": "ed1073149c9a77925684fb4a3c8e1ec6",
+    "mtime": 1786845763.827033,
+    "ast_hash": "bd10cd7c34b5b78e2be76e5c8dc96a35",
     "semantic_hash": ""
   },
   "packages/providers/src/music/fallback.test.ts": {
@@ -1155,23 +1155,13 @@
     "semantic_hash": ""
   },
   "packages/providers/src/music/openrouter.test.ts": {
-    "mtime": 1786849209.1879482,
-    "ast_hash": "12d803ae7a4cfad347a64a54465d49f0",
+    "mtime": 1786847533.1751409,
+    "ast_hash": "c9a0fbe41c80d13d00422f794d7e3262",
     "semantic_hash": ""
   },
   "packages/providers/src/music/openrouter.ts": {
-    "mtime": 1786849067.7836556,
-    "ast_hash": "a35f2efe27f0bc2931bd7787e76692ae",
-    "semantic_hash": ""
-  },
-  "packages/providers/src/http/retry.test.ts": {
-    "mtime": 1786848947.6253161,
-    "ast_hash": "fdb0679f7e13619185500c4fe9d78053",
-    "semantic_hash": ""
-  },
-  "packages/providers/src/http/retry.ts": {
-    "mtime": 1786848939.4125478,
-    "ast_hash": "a7da8d84e72ddbffca522f4289372319",
+    "mtime": 1786847521.6388392,
+    "ast_hash": "32b3b4510babe78861718a886800585f",
     "semantic_hash": ""
   }
 }

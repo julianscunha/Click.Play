@@ -1,5 +1,5 @@
 import type { CostBreakdown } from "../cost/index.js";
-import type { PipelineOptions } from "../pipeline/types.js";
+import type { PipelineCheckpoint, PipelineOptions } from "../pipeline/types.js";
 import type { QcReport } from "../qc/types.js";
 import type { jobs, JobStatus, projects } from "./schema.js";
 
@@ -27,6 +27,7 @@ export interface Job {
   estimatedCost: CostBreakdown | null;
   actualCost: CostBreakdown | null;
   qcReport: QcReport | null;
+  checkpoint: PipelineCheckpoint | null;
   error: string | null;
   createdAt: Date;
   updatedAt: Date;
@@ -56,6 +57,7 @@ export function jobFromRow(row: JobRow): Job {
     estimatedCost: (row.estimatedCost as CostBreakdown | null) ?? null,
     actualCost: (row.actualCost as CostBreakdown | null) ?? null,
     qcReport: (row.qcReport as QcReport | null) ?? null,
+    checkpoint: (row.checkpoint as PipelineCheckpoint | null) ?? null,
     error: row.error,
     createdAt: row.createdAt,
     updatedAt: row.updatedAt,

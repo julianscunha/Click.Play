@@ -6,6 +6,7 @@ import {
   createJob,
   createProject,
   getJob,
+  retryJob,
   startJob,
   type ClickPlayDb,
   type CostEstimateOptions,
@@ -113,5 +114,22 @@ export function registerJobsRoutes(app: FastifyInstance, deps: JobsRouteDeps): v
 
     const applied = deps.gate.resolveApproval(job.id, parsed.data.approved);
     return reply.send({ jobId: job.id, status: job.status, applied });
+  });
+
+  app.post<{ Params: { id: string } }>("/jobs/:id/retry", async (req, reply) => {
+    const job = await getJob(deps.db, req.params.id);
+    if (!job) return reply.status(404).send({ error: { code: "NOT_FOUND", message: "Job não encontrado" } });
+
+    const retried = await retryJob(deps.db, job.id, deps.buildJobRunnerDeps(), {
+      approveCost: (estimate) => deps.gate.waitForApproval(job.id),
+      onLog: (message) => app.log.info({ jobId: job.id }, message),
+    });
+    if (!retried) {
+      return reply
+        .status(409)
+        .send({ error: { code: "NOT_RETRYABLE", message: "Job só pode ser retomado quando está FAILED" } });
+    }
+
+    return reply.send({ id: job.id, projectId: job.projectId, status: "retrying" });
   });
 }
