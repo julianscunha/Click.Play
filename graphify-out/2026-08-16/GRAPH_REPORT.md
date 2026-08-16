@@ -1,28 +1,28 @@
-# Graph Report - Click.Play  (2026-08-15)
+# Graph Report - Click.Play  (2026-08-16)
 
 ## Corpus Check
-- 205 files · ~54,396 words
+- 207 files · ~54,917 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 802 nodes · 1245 edges · 40 communities (38 shown, 2 thin omitted)
+- 810 nodes · 1266 edges · 37 communities (34 shown, 3 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 3 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `f9877851`
+- Built from commit: `210f8fcf`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - scripts
-- providers/package.json
+- domain/package.json
 - bundled.ts
 - dependencies
 - video-engine/package.json
 - job-runner.ts
 - devDependencies
-- providers/src/index.ts
+- resolve-element.ts
 - run-qc.ts
 - compilerOptions
 - dependencies
@@ -33,19 +33,16 @@
 - domain/tsconfig.json
 - providers/tsconfig.json
 - video-engine/tsconfig.json
-- critic.ts
+- providers/package.json
 - api.ts
 - server.test.ts
 - dependencies
-- domain/src/index.ts
-- llm/types.ts
+- tts/openrouter.ts
+- providers/src/index.ts
 - Click.Play
-- creative-director.ts
-- video-project.ts
+- cost-approval-gate.ts
+- domain/src/index.ts
 - PipelineCallbacks
-- research.ts
-- domain/package.json
-- orchestrator.ts
 - new-provider
 - verify-package
 - typecheck-on-edit.cjs
@@ -57,12 +54,12 @@
 2. `ClickPlayDb` - 14 edges
 3. `LLMProvider` - 13 edges
 4. `compilerOptions` - 13 edges
-5. `VideoGenerationProvider` - 11 edges
+5. `withRetry()` - 11 edges
 6. `PipelineCallbacks` - 11 edges
-7. `ImageProvider` - 10 edges
-8. `runPipeline()` - 9 edges
-9. `QcCheckResult` - 9 edges
-10. `TTSProvider` - 9 edges
+7. `VideoGenerationProvider` - 10 edges
+8. `ImageProvider` - 10 edges
+9. `runPipeline()` - 9 edges
+10. `QcCheckResult` - 9 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `runJobOnce()` --calls--> `runPipeline()`  [EXTRACTED]
@@ -79,13 +76,13 @@
 ## Import Cycles
 - None detected.
 
-## Communities (40 total, 2 thin omitted)
+## Communities (37 total, 3 thin omitted)
 
 ### Community 0 - "scripts"
 Cohesion: 0.12
 Nodes (15): devDependencies, typescript, engines, node, typescript, name, private, scripts (+7 more)
 
-### Community 1 - "providers/package.json"
+### Community 1 - "domain/package.json"
 Cohesion: 0.04
 Nodes (45): devDependencies, ffmpeg-static, tsx, @types/node, @types/react, @types/react-dom, typescript, vitest (+37 more)
 
@@ -102,16 +99,16 @@ Cohesion: 0.05
 Nodes (36): dependencies, @clickplay/domain, react, react-dom, remotion, @remotion/bundler, @remotion/google-fonts, @remotion/renderer (+28 more)
 
 ### Community 5 - "job-runner.ts"
-Cohesion: 0.07
-Nodes (49): ClickPlayDb, createDb(), toRow(), CostApprovalGate, createCostApprovalGate(), JobRunnerDeps, runJobOnce(), startJob() (+41 more)
+Cohesion: 0.08
+Nodes (47): ClickPlayDb, createDb(), toRow(), JobRunnerDeps, runJobOnce(), startJob(), StartJobOptions, config (+39 more)
 
 ### Community 6 - "devDependencies"
 Cohesion: 0.06
 Nodes (33): dependencies, react, react-dom, devDependencies, tailwindcss, @tailwindcss/vite, @types/react, @types/react-dom (+25 more)
 
-### Community 7 - "providers/src/index.ts"
-Cohesion: 0.07
-Nodes (19): FallbackImage, GeminiImage, OpenRouterImage, ImageProvider, FalVideo, GeminiVideo, OpenRouterVideo, VideoJobStatus (+11 more)
+### Community 7 - "resolve-element.ts"
+Cohesion: 0.05
+Nodes (22): sleep(), withRetry(), FallbackImage, GeminiImage, OpenRouterImage, ImageProvider, OpenRouterMusic, FalVideo (+14 more)
 
 ### Community 8 - "run-qc.ts"
 Cohesion: 0.09
@@ -138,8 +135,8 @@ Cohesion: 0.14
 Nodes (13): compilerOptions, jsx, lib, module, moduleResolution, outDir, rootDir, extends (+5 more)
 
 ### Community 14 - "providers.ts"
-Cohesion: 0.09
-Nodes (17): openDb(), app, envFilePath, port, runsDir, buildCostOptions(), buildImageProvider(), buildJobRunnerDeps() (+9 more)
+Cohesion: 0.11
+Nodes (16): openDb(), app, envFilePath, port, runsDir, buildCostOptions(), buildImageProvider(), buildJobRunnerDeps() (+8 more)
 
 ### Community 15 - "domain/tsconfig.json"
 Cohesion: 0.25
@@ -153,9 +150,9 @@ Nodes (7): compilerOptions, outDir, rootDir, extends, include, src, ../../tsconf
 Cohesion: 0.25
 Nodes (7): compilerOptions, outDir, rootDir, extends, include, src, ../../tsconfig.base.json
 
-### Community 18 - "critic.ts"
-Cohesion: 0.22
-Nodes (10): PACING_CONFIG, CritiqueOutput, CritiqueResult, evaluate(), SYSTEM_PROMPT_PATH, ArchetypeConfig, ARCHETYPES, getArchetype() (+2 more)
+### Community 18 - "providers/package.json"
+Cohesion: 0.18
+Nodes (10): main, name, private, scripts, lint, test, typecheck, type (+2 more)
 
 ### Community 19 - "api.ts"
 Cohesion: 0.06
@@ -169,37 +166,21 @@ Nodes (37): CAPTION_STYLES, getFormConfig(), getRecommendedModels(), PACING_TIER
 Cohesion: 0.33
 Nodes (6): zod, dependencies, @clickplay/shared, zod, zod, zod
 
-### Community 25 - "domain/src/index.ts"
-Cohesion: 0.07
-Nodes (16): Asset, AssetType, EDGE_TTS_VOICES, EdgeTTS, parseWordBoundaries(), sleep(), streamToBuffer(), FallbackTTS (+8 more)
+### Community 25 - "tts/openrouter.ts"
+Cohesion: 0.10
+Nodes (12): EDGE_TTS_VOICES, EdgeTTS, parseWordBoundaries(), sleep(), streamToBuffer(), FallbackTTS, estimateWordTimestamps(), GeminiTTS (+4 more)
 
-### Community 26 - "llm/types.ts"
-Cohesion: 0.14
-Nodes (10): BaseLLM, FakeLLM, generateTextMock, FallbackLLM, opts, schema, OpenRouterLLM, LLMProvider (+2 more)
+### Community 26 - "providers/src/index.ts"
+Cohesion: 0.06
+Nodes (43): buildDefaultPrompt(), buildPacingInstruction(), DirectorScore, DirectorScoreOutput, DirectorScoreRaw, generateDirectorScore(), loadDirectorSystemPrompt(), PACING_CONFIG (+35 more)
 
 ### Community 27 - "Click.Play"
 Cohesion: 0.40
 Nodes (4): Click.Play, Comandos, pnpm gotcha (Windows), Workflow
 
-### Community 28 - "creative-director.ts"
-Cohesion: 0.29
-Nodes (12): buildDefaultPrompt(), buildPacingInstruction(), DirectorScore, DirectorScoreOutput, DirectorScoreRaw, generateDirectorScore(), loadDirectorSystemPrompt(), reviseDirectorScore() (+4 more)
-
-### Community 29 - "video-project.ts"
-Cohesion: 0.11
-Nodes (18): AudioTrack, MusicMood, MusicTrack, NarrationTrack, WordTimestamp, Caption, CaptionStyleKey, CameraMotion (+10 more)
-
-### Community 31 - "research.ts"
-Cohesion: 0.18
-Nodes (7): research, research(), ResearchOutput, ResearchResult, SYSTEM_PROMPT_PATH, RESULT, LLMUsage
-
-### Community 32 - "domain/package.json"
-Cohesion: 0.18
-Nodes (10): main, name, private, scripts, lint, test, typecheck, type (+2 more)
-
-### Community 33 - "orchestrator.ts"
-Cohesion: 0.43
-Nodes (4): PipelineOptions, PipelineResult, PipelineStage, RevisionLogEntry
+### Community 29 - "domain/src/index.ts"
+Cohesion: 0.08
+Nodes (22): Asset, AssetType, AudioTrack, MusicMood, MusicTrack, NarrationTrack, WordTimestamp, Caption (+14 more)
 
 ### Community 34 - "new-provider"
 Cohesion: 0.50
@@ -218,24 +199,24 @@ Cohesion: 0.67
 Nodes (3): @clickplay/video-engine, @clickplay/video-engine, @clickplay/video-engine
 
 ## Knowledge Gaps
-- **278 isolated node(s):** `RECOMMENDED_IMAGE_MODELS`, `RECOMMENDED_VIDEO_MODELS`, `RECOMMENDED_TTS_FALLBACK_MODELS`, `REMOTION_ENTRY`, `SECRET_FIELDS` (+273 more)
+- **278 isolated node(s):** `VideoJobStatus`, `RECOMMENDED_IMAGE_MODELS`, `RECOMMENDED_VIDEO_MODELS`, `RECOMMENDED_TTS_FALLBACK_MODELS`, `REMOTION_ENTRY` (+273 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **2 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **3 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `LLMProvider` connect `llm/types.ts` to `orchestrator.ts`, `job-runner.ts`, `critic.ts`, `creative-director.ts`, `research.ts`?**
+- **Why does `LLMProvider` connect `providers/src/index.ts` to `job-runner.ts`?**
   _High betweenness centrality (0.010) - this node is a cross-community bridge._
-- **Why does `ImageProvider` connect `providers/src/index.ts` to `job-runner.ts`?**
+- **Why does `ImageProvider` connect `resolve-element.ts` to `job-runner.ts`?**
+  _High betweenness centrality (0.009) - this node is a cross-community bridge._
+- **Why does `PipelineCallbacks` connect `PipelineCallbacks` to `providers/src/index.ts`, `job-runner.ts`?**
   _High betweenness centrality (0.008) - this node is a cross-community bridge._
-- **Why does `PipelineCallbacks` connect `PipelineCallbacks` to `orchestrator.ts`, `job-runner.ts`?**
-  _High betweenness centrality (0.008) - this node is a cross-community bridge._
-- **What connects `RECOMMENDED_IMAGE_MODELS`, `RECOMMENDED_VIDEO_MODELS`, `RECOMMENDED_TTS_FALLBACK_MODELS` to the rest of the system?**
+- **What connects `VideoJobStatus`, `RECOMMENDED_IMAGE_MODELS`, `RECOMMENDED_VIDEO_MODELS` to the rest of the system?**
   _278 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `scripts` be split into smaller, more focused modules?**
   _Cohesion score 0.125 - nodes in this community are weakly interconnected._
-- **Should `providers/package.json` be split into smaller, more focused modules?**
+- **Should `domain/package.json` be split into smaller, more focused modules?**
   _Cohesion score 0.04440333024976873 - nodes in this community are weakly interconnected._
 - **Should `dependencies` be split into smaller, more focused modules?**
   _Cohesion score 0.10526315789473684 - nodes in this community are weakly interconnected._

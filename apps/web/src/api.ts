@@ -102,7 +102,7 @@ export function approveCost(id: string, approved: boolean): Promise<void> {
 }
 
 export function retryJob(id: string): Promise<{ id: string; status: string }> {
-  return request(`/jobs/${id}/retry`, { method: "POST" });
+  return request(`/jobs/${id}/retry`, { method: "POST", body: "{}" });
 }
 
 export function outputUrl(output: string): string {
