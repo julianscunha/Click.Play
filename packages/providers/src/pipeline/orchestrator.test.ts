@@ -181,6 +181,19 @@ describe("runPipeline", () => {
     expect(options.videoRenderer.render).not.toHaveBeenCalled();
   });
 
+  it("falls back to the archetype's caption chunk/linger instead of a hardcoded default", async () => {
+    const llm = fakeLLM(RESEARCH_RESULT, directorPayload(), critiquePayload(8));
+    const options = baseOptions(runDir, llm); // não seta captionChunkSize/captionLingerS
+    const callbacks = approvingCallbacks();
+
+    await runPipeline(options, callbacks);
+
+    expect(options.videoRenderer.render).toHaveBeenCalledWith(
+      expect.objectContaining({ captionChunkSize: 4, captionLingerS: 0.5 }), // cinematic_documentary.json
+      expect.any(String),
+    );
+  });
+
   it("resumes from a checkpoint, skipping stages that were already paid for", async () => {
     const llm = fakeLLM(); // nenhuma resposta — research/director não podem ser chamados de novo
     const options = baseOptions(runDir, llm);

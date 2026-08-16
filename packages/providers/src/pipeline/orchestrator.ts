@@ -6,6 +6,7 @@ import type { DirectorScore } from "../agents/creative-director.js";
 import { generateDirectorScore, reviseDirectorScore } from "../agents/creative-director.js";
 import { evaluate } from "../agents/critic.js";
 import { research } from "../agents/research.js";
+import { getArchetype } from "../config/archetype-registry.js";
 import type { CostBreakdown } from "../cost/index.js";
 import { computeActualCost, estimateCost } from "../cost/index.js";
 import type { LLMUsage } from "../llm/types.js";
@@ -186,6 +187,11 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
 
     stage = "render";
     await callbacks.onStageStart?.(stage);
+    // Fallback de legenda vinha hardcoded aqui (3 palavras/0.15s) em vez do
+    // valor curado por arquétipo (docs/IMPLEMENTATION-PLAN.md §11A Bloco 4) —
+    // override explícito do usuário (opts.*) sempre vence, arquétipo é o
+    // default, hardcode só entra se nem um nem outro existir.
+    const archetypeConfig = getArchetype(score.archetype);
     const renderInput: RenderInput = {
       scenes: resolvedScenes,
       fps,
@@ -194,10 +200,10 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
       voiceoverPath,
       musicPath,
       words: ttsWords,
-      captionStyle: opts.captionStyle ?? "clean",
+      captionStyle: opts.captionStyle ?? archetypeConfig.captionStyle,
       captionAccentColor: opts.captionAccentColor ?? "#ffffff",
-      captionChunkSize: opts.captionChunkSize ?? 3,
-      captionLingerS: opts.captionLingerS ?? 0.15,
+      captionChunkSize: opts.captionChunkSize ?? archetypeConfig.captionChunkSize ?? 3,
+      captionLingerS: opts.captionLingerS ?? archetypeConfig.captionLingerS ?? 0.15,
     };
     const outputDir = path.join(opts.runDir, "output");
     await fs.promises.mkdir(outputDir, { recursive: true });

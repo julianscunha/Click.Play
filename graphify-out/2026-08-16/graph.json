@@ -4,15 +4,444 @@
   "graph": {},
   "nodes": [
     {
+      "label": "IMPLEMENTATION-PLAN.md",
+      "file_type": "document",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_implementation_plan",
+      "community": 11,
+      "community_name": "Click.Play",
+      "norm_label": "implementation-plan.md"
+    },
+    {
+      "label": "Click.Play \u2014 Implementation Plan",
+      "file_type": "document",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_implementation_plan_click_play_implementation_plan",
+      "community": 42,
+      "community_name": "Click.Play \u2014 Implementation Plan",
+      "norm_label": "click.play \u2014 implementation plan"
+    },
+    {
+      "label": "0.1 P\u00fablico-alvo e decis\u00f5es de produto derivadas",
+      "file_type": "document",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "docs_implementation_plan_0_1_p\u00fablico_alvo_e_decis\u00f5es_de_produto_derivadas",
+      "community": 49,
+      "community_name": "0.1 P\u00fablico-alvo e decis\u00f5es de produto derivadas",
+      "norm_label": "0.1 publico-alvo e decisoes de produto derivadas"
+    },
+    {
+      "label": "Arqu\u00e9tipos novos (Click.Play)",
+      "file_type": "document",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "docs_implementation_plan_arqu\u00e9tipos_novos_click_play",
+      "community": 49,
+      "community_name": "0.1 P\u00fablico-alvo e decis\u00f5es de produto derivadas",
+      "norm_label": "arquetipos novos (click.play)"
+    },
+    {
+      "label": "TTS: m\u00faltiplos providers, default remoto gr\u00e1tis",
+      "file_type": "document",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L24",
+      "_origin": "ast",
+      "id": "docs_implementation_plan_tts_m\u00faltiplos_providers_default_remoto_gr\u00e1tis",
+      "community": 49,
+      "community_name": "0.1 P\u00fablico-alvo e decis\u00f5es de produto derivadas",
+      "norm_label": "tts: multiplos providers, default remoto gratis"
+    },
+    {
+      "label": "0.2 Corre\u00e7\u00e3o arquitetural: estrat\u00e9gia de produ\u00e7\u00e3o visual (n\u00e3o \u00e9 slideshow)",
+      "file_type": "document",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L34",
+      "_origin": "ast",
+      "id": "docs_implementation_plan_0_2_corre\u00e7\u00e3o_arquitetural_estrat\u00e9gia_de_produ\u00e7\u00e3o_visual_n\u00e3o_\u00e9_slideshow",
+      "community": 47,
+      "community_name": "0.2 Corre\u00e7\u00e3o arquitetural: estrat\u00e9gia de produ\u00e7\u00e3o visual (n\u00e3o \u00e9 slideshow)",
+      "norm_label": "0.2 correcao arquitetural: estrategia de producao visual (nao e slideshow)"
+    },
+    {
+      "label": "Terminologia (n\u00e3o confundir)",
+      "file_type": "document",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L40",
+      "_origin": "ast",
+      "id": "docs_implementation_plan_terminologia_n\u00e3o_confundir",
+      "community": 47,
+      "community_name": "0.2 Corre\u00e7\u00e3o arquitetural: estrat\u00e9gia de produ\u00e7\u00e3o visual (n\u00e3o \u00e9 slideshow)",
+      "norm_label": "terminologia (nao confundir)"
+    },
+    {
+      "label": "As duas abstra\u00e7\u00f5es (substituindo \"AssetProvider\" como abstra\u00e7\u00e3o principal)",
+      "file_type": "document",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L63",
+      "_origin": "ast",
+      "id": "docs_implementation_plan_as_duas_abstra\u00e7\u00f5es_substituindo_assetprovider_como_abstra\u00e7\u00e3o_principal",
+      "community": 47,
+      "community_name": "0.2 Corre\u00e7\u00e3o arquitetural: estrat\u00e9gia de produ\u00e7\u00e3o visual (n\u00e3o \u00e9 slideshow)",
+      "norm_label": "as duas abstracoes (substituindo \"assetprovider\" como abstracao principal)"
+    },
+    {
+      "label": "Modelo de Scene: de \"1 visual\" para composi\u00e7\u00e3o",
+      "file_type": "document",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L70",
+      "_origin": "ast",
+      "id": "docs_implementation_plan_modelo_de_scene_de_1_visual_para_composi\u00e7\u00e3o",
+      "community": 47,
+      "community_name": "0.2 Corre\u00e7\u00e3o arquitetural: estrat\u00e9gia de produ\u00e7\u00e3o visual (n\u00e3o \u00e9 slideshow)",
+      "norm_label": "modelo de scene: de \"1 visual\" para composicao"
+    },
+    {
+      "label": "Creative Director: decide *como* produzir, n\u00e3o s\u00f3 *o que* mostrar",
+      "file_type": "document",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L107",
+      "_origin": "ast",
+      "id": "docs_implementation_plan_creative_director_decide_como_produzir_n\u00e3o_s\u00f3_o_que_mostrar",
+      "community": 47,
+      "community_name": "0.2 Corre\u00e7\u00e3o arquitetural: estrat\u00e9gia de produ\u00e7\u00e3o visual (n\u00e3o \u00e9 slideshow)",
+      "norm_label": "creative director: decide *como* produzir, nao so *o que* mostrar"
+    },
+    {
+      "label": "Storyboard",
+      "file_type": "document",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L111",
+      "_origin": "ast",
+      "id": "docs_implementation_plan_storyboard",
+      "community": 47,
+      "community_name": "0.2 Corre\u00e7\u00e3o arquitetural: estrat\u00e9gia de produ\u00e7\u00e3o visual (n\u00e3o \u00e9 slideshow)",
+      "norm_label": "storyboard"
+    },
+    {
+      "label": "Regra expl\u00edcita contra slideshow",
+      "file_type": "document",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L115",
+      "_origin": "ast",
+      "id": "docs_implementation_plan_regra_expl\u00edcita_contra_slideshow",
+      "community": 47,
+      "community_name": "0.2 Corre\u00e7\u00e3o arquitetural: estrat\u00e9gia de produ\u00e7\u00e3o visual (n\u00e3o \u00e9 slideshow)",
+      "norm_label": "regra explicita contra slideshow"
+    },
+    {
+      "label": "M\u00fasica: bundled default, IA s\u00f3 se confirmado gr\u00e1tis",
+      "file_type": "document",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L119",
+      "_origin": "ast",
+      "id": "docs_implementation_plan_m\u00fasica_bundled_default_ia_s\u00f3_se_confirmado_gr\u00e1tis",
+      "community": 49,
+      "community_name": "0.1 P\u00fablico-alvo e decis\u00f5es de produto derivadas",
+      "norm_label": "musica: bundled default, ia so se confirmado gratis"
+    },
+    {
+      "label": "Legendas: 7 estilos dispon\u00edveis, default por arqu\u00e9tipo",
+      "file_type": "document",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L129",
+      "_origin": "ast",
+      "id": "docs_implementation_plan_legendas_7_estilos_dispon\u00edveis_default_por_arqu\u00e9tipo",
+      "community": 49,
+      "community_name": "0.1 P\u00fablico-alvo e decis\u00f5es de produto derivadas",
+      "norm_label": "legendas: 7 estilos disponiveis, default por arquetipo"
+    },
+    {
+      "label": "0. Resumo da decis\u00e3o",
+      "file_type": "document",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L135",
+      "_origin": "ast",
+      "id": "docs_implementation_plan_0_resumo_da_decis\u00e3o",
+      "community": 42,
+      "community_name": "Click.Play \u2014 Implementation Plan",
+      "norm_label": "0. resumo da decisao"
+    },
+    {
+      "label": "1. Arquitetura proposta",
+      "file_type": "document",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L145",
+      "_origin": "ast",
+      "id": "docs_implementation_plan_1_arquitetura_proposta",
+      "community": 42,
+      "community_name": "Click.Play \u2014 Implementation Plan",
+      "norm_label": "1. arquitetura proposta"
+    },
+    {
+      "label": "2. Matriz de reaproveitamento",
+      "file_type": "document",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L181",
+      "_origin": "ast",
+      "id": "docs_implementation_plan_2_matriz_de_reaproveitamento",
+      "community": 42,
+      "community_name": "Click.Play \u2014 Implementation Plan",
+      "norm_label": "2. matriz de reaproveitamento"
+    },
+    {
+      "label": "3. Componentes reutilizados (quase sem mudan\u00e7a)",
+      "file_type": "document",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L208",
+      "_origin": "ast",
+      "id": "docs_implementation_plan_3_componentes_reutilizados_quase_sem_mudan\u00e7a",
+      "community": 42,
+      "community_name": "Click.Play \u2014 Implementation Plan",
+      "norm_label": "3. componentes reutilizados (quase sem mudanca)"
+    },
+    {
+      "label": "4. Componentes adaptados (reescrita parcial)",
+      "file_type": "document",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L223",
+      "_origin": "ast",
+      "id": "docs_implementation_plan_4_componentes_adaptados_reescrita_parcial",
+      "community": 42,
+      "community_name": "Click.Play \u2014 Implementation Plan",
+      "norm_label": "4. componentes adaptados (reescrita parcial)"
+    },
+    {
+      "label": "5. Componentes removidos",
+      "file_type": "document",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L232",
+      "_origin": "ast",
+      "id": "docs_implementation_plan_5_componentes_removidos",
+      "community": 42,
+      "community_name": "Click.Play \u2014 Implementation Plan",
+      "norm_label": "5. componentes removidos"
+    },
+    {
+      "label": "6. Componentes novos (n\u00e3o existem em nenhum dos dois)",
+      "file_type": "document",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L241",
+      "_origin": "ast",
+      "id": "docs_implementation_plan_6_componentes_novos_n\u00e3o_existem_em_nenhum_dos_dois",
+      "community": 42,
+      "community_name": "Click.Play \u2014 Implementation Plan",
+      "norm_label": "6. componentes novos (nao existem em nenhum dos dois)"
+    },
+    {
+      "label": "7. Depend\u00eancias",
+      "file_type": "document",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L258",
+      "_origin": "ast",
+      "id": "docs_implementation_plan_7_depend\u00eancias",
+      "community": 42,
+      "community_name": "Click.Play \u2014 Implementation Plan",
+      "norm_label": "7. dependencias"
+    },
+    {
+      "label": "8. Riscos",
+      "file_type": "document",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L268",
+      "_origin": "ast",
+      "id": "docs_implementation_plan_8_riscos",
+      "community": 42,
+      "community_name": "Click.Play \u2014 Implementation Plan",
+      "norm_label": "8. riscos"
+    },
+    {
+      "label": "9. Fases de implementa\u00e7\u00e3o",
+      "file_type": "document",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L278",
+      "_origin": "ast",
+      "id": "docs_implementation_plan_9_fases_de_implementa\u00e7\u00e3o",
+      "community": 42,
+      "community_name": "Click.Play \u2014 Implementation Plan",
+      "norm_label": "9. fases de implementacao"
+    },
+    {
+      "label": "10. Crit\u00e9rios de aceite",
+      "file_type": "document",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L321",
+      "_origin": "ast",
+      "id": "docs_implementation_plan_10_crit\u00e9rios_de_aceite",
+      "community": 42,
+      "community_name": "Click.Play \u2014 Implementation Plan",
+      "norm_label": "10. criterios de aceite"
+    },
+    {
+      "label": "11. Roadmap de produto \u2014 Studio \u2192 SaaS",
+      "file_type": "document",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L331",
+      "_origin": "ast",
+      "id": "docs_implementation_plan_11_roadmap_de_produto_studio_saas",
+      "community": 48,
+      "community_name": "11. Roadmap de produto \u2014 Studio \u2192 SaaS",
+      "norm_label": "11. roadmap de produto \u2014 studio \u2192 saas"
+    },
+    {
+      "label": "Separa\u00e7\u00e3o MVP / Evolu\u00e7\u00e3o Studio / SaaS",
+      "file_type": "document",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L337",
+      "_origin": "ast",
+      "id": "docs_implementation_plan_separa\u00e7\u00e3o_mvp_evolu\u00e7\u00e3o_studio_saas",
+      "community": 48,
+      "community_name": "11. Roadmap de produto \u2014 Studio \u2192 SaaS",
+      "norm_label": "separacao mvp / evolucao studio / saas"
+    },
+    {
+      "label": "Fases propostas (15+)",
+      "file_type": "document",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L343",
+      "_origin": "ast",
+      "id": "docs_implementation_plan_fases_propostas_15",
+      "community": 48,
+      "community_name": "11. Roadmap de produto \u2014 Studio \u2192 SaaS",
+      "norm_label": "fases propostas (15+)"
+    },
+    {
+      "label": "Depend\u00eancias entre fases",
+      "file_type": "document",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L355",
+      "_origin": "ast",
+      "id": "docs_implementation_plan_depend\u00eancias_entre_fases",
+      "community": 48,
+      "community_name": "11. Roadmap de produto \u2014 Studio \u2192 SaaS",
+      "norm_label": "dependencias entre fases"
+    },
+    {
+      "label": "Decis\u00f5es a tomar agora (evitar refatora\u00e7\u00e3o futura)",
+      "file_type": "document",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L359",
+      "_origin": "ast",
+      "id": "docs_implementation_plan_decis\u00f5es_a_tomar_agora_evitar_refatora\u00e7\u00e3o_futura",
+      "community": 48,
+      "community_name": "11. Roadmap de produto \u2014 Studio \u2192 SaaS",
+      "norm_label": "decisoes a tomar agora (evitar refatoracao futura)"
+    },
+    {
+      "label": "O que n\u00e3o muda / n\u00e3o \u00e9 reimplementado",
+      "file_type": "document",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L368",
+      "_origin": "ast",
+      "id": "docs_implementation_plan_o_que_n\u00e3o_muda_n\u00e3o_\u00e9_reimplementado",
+      "community": 48,
+      "community_name": "11. Roadmap de produto \u2014 Studio \u2192 SaaS",
+      "norm_label": "o que nao muda / nao e reimplementado"
+    },
+    {
+      "label": "\u00a711A. Roadmap de produ\u00e7\u00e3o e qualidade de output \u2014 gaps p\u00f3s-primeiro-v\u00eddeo-real",
+      "file_type": "document",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L372",
+      "_origin": "ast",
+      "id": "docs_implementation_plan_11a_roadmap_de_produ\u00e7\u00e3o_e_qualidade_de_output_gaps_p\u00f3s_primeiro_v\u00eddeo_real",
+      "community": 46,
+      "community_name": "\u00a711A. Roadmap de produ\u00e7\u00e3o e qualidade de output \u2014 gaps p\u00f3s-primeiro-v\u00eddeo-real",
+      "norm_label": "\u00a711a. roadmap de producao e qualidade de output \u2014 gaps pos-primeiro-video-real"
+    },
+    {
+      "label": "Bloco 1 \u2014 V\u00eddeo vs slideshow (item 1)",
+      "file_type": "document",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L378",
+      "_origin": "ast",
+      "id": "docs_implementation_plan_bloco_1_v\u00eddeo_vs_slideshow_item_1",
+      "community": 46,
+      "community_name": "\u00a711A. Roadmap de produ\u00e7\u00e3o e qualidade de output \u2014 gaps p\u00f3s-primeiro-v\u00eddeo-real",
+      "norm_label": "bloco 1 \u2014 video vs slideshow (item 1)"
+    },
+    {
+      "label": "Bloco 2 \u2014 Controles de produ\u00e7\u00e3o: resolu\u00e7\u00e3o, qualidade, dura\u00e7\u00e3o (itens 2, 3, 4)",
+      "file_type": "document",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L388",
+      "_origin": "ast",
+      "id": "docs_implementation_plan_bloco_2_controles_de_produ\u00e7\u00e3o_resolu\u00e7\u00e3o_qualidade_dura\u00e7\u00e3o_itens_2_3_4",
+      "community": 46,
+      "community_name": "\u00a711A. Roadmap de produ\u00e7\u00e3o e qualidade de output \u2014 gaps p\u00f3s-primeiro-v\u00eddeo-real",
+      "norm_label": "bloco 2 \u2014 controles de producao: resolucao, qualidade, duracao (itens 2, 3, 4)"
+    },
+    {
+      "label": "Bloco 3 \u2014 Idioma (item 5)",
+      "file_type": "document",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L396",
+      "_origin": "ast",
+      "id": "docs_implementation_plan_bloco_3_idioma_item_5",
+      "community": 46,
+      "community_name": "\u00a711A. Roadmap de produ\u00e7\u00e3o e qualidade de output \u2014 gaps p\u00f3s-primeiro-v\u00eddeo-real",
+      "norm_label": "bloco 3 \u2014 idioma (item 5)"
+    },
+    {
+      "label": "Bloco 4 \u2014 Legendas e overlay (itens 6, 7, 8)",
+      "file_type": "document",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L402",
+      "_origin": "ast",
+      "id": "docs_implementation_plan_bloco_4_legendas_e_overlay_itens_6_7_8",
+      "community": 46,
+      "community_name": "\u00a711A. Roadmap de produ\u00e7\u00e3o e qualidade de output \u2014 gaps p\u00f3s-primeiro-v\u00eddeo-real",
+      "norm_label": "bloco 4 \u2014 legendas e overlay (itens 6, 7, 8)"
+    },
+    {
+      "label": "Bloco 5 \u2014 Abertura/encerramento (item 10)",
+      "file_type": "document",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L412",
+      "_origin": "ast",
+      "id": "docs_implementation_plan_bloco_5_abertura_encerramento_item_10",
+      "community": 46,
+      "community_name": "\u00a711A. Roadmap de produ\u00e7\u00e3o e qualidade de output \u2014 gaps p\u00f3s-primeiro-v\u00eddeo-real",
+      "norm_label": "bloco 5 \u2014 abertura/encerramento (item 10)"
+    },
+    {
+      "label": "Bloco 6 \u2014 Observabilidade e output final (itens 9, 11)",
+      "file_type": "document",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L418",
+      "_origin": "ast",
+      "id": "docs_implementation_plan_bloco_6_observabilidade_e_output_final_itens_9_11",
+      "community": 46,
+      "community_name": "\u00a711A. Roadmap de produ\u00e7\u00e3o e qualidade de output \u2014 gaps p\u00f3s-primeiro-v\u00eddeo-real",
+      "norm_label": "bloco 6 \u2014 observabilidade e output final (itens 9, 11)"
+    },
+    {
+      "label": "Ordem sugerida de implementa\u00e7\u00e3o",
+      "file_type": "document",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L424",
+      "_origin": "ast",
+      "id": "docs_implementation_plan_ordem_sugerida_de_implementa\u00e7\u00e3o",
+      "community": 46,
+      "community_name": "\u00a711A. Roadmap de produ\u00e7\u00e3o e qualidade de output \u2014 gaps p\u00f3s-primeiro-v\u00eddeo-real",
+      "norm_label": "ordem sugerida de implementacao"
+    },
+    {
       "label": "api/src/index.ts",
       "file_type": "code",
       "source_file": "apps/api/src/index.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "apps_api_src_index",
       "community": 14,
       "community_name": "providers.ts",
-      "norm_label": "api/src/index.ts"
+      "norm_label": "api/src/index.ts",
+      "id": "apps_api_src_index"
     },
     {
       "label": "runsDir",
@@ -20,10 +449,10 @@
       "source_file": "apps/api/src/index.ts",
       "source_location": "L9",
       "_origin": "ast",
-      "id": "apps_api_src_index_runsdir",
       "community": 14,
       "community_name": "providers.ts",
-      "norm_label": "runsdir"
+      "norm_label": "runsdir",
+      "id": "apps_api_src_index_runsdir"
     },
     {
       "label": "envFilePath",
@@ -31,10 +460,10 @@
       "source_file": "apps/api/src/index.ts",
       "source_location": "L11",
       "_origin": "ast",
-      "id": "apps_api_src_index_envfilepath",
       "community": 14,
       "community_name": "providers.ts",
-      "norm_label": "envfilepath"
+      "norm_label": "envfilepath",
+      "id": "apps_api_src_index_envfilepath"
     },
     {
       "label": "db",
@@ -42,10 +471,10 @@
       "source_file": "apps/api/src/index.ts",
       "source_location": "L13",
       "_origin": "ast",
-      "id": "apps_api_src_index_db",
       "community": 14,
       "community_name": "providers.ts",
-      "norm_label": "db"
+      "norm_label": "db",
+      "id": "apps_api_src_index_db"
     },
     {
       "label": "app",
@@ -53,10 +482,10 @@
       "source_file": "apps/api/src/index.ts",
       "source_location": "L14",
       "_origin": "ast",
-      "id": "apps_api_src_index_app",
       "community": 14,
       "community_name": "providers.ts",
-      "norm_label": "app"
+      "norm_label": "app",
+      "id": "apps_api_src_index_app"
     },
     {
       "label": "port",
@@ -64,10 +493,10 @@
       "source_file": "apps/api/src/index.ts",
       "source_location": "L22",
       "_origin": "ast",
-      "id": "apps_api_src_index_port",
       "community": 14,
       "community_name": "providers.ts",
-      "norm_label": "port"
+      "norm_label": "port",
+      "id": "apps_api_src_index_port"
     },
     {
       "label": "repository.test.ts",
@@ -75,10 +504,10 @@
       "source_file": "packages/providers/src/persistence/repository.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_repository_test",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "repository.test.ts"
+      "norm_label": "repository.test.ts",
+      "id": "packages_providers_src_persistence_repository_test"
     },
     {
       "label": "config",
@@ -86,10 +515,10 @@
       "source_file": "packages/providers/src/persistence/repository.test.ts",
       "source_location": "L19",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_repository_test_config",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "config"
+      "norm_label": "config",
+      "id": "packages_providers_src_persistence_repository_test_config"
     },
     {
       "label": "repository.ts",
@@ -97,10 +526,10 @@
       "source_file": "packages/providers/src/persistence/repository.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_repository",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "repository.ts"
+      "norm_label": "repository.ts",
+      "id": "packages_providers_src_persistence_repository"
     },
     {
       "label": "createProject()",
@@ -108,10 +537,10 @@
       "source_file": "packages/providers/src/persistence/repository.ts",
       "source_location": "L11",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_repository_createproject",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "createproject()"
+      "norm_label": "createproject()",
+      "id": "packages_providers_src_persistence_repository_createproject"
     },
     {
       "label": "getProject()",
@@ -119,10 +548,10 @@
       "source_file": "packages/providers/src/persistence/repository.ts",
       "source_location": "L18",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_repository_getproject",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "getproject()"
+      "norm_label": "getproject()",
+      "id": "packages_providers_src_persistence_repository_getproject"
     },
     {
       "label": "createJob()",
@@ -130,10 +559,10 @@
       "source_file": "packages/providers/src/persistence/repository.ts",
       "source_location": "L23",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_repository_createjob",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "createjob()"
+      "norm_label": "createjob()",
+      "id": "packages_providers_src_persistence_repository_createjob"
     },
     {
       "label": "getJob()",
@@ -141,10 +570,10 @@
       "source_file": "packages/providers/src/persistence/repository.ts",
       "source_location": "L44",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_repository_getjob",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "getjob()"
+      "norm_label": "getjob()",
+      "id": "packages_providers_src_persistence_repository_getjob"
     },
     {
       "label": "listJobsByProject()",
@@ -152,10 +581,10 @@
       "source_file": "packages/providers/src/persistence/repository.ts",
       "source_location": "L49",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_repository_listjobsbyproject",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "listjobsbyproject()"
+      "norm_label": "listjobsbyproject()",
+      "id": "packages_providers_src_persistence_repository_listjobsbyproject"
     },
     {
       "label": "updateJobStatus()",
@@ -163,10 +592,10 @@
       "source_file": "packages/providers/src/persistence/repository.ts",
       "source_location": "L59",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_repository_updatejobstatus",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "updatejobstatus()"
+      "norm_label": "updatejobstatus()",
+      "id": "packages_providers_src_persistence_repository_updatejobstatus"
     },
     {
       "label": "setJobEstimatedCost()",
@@ -174,10 +603,10 @@
       "source_file": "packages/providers/src/persistence/repository.ts",
       "source_location": "L65",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_repository_setjobestimatedcost",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "setjobestimatedcost()"
+      "norm_label": "setjobestimatedcost()",
+      "id": "packages_providers_src_persistence_repository_setjobestimatedcost"
     },
     {
       "label": "setJobActualCost()",
@@ -185,10 +614,10 @@
       "source_file": "packages/providers/src/persistence/repository.ts",
       "source_location": "L69",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_repository_setjobactualcost",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "setjobactualcost()"
+      "norm_label": "setjobactualcost()",
+      "id": "packages_providers_src_persistence_repository_setjobactualcost"
     },
     {
       "label": "setJobQcReport()",
@@ -196,10 +625,10 @@
       "source_file": "packages/providers/src/persistence/repository.ts",
       "source_location": "L73",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_repository_setjobqcreport",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "setjobqcreport()"
+      "norm_label": "setjobqcreport()",
+      "id": "packages_providers_src_persistence_repository_setjobqcreport"
     },
     {
       "label": "setJobOutputPath()",
@@ -207,10 +636,10 @@
       "source_file": "packages/providers/src/persistence/repository.ts",
       "source_location": "L77",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_repository_setjoboutputpath",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "setjoboutputpath()"
+      "norm_label": "setjoboutputpath()",
+      "id": "packages_providers_src_persistence_repository_setjoboutputpath"
     },
     {
       "label": "setJobError()",
@@ -218,10 +647,10 @@
       "source_file": "packages/providers/src/persistence/repository.ts",
       "source_location": "L81",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_repository_setjoberror",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "setjoberror()"
+      "norm_label": "setjoberror()",
+      "id": "packages_providers_src_persistence_repository_setjoberror"
     },
     {
       "label": "setJobCheckpoint()",
@@ -229,10 +658,10 @@
       "source_file": "packages/providers/src/persistence/repository.ts",
       "source_location": "L85",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_repository_setjobcheckpoint",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "setjobcheckpoint()"
+      "norm_label": "setjobcheckpoint()",
+      "id": "packages_providers_src_persistence_repository_setjobcheckpoint"
     },
     {
       "label": "NON_TERMINAL_STATUSES",
@@ -240,10 +669,10 @@
       "source_file": "packages/providers/src/persistence/repository.ts",
       "source_location": "L89",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_repository_non_terminal_statuses",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "non_terminal_statuses"
+      "norm_label": "non_terminal_statuses",
+      "id": "packages_providers_src_persistence_repository_non_terminal_statuses"
     },
     {
       "label": "recoverOrphanedJobs()",
@@ -251,10 +680,10 @@
       "source_file": "packages/providers/src/persistence/repository.ts",
       "source_location": "L107",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_repository_recoverorphanedjobs",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "recoverorphanedjobs()"
+      "norm_label": "recoverorphanedjobs()",
+      "id": "packages_providers_src_persistence_repository_recoverorphanedjobs"
     },
     {
       "label": "resetJobForRetry()",
@@ -262,10 +691,10 @@
       "source_file": "packages/providers/src/persistence/repository.ts",
       "source_location": "L125",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_repository_resetjobforretry",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "resetjobforretry()"
+      "norm_label": "resetjobforretry()",
+      "id": "packages_providers_src_persistence_repository_resetjobforretry"
     },
     {
       "label": "entry.tsx",
@@ -904,347 +1333,6 @@
       "community_name": "api.ts",
       "norm_label": "progressview()",
       "id": "apps_web_src_components_progressview_progressview"
-    },
-    {
-      "label": "IMPLEMENTATION-PLAN.md",
-      "file_type": "document",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
-      "norm_label": "implementation-plan.md",
-      "id": "docs_implementation_plan"
-    },
-    {
-      "label": "Click.Play \u2014 Implementation Plan",
-      "file_type": "document",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
-      "norm_label": "click.play \u2014 implementation plan",
-      "id": "docs_implementation_plan_click_play_implementation_plan"
-    },
-    {
-      "label": "0.1 P\u00fablico-alvo e decis\u00f5es de produto derivadas",
-      "file_type": "document",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L5",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
-      "norm_label": "0.1 publico-alvo e decisoes de produto derivadas",
-      "id": "docs_implementation_plan_0_1_p\u00fablico_alvo_e_decis\u00f5es_de_produto_derivadas"
-    },
-    {
-      "label": "Arqu\u00e9tipos novos (Click.Play)",
-      "file_type": "document",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L12",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
-      "norm_label": "arquetipos novos (click.play)",
-      "id": "docs_implementation_plan_arqu\u00e9tipos_novos_click_play"
-    },
-    {
-      "label": "TTS: m\u00faltiplos providers, default remoto gr\u00e1tis",
-      "file_type": "document",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L24",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
-      "norm_label": "tts: multiplos providers, default remoto gratis",
-      "id": "docs_implementation_plan_tts_m\u00faltiplos_providers_default_remoto_gr\u00e1tis"
-    },
-    {
-      "label": "0.2 Corre\u00e7\u00e3o arquitetural: estrat\u00e9gia de produ\u00e7\u00e3o visual (n\u00e3o \u00e9 slideshow)",
-      "file_type": "document",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L34",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
-      "norm_label": "0.2 correcao arquitetural: estrategia de producao visual (nao e slideshow)",
-      "id": "docs_implementation_plan_0_2_corre\u00e7\u00e3o_arquitetural_estrat\u00e9gia_de_produ\u00e7\u00e3o_visual_n\u00e3o_\u00e9_slideshow"
-    },
-    {
-      "label": "Terminologia (n\u00e3o confundir)",
-      "file_type": "document",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L40",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
-      "norm_label": "terminologia (nao confundir)",
-      "id": "docs_implementation_plan_terminologia_n\u00e3o_confundir"
-    },
-    {
-      "label": "As duas abstra\u00e7\u00f5es (substituindo \"AssetProvider\" como abstra\u00e7\u00e3o principal)",
-      "file_type": "document",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L63",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
-      "norm_label": "as duas abstracoes (substituindo \"assetprovider\" como abstracao principal)",
-      "id": "docs_implementation_plan_as_duas_abstra\u00e7\u00f5es_substituindo_assetprovider_como_abstra\u00e7\u00e3o_principal"
-    },
-    {
-      "label": "Modelo de Scene: de \"1 visual\" para composi\u00e7\u00e3o",
-      "file_type": "document",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L70",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
-      "norm_label": "modelo de scene: de \"1 visual\" para composicao",
-      "id": "docs_implementation_plan_modelo_de_scene_de_1_visual_para_composi\u00e7\u00e3o"
-    },
-    {
-      "label": "Creative Director: decide *como* produzir, n\u00e3o s\u00f3 *o que* mostrar",
-      "file_type": "document",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L107",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
-      "norm_label": "creative director: decide *como* produzir, nao so *o que* mostrar",
-      "id": "docs_implementation_plan_creative_director_decide_como_produzir_n\u00e3o_s\u00f3_o_que_mostrar"
-    },
-    {
-      "label": "Storyboard",
-      "file_type": "document",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L111",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
-      "norm_label": "storyboard",
-      "id": "docs_implementation_plan_storyboard"
-    },
-    {
-      "label": "Regra expl\u00edcita contra slideshow",
-      "file_type": "document",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L115",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
-      "norm_label": "regra explicita contra slideshow",
-      "id": "docs_implementation_plan_regra_expl\u00edcita_contra_slideshow"
-    },
-    {
-      "label": "M\u00fasica: bundled default, IA s\u00f3 se confirmado gr\u00e1tis",
-      "file_type": "document",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L119",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
-      "norm_label": "musica: bundled default, ia so se confirmado gratis",
-      "id": "docs_implementation_plan_m\u00fasica_bundled_default_ia_s\u00f3_se_confirmado_gr\u00e1tis"
-    },
-    {
-      "label": "Legendas: 7 estilos dispon\u00edveis, default por arqu\u00e9tipo",
-      "file_type": "document",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L129",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
-      "norm_label": "legendas: 7 estilos disponiveis, default por arquetipo",
-      "id": "docs_implementation_plan_legendas_7_estilos_dispon\u00edveis_default_por_arqu\u00e9tipo"
-    },
-    {
-      "label": "0. Resumo da decis\u00e3o",
-      "file_type": "document",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L135",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
-      "norm_label": "0. resumo da decisao",
-      "id": "docs_implementation_plan_0_resumo_da_decis\u00e3o"
-    },
-    {
-      "label": "1. Arquitetura proposta",
-      "file_type": "document",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L145",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
-      "norm_label": "1. arquitetura proposta",
-      "id": "docs_implementation_plan_1_arquitetura_proposta"
-    },
-    {
-      "label": "2. Matriz de reaproveitamento",
-      "file_type": "document",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L181",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
-      "norm_label": "2. matriz de reaproveitamento",
-      "id": "docs_implementation_plan_2_matriz_de_reaproveitamento"
-    },
-    {
-      "label": "3. Componentes reutilizados (quase sem mudan\u00e7a)",
-      "file_type": "document",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L208",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
-      "norm_label": "3. componentes reutilizados (quase sem mudanca)",
-      "id": "docs_implementation_plan_3_componentes_reutilizados_quase_sem_mudan\u00e7a"
-    },
-    {
-      "label": "4. Componentes adaptados (reescrita parcial)",
-      "file_type": "document",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L223",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
-      "norm_label": "4. componentes adaptados (reescrita parcial)",
-      "id": "docs_implementation_plan_4_componentes_adaptados_reescrita_parcial"
-    },
-    {
-      "label": "5. Componentes removidos",
-      "file_type": "document",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L232",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
-      "norm_label": "5. componentes removidos",
-      "id": "docs_implementation_plan_5_componentes_removidos"
-    },
-    {
-      "label": "6. Componentes novos (n\u00e3o existem em nenhum dos dois)",
-      "file_type": "document",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L241",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
-      "norm_label": "6. componentes novos (nao existem em nenhum dos dois)",
-      "id": "docs_implementation_plan_6_componentes_novos_n\u00e3o_existem_em_nenhum_dos_dois"
-    },
-    {
-      "label": "7. Depend\u00eancias",
-      "file_type": "document",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L258",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
-      "norm_label": "7. dependencias",
-      "id": "docs_implementation_plan_7_depend\u00eancias"
-    },
-    {
-      "label": "8. Riscos",
-      "file_type": "document",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L268",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
-      "norm_label": "8. riscos",
-      "id": "docs_implementation_plan_8_riscos"
-    },
-    {
-      "label": "9. Fases de implementa\u00e7\u00e3o",
-      "file_type": "document",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L278",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
-      "norm_label": "9. fases de implementacao",
-      "id": "docs_implementation_plan_9_fases_de_implementa\u00e7\u00e3o"
-    },
-    {
-      "label": "10. Crit\u00e9rios de aceite",
-      "file_type": "document",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L319",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
-      "norm_label": "10. criterios de aceite",
-      "id": "docs_implementation_plan_10_crit\u00e9rios_de_aceite"
-    },
-    {
-      "label": "11. Roadmap de produto \u2014 Studio \u2192 SaaS",
-      "file_type": "document",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L329",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
-      "norm_label": "11. roadmap de produto \u2014 studio \u2192 saas",
-      "id": "docs_implementation_plan_11_roadmap_de_produto_studio_saas"
-    },
-    {
-      "label": "Separa\u00e7\u00e3o MVP / Evolu\u00e7\u00e3o Studio / SaaS",
-      "file_type": "document",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L335",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
-      "norm_label": "separacao mvp / evolucao studio / saas",
-      "id": "docs_implementation_plan_separa\u00e7\u00e3o_mvp_evolu\u00e7\u00e3o_studio_saas"
-    },
-    {
-      "label": "Fases propostas (15+)",
-      "file_type": "document",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L341",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
-      "norm_label": "fases propostas (15+)",
-      "id": "docs_implementation_plan_fases_propostas_15"
-    },
-    {
-      "label": "Depend\u00eancias entre fases",
-      "file_type": "document",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L353",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
-      "norm_label": "dependencias entre fases",
-      "id": "docs_implementation_plan_depend\u00eancias_entre_fases"
-    },
-    {
-      "label": "Decis\u00f5es a tomar agora (evitar refatora\u00e7\u00e3o futura)",
-      "file_type": "document",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L357",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
-      "norm_label": "decisoes a tomar agora (evitar refatoracao futura)",
-      "id": "docs_implementation_plan_decis\u00f5es_a_tomar_agora_evitar_refatora\u00e7\u00e3o_futura"
-    },
-    {
-      "label": "O que n\u00e3o muda / n\u00e3o \u00e9 reimplementado",
-      "file_type": "document",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L366",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
-      "norm_label": "o que nao muda / nao e reimplementado",
-      "id": "docs_implementation_plan_o_que_n\u00e3o_muda_n\u00e3o_\u00e9_reimplementado"
     },
     {
       "label": "client.ts",
@@ -1912,8 +2000,8 @@
       "source_file": "packages/providers/src/pipeline/orchestrator.ts",
       "source_location": "L32",
       "_origin": "ast",
-      "community": 30,
-      "community_name": "orchestrator.test.ts",
+      "community": 44,
+      "community_name": "PipelineCallbacks",
       "norm_label": "runpipeline()",
       "id": "packages_providers_src_pipeline_orchestrator_runpipeline"
     },
@@ -1945,8 +2033,8 @@
       "source_file": "packages/providers/src/pipeline/types.ts",
       "source_location": "L20",
       "_origin": "ast",
-      "community": 5,
-      "community_name": "repository.ts",
+      "community": 2,
+      "community_name": "pipeline/types.ts",
       "norm_label": "pipelinecheckpoint",
       "id": "packages_providers_src_pipeline_types_pipelinecheckpoint"
     },
@@ -1967,8 +2055,8 @@
       "source_file": "packages/providers/src/pipeline/types.ts",
       "source_location": "L34",
       "_origin": "ast",
-      "community": 30,
-      "community_name": "orchestrator.test.ts",
+      "community": 44,
+      "community_name": "PipelineCallbacks",
       "norm_label": "pipelinecallbacks",
       "id": "packages_providers_src_pipeline_types_pipelinecallbacks"
     },
@@ -1978,8 +2066,8 @@
       "source_file": "packages/providers/src/pipeline/types.ts",
       "source_location": "L36",
       "_origin": "ast",
-      "community": 30,
-      "community_name": "orchestrator.test.ts",
+      "community": 44,
+      "community_name": "PipelineCallbacks",
       "norm_label": ".onstagestart()",
       "id": "packages_providers_src_pipeline_types_pipelinecallbacks_onstagestart"
     },
@@ -1989,8 +2077,8 @@
       "source_file": "packages/providers/src/pipeline/types.ts",
       "source_location": "L37",
       "_origin": "ast",
-      "community": 30,
-      "community_name": "orchestrator.test.ts",
+      "community": 44,
+      "community_name": "PipelineCallbacks",
       "norm_label": ".onstagecomplete()",
       "id": "packages_providers_src_pipeline_types_pipelinecallbacks_onstagecomplete"
     },
@@ -2000,8 +2088,8 @@
       "source_file": "packages/providers/src/pipeline/types.ts",
       "source_location": "L38",
       "_origin": "ast",
-      "community": 30,
-      "community_name": "orchestrator.test.ts",
+      "community": 44,
+      "community_name": "PipelineCallbacks",
       "norm_label": ".onstageerror()",
       "id": "packages_providers_src_pipeline_types_pipelinecallbacks_onstageerror"
     },
@@ -2011,8 +2099,8 @@
       "source_file": "packages/providers/src/pipeline/types.ts",
       "source_location": "L40",
       "_origin": "ast",
-      "community": 30,
-      "community_name": "orchestrator.test.ts",
+      "community": 44,
+      "community_name": "PipelineCallbacks",
       "norm_label": ".oncheckpoint()",
       "id": "packages_providers_src_pipeline_types_pipelinecallbacks_oncheckpoint"
     },
@@ -2022,8 +2110,8 @@
       "source_file": "packages/providers/src/pipeline/types.ts",
       "source_location": "L42",
       "_origin": "ast",
-      "community": 30,
-      "community_name": "orchestrator.test.ts",
+      "community": 44,
+      "community_name": "PipelineCallbacks",
       "norm_label": ".oncostestimate()",
       "id": "packages_providers_src_pipeline_types_pipelinecallbacks_oncostestimate"
     },
@@ -2033,8 +2121,8 @@
       "source_file": "packages/providers/src/pipeline/types.ts",
       "source_location": "L43",
       "_origin": "ast",
-      "community": 30,
-      "community_name": "orchestrator.test.ts",
+      "community": 44,
+      "community_name": "PipelineCallbacks",
       "norm_label": ".onrevision()",
       "id": "packages_providers_src_pipeline_types_pipelinecallbacks_onrevision"
     },
@@ -2044,8 +2132,8 @@
       "source_file": "packages/providers/src/pipeline/types.ts",
       "source_location": "L44",
       "_origin": "ast",
-      "community": 30,
-      "community_name": "orchestrator.test.ts",
+      "community": 44,
+      "community_name": "PipelineCallbacks",
       "norm_label": ".onlog()",
       "id": "packages_providers_src_pipeline_types_pipelinecallbacks_onlog"
     },
@@ -2055,8 +2143,8 @@
       "source_file": "packages/providers/src/pipeline/types.ts",
       "source_location": "L45",
       "_origin": "ast",
-      "community": 30,
-      "community_name": "orchestrator.test.ts",
+      "community": 44,
+      "community_name": "PipelineCallbacks",
       "norm_label": ".onprogress()",
       "id": "packages_providers_src_pipeline_types_pipelinecallbacks_onprogress"
     },
@@ -2066,8 +2154,8 @@
       "source_file": "packages/providers/src/pipeline/types.ts",
       "source_location": "L46",
       "_origin": "ast",
-      "community": 30,
-      "community_name": "orchestrator.test.ts",
+      "community": 44,
+      "community_name": "PipelineCallbacks",
       "norm_label": ".iscancelled()",
       "id": "packages_providers_src_pipeline_types_pipelinecallbacks_iscancelled"
     },
@@ -2099,8 +2187,8 @@
       "source_file": "packages/providers/src/http/retry.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community": 28,
+      "community_name": "withRetry",
       "norm_label": "retry.test.ts",
       "id": "packages_providers_src_http_retry_test"
     },
@@ -2110,8 +2198,8 @@
       "source_file": "packages/providers/src/http/retry.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community": 28,
+      "community_name": "withRetry",
       "norm_label": "retry.ts",
       "id": "packages_providers_src_http_retry"
     },
@@ -2121,8 +2209,8 @@
       "source_file": "packages/providers/src/http/retry.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community": 28,
+      "community_name": "withRetry",
       "norm_label": "sleep()",
       "id": "packages_providers_src_http_retry_sleep"
     },
@@ -2132,8 +2220,8 @@
       "source_file": "packages/providers/src/http/retry.ts",
       "source_location": "L11",
       "_origin": "ast",
-      "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community": 28,
+      "community_name": "withRetry",
       "norm_label": "withretry()",
       "id": "packages_providers_src_http_retry_withretry"
     },
@@ -2143,8 +2231,8 @@
       "source_file": "packages/providers/src/image/openrouter.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community": 28,
+      "community_name": "withRetry",
       "norm_label": "image/openrouter.test.ts",
       "id": "packages_providers_src_image_openrouter_test"
     },
@@ -2154,8 +2242,8 @@
       "source_file": "packages/providers/src/image/openrouter.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community": 28,
+      "community_name": "withRetry",
       "norm_label": "image/openrouter.ts",
       "id": "packages_providers_src_image_openrouter"
     },
@@ -2165,8 +2253,8 @@
       "source_file": "packages/providers/src/image/openrouter.ts",
       "source_location": "L11",
       "_origin": "ast",
-      "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community": 28,
+      "community_name": "withRetry",
       "norm_label": "openrouterimage",
       "id": "packages_providers_src_image_openrouter_openrouterimage"
     },
@@ -2176,8 +2264,8 @@
       "source_file": "packages/providers/src/image/openrouter.ts",
       "source_location": "L15",
       "_origin": "ast",
-      "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community": 28,
+      "community_name": "withRetry",
       "norm_label": ".constructor()",
       "id": "packages_providers_src_image_openrouter_openrouterimage_constructor"
     },
@@ -2187,8 +2275,8 @@
       "source_file": "packages/providers/src/image/openrouter.ts",
       "source_location": "L22",
       "_origin": "ast",
-      "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community": 28,
+      "community_name": "withRetry",
       "norm_label": ".generate()",
       "id": "packages_providers_src_image_openrouter_openrouterimage_generate"
     },
@@ -2198,8 +2286,8 @@
       "source_file": "packages/providers/src/image/openrouter.ts",
       "source_location": "L32",
       "_origin": "ast",
-      "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community": 28,
+      "community_name": "withRetry",
       "norm_label": ".generateonce()",
       "id": "packages_providers_src_image_openrouter_openrouterimage_generateonce"
     },
@@ -2209,8 +2297,8 @@
       "source_file": "packages/providers/src/music/openrouter.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community": 28,
+      "community_name": "withRetry",
       "norm_label": "music/openrouter.test.ts",
       "id": "packages_providers_src_music_openrouter_test"
     },
@@ -2220,8 +2308,8 @@
       "source_file": "packages/providers/src/music/openrouter.test.ts",
       "source_location": "L5",
       "_origin": "ast",
-      "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community": 28,
+      "community_name": "withRetry",
       "norm_label": "ssestream()",
       "id": "packages_providers_src_music_openrouter_test_ssestream"
     },
@@ -2231,8 +2319,8 @@
       "source_file": "packages/providers/src/music/openrouter.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community": 28,
+      "community_name": "withRetry",
       "norm_label": "music/openrouter.ts",
       "id": "packages_providers_src_music_openrouter"
     },
@@ -2242,8 +2330,8 @@
       "source_file": "packages/providers/src/music/openrouter.ts",
       "source_location": "L20",
       "_origin": "ast",
-      "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community": 28,
+      "community_name": "withRetry",
       "norm_label": "openroutermusic",
       "id": "packages_providers_src_music_openrouter_openroutermusic"
     },
@@ -2253,8 +2341,8 @@
       "source_file": "packages/providers/src/music/openrouter.ts",
       "source_location": "L24",
       "_origin": "ast",
-      "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community": 28,
+      "community_name": "withRetry",
       "norm_label": ".constructor()",
       "id": "packages_providers_src_music_openrouter_openroutermusic_constructor"
     },
@@ -2264,8 +2352,8 @@
       "source_file": "packages/providers/src/music/openrouter.ts",
       "source_location": "L31",
       "_origin": "ast",
-      "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community": 28,
+      "community_name": "withRetry",
       "norm_label": ".generate()",
       "id": "packages_providers_src_music_openrouter_openroutermusic_generate"
     },
@@ -2275,8 +2363,8 @@
       "source_file": "packages/providers/src/music/openrouter.ts",
       "source_location": "L36",
       "_origin": "ast",
-      "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community": 28,
+      "community_name": "withRetry",
       "norm_label": ".generateonce()",
       "id": "packages_providers_src_music_openrouter_openroutermusic_generateonce"
     },
@@ -2286,8 +2374,8 @@
       "source_file": "packages/providers/src/tts/openrouter.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 25,
-      "community_name": "tts/openrouter.ts",
+      "community": 28,
+      "community_name": "withRetry",
       "norm_label": "tts/openrouter.test.ts",
       "id": "packages_providers_src_tts_openrouter_test"
     },
@@ -2298,7 +2386,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 25,
-      "community_name": "tts/openrouter.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "tts/openrouter.ts",
       "id": "packages_providers_src_tts_openrouter"
     },
@@ -2308,8 +2396,8 @@
       "source_file": "packages/providers/src/tts/openrouter.ts",
       "source_location": "L16",
       "_origin": "ast",
-      "community": 25,
-      "community_name": "tts/openrouter.ts",
+      "community": 28,
+      "community_name": "withRetry",
       "norm_label": "openroutertts",
       "id": "packages_providers_src_tts_openrouter_openroutertts"
     },
@@ -2319,8 +2407,8 @@
       "source_file": "packages/providers/src/tts/openrouter.ts",
       "source_location": "L21",
       "_origin": "ast",
-      "community": 25,
-      "community_name": "tts/openrouter.ts",
+      "community": 28,
+      "community_name": "withRetry",
       "norm_label": ".constructor()",
       "id": "packages_providers_src_tts_openrouter_openroutertts_constructor"
     },
@@ -2330,8 +2418,8 @@
       "source_file": "packages/providers/src/tts/openrouter.ts",
       "source_location": "L29",
       "_origin": "ast",
-      "community": 25,
-      "community_name": "tts/openrouter.ts",
+      "community": 28,
+      "community_name": "withRetry",
       "norm_label": ".generate()",
       "id": "packages_providers_src_tts_openrouter_openroutertts_generate"
     },
@@ -2341,8 +2429,8 @@
       "source_file": "packages/providers/src/tts/openrouter.ts",
       "source_location": "L34",
       "_origin": "ast",
-      "community": 25,
-      "community_name": "tts/openrouter.ts",
+      "community": 28,
+      "community_name": "withRetry",
       "norm_label": ".generateonce()",
       "id": "packages_providers_src_tts_openrouter_openroutertts_generateonce"
     },
@@ -2352,8 +2440,8 @@
       "source_file": "packages/providers/src/video/openrouter.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community": 28,
+      "community_name": "withRetry",
       "norm_label": "video/openrouter.test.ts",
       "id": "packages_providers_src_video_openrouter_test"
     },
@@ -2363,8 +2451,8 @@
       "source_file": "packages/providers/src/video/openrouter.test.ts",
       "source_location": "L5",
       "_origin": "ast",
-      "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community": 28,
+      "community_name": "withRetry",
       "norm_label": "jsonresponse()",
       "id": "packages_providers_src_video_openrouter_test_jsonresponse"
     },
@@ -2374,8 +2462,8 @@
       "source_file": "packages/providers/src/video/openrouter.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community": 28,
+      "community_name": "withRetry",
       "norm_label": "video/openrouter.ts",
       "id": "packages_providers_src_video_openrouter"
     },
@@ -2385,8 +2473,8 @@
       "source_file": "packages/providers/src/video/openrouter.ts",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community": 28,
+      "community_name": "withRetry",
       "norm_label": "videojobstatus",
       "id": "packages_providers_src_video_openrouter_videojobstatus"
     },
@@ -2396,8 +2484,8 @@
       "source_file": "packages/providers/src/video/openrouter.ts",
       "source_location": "L23",
       "_origin": "ast",
-      "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community": 28,
+      "community_name": "withRetry",
       "norm_label": "openroutervideo",
       "id": "packages_providers_src_video_openrouter_openroutervideo"
     },
@@ -2407,8 +2495,8 @@
       "source_file": "packages/providers/src/video/openrouter.ts",
       "source_location": "L29",
       "_origin": "ast",
-      "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community": 28,
+      "community_name": "withRetry",
       "norm_label": ".constructor()",
       "id": "packages_providers_src_video_openrouter_openroutervideo_constructor"
     },
@@ -2418,8 +2506,8 @@
       "source_file": "packages/providers/src/video/openrouter.ts",
       "source_location": "L36",
       "_origin": "ast",
-      "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community": 28,
+      "community_name": "withRetry",
       "norm_label": ".generate()",
       "id": "packages_providers_src_video_openrouter_openroutervideo_generate"
     },
@@ -2429,8 +2517,8 @@
       "source_file": "packages/providers/src/video/openrouter.ts",
       "source_location": "L49",
       "_origin": "ast",
-      "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community": 28,
+      "community_name": "withRetry",
       "norm_label": ".generateonce()",
       "id": "packages_providers_src_video_openrouter_openroutervideo_generateonce"
     },
@@ -2440,8 +2528,8 @@
       "source_file": "packages/providers/src/video/openrouter.ts",
       "source_location": "L116",
       "_origin": "ast",
-      "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community": 28,
+      "community_name": "withRetry",
       "norm_label": ".request()",
       "id": "packages_providers_src_video_openrouter_openroutervideo_request"
     },
@@ -2913,7 +3001,7 @@
       "source_file": "packages/providers/src/index.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 7,
+      "community": 25,
       "community_name": "providers/src/index.ts",
       "norm_label": "providers/src/index.ts",
       "id": "packages_providers_src_index"
@@ -3156,7 +3244,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 25,
-      "community_name": "tts/openrouter.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "tts/gemini.ts",
       "id": "packages_providers_src_tts_gemini"
     },
@@ -3167,7 +3255,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "community": 25,
-      "community_name": "tts/openrouter.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "geminitts",
       "id": "packages_providers_src_tts_gemini_geminitts"
     },
@@ -3178,7 +3266,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "community": 25,
-      "community_name": "tts/openrouter.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": ".constructor()",
       "id": "packages_providers_src_tts_gemini_geminitts_constructor"
     },
@@ -3189,7 +3277,7 @@
       "source_location": "L32",
       "_origin": "ast",
       "community": 25,
-      "community_name": "tts/openrouter.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": ".generate()",
       "id": "packages_providers_src_tts_gemini_geminitts_generate"
     },
@@ -3200,7 +3288,7 @@
       "source_location": "L54",
       "_origin": "ast",
       "community": 25,
-      "community_name": "tts/openrouter.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "estimatewordtimestamps()",
       "id": "packages_providers_src_tts_gemini_estimatewordtimestamps"
     },
@@ -3211,7 +3299,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 25,
-      "community_name": "tts/openrouter.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "pcm-to-mp3.ts",
       "id": "packages_providers_src_tts_pcm_to_mp3"
     },
@@ -3222,7 +3310,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "community": 25,
-      "community_name": "tts/openrouter.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "pcmtomp3()",
       "id": "packages_providers_src_tts_pcm_to_mp3_pcmtomp3"
     },
@@ -3233,7 +3321,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community_name": "resolve-element.ts",
       "norm_label": "resolve-provider.test.ts",
       "id": "packages_providers_src_video_resolve_provider_test"
     },
@@ -3244,7 +3332,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community_name": "resolve-element.ts",
       "norm_label": "resolve-provider.ts",
       "id": "packages_providers_src_video_resolve_provider"
     },
@@ -3255,7 +3343,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community_name": "resolve-element.ts",
       "norm_label": "resolvevideogenerationprovider()",
       "id": "packages_providers_src_video_resolve_provider_resolvevideogenerationprovider"
     },
@@ -3266,7 +3354,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community_name": "resolve-element.ts",
       "norm_label": "video/types.ts",
       "id": "packages_providers_src_video_types"
     },
@@ -3277,7 +3365,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community_name": "resolve-element.ts",
       "norm_label": "videogenerationproviderkey",
       "id": "packages_providers_src_video_types_videogenerationproviderkey"
     },
@@ -3288,7 +3376,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community_name": "resolve-element.ts",
       "norm_label": "videoresult",
       "id": "packages_providers_src_video_types_videoresult"
     },
@@ -3299,7 +3387,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community_name": "resolve-element.ts",
       "norm_label": "videogenerationprovider",
       "id": "packages_providers_src_video_types_videogenerationprovider"
     },
@@ -3310,7 +3398,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community_name": "resolve-element.ts",
       "norm_label": ".generate()",
       "id": "packages_providers_src_video_types_videogenerationprovider_generate"
     },
@@ -3321,7 +3409,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community_name": "resolve-element.ts",
       "norm_label": "resolve-element.test.ts",
       "id": "packages_providers_src_visual_resolve_element_test"
     },
@@ -3332,7 +3420,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community_name": "resolve-element.ts",
       "norm_label": "fakeimageprovider",
       "id": "packages_providers_src_visual_resolve_element_test_fakeimageprovider"
     },
@@ -3343,7 +3431,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community_name": "resolve-element.ts",
       "norm_label": "fakestockprovider()",
       "id": "packages_providers_src_visual_resolve_element_test_fakestockprovider"
     },
@@ -3354,7 +3442,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community_name": "resolve-element.ts",
       "norm_label": "candidate",
       "id": "packages_providers_src_visual_resolve_element_test_candidate"
     },
@@ -3365,7 +3453,7 @@
       "source_location": "L28",
       "_origin": "ast",
       "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community_name": "resolve-element.ts",
       "norm_label": "asset",
       "id": "packages_providers_src_visual_resolve_element_test_asset"
     },
@@ -3376,7 +3464,7 @@
       "source_location": "L30",
       "_origin": "ast",
       "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community_name": "resolve-element.ts",
       "norm_label": "basectx()",
       "id": "packages_providers_src_visual_resolve_element_test_basectx"
     },
@@ -3387,7 +3475,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community_name": "resolve-element.ts",
       "norm_label": "resolve-element.ts",
       "id": "packages_providers_src_visual_resolve_element"
     },
@@ -3398,7 +3486,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community_name": "resolve-element.ts",
       "norm_label": "resolveelementcontext",
       "id": "packages_providers_src_visual_resolve_element_resolveelementcontext"
     },
@@ -3409,7 +3497,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community_name": "resolve-element.ts",
       "norm_label": ".writeasset()",
       "id": "packages_providers_src_visual_resolve_element_resolveelementcontext_writeasset"
     },
@@ -3420,7 +3508,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community_name": "resolve-element.ts",
       "norm_label": "resolvestock()",
       "id": "packages_providers_src_visual_resolve_element_resolvestock"
     },
@@ -3431,7 +3519,7 @@
       "source_location": "L52",
       "_origin": "ast",
       "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community_name": "resolve-element.ts",
       "norm_label": "resolveaivideoclip()",
       "id": "packages_providers_src_visual_resolve_element_resolveaivideoclip"
     },
@@ -3442,7 +3530,7 @@
       "source_location": "L98",
       "_origin": "ast",
       "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community_name": "resolve-element.ts",
       "norm_label": "resolveelement()",
       "id": "packages_providers_src_visual_resolve_element_resolveelement"
     },
@@ -3453,7 +3541,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community_name": "resolve-element.ts",
       "norm_label": "image/fallback.test.ts",
       "id": "packages_providers_src_image_fallback_test"
     },
@@ -3464,7 +3552,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community_name": "resolve-element.ts",
       "norm_label": "provider()",
       "id": "packages_providers_src_image_fallback_test_provider"
     },
@@ -3475,7 +3563,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community_name": "resolve-element.ts",
       "norm_label": "image/fallback.ts",
       "id": "packages_providers_src_image_fallback"
     },
@@ -3486,7 +3574,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community_name": "resolve-element.ts",
       "norm_label": "fallbackimage",
       "id": "packages_providers_src_image_fallback_fallbackimage"
     },
@@ -3497,7 +3585,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community_name": "resolve-element.ts",
       "norm_label": ".constructor()",
       "id": "packages_providers_src_image_fallback_fallbackimage_constructor"
     },
@@ -3508,7 +3596,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community_name": "resolve-element.ts",
       "norm_label": ".generate()",
       "id": "packages_providers_src_image_fallback_fallbackimage_generate"
     },
@@ -3519,7 +3607,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 25,
-      "community_name": "tts/openrouter.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "tts/fallback.test.ts",
       "id": "packages_providers_src_tts_fallback_test"
     },
@@ -3530,7 +3618,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "community": 25,
-      "community_name": "tts/openrouter.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "provider()",
       "id": "packages_providers_src_tts_fallback_test_provider"
     },
@@ -3541,7 +3629,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 25,
-      "community_name": "tts/openrouter.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "tts/fallback.ts",
       "id": "packages_providers_src_tts_fallback"
     },
@@ -3552,7 +3640,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "community": 25,
-      "community_name": "tts/openrouter.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "fallbacktts",
       "id": "packages_providers_src_tts_fallback_fallbacktts"
     },
@@ -3563,7 +3651,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "community": 25,
-      "community_name": "tts/openrouter.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": ".constructor()",
       "id": "packages_providers_src_tts_fallback_fallbacktts_constructor"
     },
@@ -3574,7 +3662,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "community": 25,
-      "community_name": "tts/openrouter.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": ".generate()",
       "id": "packages_providers_src_tts_fallback_fallbacktts_generate"
     },
@@ -3585,7 +3673,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 25,
-      "community_name": "tts/openrouter.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "gemini.test.ts",
       "id": "packages_providers_src_tts_gemini_test"
     },
@@ -3859,7 +3947,7 @@
       "source_file": "packages/providers/src/agents/creative-director.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 42,
+      "community": 41,
       "community_name": "creative-director.ts",
       "norm_label": "creative-director.ts",
       "id": "packages_providers_src_agents_creative_director"
@@ -3870,7 +3958,7 @@
       "source_file": "packages/providers/src/agents/creative-director.ts",
       "source_location": "L11",
       "_origin": "ast",
-      "community": 42,
+      "community": 41,
       "community_name": "creative-director.ts",
       "norm_label": "system_prompt_path",
       "id": "packages_providers_src_agents_creative_director_system_prompt_path"
@@ -3881,7 +3969,7 @@
       "source_file": "packages/providers/src/agents/creative-director.ts",
       "source_location": "L25",
       "_origin": "ast",
-      "community": 42,
+      "community": 41,
       "community_name": "creative-director.ts",
       "norm_label": "sceneraw",
       "id": "packages_providers_src_agents_creative_director_sceneraw"
@@ -3892,7 +3980,7 @@
       "source_file": "packages/providers/src/agents/creative-director.ts",
       "source_location": "L32",
       "_origin": "ast",
-      "community": 42,
+      "community": 41,
       "community_name": "creative-director.ts",
       "norm_label": "directorscoreraw",
       "id": "packages_providers_src_agents_creative_director_directorscoreraw"
@@ -3903,7 +3991,7 @@
       "source_file": "packages/providers/src/agents/creative-director.ts",
       "source_location": "L39",
       "_origin": "ast",
-      "community": 42,
+      "community": 41,
       "community_name": "creative-director.ts",
       "norm_label": "directorscore",
       "id": "packages_providers_src_agents_creative_director_directorscore"
@@ -3914,7 +4002,7 @@
       "source_file": "packages/providers/src/agents/creative-director.ts",
       "source_location": "L52",
       "_origin": "ast",
-      "community": 42,
+      "community": 41,
       "community_name": "creative-director.ts",
       "norm_label": "directorscoreoutput",
       "id": "packages_providers_src_agents_creative_director_directorscoreoutput"
@@ -3925,7 +4013,7 @@
       "source_file": "packages/providers/src/agents/creative-director.ts",
       "source_location": "L64",
       "_origin": "ast",
-      "community": 42,
+      "community": 41,
       "community_name": "creative-director.ts",
       "norm_label": "toscenes()",
       "id": "packages_providers_src_agents_creative_director_toscenes"
@@ -3936,7 +4024,7 @@
       "source_file": "packages/providers/src/agents/creative-director.ts",
       "source_location": "L75",
       "_origin": "ast",
-      "community": 42,
+      "community": 41,
       "community_name": "creative-director.ts",
       "norm_label": "sleep()",
       "id": "packages_providers_src_agents_creative_director_sleep"
@@ -3947,7 +4035,7 @@
       "source_file": "packages/providers/src/agents/creative-director.ts",
       "source_location": "L79",
       "_origin": "ast",
-      "community": 42,
+      "community": 41,
       "community_name": "creative-director.ts",
       "norm_label": "loaddirectorsystemprompt()",
       "id": "packages_providers_src_agents_creative_director_loaddirectorsystemprompt"
@@ -3958,7 +4046,7 @@
       "source_file": "packages/providers/src/agents/creative-director.ts",
       "source_location": "L87",
       "_origin": "ast",
-      "community": 42,
+      "community": 41,
       "community_name": "creative-director.ts",
       "norm_label": "generatedirectorscore()",
       "id": "packages_providers_src_agents_creative_director_generatedirectorscore"
@@ -3969,7 +4057,7 @@
       "source_file": "packages/providers/src/agents/creative-director.ts",
       "source_location": "L163",
       "_origin": "ast",
-      "community": 42,
+      "community": 41,
       "community_name": "creative-director.ts",
       "norm_label": "builddefaultprompt()",
       "id": "packages_providers_src_agents_creative_director_builddefaultprompt"
@@ -3981,7 +4069,7 @@
       "source_location": "L181",
       "_origin": "ast",
       "community": 41,
-      "community_name": "critic.ts",
+      "community_name": "creative-director.ts",
       "norm_label": "pacing_config",
       "id": "packages_providers_src_agents_creative_director_pacing_config"
     },
@@ -3991,7 +4079,7 @@
       "source_file": "packages/providers/src/agents/creative-director.ts",
       "source_location": "L192",
       "_origin": "ast",
-      "community": 42,
+      "community": 41,
       "community_name": "creative-director.ts",
       "norm_label": "buildpacinginstruction()",
       "id": "packages_providers_src_agents_creative_director_buildpacinginstruction"
@@ -4002,7 +4090,7 @@
       "source_file": "packages/providers/src/agents/creative-director.ts",
       "source_location": "L219",
       "_origin": "ast",
-      "community": 42,
+      "community": 41,
       "community_name": "creative-director.ts",
       "norm_label": "revisedirectorscore()",
       "id": "packages_providers_src_agents_creative_director_revisedirectorscore"
@@ -4189,8 +4277,8 @@
       "source_file": "packages/providers/src/tts/edge.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 25,
-      "community_name": "tts/openrouter.ts",
+      "community": 45,
+      "community_name": "edge.test.ts",
       "norm_label": "edge.test.ts",
       "id": "packages_providers_src_tts_edge_test"
     },
@@ -4200,8 +4288,8 @@
       "source_file": "packages/providers/src/tts/edge.test.ts",
       "source_location": "L11",
       "_origin": "ast",
-      "community": 25,
-      "community_name": "tts/openrouter.ts",
+      "community": 45,
+      "community_name": "edge.test.ts",
       "norm_label": "setmetadata()",
       "id": "packages_providers_src_tts_edge_test_setmetadata"
     },
@@ -4211,8 +4299,8 @@
       "source_file": "packages/providers/src/tts/edge.test.ts",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 25,
-      "community_name": "tts/openrouter.ts",
+      "community": 45,
+      "community_name": "edge.test.ts",
       "norm_label": "tostream()",
       "id": "packages_providers_src_tts_edge_test_tostream"
     },
@@ -4222,8 +4310,8 @@
       "source_file": "packages/providers/src/tts/edge.test.ts",
       "source_location": "L27",
       "_origin": "ast",
-      "community": 25,
-      "community_name": "tts/openrouter.ts",
+      "community": 45,
+      "community_name": "edge.test.ts",
       "norm_label": "metadataline()",
       "id": "packages_providers_src_tts_edge_test_metadataline"
     },
@@ -4234,7 +4322,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 25,
-      "community_name": "tts/openrouter.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "edge.ts",
       "id": "packages_providers_src_tts_edge"
     },
@@ -4245,7 +4333,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "community": 25,
-      "community_name": "tts/openrouter.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "edge_tts_voices",
       "id": "packages_providers_src_tts_edge_edge_tts_voices"
     },
@@ -4255,8 +4343,8 @@
       "source_file": "packages/providers/src/tts/edge.ts",
       "source_location": "L18",
       "_origin": "ast",
-      "community": 25,
-      "community_name": "tts/openrouter.ts",
+      "community": 45,
+      "community_name": "edge.test.ts",
       "norm_label": "sleep()",
       "id": "packages_providers_src_tts_edge_sleep"
     },
@@ -4266,8 +4354,8 @@
       "source_file": "packages/providers/src/tts/edge.ts",
       "source_location": "L22",
       "_origin": "ast",
-      "community": 25,
-      "community_name": "tts/openrouter.ts",
+      "community": 45,
+      "community_name": "edge.test.ts",
       "norm_label": "edgetts",
       "id": "packages_providers_src_tts_edge_edgetts"
     },
@@ -4277,8 +4365,8 @@
       "source_file": "packages/providers/src/tts/edge.ts",
       "source_location": "L23",
       "_origin": "ast",
-      "community": 25,
-      "community_name": "tts/openrouter.ts",
+      "community": 45,
+      "community_name": "edge.test.ts",
       "norm_label": ".constructor()",
       "id": "packages_providers_src_tts_edge_edgetts_constructor"
     },
@@ -4288,8 +4376,8 @@
       "source_file": "packages/providers/src/tts/edge.ts",
       "source_location": "L25",
       "_origin": "ast",
-      "community": 25,
-      "community_name": "tts/openrouter.ts",
+      "community": 45,
+      "community_name": "edge.test.ts",
       "norm_label": ".generate()",
       "id": "packages_providers_src_tts_edge_edgetts_generate"
     },
@@ -4299,8 +4387,8 @@
       "source_file": "packages/providers/src/tts/edge.ts",
       "source_location": "L49",
       "_origin": "ast",
-      "community": 25,
-      "community_name": "tts/openrouter.ts",
+      "community": 45,
+      "community_name": "edge.test.ts",
       "norm_label": ".generateonce()",
       "id": "packages_providers_src_tts_edge_edgetts_generateonce"
     },
@@ -4310,8 +4398,8 @@
       "source_file": "packages/providers/src/tts/edge.ts",
       "source_location": "L65",
       "_origin": "ast",
-      "community": 25,
-      "community_name": "tts/openrouter.ts",
+      "community": 45,
+      "community_name": "edge.test.ts",
       "norm_label": "streamtobuffer()",
       "id": "packages_providers_src_tts_edge_streamtobuffer"
     },
@@ -4321,8 +4409,8 @@
       "source_file": "packages/providers/src/tts/edge.ts",
       "source_location": "L78",
       "_origin": "ast",
-      "community": 25,
-      "community_name": "tts/openrouter.ts",
+      "community": 45,
+      "community_name": "edge.test.ts",
       "norm_label": "parsewordboundaries()",
       "id": "packages_providers_src_tts_edge_parsewordboundaries"
     },
@@ -4333,7 +4421,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
+      "community_name": "Click.Play",
       "norm_label": "readme.md",
       "id": "readme"
     },
@@ -4344,7 +4432,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
+      "community_name": "Click.Play",
       "norm_label": "click.play",
       "id": "readme_click_play"
     },
@@ -4355,7 +4443,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
+      "community_name": "Click.Play",
       "norm_label": "para que serve",
       "id": "readme_para_que_serve"
     },
@@ -4366,7 +4454,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
+      "community_name": "Click.Play",
       "norm_label": "stack",
       "id": "readme_stack"
     },
@@ -4377,7 +4465,7 @@
       "source_location": "L41",
       "_origin": "ast",
       "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
+      "community_name": "Click.Play",
       "norm_label": "requisitos",
       "id": "readme_requisitos"
     },
@@ -4387,8 +4475,8 @@
       "source_file": "README.md",
       "source_location": "L47",
       "_origin": "ast",
-      "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
+      "community": 50,
+      "community_name": "Instala\u00e7\u00e3o",
       "norm_label": "instalacao",
       "id": "readme_instala\u00e7\u00e3o"
     },
@@ -4398,8 +4486,8 @@
       "source_file": "README.md",
       "source_location": "L57",
       "_origin": "ast",
-      "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
+      "community": 50,
+      "community_name": "Instala\u00e7\u00e3o",
       "norm_label": "configuracao",
       "id": "readme_configura\u00e7\u00e3o"
     },
@@ -4409,8 +4497,8 @@
       "source_file": "README.md",
       "source_location": "L83",
       "_origin": "ast",
-      "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
+      "community": 50,
+      "community_name": "Instala\u00e7\u00e3o",
       "norm_label": "onde conseguir cada chave",
       "id": "readme_onde_conseguir_cada_chave"
     },
@@ -4421,7 +4509,7 @@
       "source_location": "L93",
       "_origin": "ast",
       "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
+      "community_name": "Click.Play",
       "norm_label": "uso",
       "id": "readme_uso"
     },
@@ -4432,7 +4520,7 @@
       "source_location": "L95",
       "_origin": "ast",
       "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
+      "community_name": "Click.Play",
       "norm_label": "local (node/pnpm)",
       "id": "readme_local_node_pnpm"
     },
@@ -4443,7 +4531,7 @@
       "source_location": "L104",
       "_origin": "ast",
       "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
+      "community_name": "Click.Play",
       "norm_label": "docker",
       "id": "readme_docker"
     },
@@ -4454,7 +4542,7 @@
       "source_location": "L122",
       "_origin": "ast",
       "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
+      "community_name": "Click.Play",
       "norm_label": "comandos",
       "id": "readme_comandos"
     },
@@ -4465,7 +4553,7 @@
       "source_location": "L134",
       "_origin": "ast",
       "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
+      "community_name": "Click.Play",
       "norm_label": "estrutura do plano",
       "id": "readme_estrutura_do_plano"
     },
@@ -4476,7 +4564,7 @@
       "source_location": "L138",
       "_origin": "ast",
       "community": 11,
-      "community_name": "Click.Play \u2014 Implementation Plan",
+      "community_name": "Click.Play",
       "norm_label": "licenca",
       "id": "readme_licen\u00e7a"
     },
@@ -6103,8 +6191,8 @@
       "source_file": "packages/providers/src/qc/types.ts",
       "source_location": "L18",
       "_origin": "ast",
-      "community": 5,
-      "community_name": "repository.ts",
+      "community": 8,
+      "community_name": "run-qc.ts",
       "norm_label": "qcreport",
       "id": "packages_providers_src_qc_types_qcreport"
     },
@@ -7093,8 +7181,8 @@
       "source_file": "packages/providers/src/persistence/cost-approval-gate.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 28,
-      "community_name": "cost-approval-gate.ts",
+      "community": 5,
+      "community_name": "repository.ts",
       "norm_label": "cost-approval-gate.test.ts",
       "id": "packages_providers_src_persistence_cost_approval_gate_test"
     },
@@ -7104,8 +7192,8 @@
       "source_file": "packages/providers/src/persistence/cost-approval-gate.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 28,
-      "community_name": "cost-approval-gate.ts",
+      "community": 5,
+      "community_name": "repository.ts",
       "norm_label": "cost-approval-gate.ts",
       "id": "packages_providers_src_persistence_cost_approval_gate"
     },
@@ -7115,8 +7203,8 @@
       "source_file": "packages/providers/src/persistence/cost-approval-gate.ts",
       "source_location": "L8",
       "_origin": "ast",
-      "community": 28,
-      "community_name": "cost-approval-gate.ts",
+      "community": 5,
+      "community_name": "repository.ts",
       "norm_label": "costapprovalgate",
       "id": "packages_providers_src_persistence_cost_approval_gate_costapprovalgate"
     },
@@ -7126,8 +7214,8 @@
       "source_file": "packages/providers/src/persistence/cost-approval-gate.ts",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 28,
-      "community_name": "cost-approval-gate.ts",
+      "community": 5,
+      "community_name": "repository.ts",
       "norm_label": ".waitforapproval()",
       "id": "packages_providers_src_persistence_cost_approval_gate_costapprovalgate_waitforapproval"
     },
@@ -7137,8 +7225,8 @@
       "source_file": "packages/providers/src/persistence/cost-approval-gate.ts",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 28,
-      "community_name": "cost-approval-gate.ts",
+      "community": 5,
+      "community_name": "repository.ts",
       "norm_label": ".resolveapproval()",
       "id": "packages_providers_src_persistence_cost_approval_gate_costapprovalgate_resolveapproval"
     },
@@ -7148,8 +7236,8 @@
       "source_file": "packages/providers/src/persistence/cost-approval-gate.ts",
       "source_location": "L15",
       "_origin": "ast",
-      "community": 28,
-      "community_name": "cost-approval-gate.ts",
+      "community": 5,
+      "community_name": "repository.ts",
       "norm_label": "createcostapprovalgate()",
       "id": "packages_providers_src_persistence_cost_approval_gate_createcostapprovalgate"
     },
@@ -7765,7 +7853,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community_name": "resolve-element.ts",
       "norm_label": "image/gemini.ts",
       "id": "packages_providers_src_image_gemini"
     },
@@ -7776,7 +7864,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community_name": "resolve-element.ts",
       "norm_label": "geminiimage",
       "id": "packages_providers_src_image_gemini_geminiimage"
     },
@@ -7787,7 +7875,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community_name": "resolve-element.ts",
       "norm_label": ".constructor()",
       "id": "packages_providers_src_image_gemini_geminiimage_constructor"
     },
@@ -7798,7 +7886,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community_name": "resolve-element.ts",
       "norm_label": ".generate()",
       "id": "packages_providers_src_image_gemini_geminiimage_generate"
     },
@@ -7809,7 +7897,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community_name": "resolve-element.ts",
       "norm_label": "image/types.ts",
       "id": "packages_providers_src_image_types"
     },
@@ -7820,7 +7908,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community_name": "resolve-element.ts",
       "norm_label": "imageprovider",
       "id": "packages_providers_src_image_types_imageprovider"
     },
@@ -7831,7 +7919,7 @@
       "source_location": "L2",
       "_origin": "ast",
       "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community_name": "resolve-element.ts",
       "norm_label": ".generate()",
       "id": "packages_providers_src_image_types_imageprovider_generate"
     },
@@ -7842,7 +7930,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community_name": "resolve-element.ts",
       "norm_label": "fal.ts",
       "id": "packages_providers_src_video_fal"
     },
@@ -7853,7 +7941,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community_name": "resolve-element.ts",
       "norm_label": "falvideo",
       "id": "packages_providers_src_video_fal_falvideo"
     },
@@ -7864,7 +7952,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community_name": "resolve-element.ts",
       "norm_label": ".constructor()",
       "id": "packages_providers_src_video_fal_falvideo_constructor"
     },
@@ -7875,7 +7963,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community_name": "resolve-element.ts",
       "norm_label": ".generate()",
       "id": "packages_providers_src_video_fal_falvideo_generate"
     },
@@ -7886,7 +7974,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community_name": "resolve-element.ts",
       "norm_label": "video/gemini.ts",
       "id": "packages_providers_src_video_gemini"
     },
@@ -7897,7 +7985,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community_name": "resolve-element.ts",
       "norm_label": "geminivideo",
       "id": "packages_providers_src_video_gemini_geminivideo"
     },
@@ -7908,7 +7996,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community_name": "resolve-element.ts",
       "norm_label": ".constructor()",
       "id": "packages_providers_src_video_gemini_geminivideo_constructor"
     },
@@ -7919,7 +8007,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "community": 7,
-      "community_name": "providers/src/index.ts",
+      "community_name": "resolve-element.ts",
       "norm_label": ".generate()",
       "id": "packages_providers_src_video_gemini_geminivideo_generate"
     },
@@ -7985,7 +8073,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 25,
-      "community_name": "tts/openrouter.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "tts/types.ts",
       "id": "packages_providers_src_tts_types"
     },
@@ -7996,7 +8084,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "community": 25,
-      "community_name": "tts/openrouter.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "ttsresult",
       "id": "packages_providers_src_tts_types_ttsresult"
     },
@@ -8007,7 +8095,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "community": 25,
-      "community_name": "tts/openrouter.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "ttsprovider",
       "id": "packages_providers_src_tts_types_ttsprovider"
     },
@@ -8018,7 +8106,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "community": 25,
-      "community_name": "tts/openrouter.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": ".generate()",
       "id": "packages_providers_src_tts_types_ttsprovider_generate"
     },
@@ -8029,7 +8117,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 41,
-      "community_name": "critic.ts",
+      "community_name": "creative-director.ts",
       "norm_label": "critic.ts",
       "id": "packages_providers_src_agents_critic"
     },
@@ -8040,7 +8128,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "community": 41,
-      "community_name": "critic.ts",
+      "community_name": "creative-director.ts",
       "norm_label": "system_prompt_path",
       "id": "packages_providers_src_agents_critic_system_prompt_path"
     },
@@ -8051,7 +8139,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "community": 41,
-      "community_name": "critic.ts",
+      "community_name": "creative-director.ts",
       "norm_label": "critiqueresult",
       "id": "packages_providers_src_agents_critic_critiqueresult"
     },
@@ -8062,7 +8150,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "community": 41,
-      "community_name": "critic.ts",
+      "community_name": "creative-director.ts",
       "norm_label": "critiqueoutput",
       "id": "packages_providers_src_agents_critic_critiqueoutput"
     },
@@ -8073,7 +8161,7 @@
       "source_location": "L28",
       "_origin": "ast",
       "community": 41,
-      "community_name": "critic.ts",
+      "community_name": "creative-director.ts",
       "norm_label": "evaluate()",
       "id": "packages_providers_src_agents_critic_evaluate"
     },
@@ -8084,7 +8172,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 41,
-      "community_name": "critic.ts",
+      "community_name": "creative-director.ts",
       "norm_label": "archetype-registry.test.ts",
       "id": "packages_providers_src_config_archetype_registry_test"
     },
@@ -8095,7 +8183,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 41,
-      "community_name": "critic.ts",
+      "community_name": "creative-director.ts",
       "norm_label": "archetype-registry.ts",
       "id": "packages_providers_src_config_archetype_registry"
     },
@@ -8106,7 +8194,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "community": 41,
-      "community_name": "critic.ts",
+      "community_name": "creative-director.ts",
       "norm_label": "archetypes",
       "id": "packages_providers_src_config_archetype_registry_archetypes"
     },
@@ -8117,7 +8205,7 @@
       "source_location": "L48",
       "_origin": "ast",
       "community": 41,
-      "community_name": "critic.ts",
+      "community_name": "creative-director.ts",
       "norm_label": "getarchetype()",
       "id": "packages_providers_src_config_archetype_registry_getarchetype"
     },
@@ -8128,7 +8216,7 @@
       "source_location": "L56",
       "_origin": "ast",
       "community": 41,
-      "community_name": "critic.ts",
+      "community_name": "creative-director.ts",
       "norm_label": "listarchetypes()",
       "id": "packages_providers_src_config_archetype_registry_listarchetypes"
     },
@@ -8139,7 +8227,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 41,
-      "community_name": "critic.ts",
+      "community_name": "creative-director.ts",
       "norm_label": "archetype.ts",
       "id": "packages_providers_src_config_archetype"
     },
@@ -8150,7 +8238,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "community": 41,
-      "community_name": "critic.ts",
+      "community_name": "creative-director.ts",
       "norm_label": "scenepacing",
       "id": "packages_providers_src_config_archetype_scenepacing"
     },
@@ -8161,7 +8249,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "community": 41,
-      "community_name": "critic.ts",
+      "community_name": "creative-director.ts",
       "norm_label": "archetypeconfig",
       "id": "packages_providers_src_config_archetype_archetypeconfig"
     },
@@ -8545,8 +8633,8 @@
       "source_file": "packages/domain/src/asset.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 44,
-      "community_name": "asset.ts",
+      "community": 2,
+      "community_name": "pipeline/types.ts",
       "norm_label": "asset.ts",
       "id": "packages_domain_src_asset"
     },
@@ -8556,8 +8644,8 @@
       "source_file": "packages/domain/src/asset.ts",
       "source_location": "L7",
       "_origin": "ast",
-      "community": 44,
-      "community_name": "asset.ts",
+      "community": 2,
+      "community_name": "pipeline/types.ts",
       "norm_label": "assettype",
       "id": "packages_domain_src_asset_assettype"
     },
@@ -8567,8 +8655,8 @@
       "source_file": "packages/domain/src/asset.ts",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 44,
-      "community_name": "asset.ts",
+      "community": 2,
+      "community_name": "pipeline/types.ts",
       "norm_label": "asset",
       "id": "packages_domain_src_asset_asset"
     },
@@ -9378,6 +9466,435 @@
   ],
   "links": [
     {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_implementation_plan",
+      "target": "docs_implementation_plan_click_play_implementation_plan",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L136",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "readme",
+      "target": "docs_implementation_plan"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_implementation_plan_click_play_implementation_plan",
+      "target": "docs_implementation_plan_0_1_p\u00fablico_alvo_e_decis\u00f5es_de_produto_derivadas",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L135",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_implementation_plan_click_play_implementation_plan",
+      "target": "docs_implementation_plan_0_resumo_da_decis\u00e3o",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L321",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_implementation_plan_click_play_implementation_plan",
+      "target": "docs_implementation_plan_10_crit\u00e9rios_de_aceite",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L331",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_implementation_plan_click_play_implementation_plan",
+      "target": "docs_implementation_plan_11_roadmap_de_produto_studio_saas",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L372",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_implementation_plan_click_play_implementation_plan",
+      "target": "docs_implementation_plan_11a_roadmap_de_produ\u00e7\u00e3o_e_qualidade_de_output_gaps_p\u00f3s_primeiro_v\u00eddeo_real",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L145",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_implementation_plan_click_play_implementation_plan",
+      "target": "docs_implementation_plan_1_arquitetura_proposta",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L181",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_implementation_plan_click_play_implementation_plan",
+      "target": "docs_implementation_plan_2_matriz_de_reaproveitamento",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L208",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_implementation_plan_click_play_implementation_plan",
+      "target": "docs_implementation_plan_3_componentes_reutilizados_quase_sem_mudan\u00e7a",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L223",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_implementation_plan_click_play_implementation_plan",
+      "target": "docs_implementation_plan_4_componentes_adaptados_reescrita_parcial",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L232",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_implementation_plan_click_play_implementation_plan",
+      "target": "docs_implementation_plan_5_componentes_removidos",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L241",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_implementation_plan_click_play_implementation_plan",
+      "target": "docs_implementation_plan_6_componentes_novos_n\u00e3o_existem_em_nenhum_dos_dois",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L258",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_implementation_plan_click_play_implementation_plan",
+      "target": "docs_implementation_plan_7_depend\u00eancias",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L268",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_implementation_plan_click_play_implementation_plan",
+      "target": "docs_implementation_plan_8_riscos",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L278",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_implementation_plan_click_play_implementation_plan",
+      "target": "docs_implementation_plan_9_fases_de_implementa\u00e7\u00e3o",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L34",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_implementation_plan_0_1_p\u00fablico_alvo_e_decis\u00f5es_de_produto_derivadas",
+      "target": "docs_implementation_plan_0_2_corre\u00e7\u00e3o_arquitetural_estrat\u00e9gia_de_produ\u00e7\u00e3o_visual_n\u00e3o_\u00e9_slideshow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_implementation_plan_0_1_p\u00fablico_alvo_e_decis\u00f5es_de_produto_derivadas",
+      "target": "docs_implementation_plan_arqu\u00e9tipos_novos_click_play",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L129",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_implementation_plan_0_1_p\u00fablico_alvo_e_decis\u00f5es_de_produto_derivadas",
+      "target": "docs_implementation_plan_legendas_7_estilos_dispon\u00edveis_default_por_arqu\u00e9tipo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L119",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_implementation_plan_0_1_p\u00fablico_alvo_e_decis\u00f5es_de_produto_derivadas",
+      "target": "docs_implementation_plan_m\u00fasica_bundled_default_ia_s\u00f3_se_confirmado_gr\u00e1tis",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_implementation_plan_0_1_p\u00fablico_alvo_e_decis\u00f5es_de_produto_derivadas",
+      "target": "docs_implementation_plan_tts_m\u00faltiplos_providers_default_remoto_gr\u00e1tis",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L63",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_implementation_plan_0_2_corre\u00e7\u00e3o_arquitetural_estrat\u00e9gia_de_produ\u00e7\u00e3o_visual_n\u00e3o_\u00e9_slideshow",
+      "target": "docs_implementation_plan_as_duas_abstra\u00e7\u00f5es_substituindo_assetprovider_como_abstra\u00e7\u00e3o_principal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L107",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_implementation_plan_0_2_corre\u00e7\u00e3o_arquitetural_estrat\u00e9gia_de_produ\u00e7\u00e3o_visual_n\u00e3o_\u00e9_slideshow",
+      "target": "docs_implementation_plan_creative_director_decide_como_produzir_n\u00e3o_s\u00f3_o_que_mostrar",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L70",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_implementation_plan_0_2_corre\u00e7\u00e3o_arquitetural_estrat\u00e9gia_de_produ\u00e7\u00e3o_visual_n\u00e3o_\u00e9_slideshow",
+      "target": "docs_implementation_plan_modelo_de_scene_de_1_visual_para_composi\u00e7\u00e3o",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L115",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_implementation_plan_0_2_corre\u00e7\u00e3o_arquitetural_estrat\u00e9gia_de_produ\u00e7\u00e3o_visual_n\u00e3o_\u00e9_slideshow",
+      "target": "docs_implementation_plan_regra_expl\u00edcita_contra_slideshow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L111",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_implementation_plan_0_2_corre\u00e7\u00e3o_arquitetural_estrat\u00e9gia_de_produ\u00e7\u00e3o_visual_n\u00e3o_\u00e9_slideshow",
+      "target": "docs_implementation_plan_storyboard",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L40",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_implementation_plan_0_2_corre\u00e7\u00e3o_arquitetural_estrat\u00e9gia_de_produ\u00e7\u00e3o_visual_n\u00e3o_\u00e9_slideshow",
+      "target": "docs_implementation_plan_terminologia_n\u00e3o_confundir",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L359",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_implementation_plan_11_roadmap_de_produto_studio_saas",
+      "target": "docs_implementation_plan_decis\u00f5es_a_tomar_agora_evitar_refatora\u00e7\u00e3o_futura",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L355",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_implementation_plan_11_roadmap_de_produto_studio_saas",
+      "target": "docs_implementation_plan_depend\u00eancias_entre_fases",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L343",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_implementation_plan_11_roadmap_de_produto_studio_saas",
+      "target": "docs_implementation_plan_fases_propostas_15",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L368",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_implementation_plan_11_roadmap_de_produto_studio_saas",
+      "target": "docs_implementation_plan_o_que_n\u00e3o_muda_n\u00e3o_\u00e9_reimplementado",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L337",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_implementation_plan_11_roadmap_de_produto_studio_saas",
+      "target": "docs_implementation_plan_separa\u00e7\u00e3o_mvp_evolu\u00e7\u00e3o_studio_saas",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L378",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_implementation_plan_11a_roadmap_de_produ\u00e7\u00e3o_e_qualidade_de_output_gaps_p\u00f3s_primeiro_v\u00eddeo_real",
+      "target": "docs_implementation_plan_bloco_1_v\u00eddeo_vs_slideshow_item_1",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L388",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_implementation_plan_11a_roadmap_de_produ\u00e7\u00e3o_e_qualidade_de_output_gaps_p\u00f3s_primeiro_v\u00eddeo_real",
+      "target": "docs_implementation_plan_bloco_2_controles_de_produ\u00e7\u00e3o_resolu\u00e7\u00e3o_qualidade_dura\u00e7\u00e3o_itens_2_3_4",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L396",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_implementation_plan_11a_roadmap_de_produ\u00e7\u00e3o_e_qualidade_de_output_gaps_p\u00f3s_primeiro_v\u00eddeo_real",
+      "target": "docs_implementation_plan_bloco_3_idioma_item_5",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L402",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_implementation_plan_11a_roadmap_de_produ\u00e7\u00e3o_e_qualidade_de_output_gaps_p\u00f3s_primeiro_v\u00eddeo_real",
+      "target": "docs_implementation_plan_bloco_4_legendas_e_overlay_itens_6_7_8",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L412",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_implementation_plan_11a_roadmap_de_produ\u00e7\u00e3o_e_qualidade_de_output_gaps_p\u00f3s_primeiro_v\u00eddeo_real",
+      "target": "docs_implementation_plan_bloco_5_abertura_encerramento_item_10",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L418",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_implementation_plan_11a_roadmap_de_produ\u00e7\u00e3o_e_qualidade_de_output_gaps_p\u00f3s_primeiro_v\u00eddeo_real",
+      "target": "docs_implementation_plan_bloco_6_observabilidade_e_output_final_itens_9_11",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/IMPLEMENTATION-PLAN.md",
+      "source_location": "L424",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_implementation_plan_11a_roadmap_de_produ\u00e7\u00e3o_e_qualidade_de_output_gaps_p\u00f3s_primeiro_v\u00eddeo_real",
+      "target": "docs_implementation_plan_ordem_sugerida_de_implementa\u00e7\u00e3o",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -9385,9 +9902,9 @@
       "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_api_src_index",
-      "target": "apps_api_src_db",
-      "confidence_score": 1.0
+      "target": "apps_api_src_db"
     },
     {
       "relation": "imports",
@@ -9397,9 +9914,9 @@
       "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_api_src_index",
-      "target": "apps_api_src_db_opendb",
-      "confidence_score": 1.0
+      "target": "apps_api_src_db_opendb"
     },
     {
       "relation": "contains",
@@ -9408,9 +9925,9 @@
       "source_location": "L14",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_api_src_index",
-      "target": "apps_api_src_index_app",
-      "confidence_score": 1.0
+      "target": "apps_api_src_index_app"
     },
     {
       "relation": "contains",
@@ -9419,9 +9936,9 @@
       "source_location": "L13",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_api_src_index",
-      "target": "apps_api_src_index_db",
-      "confidence_score": 1.0
+      "target": "apps_api_src_index_db"
     },
     {
       "relation": "contains",
@@ -9430,9 +9947,9 @@
       "source_location": "L11",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_api_src_index",
-      "target": "apps_api_src_index_envfilepath",
-      "confidence_score": 1.0
+      "target": "apps_api_src_index_envfilepath"
     },
     {
       "relation": "contains",
@@ -9441,9 +9958,9 @@
       "source_location": "L22",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_api_src_index",
-      "target": "apps_api_src_index_port",
-      "confidence_score": 1.0
+      "target": "apps_api_src_index_port"
     },
     {
       "relation": "contains",
@@ -9452,9 +9969,9 @@
       "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_api_src_index",
-      "target": "apps_api_src_index_runsdir",
-      "confidence_score": 1.0
+      "target": "apps_api_src_index_runsdir"
     },
     {
       "relation": "imports_from",
@@ -9464,9 +9981,9 @@
       "source_location": "L7",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_api_src_index",
-      "target": "apps_api_src_providers",
-      "confidence_score": 1.0
+      "target": "apps_api_src_providers"
     },
     {
       "relation": "imports",
@@ -9476,9 +9993,9 @@
       "source_location": "L7",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_api_src_index",
-      "target": "apps_api_src_providers_buildcostoptions",
-      "confidence_score": 1.0
+      "target": "apps_api_src_providers_buildcostoptions"
     },
     {
       "relation": "imports",
@@ -9488,9 +10005,9 @@
       "source_location": "L7",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_api_src_index",
-      "target": "apps_api_src_providers_buildjobrunnerdeps",
-      "confidence_score": 1.0
+      "target": "apps_api_src_providers_buildjobrunnerdeps"
     },
     {
       "relation": "imports_from",
@@ -9500,9 +10017,9 @@
       "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_api_src_index",
-      "target": "apps_api_src_server",
-      "confidence_score": 1.0
+      "target": "apps_api_src_server"
     },
     {
       "relation": "imports",
@@ -9512,9 +10029,9 @@
       "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_api_src_index",
-      "target": "apps_api_src_server_buildserver",
-      "confidence_score": 1.0
+      "target": "apps_api_src_server_buildserver"
     },
     {
       "relation": "imports_from",
@@ -9524,9 +10041,9 @@
       "source_location": "L4",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_api_src_index",
-      "target": "packages_providers_src_index",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_index"
     },
     {
       "relation": "imports_from",
@@ -9536,9 +10053,9 @@
       "source_location": "L2",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_client",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_client"
     },
     {
       "relation": "imports",
@@ -9548,9 +10065,9 @@
       "source_location": "L2",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_client_createdb",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_client_createdb"
     },
     {
       "relation": "imports_from",
@@ -9560,9 +10077,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository"
     },
     {
       "relation": "imports",
@@ -9572,9 +10089,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository_createjob",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_createjob"
     },
     {
       "relation": "imports",
@@ -9584,9 +10101,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository_createproject",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_createproject"
     },
     {
       "relation": "imports",
@@ -9596,9 +10113,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository_getjob",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_getjob"
     },
     {
       "relation": "imports",
@@ -9608,9 +10125,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository_getproject",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_getproject"
     },
     {
       "relation": "imports",
@@ -9620,9 +10137,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository_listjobsbyproject",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_listjobsbyproject"
     },
     {
       "relation": "imports",
@@ -9632,9 +10149,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository_recoverorphanedjobs",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_recoverorphanedjobs"
     },
     {
       "relation": "imports",
@@ -9644,9 +10161,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository_setjobactualcost",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_setjobactualcost"
     },
     {
       "relation": "imports",
@@ -9656,9 +10173,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository_setjoberror",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_setjoberror"
     },
     {
       "relation": "imports",
@@ -9668,9 +10185,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository_setjobestimatedcost",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_setjobestimatedcost"
     },
     {
       "relation": "imports",
@@ -9680,9 +10197,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository_setjoboutputpath",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_setjoboutputpath"
     },
     {
       "relation": "imports",
@@ -9692,9 +10209,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository_setjobqcreport",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_setjobqcreport"
     },
     {
       "relation": "contains",
@@ -9703,9 +10220,9 @@
       "source_location": "L19",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository_test_config",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_test_config"
     },
     {
       "relation": "imports",
@@ -9715,9 +10232,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository_updatejobstatus",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_updatejobstatus"
     },
     {
       "relation": "imports_from",
@@ -9727,9 +10244,9 @@
       "source_location": "L17",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_types",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_types"
     },
     {
       "relation": "imports",
@@ -9739,9 +10256,9 @@
       "source_location": "L17",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_types_projectconfig",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_types_projectconfig"
     },
     {
       "relation": "imports_from",
@@ -9775,9 +10292,9 @@
       "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_client",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_client"
     },
     {
       "relation": "imports",
@@ -9787,9 +10304,9 @@
       "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_client_clickplaydb",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_client_clickplaydb"
     },
     {
       "relation": "imports_from",
@@ -9799,9 +10316,9 @@
       "source_location": "L7",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_job_state_machine",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_job_state_machine"
     },
     {
       "relation": "imports",
@@ -9811,9 +10328,9 @@
       "source_location": "L7",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_job_state_machine_progress_by_status",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_job_state_machine_progress_by_status"
     },
     {
       "relation": "imports",
@@ -9823,9 +10340,9 @@
       "source_location": "L7",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_job_state_machine_resumestatusforcheckpoint",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_job_state_machine_resumestatusforcheckpoint"
     },
     {
       "relation": "contains",
@@ -9834,9 +10351,9 @@
       "source_location": "L23",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_createjob",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_createjob"
     },
     {
       "relation": "contains",
@@ -9845,9 +10362,9 @@
       "source_location": "L11",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_createproject",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_createproject"
     },
     {
       "relation": "contains",
@@ -9856,9 +10373,9 @@
       "source_location": "L44",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_getjob",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_getjob"
     },
     {
       "relation": "contains",
@@ -9867,9 +10384,9 @@
       "source_location": "L18",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_getproject",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_getproject"
     },
     {
       "relation": "contains",
@@ -9878,9 +10395,9 @@
       "source_location": "L49",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_listjobsbyproject",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_listjobsbyproject"
     },
     {
       "relation": "contains",
@@ -9889,9 +10406,9 @@
       "source_location": "L89",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_non_terminal_statuses",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_non_terminal_statuses"
     },
     {
       "relation": "contains",
@@ -9900,9 +10417,9 @@
       "source_location": "L107",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_recoverorphanedjobs",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_recoverorphanedjobs"
     },
     {
       "relation": "contains",
@@ -9911,9 +10428,9 @@
       "source_location": "L125",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_resetjobforretry",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_resetjobforretry"
     },
     {
       "relation": "contains",
@@ -9922,9 +10439,9 @@
       "source_location": "L69",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_setjobactualcost",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_setjobactualcost"
     },
     {
       "relation": "contains",
@@ -9933,9 +10450,9 @@
       "source_location": "L85",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_setjobcheckpoint",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_setjobcheckpoint"
     },
     {
       "relation": "contains",
@@ -9944,9 +10461,9 @@
       "source_location": "L81",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_setjoberror",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_setjoberror"
     },
     {
       "relation": "contains",
@@ -9955,9 +10472,9 @@
       "source_location": "L65",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_setjobestimatedcost",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_setjobestimatedcost"
     },
     {
       "relation": "contains",
@@ -9966,9 +10483,9 @@
       "source_location": "L77",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_setjoboutputpath",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_setjoboutputpath"
     },
     {
       "relation": "contains",
@@ -9977,9 +10494,9 @@
       "source_location": "L73",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_setjobqcreport",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_setjobqcreport"
     },
     {
       "relation": "contains",
@@ -9988,9 +10505,9 @@
       "source_location": "L59",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_updatejobstatus",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_updatejobstatus"
     },
     {
       "relation": "imports_from",
@@ -10000,9 +10517,9 @@
       "source_location": "L8",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_schema",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_schema"
     },
     {
       "relation": "imports",
@@ -10012,9 +10529,9 @@
       "source_location": "L8",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_schema_jobs",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_schema_jobs"
     },
     {
       "relation": "imports",
@@ -10024,9 +10541,9 @@
       "source_location": "L8",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_schema_jobstatus",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_schema_jobstatus"
     },
     {
       "relation": "imports",
@@ -10036,9 +10553,9 @@
       "source_location": "L8",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_schema_projects",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_schema_projects"
     },
     {
       "relation": "imports_from",
@@ -10048,9 +10565,9 @@
       "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_types",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_types"
     },
     {
       "relation": "imports",
@@ -10060,9 +10577,9 @@
       "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_types_job",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_types_job"
     },
     {
       "relation": "imports",
@@ -10072,9 +10589,9 @@
       "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_types_jobfromrow",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_types_jobfromrow"
     },
     {
       "relation": "imports",
@@ -10084,9 +10601,9 @@
       "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_types_project",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_types_project"
     },
     {
       "relation": "imports",
@@ -10096,9 +10613,9 @@
       "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_types_projectconfig",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_types_projectconfig"
     },
     {
       "relation": "imports",
@@ -10108,9 +10625,9 @@
       "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_types_projectfromrow",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_types_projectfromrow"
     },
     {
       "relation": "imports_from",
@@ -10120,9 +10637,9 @@
       "source_location": "L4",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_pipeline_types",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_pipeline_types"
     },
     {
       "relation": "imports",
@@ -10132,9 +10649,9 @@
       "source_location": "L4",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_pipeline_types_pipelinecheckpoint",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_pipeline_types_pipelinecheckpoint"
     },
     {
       "relation": "imports_from",
@@ -10144,9 +10661,9 @@
       "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_qc_types",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_qc_types"
     },
     {
       "relation": "imports",
@@ -10156,9 +10673,9 @@
       "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_qc_types_qcreport",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_qc_types_qcreport"
     },
     {
       "relation": "imports",
@@ -10264,9 +10781,9 @@
       "source_location": "L126",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository_resetjobforretry",
-      "target": "packages_providers_src_persistence_repository_getjob",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_getjob"
     },
     {
       "relation": "imports",
@@ -11754,347 +12271,6 @@
       "confidence_score": 1.0,
       "source": "apps_web_src_components_progressview_progressview",
       "target": "apps_web_src_components_progressview_progressviewprops_onapprove"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L1",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "docs_implementation_plan",
-      "target": "docs_implementation_plan_click_play_implementation_plan"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L136",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "readme",
-      "target": "docs_implementation_plan"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L5",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "docs_implementation_plan_click_play_implementation_plan",
-      "target": "docs_implementation_plan_0_1_p\u00fablico_alvo_e_decis\u00f5es_de_produto_derivadas"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L135",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "docs_implementation_plan_click_play_implementation_plan",
-      "target": "docs_implementation_plan_0_resumo_da_decis\u00e3o"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L319",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "docs_implementation_plan_click_play_implementation_plan",
-      "target": "docs_implementation_plan_10_crit\u00e9rios_de_aceite"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L329",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "docs_implementation_plan_click_play_implementation_plan",
-      "target": "docs_implementation_plan_11_roadmap_de_produto_studio_saas"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L145",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "docs_implementation_plan_click_play_implementation_plan",
-      "target": "docs_implementation_plan_1_arquitetura_proposta"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L181",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "docs_implementation_plan_click_play_implementation_plan",
-      "target": "docs_implementation_plan_2_matriz_de_reaproveitamento"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L208",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "docs_implementation_plan_click_play_implementation_plan",
-      "target": "docs_implementation_plan_3_componentes_reutilizados_quase_sem_mudan\u00e7a"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L223",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "docs_implementation_plan_click_play_implementation_plan",
-      "target": "docs_implementation_plan_4_componentes_adaptados_reescrita_parcial"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L232",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "docs_implementation_plan_click_play_implementation_plan",
-      "target": "docs_implementation_plan_5_componentes_removidos"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L241",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "docs_implementation_plan_click_play_implementation_plan",
-      "target": "docs_implementation_plan_6_componentes_novos_n\u00e3o_existem_em_nenhum_dos_dois"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L258",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "docs_implementation_plan_click_play_implementation_plan",
-      "target": "docs_implementation_plan_7_depend\u00eancias"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L268",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "docs_implementation_plan_click_play_implementation_plan",
-      "target": "docs_implementation_plan_8_riscos"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L278",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "docs_implementation_plan_click_play_implementation_plan",
-      "target": "docs_implementation_plan_9_fases_de_implementa\u00e7\u00e3o"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L34",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "docs_implementation_plan_0_1_p\u00fablico_alvo_e_decis\u00f5es_de_produto_derivadas",
-      "target": "docs_implementation_plan_0_2_corre\u00e7\u00e3o_arquitetural_estrat\u00e9gia_de_produ\u00e7\u00e3o_visual_n\u00e3o_\u00e9_slideshow"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L12",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "docs_implementation_plan_0_1_p\u00fablico_alvo_e_decis\u00f5es_de_produto_derivadas",
-      "target": "docs_implementation_plan_arqu\u00e9tipos_novos_click_play"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L129",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "docs_implementation_plan_0_1_p\u00fablico_alvo_e_decis\u00f5es_de_produto_derivadas",
-      "target": "docs_implementation_plan_legendas_7_estilos_dispon\u00edveis_default_por_arqu\u00e9tipo"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L119",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "docs_implementation_plan_0_1_p\u00fablico_alvo_e_decis\u00f5es_de_produto_derivadas",
-      "target": "docs_implementation_plan_m\u00fasica_bundled_default_ia_s\u00f3_se_confirmado_gr\u00e1tis"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L24",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "docs_implementation_plan_0_1_p\u00fablico_alvo_e_decis\u00f5es_de_produto_derivadas",
-      "target": "docs_implementation_plan_tts_m\u00faltiplos_providers_default_remoto_gr\u00e1tis"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L63",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "docs_implementation_plan_0_2_corre\u00e7\u00e3o_arquitetural_estrat\u00e9gia_de_produ\u00e7\u00e3o_visual_n\u00e3o_\u00e9_slideshow",
-      "target": "docs_implementation_plan_as_duas_abstra\u00e7\u00f5es_substituindo_assetprovider_como_abstra\u00e7\u00e3o_principal"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L107",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "docs_implementation_plan_0_2_corre\u00e7\u00e3o_arquitetural_estrat\u00e9gia_de_produ\u00e7\u00e3o_visual_n\u00e3o_\u00e9_slideshow",
-      "target": "docs_implementation_plan_creative_director_decide_como_produzir_n\u00e3o_s\u00f3_o_que_mostrar"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L70",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "docs_implementation_plan_0_2_corre\u00e7\u00e3o_arquitetural_estrat\u00e9gia_de_produ\u00e7\u00e3o_visual_n\u00e3o_\u00e9_slideshow",
-      "target": "docs_implementation_plan_modelo_de_scene_de_1_visual_para_composi\u00e7\u00e3o"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L115",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "docs_implementation_plan_0_2_corre\u00e7\u00e3o_arquitetural_estrat\u00e9gia_de_produ\u00e7\u00e3o_visual_n\u00e3o_\u00e9_slideshow",
-      "target": "docs_implementation_plan_regra_expl\u00edcita_contra_slideshow"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L111",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "docs_implementation_plan_0_2_corre\u00e7\u00e3o_arquitetural_estrat\u00e9gia_de_produ\u00e7\u00e3o_visual_n\u00e3o_\u00e9_slideshow",
-      "target": "docs_implementation_plan_storyboard"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L40",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "docs_implementation_plan_0_2_corre\u00e7\u00e3o_arquitetural_estrat\u00e9gia_de_produ\u00e7\u00e3o_visual_n\u00e3o_\u00e9_slideshow",
-      "target": "docs_implementation_plan_terminologia_n\u00e3o_confundir"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L357",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "docs_implementation_plan_11_roadmap_de_produto_studio_saas",
-      "target": "docs_implementation_plan_decis\u00f5es_a_tomar_agora_evitar_refatora\u00e7\u00e3o_futura"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L353",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "docs_implementation_plan_11_roadmap_de_produto_studio_saas",
-      "target": "docs_implementation_plan_depend\u00eancias_entre_fases"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L341",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "docs_implementation_plan_11_roadmap_de_produto_studio_saas",
-      "target": "docs_implementation_plan_fases_propostas_15"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L366",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "docs_implementation_plan_11_roadmap_de_produto_studio_saas",
-      "target": "docs_implementation_plan_o_que_n\u00e3o_muda_n\u00e3o_\u00e9_reimplementado"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "docs/IMPLEMENTATION-PLAN.md",
-      "source_location": "L335",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "docs_implementation_plan_11_roadmap_de_produto_studio_saas",
-      "target": "docs_implementation_plan_separa\u00e7\u00e3o_mvp_evolu\u00e7\u00e3o_studio_saas"
     },
     {
       "relation": "contains",
@@ -24851,5 +25027,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "800c517a2bd9bc560cf85e4f369438dc3e21ae65"
+  "built_at_commit": "31f7f873eb47d682a952645e051191bd8648a50d"
 }
