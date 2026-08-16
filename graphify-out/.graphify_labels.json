@@ -1,12 +1,12 @@
 {
   "0": "scripts",
   "1": "providers/package.json",
-  "2": "withRetry",
+  "2": "pipeline/types.ts",
   "3": "dependencies",
   "4": "video-engine/package.json",
   "5": "repository.ts",
   "6": "devDependencies",
-  "7": "resolve-element.ts",
+  "7": "providers/src/index.ts",
   "8": "run-qc.ts",
   "9": "compilerOptions",
   "10": "domain/package.json",
@@ -25,7 +25,7 @@
   "23": "copilot-instructions.md",
   "24": "bundled.ts",
   "25": "tts/openrouter.ts",
-  "26": "providers/src/index.ts",
+  "26": "llm/types.ts",
   "27": "Click.Play",
   "28": "cost-approval-gate.ts",
   "29": "video-project.ts",
@@ -39,5 +39,9 @@
   "37": "block-env-edit.cjs",
   "38": "pricing.ts",
   "39": "ImageElement.tsx",
-  "40": "VideoElement.tsx"
+  "40": "VideoElement.tsx",
+  "41": "critic.ts",
+  "42": "creative-director.ts",
+  "43": "research.ts",
+  "44": "asset.ts"
 }
