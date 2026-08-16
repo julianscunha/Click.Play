@@ -1,5 +1,5 @@
 import type React from "react";
-import { AbsoluteFill, Img, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
+import { AbsoluteFill, Img, interpolate, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import type { ResolvedElement } from "../types";
 
 /** ai_image/stock_image/stock_video (fallback estático): imagem com Ken Burns por CameraMotion. */
@@ -38,7 +38,7 @@ export const ImageElement: React.FC<ResolvedElement> = ({ assetPath, motion }) =
   return (
     <AbsoluteFill>
       <Img
-        src={assetPath}
+        src={staticFile(assetPath)}
         style={{
           width: "100%",
           height: "100%",

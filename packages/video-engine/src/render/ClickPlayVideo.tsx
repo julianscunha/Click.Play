@@ -7,6 +7,8 @@ import { SceneLayer } from "./SceneLayer";
 import { getTransition } from "./transitions";
 import type { CompositionProps } from "./types";
 
+// Assets são copiados/symlinkados pro publicDir do bundle antes do render
+// (video-renderer.ts) — aqui só chegam paths relativos a esse publicDir.
 const resolveAsset = (path: string | null): string | null => (path ? staticFile(path) : null);
 
 const Main: React.FC<CompositionProps> = ({

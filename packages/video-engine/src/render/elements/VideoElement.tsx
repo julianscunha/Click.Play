@@ -1,5 +1,5 @@
 import type React from "react";
-import { AbsoluteFill, Loop, OffthreadVideo, useVideoConfig } from "remotion";
+import { AbsoluteFill, Loop, OffthreadVideo, staticFile, useVideoConfig } from "remotion";
 import type { ResolvedElement } from "../types";
 
 /**
@@ -19,7 +19,7 @@ export const VideoElement: React.FC<ResolvedElement> = ({ assetPath, sourceDurat
 
   const video = (
     <OffthreadVideo
-      src={assetPath}
+      src={staticFile(assetPath)}
       style={{ width: "100%", height: "100%", objectFit: "cover" }}
       muted
     />
