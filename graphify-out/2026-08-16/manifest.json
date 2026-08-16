@@ -710,8 +710,8 @@
     "semantic_hash": ""
   },
   "packages/video-engine/src/render/video-renderer.ts": {
-    "mtime": 1786711534.7480102,
-    "ast_hash": "21e5baafb841087d9515bc9d6a96ccac",
+    "mtime": 1786858208.1000748,
+    "ast_hash": "c9502aa8626835f352192f37b6673877",
     "semantic_hash": ""
   },
   ".claude/skills/plan-status/SKILL.md": {

@@ -1,23 +1,23 @@
 # Graph Report - Click.Play  (2026-08-16)
 
 ## Corpus Check
-- 207 files · ~56,543 words
+- 207 files · ~57,240 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 832 nodes · 1341 edges · 36 communities (34 shown, 2 thin omitted)
+- 839 nodes · 1348 edges · 40 communities (37 shown, 3 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 3 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `88fa9b93`
+- Built from commit: `ccc53070`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - scripts
-- api/package.json
-- devDependencies
+- providers/package.json
+- withRetry
 - dependencies
 - video-engine/package.json
 - repository.ts
@@ -33,20 +33,24 @@
 - domain/tsconfig.json
 - providers/tsconfig.json
 - video-engine/tsconfig.json
-- providers/package.json
+- dependencies
 - api.ts
 - server.test.ts
-- devDependencies
+- bundled.ts
+- tts/openrouter.ts
 - providers/src/index.ts
-- creative-director.ts
 - Click.Play
 - cost-approval-gate.ts
 - video-project.ts
 - orchestrator.test.ts
+- RemotionRenderer
+- dependencies
+- ffmpeg-static
 - new-provider
 - verify-package
 - typecheck-on-edit.cjs
 - pricing.ts
+- react
 
 ## God Nodes (most connected - your core abstractions)
 1. `ClickPlayDb` - 16 edges
@@ -75,23 +79,23 @@
 ## Import Cycles
 - None detected.
 
-## Communities (36 total, 2 thin omitted)
+## Communities (40 total, 3 thin omitted)
 
 ### Community 0 - "scripts"
 Cohesion: 0.12
 Nodes (15): devDependencies, typescript, engines, node, typescript, name, private, scripts (+7 more)
 
-### Community 1 - "api/package.json"
-Cohesion: 0.17
-Nodes (11): name, private, scripts, build, dev, lint, start, test (+3 more)
+### Community 1 - "providers/package.json"
+Cohesion: 0.05
+Nodes (42): devDependencies, tsx, @types/node, @types/react, @types/react-dom, typescript, vitest, name (+34 more)
 
-### Community 2 - "devDependencies"
-Cohesion: 0.18
-Nodes (12): typescript, vitest, devDependencies, typescript, vitest, devDependencies, @types/ffprobe-static, typescript (+4 more)
+### Community 2 - "withRetry"
+Cohesion: 0.12
+Nodes (6): sleep(), withRetry(), OpenRouterImage, OpenRouterMusic, OpenRouterVideo, VideoJobStatus
 
 ### Community 3 - "dependencies"
-Cohesion: 0.04
-Nodes (49): ai, dependencies, @clickplay/domain, @clickplay/providers, @clickplay/video-engine, fastify, @fastify/cors, @fastify/helmet (+41 more)
+Cohesion: 0.10
+Nodes (20): dependencies, @clickplay/domain, @clickplay/providers, fastify, @fastify/cors, @fastify/helmet, @fastify/rate-limit, @fastify/static (+12 more)
 
 ### Community 4 - "video-engine/package.json"
 Cohesion: 0.05
@@ -106,11 +110,11 @@ Cohesion: 0.06
 Nodes (33): dependencies, react, react-dom, devDependencies, tailwindcss, @tailwindcss/vite, @types/react, @types/react-dom (+25 more)
 
 ### Community 7 - "resolve-element.ts"
-Cohesion: 0.05
-Nodes (22): sleep(), withRetry(), FallbackImage, GeminiImage, OpenRouterImage, ImageProvider, OpenRouterMusic, FalVideo (+14 more)
+Cohesion: 0.09
+Nodes (16): FallbackImage, GeminiImage, ImageProvider, FalVideo, GeminiVideo, resolveVideoGenerationProvider(), VideoGenerationProvider, VideoGenerationProviderKey (+8 more)
 
 ### Community 8 - "run-qc.ts"
-Cohesion: 0.08
+Cohesion: 0.09
 Nodes (25): checkBlackdetect(), checkCostDeviation(), checkCriticScore(), checkDurationMatch(), checkOutputExists(), checkResolutionMatch(), ExpectedFormat, checkTtsCoverage() (+17 more)
 
 ### Community 9 - "compilerOptions"
@@ -149,9 +153,9 @@ Nodes (7): compilerOptions, outDir, rootDir, extends, include, src, ../../tsconf
 Cohesion: 0.25
 Nodes (7): compilerOptions, outDir, rootDir, extends, include, src, ../../tsconfig.base.json
 
-### Community 18 - "providers/package.json"
-Cohesion: 0.18
-Nodes (10): main, name, private, scripts, lint, test, typecheck, type (+2 more)
+### Community 18 - "dependencies"
+Cohesion: 0.11
+Nodes (18): ai, @clickplay/video-engine, @clickplay/video-engine, drizzle-orm, @fal-ai/client, ffprobe-static, @google/genai, msedge-tts (+10 more)
 
 ### Community 19 - "api.ts"
 Cohesion: 0.06
@@ -161,17 +165,17 @@ Nodes (42): approveCost(), CostAmount, CostBreakdown, createJob(), CreateJobInpu
 Cohesion: 0.07
 Nodes (37): CAPTION_STYLES, getFormConfig(), getRecommendedModels(), PACING_TIERS, RECOMMENDED_IMAGE_MODELS, RECOMMENDED_TTS_FALLBACK_MODELS, RECOMMENDED_VIDEO_MODELS, readEnvFile() (+29 more)
 
-### Community 24 - "devDependencies"
-Cohesion: 0.22
-Nodes (9): devDependencies, tsx, @types/node, @types/react, @types/react-dom, tsx, @types/node, @types/react (+1 more)
+### Community 24 - "bundled.ts"
+Cohesion: 0.21
+Nodes (10): listTracks(), loadManifest(), MANIFEST_PATH, ManifestTrack, MUSIC_DIR, MusicManifest, MusicSelection, PACKAGE_ROOT (+2 more)
 
-### Community 25 - "providers/src/index.ts"
+### Community 25 - "tts/openrouter.ts"
+Cohesion: 0.10
+Nodes (12): EDGE_TTS_VOICES, EdgeTTS, parseWordBoundaries(), sleep(), streamToBuffer(), FallbackTTS, estimateWordTimestamps(), GeminiTTS (+4 more)
+
+### Community 26 - "providers/src/index.ts"
 Cohesion: 0.05
-Nodes (26): Asset, AssetType, listTracks(), loadManifest(), MANIFEST_PATH, ManifestTrack, MUSIC_DIR, MusicManifest (+18 more)
-
-### Community 26 - "creative-director.ts"
-Cohesion: 0.06
-Nodes (43): buildDefaultPrompt(), buildPacingInstruction(), DirectorScore, DirectorScoreOutput, DirectorScoreRaw, generateDirectorScore(), loadDirectorSystemPrompt(), PACING_CONFIG (+35 more)
+Nodes (47): Asset, AssetType, buildDefaultPrompt(), buildPacingInstruction(), DirectorScore, DirectorScoreOutput, DirectorScoreRaw, generateDirectorScore() (+39 more)
 
 ### Community 27 - "Click.Play"
 Cohesion: 0.40
@@ -184,6 +188,18 @@ Nodes (18): AudioTrack, MusicMood, MusicTrack, NarrationTrack, WordTimestamp, Ca
 ### Community 30 - "orchestrator.test.ts"
 Cohesion: 0.13
 Nodes (10): runPipeline(), baseOptions(), fakeImageProvider(), fakeLLM(), fakeMusic(), fakeTTS(), fakeVideoRenderer(), RESEARCH_RESULT (+2 more)
+
+### Community 31 - "RemotionRenderer"
+Cohesion: 0.33
+Nodes (3): RemotionRenderer, RemotionRendererOptions, VideoRenderer
+
+### Community 32 - "dependencies"
+Cohesion: 0.33
+Nodes (6): zod, dependencies, @clickplay/shared, zod, zod, zod
+
+### Community 33 - "ffmpeg-static"
+Cohesion: 0.67
+Nodes (3): ffmpeg-static, ffmpeg-static, ffmpeg-static
 
 ### Community 34 - "new-provider"
 Cohesion: 0.50
@@ -198,24 +214,24 @@ Cohesion: 0.29
 Nodes (6): IMAGE_PRICING_PER_IMAGE, LLM_CALL_TOKEN_ESTIMATES, LLM_PRICING_PER_MODEL, MUSIC_PRICING_PER_TRACK, TTS_PRICING_PER_CHAR, VIDEO_PRICING_PER_SECOND
 
 ## Knowledge Gaps
-- **279 isolated node(s):** `STAGE_BY_STATUS`, `CostAmount`, `JobStatus`, `SecretField`, `STAGE_LABELS` (+274 more)
+- **280 isolated node(s):** `Arquétipos novos (Click.Play)`, `TTS: múltiplos providers, default remoto grátis`, `Terminologia (não confundir)`, `As duas abstrações (substituindo "AssetProvider" como abstração principal)`, `Modelo de Scene: de "1 visual" para composição` (+275 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **2 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **3 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `LLMProvider` connect `creative-director.ts` to `repository.ts`, `orchestrator.test.ts`?**
-  _High betweenness centrality (0.011) - this node is a cross-community bridge._
-- **Why does `ImageProvider` connect `resolve-element.ts` to `repository.ts`, `orchestrator.test.ts`?**
+- **Why does `LLMProvider` connect `providers/src/index.ts` to `repository.ts`, `orchestrator.test.ts`?**
   _High betweenness centrality (0.010) - this node is a cross-community bridge._
-- **Why does `TTSProvider` connect `providers/src/index.ts` to `creative-director.ts`, `repository.ts`, `orchestrator.test.ts`?**
+- **Why does `ImageProvider` connect `resolve-element.ts` to `withRetry`, `repository.ts`, `orchestrator.test.ts`?**
+  _High betweenness centrality (0.009) - this node is a cross-community bridge._
+- **Why does `TTSProvider` connect `tts/openrouter.ts` to `providers/src/index.ts`, `repository.ts`, `orchestrator.test.ts`?**
   _High betweenness centrality (0.008) - this node is a cross-community bridge._
-- **What connects `STAGE_BY_STATUS`, `CostAmount`, `JobStatus` to the rest of the system?**
-  _279 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **What connects `Arquétipos novos (Click.Play)`, `TTS: múltiplos providers, default remoto grátis`, `Terminologia (não confundir)` to the rest of the system?**
+  _280 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `scripts` be split into smaller, more focused modules?**
   _Cohesion score 0.125 - nodes in this community are weakly interconnected._
-- **Should `dependencies` be split into smaller, more focused modules?**
-  _Cohesion score 0.04251700680272109 - nodes in this community are weakly interconnected._
-- **Should `video-engine/package.json` be split into smaller, more focused modules?**
-  _Cohesion score 0.05405405405405406 - nodes in this community are weakly interconnected._
+- **Should `providers/package.json` be split into smaller, more focused modules?**
+  _Cohesion score 0.04756871035940803 - nodes in this community are weakly interconnected._
+- **Should `withRetry` be split into smaller, more focused modules?**
+  _Cohesion score 0.12307692307692308 - nodes in this community are weakly interconnected._

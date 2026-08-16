@@ -125,8 +125,8 @@
     "semantic_hash": ""
   },
   "docs/IMPLEMENTATION-PLAN.md": {
-    "mtime": 1786856286.5690827,
-    "ast_hash": "9dd952fb7f895b466d1c9ca666f128d0",
+    "mtime": 1786863389.6337779,
+    "ast_hash": "d6fd22b3181dafd5445d402bb6894875",
     "semantic_hash": ""
   },
   "pnpm-workspace.yaml": {
@@ -645,8 +645,8 @@
     "semantic_hash": ""
   },
   "packages/video-engine/src/render/ClickPlayVideo.tsx": {
-    "mtime": 1786711534.6270504,
-    "ast_hash": "c49d94c534dcf4a39af785cf2e534014",
+    "mtime": 1786862641.0821218,
+    "ast_hash": "c874e35e6e265132ee27d4ace3f94157",
     "semantic_hash": ""
   },
   "packages/video-engine/src/render/MusicTrack.tsx": {
@@ -660,8 +660,8 @@
     "semantic_hash": ""
   },
   "packages/video-engine/src/render/elements/ImageElement.tsx": {
-    "mtime": 1786711534.6320422,
-    "ast_hash": "44ef951a3de8504bd9373ea4006e4878",
+    "mtime": 1786862617.8799381,
+    "ast_hash": "33a69b3b9aef74e2118ecb397da11b14",
     "semantic_hash": ""
   },
   "packages/video-engine/src/render/elements/TextElement.tsx": {
@@ -675,8 +675,8 @@
     "semantic_hash": ""
   },
   "packages/video-engine/src/render/elements/VideoElement.tsx": {
-    "mtime": 1786711534.6340418,
-    "ast_hash": "05f6aad83d10ad73e0331a57cccaeab7",
+    "mtime": 1786862627.5736926,
+    "ast_hash": "53d1eaf7a2f5175024884884e9b6af73",
     "semantic_hash": ""
   },
   "packages/video-engine/src/render/elements/index.ts": {
@@ -710,8 +710,8 @@
     "semantic_hash": ""
   },
   "packages/video-engine/src/render/video-renderer.ts": {
-    "mtime": 1786858208.1000748,
-    "ast_hash": "c9502aa8626835f352192f37b6673877",
+    "mtime": 1786862677.192359,
+    "ast_hash": "2a4acfd2ab47efb38b9434dc9c8ef35a",
     "semantic_hash": ""
   },
   ".claude/skills/plan-status/SKILL.md": {
@@ -860,8 +860,8 @@
     "semantic_hash": ""
   },
   "apps/api/src/remotion/entry.tsx": {
-    "mtime": 1786733727.0996454,
-    "ast_hash": "a1e4a3cc8e315c9bd98ca4d16c80f394",
+    "mtime": 1786862022.9996376,
+    "ast_hash": "c9958a25efb072682c1aeb950d55a20f",
     "semantic_hash": ""
   },
   "apps/api/src/routes/jobs.ts": {
