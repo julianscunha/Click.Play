@@ -5,14 +5,20 @@ import { readEnvFile, writeEnvFile } from "../env-file.js";
 /** Chaves/modelo geridos pela tela de settings — resto do .env (DATABASE_URL, PORT, RUNS_DIR...) fica fora, é infra de boot, não credencial de provider. */
 const SECRET_FIELDS = [
   "OPENROUTER_API_KEY",
-  "TTS_API_KEY",
   "GOOGLE_API_KEY",
   "FAL_API_KEY",
   "PEXELS_API_KEY",
   "PIXABAY_API_KEY",
 ] as const;
 
-const PLAIN_FIELDS = ["OPENROUTER_MODEL", "OPENROUTER_MODEL_FALLBACK", "TTS_PROVIDER"] as const;
+const PLAIN_FIELDS = [
+  "OPENROUTER_MODEL",
+  "OPENROUTER_MODEL_FALLBACK",
+  "IMAGE_MODEL",
+  "VIDEO_MODEL",
+  "TTS_MODEL_FALLBACK",
+  "MUSIC_PROVIDER",
+] as const;
 
 // Sem \r\n: writeEnvFile grava "KEY=valor\n" cru — um valor com quebra de
 // linha injetaria uma linha .env nova (ex.: sobrescrever outra chave).
@@ -22,8 +28,10 @@ const SettingsBody = z.object({
   OPENROUTER_API_KEY: noNewlines.optional(),
   OPENROUTER_MODEL: noNewlines.optional(),
   OPENROUTER_MODEL_FALLBACK: noNewlines.optional(),
-  TTS_PROVIDER: noNewlines.optional(),
-  TTS_API_KEY: noNewlines.optional(),
+  IMAGE_MODEL: noNewlines.optional(),
+  VIDEO_MODEL: noNewlines.optional(),
+  TTS_MODEL_FALLBACK: noNewlines.optional(),
+  MUSIC_PROVIDER: noNewlines.optional(),
   GOOGLE_API_KEY: noNewlines.optional(),
   FAL_API_KEY: noNewlines.optional(),
   PEXELS_API_KEY: noNewlines.optional(),

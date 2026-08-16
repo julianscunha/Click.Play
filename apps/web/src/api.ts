@@ -53,6 +53,9 @@ export interface FormConfig {
   pacingTiers: readonly string[];
   captionStyles: readonly string[];
   recommendedModels: string[];
+  recommendedImageModels: string[];
+  recommendedVideoModels: string[];
+  recommendedTtsFallbackModels: string[];
 }
 
 export interface CreateJobInput {
@@ -108,8 +111,10 @@ export interface Settings {
   OPENROUTER_API_KEY: SecretField;
   OPENROUTER_MODEL: string;
   OPENROUTER_MODEL_FALLBACK: string;
-  TTS_PROVIDER: string;
-  TTS_API_KEY: SecretField;
+  IMAGE_MODEL: string;
+  VIDEO_MODEL: string;
+  TTS_MODEL_FALLBACK: string;
+  MUSIC_PROVIDER: string;
   GOOGLE_API_KEY: SecretField;
   FAL_API_KEY: SecretField;
   PEXELS_API_KEY: SecretField;

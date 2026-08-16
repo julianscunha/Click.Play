@@ -2,6 +2,7 @@ import {
   BundledMusic,
   EdgeTTS,
   FallbackLLM,
+  FallbackMusic,
   FallbackTTS,
   FallbackImage,
   GeminiImage,
@@ -10,6 +11,7 @@ import {
   FalVideo,
   OpenRouterImage,
   OpenRouterLLM,
+  OpenRouterMusic,
   OpenRouterTTS,
   OpenRouterVideo,
   PexelsStock,
@@ -17,6 +19,7 @@ import {
   type CostEstimateOptions,
   type ImageProvider,
   type LLMProvider,
+  type MusicProvider,
   type ResolveElementContext,
   type StockProvider,
   type TTSProvider,
@@ -41,13 +44,13 @@ export function buildCostOptions(): CostEstimateOptions {
     ttsProvider: "edge",
     imageProvider: "openrouter",
     videoProvider: "openrouter",
-    musicProvider: "bundled",
+    musicProvider: process.env.MUSIC_PROVIDER === "lyria" ? "lyria" : "bundled",
   };
 }
 
 function buildVideoProviders(): Partial<Record<"gemini" | "fal" | "openrouter", VideoGenerationProvider>> {
   const providers: Partial<Record<"gemini" | "fal" | "openrouter", VideoGenerationProvider>> = {
-    openrouter: new OpenRouterVideo(undefined, process.env.OPENROUTER_API_KEY),
+    openrouter: new OpenRouterVideo(process.env.VIDEO_MODEL || undefined, process.env.OPENROUTER_API_KEY),
   };
   if (process.env.GOOGLE_API_KEY) providers.gemini = new GeminiVideo();
   if (process.env.FAL_API_KEY) providers.fal = new FalVideo();
@@ -61,7 +64,7 @@ function buildVideoProviders(): Partial<Record<"gemini" | "fal" | "openrouter", 
  * erro pro primeiro uso real (job), em vez de derrubar o boot do servidor. */
 function buildImageProvider(): ImageProvider {
   try {
-    const primary = new OpenRouterImage(undefined, process.env.OPENROUTER_API_KEY);
+    const primary = new OpenRouterImage(process.env.IMAGE_MODEL || undefined, process.env.OPENROUTER_API_KEY);
     if (!process.env.GOOGLE_API_KEY) return primary;
 
     return new FallbackImage(primary, new GeminiImage(undefined, process.env.GOOGLE_API_KEY));
@@ -94,7 +97,11 @@ function buildLLM(): LLMProvider {
  * GOOGLE_API_KEY existir (raramente necessário agora). */
 function buildTTS(): TTSProvider {
   const primary = new EdgeTTS();
-  const openRouterFallback = new OpenRouterTTS(undefined, undefined, process.env.OPENROUTER_API_KEY);
+  const openRouterFallback = new OpenRouterTTS(
+    process.env.TTS_MODEL_FALLBACK || undefined,
+    undefined,
+    process.env.OPENROUTER_API_KEY,
+  );
 
   if (!process.env.GOOGLE_API_KEY) return new FallbackTTS(primary, openRouterFallback);
 
@@ -102,6 +109,17 @@ function buildTTS(): TTSProvider {
     primary,
     new FallbackTTS(openRouterFallback, new GeminiTTS(undefined, undefined, process.env.GOOGLE_API_KEY)),
   );
+}
+
+/** BundledMusic (grátis, trilhas prontas) é o default e o fallback automático.
+ * MUSIC_PROVIDER=lyria liga a IA generativa via OpenRouter (mesma
+ * OPENROUTER_API_KEY já obrigatória, sem exigir GOOGLE_API_KEY separada —
+ * ainda não validado ao vivo, ver music/openrouter.ts). */
+function buildMusicProvider(): MusicProvider {
+  const bundled = new BundledMusic();
+  if (process.env.MUSIC_PROVIDER !== "lyria") return bundled;
+
+  return new FallbackMusic(new OpenRouterMusic(undefined, process.env.OPENROUTER_API_KEY), bundled);
 }
 
 function buildStockProviders(): StockProvider[] {
@@ -126,7 +144,7 @@ export function buildJobRunnerDeps(): JobRunnerDeps {
   return {
     llm: buildLLM(),
     ttsProvider: buildTTS(),
-    musicProvider: new BundledMusic(),
+    musicProvider: buildMusicProvider(),
     resolveElementCtx,
     videoRenderer,
   };
