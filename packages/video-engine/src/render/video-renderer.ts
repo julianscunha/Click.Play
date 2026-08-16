@@ -31,7 +31,19 @@ export class RemotionRenderer implements VideoRenderer {
     const props = mapRenderInputToProps(input);
     const durationInFrames = getTotalDurationInFrames(props, input.fps);
 
-    const bundleLocation = await bundle({ entryPoint: this.options.entryPoint });
+    const bundleLocation = await bundle({
+      entryPoint: this.options.entryPoint,
+      // Monorepo usa imports ESM estilo Node16 (".js" apontando pra ".ts") —
+      // webpack não resolve isso por padrão, só tsc/tsx. Sem isso, bundle
+      // quebra em qualquer import cross-arquivo dentro de video-engine/providers.
+      webpackOverride: (config) => ({
+        ...config,
+        resolve: {
+          ...config.resolve,
+          extensionAlias: { ".js": [".js", ".ts", ".tsx"] },
+        },
+      }),
+    });
 
     // inputProps do Remotion exige Record<string,unknown> — mesmo cast do OpenReelsVideo.tsx.
     const inputProps = props as unknown as Record<string, unknown>;
