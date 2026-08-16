@@ -99,8 +99,8 @@ export async function generateDirectorScore(
 
   const videoEnabled = options?.videoEnabled ?? true;
   const strategyGuidance = videoEnabled
-    ? 'Use visualStrategy "motion_graphics" for most scenes (composed elements: animated_text, svg, shape, icon, particle_system, diagram, ai_image, stock_image/stock_video). Use "ai_video" or "hybrid" for 1-3 scenes where MOTION is the story (explosions, flowing water, launches, transformations) — BOTH require at least one element of type "ai_video_clip" in the elements array (a scene with visualStrategy "ai_video" and no "ai_video_clip" element is INVALID and will be rejected). ai_video_clip costs ~$0.30/scene vs ~$0.04 for ai_image — use selectively.'
-    : 'Use visualStrategy "motion_graphics" for every scene (composed elements: animated_text, svg, shape, icon, particle_system, diagram, ai_image, stock_image/stock_video). ai_video is disabled for this project.';
+    ? 'Use visualStrategy "motion_graphics" for most scenes (composed elements: animated_text, ai_image, stock_image/stock_video — do NOT use svg/shape/icon/particle_system/diagram, they have no renderer yet and render as blank). Use "ai_video" or "hybrid" for 1-3 scenes where MOTION is the story (explosions, flowing water, launches, transformations) — BOTH require at least one element of type "ai_video_clip" in the elements array (a scene with visualStrategy "ai_video" and no "ai_video_clip" element is INVALID and will be rejected). ai_video_clip costs ~$0.30/scene vs ~$0.04 for ai_image — use selectively.'
+    : 'Use visualStrategy "motion_graphics" for every scene (composed elements: animated_text, ai_image, stock_image/stock_video — do NOT use svg/shape/icon/particle_system/diagram, they have no renderer yet and render as blank). ai_video is disabled for this project.';
 
   const pacingInstruction = buildPacingInstruction(options?.archetype, options?.pacing);
 
@@ -122,7 +122,7 @@ ${archetypeInstruction}
 
 ${pacingInstruction}
 ${strategyGuidance}
-${directionSection}CRITICAL RULE: A scene must never be reduced to a single static image/stock clip more than 2 times in a row — compose scenes with multiple elements (text, shapes, diagrams, particles) instead of a plain image slideshow. Plan your visualStrategy sequence BEFORE writing scenes to ensure variety.
+${directionSection}CRITICAL RULE: A scene must never be reduced to a single static image/stock clip more than 2 times in a row — compose scenes with multiple elements (e.g. animated_text over an ai_image) instead of a plain image slideshow. Plan your visualStrategy sequence BEFORE writing scenes to ensure variety.
 Every scene MUST have a scriptLine (the voiceover text).
 The first scene should be a strong hook.
 If over budget, cut a scene rather than cramming.`;
@@ -171,7 +171,7 @@ You must output a DirectorScore with:
 - music_mood: MUST be exactly one of: "epic_cinematic", "tense_electronic", "chill_lofi", "uplifting_pop", "mysterious_ambient", "warm_acoustic", "dark_cinematic", "dreamy_ethereal", "playful_kids"
 - scenes: Array of scenes following the archetype's recommended pacing tier. Each scene has visualStrategy ("motion_graphics" | "ai_video" | "hybrid") and elements (1+ composed visual elements). visualStrategy "ai_video" or "hybrid" REQUIRES at least one element of type "ai_video_clip" in elements — without it, the scene is invalid.
 
-GOLDEN RULE: Never reduce more than 2 consecutive scenes to a single static image/stock clip. Compose with animated_text, svg, shape, icon, particle_system, and diagram elements for visual variety and movement.
+GOLDEN RULE: Never reduce more than 2 consecutive scenes to a single static image/stock clip. Compose with animated_text over ai_image/stock elements for visual variety and movement — do NOT use svg/shape/icon/particle_system/diagram, they have no renderer yet and render as blank.
 
 Think like a YouTube Shorts producer. The hook must grab in 1-2 seconds. Every scene should move the story forward. The FINAL scene MUST be a call-to-action (e.g. "What would you have done? Comment below."), not a story conclusion.
 

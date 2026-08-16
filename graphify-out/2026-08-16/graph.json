@@ -4,15 +4,279 @@
   "graph": {},
   "nodes": [
     {
+      "label": "api/src/index.ts",
+      "file_type": "code",
+      "source_file": "apps/api/src/index.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_api_src_index",
+      "community": 14,
+      "community_name": "providers.ts",
+      "norm_label": "api/src/index.ts"
+    },
+    {
+      "label": "runsDir",
+      "file_type": "code",
+      "source_file": "apps/api/src/index.ts",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "apps_api_src_index_runsdir",
+      "community": 14,
+      "community_name": "providers.ts",
+      "norm_label": "runsdir"
+    },
+    {
+      "label": "envFilePath",
+      "file_type": "code",
+      "source_file": "apps/api/src/index.ts",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "apps_api_src_index_envfilepath",
+      "community": 14,
+      "community_name": "providers.ts",
+      "norm_label": "envfilepath"
+    },
+    {
+      "label": "db",
+      "file_type": "code",
+      "source_file": "apps/api/src/index.ts",
+      "source_location": "L13",
+      "_origin": "ast",
+      "id": "apps_api_src_index_db",
+      "community": 14,
+      "community_name": "providers.ts",
+      "norm_label": "db"
+    },
+    {
+      "label": "app",
+      "file_type": "code",
+      "source_file": "apps/api/src/index.ts",
+      "source_location": "L14",
+      "_origin": "ast",
+      "id": "apps_api_src_index_app",
+      "community": 14,
+      "community_name": "providers.ts",
+      "norm_label": "app"
+    },
+    {
+      "label": "port",
+      "file_type": "code",
+      "source_file": "apps/api/src/index.ts",
+      "source_location": "L22",
+      "_origin": "ast",
+      "id": "apps_api_src_index_port",
+      "community": 14,
+      "community_name": "providers.ts",
+      "norm_label": "port"
+    },
+    {
+      "label": "repository.test.ts",
+      "file_type": "code",
+      "source_file": "packages/providers/src/persistence/repository.test.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "packages_providers_src_persistence_repository_test",
+      "community": 5,
+      "community_name": "repository.ts",
+      "norm_label": "repository.test.ts"
+    },
+    {
+      "label": "config",
+      "file_type": "code",
+      "source_file": "packages/providers/src/persistence/repository.test.ts",
+      "source_location": "L19",
+      "_origin": "ast",
+      "id": "packages_providers_src_persistence_repository_test_config",
+      "community": 5,
+      "community_name": "repository.ts",
+      "norm_label": "config"
+    },
+    {
+      "label": "repository.ts",
+      "file_type": "code",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "packages_providers_src_persistence_repository",
+      "community": 5,
+      "community_name": "repository.ts",
+      "norm_label": "repository.ts"
+    },
+    {
+      "label": "createProject()",
+      "file_type": "code",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "packages_providers_src_persistence_repository_createproject",
+      "community": 5,
+      "community_name": "repository.ts",
+      "norm_label": "createproject()"
+    },
+    {
+      "label": "getProject()",
+      "file_type": "code",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L18",
+      "_origin": "ast",
+      "id": "packages_providers_src_persistence_repository_getproject",
+      "community": 5,
+      "community_name": "repository.ts",
+      "norm_label": "getproject()"
+    },
+    {
+      "label": "createJob()",
+      "file_type": "code",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L23",
+      "_origin": "ast",
+      "id": "packages_providers_src_persistence_repository_createjob",
+      "community": 5,
+      "community_name": "repository.ts",
+      "norm_label": "createjob()"
+    },
+    {
+      "label": "getJob()",
+      "file_type": "code",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L44",
+      "_origin": "ast",
+      "id": "packages_providers_src_persistence_repository_getjob",
+      "community": 5,
+      "community_name": "repository.ts",
+      "norm_label": "getjob()"
+    },
+    {
+      "label": "listJobsByProject()",
+      "file_type": "code",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L49",
+      "_origin": "ast",
+      "id": "packages_providers_src_persistence_repository_listjobsbyproject",
+      "community": 5,
+      "community_name": "repository.ts",
+      "norm_label": "listjobsbyproject()"
+    },
+    {
+      "label": "updateJobStatus()",
+      "file_type": "code",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L59",
+      "_origin": "ast",
+      "id": "packages_providers_src_persistence_repository_updatejobstatus",
+      "community": 5,
+      "community_name": "repository.ts",
+      "norm_label": "updatejobstatus()"
+    },
+    {
+      "label": "setJobEstimatedCost()",
+      "file_type": "code",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L65",
+      "_origin": "ast",
+      "id": "packages_providers_src_persistence_repository_setjobestimatedcost",
+      "community": 5,
+      "community_name": "repository.ts",
+      "norm_label": "setjobestimatedcost()"
+    },
+    {
+      "label": "setJobActualCost()",
+      "file_type": "code",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L69",
+      "_origin": "ast",
+      "id": "packages_providers_src_persistence_repository_setjobactualcost",
+      "community": 5,
+      "community_name": "repository.ts",
+      "norm_label": "setjobactualcost()"
+    },
+    {
+      "label": "setJobQcReport()",
+      "file_type": "code",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L73",
+      "_origin": "ast",
+      "id": "packages_providers_src_persistence_repository_setjobqcreport",
+      "community": 5,
+      "community_name": "repository.ts",
+      "norm_label": "setjobqcreport()"
+    },
+    {
+      "label": "setJobOutputPath()",
+      "file_type": "code",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L77",
+      "_origin": "ast",
+      "id": "packages_providers_src_persistence_repository_setjoboutputpath",
+      "community": 5,
+      "community_name": "repository.ts",
+      "norm_label": "setjoboutputpath()"
+    },
+    {
+      "label": "setJobError()",
+      "file_type": "code",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L81",
+      "_origin": "ast",
+      "id": "packages_providers_src_persistence_repository_setjoberror",
+      "community": 5,
+      "community_name": "repository.ts",
+      "norm_label": "setjoberror()"
+    },
+    {
+      "label": "setJobCheckpoint()",
+      "file_type": "code",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L85",
+      "_origin": "ast",
+      "id": "packages_providers_src_persistence_repository_setjobcheckpoint",
+      "community": 5,
+      "community_name": "repository.ts",
+      "norm_label": "setjobcheckpoint()"
+    },
+    {
+      "label": "NON_TERMINAL_STATUSES",
+      "file_type": "code",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L89",
+      "_origin": "ast",
+      "id": "packages_providers_src_persistence_repository_non_terminal_statuses",
+      "community": 5,
+      "community_name": "repository.ts",
+      "norm_label": "non_terminal_statuses"
+    },
+    {
+      "label": "recoverOrphanedJobs()",
+      "file_type": "code",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L107",
+      "_origin": "ast",
+      "id": "packages_providers_src_persistence_repository_recoverorphanedjobs",
+      "community": 5,
+      "community_name": "repository.ts",
+      "norm_label": "recoverorphanedjobs()"
+    },
+    {
+      "label": "resetJobForRetry()",
+      "file_type": "code",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L125",
+      "_origin": "ast",
+      "id": "packages_providers_src_persistence_repository_resetjobforretry",
+      "community": 5,
+      "community_name": "repository.ts",
+      "norm_label": "resetjobforretry()"
+    },
+    {
       "label": "entry.tsx",
       "file_type": "code",
       "source_file": "apps/api/src/remotion/entry.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "apps_api_src_remotion_entry",
       "community": 31,
       "community_name": "ClickPlayVideo.tsx",
-      "norm_label": "entry.tsx"
+      "norm_label": "entry.tsx",
+      "id": "apps_api_src_remotion_entry"
     },
     {
       "label": "ClickPlayVideo.tsx",
@@ -20,10 +284,10 @@
       "source_file": "packages/video-engine/src/render/ClickPlayVideo.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "packages_video_engine_src_render_clickplayvideo",
       "community": 31,
       "community_name": "ClickPlayVideo.tsx",
-      "norm_label": "clickplayvideo.tsx"
+      "norm_label": "clickplayvideo.tsx",
+      "id": "packages_video_engine_src_render_clickplayvideo"
     },
     {
       "label": "resolveAsset()",
@@ -31,10 +295,10 @@
       "source_file": "packages/video-engine/src/render/ClickPlayVideo.tsx",
       "source_location": "L12",
       "_origin": "ast",
-      "id": "packages_video_engine_src_render_clickplayvideo_resolveasset",
       "community": 31,
       "community_name": "ClickPlayVideo.tsx",
-      "norm_label": "resolveasset()"
+      "norm_label": "resolveasset()",
+      "id": "packages_video_engine_src_render_clickplayvideo_resolveasset"
     },
     {
       "label": "Main()",
@@ -42,10 +306,10 @@
       "source_file": "packages/video-engine/src/render/ClickPlayVideo.tsx",
       "source_location": "L14",
       "_origin": "ast",
-      "id": "packages_video_engine_src_render_clickplayvideo_main",
       "community": 31,
       "community_name": "ClickPlayVideo.tsx",
-      "norm_label": "main()"
+      "norm_label": "main()",
+      "id": "packages_video_engine_src_render_clickplayvideo_main"
     },
     {
       "label": "DEFAULT_PROPS",
@@ -53,10 +317,10 @@
       "source_file": "packages/video-engine/src/render/ClickPlayVideo.tsx",
       "source_location": "L70",
       "_origin": "ast",
-      "id": "packages_video_engine_src_render_clickplayvideo_default_props",
       "community": 31,
       "community_name": "ClickPlayVideo.tsx",
-      "norm_label": "default_props"
+      "norm_label": "default_props",
+      "id": "packages_video_engine_src_render_clickplayvideo_default_props"
     },
     {
       "label": "ClickPlayVideoRoot()",
@@ -64,10 +328,10 @@
       "source_file": "packages/video-engine/src/render/ClickPlayVideo.tsx",
       "source_location": "L85",
       "_origin": "ast",
-      "id": "packages_video_engine_src_render_clickplayvideo_clickplayvideoroot",
       "community": 31,
       "community_name": "ClickPlayVideo.tsx",
-      "norm_label": "clickplayvideoroot()"
+      "norm_label": "clickplayvideoroot()",
+      "id": "packages_video_engine_src_render_clickplayvideo_clickplayvideoroot"
     },
     {
       "label": "ImageElement.tsx",
@@ -75,10 +339,10 @@
       "source_file": "packages/video-engine/src/render/elements/ImageElement.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "packages_video_engine_src_render_elements_imageelement",
       "community": 39,
       "community_name": "ImageElement.tsx",
-      "norm_label": "imageelement.tsx"
+      "norm_label": "imageelement.tsx",
+      "id": "packages_video_engine_src_render_elements_imageelement"
     },
     {
       "label": "ImageElement()",
@@ -86,10 +350,10 @@
       "source_file": "packages/video-engine/src/render/elements/ImageElement.tsx",
       "source_location": "L6",
       "_origin": "ast",
-      "id": "packages_video_engine_src_render_elements_imageelement_imageelement",
       "community": 39,
       "community_name": "ImageElement.tsx",
-      "norm_label": "imageelement()"
+      "norm_label": "imageelement()",
+      "id": "packages_video_engine_src_render_elements_imageelement_imageelement"
     },
     {
       "label": "VideoElement.tsx",
@@ -97,10 +361,10 @@
       "source_file": "packages/video-engine/src/render/elements/VideoElement.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "packages_video_engine_src_render_elements_videoelement",
       "community": 40,
       "community_name": "VideoElement.tsx",
-      "norm_label": "videoelement.tsx"
+      "norm_label": "videoelement.tsx",
+      "id": "packages_video_engine_src_render_elements_videoelement"
     },
     {
       "label": "VideoElement()",
@@ -108,10 +372,10 @@
       "source_file": "packages/video-engine/src/render/elements/VideoElement.tsx",
       "source_location": "L10",
       "_origin": "ast",
-      "id": "packages_video_engine_src_render_elements_videoelement_videoelement",
       "community": 40,
       "community_name": "VideoElement.tsx",
-      "norm_label": "videoelement()"
+      "norm_label": "videoelement()",
+      "id": "packages_video_engine_src_render_elements_videoelement_videoelement"
     },
     {
       "label": "video-renderer.ts",
@@ -119,10 +383,10 @@
       "source_file": "packages/video-engine/src/render/video-renderer.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "packages_video_engine_src_render_video_renderer",
       "community": 31,
       "community_name": "ClickPlayVideo.tsx",
-      "norm_label": "video-renderer.ts"
+      "norm_label": "video-renderer.ts",
+      "id": "packages_video_engine_src_render_video_renderer"
     },
     {
       "label": "VideoRenderer",
@@ -130,10 +394,10 @@
       "source_file": "packages/video-engine/src/render/video-renderer.ts",
       "source_location": "L14",
       "_origin": "ast",
-      "id": "packages_video_engine_src_render_video_renderer_videorenderer",
       "community": 31,
       "community_name": "ClickPlayVideo.tsx",
-      "norm_label": "videorenderer"
+      "norm_label": "videorenderer",
+      "id": "packages_video_engine_src_render_video_renderer_videorenderer"
     },
     {
       "label": ".render()",
@@ -141,10 +405,10 @@
       "source_file": "packages/video-engine/src/render/video-renderer.ts",
       "source_location": "L16",
       "_origin": "ast",
-      "id": "packages_video_engine_src_render_video_renderer_videorenderer_render",
       "community": 31,
       "community_name": "ClickPlayVideo.tsx",
-      "norm_label": ".render()"
+      "norm_label": ".render()",
+      "id": "packages_video_engine_src_render_video_renderer_videorenderer_render"
     },
     {
       "label": "RemotionRendererOptions",
@@ -152,10 +416,10 @@
       "source_file": "packages/video-engine/src/render/video-renderer.ts",
       "source_location": "L19",
       "_origin": "ast",
-      "id": "packages_video_engine_src_render_video_renderer_remotionrendereroptions",
       "community": 31,
       "community_name": "ClickPlayVideo.tsx",
-      "norm_label": "remotionrendereroptions"
+      "norm_label": "remotionrendereroptions",
+      "id": "packages_video_engine_src_render_video_renderer_remotionrendereroptions"
     },
     {
       "label": "RemotionRenderer",
@@ -163,10 +427,10 @@
       "source_file": "packages/video-engine/src/render/video-renderer.ts",
       "source_location": "L24",
       "_origin": "ast",
-      "id": "packages_video_engine_src_render_video_renderer_remotionrenderer",
       "community": 31,
       "community_name": "ClickPlayVideo.tsx",
-      "norm_label": "remotionrenderer"
+      "norm_label": "remotionrenderer",
+      "id": "packages_video_engine_src_render_video_renderer_remotionrenderer"
     },
     {
       "label": ".constructor()",
@@ -174,10 +438,10 @@
       "source_file": "packages/video-engine/src/render/video-renderer.ts",
       "source_location": "L27",
       "_origin": "ast",
-      "id": "packages_video_engine_src_render_video_renderer_remotionrenderer_constructor",
       "community": 31,
       "community_name": "ClickPlayVideo.tsx",
-      "norm_label": ".constructor()"
+      "norm_label": ".constructor()",
+      "id": "packages_video_engine_src_render_video_renderer_remotionrenderer_constructor"
     },
     {
       "label": ".render()",
@@ -185,10 +449,10 @@
       "source_file": "packages/video-engine/src/render/video-renderer.ts",
       "source_location": "L29",
       "_origin": "ast",
-      "id": "packages_video_engine_src_render_video_renderer_remotionrenderer_render",
       "community": 31,
       "community_name": "ClickPlayVideo.tsx",
-      "norm_label": ".render()"
+      "norm_label": ".render()",
+      "id": "packages_video_engine_src_render_video_renderer_remotionrenderer_render"
     },
     {
       "label": "preparePublicAssets()",
@@ -196,10 +460,10 @@
       "source_file": "packages/video-engine/src/render/video-renderer.ts",
       "source_location": "L123",
       "_origin": "ast",
-      "id": "packages_video_engine_src_render_video_renderer_preparepublicassets",
       "community": 31,
       "community_name": "ClickPlayVideo.tsx",
-      "norm_label": "preparepublicassets()"
+      "norm_label": "preparepublicassets()",
+      "id": "packages_video_engine_src_render_video_renderer_preparepublicassets"
     },
     {
       "label": "jobs.ts",
@@ -1346,160 +1610,6 @@
       "id": "packages_providers_src_persistence_job_state_machine_progress_by_status"
     },
     {
-      "label": "repository.ts",
-      "file_type": "code",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "repository.ts",
-      "norm_label": "repository.ts",
-      "id": "packages_providers_src_persistence_repository"
-    },
-    {
-      "label": "createProject()",
-      "file_type": "code",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L11",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "repository.ts",
-      "norm_label": "createproject()",
-      "id": "packages_providers_src_persistence_repository_createproject"
-    },
-    {
-      "label": "getProject()",
-      "file_type": "code",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L18",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "repository.ts",
-      "norm_label": "getproject()",
-      "id": "packages_providers_src_persistence_repository_getproject"
-    },
-    {
-      "label": "createJob()",
-      "file_type": "code",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L23",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "repository.ts",
-      "norm_label": "createjob()",
-      "id": "packages_providers_src_persistence_repository_createjob"
-    },
-    {
-      "label": "getJob()",
-      "file_type": "code",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L44",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "repository.ts",
-      "norm_label": "getjob()",
-      "id": "packages_providers_src_persistence_repository_getjob"
-    },
-    {
-      "label": "listJobsByProject()",
-      "file_type": "code",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L49",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "repository.ts",
-      "norm_label": "listjobsbyproject()",
-      "id": "packages_providers_src_persistence_repository_listjobsbyproject"
-    },
-    {
-      "label": "updateJobStatus()",
-      "file_type": "code",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L59",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "repository.ts",
-      "norm_label": "updatejobstatus()",
-      "id": "packages_providers_src_persistence_repository_updatejobstatus"
-    },
-    {
-      "label": "setJobEstimatedCost()",
-      "file_type": "code",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L65",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "repository.ts",
-      "norm_label": "setjobestimatedcost()",
-      "id": "packages_providers_src_persistence_repository_setjobestimatedcost"
-    },
-    {
-      "label": "setJobActualCost()",
-      "file_type": "code",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L69",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "repository.ts",
-      "norm_label": "setjobactualcost()",
-      "id": "packages_providers_src_persistence_repository_setjobactualcost"
-    },
-    {
-      "label": "setJobQcReport()",
-      "file_type": "code",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L73",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "repository.ts",
-      "norm_label": "setjobqcreport()",
-      "id": "packages_providers_src_persistence_repository_setjobqcreport"
-    },
-    {
-      "label": "setJobOutputPath()",
-      "file_type": "code",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L77",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "repository.ts",
-      "norm_label": "setjoboutputpath()",
-      "id": "packages_providers_src_persistence_repository_setjoboutputpath"
-    },
-    {
-      "label": "setJobError()",
-      "file_type": "code",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L81",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "repository.ts",
-      "norm_label": "setjoberror()",
-      "id": "packages_providers_src_persistence_repository_setjoberror"
-    },
-    {
-      "label": "setJobCheckpoint()",
-      "file_type": "code",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L85",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "repository.ts",
-      "norm_label": "setjobcheckpoint()",
-      "id": "packages_providers_src_persistence_repository_setjobcheckpoint"
-    },
-    {
-      "label": "resetJobForRetry()",
-      "file_type": "code",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L95",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "repository.ts",
-      "norm_label": "resetjobforretry()",
-      "id": "packages_providers_src_persistence_repository_resetjobforretry"
-    },
-    {
       "label": "schema.ts",
       "file_type": "code",
       "source_file": "packages/providers/src/persistence/schema.ts",
@@ -1791,8 +1901,8 @@
       "source_file": "packages/providers/src/pipeline/orchestrator.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 2,
+      "community_name": "pipeline/types.ts",
       "norm_label": "orchestrator.ts",
       "id": "packages_providers_src_pipeline_orchestrator"
     },
@@ -1813,8 +1923,8 @@
       "source_file": "packages/providers/src/pipeline/types.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 2,
+      "community_name": "pipeline/types.ts",
       "norm_label": "pipeline/types.ts",
       "id": "packages_providers_src_pipeline_types"
     },
@@ -1824,8 +1934,8 @@
       "source_file": "packages/providers/src/pipeline/types.ts",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 2,
+      "community_name": "pipeline/types.ts",
       "norm_label": "pipelinestage",
       "id": "packages_providers_src_pipeline_types_pipelinestage"
     },
@@ -1846,8 +1956,8 @@
       "source_file": "packages/providers/src/pipeline/types.ts",
       "source_location": "L27",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 2,
+      "community_name": "pipeline/types.ts",
       "norm_label": "revisionlogentry",
       "id": "packages_providers_src_pipeline_types_revisionlogentry"
     },
@@ -1967,8 +2077,8 @@
       "source_file": "packages/providers/src/pipeline/types.ts",
       "source_location": "L49",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 2,
+      "community_name": "pipeline/types.ts",
       "norm_label": "pipelineoptions",
       "id": "packages_providers_src_pipeline_types_pipelineoptions"
     },
@@ -1978,8 +2088,8 @@
       "source_file": "packages/providers/src/pipeline/types.ts",
       "source_location": "L76",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 2,
+      "community_name": "pipeline/types.ts",
       "norm_label": "pipelineresult",
       "id": "packages_providers_src_pipeline_types_pipelineresult"
     },
@@ -1989,8 +2099,8 @@
       "source_file": "packages/providers/src/http/retry.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
-      "community_name": "withRetry",
+      "community": 7,
+      "community_name": "providers/src/index.ts",
       "norm_label": "retry.test.ts",
       "id": "packages_providers_src_http_retry_test"
     },
@@ -2000,8 +2110,8 @@
       "source_file": "packages/providers/src/http/retry.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
-      "community_name": "withRetry",
+      "community": 7,
+      "community_name": "providers/src/index.ts",
       "norm_label": "retry.ts",
       "id": "packages_providers_src_http_retry"
     },
@@ -2011,8 +2121,8 @@
       "source_file": "packages/providers/src/http/retry.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
-      "community_name": "withRetry",
+      "community": 7,
+      "community_name": "providers/src/index.ts",
       "norm_label": "sleep()",
       "id": "packages_providers_src_http_retry_sleep"
     },
@@ -2022,8 +2132,8 @@
       "source_file": "packages/providers/src/http/retry.ts",
       "source_location": "L11",
       "_origin": "ast",
-      "community": 2,
-      "community_name": "withRetry",
+      "community": 7,
+      "community_name": "providers/src/index.ts",
       "norm_label": "withretry()",
       "id": "packages_providers_src_http_retry_withretry"
     },
@@ -2033,8 +2143,8 @@
       "source_file": "packages/providers/src/image/openrouter.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
-      "community_name": "withRetry",
+      "community": 7,
+      "community_name": "providers/src/index.ts",
       "norm_label": "image/openrouter.test.ts",
       "id": "packages_providers_src_image_openrouter_test"
     },
@@ -2044,8 +2154,8 @@
       "source_file": "packages/providers/src/image/openrouter.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
-      "community_name": "withRetry",
+      "community": 7,
+      "community_name": "providers/src/index.ts",
       "norm_label": "image/openrouter.ts",
       "id": "packages_providers_src_image_openrouter"
     },
@@ -2055,8 +2165,8 @@
       "source_file": "packages/providers/src/image/openrouter.ts",
       "source_location": "L11",
       "_origin": "ast",
-      "community": 2,
-      "community_name": "withRetry",
+      "community": 7,
+      "community_name": "providers/src/index.ts",
       "norm_label": "openrouterimage",
       "id": "packages_providers_src_image_openrouter_openrouterimage"
     },
@@ -2066,8 +2176,8 @@
       "source_file": "packages/providers/src/image/openrouter.ts",
       "source_location": "L15",
       "_origin": "ast",
-      "community": 2,
-      "community_name": "withRetry",
+      "community": 7,
+      "community_name": "providers/src/index.ts",
       "norm_label": ".constructor()",
       "id": "packages_providers_src_image_openrouter_openrouterimage_constructor"
     },
@@ -2077,8 +2187,8 @@
       "source_file": "packages/providers/src/image/openrouter.ts",
       "source_location": "L22",
       "_origin": "ast",
-      "community": 2,
-      "community_name": "withRetry",
+      "community": 7,
+      "community_name": "providers/src/index.ts",
       "norm_label": ".generate()",
       "id": "packages_providers_src_image_openrouter_openrouterimage_generate"
     },
@@ -2088,8 +2198,8 @@
       "source_file": "packages/providers/src/image/openrouter.ts",
       "source_location": "L32",
       "_origin": "ast",
-      "community": 2,
-      "community_name": "withRetry",
+      "community": 7,
+      "community_name": "providers/src/index.ts",
       "norm_label": ".generateonce()",
       "id": "packages_providers_src_image_openrouter_openrouterimage_generateonce"
     },
@@ -2099,8 +2209,8 @@
       "source_file": "packages/providers/src/music/openrouter.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
-      "community_name": "withRetry",
+      "community": 7,
+      "community_name": "providers/src/index.ts",
       "norm_label": "music/openrouter.test.ts",
       "id": "packages_providers_src_music_openrouter_test"
     },
@@ -2110,8 +2220,8 @@
       "source_file": "packages/providers/src/music/openrouter.test.ts",
       "source_location": "L5",
       "_origin": "ast",
-      "community": 2,
-      "community_name": "withRetry",
+      "community": 7,
+      "community_name": "providers/src/index.ts",
       "norm_label": "ssestream()",
       "id": "packages_providers_src_music_openrouter_test_ssestream"
     },
@@ -2121,8 +2231,8 @@
       "source_file": "packages/providers/src/music/openrouter.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
-      "community_name": "withRetry",
+      "community": 7,
+      "community_name": "providers/src/index.ts",
       "norm_label": "music/openrouter.ts",
       "id": "packages_providers_src_music_openrouter"
     },
@@ -2132,8 +2242,8 @@
       "source_file": "packages/providers/src/music/openrouter.ts",
       "source_location": "L20",
       "_origin": "ast",
-      "community": 2,
-      "community_name": "withRetry",
+      "community": 7,
+      "community_name": "providers/src/index.ts",
       "norm_label": "openroutermusic",
       "id": "packages_providers_src_music_openrouter_openroutermusic"
     },
@@ -2143,8 +2253,8 @@
       "source_file": "packages/providers/src/music/openrouter.ts",
       "source_location": "L24",
       "_origin": "ast",
-      "community": 2,
-      "community_name": "withRetry",
+      "community": 7,
+      "community_name": "providers/src/index.ts",
       "norm_label": ".constructor()",
       "id": "packages_providers_src_music_openrouter_openroutermusic_constructor"
     },
@@ -2154,8 +2264,8 @@
       "source_file": "packages/providers/src/music/openrouter.ts",
       "source_location": "L31",
       "_origin": "ast",
-      "community": 2,
-      "community_name": "withRetry",
+      "community": 7,
+      "community_name": "providers/src/index.ts",
       "norm_label": ".generate()",
       "id": "packages_providers_src_music_openrouter_openroutermusic_generate"
     },
@@ -2165,8 +2275,8 @@
       "source_file": "packages/providers/src/music/openrouter.ts",
       "source_location": "L36",
       "_origin": "ast",
-      "community": 2,
-      "community_name": "withRetry",
+      "community": 7,
+      "community_name": "providers/src/index.ts",
       "norm_label": ".generateonce()",
       "id": "packages_providers_src_music_openrouter_openroutermusic_generateonce"
     },
@@ -2242,8 +2352,8 @@
       "source_file": "packages/providers/src/video/openrouter.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
-      "community_name": "withRetry",
+      "community": 7,
+      "community_name": "providers/src/index.ts",
       "norm_label": "video/openrouter.test.ts",
       "id": "packages_providers_src_video_openrouter_test"
     },
@@ -2253,8 +2363,8 @@
       "source_file": "packages/providers/src/video/openrouter.test.ts",
       "source_location": "L5",
       "_origin": "ast",
-      "community": 2,
-      "community_name": "withRetry",
+      "community": 7,
+      "community_name": "providers/src/index.ts",
       "norm_label": "jsonresponse()",
       "id": "packages_providers_src_video_openrouter_test_jsonresponse"
     },
@@ -2264,8 +2374,8 @@
       "source_file": "packages/providers/src/video/openrouter.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
-      "community_name": "withRetry",
+      "community": 7,
+      "community_name": "providers/src/index.ts",
       "norm_label": "video/openrouter.ts",
       "id": "packages_providers_src_video_openrouter"
     },
@@ -2275,8 +2385,8 @@
       "source_file": "packages/providers/src/video/openrouter.ts",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 2,
-      "community_name": "withRetry",
+      "community": 7,
+      "community_name": "providers/src/index.ts",
       "norm_label": "videojobstatus",
       "id": "packages_providers_src_video_openrouter_videojobstatus"
     },
@@ -2286,8 +2396,8 @@
       "source_file": "packages/providers/src/video/openrouter.ts",
       "source_location": "L23",
       "_origin": "ast",
-      "community": 2,
-      "community_name": "withRetry",
+      "community": 7,
+      "community_name": "providers/src/index.ts",
       "norm_label": "openroutervideo",
       "id": "packages_providers_src_video_openrouter_openroutervideo"
     },
@@ -2297,8 +2407,8 @@
       "source_file": "packages/providers/src/video/openrouter.ts",
       "source_location": "L29",
       "_origin": "ast",
-      "community": 2,
-      "community_name": "withRetry",
+      "community": 7,
+      "community_name": "providers/src/index.ts",
       "norm_label": ".constructor()",
       "id": "packages_providers_src_video_openrouter_openroutervideo_constructor"
     },
@@ -2308,8 +2418,8 @@
       "source_file": "packages/providers/src/video/openrouter.ts",
       "source_location": "L36",
       "_origin": "ast",
-      "community": 2,
-      "community_name": "withRetry",
+      "community": 7,
+      "community_name": "providers/src/index.ts",
       "norm_label": ".generate()",
       "id": "packages_providers_src_video_openrouter_openroutervideo_generate"
     },
@@ -2319,8 +2429,8 @@
       "source_file": "packages/providers/src/video/openrouter.ts",
       "source_location": "L49",
       "_origin": "ast",
-      "community": 2,
-      "community_name": "withRetry",
+      "community": 7,
+      "community_name": "providers/src/index.ts",
       "norm_label": ".generateonce()",
       "id": "packages_providers_src_video_openrouter_openroutervideo_generateonce"
     },
@@ -2330,8 +2440,8 @@
       "source_file": "packages/providers/src/video/openrouter.ts",
       "source_location": "L116",
       "_origin": "ast",
-      "community": 2,
-      "community_name": "withRetry",
+      "community": 7,
+      "community_name": "providers/src/index.ts",
       "norm_label": ".request()",
       "id": "packages_providers_src_video_openrouter_openroutervideo_request"
     },
@@ -2803,7 +2913,7 @@
       "source_file": "packages/providers/src/index.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 26,
+      "community": 7,
       "community_name": "providers/src/index.ts",
       "norm_label": "providers/src/index.ts",
       "id": "packages_providers_src_index"
@@ -3123,7 +3233,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 7,
-      "community_name": "resolve-element.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "resolve-provider.test.ts",
       "id": "packages_providers_src_video_resolve_provider_test"
     },
@@ -3134,7 +3244,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 7,
-      "community_name": "resolve-element.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "resolve-provider.ts",
       "id": "packages_providers_src_video_resolve_provider"
     },
@@ -3145,7 +3255,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "community": 7,
-      "community_name": "resolve-element.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "resolvevideogenerationprovider()",
       "id": "packages_providers_src_video_resolve_provider_resolvevideogenerationprovider"
     },
@@ -3156,7 +3266,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 7,
-      "community_name": "resolve-element.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "video/types.ts",
       "id": "packages_providers_src_video_types"
     },
@@ -3167,7 +3277,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 7,
-      "community_name": "resolve-element.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "videogenerationproviderkey",
       "id": "packages_providers_src_video_types_videogenerationproviderkey"
     },
@@ -3178,7 +3288,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "community": 7,
-      "community_name": "resolve-element.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "videoresult",
       "id": "packages_providers_src_video_types_videoresult"
     },
@@ -3189,7 +3299,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "community": 7,
-      "community_name": "resolve-element.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "videogenerationprovider",
       "id": "packages_providers_src_video_types_videogenerationprovider"
     },
@@ -3200,7 +3310,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "community": 7,
-      "community_name": "resolve-element.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": ".generate()",
       "id": "packages_providers_src_video_types_videogenerationprovider_generate"
     },
@@ -3211,7 +3321,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 7,
-      "community_name": "resolve-element.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "resolve-element.test.ts",
       "id": "packages_providers_src_visual_resolve_element_test"
     },
@@ -3222,7 +3332,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "community": 7,
-      "community_name": "resolve-element.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "fakeimageprovider",
       "id": "packages_providers_src_visual_resolve_element_test_fakeimageprovider"
     },
@@ -3233,7 +3343,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "community": 7,
-      "community_name": "resolve-element.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "fakestockprovider()",
       "id": "packages_providers_src_visual_resolve_element_test_fakestockprovider"
     },
@@ -3244,7 +3354,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "community": 7,
-      "community_name": "resolve-element.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "candidate",
       "id": "packages_providers_src_visual_resolve_element_test_candidate"
     },
@@ -3255,7 +3365,7 @@
       "source_location": "L28",
       "_origin": "ast",
       "community": 7,
-      "community_name": "resolve-element.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "asset",
       "id": "packages_providers_src_visual_resolve_element_test_asset"
     },
@@ -3266,7 +3376,7 @@
       "source_location": "L30",
       "_origin": "ast",
       "community": 7,
-      "community_name": "resolve-element.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "basectx()",
       "id": "packages_providers_src_visual_resolve_element_test_basectx"
     },
@@ -3277,7 +3387,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 7,
-      "community_name": "resolve-element.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "resolve-element.ts",
       "id": "packages_providers_src_visual_resolve_element"
     },
@@ -3288,7 +3398,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "community": 7,
-      "community_name": "resolve-element.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "resolveelementcontext",
       "id": "packages_providers_src_visual_resolve_element_resolveelementcontext"
     },
@@ -3299,7 +3409,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "community": 7,
-      "community_name": "resolve-element.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": ".writeasset()",
       "id": "packages_providers_src_visual_resolve_element_resolveelementcontext_writeasset"
     },
@@ -3310,7 +3420,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "community": 7,
-      "community_name": "resolve-element.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "resolvestock()",
       "id": "packages_providers_src_visual_resolve_element_resolvestock"
     },
@@ -3321,7 +3431,7 @@
       "source_location": "L52",
       "_origin": "ast",
       "community": 7,
-      "community_name": "resolve-element.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "resolveaivideoclip()",
       "id": "packages_providers_src_visual_resolve_element_resolveaivideoclip"
     },
@@ -3332,7 +3442,7 @@
       "source_location": "L98",
       "_origin": "ast",
       "community": 7,
-      "community_name": "resolve-element.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "resolveelement()",
       "id": "packages_providers_src_visual_resolve_element_resolveelement"
     },
@@ -3343,7 +3453,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 7,
-      "community_name": "resolve-element.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "image/fallback.test.ts",
       "id": "packages_providers_src_image_fallback_test"
     },
@@ -3354,7 +3464,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "community": 7,
-      "community_name": "resolve-element.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "provider()",
       "id": "packages_providers_src_image_fallback_test_provider"
     },
@@ -3365,7 +3475,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 7,
-      "community_name": "resolve-element.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "image/fallback.ts",
       "id": "packages_providers_src_image_fallback"
     },
@@ -3376,7 +3486,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "community": 7,
-      "community_name": "resolve-element.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "fallbackimage",
       "id": "packages_providers_src_image_fallback_fallbackimage"
     },
@@ -3387,7 +3497,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "community": 7,
-      "community_name": "resolve-element.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": ".constructor()",
       "id": "packages_providers_src_image_fallback_fallbackimage_constructor"
     },
@@ -3398,7 +3508,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "community": 7,
-      "community_name": "resolve-element.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": ".generate()",
       "id": "packages_providers_src_image_fallback_fallbackimage_generate"
     },
@@ -3661,8 +3771,8 @@
       "source_file": "apps/api/src/server.ts",
       "source_location": "L11",
       "_origin": "ast",
-      "community": 14,
-      "community_name": "providers.ts",
+      "community": 22,
+      "community_name": "server.test.ts",
       "norm_label": "buildserveroptions",
       "id": "apps_api_src_server_buildserveroptions"
     },
@@ -3672,8 +3782,8 @@
       "source_file": "apps/api/src/server.ts",
       "source_location": "L13",
       "_origin": "ast",
-      "community": 14,
-      "community_name": "providers.ts",
+      "community": 22,
+      "community_name": "server.test.ts",
       "norm_label": ".buildjobrunnerdeps()",
       "id": "apps_api_src_server_buildserveroptions_buildjobrunnerdeps"
     },
@@ -3683,8 +3793,8 @@
       "source_file": "apps/api/src/server.ts",
       "source_location": "L14",
       "_origin": "ast",
-      "community": 14,
-      "community_name": "providers.ts",
+      "community": 22,
+      "community_name": "server.test.ts",
       "norm_label": ".buildcostoptions()",
       "id": "apps_api_src_server_buildserveroptions_buildcostoptions"
     },
@@ -3705,8 +3815,8 @@
       "source_file": "packages/providers/src/agents/creative-director.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 43,
+      "community_name": "research.ts",
       "norm_label": "creative-director.test.ts",
       "id": "packages_providers_src_agents_creative_director_test"
     },
@@ -3716,8 +3826,8 @@
       "source_file": "packages/providers/src/agents/creative-director.test.ts",
       "source_location": "L6",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 43,
+      "community_name": "research.ts",
       "norm_label": "research",
       "id": "packages_providers_src_agents_creative_director_test_research"
     },
@@ -3727,8 +3837,8 @@
       "source_file": "packages/providers/src/agents/creative-director.test.ts",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 43,
+      "community_name": "research.ts",
       "norm_label": "sceneraw()",
       "id": "packages_providers_src_agents_creative_director_test_sceneraw"
     },
@@ -3738,8 +3848,8 @@
       "source_file": "packages/providers/src/agents/creative-director.test.ts",
       "source_location": "L22",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 43,
+      "community_name": "research.ts",
       "norm_label": "fakellm()",
       "id": "packages_providers_src_agents_creative_director_test_fakellm"
     },
@@ -3749,8 +3859,8 @@
       "source_file": "packages/providers/src/agents/creative-director.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 42,
+      "community_name": "creative-director.ts",
       "norm_label": "creative-director.ts",
       "id": "packages_providers_src_agents_creative_director"
     },
@@ -3760,8 +3870,8 @@
       "source_file": "packages/providers/src/agents/creative-director.ts",
       "source_location": "L11",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 42,
+      "community_name": "creative-director.ts",
       "norm_label": "system_prompt_path",
       "id": "packages_providers_src_agents_creative_director_system_prompt_path"
     },
@@ -3771,8 +3881,8 @@
       "source_file": "packages/providers/src/agents/creative-director.ts",
       "source_location": "L25",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 42,
+      "community_name": "creative-director.ts",
       "norm_label": "sceneraw",
       "id": "packages_providers_src_agents_creative_director_sceneraw"
     },
@@ -3782,8 +3892,8 @@
       "source_file": "packages/providers/src/agents/creative-director.ts",
       "source_location": "L32",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 42,
+      "community_name": "creative-director.ts",
       "norm_label": "directorscoreraw",
       "id": "packages_providers_src_agents_creative_director_directorscoreraw"
     },
@@ -3793,8 +3903,8 @@
       "source_file": "packages/providers/src/agents/creative-director.ts",
       "source_location": "L39",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 42,
+      "community_name": "creative-director.ts",
       "norm_label": "directorscore",
       "id": "packages_providers_src_agents_creative_director_directorscore"
     },
@@ -3804,8 +3914,8 @@
       "source_file": "packages/providers/src/agents/creative-director.ts",
       "source_location": "L52",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 42,
+      "community_name": "creative-director.ts",
       "norm_label": "directorscoreoutput",
       "id": "packages_providers_src_agents_creative_director_directorscoreoutput"
     },
@@ -3815,8 +3925,8 @@
       "source_file": "packages/providers/src/agents/creative-director.ts",
       "source_location": "L64",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 42,
+      "community_name": "creative-director.ts",
       "norm_label": "toscenes()",
       "id": "packages_providers_src_agents_creative_director_toscenes"
     },
@@ -3826,8 +3936,8 @@
       "source_file": "packages/providers/src/agents/creative-director.ts",
       "source_location": "L75",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 42,
+      "community_name": "creative-director.ts",
       "norm_label": "sleep()",
       "id": "packages_providers_src_agents_creative_director_sleep"
     },
@@ -3837,8 +3947,8 @@
       "source_file": "packages/providers/src/agents/creative-director.ts",
       "source_location": "L79",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 42,
+      "community_name": "creative-director.ts",
       "norm_label": "loaddirectorsystemprompt()",
       "id": "packages_providers_src_agents_creative_director_loaddirectorsystemprompt"
     },
@@ -3848,8 +3958,8 @@
       "source_file": "packages/providers/src/agents/creative-director.ts",
       "source_location": "L87",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 42,
+      "community_name": "creative-director.ts",
       "norm_label": "generatedirectorscore()",
       "id": "packages_providers_src_agents_creative_director_generatedirectorscore"
     },
@@ -3859,8 +3969,8 @@
       "source_file": "packages/providers/src/agents/creative-director.ts",
       "source_location": "L163",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 42,
+      "community_name": "creative-director.ts",
       "norm_label": "builddefaultprompt()",
       "id": "packages_providers_src_agents_creative_director_builddefaultprompt"
     },
@@ -3870,8 +3980,8 @@
       "source_file": "packages/providers/src/agents/creative-director.ts",
       "source_location": "L181",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 41,
+      "community_name": "critic.ts",
       "norm_label": "pacing_config",
       "id": "packages_providers_src_agents_creative_director_pacing_config"
     },
@@ -3881,8 +3991,8 @@
       "source_file": "packages/providers/src/agents/creative-director.ts",
       "source_location": "L192",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 42,
+      "community_name": "creative-director.ts",
       "norm_label": "buildpacinginstruction()",
       "id": "packages_providers_src_agents_creative_director_buildpacinginstruction"
     },
@@ -3892,8 +4002,8 @@
       "source_file": "packages/providers/src/agents/creative-director.ts",
       "source_location": "L219",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 42,
+      "community_name": "creative-director.ts",
       "norm_label": "revisedirectorscore()",
       "id": "packages_providers_src_agents_creative_director_revisedirectorscore"
     },
@@ -3903,8 +4013,8 @@
       "source_file": "packages/providers/src/agents/research.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 43,
+      "community_name": "research.ts",
       "norm_label": "research.test.ts",
       "id": "packages_providers_src_agents_research_test"
     },
@@ -3914,8 +4024,8 @@
       "source_file": "packages/providers/src/agents/research.test.ts",
       "source_location": "L5",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 43,
+      "community_name": "research.ts",
       "norm_label": "fakellm()",
       "id": "packages_providers_src_agents_research_test_fakellm"
     },
@@ -3925,8 +4035,8 @@
       "source_file": "packages/providers/src/agents/research.test.ts",
       "source_location": "L14",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 43,
+      "community_name": "research.ts",
       "norm_label": "result",
       "id": "packages_providers_src_agents_research_test_result"
     },
@@ -3936,8 +4046,8 @@
       "source_file": "packages/providers/src/agents/research.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 43,
+      "community_name": "research.ts",
       "norm_label": "research.ts",
       "id": "packages_providers_src_agents_research"
     },
@@ -3947,8 +4057,8 @@
       "source_file": "packages/providers/src/agents/research.ts",
       "source_location": "L6",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 43,
+      "community_name": "research.ts",
       "norm_label": "system_prompt_path",
       "id": "packages_providers_src_agents_research_system_prompt_path"
     },
@@ -3958,8 +4068,8 @@
       "source_file": "packages/providers/src/agents/research.ts",
       "source_location": "L8",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 43,
+      "community_name": "research.ts",
       "norm_label": "researchresult",
       "id": "packages_providers_src_agents_research_researchresult"
     },
@@ -3969,8 +4079,8 @@
       "source_file": "packages/providers/src/agents/research.ts",
       "source_location": "L15",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 43,
+      "community_name": "research.ts",
       "norm_label": "researchoutput",
       "id": "packages_providers_src_agents_research_researchoutput"
     },
@@ -3980,8 +4090,8 @@
       "source_file": "packages/providers/src/agents/research.ts",
       "source_location": "L26",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 43,
+      "community_name": "research.ts",
       "norm_label": "research()",
       "id": "packages_providers_src_agents_research_research"
     },
@@ -3992,7 +4102,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community_name": "llm/types.ts",
       "norm_label": "llm/fallback.test.ts",
       "id": "packages_providers_src_llm_fallback_test"
     },
@@ -4003,7 +4113,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community_name": "llm/types.ts",
       "norm_label": "schema",
       "id": "packages_providers_src_llm_fallback_test_schema"
     },
@@ -4014,7 +4124,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community_name": "llm/types.ts",
       "norm_label": "opts",
       "id": "packages_providers_src_llm_fallback_test_opts"
     },
@@ -4025,7 +4135,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community_name": "llm/types.ts",
       "norm_label": "provider()",
       "id": "packages_providers_src_llm_fallback_test_provider"
     },
@@ -4036,7 +4146,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community_name": "llm/types.ts",
       "norm_label": "llm/fallback.ts",
       "id": "packages_providers_src_llm_fallback"
     },
@@ -4047,7 +4157,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community_name": "llm/types.ts",
       "norm_label": "fallbackllm",
       "id": "packages_providers_src_llm_fallback_fallbackllm"
     },
@@ -4058,7 +4168,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community_name": "llm/types.ts",
       "norm_label": ".constructor()",
       "id": "packages_providers_src_llm_fallback_fallbackllm_constructor"
     },
@@ -4069,7 +4179,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community_name": "llm/types.ts",
       "norm_label": ".generate()",
       "id": "packages_providers_src_llm_fallback_fallbackllm_generate"
     },
@@ -4943,61 +5053,6 @@
       "id": "vitest"
     },
     {
-      "label": "api/src/index.ts",
-      "file_type": "code",
-      "source_file": "apps/api/src/index.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "providers.ts",
-      "norm_label": "api/src/index.ts",
-      "id": "apps_api_src_index"
-    },
-    {
-      "label": "runsDir",
-      "file_type": "code",
-      "source_file": "apps/api/src/index.ts",
-      "source_location": "L8",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "providers.ts",
-      "norm_label": "runsdir",
-      "id": "apps_api_src_index_runsdir"
-    },
-    {
-      "label": "envFilePath",
-      "file_type": "code",
-      "source_file": "apps/api/src/index.ts",
-      "source_location": "L10",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "providers.ts",
-      "norm_label": "envfilepath",
-      "id": "apps_api_src_index_envfilepath"
-    },
-    {
-      "label": "app",
-      "file_type": "code",
-      "source_file": "apps/api/src/index.ts",
-      "source_location": "L12",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "providers.ts",
-      "norm_label": "app",
-      "id": "apps_api_src_index_app"
-    },
-    {
-      "label": "port",
-      "file_type": "code",
-      "source_file": "apps/api/src/index.ts",
-      "source_location": "L20",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "providers.ts",
-      "norm_label": "port",
-      "id": "apps_api_src_index_port"
-    },
-    {
       "label": "TokenGate.tsx",
       "file_type": "code",
       "source_file": "apps/web/src/components/TokenGate.tsx",
@@ -5047,8 +5102,8 @@
       "source_file": "packages/providers/src/pipeline/scene-timing.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 2,
+      "community_name": "pipeline/types.ts",
       "norm_label": "scene-timing.test.ts",
       "id": "packages_providers_src_pipeline_scene_timing_test"
     },
@@ -5058,8 +5113,8 @@
       "source_file": "packages/providers/src/pipeline/scene-timing.test.ts",
       "source_location": "L5",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 2,
+      "community_name": "pipeline/types.ts",
       "norm_label": "scene()",
       "id": "packages_providers_src_pipeline_scene_timing_test_scene"
     },
@@ -5069,8 +5124,8 @@
       "source_file": "packages/providers/src/pipeline/scene-timing.test.ts",
       "source_location": "L16",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 2,
+      "community_name": "pipeline/types.ts",
       "norm_label": "word()",
       "id": "packages_providers_src_pipeline_scene_timing_test_word"
     },
@@ -6010,28 +6065,6 @@
       "id": "packages_providers_src_qc_media_tools_probe_probemedia"
     },
     {
-      "label": "repository.test.ts",
-      "file_type": "code",
-      "source_file": "packages/providers/src/persistence/repository.test.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "repository.ts",
-      "norm_label": "repository.test.ts",
-      "id": "packages_providers_src_persistence_repository_test"
-    },
-    {
-      "label": "config",
-      "file_type": "code",
-      "source_file": "packages/providers/src/persistence/repository.test.ts",
-      "source_location": "L18",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "repository.ts",
-      "norm_label": "config",
-      "id": "packages_providers_src_persistence_repository_test_config"
-    },
-    {
       "label": "qc/types.ts",
       "file_type": "code",
       "source_file": "packages/providers/src/qc/types.ts",
@@ -6070,8 +6103,8 @@
       "source_file": "packages/providers/src/qc/types.ts",
       "source_location": "L18",
       "_origin": "ast",
-      "community": 8,
-      "community_name": "run-qc.ts",
+      "community": 5,
+      "community_name": "repository.ts",
       "norm_label": "qcreport",
       "id": "packages_providers_src_qc_types_qcreport"
     },
@@ -7732,7 +7765,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 7,
-      "community_name": "resolve-element.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "image/gemini.ts",
       "id": "packages_providers_src_image_gemini"
     },
@@ -7743,7 +7776,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "community": 7,
-      "community_name": "resolve-element.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "geminiimage",
       "id": "packages_providers_src_image_gemini_geminiimage"
     },
@@ -7754,7 +7787,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "community": 7,
-      "community_name": "resolve-element.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": ".constructor()",
       "id": "packages_providers_src_image_gemini_geminiimage_constructor"
     },
@@ -7765,7 +7798,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "community": 7,
-      "community_name": "resolve-element.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": ".generate()",
       "id": "packages_providers_src_image_gemini_geminiimage_generate"
     },
@@ -7776,7 +7809,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 7,
-      "community_name": "resolve-element.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "image/types.ts",
       "id": "packages_providers_src_image_types"
     },
@@ -7787,7 +7820,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 7,
-      "community_name": "resolve-element.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "imageprovider",
       "id": "packages_providers_src_image_types_imageprovider"
     },
@@ -7798,7 +7831,7 @@
       "source_location": "L2",
       "_origin": "ast",
       "community": 7,
-      "community_name": "resolve-element.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": ".generate()",
       "id": "packages_providers_src_image_types_imageprovider_generate"
     },
@@ -7809,7 +7842,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 7,
-      "community_name": "resolve-element.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "fal.ts",
       "id": "packages_providers_src_video_fal"
     },
@@ -7820,7 +7853,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "community": 7,
-      "community_name": "resolve-element.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "falvideo",
       "id": "packages_providers_src_video_fal_falvideo"
     },
@@ -7831,7 +7864,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "community": 7,
-      "community_name": "resolve-element.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": ".constructor()",
       "id": "packages_providers_src_video_fal_falvideo_constructor"
     },
@@ -7842,7 +7875,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "community": 7,
-      "community_name": "resolve-element.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": ".generate()",
       "id": "packages_providers_src_video_fal_falvideo_generate"
     },
@@ -7853,7 +7886,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 7,
-      "community_name": "resolve-element.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "video/gemini.ts",
       "id": "packages_providers_src_video_gemini"
     },
@@ -7864,7 +7897,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "community": 7,
-      "community_name": "resolve-element.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": "geminivideo",
       "id": "packages_providers_src_video_gemini_geminivideo"
     },
@@ -7875,7 +7908,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "community": 7,
-      "community_name": "resolve-element.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": ".constructor()",
       "id": "packages_providers_src_video_gemini_geminivideo_constructor"
     },
@@ -7886,7 +7919,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "community": 7,
-      "community_name": "resolve-element.ts",
+      "community_name": "providers/src/index.ts",
       "norm_label": ".generate()",
       "id": "packages_providers_src_video_gemini_geminivideo_generate"
     },
@@ -7896,8 +7929,8 @@
       "source_file": "packages/video-engine/src/index.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 2,
+      "community_name": "pipeline/types.ts",
       "norm_label": "video-engine/src/index.ts",
       "id": "packages_video_engine_src_index"
     },
@@ -7907,8 +7940,8 @@
       "source_file": "packages/video-engine/src/visual-composition-provider.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 2,
+      "community_name": "pipeline/types.ts",
       "norm_label": "visual-composition-provider.ts",
       "id": "packages_video_engine_src_visual_composition_provider"
     },
@@ -7918,8 +7951,8 @@
       "source_file": "packages/video-engine/src/visual-composition-provider.ts",
       "source_location": "L15",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 2,
+      "community_name": "pipeline/types.ts",
       "norm_label": "visualcompositionprovider",
       "id": "packages_video_engine_src_visual_composition_provider_visualcompositionprovider"
     },
@@ -7929,8 +7962,8 @@
       "source_file": "packages/video-engine/src/visual-composition-provider.ts",
       "source_location": "L17",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 2,
+      "community_name": "pipeline/types.ts",
       "norm_label": ".compose()",
       "id": "packages_video_engine_src_visual_composition_provider_visualcompositionprovider_compose"
     },
@@ -7940,8 +7973,8 @@
       "source_file": "packages/video-engine/src/visual-composition-provider.ts",
       "source_location": "L20",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 2,
+      "community_name": "pipeline/types.ts",
       "norm_label": "composedscene",
       "id": "packages_video_engine_src_visual_composition_provider_composedscene"
     },
@@ -7995,8 +8028,8 @@
       "source_file": "packages/providers/src/agents/critic.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 41,
+      "community_name": "critic.ts",
       "norm_label": "critic.ts",
       "id": "packages_providers_src_agents_critic"
     },
@@ -8006,8 +8039,8 @@
       "source_file": "packages/providers/src/agents/critic.ts",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 41,
+      "community_name": "critic.ts",
       "norm_label": "system_prompt_path",
       "id": "packages_providers_src_agents_critic_system_prompt_path"
     },
@@ -8017,8 +8050,8 @@
       "source_file": "packages/providers/src/agents/critic.ts",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 41,
+      "community_name": "critic.ts",
       "norm_label": "critiqueresult",
       "id": "packages_providers_src_agents_critic_critiqueresult"
     },
@@ -8028,8 +8061,8 @@
       "source_file": "packages/providers/src/agents/critic.ts",
       "source_location": "L22",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 41,
+      "community_name": "critic.ts",
       "norm_label": "critiqueoutput",
       "id": "packages_providers_src_agents_critic_critiqueoutput"
     },
@@ -8039,8 +8072,8 @@
       "source_file": "packages/providers/src/agents/critic.ts",
       "source_location": "L28",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 41,
+      "community_name": "critic.ts",
       "norm_label": "evaluate()",
       "id": "packages_providers_src_agents_critic_evaluate"
     },
@@ -8050,8 +8083,8 @@
       "source_file": "packages/providers/src/config/archetype-registry.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 41,
+      "community_name": "critic.ts",
       "norm_label": "archetype-registry.test.ts",
       "id": "packages_providers_src_config_archetype_registry_test"
     },
@@ -8061,8 +8094,8 @@
       "source_file": "packages/providers/src/config/archetype-registry.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 41,
+      "community_name": "critic.ts",
       "norm_label": "archetype-registry.ts",
       "id": "packages_providers_src_config_archetype_registry"
     },
@@ -8072,8 +8105,8 @@
       "source_file": "packages/providers/src/config/archetype-registry.ts",
       "source_location": "L26",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 41,
+      "community_name": "critic.ts",
       "norm_label": "archetypes",
       "id": "packages_providers_src_config_archetype_registry_archetypes"
     },
@@ -8083,8 +8116,8 @@
       "source_file": "packages/providers/src/config/archetype-registry.ts",
       "source_location": "L48",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 41,
+      "community_name": "critic.ts",
       "norm_label": "getarchetype()",
       "id": "packages_providers_src_config_archetype_registry_getarchetype"
     },
@@ -8094,8 +8127,8 @@
       "source_file": "packages/providers/src/config/archetype-registry.ts",
       "source_location": "L56",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 41,
+      "community_name": "critic.ts",
       "norm_label": "listarchetypes()",
       "id": "packages_providers_src_config_archetype_registry_listarchetypes"
     },
@@ -8105,8 +8138,8 @@
       "source_file": "packages/providers/src/config/archetype.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 41,
+      "community_name": "critic.ts",
       "norm_label": "archetype.ts",
       "id": "packages_providers_src_config_archetype"
     },
@@ -8116,8 +8149,8 @@
       "source_file": "packages/providers/src/config/archetype.ts",
       "source_location": "L3",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 41,
+      "community_name": "critic.ts",
       "norm_label": "scenepacing",
       "id": "packages_providers_src_config_archetype_scenepacing"
     },
@@ -8127,8 +8160,8 @@
       "source_file": "packages/providers/src/config/archetype.ts",
       "source_location": "L6",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 41,
+      "community_name": "critic.ts",
       "norm_label": "archetypeconfig",
       "id": "packages_providers_src_config_archetype_archetypeconfig"
     },
@@ -8139,7 +8172,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community_name": "llm/types.ts",
       "norm_label": "base.test.ts",
       "id": "packages_providers_src_llm_base_test"
     },
@@ -8150,7 +8183,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community_name": "llm/types.ts",
       "norm_label": "generatetextmock",
       "id": "packages_providers_src_llm_base_test_generatetextmock"
     },
@@ -8161,7 +8194,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community_name": "llm/types.ts",
       "norm_label": "fakellm",
       "id": "packages_providers_src_llm_base_test_fakellm"
     },
@@ -8172,7 +8205,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community_name": "llm/types.ts",
       "norm_label": ".createlanguagemodel()",
       "id": "packages_providers_src_llm_base_test_fakellm_createlanguagemodel"
     },
@@ -8183,7 +8216,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community_name": "llm/types.ts",
       "norm_label": "base.ts",
       "id": "packages_providers_src_llm_base"
     },
@@ -8194,7 +8227,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community_name": "llm/types.ts",
       "norm_label": "basellm",
       "id": "packages_providers_src_llm_base_basellm"
     },
@@ -8205,7 +8238,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community_name": "llm/types.ts",
       "norm_label": ".generate()",
       "id": "packages_providers_src_llm_base_basellm_generate"
     },
@@ -8216,7 +8249,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community_name": "llm/types.ts",
       "norm_label": "llm/openrouter.ts",
       "id": "packages_providers_src_llm_openrouter"
     },
@@ -8227,7 +8260,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community_name": "llm/types.ts",
       "norm_label": "openrouterllm",
       "id": "packages_providers_src_llm_openrouter_openrouterllm"
     },
@@ -8238,7 +8271,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community_name": "llm/types.ts",
       "norm_label": ".constructor()",
       "id": "packages_providers_src_llm_openrouter_openrouterllm_constructor"
     },
@@ -8249,7 +8282,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community_name": "llm/types.ts",
       "norm_label": ".createlanguagemodel()",
       "id": "packages_providers_src_llm_openrouter_openrouterllm_createlanguagemodel"
     },
@@ -8260,7 +8293,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community_name": "llm/types.ts",
       "norm_label": "llm/types.ts",
       "id": "packages_providers_src_llm_types"
     },
@@ -8271,7 +8304,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community_name": "llm/types.ts",
       "norm_label": "llmproviderkey",
       "id": "packages_providers_src_llm_types_llmproviderkey"
     },
@@ -8281,8 +8314,8 @@
       "source_file": "packages/providers/src/llm/types.ts",
       "source_location": "L5",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 2,
+      "community_name": "pipeline/types.ts",
       "norm_label": "llmusage",
       "id": "packages_providers_src_llm_types_llmusage"
     },
@@ -8293,7 +8326,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community_name": "llm/types.ts",
       "norm_label": "llmresult",
       "id": "packages_providers_src_llm_types_llmresult"
     },
@@ -8304,7 +8337,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community_name": "llm/types.ts",
       "norm_label": "llmprovider",
       "id": "packages_providers_src_llm_types_llmprovider"
     },
@@ -8315,7 +8348,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community_name": "llm/types.ts",
       "norm_label": ".generate()",
       "id": "packages_providers_src_llm_types_llmprovider_generate"
     },
@@ -8512,8 +8545,8 @@
       "source_file": "packages/domain/src/asset.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 44,
+      "community_name": "asset.ts",
       "norm_label": "asset.ts",
       "id": "packages_domain_src_asset"
     },
@@ -8523,8 +8556,8 @@
       "source_file": "packages/domain/src/asset.ts",
       "source_location": "L7",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 44,
+      "community_name": "asset.ts",
       "norm_label": "assettype",
       "id": "packages_domain_src_asset_assettype"
     },
@@ -8534,8 +8567,8 @@
       "source_file": "packages/domain/src/asset.ts",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 44,
+      "community_name": "asset.ts",
       "norm_label": "asset",
       "id": "packages_domain_src_asset_asset"
     },
@@ -8644,8 +8677,8 @@
       "source_file": "packages/domain/src/index.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 26,
-      "community_name": "providers/src/index.ts",
+      "community": 2,
+      "community_name": "pipeline/types.ts",
       "norm_label": "domain/src/index.ts",
       "id": "packages_domain_src_index"
     },
@@ -9345,6 +9378,1089 @@
   ],
   "links": [
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/index.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "apps_api_src_index",
+      "target": "apps_api_src_db",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/index.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "apps_api_src_index",
+      "target": "apps_api_src_db_opendb",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/index.ts",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "apps_api_src_index",
+      "target": "apps_api_src_index_app",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/index.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "apps_api_src_index",
+      "target": "apps_api_src_index_db",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/index.ts",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "apps_api_src_index",
+      "target": "apps_api_src_index_envfilepath",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/index.ts",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "apps_api_src_index",
+      "target": "apps_api_src_index_port",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/index.ts",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "apps_api_src_index",
+      "target": "apps_api_src_index_runsdir",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/index.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "apps_api_src_index",
+      "target": "apps_api_src_providers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/index.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "apps_api_src_index",
+      "target": "apps_api_src_providers_buildcostoptions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/index.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "apps_api_src_index",
+      "target": "apps_api_src_providers_buildjobrunnerdeps",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/index.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "apps_api_src_index",
+      "target": "apps_api_src_server",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/index.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "apps_api_src_index",
+      "target": "apps_api_src_server_buildserver",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/index.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "apps_api_src_index",
+      "target": "packages_providers_src_index",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository_test",
+      "target": "packages_providers_src_persistence_client",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository_test",
+      "target": "packages_providers_src_persistence_client_createdb",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.test.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository_test",
+      "target": "packages_providers_src_persistence_repository",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.test.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository_test",
+      "target": "packages_providers_src_persistence_repository_createjob",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.test.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository_test",
+      "target": "packages_providers_src_persistence_repository_createproject",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.test.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository_test",
+      "target": "packages_providers_src_persistence_repository_getjob",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.test.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository_test",
+      "target": "packages_providers_src_persistence_repository_getproject",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.test.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository_test",
+      "target": "packages_providers_src_persistence_repository_listjobsbyproject",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.test.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository_test",
+      "target": "packages_providers_src_persistence_repository_recoverorphanedjobs",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.test.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository_test",
+      "target": "packages_providers_src_persistence_repository_setjobactualcost",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.test.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository_test",
+      "target": "packages_providers_src_persistence_repository_setjoberror",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.test.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository_test",
+      "target": "packages_providers_src_persistence_repository_setjobestimatedcost",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.test.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository_test",
+      "target": "packages_providers_src_persistence_repository_setjoboutputpath",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.test.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository_test",
+      "target": "packages_providers_src_persistence_repository_setjobqcreport",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.test.ts",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository_test",
+      "target": "packages_providers_src_persistence_repository_test_config",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.test.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository_test",
+      "target": "packages_providers_src_persistence_repository_updatejobstatus",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.test.ts",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository_test",
+      "target": "packages_providers_src_persistence_types",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.test.ts",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository_test",
+      "target": "packages_providers_src_persistence_types_projectconfig",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/job-runner.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "packages_providers_src_persistence_job_runner",
+      "target": "packages_providers_src_persistence_repository"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/job-runner.test.ts",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "packages_providers_src_persistence_job_runner_test",
+      "target": "packages_providers_src_persistence_repository"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository",
+      "target": "packages_providers_src_persistence_client",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository",
+      "target": "packages_providers_src_persistence_client_clickplaydb",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository",
+      "target": "packages_providers_src_persistence_job_state_machine",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository",
+      "target": "packages_providers_src_persistence_job_state_machine_progress_by_status",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository",
+      "target": "packages_providers_src_persistence_job_state_machine_resumestatusforcheckpoint",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository",
+      "target": "packages_providers_src_persistence_repository_createjob",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository",
+      "target": "packages_providers_src_persistence_repository_createproject",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L44",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository",
+      "target": "packages_providers_src_persistence_repository_getjob",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository",
+      "target": "packages_providers_src_persistence_repository_getproject",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L49",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository",
+      "target": "packages_providers_src_persistence_repository_listjobsbyproject",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L89",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository",
+      "target": "packages_providers_src_persistence_repository_non_terminal_statuses",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L107",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository",
+      "target": "packages_providers_src_persistence_repository_recoverorphanedjobs",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L125",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository",
+      "target": "packages_providers_src_persistence_repository_resetjobforretry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L69",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository",
+      "target": "packages_providers_src_persistence_repository_setjobactualcost",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L85",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository",
+      "target": "packages_providers_src_persistence_repository_setjobcheckpoint",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L81",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository",
+      "target": "packages_providers_src_persistence_repository_setjoberror",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L65",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository",
+      "target": "packages_providers_src_persistence_repository_setjobestimatedcost",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L77",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository",
+      "target": "packages_providers_src_persistence_repository_setjoboutputpath",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L73",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository",
+      "target": "packages_providers_src_persistence_repository_setjobqcreport",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L59",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository",
+      "target": "packages_providers_src_persistence_repository_updatejobstatus",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository",
+      "target": "packages_providers_src_persistence_schema",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository",
+      "target": "packages_providers_src_persistence_schema_jobs",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository",
+      "target": "packages_providers_src_persistence_schema_jobstatus",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository",
+      "target": "packages_providers_src_persistence_schema_projects",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository",
+      "target": "packages_providers_src_persistence_types",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository",
+      "target": "packages_providers_src_persistence_types_job",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository",
+      "target": "packages_providers_src_persistence_types_jobfromrow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository",
+      "target": "packages_providers_src_persistence_types_project",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository",
+      "target": "packages_providers_src_persistence_types_projectconfig",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository",
+      "target": "packages_providers_src_persistence_types_projectfromrow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository",
+      "target": "packages_providers_src_pipeline_types",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository",
+      "target": "packages_providers_src_pipeline_types_pipelinecheckpoint",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository",
+      "target": "packages_providers_src_qc_types",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository",
+      "target": "packages_providers_src_qc_types_qcreport",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/job-runner.test.ts",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "packages_providers_src_persistence_job_runner_test",
+      "target": "packages_providers_src_persistence_repository_createproject"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/job-runner.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "packages_providers_src_persistence_job_runner",
+      "target": "packages_providers_src_persistence_repository_getproject"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "packages/providers/src/persistence/job-runner.ts",
+      "source_location": "L75",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_job_runner_runjobonce",
+      "target": "packages_providers_src_persistence_repository_getproject"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/job-runner.test.ts",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "packages_providers_src_persistence_job_runner_test",
+      "target": "packages_providers_src_persistence_repository_createjob"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/job-runner.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "packages_providers_src_persistence_job_runner",
+      "target": "packages_providers_src_persistence_repository_getjob"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "packages/providers/src/persistence/job-runner.ts",
+      "source_location": "L59",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_job_runner_retryjob",
+      "target": "packages_providers_src_persistence_repository_getjob"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "packages/providers/src/persistence/job-runner.ts",
+      "source_location": "L73",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_job_runner_runjobonce",
+      "target": "packages_providers_src_persistence_repository_getjob"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/job-runner.test.ts",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "packages_providers_src_persistence_job_runner_test",
+      "target": "packages_providers_src_persistence_repository_getjob"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L126",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository_resetjobforretry",
+      "target": "packages_providers_src_persistence_repository_getjob",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/job-runner.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "packages_providers_src_persistence_job_runner",
+      "target": "packages_providers_src_persistence_repository_updatejobstatus"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "packages/providers/src/persistence/job-runner.ts",
+      "source_location": "L82",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_job_runner_runjobonce",
+      "target": "packages_providers_src_persistence_repository_updatejobstatus"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/job-runner.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "packages_providers_src_persistence_job_runner",
+      "target": "packages_providers_src_persistence_repository_setjobestimatedcost"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/job-runner.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "packages_providers_src_persistence_job_runner",
+      "target": "packages_providers_src_persistence_repository_setjobactualcost"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "packages/providers/src/persistence/job-runner.ts",
+      "source_location": "L120",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_job_runner_runjobonce",
+      "target": "packages_providers_src_persistence_repository_setjobactualcost"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/job-runner.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "packages_providers_src_persistence_job_runner",
+      "target": "packages_providers_src_persistence_repository_setjobqcreport"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "packages/providers/src/persistence/job-runner.ts",
+      "source_location": "L133",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_job_runner_runjobonce",
+      "target": "packages_providers_src_persistence_repository_setjobqcreport"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/job-runner.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "packages_providers_src_persistence_job_runner",
+      "target": "packages_providers_src_persistence_repository_setjoboutputpath"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "packages/providers/src/persistence/job-runner.ts",
+      "source_location": "L121",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_job_runner_runjobonce",
+      "target": "packages_providers_src_persistence_repository_setjoboutputpath"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/job-runner.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "packages_providers_src_persistence_job_runner",
+      "target": "packages_providers_src_persistence_repository_setjoberror"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "packages/providers/src/persistence/job-runner.ts",
+      "source_location": "L140",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_job_runner_runjobonce",
+      "target": "packages_providers_src_persistence_repository_setjoberror"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "packages/providers/src/persistence/job-runner.ts",
+      "source_location": "L44",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_job_runner_startjob",
+      "target": "packages_providers_src_persistence_repository_setjoberror"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/job-runner.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "packages_providers_src_persistence_job_runner",
+      "target": "packages_providers_src_persistence_repository_setjobcheckpoint"
+    },
+    {
+      "relation": "references",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "packages/providers/src/persistence/repository.ts",
+      "source_location": "L109",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_repository_recoverorphanedjobs",
+      "target": "packages_providers_src_persistence_repository_non_terminal_statuses"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/persistence/job-runner.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "packages_providers_src_persistence_job_runner",
+      "target": "packages_providers_src_persistence_repository_resetjobforretry"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "packages/providers/src/persistence/job-runner.ts",
+      "source_location": "L61",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_persistence_job_runner_retryjob",
+      "target": "packages_providers_src_persistence_repository_resetjobforretry"
+    },
+    {
       "relation": "indirect_call",
       "context": "argument",
       "confidence": "INFERRED",
@@ -9363,9 +10479,9 @@
       "source_location": "L85",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_video_engine_src_render_clickplayvideo",
-      "target": "packages_video_engine_src_render_clickplayvideo_clickplayvideoroot",
-      "confidence_score": 1.0
+      "target": "packages_video_engine_src_render_clickplayvideo_clickplayvideoroot"
     },
     {
       "relation": "contains",
@@ -9374,9 +10490,9 @@
       "source_location": "L70",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_video_engine_src_render_clickplayvideo",
-      "target": "packages_video_engine_src_render_clickplayvideo_default_props",
-      "confidence_score": 1.0
+      "target": "packages_video_engine_src_render_clickplayvideo_default_props"
     },
     {
       "relation": "contains",
@@ -9385,9 +10501,9 @@
       "source_location": "L14",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_video_engine_src_render_clickplayvideo",
-      "target": "packages_video_engine_src_render_clickplayvideo_main",
-      "confidence_score": 1.0
+      "target": "packages_video_engine_src_render_clickplayvideo_main"
     },
     {
       "relation": "contains",
@@ -9396,9 +10512,9 @@
       "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_video_engine_src_render_clickplayvideo",
-      "target": "packages_video_engine_src_render_clickplayvideo_resolveasset",
-      "confidence_score": 1.0
+      "target": "packages_video_engine_src_render_clickplayvideo_resolveasset"
     },
     {
       "relation": "imports_from",
@@ -9408,9 +10524,9 @@
       "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_video_engine_src_render_video_renderer",
-      "target": "packages_video_engine_src_render_clickplayvideo",
-      "confidence_score": 1.0
+      "target": "packages_video_engine_src_render_clickplayvideo"
     },
     {
       "relation": "calls",
@@ -9420,9 +10536,9 @@
       "source_location": "L64",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_video_engine_src_render_clickplayvideo_main",
-      "target": "packages_video_engine_src_render_clickplayvideo_resolveasset",
-      "confidence_score": 1.0
+      "target": "packages_video_engine_src_render_clickplayvideo_resolveasset"
     },
     {
       "relation": "contains",
@@ -9431,9 +10547,9 @@
       "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_video_engine_src_render_elements_imageelement",
-      "target": "packages_video_engine_src_render_elements_imageelement_imageelement",
-      "confidence_score": 1.0
+      "target": "packages_video_engine_src_render_elements_imageelement_imageelement"
     },
     {
       "relation": "contains",
@@ -9442,9 +10558,9 @@
       "source_location": "L10",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_video_engine_src_render_elements_videoelement",
-      "target": "packages_video_engine_src_render_elements_videoelement_videoelement",
-      "confidence_score": 1.0
+      "target": "packages_video_engine_src_render_elements_videoelement_videoelement"
     },
     {
       "relation": "contains",
@@ -9453,9 +10569,9 @@
       "source_location": "L123",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_video_engine_src_render_video_renderer",
-      "target": "packages_video_engine_src_render_video_renderer_preparepublicassets",
-      "confidence_score": 1.0
+      "target": "packages_video_engine_src_render_video_renderer_preparepublicassets"
     },
     {
       "relation": "contains",
@@ -9464,9 +10580,9 @@
       "source_location": "L24",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_video_engine_src_render_video_renderer",
-      "target": "packages_video_engine_src_render_video_renderer_remotionrenderer",
-      "confidence_score": 1.0
+      "target": "packages_video_engine_src_render_video_renderer_remotionrenderer"
     },
     {
       "relation": "contains",
@@ -9475,9 +10591,9 @@
       "source_location": "L19",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_video_engine_src_render_video_renderer",
-      "target": "packages_video_engine_src_render_video_renderer_remotionrendereroptions",
-      "confidence_score": 1.0
+      "target": "packages_video_engine_src_render_video_renderer_remotionrendereroptions"
     },
     {
       "relation": "contains",
@@ -9486,9 +10602,9 @@
       "source_location": "L14",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_video_engine_src_render_video_renderer",
-      "target": "packages_video_engine_src_render_video_renderer_videorenderer",
-      "confidence_score": 1.0
+      "target": "packages_video_engine_src_render_video_renderer_videorenderer"
     },
     {
       "relation": "implements",
@@ -9498,9 +10614,9 @@
       "source_location": "L24",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_video_engine_src_render_video_renderer_remotionrenderer",
-      "target": "packages_video_engine_src_render_video_renderer_videorenderer",
-      "confidence_score": 1.0
+      "target": "packages_video_engine_src_render_video_renderer_videorenderer"
     },
     {
       "relation": "method",
@@ -9509,9 +10625,9 @@
       "source_location": "L16",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_video_engine_src_render_video_renderer_videorenderer",
-      "target": "packages_video_engine_src_render_video_renderer_videorenderer_render",
-      "confidence_score": 1.0
+      "target": "packages_video_engine_src_render_video_renderer_videorenderer_render"
     },
     {
       "relation": "method",
@@ -9520,9 +10636,9 @@
       "source_location": "L27",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_video_engine_src_render_video_renderer_remotionrenderer",
-      "target": "packages_video_engine_src_render_video_renderer_remotionrenderer_constructor",
-      "confidence_score": 1.0
+      "target": "packages_video_engine_src_render_video_renderer_remotionrenderer_constructor"
     },
     {
       "relation": "method",
@@ -9531,9 +10647,9 @@
       "source_location": "L29",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_video_engine_src_render_video_renderer_remotionrenderer",
-      "target": "packages_video_engine_src_render_video_renderer_remotionrenderer_render",
-      "confidence_score": 1.0
+      "target": "packages_video_engine_src_render_video_renderer_remotionrenderer_render"
     },
     {
       "relation": "calls",
@@ -9543,9 +10659,9 @@
       "source_location": "L36",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_video_engine_src_render_video_renderer_remotionrenderer_render",
-      "target": "packages_video_engine_src_render_video_renderer_preparepublicassets",
-      "confidence_score": 1.0
+      "target": "packages_video_engine_src_render_video_renderer_preparepublicassets"
     },
     {
       "relation": "imports_from",
@@ -11061,30 +12177,6 @@
       "target": "packages_providers_src_persistence_client"
     },
     {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L6",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_client"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.test.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_client"
-    },
-    {
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -11094,174 +12186,6 @@
       "_origin": "ast",
       "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_job_runner",
-      "target": "packages_providers_src_persistence_client_clickplaydb"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L6",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_client_clickplaydb"
-    },
-    {
-      "relation": "references",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L40",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_providers_src_persistence_repository_createjob",
-      "target": "packages_providers_src_persistence_client_clickplaydb"
-    },
-    {
-      "relation": "references",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L14",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_providers_src_persistence_repository_createproject",
-      "target": "packages_providers_src_persistence_client_clickplaydb"
-    },
-    {
-      "relation": "references",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L45",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_providers_src_persistence_repository_getjob",
-      "target": "packages_providers_src_persistence_client_clickplaydb"
-    },
-    {
-      "relation": "references",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L19",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_providers_src_persistence_repository_getproject",
-      "target": "packages_providers_src_persistence_client_clickplaydb"
-    },
-    {
-      "relation": "references",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L50",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_providers_src_persistence_repository_listjobsbyproject",
-      "target": "packages_providers_src_persistence_client_clickplaydb"
-    },
-    {
-      "relation": "references",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L102",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_providers_src_persistence_repository_resetjobforretry",
-      "target": "packages_providers_src_persistence_client_clickplaydb"
-    },
-    {
-      "relation": "references",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L70",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_providers_src_persistence_repository_setjobactualcost",
-      "target": "packages_providers_src_persistence_client_clickplaydb"
-    },
-    {
-      "relation": "references",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L86",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_providers_src_persistence_repository_setjobcheckpoint",
-      "target": "packages_providers_src_persistence_client_clickplaydb"
-    },
-    {
-      "relation": "references",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L82",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_providers_src_persistence_repository_setjoberror",
-      "target": "packages_providers_src_persistence_client_clickplaydb"
-    },
-    {
-      "relation": "references",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L66",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_providers_src_persistence_repository_setjobestimatedcost",
-      "target": "packages_providers_src_persistence_client_clickplaydb"
-    },
-    {
-      "relation": "references",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L78",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_providers_src_persistence_repository_setjoboutputpath",
-      "target": "packages_providers_src_persistence_client_clickplaydb"
-    },
-    {
-      "relation": "references",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L74",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_providers_src_persistence_repository_setjobqcreport",
-      "target": "packages_providers_src_persistence_client_clickplaydb"
-    },
-    {
-      "relation": "references",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L62",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_providers_src_persistence_repository_updatejobstatus",
       "target": "packages_providers_src_persistence_client_clickplaydb"
     },
     {
@@ -11298,18 +12222,6 @@
       "_origin": "ast",
       "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_job_runner_test",
-      "target": "packages_providers_src_persistence_client_createdb"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.test.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository_test",
       "target": "packages_providers_src_persistence_client_createdb"
     },
     {
@@ -11538,54 +12450,6 @@
       "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_job_runner_test",
       "target": "packages_providers_src_persistence_job_runner_test_usage"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/job-runner.test.ts",
-      "source_location": "L17",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_job_runner_test",
-      "target": "packages_providers_src_persistence_repository"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/job-runner.test.ts",
-      "source_location": "L17",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_job_runner_test",
-      "target": "packages_providers_src_persistence_repository_createjob"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/job-runner.test.ts",
-      "source_location": "L17",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_job_runner_test",
-      "target": "packages_providers_src_persistence_repository_createproject"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/job-runner.test.ts",
-      "source_location": "L17",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_job_runner_test",
-      "target": "packages_providers_src_persistence_repository_getjob"
     },
     {
       "relation": "imports_from",
@@ -11827,138 +12691,6 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "packages/providers/src/persistence/job-runner.ts",
-      "source_location": "L8",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_job_runner",
-      "target": "packages_providers_src_persistence_repository"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/job-runner.ts",
-      "source_location": "L8",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_job_runner",
-      "target": "packages_providers_src_persistence_repository_getjob"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/job-runner.ts",
-      "source_location": "L8",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_job_runner",
-      "target": "packages_providers_src_persistence_repository_getproject"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/job-runner.ts",
-      "source_location": "L8",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_job_runner",
-      "target": "packages_providers_src_persistence_repository_resetjobforretry"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/job-runner.ts",
-      "source_location": "L8",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_job_runner",
-      "target": "packages_providers_src_persistence_repository_setjobactualcost"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/job-runner.ts",
-      "source_location": "L8",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_job_runner",
-      "target": "packages_providers_src_persistence_repository_setjobcheckpoint"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/job-runner.ts",
-      "source_location": "L8",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_job_runner",
-      "target": "packages_providers_src_persistence_repository_setjoberror"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/job-runner.ts",
-      "source_location": "L8",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_job_runner",
-      "target": "packages_providers_src_persistence_repository_setjobestimatedcost"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/job-runner.ts",
-      "source_location": "L8",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_job_runner",
-      "target": "packages_providers_src_persistence_repository_setjoboutputpath"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/job-runner.ts",
-      "source_location": "L8",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_job_runner",
-      "target": "packages_providers_src_persistence_repository_setjobqcreport"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/job-runner.ts",
-      "source_location": "L8",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_job_runner",
-      "target": "packages_providers_src_persistence_repository_updatejobstatus"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/job-runner.ts",
       "source_location": "L20",
       "weight": 1.0,
       "_origin": "ast",
@@ -12138,131 +12870,11 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "packages/providers/src/persistence/job-runner.ts",
-      "source_location": "L44",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_providers_src_persistence_job_runner_startjob",
-      "target": "packages_providers_src_persistence_repository_setjoberror"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "packages/providers/src/persistence/job-runner.ts",
-      "source_location": "L59",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_providers_src_persistence_job_runner_retryjob",
-      "target": "packages_providers_src_persistence_repository_getjob"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "packages/providers/src/persistence/job-runner.ts",
-      "source_location": "L61",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_providers_src_persistence_job_runner_retryjob",
-      "target": "packages_providers_src_persistence_repository_resetjobforretry"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "packages/providers/src/persistence/job-runner.ts",
       "source_location": "L80",
       "weight": 1.0,
       "_origin": "ast",
       "source": "packages_providers_src_persistence_job_runner_runjobonce",
       "target": "packages_providers_src_persistence_job_state_machine_asserttransition"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "packages/providers/src/persistence/job-runner.ts",
-      "source_location": "L73",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_providers_src_persistence_job_runner_runjobonce",
-      "target": "packages_providers_src_persistence_repository_getjob"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "packages/providers/src/persistence/job-runner.ts",
-      "source_location": "L75",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_providers_src_persistence_job_runner_runjobonce",
-      "target": "packages_providers_src_persistence_repository_getproject"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "packages/providers/src/persistence/job-runner.ts",
-      "source_location": "L120",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_providers_src_persistence_job_runner_runjobonce",
-      "target": "packages_providers_src_persistence_repository_setjobactualcost"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "packages/providers/src/persistence/job-runner.ts",
-      "source_location": "L140",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_providers_src_persistence_job_runner_runjobonce",
-      "target": "packages_providers_src_persistence_repository_setjoberror"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "packages/providers/src/persistence/job-runner.ts",
-      "source_location": "L121",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_providers_src_persistence_job_runner_runjobonce",
-      "target": "packages_providers_src_persistence_repository_setjoboutputpath"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "packages/providers/src/persistence/job-runner.ts",
-      "source_location": "L133",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_providers_src_persistence_job_runner_runjobonce",
-      "target": "packages_providers_src_persistence_repository_setjobqcreport"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "packages/providers/src/persistence/job-runner.ts",
-      "source_location": "L82",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_providers_src_persistence_job_runner_runjobonce",
-      "target": "packages_providers_src_persistence_repository_updatejobstatus"
     },
     {
       "relation": "calls",
@@ -12404,18 +13016,6 @@
       "target": "packages_providers_src_persistence_job_state_machine"
     },
     {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L7",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_job_state_machine"
-    },
-    {
       "relation": "references",
       "context": "call",
       "confidence": "EXTRACTED",
@@ -12443,30 +13043,6 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L7",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_job_state_machine_resumestatusforcheckpoint"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L100",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_providers_src_persistence_repository_resetjobforretry",
-      "target": "packages_providers_src_persistence_job_state_machine_resumestatusforcheckpoint"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
       "source_file": "packages/providers/src/persistence/job-state-machine.test.ts",
       "source_location": "L2",
       "weight": 1.0,
@@ -12474,545 +13050,6 @@
       "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_job_state_machine_test",
       "target": "packages_providers_src_persistence_job_state_machine_progress_by_status"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L7",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_job_state_machine_progress_by_status"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L23",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_createjob"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L11",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_createproject"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L44",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_getjob"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L18",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_getproject"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L49",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_listjobsbyproject"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L95",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_resetjobforretry"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L69",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_setjobactualcost"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L85",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_setjobcheckpoint"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L81",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_setjoberror"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L65",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_setjobestimatedcost"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L77",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_setjoboutputpath"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L73",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_setjobqcreport"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L59",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_updatejobstatus"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L8",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_schema"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L8",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_schema_jobs"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L8",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_schema_jobstatus"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L8",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_schema_projects"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L9",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_types"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L9",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_types_job"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L9",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_types_jobfromrow"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L9",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_types_project"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L9",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_types_projectconfig"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L9",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_types_projectfromrow"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L4",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_pipeline_types"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L4",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_pipeline_types_pipelinecheckpoint"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_qc_types"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_qc_types_qcreport"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.test.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L15",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_providers_src_persistence_repository_createproject",
-      "target": "packages_providers_src_persistence_types_projectfromrow"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.test.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository_createproject"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L20",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_providers_src_persistence_repository_getproject",
-      "target": "packages_providers_src_persistence_types_projectfromrow"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.test.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository_getproject"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L41",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_providers_src_persistence_repository_createjob",
-      "target": "packages_providers_src_persistence_types_jobfromrow"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.test.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository_createjob"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L46",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_providers_src_persistence_repository_getjob",
-      "target": "packages_providers_src_persistence_types_jobfromrow"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L96",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository_resetjobforretry",
-      "target": "packages_providers_src_persistence_repository_getjob"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.test.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository_getjob"
-    },
-    {
-      "relation": "indirect_call",
-      "context": "argument",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "packages/providers/src/persistence/repository.ts",
-      "source_location": "L51",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_providers_src_persistence_repository_listjobsbyproject",
-      "target": "packages_providers_src_persistence_types_jobfromrow"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.test.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository_listjobsbyproject"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.test.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository_updatejobstatus"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.test.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository_setjobestimatedcost"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.test.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository_setjobactualcost"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.test.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository_setjobqcreport"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.test.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository_setjoboutputpath"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.test.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository_setjoberror"
     },
     {
       "relation": "re_exports",
@@ -13129,18 +13166,6 @@
       "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_types",
       "target": "packages_providers_src_persistence_schema_jobs"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.test.ts",
-      "source_location": "L16",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_types"
     },
     {
       "relation": "contains",
@@ -13278,18 +13303,6 @@
       "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_types",
       "target": "packages_providers_src_qc_types_qcreport"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.test.ts",
-      "source_location": "L16",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_types_projectconfig"
     },
     {
       "relation": "references",
@@ -15203,18 +15216,6 @@
       "target": "apps_api_src_config_getformconfig"
     },
     {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/index.ts",
-      "source_location": "L6",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "apps_api_src_index",
-      "target": "apps_api_src_providers"
-    },
-    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/api/src/providers.ts",
@@ -15350,18 +15351,6 @@
       "target": "packages_video_engine_src_index"
     },
     {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/index.ts",
-      "source_location": "L6",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "apps_api_src_index",
-      "target": "apps_api_src_providers_buildcostoptions"
-    },
-    {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
@@ -15432,18 +15421,6 @@
       "confidence_score": 1.0,
       "source": "apps_api_src_providers_buildjobrunnerdeps",
       "target": "apps_api_src_providers_buildstockproviders"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/index.ts",
-      "source_location": "L6",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "apps_api_src_index",
-      "target": "apps_api_src_providers_buildjobrunnerdeps"
     },
     {
       "relation": "imports_from",
@@ -17780,18 +17757,6 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/index.ts",
-      "source_location": "L4",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "apps_api_src_index",
-      "target": "apps_api_src_server"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
       "source_file": "apps/api/src/server.ts",
       "source_location": "L8",
       "weight": 1.0,
@@ -17855,42 +17820,6 @@
       "confidence_score": 1.0,
       "source": "apps_api_src_server_buildserveroptions",
       "target": "apps_api_src_server_buildserveroptions_buildjobrunnerdeps"
-    },
-    {
-      "relation": "indirect_call",
-      "context": "collection",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "apps/api/src/index.ts",
-      "source_location": "L14",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_index",
-      "target": "apps_api_src_server_buildserveroptions_buildjobrunnerdeps"
-    },
-    {
-      "relation": "indirect_call",
-      "context": "collection",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "apps/api/src/index.ts",
-      "source_location": "L15",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_index",
-      "target": "apps_api_src_server_buildserveroptions_buildcostoptions"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/index.ts",
-      "source_location": "L4",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "apps_api_src_index",
-      "target": "apps_api_src_server_buildserver"
     },
     {
       "relation": "imports_from",
@@ -19837,74 +19766,6 @@
       "target": "vitest"
     },
     {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/index.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "apps_api_src_index",
-      "target": "apps_api_src_db"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/index.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "apps_api_src_index",
-      "target": "apps_api_src_db_opendb"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/index.ts",
-      "source_location": "L12",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "apps_api_src_index",
-      "target": "apps_api_src_index_app"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/index.ts",
-      "source_location": "L10",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "apps_api_src_index",
-      "target": "apps_api_src_index_envfilepath"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/index.ts",
-      "source_location": "L20",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "apps_api_src_index",
-      "target": "apps_api_src_index_port"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/index.ts",
-      "source_location": "L8",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "apps_api_src_index",
-      "target": "apps_api_src_index_runsdir"
-    },
-    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/components/TokenGate.tsx",
@@ -21598,17 +21459,6 @@
       "confidence_score": 1.0,
       "source": "packages_providers_src_qc_media_tools_probe_probemedia",
       "target": "packages_providers_src_qc_media_tools_probe_parseframerate"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/persistence/repository.test.ts",
-      "source_location": "L18",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository_test_config"
     },
     {
       "relation": "contains",
@@ -25001,5 +24851,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "ccc5307088eff39f441195ef3ee3da6368a589b1"
+  "built_at_commit": "800c517a2bd9bc560cf85e4f369438dc3e21ae65"
 }
