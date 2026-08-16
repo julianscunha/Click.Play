@@ -3,10 +3,12 @@ import {
   EdgeTTS,
   FallbackLLM,
   FallbackTTS,
+  FallbackImage,
   GeminiImage,
   GeminiTTS,
   GeminiVideo,
   FalVideo,
+  OpenRouterImage,
   OpenRouterLLM,
   PexelsStock,
   PixabayStock,
@@ -48,10 +50,17 @@ function buildVideoProviders(): Partial<Record<"gemini" | "fal", VideoGeneration
   return providers;
 }
 
-/** GeminiImage lança no construtor se faltar GOOGLE_API_KEY — adia esse erro pro primeiro uso real (job), em vez de derrubar o boot do servidor pra todo mundo por falta de 1 chave. */
+/** OpenRouter é o padrão (mesma OPENROUTER_API_KEY do texto, sem exigir billing
+ * no Google Cloud — achado em teste manual real: GeminiImage direto esbarra
+ * em quota=0 sem billing habilitado). GeminiImage direto fica como fallback
+ * quando GOOGLE_API_KEY existe. Construtor lança se faltar chave — adia esse
+ * erro pro primeiro uso real (job), em vez de derrubar o boot do servidor. */
 function buildImageProvider(): ImageProvider {
   try {
-    return new GeminiImage(undefined, process.env.GOOGLE_API_KEY);
+    const primary = new OpenRouterImage(undefined, process.env.OPENROUTER_API_KEY);
+    if (!process.env.GOOGLE_API_KEY) return primary;
+
+    return new FallbackImage(primary, new GeminiImage(undefined, process.env.GOOGLE_API_KEY));
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     return {

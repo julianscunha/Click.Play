@@ -17,6 +17,8 @@ export * from "./video/gemini.js";
 export * from "./video/fal.js";
 export * from "./image/types.js";
 export * from "./image/gemini.js";
+export * from "./image/openrouter.js";
+export * from "./image/fallback.js";
 export * from "./video/resolve-provider.js";
 export * from "./music/types.js";
 export * from "./music/bundled.js";
