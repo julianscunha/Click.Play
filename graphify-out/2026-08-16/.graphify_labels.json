@@ -1,7 +1,6 @@
 {
   "0": "scripts",
   "1": "providers/package.json",
-  "2": "pipeline/types.ts",
   "3": "dependencies",
   "4": "video-engine/package.json",
   "5": "repository.ts",
@@ -25,7 +24,7 @@
   "23": "copilot-instructions.md",
   "24": "bundled.ts",
   "25": "providers/src/index.ts",
-  "26": "llm/types.ts",
+  "26": "creative-director.ts",
   "27": "Click.Play",
   "28": "withRetry",
   "29": "video-project.ts",
@@ -40,16 +39,12 @@
   "38": "pricing.ts",
   "39": "ImageElement.tsx",
   "40": "VideoElement.tsx",
-  "41": "critic.ts",
   "42": "Click.Play — Implementation Plan",
-  "43": "research.ts",
-  "44": "creative-director.ts",
   "45": "cost-approval-gate.ts",
   "46": "§11A. Roadmap de produção e qualidade de output — gaps pós-primeiro-vídeo-real",
   "47": "0.2 Correção arquitetural: estratégia de produção visual (não é slideshow)",
   "48": "11. Roadmap de produto — Studio → SaaS",
   "49": "0.1 Público-alvo e decisões de produto derivadas",
   "50": "Uso",
-  "51": "asset.ts",
   "52": "UnsupportedElement.tsx"
 }
