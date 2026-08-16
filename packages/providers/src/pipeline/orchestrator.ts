@@ -151,11 +151,15 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
       const transitionDurationFrames = opts.transitionDurationFrames ?? Math.round(fps * 0.4);
 
       resolvedScenes = [];
+      const totalElements = score.scenes.reduce((sum, s) => sum + s.elements.length, 0);
+      let doneElements = 0;
       for (let i = 0; i < score.scenes.length; i++) {
         const scene = score.scenes[i]!;
         const elements = [];
         for (let j = 0; j < scene.elements.length; j++) {
-          const resolved = await resolveElement(scene.elements[j]!, {
+          const element = scene.elements[j]!;
+          callbacks.onLog?.(`Gerando cena ${i + 1}/${score.scenes.length} (${element.type})`);
+          const resolved = await resolveElement(element, {
             ...opts.resolveElementCtx,
             assetId: `${scene.id}-${j}`,
             writeAsset: async (buffer, filename) => {
@@ -166,6 +170,8 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
             },
           });
           elements.push(resolved);
+          doneElements++;
+          callbacks.onProgress?.(doneElements / totalElements);
         }
         resolvedScenes.push({
           id: scene.id,

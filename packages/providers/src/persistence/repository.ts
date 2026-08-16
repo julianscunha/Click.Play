@@ -33,6 +33,7 @@ export async function createJob(db: ClickPlayDb, input: { projectId: string; run
     actualCost: null,
     qcReport: null,
     checkpoint: null,
+    stageDetail: null,
     error: null,
     createdAt: now,
     updatedAt: now,
@@ -57,9 +58,23 @@ export async function listJobsByProject(db: ClickPlayDb, projectId: string): Pro
  * concluído em vez de zerar (útil pra saber onde o job parou).
  */
 export async function updateJobStatus(db: ClickPlayDb, id: string, status: JobStatus): Promise<void> {
-  const set: { status: JobStatus; updatedAt: Date; progress?: number } = { status, updatedAt: new Date() };
+  // stageDetail zera a cada troca de estágio — texto da sub-etapa anterior não deve vazar pro próximo.
+  const set: { status: JobStatus; updatedAt: Date; progress?: number; stageDetail: null } = {
+    status,
+    updatedAt: new Date(),
+    stageDetail: null,
+  };
   if (status !== "FAILED" && status !== "CANCELLED") set.progress = PROGRESS_BY_STATUS[status];
   await db.update(jobs).set(set).where(eq(jobs.id, id));
+}
+
+/**
+ * Progresso granular dentro do estágio GENERATING (§11A observabilidade) —
+ * único ponto que aceita progress/stageDetail livres, fora da derivação por
+ * status. Quem chama garante que só é usado durante GENERATING (job-runner.ts).
+ */
+export async function setJobProgress(db: ClickPlayDb, id: string, progress: number, stageDetail?: string): Promise<void> {
+  await db.update(jobs).set({ progress, stageDetail: stageDetail ?? null, updatedAt: new Date() }).where(eq(jobs.id, id));
 }
 
 export async function setJobEstimatedCost(db: ClickPlayDb, id: string, cost: CostBreakdown): Promise<void> {
@@ -129,6 +144,9 @@ export async function resetJobForRetry(db: ClickPlayDb, id: string): Promise<Job
 
   const status = resumeStatusForCheckpoint(job.checkpoint);
   const progress = PROGRESS_BY_STATUS[status];
-  await db.update(jobs).set({ status, progress, error: null, updatedAt: new Date() }).where(eq(jobs.id, id));
-  return { ...job, status, progress, error: null };
+  await db
+    .update(jobs)
+    .set({ status, progress, stageDetail: null, error: null, updatedAt: new Date() })
+    .where(eq(jobs.id, id));
+  return { ...job, status, progress, stageDetail: null, error: null };
 }

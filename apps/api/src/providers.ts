@@ -16,6 +16,7 @@ import {
   OpenRouterVideo,
   PexelsStock,
   PixabayStock,
+  withProviderTimeout,
   type CostEstimateOptions,
   type ImageProvider,
   type LLMProvider,
@@ -31,6 +32,18 @@ import * as path from "node:path";
 import * as url from "node:url";
 
 const REMOTION_ENTRY = path.join(path.dirname(url.fileURLToPath(import.meta.url)), "remotion", "entry.tsx");
+
+/** Timeout por tipo de chamada externa — achado em teste manual real: job travou
+ * 2h em 15% sem erro (fetch pendurado, nenhum provider tinha timeout). Vídeo
+ * (Veo/Kling) legitimamente demora minutos pra gerar, por isso valor bem maior
+ * que os outros — um timeout único pra tudo derrubaria gerações válidas de vídeo. */
+const TIMEOUT_MS = {
+  llm: 90_000,
+  tts: 60_000,
+  image: 90_000,
+  video: 300_000,
+  music: 120_000,
+};
 
 /**
  * Estratégia de custo default do MVP (edge/gemini/bundled grátis-first) — ver
@@ -50,10 +63,14 @@ export function buildCostOptions(): CostEstimateOptions {
 
 function buildVideoProviders(): Partial<Record<"gemini" | "fal" | "openrouter", VideoGenerationProvider>> {
   const providers: Partial<Record<"gemini" | "fal" | "openrouter", VideoGenerationProvider>> = {
-    openrouter: new OpenRouterVideo(process.env.VIDEO_MODEL || undefined, process.env.OPENROUTER_API_KEY),
+    openrouter: withProviderTimeout(
+      new OpenRouterVideo(process.env.VIDEO_MODEL || undefined, process.env.OPENROUTER_API_KEY),
+      "video:openrouter",
+      TIMEOUT_MS.video,
+    ),
   };
-  if (process.env.GOOGLE_API_KEY) providers.gemini = new GeminiVideo();
-  if (process.env.FAL_API_KEY) providers.fal = new FalVideo();
+  if (process.env.GOOGLE_API_KEY) providers.gemini = withProviderTimeout(new GeminiVideo(), "video:gemini", TIMEOUT_MS.video);
+  if (process.env.FAL_API_KEY) providers.fal = withProviderTimeout(new FalVideo(), "video:fal", TIMEOUT_MS.video);
   return providers;
 }
 
@@ -64,10 +81,19 @@ function buildVideoProviders(): Partial<Record<"gemini" | "fal" | "openrouter", 
  * erro pro primeiro uso real (job), em vez de derrubar o boot do servidor. */
 function buildImageProvider(): ImageProvider {
   try {
-    const primary = new OpenRouterImage(process.env.IMAGE_MODEL || undefined, process.env.OPENROUTER_API_KEY);
+    const primary = withProviderTimeout(
+      new OpenRouterImage(process.env.IMAGE_MODEL || undefined, process.env.OPENROUTER_API_KEY),
+      "image:openrouter",
+      TIMEOUT_MS.image,
+    );
     if (!process.env.GOOGLE_API_KEY) return primary;
 
-    return new FallbackImage(primary, new GeminiImage(undefined, process.env.GOOGLE_API_KEY));
+    const geminiFallback = withProviderTimeout(
+      new GeminiImage(undefined, process.env.GOOGLE_API_KEY),
+      "image:gemini",
+      TIMEOUT_MS.image,
+    );
+    return new FallbackImage(primary, geminiFallback);
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     return {
@@ -82,11 +108,19 @@ function buildImageProvider(): ImageProvider {
  * pra ele quando o primário falhar (quota/erro/"No output generated", achados
  * em teste manual real). */
 function buildLLM(): LLMProvider {
-  const primary = new OpenRouterLLM(process.env.OPENROUTER_MODEL, process.env.OPENROUTER_API_KEY);
+  const primary = withProviderTimeout(
+    new OpenRouterLLM(process.env.OPENROUTER_MODEL, process.env.OPENROUTER_API_KEY),
+    "llm:primary",
+    TIMEOUT_MS.llm,
+  );
   const fallbackModel = process.env.OPENROUTER_MODEL_FALLBACK;
   if (!fallbackModel) return primary;
 
-  const fallback = new OpenRouterLLM(fallbackModel, process.env.OPENROUTER_API_KEY);
+  const fallback = withProviderTimeout(
+    new OpenRouterLLM(fallbackModel, process.env.OPENROUTER_API_KEY),
+    "llm:fallback",
+    TIMEOUT_MS.llm,
+  );
   return new FallbackLLM(primary, fallback);
 }
 
@@ -96,19 +130,21 @@ function buildLLM(): LLMProvider {
  * "Premature close"). GeminiTTS direto entra como 3º nível só se
  * GOOGLE_API_KEY existir (raramente necessário agora). */
 function buildTTS(): TTSProvider {
-  const primary = new EdgeTTS();
-  const openRouterFallback = new OpenRouterTTS(
-    process.env.TTS_MODEL_FALLBACK || undefined,
-    undefined,
-    process.env.OPENROUTER_API_KEY,
+  const primary = withProviderTimeout(new EdgeTTS(), "tts:edge", TIMEOUT_MS.tts);
+  const openRouterFallback = withProviderTimeout(
+    new OpenRouterTTS(process.env.TTS_MODEL_FALLBACK || undefined, undefined, process.env.OPENROUTER_API_KEY),
+    "tts:openrouter",
+    TIMEOUT_MS.tts,
   );
 
   if (!process.env.GOOGLE_API_KEY) return new FallbackTTS(primary, openRouterFallback);
 
-  return new FallbackTTS(
-    primary,
-    new FallbackTTS(openRouterFallback, new GeminiTTS(undefined, undefined, process.env.GOOGLE_API_KEY)),
+  const geminiFallback = withProviderTimeout(
+    new GeminiTTS(undefined, undefined, process.env.GOOGLE_API_KEY),
+    "tts:gemini",
+    TIMEOUT_MS.tts,
   );
+  return new FallbackTTS(primary, new FallbackTTS(openRouterFallback, geminiFallback));
 }
 
 /** BundledMusic (grátis, trilhas prontas) é o default e o fallback automático.
@@ -116,10 +152,15 @@ function buildTTS(): TTSProvider {
  * OPENROUTER_API_KEY já obrigatória, sem exigir GOOGLE_API_KEY separada —
  * ainda não validado ao vivo, ver music/openrouter.ts). */
 function buildMusicProvider(): MusicProvider {
-  const bundled = new BundledMusic();
+  const bundled = new BundledMusic(); // arquivo local, sem chamada externa — não precisa de timeout
   if (process.env.MUSIC_PROVIDER !== "lyria") return bundled;
 
-  return new FallbackMusic(new OpenRouterMusic(undefined, process.env.OPENROUTER_API_KEY), bundled);
+  const lyria = withProviderTimeout(
+    new OpenRouterMusic(undefined, process.env.OPENROUTER_API_KEY),
+    "music:openrouter",
+    TIMEOUT_MS.music,
+  );
+  return new FallbackMusic(lyria, bundled);
 }
 
 function buildStockProviders(): StockProvider[] {

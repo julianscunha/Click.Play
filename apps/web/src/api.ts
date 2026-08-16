@@ -41,6 +41,7 @@ export interface JobView {
   projectId: string;
   status: JobStatus;
   stage: string;
+  stageDetail: string | null;
   progress: number;
   estimatedCost: CostBreakdown | null;
   actualCost: CostBreakdown | null;

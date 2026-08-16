@@ -1,6 +1,6 @@
 # Click.Play — Implementation Plan
 
-Status: Fases 0–15 concluídas (auditoria, bootstrap, domain, LLM provider, Creative Director, TTS, produção visual, música, captions, VideoRenderer/RemotionRenderer, Job pipeline, WebUI MVP, QC determinístico, Docker, Hardening, migração OpenRouter, retry por estágio/checkpoint). Próxima: Fases 15A-15D (roadmap de qualidade de output, ver §11A) antes de Fase 15+ (evolução Studio → SaaS, ver §11).
+Status: Fases 0–15 concluídas (auditoria, bootstrap, domain, LLM provider, Creative Director, TTS, produção visual, música, captions, VideoRenderer/RemotionRenderer, Job pipeline, WebUI MVP, QC determinístico, Docker, Hardening, migração OpenRouter, retry por estágio/checkpoint). Bugfix urgente (2026-08-16, à parte do roadmap): nenhuma chamada externa (LLM/TTS/imagem/vídeo/música) tinha timeout — job travava horas sem erro; adicionado timeout por tipo de provider (`withProviderTimeout`, `apps/api/src/providers.ts`) + progresso granular por sub-etapa dentro de GENERATING (`job.stageDetail`). Próxima: Fases 15A-15D (roadmap de qualidade de output, ver §11A) antes de Fase 15+ (evolução Studio → SaaS, ver §11).
 
 ## 0.1 Público-alvo e decisões de produto derivadas
 

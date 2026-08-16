@@ -14,9 +14,11 @@ import {
   setJobError,
   setJobEstimatedCost,
   setJobOutputPath,
+  setJobProgress,
   setJobQcReport,
   updateJobStatus,
 } from "./repository.js";
+import { PROGRESS_BY_STATUS } from "./job-state-machine.js";
 import type { JobStatus } from "./schema.js";
 
 /** Providers/runtime que não são persistidos (ver persistence/types.ts ProjectConfig). */
@@ -76,6 +78,7 @@ export async function runJobOnce(
   if (!project) throw new Error(`Project "${job.projectId}" não encontrado`);
 
   let status: JobStatus = job.status;
+  let lastLogMessage: string | undefined;
   const transition = async (to: JobStatus) => {
     assertTransition(status, to);
     status = to;
@@ -102,7 +105,17 @@ export async function runJobOnce(
     async onCheckpoint(checkpoint) {
       await setJobCheckpoint(db, jobId, checkpoint);
     },
-    onLog: opts.onLog,
+    // Progresso granular por sub-etapa (§11A observabilidade) — orchestrator só
+    // emite dentro do loop de resolução de visuais, mapeado pra faixa GENERATING→RENDERING.
+    async onProgress(fraction) {
+      const base = PROGRESS_BY_STATUS.GENERATING;
+      const range = PROGRESS_BY_STATUS.RENDERING - base;
+      await setJobProgress(db, jobId, base + fraction * range, lastLogMessage);
+    },
+    onLog(message) {
+      lastLogMessage = message;
+      opts.onLog?.(message);
+    },
   };
 
   const pipelineOptions: PipelineOptions = {

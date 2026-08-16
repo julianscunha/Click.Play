@@ -66,6 +66,7 @@ export function ProgressView({ job, onApprove, approving, onRetry, retrying }: P
           <span>{STAGE_LABELS[job.stage] ?? job.stage}</span>
           <span>{percent}%</span>
         </div>
+        {job.stageDetail && <p className="text-xs text-neutral-500">{job.stageDetail}</p>}
         <div className="h-2 overflow-hidden rounded-full bg-neutral-800">
           <div
             className="h-full rounded-full bg-neutral-50 transition-all duration-500"

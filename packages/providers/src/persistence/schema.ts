@@ -49,6 +49,8 @@ export const jobs = sqliteTable("jobs", {
   qcReport: text("qc_report", { mode: "json" }).$type<unknown>(),
   /** Output de estágios já concluídos (PipelineCheckpoint) — permite retry retomar sem repagar estágios já pagos. */
   checkpoint: text("checkpoint", { mode: "json" }).$type<unknown>(),
+  /** Texto livre da sub-etapa atual (ex.: "Gerando cena 3/8 (ai_image)") — só populado durante GENERATING, null nas demais. */
+  stageDetail: text("stage_detail"),
   error: text("error"),
   createdAt: integer("created_at", { mode: "timestamp_ms" }).notNull(),
   updatedAt: integer("updated_at", { mode: "timestamp_ms" }).notNull(),

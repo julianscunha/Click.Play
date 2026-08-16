@@ -28,6 +28,7 @@ export interface Job {
   actualCost: CostBreakdown | null;
   qcReport: QcReport | null;
   checkpoint: PipelineCheckpoint | null;
+  stageDetail: string | null;
   error: string | null;
   createdAt: Date;
   updatedAt: Date;
@@ -58,6 +59,7 @@ export function jobFromRow(row: JobRow): Job {
     actualCost: (row.actualCost as CostBreakdown | null) ?? null,
     qcReport: (row.qcReport as QcReport | null) ?? null,
     checkpoint: (row.checkpoint as PipelineCheckpoint | null) ?? null,
+    stageDetail: row.stageDetail ?? null,
     error: row.error,
     createdAt: row.createdAt,
     updatedAt: row.updatedAt,
