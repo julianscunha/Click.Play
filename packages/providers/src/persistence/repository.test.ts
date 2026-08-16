@@ -6,6 +6,7 @@ import {
   getJob,
   getProject,
   listJobsByProject,
+  recoverOrphanedJobs,
   setJobActualCost,
   setJobError,
   setJobEstimatedCost,
@@ -102,5 +103,27 @@ describe("persistence repository", () => {
 
     const fetched = await getJob(db, job.id);
     expect(fetched?.qcReport).toEqual(qcReport);
+  });
+
+  it("recoverOrphanedJobs marks non-terminal jobs FAILED and leaves terminal ones alone", async () => {
+    const project = await createProject(db, { topic: "t", config });
+    const stuck = await createJob(db, { projectId: project.id, runDir: "/tmp/run-5" });
+    await updateJobStatus(db, stuck.id, "RENDERING");
+
+    const done = await createJob(db, { projectId: project.id, runDir: "/tmp/run-6" });
+    await updateJobStatus(db, done.id, "RESEARCHING");
+    await updateJobStatus(db, done.id, "PLANNING");
+    await updateJobStatus(db, done.id, "REVIEWING");
+    await updateJobStatus(db, done.id, "AWAITING_COST_APPROVAL");
+    await updateJobStatus(db, done.id, "GENERATING");
+    await updateJobStatus(db, done.id, "RENDERING");
+    await updateJobStatus(db, done.id, "COMPLETED");
+
+    const count = await recoverOrphanedJobs(db);
+    expect(count).toBe(1);
+
+    expect((await getJob(db, stuck.id))?.status).toBe("FAILED");
+    expect((await getJob(db, stuck.id))?.error).toMatch(/reiníc/);
+    expect((await getJob(db, done.id))?.status).toBe("COMPLETED");
   });
 });

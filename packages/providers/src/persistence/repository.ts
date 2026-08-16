@@ -86,6 +86,36 @@ export async function setJobCheckpoint(db: ClickPlayDb, id: string, checkpoint: 
   await db.update(jobs).set({ checkpoint, updatedAt: new Date() }).where(eq(jobs.id, id));
 }
 
+const NON_TERMINAL_STATUSES: JobStatus[] = [
+  "QUEUED",
+  "RESEARCHING",
+  "PLANNING",
+  "REVIEWING",
+  "AWAITING_COST_APPROVAL",
+  "GENERATING",
+  "RENDERING",
+];
+
+/**
+ * Execução é fire-and-forget in-process (sem fila externa, decisão do
+ * usuário — 10D) — um restart do servidor mata qualquer job em andamento sem
+ * chance de persistir erro, deixando o job preso num estado não-terminal pra
+ * sempre (sem botão de retry, que só aparece em FAILED). Chamado uma vez no
+ * boot: marca como FAILED qualquer job órfão de um restart anterior,
+ * preservando o checkpoint já persistido (retry retoma do último estágio pago).
+ */
+export async function recoverOrphanedJobs(db: ClickPlayDb): Promise<number> {
+  const rows = await db.select().from(jobs).all();
+  const orphans = rows.filter((row) => NON_TERMINAL_STATUSES.includes(row.status));
+  for (const row of orphans) {
+    await db
+      .update(jobs)
+      .set({ status: "FAILED", error: "Job interrompido por reinício do servidor", updatedAt: new Date() })
+      .where(eq(jobs.id, row.id));
+  }
+  return orphans.length;
+}
+
 /**
  * Reset administrativo pra retomar um job FAILED (Fase 15+, retry por
  * estágio) — não é transição do pipeline, por isso não passa por
