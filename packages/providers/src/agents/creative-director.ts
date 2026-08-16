@@ -71,12 +71,32 @@ export interface DirectorScoreOutput {
  * modelos erram essa combinação (achado em teste manual, reproduzido 3/3
  * em dois modelos diferentes); reparar é mais confiável que reprompt.
  */
-function toScenes(raw: z.infer<typeof SceneRaw>[]): Scene[] {
-  return raw.map((scene, i) => {
+function toScenes(raw: z.infer<typeof SceneRaw>[]): { scenes: Scene[]; downgraded: number[] } {
+  const downgraded: number[] = [];
+  const scenes = raw.map((scene, i) => {
     const hasAiVideoClip = scene.elements.some((e) => e.type === "ai_video_clip");
-    const visualStrategy = scene.visualStrategy === "ai_video" && !hasAiVideoClip ? "motion_graphics" : scene.visualStrategy;
+    const wasAiVideo = scene.visualStrategy === "ai_video";
+    if (wasAiVideo && !hasAiVideoClip) downgraded.push(i + 1);
+    const visualStrategy = wasAiVideo && !hasAiVideoClip ? "motion_graphics" : scene.visualStrategy;
     return Scene.parse({ id: String(i + 1), ...scene, visualStrategy });
   });
+  return { scenes, downgraded };
+}
+
+/** Junta o erro de piso de VideoMode com quais cenas foram rebaixadas por
+ * faltar "ai_video_clip" — sem isso o LLM recebe a mesma mensagem genérica a
+ * cada retry e repete o mesmo erro (achado em teste manual real: hybrid
+ * falhando as 3 tentativas com "roteiro não atinge o piso" mesmo o LLM
+ * escrevendo cenas ai_video, porque elas eram rebaixadas em silêncio). */
+function assertVideoModeWithDowngradeContext(scenes: Scene[], mode: VideoMode, downgraded: number[]): void {
+  try {
+    assertVideoMode(scenes, mode);
+  } catch (err) {
+    if (downgraded.length > 0 && err instanceof Error) {
+      err.message += ` Nota: cena(s) ${downgraded.join(", ")} tinham visualStrategy "ai_video"/"hybrid" mas SEM elemento "ai_video_clip" no array de elements, e foram rebaixadas pra "motion_graphics" — sempre inclua um elemento do tipo "ai_video_clip" ao usar ai_video/hybrid.`;
+    }
+    throw err;
+  }
 }
 
 /** Backoff antes de cada retry — achado em teste manual: rate limit do provider
@@ -182,11 +202,9 @@ If over budget, cut a scene rather than cramming.`;
       totalUsage.inputTokens += result.usage.inputTokens;
       totalUsage.outputTokens += result.usage.outputTokens;
 
-      const validated = DirectorScore.parse({
-        ...result.data,
-        scenes: toScenes(result.data.scenes),
-      });
-      assertVideoMode(validated.scenes, videoMode);
+      const { scenes, downgraded } = toScenes(result.data.scenes);
+      const validated = DirectorScore.parse({ ...result.data, scenes });
+      assertVideoModeWithDowngradeContext(validated.scenes, videoMode, downgraded);
       return { data: validated, usage: totalUsage };
     } catch (err) {
       lastError = err instanceof Error ? err : new Error(String(err));
@@ -318,10 +336,8 @@ Keep the same archetype. Maintain the GOLDEN RULE: never reduce more than 2 cons
       totalUsage.inputTokens += result.usage.inputTokens;
       totalUsage.outputTokens += result.usage.outputTokens;
 
-      const validated = DirectorScore.parse({
-        ...result.data,
-        scenes: toScenes(result.data.scenes),
-      });
+      const { scenes, downgraded } = toScenes(result.data.scenes);
+      const validated = DirectorScore.parse({ ...result.data, scenes });
 
       // Prevent archetype drift: the LLM may change the archetype during revision
       // despite prompt instructions. Force it back to the original.
@@ -329,7 +345,7 @@ Keep the same archetype. Maintain the GOLDEN RULE: never reduce more than 2 cons
         (validated as { archetype: string }).archetype = originalScore.archetype;
       }
 
-      assertVideoMode(validated.scenes, videoMode);
+      assertVideoModeWithDowngradeContext(validated.scenes, videoMode, downgraded);
       return { data: validated, usage: totalUsage };
     } catch (err) {
       lastError = err instanceof Error ? err : new Error(String(err));

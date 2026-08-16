@@ -56,6 +56,21 @@ describe("generateDirectorScore", () => {
     expect(llm.generate).toHaveBeenCalledTimes(1);
   });
 
+  it("names the downgraded scenes in the error when a VideoMode floor fails because of a missing ai_video_clip", async () => {
+    // hybrid com 6 cenas exige piso de 2 (ceil(6*0.3)) — nenhuma cena aqui tem
+    // ai_video_clip de verdade, então toScenes rebaixa a única "ai_video" pra
+    // motion_graphics e o piso nunca é atingido; a mensagem deve nomear a cena.
+    const brokenAiVideo = sceneRaw({
+      visualStrategy: "ai_video",
+      elements: [{ type: "stock_image", prompt: "rocket launch" }],
+    });
+    const llm = fakeLLM([sceneRaw(), sceneRaw(), brokenAiVideo, sceneRaw(), sceneRaw(), sceneRaw()]);
+
+    await expect(generateDirectorScore(llm, "Apollo 11", research, { videoMode: "hybrid" })).rejects.toThrow(
+      /cena\(s\) 3.*rebaixadas/,
+    );
+  }, 15_000);
+
   it("retries and eventually throws when scenes keep violating the anti-slideshow rule", async () => {
     const staticScene = sceneRaw({ elements: [{ type: "stock_image", prompt: "moon" }] });
     // 3 cenas consecutivas só com imagem estática viola violatesSlideshowRule (domain).
