@@ -1,16 +1,16 @@
 # Graph Report - Click.Play  (2026-08-15)
 
 ## Corpus Check
-- 201 files · ~52,621 words
+- 205 files · ~54,396 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 780 nodes · 1222 edges · 40 communities (38 shown, 2 thin omitted)
+- 802 nodes · 1245 edges · 40 communities (38 shown, 2 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 3 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `f09b1bc5`
+- Built from commit: `f9877851`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -29,7 +29,7 @@
 - Click.Play — Implementation Plan
 - compilerOptions
 - compilerOptions
-- api/src/index.ts
+- providers.ts
 - domain/tsconfig.json
 - providers/tsconfig.json
 - video-engine/tsconfig.json
@@ -57,7 +57,7 @@
 2. `ClickPlayDb` - 14 edges
 3. `LLMProvider` - 13 edges
 4. `compilerOptions` - 13 edges
-5. `VideoGenerationProvider` - 12 edges
+5. `VideoGenerationProvider` - 11 edges
 6. `PipelineCallbacks` - 11 edges
 7. `ImageProvider` - 10 edges
 8. `runPipeline()` - 9 edges
@@ -69,12 +69,12 @@
   packages/providers/src/persistence/job-runner.ts → packages/providers/src/pipeline/orchestrator.ts
 - `listJobsByProject()` --indirect_call--> `jobFromRow()`  [INFERRED]
   packages/providers/src/persistence/repository.ts → packages/providers/src/persistence/types.ts
-- `staticScene()` --references--> `Scene`  [EXTRACTED]
-  packages/domain/src/scene.test.ts → packages/domain/src/scene.ts
-- `OpenRouterVideo` --implements--> `VideoGenerationProvider`  [EXTRACTED]
-  packages/providers/src/video/openrouter.ts → packages/providers/src/video/types.ts
-- `resolveAiVideoClip()` --calls--> `resolveVideoGenerationProvider()`  [EXTRACTED]
-  packages/providers/src/visual/resolve-element.ts → packages/providers/src/video/resolve-provider.ts
+- `registerMetaRoutes()` --calls--> `getFormConfig()`  [EXTRACTED]
+  apps/api/src/routes/meta.ts → apps/api/src/config.ts
+- `buildServer()` --calls--> `registerSettingsRoutes()`  [EXTRACTED]
+  apps/api/src/server.ts → apps/api/src/routes/settings.ts
+- `TokenGate()` --calls--> `setStoredToken()`  [EXTRACTED]
+  apps/web/src/components/TokenGate.tsx → apps/web/src/api.ts
 
 ## Import Cycles
 - None detected.
@@ -137,9 +137,9 @@ Nodes (13): compilerOptions, jsx, lib, noEmit, types, extends, include, DOM (+5 
 Cohesion: 0.14
 Nodes (13): compilerOptions, jsx, lib, module, moduleResolution, outDir, rootDir, extends (+5 more)
 
-### Community 14 - "api/src/index.ts"
-Cohesion: 0.16
-Nodes (14): openDb(), app, envFilePath, port, runsDir, buildCostOptions(), buildImageProvider(), buildJobRunnerDeps() (+6 more)
+### Community 14 - "providers.ts"
+Cohesion: 0.09
+Nodes (17): openDb(), app, envFilePath, port, runsDir, buildCostOptions(), buildImageProvider(), buildJobRunnerDeps() (+9 more)
 
 ### Community 15 - "domain/tsconfig.json"
 Cohesion: 0.25
@@ -158,12 +158,12 @@ Cohesion: 0.22
 Nodes (10): PACING_CONFIG, CritiqueOutput, CritiqueResult, evaluate(), SYSTEM_PROMPT_PATH, ArchetypeConfig, ARCHETYPES, getArchetype() (+2 more)
 
 ### Community 19 - "api.ts"
-Cohesion: 0.07
-Nodes (38): approveCost(), CostAmount, CostBreakdown, createJob(), CreateJobInput, FormConfig, getFormConfig(), getJob() (+30 more)
+Cohesion: 0.06
+Nodes (41): approveCost(), CostAmount, CostBreakdown, createJob(), CreateJobInput, FormConfig, getFormConfig(), getJob() (+33 more)
 
 ### Community 22 - "server.test.ts"
-Cohesion: 0.08
-Nodes (34): CAPTION_STYLES, getFormConfig(), getRecommendedModels(), PACING_TIERS, readEnvFile(), writeEnvFile(), ApproveCostBody, CreateJobBody (+26 more)
+Cohesion: 0.07
+Nodes (37): CAPTION_STYLES, getFormConfig(), getRecommendedModels(), PACING_TIERS, RECOMMENDED_IMAGE_MODELS, RECOMMENDED_TTS_FALLBACK_MODELS, RECOMMENDED_VIDEO_MODELS, readEnvFile() (+29 more)
 
 ### Community 24 - "dependencies"
 Cohesion: 0.33
@@ -218,7 +218,7 @@ Cohesion: 0.67
 Nodes (3): @clickplay/video-engine, @clickplay/video-engine, @clickplay/video-engine
 
 ## Knowledge Gaps
-- **272 isolated node(s):** `REMOTION_ENTRY`, `TransitionType`, `CameraMotion`, `VisualStrategy`, `VideoGenerationProviderKey` (+267 more)
+- **278 isolated node(s):** `RECOMMENDED_IMAGE_MODELS`, `RECOMMENDED_VIDEO_MODELS`, `RECOMMENDED_TTS_FALLBACK_MODELS`, `REMOTION_ENTRY`, `SECRET_FIELDS` (+273 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **2 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -226,13 +226,13 @@ Nodes (3): @clickplay/video-engine, @clickplay/video-engine, @clickplay/video-en
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `LLMProvider` connect `llm/types.ts` to `orchestrator.ts`, `job-runner.ts`, `critic.ts`, `creative-director.ts`, `research.ts`?**
-  _High betweenness centrality (0.011) - this node is a cross-community bridge._
+  _High betweenness centrality (0.010) - this node is a cross-community bridge._
 - **Why does `ImageProvider` connect `providers/src/index.ts` to `job-runner.ts`?**
-  _High betweenness centrality (0.009) - this node is a cross-community bridge._
+  _High betweenness centrality (0.008) - this node is a cross-community bridge._
 - **Why does `PipelineCallbacks` connect `PipelineCallbacks` to `orchestrator.ts`, `job-runner.ts`?**
   _High betweenness centrality (0.008) - this node is a cross-community bridge._
-- **What connects `REMOTION_ENTRY`, `TransitionType`, `CameraMotion` to the rest of the system?**
-  _272 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **What connects `RECOMMENDED_IMAGE_MODELS`, `RECOMMENDED_VIDEO_MODELS`, `RECOMMENDED_TTS_FALLBACK_MODELS` to the rest of the system?**
+  _278 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `scripts` be split into smaller, more focused modules?**
   _Cohesion score 0.125 - nodes in this community are weakly interconnected._
 - **Should `providers/package.json` be split into smaller, more focused modules?**

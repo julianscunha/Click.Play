@@ -50,7 +50,7 @@ describe("OpenRouterVideo", () => {
     await expect(video.generate({ sourceImage: Buffer.from("img"), prompt: "a cat" })).rejects.toThrow(
       "provider error",
     );
-  });
+  }, 15_000);
 
   it("throws in the constructor when no API key is available", () => {
     const original = process.env["OPENROUTER_API_KEY"];

@@ -1,6 +1,7 @@
 import * as fs from "node:fs";
 import * as os from "node:os";
 import * as path from "node:path";
+import { withRetry } from "../http/retry.js";
 import type { VideoGenerationProvider, VideoResult } from "./types.js";
 
 const POLL_INTERVAL_MS = 5_000;
@@ -33,6 +34,19 @@ export class OpenRouterVideo implements VideoGenerationProvider {
   }
 
   async generate(opts: {
+    sourceImage: Buffer;
+    prompt: string;
+    durationSeconds?: number;
+    aspectRatio?: string;
+    negativePrompt?: string;
+  }): Promise<VideoResult> {
+    // Rate limit transitório do provider por trás ("retry in Ns", achado em
+    // teste manual real na imagem — mesmo risco aqui). Reenvia o job inteiro
+    // em cada tentativa (mais simples que retomar só o passo que falhou).
+    return withRetry(() => this.generateOnce(opts), { label: "openrouter-video" });
+  }
+
+  private async generateOnce(opts: {
     sourceImage: Buffer;
     prompt: string;
     durationSeconds?: number;

@@ -30,7 +30,7 @@ describe("OpenRouterTTS", () => {
 
     const tts = new OpenRouterTTS(undefined, undefined, "key");
     await expect(tts.generate("oi")).rejects.toThrow("400");
-  });
+  }, 15_000);
 
   it("throws in the constructor when no API key is available", () => {
     const original = process.env["OPENROUTER_API_KEY"];

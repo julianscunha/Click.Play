@@ -80,8 +80,8 @@
     "semantic_hash": ""
   },
   "packages/providers/src/index.ts": {
-    "mtime": 1786845800.545869,
-    "ast_hash": "3a0072c62e8077a6f0b9c3a45e575f71",
+    "mtime": 1786847538.9897666,
+    "ast_hash": "953f98db7fd0eeae11baf1236fbd6b9f",
     "semantic_hash": ""
   },
   "packages/providers/tsconfig.json": {
@@ -845,8 +845,8 @@
     "semantic_hash": ""
   },
   "apps/api/src/config.ts": {
-    "mtime": 1786820588.4927654,
-    "ast_hash": "623fc90a836543fe88b88a3d100fb724",
+    "mtime": 1786846839.8138027,
+    "ast_hash": "ec934ea100d5bfa87552e13459341fa9",
     "semantic_hash": ""
   },
   "apps/api/src/db.ts": {
@@ -855,8 +855,8 @@
     "semantic_hash": ""
   },
   "apps/api/src/providers.ts": {
-    "mtime": 1786845966.8755772,
-    "ast_hash": "129c2384801ed53f81c02c04e50ec90e",
+    "mtime": 1786847566.2408772,
+    "ast_hash": "e9a6f893539facef2de7a6a058fe3291",
     "semantic_hash": ""
   },
   "apps/api/src/remotion/entry.tsx": {
@@ -875,8 +875,8 @@
     "semantic_hash": ""
   },
   "apps/web/src/api.ts": {
-    "mtime": 1786827196.4164293,
-    "ast_hash": "43aaf77b10cf065ae3618b86d3ac5e11",
+    "mtime": 1786847751.090749,
+    "ast_hash": "550a169fc409a753d540575338011e6e",
     "semantic_hash": ""
   },
   "apps/web/src/components/CreateForm.tsx": {
@@ -1035,13 +1035,13 @@
     "semantic_hash": ""
   },
   "apps/api/src/routes/settings.ts": {
-    "mtime": 1786827168.42104,
-    "ast_hash": "5596e5f79d3aac4c89c0b6c075b3f805",
+    "mtime": 1786847735.4606857,
+    "ast_hash": "58da5fe969249dc4d8dfd95ecd82225d",
     "semantic_hash": ""
   },
   "apps/web/src/components/SettingsView.tsx": {
-    "mtime": 1786827257.18286,
-    "ast_hash": "e78c77d65f8f061810a51e6fdfb21fe3",
+    "mtime": 1786847821.0730002,
+    "ast_hash": "be014eb8d493836eecdef9992882cf32",
     "semantic_hash": ""
   },
   "docker-compose.yml": {
@@ -1142,6 +1142,26 @@
   "packages/providers/src/video/openrouter.ts": {
     "mtime": 1786845763.827033,
     "ast_hash": "bd10cd7c34b5b78e2be76e5c8dc96a35",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/music/fallback.test.ts": {
+    "mtime": 1786846815.4109452,
+    "ast_hash": "90eb2c361b88dcb15fdb6b94c7e45d4a",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/music/fallback.ts": {
+    "mtime": 1786846789.0239103,
+    "ast_hash": "6f08a5380002e66662c0b45f8893eb75",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/music/openrouter.test.ts": {
+    "mtime": 1786847533.1751409,
+    "ast_hash": "c9a0fbe41c80d13d00422f794d7e3262",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/music/openrouter.ts": {
+    "mtime": 1786847521.6388392,
+    "ast_hash": "32b3b4510babe78861718a886800585f",
     "semantic_hash": ""
   }
 }

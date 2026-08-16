@@ -34,11 +34,14 @@ describe("OpenRouterMusic", () => {
   });
 
   it("throws when the stream never yields audio data", async () => {
-    vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ ok: true, body: sseStream(["[DONE]"]) }));
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockImplementation(async () => ({ ok: true, body: sseStream(["[DONE]"]) })),
+    );
 
     const music = new OpenRouterMusic(undefined, "key");
     await expect(music.generate("upbeat trailer music", "epic_cinematic")).rejects.toThrow("no audio data");
-  });
+  }, 15_000);
 
   it("throws when the API responds with an error status", async () => {
     vi.stubGlobal(
@@ -48,7 +51,7 @@ describe("OpenRouterMusic", () => {
 
     const music = new OpenRouterMusic(undefined, "key");
     await expect(music.generate("upbeat trailer music", "epic_cinematic")).rejects.toThrow("429");
-  });
+  }, 15_000);
 
   it("throws in the constructor when no API key is available", () => {
     const original = process.env["OPENROUTER_API_KEY"];

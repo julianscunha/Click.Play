@@ -1,3 +1,4 @@
+import { withRetry } from "../http/retry.js";
 import type { ImageProvider } from "./types.js";
 
 /**
@@ -23,6 +24,12 @@ export class OpenRouterImage implements ImageProvider {
       ? `${prompt}. Style: ${style}. Vertical 9:16 aspect ratio, 1080x1920 pixels. No text, no watermarks.`
       : `${prompt}. Vertical 9:16 aspect ratio, 1080x1920 pixels. No text, no watermarks.`;
 
+    // Rate limit transitório do provider por trás ("retry in Ns", achado em
+    // teste manual real) — sem retry, 1 429 passageiro derruba o job inteiro.
+    return withRetry(() => this.generateOnce(fullPrompt), { label: "openrouter-image" });
+  }
+
+  private async generateOnce(fullPrompt: string): Promise<Buffer> {
     const res = await fetch("https://openrouter.ai/api/v1/images", {
       method: "POST",
       headers: { Authorization: `Bearer ${this.apiKey}`, "Content-Type": "application/json" },

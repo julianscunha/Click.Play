@@ -80,8 +80,8 @@
     "semantic_hash": ""
   },
   "packages/providers/src/index.ts": {
-    "mtime": 1786845104.308896,
-    "ast_hash": "0f4702fd07f281f7e30767b7fb3dc23c",
+    "mtime": 1786845800.545869,
+    "ast_hash": "3a0072c62e8077a6f0b9c3a45e575f71",
     "semantic_hash": ""
   },
   "packages/providers/tsconfig.json": {
@@ -155,8 +155,8 @@
     "semantic_hash": ""
   },
   "packages/domain/src/scene.ts": {
-    "mtime": 1786664134.933672,
-    "ast_hash": "0064491beb9ddee4aecbb7ced4f5f855",
+    "mtime": 1786845688.1990283,
+    "ast_hash": "426225b23cb52dc788355014d55b7296",
     "semantic_hash": ""
   },
   "packages/domain/src/video-project.ts": {
@@ -350,18 +350,18 @@
     "semantic_hash": ""
   },
   "packages/providers/src/video/resolve-provider.test.ts": {
-    "mtime": 1786668340.087333,
-    "ast_hash": "2ae19a9a60ace6a386d5bc0768e96fb4",
+    "mtime": 1786845847.857279,
+    "ast_hash": "cda71a1df1c68f4afa74b687363526d1",
     "semantic_hash": ""
   },
   "packages/providers/src/video/resolve-provider.ts": {
-    "mtime": 1786668333.1041589,
-    "ast_hash": "e42b64ee482201e5a797d1c317d34616",
+    "mtime": 1786845837.683611,
+    "ast_hash": "73ace4e31446dc169a08354f238ee94d",
     "semantic_hash": ""
   },
   "packages/providers/src/video/types.ts": {
-    "mtime": 1786668259.4486163,
-    "ast_hash": "0b65fd104c0d79be6a2748dfdea635d6",
+    "mtime": 1786845692.6903543,
+    "ast_hash": "84e7710532f5f30622e3100bd72b18ee",
     "semantic_hash": ""
   },
   "packages/video-engine/src/visual-composition-provider.ts": {
@@ -420,8 +420,8 @@
     "semantic_hash": ""
   },
   "packages/providers/src/cost/pricing.ts": {
-    "mtime": 1786712374.816268,
-    "ast_hash": "1814b93c76d8e634e2864c74f6f43d69",
+    "mtime": 1786845941.909856,
+    "ast_hash": "70e9be2db94f9965392563589ee1c0eb",
     "semantic_hash": ""
   },
   "packages/providers/src/cost/types.ts": {
@@ -565,13 +565,13 @@
     "semantic_hash": ""
   },
   "packages/providers/src/visual/resolve-element.test.ts": {
-    "mtime": 1786827365.3456688,
-    "ast_hash": "d5401f1a6056e87e00e7948c0e54ac4f",
+    "mtime": 1786846081.5097713,
+    "ast_hash": "fdc3b560d1797543cea171b2aaf478ff",
     "semantic_hash": ""
   },
   "packages/providers/src/visual/resolve-element.ts": {
-    "mtime": 1786827326.760867,
-    "ast_hash": "19b231f1ff67020f6dac60a8802e96db",
+    "mtime": 1786845860.3999457,
+    "ast_hash": "336a2c249353637254add72ca0c500d6",
     "semantic_hash": ""
   },
   "packages/providers/src/visual/types.ts": {
@@ -855,8 +855,8 @@
     "semantic_hash": ""
   },
   "apps/api/src/providers.ts": {
-    "mtime": 1786845117.0688243,
-    "ast_hash": "6e09ccbfd4b08eaa5703ecee9f0bc41c",
+    "mtime": 1786845966.8755772,
+    "ast_hash": "129c2384801ed53f81c02c04e50ec90e",
     "semantic_hash": ""
   },
   "apps/api/src/remotion/entry.tsx": {
@@ -1090,8 +1090,8 @@
     "semantic_hash": ""
   },
   "packages/providers/src/tts/gemini.ts": {
-    "mtime": 1786836066.3793747,
-    "ast_hash": "9565271b2fc015c9853235ee744c96f6",
+    "mtime": 1786845619.9137683,
+    "ast_hash": "74e45a45827be0bff403abd462a12543",
     "semantic_hash": ""
   },
   ".claude/agents/engineering-voice-ai-integration-engineer.md": {
@@ -1117,6 +1117,31 @@
   "packages/providers/src/image/openrouter.ts": {
     "mtime": 1786845038.711214,
     "ast_hash": "98b533162c3dd55c9333d2cf6d98eb56",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/tts/openrouter.test.ts": {
+    "mtime": 1786845644.080632,
+    "ast_hash": "2e82032d9b4906e958218abf471b948e",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/tts/openrouter.ts": {
+    "mtime": 1786845634.751327,
+    "ast_hash": "c5bd1d3ca23b2da875c2ccf971977918",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/tts/pcm-to-mp3.ts": {
+    "mtime": 1786845606.8544533,
+    "ast_hash": "3859132b490bab2abf136f3074abd29a",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/video/openrouter.test.ts": {
+    "mtime": 1786846087.9592268,
+    "ast_hash": "79e4ba8c20e0f9e8a7da4180658644b9",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/video/openrouter.ts": {
+    "mtime": 1786845763.827033,
+    "ast_hash": "bd10cd7c34b5b78e2be76e5c8dc96a35",
     "semantic_hash": ""
   }
 }

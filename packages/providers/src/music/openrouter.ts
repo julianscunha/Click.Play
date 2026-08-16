@@ -1,6 +1,7 @@
 import * as fsp from "node:fs/promises";
 import * as os from "node:os";
 import * as path from "node:path";
+import { withRetry } from "../http/retry.js";
 import type { MusicMood, MusicProvider, MusicResult } from "./types.js";
 
 /**
@@ -28,6 +29,11 @@ export class OpenRouterMusic implements MusicProvider {
   }
 
   async generate(prompt: string, _mood: MusicMood): Promise<MusicResult> {
+    // Rate limit transitório do provider por trás (mesmo achado da imagem/vídeo/TTS).
+    return withRetry(() => this.generateOnce(prompt), { label: "openrouter-music" });
+  }
+
+  private async generateOnce(prompt: string): Promise<MusicResult> {
     const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: { Authorization: `Bearer ${this.apiKey}`, "Content-Type": "application/json" },

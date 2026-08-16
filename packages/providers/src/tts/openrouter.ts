@@ -1,3 +1,4 @@
+import { withRetry } from "../http/retry.js";
 import { pcmToMp3 } from "./pcm-to-mp3.js";
 import { estimateWordTimestamps } from "./gemini.js";
 import type { TTSProvider, TTSResult } from "./types.js";
@@ -26,6 +27,11 @@ export class OpenRouterTTS implements TTSProvider {
   }
 
   async generate(text: string): Promise<TTSResult> {
+    // Rate limit transitório do provider por trás (mesmo achado da imagem/vídeo).
+    return withRetry(() => this.generateOnce(text), { label: "openrouter-tts" });
+  }
+
+  private async generateOnce(text: string): Promise<TTSResult> {
     const res = await fetch("https://openrouter.ai/api/v1/audio/speech", {
       method: "POST",
       headers: { Authorization: `Bearer ${this.apiKey}`, "Content-Type": "application/json" },
