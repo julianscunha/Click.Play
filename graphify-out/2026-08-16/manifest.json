@@ -80,8 +80,8 @@
     "semantic_hash": ""
   },
   "packages/providers/src/index.ts": {
-    "mtime": 1786847538.9897666,
-    "ast_hash": "953f98db7fd0eeae11baf1236fbd6b9f",
+    "mtime": 1786908387.6053536,
+    "ast_hash": "303d17629f4d6c28be0bc69a9b36a05c",
     "semantic_hash": ""
   },
   "packages/providers/tsconfig.json": {
@@ -125,8 +125,8 @@
     "semantic_hash": ""
   },
   "docs/IMPLEMENTATION-PLAN.md": {
-    "mtime": 1786890040.638007,
-    "ast_hash": "969457bd4df940918538101ab13e1094",
+    "mtime": 1786908387.5973537,
+    "ast_hash": "9f0be8c81eb865a169c56dbbbb962638",
     "semantic_hash": ""
   },
   "pnpm-workspace.yaml": {
@@ -465,8 +465,8 @@
     "semantic_hash": ""
   },
   "packages/providers/src/persistence/client.ts": {
-    "mtime": 1786855365.1534588,
-    "ast_hash": "3561e4b2f67420ecf0824a8c7afce643",
+    "mtime": 1786908387.6063545,
+    "ast_hash": "181eba94fae9b43eae1732fd6191e3f1",
     "semantic_hash": ""
   },
   "packages/providers/src/persistence/index.ts": {
@@ -480,8 +480,8 @@
     "semantic_hash": ""
   },
   "packages/providers/src/persistence/job-runner.ts": {
-    "mtime": 1786855495.5082672,
-    "ast_hash": "68bfbb8842ceb94bc4b668c3536cbc53",
+    "mtime": 1786908387.6073544,
+    "ast_hash": "789a10f94859c701a5d2780996e2977e",
     "semantic_hash": ""
   },
   "packages/providers/src/persistence/job-state-machine.test.ts": {
@@ -500,18 +500,18 @@
     "semantic_hash": ""
   },
   "packages/providers/src/persistence/repository.ts": {
-    "mtime": 1786865917.095148,
-    "ast_hash": "6db3d4d6daf2ee70b002ca3e7142ce46",
+    "mtime": 1786908387.608354,
+    "ast_hash": "bca8acfe4b7b180f981db92866effcbe",
     "semantic_hash": ""
   },
   "packages/providers/src/persistence/schema.ts": {
-    "mtime": 1786851404.8680115,
-    "ast_hash": "085ca8870266fbe816724d18469d3714",
+    "mtime": 1786908387.608976,
+    "ast_hash": "be666ba31911a18703cc707dbed1abff",
     "semantic_hash": ""
   },
   "packages/providers/src/persistence/types.ts": {
-    "mtime": 1786855390.26692,
-    "ast_hash": "44cac0112aa1c6e37e0d9653ac415cc8",
+    "mtime": 1786908387.609995,
+    "ast_hash": "004be37586102a10608be2c480209a93",
     "semantic_hash": ""
   },
   "packages/providers/src/pipeline/index.ts": {
@@ -525,8 +525,8 @@
     "semantic_hash": ""
   },
   "packages/providers/src/pipeline/orchestrator.ts": {
-    "mtime": 1786889065.486657,
-    "ast_hash": "63d3d49dfb661cddcfaf8dc75645ab53",
+    "mtime": 1786908387.6109786,
+    "ast_hash": "15981b905c68f9d443f68cd321490c11",
     "semantic_hash": ""
   },
   "packages/providers/src/pipeline/scene-timing.ts": {
@@ -855,8 +855,8 @@
     "semantic_hash": ""
   },
   "apps/api/src/providers.ts": {
-    "mtime": 1786847566.2408772,
-    "ast_hash": "e9a6f893539facef2de7a6a058fe3291",
+    "mtime": 1786908387.5879498,
+    "ast_hash": "567c905556f991f93bae64704776eab9",
     "semantic_hash": ""
   },
   "apps/api/src/remotion/entry.tsx": {
@@ -865,8 +865,8 @@
     "semantic_hash": ""
   },
   "apps/api/src/routes/jobs.ts": {
-    "mtime": 1786889140.0065444,
-    "ast_hash": "0acbe203720647399d5da4331da34fb2",
+    "mtime": 1786908387.5933557,
+    "ast_hash": "5d53f56cd5276a784162bd1f7888167d",
     "semantic_hash": ""
   },
   "apps/api/src/routes/meta.ts": {
@@ -875,8 +875,8 @@
     "semantic_hash": ""
   },
   "apps/web/src/api.ts": {
-    "mtime": 1786889169.9012456,
-    "ast_hash": "5d35bd88ed8d4a0839debdc715ae7d8c",
+    "mtime": 1786908387.5943568,
+    "ast_hash": "a67b1604c8174dbaa293a2e08f68f128",
     "semantic_hash": ""
   },
   "apps/web/src/components/CreateForm.tsx": {
@@ -885,8 +885,8 @@
     "semantic_hash": ""
   },
   "apps/web/src/components/ProgressView.tsx": {
-    "mtime": 1786855606.5374725,
-    "ast_hash": "99f275fe9e259536b7ef26a4ad3b296b",
+    "mtime": 1786908387.5953536,
+    "ast_hash": "218f08199727aa55b261001e4dd5ffd8",
     "semantic_hash": ""
   },
   "apps/web/src/components/ResultPlayer.tsx": {
@@ -1094,11 +1094,6 @@
     "ast_hash": "74e45a45827be0bff403abd462a12543",
     "semantic_hash": ""
   },
-  ".claude/agents/engineering-voice-ai-integration-engineer.md": {
-    "mtime": 1786833196.638756,
-    "ast_hash": "e0b2fb51ad9f57901a04c1ab47f51362",
-    "semantic_hash": ""
-  },
   "packages/providers/src/image/fallback.test.ts": {
     "mtime": 1786845100.1874027,
     "ast_hash": "de6947ed133c1200500581ea2fbca75a",
@@ -1172,6 +1167,16 @@
   "packages/providers/src/http/retry.ts": {
     "mtime": 1786848939.4125478,
     "ast_hash": "a7da8d84e72ddbffca522f4289372319",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/http/timeout.test.ts": {
+    "mtime": 1786908387.6033545,
+    "ast_hash": "de53e650de4d1b08776e04f28bc48023",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/http/timeout.ts": {
+    "mtime": 1786908387.6033545,
+    "ast_hash": "7c94f9bd6fa4523f2fcf955631ad0a17",
     "semantic_hash": ""
   }
 }

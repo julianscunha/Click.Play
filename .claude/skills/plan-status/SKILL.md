@@ -24,3 +24,4 @@ grep -n '^##' docs/IMPLEMENTATION-PLAN.md
 grep -n -i -A5 -B2 '<termo>' docs/IMPLEMENTATION-PLAN.md
 ```
 3. Retornar resultado direto ao usuário/thread. Não ler arquivo inteiro via Read a menos que decisão de arquitetura precise do texto completo de uma seção — nesse caso, ler só a faixa de linhas daquela seção (usar offset/limit do índice acima), não o doc inteiro.
+4. Pergunta genérica tipo "quais próximos passos" → responder só com status line + títulos do índice (não puxar `sed` de um bloco de seção inteiro pra isso). Só ler faixa de linhas de 1 seção quando o usuário pedir detalhe daquela seção específica.
