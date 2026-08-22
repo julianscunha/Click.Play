@@ -1,7 +1,7 @@
 # Graph Report - Click.Play  (2026-08-22)
 
 ## Corpus Check
-- 216 files · ~73,608 words
+- 216 files · ~73,758 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `ef639311`
+- Built from commit: `d849106b`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -325,7 +325,7 @@ Cohesion: 0.70
 Nodes (3): GenerateProvider, withProviderTimeout(), withTimeout()
 
 ## Knowledge Gaps
-- **402 isolated node(s):** `ASPECT_RATIOS`, `RESOLUTION_BY_ASPECT_RATIO`, `STAGE_BY_STATUS`, `JobRunnerDeps`, `JOB_STATUSES` (+397 more)
+- **402 isolated node(s):** `Arquétipos novos (Click.Play)`, `TTS: múltiplos providers, default remoto grátis`, `Terminologia (não confundir)`, `As duas abstrações (substituindo "AssetProvider" como abstração principal)`, `Modelo de Scene: de "1 visual" para composição` (+397 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **4 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -333,10 +333,10 @@ Nodes (3): GenerateProvider, withProviderTimeout(), withTimeout()
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `LLMProvider` connect `llm/types.ts` to `repository.ts`, `critic.ts`, `creative-director.ts`, `research.ts`, `pipeline/types.ts`, `orchestrator.test.ts`?**
-  _High betweenness centrality (0.011) - this node is a cross-community bridge._
+  _High betweenness centrality (0.012) - this node is a cross-community bridge._
 - **Why does `withRetry()` connect `withRetry` to `edge.ts`, `OpenRouterVideo`, `image/openrouter.ts`?**
-  _High betweenness centrality (0.009) - this node is a cross-community bridge._
-- **What connects `ASPECT_RATIOS`, `RESOLUTION_BY_ASPECT_RATIO`, `STAGE_BY_STATUS` to the rest of the system?**
+  _High betweenness centrality (0.010) - this node is a cross-community bridge._
+- **What connects `Arquétipos novos (Click.Play)`, `TTS: múltiplos providers, default remoto grátis`, `Terminologia (não confundir)` to the rest of the system?**
   _402 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `scripts` be split into smaller, more focused modules?**
   _Cohesion score 0.125 - nodes in this community are weakly interconnected._
