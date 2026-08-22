@@ -47,6 +47,7 @@ export const VisualElement = z.discriminatedUnion("type", [
     type: z.literal("animated_text"),
     text: z.string().min(1),
     style: z.string().optional(),
+    position: z.enum(["top", "bottom", "center", "random"]).optional(),
   }),
   z.object({
     type: z.enum(["svg", "shape", "icon"]),

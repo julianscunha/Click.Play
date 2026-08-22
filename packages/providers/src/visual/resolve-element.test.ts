@@ -49,10 +49,22 @@ describe("resolveElement — ai_image", () => {
 });
 
 describe("resolveElement — animated_text", () => {
-  it("passes through the text with no asset resolution", async () => {
+  it("passes through the text with no asset resolution, defaulting position to center", async () => {
     const element: VisualElement = { type: "animated_text", text: "1969" };
     const result = await resolveElement(element, baseCtx());
-    expect(result).toEqual({ type: "animated_text", text: "1969" });
+    expect(result).toEqual({ type: "animated_text", text: "1969", position: "center" });
+  });
+
+  it("passes through an explicit position", async () => {
+    const element: VisualElement = { type: "animated_text", text: "1969", position: "top" };
+    const result = await resolveElement(element, baseCtx());
+    expect(result).toEqual({ type: "animated_text", text: "1969", position: "top" });
+  });
+
+  it("resolves 'random' position to one of top/bottom/center", async () => {
+    const element: VisualElement = { type: "animated_text", text: "1969", position: "random" };
+    const result = await resolveElement(element, baseCtx());
+    expect(["top", "bottom", "center"]).toContain(result.position);
   });
 });
 

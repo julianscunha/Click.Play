@@ -61,6 +61,8 @@ export interface PipelineOptions {
   pacing?: string;
   videoMode?: VideoMode;
   direction?: string;
+  /** Se false, instrui o Creative Director a não emitir elementos animated_text (§11A Bloco 4 item 7). Default true. */
+  showTextOverlays?: boolean;
   fps?: number;
   width?: number;
   height?: number;

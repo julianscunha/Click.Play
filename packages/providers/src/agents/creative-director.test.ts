@@ -43,6 +43,17 @@ describe("generateDirectorScore", () => {
     expect(result.data.archetype).toBe("cinematic_documentary");
   });
 
+  it("instructs the LLM to skip animated_text when showTextOverlays is false", async () => {
+    const llm = fakeLLM([sceneRaw(), sceneRaw(), sceneRaw()]);
+    await generateDirectorScore(llm, "Apollo 11", research, {
+      videoMode: "motion_graphics_only",
+      showTextOverlays: false,
+    });
+
+    const call = (llm.generate as ReturnType<typeof vi.fn>).mock.calls[0]![0];
+    expect(call.userMessage).toMatch(/do NOT use "animated_text"/);
+  });
+
   it("downgrades ai_video scenes missing an ai_video_clip element to motion_graphics instead of failing", async () => {
     const brokenAiVideo = sceneRaw({
       visualStrategy: "ai_video",

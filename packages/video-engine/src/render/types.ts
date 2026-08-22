@@ -15,6 +15,8 @@ export interface ResolvedElement {
   sourceDurationSeconds?: number;
   /** Texto pra animated_text. */
   text?: string;
+  /** Posição pra animated_text ("random" já resolvido pro valor concreto antes de chegar aqui). */
+  position?: "top" | "bottom" | "center";
 }
 
 export interface ResolvedScene {

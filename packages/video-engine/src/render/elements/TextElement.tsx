@@ -2,8 +2,14 @@ import type React from "react";
 import { AbsoluteFill, spring, useCurrentFrame, useVideoConfig } from "remotion";
 import type { ResolvedElement } from "../types";
 
+const JUSTIFY_BY_POSITION: Record<NonNullable<ResolvedElement["position"]>, string> = {
+  top: "flex-start",
+  center: "center",
+  bottom: "flex-end",
+};
+
 /** animated_text: título/texto de cena, com entrada por spring. Não confundir com legenda (Fase 8). */
-export const TextElement: React.FC<ResolvedElement> = ({ text }) => {
+export const TextElement: React.FC<ResolvedElement> = ({ text, position = "center" }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const scaleIn = spring({ frame, fps, config: { damping: 15, stiffness: 100 } });
@@ -12,7 +18,7 @@ export const TextElement: React.FC<ResolvedElement> = ({ text }) => {
 
   return (
     <AbsoluteFill
-      style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "80px" }}
+      style={{ display: "flex", alignItems: "center", justifyContent: JUSTIFY_BY_POSITION[position], padding: "80px" }}
     >
       <div
         style={{

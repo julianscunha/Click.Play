@@ -12,6 +12,7 @@ export interface ResolvedElement {
   motion?: CameraMotion;
   sourceDurationSeconds?: number;
   text?: string;
+  position?: "top" | "bottom" | "center";
 }
 
 /** Erro estruturado quando nenhum StockProvider consegue resolver um elemento. */

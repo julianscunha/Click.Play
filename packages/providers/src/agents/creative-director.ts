@@ -120,16 +120,19 @@ function loadDirectorSystemPrompt(): string {
  * sugerido — o booleano `videoEnabled` antigo permitia 0 cenas em vídeo mesmo
  * "habilitado", porque era só texto de prompt sem validação.
  */
-function buildVideoModeGuidance(mode: VideoMode): string {
+function buildVideoModeGuidance(mode: VideoMode, showTextOverlays = true): string {
   const noPlaceholders =
     "do NOT use svg/shape/icon/particle_system/diagram, they have no renderer yet and render as blank";
+  const noTextOverlays = showTextOverlays
+    ? ""
+    : ` do NOT use "animated_text" elements in this project — the producer disabled text overlays.`;
   if (mode === "motion_graphics_only") {
-    return `Use visualStrategy "motion_graphics" for every scene (composed elements: animated_text, ai_image, stock_image/stock_video — ${noPlaceholders}). ai_video is disabled for this project.`;
+    return `Use visualStrategy "motion_graphics" for every scene (composed elements: animated_text, ai_image, stock_image/stock_video — ${noPlaceholders}).${noTextOverlays} ai_video is disabled for this project.`;
   }
   if (mode === "ai_video_only") {
-    return `Use visualStrategy "ai_video" for every scene — every scene REQUIRES at least one element of type "ai_video_clip" in the elements array, no exceptions. This project has real motion video in every scene, not motion graphics.`;
+    return `Use visualStrategy "ai_video" for every scene — every scene REQUIRES at least one element of type "ai_video_clip" in the elements array, no exceptions. This project has real motion video in every scene, not motion graphics.${noTextOverlays}`;
   }
-  return `Use visualStrategy "motion_graphics" for most scenes (composed elements: animated_text, ai_image, stock_image/stock_video — ${noPlaceholders}). Use "ai_video" or "hybrid" for at least 30% of scenes where MOTION is the story (explosions, flowing water, launches, transformations) — BOTH require at least one element of type "ai_video_clip" in the elements array (a scene with visualStrategy "ai_video" and no "ai_video_clip" element is INVALID and will be rejected). ai_video_clip costs ~$0.30/scene vs ~$0.04 for ai_image — use selectively, but the 30% floor is mandatory.`;
+  return `Use visualStrategy "motion_graphics" for most scenes (composed elements: animated_text, ai_image, stock_image/stock_video — ${noPlaceholders}). Use "ai_video" or "hybrid" for at least 30% of scenes where MOTION is the story (explosions, flowing water, launches, transformations) — BOTH require at least one element of type "ai_video_clip" in the elements array (a scene with visualStrategy "ai_video" and no "ai_video_clip" element is INVALID and will be rejected). ai_video_clip costs ~$0.30/scene vs ~$0.04 for ai_image — use selectively, but the 30% floor is mandatory.${noTextOverlays}`;
 }
 
 /** Lança se o roteiro não atinge o piso de vídeo do VideoMode — pego pelo mesmo retry-with-feedback dos outros erros de validação. */
@@ -146,7 +149,7 @@ export async function generateDirectorScore(
   llm: LLMProvider,
   topic: string,
   researchContext: ResearchResult,
-  options?: { archetype?: string; pacing?: string; videoMode?: VideoMode; direction?: string },
+  options?: { archetype?: string; pacing?: string; videoMode?: VideoMode; direction?: string; showTextOverlays?: boolean },
 ): Promise<DirectorScoreOutput> {
   const systemPrompt = loadDirectorSystemPrompt();
 
@@ -156,7 +159,7 @@ export async function generateDirectorScore(
     : `Choose from: ${archetypes.join(", ")}`;
 
   const videoMode = options?.videoMode ?? "hybrid";
-  const strategyGuidance = buildVideoModeGuidance(videoMode);
+  const strategyGuidance = buildVideoModeGuidance(videoMode, options?.showTextOverlays);
 
   const pacingInstruction = buildPacingInstruction(options?.archetype, options?.pacing);
 
@@ -277,7 +280,7 @@ export async function reviseDirectorScore(
   researchContext: ResearchResult,
   originalScore: DirectorScore,
   critique: CritiqueResult,
-  options?: { archetype?: string; pacing?: string; videoMode?: VideoMode; direction?: string },
+  options?: { archetype?: string; pacing?: string; videoMode?: VideoMode; direction?: string; showTextOverlays?: boolean },
 ): Promise<DirectorScoreOutput> {
   const systemPrompt = loadDirectorSystemPrompt();
   const videoMode = options?.videoMode ?? "hybrid";
@@ -287,6 +290,10 @@ export async function reviseDirectorScore(
   const directionSection = options?.direction?.trim()
     ? `\n## Creative Direction (from the producer)\n\n${options.direction}\n\nHonor these creative constraints while exercising your judgment on anything not specified.\n`
     : "";
+  const noTextOverlaysSection =
+    options?.showTextOverlays === false
+      ? `\ndo NOT use "animated_text" elements in this revision — the producer disabled text overlays.\n`
+      : "";
 
   const userMessage = `Topic: ${topic}
 
@@ -299,7 +306,7 @@ ${researchContext.key_facts.map((f) => `- ${f}`).join("\n")}
 Mood: ${researchContext.mood}
 
 ${pacingInstruction}
-${directionSection}
+${directionSection}${noTextOverlaysSection}
 ## Current Plan (score: ${critique.score}/10)
 
 ${JSON.stringify(originalScore, null, 2)}

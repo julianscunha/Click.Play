@@ -114,8 +114,14 @@ export async function resolveElement(element: VisualElement, ctx: ResolveElement
     case "ai_video_clip":
       return resolveAiVideoClip(element, ctx);
 
-    case "animated_text":
-      return { type: "animated_text", text: element.text };
+    case "animated_text": {
+      const randomPositions = ["top", "bottom", "center"] as const;
+      const position =
+        element.position === "random"
+          ? randomPositions[Math.floor(Math.random() * randomPositions.length)]
+          : (element.position ?? "center");
+      return { type: "animated_text", text: element.text, position };
+    }
 
     // Fora do escopo MVP (Fase 9/10) — sem provider real ainda, passa adiante
     // sem asset; o renderer já sabe desenhar um placeholder pra esses tipos.

@@ -70,6 +70,7 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
         pacing: opts.pacing,
         videoMode: opts.videoMode,
         direction: opts.direction,
+        showTextOverlays: opts.showTextOverlays,
       };
 
       let directorOut = await generateDirectorScore(opts.llm, opts.topic, researchOut.data, directorOpts);
