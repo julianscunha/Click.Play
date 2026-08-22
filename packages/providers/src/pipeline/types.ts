@@ -1,4 +1,4 @@
-import type { CaptionStyleKey, QualityTier, VideoMode, WordTimestamp } from "@clickplay/domain";
+import type { CaptionStyleKey, IntroOutroConfig, QualityTier, VideoMode, WordTimestamp } from "@clickplay/domain";
 import type { DirectorScore } from "../agents/creative-director.js";
 import type { CritiqueResult } from "../agents/critic.js";
 import type { ResearchResult } from "../agents/research.js";
@@ -69,6 +69,9 @@ export interface PipelineOptions {
   direction?: string;
   /** Se false, instrui o Creative Director a não emitir elementos animated_text (§11A Bloco 4 item 7). Default true. */
   showTextOverlays?: boolean;
+  /** Abertura/encerramento sintéticos (§11A Bloco 5) — Scene com animated_text + transition, prepend/append ao roteiro antes do TTS. Só modo "generated" é resolvido; "upload" fica pra Fase 15. */
+  intro?: IntroOutroConfig;
+  outro?: IntroOutroConfig;
   fps?: number;
   width?: number;
   height?: number;

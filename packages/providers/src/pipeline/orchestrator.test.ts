@@ -226,6 +226,35 @@ describe("runPipeline", () => {
     expect((checkpoints[3] as { visuals?: unknown }).visuals).toBeDefined();
   });
 
+  it("prepends/appends synthetic intro/outro scenes with user-provided text (§11A Bloco 5)", async () => {
+    const llm = fakeLLM(RESEARCH_RESULT, directorPayload(), critiquePayload(8));
+    const options = baseOptions(runDir, llm);
+    options.intro = { mode: "generated", text: "Welcome!" };
+    options.outro = { mode: "generated", text: "Bye!" };
+    const callbacks = approvingCallbacks();
+
+    const result = await runPipeline(options, callbacks);
+
+    expect(result.status).toBe("completed");
+    if (result.status !== "completed") throw new Error("expected completed");
+    expect(result.directorScore.scenes[0]).toMatchObject({ id: "intro", scriptLine: "Welcome!" });
+    expect(result.directorScore.scenes.at(-1)).toMatchObject({ id: "outro", scriptLine: "Bye!" });
+    expect(result.directorScore.scenes).toHaveLength(5); // 3 do director + intro + outro
+  });
+
+  it("does not add intro/outro when mode is upload (not resolved yet)", async () => {
+    const llm = fakeLLM(RESEARCH_RESULT, directorPayload(), critiquePayload(8));
+    const options = baseOptions(runDir, llm);
+    options.intro = { mode: "upload" };
+    const callbacks = approvingCallbacks();
+
+    const result = await runPipeline(options, callbacks);
+
+    expect(result.status).toBe("completed");
+    if (result.status !== "completed") throw new Error("expected completed");
+    expect(result.directorScore.scenes).toHaveLength(3);
+  });
+
   it("returns a structured failed result tagged with the stage that threw", async () => {
     const llm = fakeLLM(RESEARCH_RESULT, directorPayload(), critiquePayload(8));
     const options = baseOptions(runDir, llm);

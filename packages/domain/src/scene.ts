@@ -34,6 +34,18 @@ export type VideoGenerationProviderKey = z.infer<typeof VideoGenerationProviderK
 export const QualityTier = z.enum(["draft", "standard", "high"]);
 export type QualityTier = z.infer<typeof QualityTier>;
 
+/** "upload" só registrado no schema — resolução fica pra Fase 15 (precisa endpoint de upload de arquivo, ainda não existe). */
+export const IntroOutroMode = z.enum(["generated", "upload"]);
+export type IntroOutroMode = z.infer<typeof IntroOutroMode>;
+
+/** Abertura/encerramento (docs/IMPLEMENTATION-PLAN.md §11A Bloco 5). Modo "generated" vira uma Scene sintética (animated_text + transition) prependada/appendada ao roteiro — text explícito do usuário tem prioridade, senão o pipeline gera via LLM a partir do research. */
+export const IntroOutroConfig = z.object({
+  mode: IntroOutroMode,
+  text: z.string().optional(),
+  transition: TransitionType.optional(),
+});
+export type IntroOutroConfig = z.infer<typeof IntroOutroConfig>;
+
 /** Elemento composto dentro de uma Scene. Múltiplos podem coexistir (visualStrategy: "hybrid"). */
 export const VisualElement = z.discriminatedUnion("type", [
   z.object({

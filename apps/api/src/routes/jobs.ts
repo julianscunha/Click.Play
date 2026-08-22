@@ -1,7 +1,7 @@
 import * as path from "node:path";
 import type { FastifyInstance } from "fastify";
 import { z } from "zod";
-import { QualityTier, VideoMode } from "@clickplay/domain";
+import { IntroOutroConfig, QualityTier, VideoMode } from "@clickplay/domain";
 import {
   createCostApprovalGate,
   createJob,
@@ -37,6 +37,8 @@ const CreateJobBody = z.object({
   qualityTier: QualityTier.optional(),
   targetDurationSeconds: z.number().positive().optional(),
   language: z.string().optional(),
+  intro: IntroOutroConfig.optional(),
+  outro: IntroOutroConfig.optional(),
 });
 
 const ApproveCostBody = z.object({ approved: z.boolean() });
@@ -101,7 +103,14 @@ export function registerJobsRoutes(app: FastifyInstance, deps: JobsRouteDeps): v
       qualityTier,
       targetDurationSeconds,
       language,
+      intro,
+      outro,
     } = parsed.data;
+    if (intro?.mode === "upload" || outro?.mode === "upload") {
+      return reply.status(422).send({
+        error: { code: "VALIDATION_ERROR", message: 'intro/outro modo "upload" ainda não implementado' },
+      });
+    }
     const resolution = aspectRatio ? RESOLUTION_BY_ASPECT_RATIO[aspectRatio] : undefined;
 
     const project = await createProject(deps.db, {
@@ -118,6 +127,8 @@ export function registerJobsRoutes(app: FastifyInstance, deps: JobsRouteDeps): v
         qualityTier,
         targetDurationSeconds,
         language,
+        intro,
+        outro,
       },
     });
     const runDir = path.join(deps.runsDir, project.id);

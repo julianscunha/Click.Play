@@ -11,6 +11,7 @@ import type { CostBreakdown } from "../cost/index.js";
 import { computeActualCost, estimateCost } from "../cost/index.js";
 import type { LLMUsage } from "../llm/types.js";
 import { resolveElement } from "../visual/index.js";
+import { resolveIntroOutroScene } from "./intro-outro.js";
 import { splitWordsIntoScenes } from "./scene-timing.js";
 import type {
   PipelineCallbacks,
@@ -105,6 +106,11 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
         await callbacks.onRevision?.(entry);
       }
       await callbacks.onStageComplete?.(stage);
+
+      const introScene = await resolveIntroOutroScene(opts.intro, "intro", opts.llm, opts.topic, researchOut.data, opts.language);
+      const outroScene = await resolveIntroOutroScene(opts.outro, "outro", opts.llm, opts.topic, researchOut.data, opts.language);
+      if (introScene) score.scenes = [introScene, ...score.scenes];
+      if (outroScene) score.scenes = [...score.scenes, outroScene];
 
       costEstimate = estimateCost(score.scenes, opts.cost);
       const approved = await callbacks.onCostEstimate(costEstimate);
