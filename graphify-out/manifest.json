@@ -465,8 +465,8 @@
     "semantic_hash": ""
   },
   "packages/providers/src/persistence/client.ts": {
-    "mtime": 1786908387.6063545,
-    "ast_hash": "181eba94fae9b43eae1732fd6191e3f1",
+    "mtime": 1787418143.284678,
+    "ast_hash": "74099706d1665acac12331695db1afbc",
     "semantic_hash": ""
   },
   "packages/providers/src/persistence/index.ts": {
@@ -480,8 +480,8 @@
     "semantic_hash": ""
   },
   "packages/providers/src/persistence/job-runner.ts": {
-    "mtime": 1787408593.4173782,
-    "ast_hash": "099ce2c897cd44d783b6717f7ab315a1",
+    "mtime": 1787418209.0438986,
+    "ast_hash": "df1ff90279bb9ba5daa58cc4101ab78d",
     "semantic_hash": ""
   },
   "packages/providers/src/persistence/job-state-machine.test.ts": {
@@ -500,18 +500,18 @@
     "semantic_hash": ""
   },
   "packages/providers/src/persistence/repository.ts": {
-    "mtime": 1786908387.608354,
-    "ast_hash": "bca8acfe4b7b180f981db92866effcbe",
+    "mtime": 1787418176.8512151,
+    "ast_hash": "69362b22f3d98ae474f7792ab9ca2567",
     "semantic_hash": ""
   },
   "packages/providers/src/persistence/schema.ts": {
-    "mtime": 1786908387.608976,
-    "ast_hash": "be666ba31911a18703cc707dbed1abff",
+    "mtime": 1787418127.4359164,
+    "ast_hash": "984682b1e7f731685430b3bf80ab342d",
     "semantic_hash": ""
   },
   "packages/providers/src/persistence/types.ts": {
-    "mtime": 1786908387.609995,
-    "ast_hash": "004be37586102a10608be2c480209a93",
+    "mtime": 1787418157.3102057,
+    "ast_hash": "dd035077696af2f0c19188bcdcfedf81",
     "semantic_hash": ""
   },
   "packages/providers/src/pipeline/index.ts": {
@@ -520,13 +520,13 @@
     "semantic_hash": ""
   },
   "packages/providers/src/pipeline/orchestrator.test.ts": {
-    "mtime": 1786889498.1504998,
-    "ast_hash": "6b8cfdf2b5cef34d5ebbf86e298d57bb",
+    "mtime": 1787418273.452701,
+    "ast_hash": "7cc134f671ba9724b5efb5bb2e277714",
     "semantic_hash": ""
   },
   "packages/providers/src/pipeline/orchestrator.ts": {
-    "mtime": 1787417131.8823042,
-    "ast_hash": "0fcf3e0c3298fa5702b6a69899a0b253",
+    "mtime": 1787418195.4374297,
+    "ast_hash": "f35a0951e25c525cf918311445d357b7",
     "semantic_hash": ""
   },
   "packages/providers/src/pipeline/scene-timing.ts": {
@@ -535,8 +535,8 @@
     "semantic_hash": ""
   },
   "packages/providers/src/pipeline/types.ts": {
-    "mtime": 1787417122.0437944,
-    "ast_hash": "96cd0656f6fce5e886d77964d239d266",
+    "mtime": 1787418184.979329,
+    "ast_hash": "a18bd56eec6410df28125f67e39ef9c8",
     "semantic_hash": ""
   },
   "packages/providers/src/stock/index.ts": {
@@ -865,8 +865,8 @@
     "semantic_hash": ""
   },
   "apps/api/src/routes/jobs.ts": {
-    "mtime": 1787417198.088434,
-    "ast_hash": "7cd1b46bfa9b816a278fc314ba7822f7",
+    "mtime": 1787418214.644658,
+    "ast_hash": "7b4ec16cf04dc93bfe2267bfd49976a4",
     "semantic_hash": ""
   },
   "apps/api/src/routes/meta.ts": {
