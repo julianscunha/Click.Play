@@ -23,7 +23,7 @@ export interface ResearchOutput {
  * próprio, então o campo `sources` do original foi removido (não há como
  * citar fonte real sem busca).
  */
-export async function research(llm: LLMProvider, topic: string): Promise<ResearchOutput> {
+export async function research(llm: LLMProvider, topic: string, language?: string): Promise<ResearchOutput> {
   let systemPrompt =
     "You are a research assistant. Given a topic, use your training knowledge to produce a structured research summary with key facts and mood/tone for a short-form video script. You do not have web access — never invent specific sources, dates, or statistics you are not confident about.";
 
@@ -33,7 +33,8 @@ export async function research(llm: LLMProvider, topic: string): Promise<Researc
     // Use default prompt if file doesn't exist
   }
 
-  const userMessage = `Research this topic for a short-form video script: ${topic}`;
+  const languageInstruction = language ? ` Write the summary and key facts in ${language}.` : "";
+  const userMessage = `Research this topic for a short-form video script: ${topic}${languageInstruction}`;
   const maxRetries = 3;
   let lastError: Error | null = null;
 

@@ -15,6 +15,12 @@ export const EDGE_TTS_VOICES = {
   "en-US": { female: "en-US-AriaNeural", male: "en-US-GuyNeural" },
 } as const;
 
+/** Voz Edge pro idioma do job (§11A Bloco 3) — idioma fora do mapa (ainda só pt-BR/en-US) cai em pt-BR feminino sem erro, não trava o job por typo/idioma não coberto. */
+export function resolveEdgeVoice(language?: string): string {
+  const entry = language && language in EDGE_TTS_VOICES ? EDGE_TTS_VOICES[language as keyof typeof EDGE_TTS_VOICES] : undefined;
+  return (entry ?? EDGE_TTS_VOICES["pt-BR"]).female;
+}
+
 function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }

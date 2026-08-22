@@ -46,7 +46,7 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
       researchOut = opts.resume.research;
     } else {
       await callbacks.onStageStart?.(stage);
-      researchOut = await research(opts.llm, opts.topic);
+      researchOut = await research(opts.llm, opts.topic, opts.language);
       await callbacks.onStageComplete?.(stage);
     }
     usages.push(researchOut.usage);
@@ -72,6 +72,7 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
         direction: opts.direction,
         showTextOverlays: opts.showTextOverlays,
         targetDurationSeconds: opts.targetDurationSeconds,
+        language: opts.language,
       };
 
       let directorOut = await generateDirectorScore(opts.llm, opts.topic, researchOut.data, directorOpts);

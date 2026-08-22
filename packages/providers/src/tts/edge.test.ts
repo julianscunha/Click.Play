@@ -1,6 +1,6 @@
 import { Readable } from "node:stream";
 import { describe, expect, it, vi } from "vitest";
-import { EdgeTTS, parseWordBoundaries } from "./edge.js";
+import { EdgeTTS, EDGE_TTS_VOICES, parseWordBoundaries, resolveEdgeVoice } from "./edge.js";
 
 let attempt = 0;
 let failuresBeforeSuccess = 0;
@@ -52,6 +52,20 @@ describe("parseWordBoundaries", () => {
   it("returns empty array for blank/malformed input", () => {
     expect(parseWordBoundaries("")).toEqual([]);
     expect(parseWordBoundaries("not json\n\n")).toEqual([]);
+  });
+});
+
+describe("resolveEdgeVoice", () => {
+  it("resolves the female voice for a covered language", () => {
+    expect(resolveEdgeVoice("en-US")).toBe(EDGE_TTS_VOICES["en-US"].female);
+  });
+
+  it("falls back to pt-BR when language is not in EDGE_TTS_VOICES", () => {
+    expect(resolveEdgeVoice("fr-FR")).toBe(EDGE_TTS_VOICES["pt-BR"].female);
+  });
+
+  it("falls back to pt-BR when language is omitted", () => {
+    expect(resolveEdgeVoice(undefined)).toBe(EDGE_TTS_VOICES["pt-BR"].female);
   });
 });
 

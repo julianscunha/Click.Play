@@ -1,7 +1,7 @@
 # Graph Report - Click.Play  (2026-08-22)
 
 ## Corpus Check
-- 216 files · ~72,676 words
+- 216 files · ~72,980 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `5c3ae9cd`
+- Built from commit: `3c176602`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -75,8 +75,8 @@
 
 ## God Nodes (most connected - your core abstractions)
 1. `ClickPlayDb` - 18 edges
-2. `runPipeline()` - 15 edges
-3. `Click.Play — Implementation Plan` - 15 edges
+2. `Click.Play — Implementation Plan` - 15 edges
+3. `runPipeline()` - 15 edges
 4. `LLMProvider` - 14 edges
 5. `generateDirectorScore()` - 13 edges
 6. `PipelineCallbacks` - 13 edges
@@ -311,7 +311,7 @@ Cohesion: 0.27
 Nodes (4): FalVideo, GeminiVideo, VideoGenerationProvider, VideoResult
 
 ## Knowledge Gaps
-- **403 isolated node(s):** `ASPECT_RATIOS`, `RESOLUTION_BY_ASPECT_RATIO`, `STAGE_BY_STATUS`, `research`, `SYSTEM_PROMPT_PATH` (+398 more)
+- **403 isolated node(s):** `Arquétipos novos (Click.Play)`, `TTS: múltiplos providers, default remoto grátis`, `Terminologia (não confundir)`, `As duas abstrações (substituindo "AssetProvider" como abstração principal)`, `Modelo de Scene: de "1 visual" para composição` (+398 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **5 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -319,12 +319,12 @@ Nodes (4): FalVideo, GeminiVideo, VideoGenerationProvider, VideoResult
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `ImageProvider` connect `providers/src/index.ts` to `image/openrouter.ts`, `repository.ts`, `orchestrator.test.ts`, `resolve-element.ts`?**
-  _High betweenness centrality (0.009) - this node is a cross-community bridge._
+  _High betweenness centrality (0.011) - this node is a cross-community bridge._
 - **Why does `TTSProvider` connect `tts/openrouter.ts` to `creative-director.ts`, `repository.ts`, `orchestrator.test.ts`?**
   _High betweenness centrality (0.008) - this node is a cross-community bridge._
-- **Why does `PipelineCallbacks` connect `orchestrator.test.ts` to `creative-director.ts`, `repository.ts`?**
-  _High betweenness centrality (0.008) - this node is a cross-community bridge._
-- **What connects `ASPECT_RATIOS`, `RESOLUTION_BY_ASPECT_RATIO`, `STAGE_BY_STATUS` to the rest of the system?**
+- **Why does `LLMProvider` connect `creative-director.ts` to `repository.ts`, `orchestrator.test.ts`?**
+  _High betweenness centrality (0.007) - this node is a cross-community bridge._
+- **What connects `Arquétipos novos (Click.Play)`, `TTS: múltiplos providers, default remoto grátis`, `Terminologia (não confundir)` to the rest of the system?**
   _403 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `scripts` be split into smaller, more focused modules?**
   _Cohesion score 0.125 - nodes in this community are weakly interconnected._

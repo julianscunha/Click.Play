@@ -182,6 +182,7 @@ export async function generateDirectorScore(
     direction?: string;
     showTextOverlays?: boolean;
     targetDurationSeconds?: number;
+    language?: string;
   },
 ): Promise<DirectorScoreOutput> {
   const systemPrompt = loadDirectorSystemPrompt();
@@ -197,6 +198,9 @@ export async function generateDirectorScore(
   const pacingInstruction = buildPacingInstruction(options?.archetype, options?.pacing);
   const durationInstruction = options?.targetDurationSeconds
     ? `\nTarget total duration: ${options.targetDurationSeconds}s. Budget your scene count and script length accordingly (max ${sceneCapForDuration(options.targetDurationSeconds)} scenes at ~${AI_VIDEO_ESTIMATE_DURATION_SECONDS}s/scene).`
+    : "";
+  const languageInstruction = options?.language
+    ? `\nWrite every scriptLine (voiceover text) in ${options.language}. Other fields (archetype, emotional_arc, music_mood) stay in English as usual.`
     : "";
 
   const directionSection = options?.direction?.trim()
@@ -217,6 +221,7 @@ ${archetypeInstruction}
 
 ${pacingInstruction}
 ${durationInstruction}
+${languageInstruction}
 ${strategyGuidance}
 ${directionSection}CRITICAL RULE: A scene must never be reduced to a single static image/stock clip more than 2 times in a row — compose scenes with multiple elements (e.g. animated_text over an ai_image) instead of a plain image slideshow. Plan your visualStrategy sequence BEFORE writing scenes to ensure variety.
 Every scene MUST have a scriptLine (the voiceover text).
@@ -325,6 +330,7 @@ export async function reviseDirectorScore(
     direction?: string;
     showTextOverlays?: boolean;
     targetDurationSeconds?: number;
+    language?: string;
   },
 ): Promise<DirectorScoreOutput> {
   const systemPrompt = loadDirectorSystemPrompt();
@@ -333,6 +339,9 @@ export async function reviseDirectorScore(
   const pacingInstruction = buildPacingInstruction(options?.archetype, options?.pacing);
   const durationInstruction = options?.targetDurationSeconds
     ? `\nTarget total duration: ${options.targetDurationSeconds}s. Budget your scene count and script length accordingly (max ${sceneCapForDuration(options.targetDurationSeconds)} scenes at ~${AI_VIDEO_ESTIMATE_DURATION_SECONDS}s/scene).`
+    : "";
+  const languageInstruction = options?.language
+    ? `\nWrite every scriptLine (voiceover text) in ${options.language}.`
     : "";
 
   const directionSection = options?.direction?.trim()
@@ -355,6 +364,7 @@ Mood: ${researchContext.mood}
 
 ${pacingInstruction}
 ${durationInstruction}
+${languageInstruction}
 ${directionSection}${noTextOverlaysSection}
 ## Current Plan (score: ${critique.score}/10)
 

@@ -36,6 +36,7 @@ const CreateJobBody = z.object({
   aspectRatio: z.enum(ASPECT_RATIOS).optional(),
   qualityTier: QualityTier.optional(),
   targetDurationSeconds: z.number().positive().optional(),
+  language: z.string().optional(),
 });
 
 const ApproveCostBody = z.object({ approved: z.boolean() });
@@ -57,7 +58,7 @@ const STAGE_BY_STATUS: Record<JobStatus, string> = {
 export interface JobsRouteDeps {
   db: ClickPlayDb;
   /** Chamado por job (não montado uma vez no boot) — reflete keys/modelo salvos via PUT /settings sem exigir restart. */
-  buildJobRunnerDeps(tier?: QualityTier): JobRunnerDeps;
+  buildJobRunnerDeps(tier?: QualityTier, language?: string): JobRunnerDeps;
   buildCostOptions(): CostEstimateOptions;
   runsDir: string;
   gate: ReturnType<typeof createCostApprovalGate>;
@@ -88,8 +89,18 @@ export function registerJobsRoutes(app: FastifyInstance, deps: JobsRouteDeps): v
         .status(422)
         .send({ error: { code: "VALIDATION_ERROR", message: "Corpo inválido", details: parsed.error.flatten() } });
     }
-    const { topic, direction, archetype, pacing, videoMode, captionStyle, aspectRatio, qualityTier, targetDurationSeconds } =
-      parsed.data;
+    const {
+      topic,
+      direction,
+      archetype,
+      pacing,
+      videoMode,
+      captionStyle,
+      aspectRatio,
+      qualityTier,
+      targetDurationSeconds,
+      language,
+    } = parsed.data;
     const resolution = aspectRatio ? RESOLUTION_BY_ASPECT_RATIO[aspectRatio] : undefined;
 
     const project = await createProject(deps.db, {
@@ -105,12 +116,13 @@ export function registerJobsRoutes(app: FastifyInstance, deps: JobsRouteDeps): v
         height: resolution?.height,
         qualityTier,
         targetDurationSeconds,
+        language,
       },
     });
     const runDir = path.join(deps.runsDir, project.id);
     const job = await createJob(deps.db, { projectId: project.id, runDir });
 
-    startJob(deps.db, job.id, deps.buildJobRunnerDeps(qualityTier), {
+    startJob(deps.db, job.id, deps.buildJobRunnerDeps(qualityTier, language), {
       approveCost: (estimate) => deps.gate.waitForApproval(job.id),
       onLog: (message) => app.log.info({ jobId: job.id }, message),
     });
@@ -149,10 +161,15 @@ export function registerJobsRoutes(app: FastifyInstance, deps: JobsRouteDeps): v
     if (!job) return reply.status(404).send({ error: { code: "NOT_FOUND", message: "Job não encontrado" } });
 
     const project = await getProject(deps.db, job.projectId);
-    const retried = await retryJob(deps.db, job.id, deps.buildJobRunnerDeps(project?.config.qualityTier), {
-      approveCost: (estimate) => deps.gate.waitForApproval(job.id),
-      onLog: (message) => app.log.info({ jobId: job.id }, message),
-    });
+    const retried = await retryJob(
+      deps.db,
+      job.id,
+      deps.buildJobRunnerDeps(project?.config.qualityTier, project?.config.language),
+      {
+        approveCost: (estimate) => deps.gate.waitForApproval(job.id),
+        onLog: (message) => app.log.info({ jobId: job.id }, message),
+      },
+    );
     if (!retried) {
       return reply
         .status(409)
