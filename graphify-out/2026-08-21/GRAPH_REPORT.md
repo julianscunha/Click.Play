@@ -1,16 +1,16 @@
-# Graph Report - Click.Play  (2026-08-16)
+# Graph Report - Click.Play  (2026-08-21)
 
 ## Corpus Check
-- 208 files · ~59,533 words
+- 214 files · ~71,356 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 878 nodes · 1400 edges · 48 communities (45 shown, 3 thin omitted)
+- 1023 nodes · 1538 edges · 62 communities (58 shown, 4 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 2 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `cec78076`
+- Built from commit: `7da1f000`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -22,52 +22,66 @@
 - video-engine/package.json
 - repository.ts
 - devDependencies
-- resolve-element.ts
+- providers/src/index.ts
 - run-qc.ts
 - compilerOptions
 - domain/package.json
 - Click.Play
 - compilerOptions
 - compilerOptions
-- server.test.ts
+- AgentsOrchestrator Agent Personality
 - domain/tsconfig.json
 - providers/tsconfig.json
 - video-engine/tsconfig.json
 - providers/package.json
 - api.ts
-- providers.ts
+- server.test.ts
 - bundled.ts
-- tts/openrouter.ts
-- providers/src/index.ts
+- domain/src/index.ts
+- llm/types.ts
 - Click.Play
 - devDependencies
 - scene.ts
 - orchestrator.test.ts
 - ClickPlayVideo.tsx
+- 🎙️ Voice AI Integration Engineer Agent
+- Core Mission
 - new-provider
 - verify-package
 - typecheck-on-edit.cjs
 - pricing.ts
+- providers.ts
 - Click.Play — Implementation Plan
+- dependencies
+- Social Media Strategist Agent
 - cost-approval-gate.ts
 - §11A. Roadmap de produção e qualidade de output — gaps pós-primeiro-vídeo-real
 - 0.2 Correção arquitetural: estratégia de produção visual (não é slideshow)
 - 11. Roadmap de produto — Studio → SaaS
 - 0.1 Público-alvo e decisões de produto derivadas
 - Uso
+- Marketing Video Optimization Specialist Agent
 - FallbackMusic
+- creative-director.ts
+- critic.ts
+- research.ts
+- PipelineCallbacks
+- pipeline/types.ts
+- Marketing Content Creator Agent
+- dependencies
+- plan-status
 
 ## God Nodes (most connected - your core abstractions)
 1. `ClickPlayDb` - 18 edges
 2. `Click.Play — Implementation Plan` - 15 edges
 3. `LLMProvider` - 14 edges
-4. `PipelineCallbacks` - 13 edges
-5. `compilerOptions` - 13 edges
-6. `runJobOnce()` - 11 edges
-7. `withRetry()` - 11 edges
-8. `ImageProvider` - 11 edges
-9. `generateDirectorScore()` - 10 edges
-10. `VideoGenerationProvider` - 10 edges
+4. `AgentsOrchestrator Agent Personality` - 13 edges
+5. `Social Media Strategist Agent` - 13 edges
+6. `PipelineCallbacks` - 13 edges
+7. `compilerOptions` - 13 edges
+8. `runJobOnce()` - 11 edges
+9. `withRetry()` - 11 edges
+10. `ImageProvider` - 11 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `buildVideoProviders()` --calls--> `withProviderTimeout()`  [EXTRACTED]
@@ -84,7 +98,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (48 total, 3 thin omitted)
+## Communities (62 total, 4 thin omitted)
 
 ### Community 0 - "scripts"
 Cohesion: 0.12
@@ -99,23 +113,23 @@ Cohesion: 0.18
 Nodes (12): typescript, vitest, devDependencies, typescript, vitest, devDependencies, @types/ffprobe-static, typescript (+4 more)
 
 ### Community 3 - "dependencies"
-Cohesion: 0.04
-Nodes (49): ai, dependencies, @clickplay/domain, @clickplay/providers, @clickplay/video-engine, fastify, @fastify/cors, @fastify/helmet (+41 more)
+Cohesion: 0.10
+Nodes (21): ai, @clickplay/domain, @clickplay/video-engine, @clickplay/domain, @clickplay/video-engine, drizzle-orm, @fal-ai/client, ffprobe-static (+13 more)
 
 ### Community 4 - "video-engine/package.json"
 Cohesion: 0.05
 Nodes (36): dependencies, @clickplay/domain, react, react-dom, remotion, @remotion/bundler, @remotion/google-fonts, @remotion/renderer (+28 more)
 
 ### Community 5 - "repository.ts"
-Cohesion: 0.07
+Cohesion: 0.08
 Nodes (58): addCheckpointColumnIfMissing(), addStageDetailColumnIfMissing(), ClickPlayDb, createDb(), toRow(), JobRunnerDeps, retryJob(), runJobOnce() (+50 more)
 
 ### Community 6 - "devDependencies"
 Cohesion: 0.06
 Nodes (33): dependencies, react, react-dom, devDependencies, tailwindcss, @tailwindcss/vite, @types/react, @types/react-dom (+25 more)
 
-### Community 7 - "resolve-element.ts"
-Cohesion: 0.05
+### Community 7 - "providers/src/index.ts"
+Cohesion: 0.06
 Nodes (22): sleep(), withRetry(), FallbackImage, GeminiImage, OpenRouterImage, ImageProvider, OpenRouterMusic, FalVideo (+14 more)
 
 ### Community 8 - "run-qc.ts"
@@ -142,9 +156,9 @@ Nodes (13): compilerOptions, jsx, lib, noEmit, types, extends, include, DOM (+5 
 Cohesion: 0.14
 Nodes (13): compilerOptions, jsx, lib, module, moduleResolution, outDir, rootDir, extends (+5 more)
 
-### Community 14 - "server.test.ts"
-Cohesion: 0.22
-Nodes (13): appWithToken(), costOptions, directorPayload(), execFileAsync, fakeImageProvider(), fakeJobRunnerDeps(), fakeLLM(), fakeMusic() (+5 more)
+### Community 14 - "AgentsOrchestrator Agent Personality"
+Cohesion: 0.05
+Nodes (37): 🚀 Advanced Pipeline Capabilities, AgentsOrchestrator Agent Personality, Autonomous Operation, 🤖 Available Specialist Agents, Completion Summary Template, Context-Aware Agent Spawning, 🚨 Critical Rules You Must Follow, 🎨 Design & UX Agents (+29 more)
 
 ### Community 15 - "domain/tsconfig.json"
 Cohesion: 0.25
@@ -166,41 +180,49 @@ Nodes (10): main, name, private, scripts, lint, test, typecheck, type (+2 more)
 Cohesion: 0.06
 Nodes (42): approveCost(), CostAmount, CostBreakdown, createJob(), CreateJobInput, FormConfig, getFormConfig(), getJob() (+34 more)
 
-### Community 22 - "providers.ts"
+### Community 22 - "server.test.ts"
 Cohesion: 0.06
-Nodes (44): CAPTION_STYLES, getFormConfig(), getRecommendedModels(), PACING_TIERS, RECOMMENDED_IMAGE_MODELS, RECOMMENDED_TTS_FALLBACK_MODELS, RECOMMENDED_VIDEO_MODELS, openDb() (+36 more)
+Nodes (38): CAPTION_STYLES, getFormConfig(), getRecommendedModels(), PACING_TIERS, RECOMMENDED_IMAGE_MODELS, RECOMMENDED_TTS_FALLBACK_MODELS, RECOMMENDED_VIDEO_MODELS, readEnvFile() (+30 more)
 
 ### Community 24 - "bundled.ts"
 Cohesion: 0.21
 Nodes (10): listTracks(), loadManifest(), MANIFEST_PATH, ManifestTrack, MUSIC_DIR, MusicManifest, MusicSelection, PACKAGE_ROOT (+2 more)
 
-### Community 25 - "tts/openrouter.ts"
-Cohesion: 0.10
-Nodes (12): EDGE_TTS_VOICES, EdgeTTS, parseWordBoundaries(), sleep(), streamToBuffer(), FallbackTTS, estimateWordTimestamps(), GeminiTTS (+4 more)
+### Community 25 - "domain/src/index.ts"
+Cohesion: 0.07
+Nodes (16): Asset, AssetType, EDGE_TTS_VOICES, EdgeTTS, parseWordBoundaries(), sleep(), streamToBuffer(), FallbackTTS (+8 more)
 
-### Community 26 - "providers/src/index.ts"
-Cohesion: 0.05
-Nodes (50): Asset, AssetType, assertVideoMode(), assertVideoModeWithDowngradeContext(), buildDefaultPrompt(), buildPacingInstruction(), buildVideoModeGuidance(), DirectorScore (+42 more)
+### Community 26 - "llm/types.ts"
+Cohesion: 0.14
+Nodes (10): BaseLLM, FakeLLM, generateTextMock, FallbackLLM, opts, schema, OpenRouterLLM, LLMProvider (+2 more)
 
 ### Community 27 - "Click.Play"
 Cohesion: 0.40
 Nodes (4): Click.Play, Comandos, pnpm gotcha (Windows), Workflow
 
 ### Community 28 - "devDependencies"
-Cohesion: 0.22
-Nodes (9): devDependencies, tsx, @types/node, @types/react, @types/react-dom, tsx, @types/node, @types/react (+1 more)
+Cohesion: 0.17
+Nodes (12): devDependencies, ffmpeg-static, tsx, @types/node, @types/react, @types/react-dom, ffmpeg-static, ffmpeg-static (+4 more)
 
 ### Community 29 - "scene.ts"
 Cohesion: 0.11
 Nodes (22): AudioTrack, MusicMood, MusicTrack, NarrationTrack, WordTimestamp, Caption, CaptionStyleKey, CameraMotion (+14 more)
 
 ### Community 30 - "orchestrator.test.ts"
-Cohesion: 0.11
-Nodes (9): baseOptions(), fakeImageProvider(), fakeLLM(), fakeMusic(), fakeTTS(), fakeVideoRenderer(), RESEARCH_RESULT, usage() (+1 more)
+Cohesion: 0.22
+Nodes (8): baseOptions(), fakeImageProvider(), fakeLLM(), fakeMusic(), fakeTTS(), fakeVideoRenderer(), RESEARCH_RESULT, usage()
 
 ### Community 31 - "ClickPlayVideo.tsx"
 Cohesion: 0.18
 Nodes (8): ClickPlayVideoRoot(), DEFAULT_PROPS, Main(), resolveAsset(), preparePublicAssets(), RemotionRenderer, RemotionRendererOptions, VideoRenderer
+
+### Community 32 - "🎙️ Voice AI Integration Engineer Agent"
+Cohesion: 0.06
+Nodes (30): 🚀 Advanced Capabilities, Advanced Diarization and Speaker Intelligence, Audio Quality Awareness, 🚨 Critical Rules You Must Follow, End-to-End Transcription Pipeline Engineering, Input Handling and Validation, Integration Targets, 🔄 Learning & Memory (+22 more)
+
+### Community 33 - "Core Mission"
+Cohesion: 0.07
+Nodes (26): AI-Assisted Editing, Audio Engineering, Audio Matters as Much as Video, Color Grading & Correction, Communication Style, Composition & Camera Language, Core Mission, Critical Rules (+18 more)
 
 ### Community 34 - "new-provider"
 Cohesion: 0.50
@@ -214,9 +236,21 @@ Nodes (3): Passos, Uso, verify-package
 Cohesion: 0.29
 Nodes (6): IMAGE_PRICING_PER_IMAGE, LLM_CALL_TOKEN_ESTIMATES, LLM_PRICING_PER_MODEL, MUSIC_PRICING_PER_TRACK, TTS_PRICING_PER_CHAR, VIDEO_PRICING_PER_SECOND
 
+### Community 41 - "providers.ts"
+Cohesion: 0.14
+Nodes (19): openDb(), app, db, envFilePath, port, runsDir, buildCostOptions(), buildImageProvider() (+11 more)
+
 ### Community 42 - "Click.Play — Implementation Plan"
 Cohesion: 0.17
 Nodes (12): 0. Resumo da decisão, 10. Critérios de aceite, 1. Arquitetura proposta, 2. Matriz de reaproveitamento, 3. Componentes reutilizados (quase sem mudança), 4. Componentes adaptados (reescrita parcial), 5. Componentes removidos, 6. Componentes novos (não existem em nenhum dos dois) (+4 more)
+
+### Community 43 - "dependencies"
+Cohesion: 0.11
+Nodes (19): dependencies, @clickplay/providers, fastify, @fastify/cors, @fastify/helmet, @fastify/rate-limit, @fastify/static, react (+11 more)
+
+### Community 44 - "Social Media Strategist Agent"
+Cohesion: 0.11
+Nodes (18): Campaign Management, Campaign Planning, Communication Style, Core Capabilities, Cross-Platform Integration, Decision Framework, Example Use Cases, Learning & Memory (+10 more)
 
 ### Community 46 - "§11A. Roadmap de produção e qualidade de output — gaps pós-primeiro-vídeo-real"
 Cohesion: 0.22
@@ -238,25 +272,57 @@ Nodes (5): 0.1 Público-alvo e decisões de produto derivadas, Arquétipos novos
 Cohesion: 0.50
 Nodes (4): Comandos, Docker, Local (Node/pnpm), Uso
 
+### Community 51 - "Marketing Video Optimization Specialist Agent"
+Cohesion: 0.11
+Nodes (18): Algorithmic Optimization, Analytics & Monetization, Clickability Without Clickbait, Content & Visual Strategy, 🚨 Critical Rules You Must Follow, Marketing Video Optimization Specialist Agent, Retention First, Step 1: Research & Discovery (+10 more)
+
+### Community 54 - "creative-director.ts"
+Cohesion: 0.26
+Nodes (14): assertVideoMode(), assertVideoModeWithDowngradeContext(), buildDefaultPrompt(), buildPacingInstruction(), buildVideoModeGuidance(), DirectorScoreOutput, DirectorScoreRaw, generateDirectorScore() (+6 more)
+
+### Community 55 - "critic.ts"
+Cohesion: 0.22
+Nodes (10): PACING_CONFIG, CritiqueOutput, CritiqueResult, evaluate(), SYSTEM_PROMPT_PATH, ArchetypeConfig, ARCHETYPES, getArchetype() (+2 more)
+
+### Community 56 - "research.ts"
+Cohesion: 0.20
+Nodes (6): research, research(), ResearchOutput, ResearchResult, SYSTEM_PROMPT_PATH, RESULT
+
+### Community 58 - "pipeline/types.ts"
+Cohesion: 0.42
+Nodes (6): DirectorScore, LLMUsage, PipelineOptions, PipelineResult, PipelineStage, RevisionLogEntry
+
+### Community 59 - "Marketing Content Creator Agent"
+Cohesion: 0.29
+Nodes (6): Core Capabilities, Decision Framework, Identity & Role Definition, Marketing Content Creator Agent, Specialized Skills, Success Metrics
+
+### Community 60 - "dependencies"
+Cohesion: 0.33
+Nodes (6): zod, dependencies, @clickplay/shared, zod, zod, zod
+
+### Community 61 - "plan-status"
+Cohesion: 0.50
+Nodes (3): plan-status, Processo, Uso
+
 ## Knowledge Gaps
-- **293 isolated node(s):** `research`, `SYSTEM_PROMPT_PATH`, `SceneRaw`, `DirectorScoreRaw`, `DirectorScoreOutput` (+288 more)
+- **402 isolated node(s):** `🧠 Your Identity & Memory`, `Orchestrate Complete Development Pipeline`, `Implement Continuous Quality Loops`, `Autonomous Operation`, `Quality Gate Enforcement` (+397 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **3 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **4 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `PipelineCallbacks` connect `orchestrator.test.ts` to `providers/src/index.ts`, `repository.ts`?**
-  _High betweenness centrality (0.011) - this node is a cross-community bridge._
-- **Why does `LLMProvider` connect `providers/src/index.ts` to `repository.ts`, `orchestrator.test.ts`?**
-  _High betweenness centrality (0.010) - this node is a cross-community bridge._
-- **Why does `ImageProvider` connect `resolve-element.ts` to `repository.ts`, `orchestrator.test.ts`?**
-  _High betweenness centrality (0.009) - this node is a cross-community bridge._
-- **What connects `research`, `SYSTEM_PROMPT_PATH`, `SceneRaw` to the rest of the system?**
-  _293 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Why does `PipelineCallbacks` connect `PipelineCallbacks` to `pipeline/types.ts`, `repository.ts`, `orchestrator.test.ts`?**
+  _High betweenness centrality (0.013) - this node is a cross-community bridge._
+- **Why does `dependencies` connect `dependencies` to `api/package.json`, `dependencies`, `dependencies`?**
+  _High betweenness centrality (0.005) - this node is a cross-community bridge._
+- **What connects `🧠 Your Identity & Memory`, `Orchestrate Complete Development Pipeline`, `Implement Continuous Quality Loops` to the rest of the system?**
+  _402 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `scripts` be split into smaller, more focused modules?**
   _Cohesion score 0.125 - nodes in this community are weakly interconnected._
 - **Should `dependencies` be split into smaller, more focused modules?**
-  _Cohesion score 0.04251700680272109 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.09523809523809523 - nodes in this community are weakly interconnected._
 - **Should `video-engine/package.json` be split into smaller, more focused modules?**
   _Cohesion score 0.05405405405405406 - nodes in this community are weakly interconnected._
+- **Should `repository.ts` be split into smaller, more focused modules?**
+  _Cohesion score 0.07525150905432595 - nodes in this community are weakly interconnected._

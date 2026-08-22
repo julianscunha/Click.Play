@@ -64,39 +64,37 @@ export interface DirectorScoreOutput {
   usage: LLMUsage;
 }
 
-/**
- * Atribui id sequencial (a LLM não produz ids únicos de forma confiável) e
- * corrige visualStrategy "ai_video" sem elemento "ai_video_clip" rebaixando
- * pra "motion_graphics" — mesmo com o prompt explícito sobre a exigência,
- * modelos erram essa combinação (achado em teste manual, reproduzido 3/3
- * em dois modelos diferentes); reparar é mais confiável que reprompt.
- */
-function toScenes(raw: z.infer<typeof SceneRaw>[]): { scenes: Scene[]; downgraded: number[] } {
-  const downgraded: number[] = [];
-  const scenes = raw.map((scene, i) => {
-    const hasAiVideoClip = scene.elements.some((e) => e.type === "ai_video_clip");
-    const wasAiVideo = scene.visualStrategy === "ai_video";
-    if (wasAiVideo && !hasAiVideoClip) downgraded.push(i + 1);
-    const visualStrategy = wasAiVideo && !hasAiVideoClip ? "motion_graphics" : scene.visualStrategy;
-    return Scene.parse({ id: String(i + 1), ...scene, visualStrategy });
-  });
-  return { scenes, downgraded };
+/** Prompt visual a reaproveitar pro ai_video_clip injetado — pega de outro
+ * elemento com prompt (ai_image/stock_image/stock_video) já presente na
+ * cena; sem isso (cena só com animated_text, por ex.), cai pro scriptLine. */
+function extractVisualPrompt(scene: z.infer<typeof SceneRaw>): string {
+  const withPrompt = scene.elements.find((e): e is Extract<VisualElement, { prompt: string }> => "prompt" in e);
+  return withPrompt?.prompt ?? scene.scriptLine;
 }
 
-/** Junta o erro de piso de VideoMode com quais cenas foram rebaixadas por
- * faltar "ai_video_clip" — sem isso o LLM recebe a mesma mensagem genérica a
- * cada retry e repete o mesmo erro (achado em teste manual real: hybrid
- * falhando as 3 tentativas com "roteiro não atinge o piso" mesmo o LLM
- * escrevendo cenas ai_video, porque elas eram rebaixadas em silêncio). */
-function assertVideoModeWithDowngradeContext(scenes: Scene[], mode: VideoMode, downgraded: number[]): void {
-  try {
-    assertVideoMode(scenes, mode);
-  } catch (err) {
-    if (downgraded.length > 0 && err instanceof Error) {
-      err.message += ` Nota: cena(s) ${downgraded.join(", ")} tinham visualStrategy "ai_video"/"hybrid" mas SEM elemento "ai_video_clip" no array de elements, e foram rebaixadas pra "motion_graphics" — sempre inclua um elemento do tipo "ai_video_clip" ao usar ai_video/hybrid.`;
-    }
-    throw err;
-  }
+/**
+ * Atribui id sequencial (a LLM não produz ids únicos de forma confiável) e
+ * repara visualStrategy "ai_video" sem elemento "ai_video_clip" injetando um
+ * — mesmo com o prompt explícito sobre a exigência, modelos erram essa
+ * combinação (achado em teste manual, reproduzido 3/3 em dois modelos
+ * diferentes). Rebaixar pra "motion_graphics" (comportamento anterior)
+ * quebrava VideoMode "ai_video_only" de vez: o piso exige TODA cena com
+ * clip, então qualquer rebaixamento garantia falha nas 3 tentativas — visto
+ * em produção (8/8 cenas rebaixadas, job sempre falhando). Injetar o
+ * elemento faltante honra a intenção original do LLM e sempre atinge o piso.
+ */
+function toScenes(raw: z.infer<typeof SceneRaw>[]): { scenes: Scene[]; repaired: number[] } {
+  const repaired: number[] = [];
+  const scenes = raw.map((scene, i) => {
+    const hasAiVideoClip = scene.elements.some((e) => e.type === "ai_video_clip");
+    const needsRepair = scene.visualStrategy === "ai_video" && !hasAiVideoClip;
+    if (needsRepair) repaired.push(i + 1);
+    const elements = needsRepair
+      ? [...scene.elements, { type: "ai_video_clip" as const, provider: "auto" as const, prompt: extractVisualPrompt(scene) }]
+      : scene.elements;
+    return Scene.parse({ id: String(i + 1), ...scene, elements });
+  });
+  return { scenes, repaired };
 }
 
 /** Backoff antes de cada retry — achado em teste manual: rate limit do provider
@@ -205,9 +203,9 @@ If over budget, cut a scene rather than cramming.`;
       totalUsage.inputTokens += result.usage.inputTokens;
       totalUsage.outputTokens += result.usage.outputTokens;
 
-      const { scenes, downgraded } = toScenes(result.data.scenes);
+      const { scenes } = toScenes(result.data.scenes);
       const validated = DirectorScore.parse({ ...result.data, scenes });
-      assertVideoModeWithDowngradeContext(validated.scenes, videoMode, downgraded);
+      assertVideoMode(validated.scenes, videoMode);
       return { data: validated, usage: totalUsage };
     } catch (err) {
       lastError = err instanceof Error ? err : new Error(String(err));
@@ -343,7 +341,7 @@ Keep the same archetype. Maintain the GOLDEN RULE: never reduce more than 2 cons
       totalUsage.inputTokens += result.usage.inputTokens;
       totalUsage.outputTokens += result.usage.outputTokens;
 
-      const { scenes, downgraded } = toScenes(result.data.scenes);
+      const { scenes } = toScenes(result.data.scenes);
       const validated = DirectorScore.parse({ ...result.data, scenes });
 
       // Prevent archetype drift: the LLM may change the archetype during revision
@@ -352,7 +350,7 @@ Keep the same archetype. Maintain the GOLDEN RULE: never reduce more than 2 cons
         (validated as { archetype: string }).archetype = originalScore.archetype;
       }
 
-      assertVideoModeWithDowngradeContext(validated.scenes, videoMode, downgraded);
+      assertVideoMode(validated.scenes, videoMode);
       return { data: validated, usage: totalUsage };
     } catch (err) {
       lastError = err instanceof Error ? err : new Error(String(err));

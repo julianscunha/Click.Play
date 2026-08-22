@@ -54,7 +54,7 @@ describe("generateDirectorScore", () => {
     expect(call.userMessage).toMatch(/do NOT use "animated_text"/);
   });
 
-  it("downgrades ai_video scenes missing an ai_video_clip element to motion_graphics instead of failing", async () => {
+  it("repairs an ai_video scene missing an ai_video_clip element by injecting one, reusing an existing prompt", async () => {
     const brokenAiVideo = sceneRaw({
       visualStrategy: "ai_video",
       elements: [{ type: "stock_image", prompt: "rocket launch" }],
@@ -63,24 +63,29 @@ describe("generateDirectorScore", () => {
 
     const result = await generateDirectorScore(llm, "Apollo 11", research, { videoMode: "motion_graphics_only" });
 
-    expect(result.data.scenes[2]!.visualStrategy).toBe("motion_graphics");
+    expect(result.data.scenes[2]!.visualStrategy).toBe("ai_video");
+    expect(result.data.scenes[2]!.elements).toContainEqual(
+      expect.objectContaining({ type: "ai_video_clip", provider: "auto", prompt: "rocket launch" }),
+    );
     expect(llm.generate).toHaveBeenCalledTimes(1);
   });
 
-  it("names the downgraded scenes in the error when a VideoMode floor fails because of a missing ai_video_clip", async () => {
-    // hybrid com 6 cenas exige piso de 2 (ceil(6*0.3)) — nenhuma cena aqui tem
-    // ai_video_clip de verdade, então toScenes rebaixa a única "ai_video" pra
-    // motion_graphics e o piso nunca é atingido; a mensagem deve nomear a cena.
+  it("satisfies VideoMode 'ai_video_only' even when every scene comes back missing its ai_video_clip element", async () => {
+    // Caso real observado em produção: LLM marca visualStrategy "ai_video" em
+    // todas as cenas mas esquece o elemento "ai_video_clip" nas 8 — antes do
+    // reparo isso rebaixava tudo pra "motion_graphics" e "ai_video_only"
+    // (piso = 100% das cenas) falhava sempre, nas 3 tentativas.
     const brokenAiVideo = sceneRaw({
       visualStrategy: "ai_video",
       elements: [{ type: "stock_image", prompt: "rocket launch" }],
     });
-    const llm = fakeLLM([sceneRaw(), sceneRaw(), brokenAiVideo, sceneRaw(), sceneRaw(), sceneRaw()]);
+    const llm = fakeLLM([brokenAiVideo, brokenAiVideo, brokenAiVideo]);
 
-    await expect(generateDirectorScore(llm, "Apollo 11", research, { videoMode: "hybrid" })).rejects.toThrow(
-      /cena\(s\) 3.*rebaixadas/,
-    );
-  }, 15_000);
+    const result = await generateDirectorScore(llm, "Apollo 11", research, { videoMode: "ai_video_only" });
+
+    expect(result.data.scenes.every((s) => s.elements.some((e) => e.type === "ai_video_clip"))).toBe(true);
+    expect(llm.generate).toHaveBeenCalledTimes(1);
+  });
 
   it("retries and eventually throws when scenes keep violating the anti-slideshow rule", async () => {
     const staticScene = sceneRaw({ elements: [{ type: "stock_image", prompt: "moon" }] });

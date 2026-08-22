@@ -715,8 +715,8 @@
     "semantic_hash": ""
   },
   ".claude/skills/plan-status/SKILL.md": {
-    "mtime": 1786732036.2916667,
-    "ast_hash": "9fe9bb7d7e9533e5d052d489fbdcb0eb",
+    "mtime": 1787363475.494982,
+    "ast_hash": "0b6542bb0a4aea9a816e274b203dc9c1",
     "semantic_hash": ""
   },
   "packages/providers/assets/music/chill-lofi-01.mp3": {
@@ -1182,6 +1182,36 @@
   ".github/FUNDING.yml": {
     "mtime": 1786908387.1987212,
     "ast_hash": "40bb26bb9a0fb8da25ccabe0f4e98f81",
+    "semantic_hash": ""
+  },
+  ".claude/agents/agents-orchestrator.md": {
+    "mtime": 1786935363.2602942,
+    "ast_hash": "a47e509bb98047195f93ae3dbae2d453",
+    "semantic_hash": ""
+  },
+  ".claude/agents/engineering-voice-ai-integration-engineer.md": {
+    "mtime": 1786935363.7848713,
+    "ast_hash": "e0b2fb51ad9f57901a04c1ab47f51362",
+    "semantic_hash": ""
+  },
+  ".claude/agents/marketing-content-creator.md": {
+    "mtime": 1786935363.3958666,
+    "ast_hash": "9e2ade728189a0685228c2a64113c864",
+    "semantic_hash": ""
+  },
+  ".claude/agents/marketing-short-video-editing-coach.md": {
+    "mtime": 1786935363.4868367,
+    "ast_hash": "b3530d252459aa424fcefc98a026eca1",
+    "semantic_hash": ""
+  },
+  ".claude/agents/marketing-social-media-strategist.md": {
+    "mtime": 1786935363.5791254,
+    "ast_hash": "681cc9869f74852d38972c106ed88b1d",
+    "semantic_hash": ""
+  },
+  ".claude/agents/marketing-video-optimization-specialist.md": {
+    "mtime": 1786935363.6880612,
+    "ast_hash": "8f703f9e970993942668c069c1c28701",
     "semantic_hash": ""
   }
 }
