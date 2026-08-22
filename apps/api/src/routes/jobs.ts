@@ -35,6 +35,7 @@ const CreateJobBody = z.object({
   captionStyle: z.enum(CAPTION_STYLES).optional(),
   aspectRatio: z.enum(ASPECT_RATIOS).optional(),
   qualityTier: QualityTier.optional(),
+  targetDurationSeconds: z.number().positive().optional(),
 });
 
 const ApproveCostBody = z.object({ approved: z.boolean() });
@@ -87,7 +88,8 @@ export function registerJobsRoutes(app: FastifyInstance, deps: JobsRouteDeps): v
         .status(422)
         .send({ error: { code: "VALIDATION_ERROR", message: "Corpo inválido", details: parsed.error.flatten() } });
     }
-    const { topic, direction, archetype, pacing, videoMode, captionStyle, aspectRatio, qualityTier } = parsed.data;
+    const { topic, direction, archetype, pacing, videoMode, captionStyle, aspectRatio, qualityTier, targetDurationSeconds } =
+      parsed.data;
     const resolution = aspectRatio ? RESOLUTION_BY_ASPECT_RATIO[aspectRatio] : undefined;
 
     const project = await createProject(deps.db, {
@@ -102,6 +104,7 @@ export function registerJobsRoutes(app: FastifyInstance, deps: JobsRouteDeps): v
         width: resolution?.width,
         height: resolution?.height,
         qualityTier,
+        targetDurationSeconds,
       },
     });
     const runDir = path.join(deps.runsDir, project.id);

@@ -7,6 +7,7 @@ import { checkCriticScore } from "./checks/critic-score.js";
 import { checkDurationMatch } from "./checks/duration-match.js";
 import { checkOutputExists } from "./checks/output-exists.js";
 import { checkResolutionMatch } from "./checks/resolution-match.js";
+import { checkTargetDurationMatch } from "./checks/target-duration-match.js";
 import { checkTtsCoverage } from "./checks/tts-coverage.js";
 import { detectBlackSegments } from "./media-tools/blackdetect.js";
 import { probeMedia } from "./media-tools/probe.js";
@@ -19,6 +20,8 @@ export interface RunQcInput {
   fps: number;
   width: number;
   height: number;
+  /** Duração pedida pelo produtor (§11A Bloco 2 item 4) — se ausente, `target_duration_match` não roda. */
+  targetDurationSeconds?: number;
   /** Checks WARNING — opcionais, rodam independente do output existir. */
   ttsCoverage?: { scriptWordCount: number; coveredWordCount: number };
   revisions?: RevisionLogEntry[];
@@ -45,6 +48,9 @@ export async function runQc(input: RunQcInput): Promise<QcReport> {
     const probed = await probeMedia(input.outputPath);
     const expectedSeconds = input.expectedDurationInFrames / input.fps;
     checks.push(checkDurationMatch(expectedSeconds, probed.durationSeconds));
+    if (input.targetDurationSeconds) {
+      checks.push(checkTargetDurationMatch(input.targetDurationSeconds, probed.durationSeconds));
+    }
     checks.push(
       checkResolutionMatch(
         { width: input.width, height: input.height, fps: input.fps },

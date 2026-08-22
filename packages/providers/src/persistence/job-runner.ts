@@ -139,6 +139,7 @@ export async function runJobOnce(
         fps: result.fps,
         width: result.width,
         height: result.height,
+        targetDurationSeconds: pipelineOptions.targetDurationSeconds,
         ttsCoverage: { scriptWordCount: result.scriptWordCount, coveredWordCount: result.coveredWordCount },
         revisions: result.revisions,
         cost: { estimated: result.costEstimate.total, actual: result.costActual.total },

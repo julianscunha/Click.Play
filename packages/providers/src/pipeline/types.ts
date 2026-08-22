@@ -60,6 +60,8 @@ export interface PipelineOptions {
   archetype?: string;
   pacing?: string;
   videoMode?: VideoMode;
+  /** Orça nº de cenas do Director e vira instrução no prompt (§11A Bloco 2 item 4). Sem isso, duração real é subproduto de quantas cenas o LLM decidir escrever. */
+  targetDurationSeconds?: number;
   /** Não usado pelo orchestrator — persistido só pra retry reconstruir os providers com o mesmo tier (§11A Bloco 2 item 3, ver buildJobRunnerDeps). */
   qualityTier?: QualityTier;
   direction?: string;

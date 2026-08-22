@@ -71,6 +71,7 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
         videoMode: opts.videoMode,
         direction: opts.direction,
         showTextOverlays: opts.showTextOverlays,
+        targetDurationSeconds: opts.targetDurationSeconds,
       };
 
       let directorOut = await generateDirectorScore(opts.llm, opts.topic, researchOut.data, directorOpts);

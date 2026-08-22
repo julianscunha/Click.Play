@@ -14,6 +14,7 @@ import {
 } from "@clickplay/domain";
 import { getArchetype, listArchetypes } from "../config/archetype-registry.js";
 import type { ScenePacing } from "../config/archetype.js";
+import { AI_VIDEO_ESTIMATE_DURATION_SECONDS } from "../cost/pricing.js";
 import type { LLMProvider, LLMUsage } from "../llm/types.js";
 import type { ResearchResult } from "./research.js";
 import type { CritiqueResult } from "./critic.js";
@@ -51,7 +52,9 @@ export const DirectorScore = z
     emotional_arc: z.string().min(1),
     archetype: z.string().min(1),
     music_mood: MusicMood,
-    scenes: z.array(Scene).min(3).max(16),
+    // Teto real por job é dinâmico (targetDurationSeconds) — imposto depois via
+    // assertSceneCountCap, não no schema. min(3) continua fixo (piso narrativo).
+    scenes: z.array(Scene).min(3),
   })
   .refine((score) => !violatesSlideshowRule(score.scenes), {
     message:
@@ -143,11 +146,43 @@ function assertVideoMode(scenes: Scene[], mode: VideoMode): void {
   }
 }
 
+const DEFAULT_MAX_SCENES = 16;
+
+/**
+ * Teto de cenas a partir da duração-alvo (§11A Bloco 2 item 4) — reusa
+ * `AI_VIDEO_ESTIMATE_DURATION_SECONDS` (~6s/cena, já assumido pro custo de
+ * ai_video_clip) como proxy de duração média de cena em geral; não existe
+ * constante melhor no código hoje (duração real só se sabe após o TTS
+ * alinhar palavra-por-cena). Sem targetDurationSeconds, mantém o teto fixo
+ * anterior (16) — comportamento antigo preservado por default.
+ */
+export function sceneCapForDuration(targetDurationSeconds?: number): number {
+  if (!targetDurationSeconds) return DEFAULT_MAX_SCENES;
+  return Math.max(3, Math.ceil(targetDurationSeconds / AI_VIDEO_ESTIMATE_DURATION_SECONDS));
+}
+
+/** Lança se o roteiro estourou o teto de cenas orçado pela duração-alvo — pego pelo mesmo retry-with-feedback dos outros erros de validação. */
+function assertSceneCountCap(scenes: Scene[], targetDurationSeconds?: number): void {
+  const cap = sceneCapForDuration(targetDurationSeconds);
+  if (scenes.length > cap) {
+    throw new Error(
+      `${scenes.length} cena(s) estoura o teto de ${cap} orçado pra duração-alvo${targetDurationSeconds ? ` de ${targetDurationSeconds}s` : ""} (~${AI_VIDEO_ESTIMATE_DURATION_SECONDS}s/cena).`,
+    );
+  }
+}
+
 export async function generateDirectorScore(
   llm: LLMProvider,
   topic: string,
   researchContext: ResearchResult,
-  options?: { archetype?: string; pacing?: string; videoMode?: VideoMode; direction?: string; showTextOverlays?: boolean },
+  options?: {
+    archetype?: string;
+    pacing?: string;
+    videoMode?: VideoMode;
+    direction?: string;
+    showTextOverlays?: boolean;
+    targetDurationSeconds?: number;
+  },
 ): Promise<DirectorScoreOutput> {
   const systemPrompt = loadDirectorSystemPrompt();
 
@@ -160,6 +195,9 @@ export async function generateDirectorScore(
   const strategyGuidance = buildVideoModeGuidance(videoMode, options?.showTextOverlays);
 
   const pacingInstruction = buildPacingInstruction(options?.archetype, options?.pacing);
+  const durationInstruction = options?.targetDurationSeconds
+    ? `\nTarget total duration: ${options.targetDurationSeconds}s. Budget your scene count and script length accordingly (max ${sceneCapForDuration(options.targetDurationSeconds)} scenes at ~${AI_VIDEO_ESTIMATE_DURATION_SECONDS}s/scene).`
+    : "";
 
   const directionSection = options?.direction?.trim()
     ? `\n## Creative Direction (from the producer)\n\n${options.direction}\n\nHonor these creative constraints while exercising your judgment on anything not specified.\n`
@@ -178,6 +216,7 @@ Mood: ${researchContext.mood}
 ${archetypeInstruction}
 
 ${pacingInstruction}
+${durationInstruction}
 ${strategyGuidance}
 ${directionSection}CRITICAL RULE: A scene must never be reduced to a single static image/stock clip more than 2 times in a row — compose scenes with multiple elements (e.g. animated_text over an ai_image) instead of a plain image slideshow. Plan your visualStrategy sequence BEFORE writing scenes to ensure variety.
 Every scene MUST have a scriptLine (the voiceover text).
@@ -206,6 +245,7 @@ If over budget, cut a scene rather than cramming.`;
       const { scenes } = toScenes(result.data.scenes);
       const validated = DirectorScore.parse({ ...result.data, scenes });
       assertVideoMode(validated.scenes, videoMode);
+      assertSceneCountCap(validated.scenes, options?.targetDurationSeconds);
       return { data: validated, usage: totalUsage };
     } catch (err) {
       lastError = err instanceof Error ? err : new Error(String(err));
@@ -278,12 +318,22 @@ export async function reviseDirectorScore(
   researchContext: ResearchResult,
   originalScore: DirectorScore,
   critique: CritiqueResult,
-  options?: { archetype?: string; pacing?: string; videoMode?: VideoMode; direction?: string; showTextOverlays?: boolean },
+  options?: {
+    archetype?: string;
+    pacing?: string;
+    videoMode?: VideoMode;
+    direction?: string;
+    showTextOverlays?: boolean;
+    targetDurationSeconds?: number;
+  },
 ): Promise<DirectorScoreOutput> {
   const systemPrompt = loadDirectorSystemPrompt();
   const videoMode = options?.videoMode ?? "hybrid";
   const revisionGuidance = critique.revision_instructions ?? `Address these weaknesses: ${critique.weaknesses.join("; ")}`;
   const pacingInstruction = buildPacingInstruction(options?.archetype, options?.pacing);
+  const durationInstruction = options?.targetDurationSeconds
+    ? `\nTarget total duration: ${options.targetDurationSeconds}s. Budget your scene count and script length accordingly (max ${sceneCapForDuration(options.targetDurationSeconds)} scenes at ~${AI_VIDEO_ESTIMATE_DURATION_SECONDS}s/scene).`
+    : "";
 
   const directionSection = options?.direction?.trim()
     ? `\n## Creative Direction (from the producer)\n\n${options.direction}\n\nHonor these creative constraints while exercising your judgment on anything not specified.\n`
@@ -304,6 +354,7 @@ ${researchContext.key_facts.map((f) => `- ${f}`).join("\n")}
 Mood: ${researchContext.mood}
 
 ${pacingInstruction}
+${durationInstruction}
 ${directionSection}${noTextOverlaysSection}
 ## Current Plan (score: ${critique.score}/10)
 
@@ -351,6 +402,7 @@ Keep the same archetype. Maintain the GOLDEN RULE: never reduce more than 2 cons
       }
 
       assertVideoMode(validated.scenes, videoMode);
+      assertSceneCountCap(validated.scenes, options?.targetDurationSeconds);
       return { data: validated, usage: totalUsage };
     } catch (err) {
       lastError = err instanceof Error ? err : new Error(String(err));

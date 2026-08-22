@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import type { LLMProvider } from "../llm/types.js";
-import { generateDirectorScore } from "./creative-director.js";
+import { generateDirectorScore, sceneCapForDuration } from "./creative-director.js";
 import type { ResearchResult } from "./research.js";
 
 const research: ResearchResult = {
@@ -97,4 +97,27 @@ describe("generateDirectorScore", () => {
     );
     expect(llm.generate).toHaveBeenCalledTimes(3);
   }, 15_000); // backoff entre retries (4s, 8s) — vitest default de 5s não basta
+
+  it("retries and eventually throws when scene count busts the targetDurationSeconds cap", async () => {
+    const staticScene = sceneRaw();
+    // targetDurationSeconds=6 → cap de 3 cenas (sceneCapForDuration), roteiro manda 4.
+    const llm = fakeLLM([staticScene, staticScene, staticScene, staticScene]);
+
+    await expect(
+      generateDirectorScore(llm, "Apollo 11", research, { targetDurationSeconds: 6 }),
+    ).rejects.toThrow("Creative Director failed after 3 attempts");
+    expect(llm.generate).toHaveBeenCalledTimes(3);
+  }, 15_000);
+});
+
+describe("sceneCapForDuration", () => {
+  it("defaults to 16 scenes when no target duration is given", () => {
+    expect(sceneCapForDuration(undefined)).toBe(16);
+  });
+
+  it("derives cap from ~6s/scene, floored at 3", () => {
+    expect(sceneCapForDuration(60)).toBe(10);
+    expect(sceneCapForDuration(12)).toBe(3);
+    expect(sceneCapForDuration(1)).toBe(3);
+  });
 });
