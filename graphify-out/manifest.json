@@ -185,13 +185,13 @@
     "semantic_hash": ""
   },
   "packages/providers/src/agents/creative-director.test.ts": {
-    "mtime": 1787365809.5999382,
-    "ast_hash": "931ad12e102931b6ff8fd1b20f599ec6",
+    "mtime": 1787408693.183807,
+    "ast_hash": "491ac0fbfa8c377dbb0e0d7d878550c4",
     "semantic_hash": ""
   },
   "packages/providers/src/agents/creative-director.ts": {
-    "mtime": 1787365770.7371118,
-    "ast_hash": "bcb025f7dcefc7428aa044bef3fcd766",
+    "mtime": 1787408545.2529774,
+    "ast_hash": "d66000d7acb531da162ec2ec4fc4470d",
     "semantic_hash": ""
   },
   "packages/providers/src/agents/critic.ts": {
@@ -480,8 +480,8 @@
     "semantic_hash": ""
   },
   "packages/providers/src/persistence/job-runner.ts": {
-    "mtime": 1786908387.6073544,
-    "ast_hash": "789a10f94859c701a5d2780996e2977e",
+    "mtime": 1787408593.4173782,
+    "ast_hash": "099ce2c897cd44d783b6717f7ab315a1",
     "semantic_hash": ""
   },
   "packages/providers/src/persistence/job-state-machine.test.ts": {
@@ -525,8 +525,8 @@
     "semantic_hash": ""
   },
   "packages/providers/src/pipeline/orchestrator.ts": {
-    "mtime": 1787364080.8851242,
-    "ast_hash": "8282bed547fbe021fb6fca2f4692f7ac",
+    "mtime": 1787408557.270131,
+    "ast_hash": "969624b4687ba8ac5b4f6636bf5f3826",
     "semantic_hash": ""
   },
   "packages/providers/src/pipeline/scene-timing.ts": {
@@ -535,8 +535,8 @@
     "semantic_hash": ""
   },
   "packages/providers/src/pipeline/types.ts": {
-    "mtime": 1787407576.8276775,
-    "ast_hash": "50650a864baff41bde3b7ba3ada25c78",
+    "mtime": 1787408552.3007655,
+    "ast_hash": "f17c4a2a97c0d411ed575f9b5f2f3bda",
     "semantic_hash": ""
   },
   "packages/providers/src/stock/index.ts": {
@@ -865,8 +865,8 @@
     "semantic_hash": ""
   },
   "apps/api/src/routes/jobs.ts": {
-    "mtime": 1787407566.3080237,
-    "ast_hash": "1da7e3ebe2497368d351eaca2f748108",
+    "mtime": 1787408623.9791572,
+    "ast_hash": "bc65ac21211b7b73c45d6350a407a529",
     "semantic_hash": ""
   },
   "apps/api/src/routes/meta.ts": {
@@ -905,8 +905,8 @@
     "semantic_hash": ""
   },
   "packages/providers/src/qc/index.ts": {
-    "mtime": 1786752043.2490578,
-    "ast_hash": "543e2278bdbdd978302f178126bc14e5",
+    "mtime": 1787408603.860149,
+    "ast_hash": "0778e508828a9da058d8220981b983a8",
     "semantic_hash": ""
   },
   "packages/providers/src/qc/types.ts": {
@@ -965,8 +965,8 @@
     "semantic_hash": ""
   },
   "packages/providers/src/qc/run-qc.ts": {
-    "mtime": 1786752032.7838042,
-    "ast_hash": "6404d1aca3b1116933dfe38a1176a6de",
+    "mtime": 1787408586.8244317,
+    "ast_hash": "0d38b106695eead240b82c0ee323de39",
     "semantic_hash": ""
   },
   "packages/providers/src/qc/checks/cost-deviation.test.ts": {
@@ -1212,6 +1212,16 @@
   ".claude/agents/marketing-video-optimization-specialist.md": {
     "mtime": 1786935363.6880612,
     "ast_hash": "8f703f9e970993942668c069c1c28701",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/qc/checks/target-duration-match.test.ts": {
+    "mtime": 1787408651.7359245,
+    "ast_hash": "5a6f3f76de9d30fcf226d688b849c584",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/qc/checks/target-duration-match.ts": {
+    "mtime": 1787408566.7307787,
+    "ast_hash": "46ea23eaf785319a58c8ce256a07f20e",
     "semantic_hash": ""
   }
 }
