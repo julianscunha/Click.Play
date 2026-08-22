@@ -18,6 +18,7 @@ export function CreateForm({ config, onSubmit, submitting }: CreateFormProps) {
   const [pacing, setPacing] = useState("");
   const [videoMode, setVideoMode] = useState<"motion_graphics_only" | "ai_video_only" | "hybrid">("hybrid");
   const [captionStyle, setCaptionStyle] = useState("");
+  const [aspectRatio, setAspectRatio] = useState<"vertical" | "horizontal" | "square">("vertical");
 
   const canSubmit = topic.trim().length > 0 && !submitting;
 
@@ -31,6 +32,7 @@ export function CreateForm({ config, onSubmit, submitting }: CreateFormProps) {
       pacing: pacing || undefined,
       videoMode,
       captionStyle: captionStyle || undefined,
+      aspectRatio,
     });
   }
 
@@ -135,6 +137,22 @@ export function CreateForm({ config, onSubmit, submitting }: CreateFormProps) {
             <option value="hybrid">Híbrido (imagem + vídeo onde faz sentido)</option>
             <option value="motion_graphics_only">Só imagem (mais barato)</option>
             <option value="ai_video_only">Só vídeo (mais caro)</option>
+          </select>
+        </div>
+
+        <div className="flex flex-col gap-1.5">
+          <label htmlFor="aspectRatio" className="text-sm font-medium text-neutral-200">
+            Formato
+          </label>
+          <select
+            id="aspectRatio"
+            value={aspectRatio}
+            onChange={(e) => setAspectRatio(e.target.value as typeof aspectRatio)}
+            className="rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-neutral-50 focus:border-neutral-400 focus:outline-none"
+          >
+            <option value="vertical">Vertical (9:16 — Reels/TikTok/Shorts)</option>
+            <option value="horizontal">Horizontal (16:9 — YouTube)</option>
+            <option value="square">Quadrado (1:1)</option>
           </select>
         </div>
       </div>

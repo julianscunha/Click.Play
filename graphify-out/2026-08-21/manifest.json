@@ -155,8 +155,8 @@
     "semantic_hash": ""
   },
   "packages/domain/src/scene.ts": {
-    "mtime": 1786888834.6226032,
-    "ast_hash": "403d09e7c81da9e9ead9ff33baf66eeb",
+    "mtime": 1787363962.4176414,
+    "ast_hash": "67173ceb21356bab277b06618d628d81",
     "semantic_hash": ""
   },
   "packages/domain/src/video-project.ts": {
@@ -185,13 +185,13 @@
     "semantic_hash": ""
   },
   "packages/providers/src/agents/creative-director.test.ts": {
-    "mtime": 1786910710.0851038,
-    "ast_hash": "979c56b79777ce44e01678ee7db1163c",
+    "mtime": 1787364267.056668,
+    "ast_hash": "be78b6870907a8c2a0a7694f4e94146d",
     "semantic_hash": ""
   },
   "packages/providers/src/agents/creative-director.ts": {
-    "mtime": 1786910603.8997734,
-    "ast_hash": "667134af859057f5b707113a2d553572",
+    "mtime": 1787364130.469394,
+    "ast_hash": "dc5e49bc5fb1920da9f401cc7a245e4a",
     "semantic_hash": ""
   },
   "packages/providers/src/agents/critic.ts": {
@@ -525,8 +525,8 @@
     "semantic_hash": ""
   },
   "packages/providers/src/pipeline/orchestrator.ts": {
-    "mtime": 1786908387.6109786,
-    "ast_hash": "15981b905c68f9d443f68cd321490c11",
+    "mtime": 1787364080.8851242,
+    "ast_hash": "8282bed547fbe021fb6fca2f4692f7ac",
     "semantic_hash": ""
   },
   "packages/providers/src/pipeline/scene-timing.ts": {
@@ -535,8 +535,8 @@
     "semantic_hash": ""
   },
   "packages/providers/src/pipeline/types.ts": {
-    "mtime": 1786889053.9246008,
-    "ast_hash": "08570c848510547b797df86247b87800",
+    "mtime": 1787364075.414706,
+    "ast_hash": "87eb678de5f5cf196285ec8fb8fef982",
     "semantic_hash": ""
   },
   "packages/providers/src/stock/index.ts": {
@@ -565,18 +565,18 @@
     "semantic_hash": ""
   },
   "packages/providers/src/visual/resolve-element.test.ts": {
-    "mtime": 1786846081.5097713,
-    "ast_hash": "fdc3b560d1797543cea171b2aaf478ff",
+    "mtime": 1787364239.2274013,
+    "ast_hash": "5ba9880ee196d7556a5dc0da5f17ff91",
     "semantic_hash": ""
   },
   "packages/providers/src/visual/resolve-element.ts": {
-    "mtime": 1786845860.3999457,
-    "ast_hash": "336a2c249353637254add72ca0c500d6",
+    "mtime": 1787363999.7064295,
+    "ast_hash": "b2d384e96ce281c7d6c6283e4d9e3b6d",
     "semantic_hash": ""
   },
   "packages/providers/src/visual/types.ts": {
-    "mtime": 1786713115.4852393,
-    "ast_hash": "ae1c09939aaf8c7fdacc0ccaff66b700",
+    "mtime": 1787364040.9686189,
+    "ast_hash": "5c8d44d69a07fba264f99f90c0a3e832",
     "semantic_hash": ""
   },
   "packages/video-engine/src/captions/CaptionWrapper.tsx": {
@@ -665,8 +665,8 @@
     "semantic_hash": ""
   },
   "packages/video-engine/src/render/elements/TextElement.tsx": {
-    "mtime": 1786711534.6330514,
-    "ast_hash": "fc8ef4193f61672d15f4ef5c131a25fd",
+    "mtime": 1787364060.9809744,
+    "ast_hash": "9168a0bb64d3a4bebb1cebf3ee033748",
     "semantic_hash": ""
   },
   "packages/video-engine/src/render/elements/UnsupportedElement.tsx": {
@@ -705,8 +705,8 @@
     "semantic_hash": ""
   },
   "packages/video-engine/src/render/types.ts": {
-    "mtime": 1786711534.7470164,
-    "ast_hash": "b862bae774c6c4a3a53f9d0be8bd14fc",
+    "mtime": 1787363986.277598,
+    "ast_hash": "6051b63383685725589ad234d19466ba",
     "semantic_hash": ""
   },
   "packages/video-engine/src/render/video-renderer.ts": {

@@ -5,12 +5,12 @@
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1035 nodes · 1565 edges · 63 communities (60 shown, 3 thin omitted)
+- 1035 nodes · 1564 edges · 63 communities (60 shown, 3 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 2 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `0ff668b4`
+- Built from commit: `77cd3619`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -283,7 +283,7 @@ Nodes (6): sleep(), withRetry(), OpenRouterImage, OpenRouterMusic, OpenRouterVid
 
 ### Community 54 - "creative-director.ts"
 Cohesion: 0.26
-Nodes (14): assertVideoMode(), assertVideoModeWithDowngradeContext(), buildDefaultPrompt(), buildPacingInstruction(), buildVideoModeGuidance(), DirectorScoreOutput, DirectorScoreRaw, generateDirectorScore() (+6 more)
+Nodes (14): assertVideoMode(), buildDefaultPrompt(), buildPacingInstruction(), buildVideoModeGuidance(), DirectorScoreOutput, DirectorScoreRaw, extractVisualPrompt(), generateDirectorScore() (+6 more)
 
 ### Community 55 - "pipeline/types.ts"
 Cohesion: 0.17
@@ -314,7 +314,7 @@ Cohesion: 0.29
 Nodes (5): JUSTIFY_BY_POSITION, CompositionProps, RenderInput, ResolvedElement, ResolvedScene
 
 ## Knowledge Gaps
-- **406 isolated node(s):** `TransitionType`, `CameraMotion`, `VisualStrategy`, `VideoMode`, `VideoGenerationProviderKey` (+401 more)
+- **406 isolated node(s):** `research`, `SYSTEM_PROMPT_PATH`, `SceneRaw`, `DirectorScoreRaw`, `DirectorScoreOutput` (+401 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **3 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -323,11 +323,11 @@ _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `PipelineCallbacks` connect `runPipeline` to `repository.ts`, `orchestrator.test.ts`, `pipeline/types.ts`?**
   _High betweenness centrality (0.007) - this node is a cross-community bridge._
-- **Why does `runPipeline()` connect `runPipeline` to `orchestrator.test.ts`, `repository.ts`, `creative-director.ts`, `pipeline/types.ts`?**
-  _High betweenness centrality (0.007) - this node is a cross-community bridge._
 - **Why does `withRetry()` connect `withRetry` to `providers/src/index.ts`?**
   _High betweenness centrality (0.006) - this node is a cross-community bridge._
-- **What connects `TransitionType`, `CameraMotion`, `VisualStrategy` to the rest of the system?**
+- **Why does `runPipeline()` connect `runPipeline` to `orchestrator.test.ts`, `repository.ts`, `creative-director.ts`, `pipeline/types.ts`?**
+  _High betweenness centrality (0.006) - this node is a cross-community bridge._
+- **What connects `research`, `SYSTEM_PROMPT_PATH`, `SceneRaw` to the rest of the system?**
   _406 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `scripts` be split into smaller, more focused modules?**
   _Cohesion score 0.125 - nodes in this community are weakly interconnected._

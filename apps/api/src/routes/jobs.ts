@@ -16,6 +16,15 @@ import {
 } from "@clickplay/providers";
 import { CAPTION_STYLES, PACING_TIERS } from "../config.js";
 
+const ASPECT_RATIOS = ["vertical", "horizontal", "square"] as const;
+
+/** width/height por aspectRatio — não expor width/height cru na API pra evitar resoluções arbitrárias não testadas no RemotionRenderer (§11A Bloco 2 item 2). */
+const RESOLUTION_BY_ASPECT_RATIO: Record<(typeof ASPECT_RATIOS)[number], { width: number; height: number }> = {
+  vertical: { width: 1080, height: 1920 },
+  horizontal: { width: 1920, height: 1080 },
+  square: { width: 1080, height: 1080 },
+};
+
 const CreateJobBody = z.object({
   topic: z.string().min(1, "topic é obrigatório"),
   direction: z.string().optional(),
@@ -23,6 +32,7 @@ const CreateJobBody = z.object({
   pacing: z.enum(PACING_TIERS).optional(),
   videoMode: VideoMode.optional(),
   captionStyle: z.enum(CAPTION_STYLES).optional(),
+  aspectRatio: z.enum(ASPECT_RATIOS).optional(),
 });
 
 const ApproveCostBody = z.object({ approved: z.boolean() });
@@ -75,11 +85,21 @@ export function registerJobsRoutes(app: FastifyInstance, deps: JobsRouteDeps): v
         .status(422)
         .send({ error: { code: "VALIDATION_ERROR", message: "Corpo inválido", details: parsed.error.flatten() } });
     }
-    const { topic, direction, archetype, pacing, videoMode, captionStyle } = parsed.data;
+    const { topic, direction, archetype, pacing, videoMode, captionStyle, aspectRatio } = parsed.data;
+    const resolution = aspectRatio ? RESOLUTION_BY_ASPECT_RATIO[aspectRatio] : undefined;
 
     const project = await createProject(deps.db, {
       topic,
-      config: { cost: deps.buildCostOptions(), direction, archetype, pacing, videoMode, captionStyle },
+      config: {
+        cost: deps.buildCostOptions(),
+        direction,
+        archetype,
+        pacing,
+        videoMode,
+        captionStyle,
+        width: resolution?.width,
+        height: resolution?.height,
+      },
     });
     const runDir = path.join(deps.runsDir, project.id);
     const job = await createJob(deps.db, { projectId: project.id, runDir });

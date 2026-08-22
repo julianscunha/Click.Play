@@ -4,127 +4,6 @@
   "graph": {},
   "nodes": [
     {
-      "label": "scene.ts",
-      "file_type": "code",
-      "source_file": "packages/domain/src/scene.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "packages_domain_src_scene",
-      "community": 29,
-      "community_name": "scene.ts",
-      "norm_label": "scene.ts"
-    },
-    {
-      "label": "TransitionType",
-      "file_type": "code",
-      "source_file": "packages/domain/src/scene.ts",
-      "source_location": "L10",
-      "_origin": "ast",
-      "id": "packages_domain_src_scene_transitiontype",
-      "community": 29,
-      "community_name": "scene.ts",
-      "norm_label": "transitiontype"
-    },
-    {
-      "label": "CameraMotion",
-      "file_type": "code",
-      "source_file": "packages/domain/src/scene.ts",
-      "source_location": "L13",
-      "_origin": "ast",
-      "id": "packages_domain_src_scene_cameramotion",
-      "community": 29,
-      "community_name": "scene.ts",
-      "norm_label": "cameramotion"
-    },
-    {
-      "label": "VisualStrategy",
-      "file_type": "code",
-      "source_file": "packages/domain/src/scene.ts",
-      "source_location": "L16",
-      "_origin": "ast",
-      "id": "packages_domain_src_scene_visualstrategy",
-      "community": 29,
-      "community_name": "scene.ts",
-      "norm_label": "visualstrategy"
-    },
-    {
-      "label": "VideoMode",
-      "file_type": "code",
-      "source_file": "packages/domain/src/scene.ts",
-      "source_location": "L27",
-      "_origin": "ast",
-      "id": "packages_domain_src_scene_videomode",
-      "community": 29,
-      "community_name": "scene.ts",
-      "norm_label": "videomode"
-    },
-    {
-      "label": "VideoGenerationProviderKey",
-      "file_type": "code",
-      "source_file": "packages/domain/src/scene.ts",
-      "source_location": "L30",
-      "_origin": "ast",
-      "id": "packages_domain_src_scene_videogenerationproviderkey",
-      "community": 29,
-      "community_name": "scene.ts",
-      "norm_label": "videogenerationproviderkey"
-    },
-    {
-      "label": "VisualElement",
-      "file_type": "code",
-      "source_file": "packages/domain/src/scene.ts",
-      "source_location": "L34",
-      "_origin": "ast",
-      "id": "packages_domain_src_scene_visualelement",
-      "community": 29,
-      "community_name": "scene.ts",
-      "norm_label": "visualelement"
-    },
-    {
-      "label": "Scene",
-      "file_type": "code",
-      "source_file": "packages/domain/src/scene.ts",
-      "source_location": "L67",
-      "_origin": "ast",
-      "id": "packages_domain_src_scene_scene",
-      "community": 29,
-      "community_name": "scene.ts",
-      "norm_label": "scene"
-    },
-    {
-      "label": "violatesSlideshowRule()",
-      "file_type": "code",
-      "source_file": "packages/domain/src/scene.ts",
-      "source_location": "L88",
-      "_origin": "ast",
-      "id": "packages_domain_src_scene_violatesslideshowrule",
-      "community": 29,
-      "community_name": "scene.ts",
-      "norm_label": "violatesslideshowrule()"
-    },
-    {
-      "label": "minAiVideoScenes()",
-      "file_type": "code",
-      "source_file": "packages/domain/src/scene.ts",
-      "source_location": "L101",
-      "_origin": "ast",
-      "id": "packages_domain_src_scene_minaivideoscenes",
-      "community": 29,
-      "community_name": "scene.ts",
-      "norm_label": "minaivideoscenes()"
-    },
-    {
-      "label": "violatesVideoModeRule()",
-      "file_type": "code",
-      "source_file": "packages/domain/src/scene.ts",
-      "source_location": "L108",
-      "_origin": "ast",
-      "id": "packages_domain_src_scene_violatesvideomoderule",
-      "community": 29,
-      "community_name": "scene.ts",
-      "norm_label": "violatesvideomoderule()"
-    },
-    {
       "label": "creative-director.test.ts",
       "file_type": "code",
       "source_file": "packages/providers/src/agents/creative-director.test.ts",
@@ -235,10 +114,21 @@
       "norm_label": "directorscoreoutput"
     },
     {
+      "label": "extractVisualPrompt()",
+      "file_type": "code",
+      "source_file": "packages/providers/src/agents/creative-director.ts",
+      "source_location": "L70",
+      "_origin": "ast",
+      "id": "packages_providers_src_agents_creative_director_extractvisualprompt",
+      "community": 54,
+      "community_name": "creative-director.ts",
+      "norm_label": "extractvisualprompt()"
+    },
+    {
       "label": "toScenes()",
       "file_type": "code",
       "source_file": "packages/providers/src/agents/creative-director.ts",
-      "source_location": "L74",
+      "source_location": "L86",
       "_origin": "ast",
       "id": "packages_providers_src_agents_creative_director_toscenes",
       "community": 54,
@@ -246,21 +136,10 @@
       "norm_label": "toscenes()"
     },
     {
-      "label": "assertVideoModeWithDowngradeContext()",
-      "file_type": "code",
-      "source_file": "packages/providers/src/agents/creative-director.ts",
-      "source_location": "L91",
-      "_origin": "ast",
-      "id": "packages_providers_src_agents_creative_director_assertvideomodewithdowngradecontext",
-      "community": 54,
-      "community_name": "creative-director.ts",
-      "norm_label": "assertvideomodewithdowngradecontext()"
-    },
-    {
       "label": "sleep()",
       "file_type": "code",
       "source_file": "packages/providers/src/agents/creative-director.ts",
-      "source_location": "L105",
+      "source_location": "L103",
       "_origin": "ast",
       "id": "packages_providers_src_agents_creative_director_sleep",
       "community": 54,
@@ -271,7 +150,7 @@
       "label": "loadDirectorSystemPrompt()",
       "file_type": "code",
       "source_file": "packages/providers/src/agents/creative-director.ts",
-      "source_location": "L109",
+      "source_location": "L107",
       "_origin": "ast",
       "id": "packages_providers_src_agents_creative_director_loaddirectorsystemprompt",
       "community": 54,
@@ -282,7 +161,7 @@
       "label": "buildVideoModeGuidance()",
       "file_type": "code",
       "source_file": "packages/providers/src/agents/creative-director.ts",
-      "source_location": "L123",
+      "source_location": "L121",
       "_origin": "ast",
       "id": "packages_providers_src_agents_creative_director_buildvideomodeguidance",
       "community": 54,
@@ -293,7 +172,7 @@
       "label": "assertVideoMode()",
       "file_type": "code",
       "source_file": "packages/providers/src/agents/creative-director.ts",
-      "source_location": "L139",
+      "source_location": "L137",
       "_origin": "ast",
       "id": "packages_providers_src_agents_creative_director_assertvideomode",
       "community": 54,
@@ -304,7 +183,7 @@
       "label": "generateDirectorScore()",
       "file_type": "code",
       "source_file": "packages/providers/src/agents/creative-director.ts",
-      "source_location": "L148",
+      "source_location": "L146",
       "_origin": "ast",
       "id": "packages_providers_src_agents_creative_director_generatedirectorscore",
       "community": 54,
@@ -315,7 +194,7 @@
       "label": "buildDefaultPrompt()",
       "file_type": "code",
       "source_file": "packages/providers/src/agents/creative-director.ts",
-      "source_location": "L221",
+      "source_location": "L219",
       "_origin": "ast",
       "id": "packages_providers_src_agents_creative_director_builddefaultprompt",
       "community": 54,
@@ -326,7 +205,7 @@
       "label": "PACING_CONFIG",
       "file_type": "code",
       "source_file": "packages/providers/src/agents/creative-director.ts",
-      "source_location": "L239",
+      "source_location": "L237",
       "_origin": "ast",
       "id": "packages_providers_src_agents_creative_director_pacing_config",
       "community": 55,
@@ -337,7 +216,7 @@
       "label": "buildPacingInstruction()",
       "file_type": "code",
       "source_file": "packages/providers/src/agents/creative-director.ts",
-      "source_location": "L250",
+      "source_location": "L248",
       "_origin": "ast",
       "id": "packages_providers_src_agents_creative_director_buildpacinginstruction",
       "community": 54,
@@ -348,7 +227,7 @@
       "label": "reviseDirectorScore()",
       "file_type": "code",
       "source_file": "packages/providers/src/agents/creative-director.ts",
-      "source_location": "L277",
+      "source_location": "L275",
       "_origin": "ast",
       "id": "packages_providers_src_agents_creative_director_revisedirectorscore",
       "community": 54,
@@ -356,15 +235,136 @@
       "norm_label": "revisedirectorscore()"
     },
     {
+      "label": "scene.ts",
+      "file_type": "code",
+      "source_file": "packages/domain/src/scene.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 29,
+      "community_name": "scene.ts",
+      "norm_label": "scene.ts",
+      "id": "packages_domain_src_scene"
+    },
+    {
+      "label": "TransitionType",
+      "file_type": "code",
+      "source_file": "packages/domain/src/scene.ts",
+      "source_location": "L10",
+      "_origin": "ast",
+      "community": 29,
+      "community_name": "scene.ts",
+      "norm_label": "transitiontype",
+      "id": "packages_domain_src_scene_transitiontype"
+    },
+    {
+      "label": "CameraMotion",
+      "file_type": "code",
+      "source_file": "packages/domain/src/scene.ts",
+      "source_location": "L13",
+      "_origin": "ast",
+      "community": 29,
+      "community_name": "scene.ts",
+      "norm_label": "cameramotion",
+      "id": "packages_domain_src_scene_cameramotion"
+    },
+    {
+      "label": "VisualStrategy",
+      "file_type": "code",
+      "source_file": "packages/domain/src/scene.ts",
+      "source_location": "L16",
+      "_origin": "ast",
+      "community": 29,
+      "community_name": "scene.ts",
+      "norm_label": "visualstrategy",
+      "id": "packages_domain_src_scene_visualstrategy"
+    },
+    {
+      "label": "VideoMode",
+      "file_type": "code",
+      "source_file": "packages/domain/src/scene.ts",
+      "source_location": "L27",
+      "_origin": "ast",
+      "community": 29,
+      "community_name": "scene.ts",
+      "norm_label": "videomode",
+      "id": "packages_domain_src_scene_videomode"
+    },
+    {
+      "label": "VideoGenerationProviderKey",
+      "file_type": "code",
+      "source_file": "packages/domain/src/scene.ts",
+      "source_location": "L30",
+      "_origin": "ast",
+      "community": 29,
+      "community_name": "scene.ts",
+      "norm_label": "videogenerationproviderkey",
+      "id": "packages_domain_src_scene_videogenerationproviderkey"
+    },
+    {
+      "label": "VisualElement",
+      "file_type": "code",
+      "source_file": "packages/domain/src/scene.ts",
+      "source_location": "L34",
+      "_origin": "ast",
+      "community": 29,
+      "community_name": "scene.ts",
+      "norm_label": "visualelement",
+      "id": "packages_domain_src_scene_visualelement"
+    },
+    {
+      "label": "Scene",
+      "file_type": "code",
+      "source_file": "packages/domain/src/scene.ts",
+      "source_location": "L67",
+      "_origin": "ast",
+      "community": 29,
+      "community_name": "scene.ts",
+      "norm_label": "scene",
+      "id": "packages_domain_src_scene_scene"
+    },
+    {
+      "label": "violatesSlideshowRule()",
+      "file_type": "code",
+      "source_file": "packages/domain/src/scene.ts",
+      "source_location": "L88",
+      "_origin": "ast",
+      "community": 29,
+      "community_name": "scene.ts",
+      "norm_label": "violatesslideshowrule()",
+      "id": "packages_domain_src_scene_violatesslideshowrule"
+    },
+    {
+      "label": "minAiVideoScenes()",
+      "file_type": "code",
+      "source_file": "packages/domain/src/scene.ts",
+      "source_location": "L101",
+      "_origin": "ast",
+      "community": 29,
+      "community_name": "scene.ts",
+      "norm_label": "minaivideoscenes()",
+      "id": "packages_domain_src_scene_minaivideoscenes"
+    },
+    {
+      "label": "violatesVideoModeRule()",
+      "file_type": "code",
+      "source_file": "packages/domain/src/scene.ts",
+      "source_location": "L108",
+      "_origin": "ast",
+      "community": 29,
+      "community_name": "scene.ts",
+      "norm_label": "violatesvideomoderule()",
+      "id": "packages_domain_src_scene_violatesvideomoderule"
+    },
+    {
       "label": "orchestrator.ts",
       "file_type": "code",
       "source_file": "packages/providers/src/pipeline/orchestrator.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "packages_providers_src_pipeline_orchestrator",
       "community": 55,
       "community_name": "pipeline/types.ts",
-      "norm_label": "orchestrator.ts"
+      "norm_label": "orchestrator.ts",
+      "id": "packages_providers_src_pipeline_orchestrator"
     },
     {
       "label": "runPipeline()",
@@ -372,10 +372,10 @@
       "source_file": "packages/providers/src/pipeline/orchestrator.ts",
       "source_location": "L33",
       "_origin": "ast",
-      "id": "packages_providers_src_pipeline_orchestrator_runpipeline",
       "community": 57,
       "community_name": "runPipeline",
-      "norm_label": "runpipeline()"
+      "norm_label": "runpipeline()",
+      "id": "packages_providers_src_pipeline_orchestrator_runpipeline"
     },
     {
       "label": "pipeline/types.ts",
@@ -383,10 +383,10 @@
       "source_file": "packages/providers/src/pipeline/types.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "packages_providers_src_pipeline_types",
       "community": 55,
       "community_name": "pipeline/types.ts",
-      "norm_label": "pipeline/types.ts"
+      "norm_label": "pipeline/types.ts",
+      "id": "packages_providers_src_pipeline_types"
     },
     {
       "label": "PipelineStage",
@@ -394,10 +394,10 @@
       "source_file": "packages/providers/src/pipeline/types.ts",
       "source_location": "L12",
       "_origin": "ast",
-      "id": "packages_providers_src_pipeline_types_pipelinestage",
       "community": 55,
       "community_name": "pipeline/types.ts",
-      "norm_label": "pipelinestage"
+      "norm_label": "pipelinestage",
+      "id": "packages_providers_src_pipeline_types_pipelinestage"
     },
     {
       "label": "PipelineCheckpoint",
@@ -405,10 +405,10 @@
       "source_file": "packages/providers/src/pipeline/types.ts",
       "source_location": "L20",
       "_origin": "ast",
-      "id": "packages_providers_src_pipeline_types_pipelinecheckpoint",
       "community": 55,
       "community_name": "pipeline/types.ts",
-      "norm_label": "pipelinecheckpoint"
+      "norm_label": "pipelinecheckpoint",
+      "id": "packages_providers_src_pipeline_types_pipelinecheckpoint"
     },
     {
       "label": "RevisionLogEntry",
@@ -416,10 +416,10 @@
       "source_file": "packages/providers/src/pipeline/types.ts",
       "source_location": "L27",
       "_origin": "ast",
-      "id": "packages_providers_src_pipeline_types_revisionlogentry",
       "community": 55,
       "community_name": "pipeline/types.ts",
-      "norm_label": "revisionlogentry"
+      "norm_label": "revisionlogentry",
+      "id": "packages_providers_src_pipeline_types_revisionlogentry"
     },
     {
       "label": "PipelineCallbacks",
@@ -427,10 +427,10 @@
       "source_file": "packages/providers/src/pipeline/types.ts",
       "source_location": "L34",
       "_origin": "ast",
-      "id": "packages_providers_src_pipeline_types_pipelinecallbacks",
       "community": 57,
       "community_name": "runPipeline",
-      "norm_label": "pipelinecallbacks"
+      "norm_label": "pipelinecallbacks",
+      "id": "packages_providers_src_pipeline_types_pipelinecallbacks"
     },
     {
       "label": ".onStageStart()",
@@ -438,10 +438,10 @@
       "source_file": "packages/providers/src/pipeline/types.ts",
       "source_location": "L36",
       "_origin": "ast",
-      "id": "packages_providers_src_pipeline_types_pipelinecallbacks_onstagestart",
       "community": 57,
       "community_name": "runPipeline",
-      "norm_label": ".onstagestart()"
+      "norm_label": ".onstagestart()",
+      "id": "packages_providers_src_pipeline_types_pipelinecallbacks_onstagestart"
     },
     {
       "label": ".onStageComplete()",
@@ -449,10 +449,10 @@
       "source_file": "packages/providers/src/pipeline/types.ts",
       "source_location": "L37",
       "_origin": "ast",
-      "id": "packages_providers_src_pipeline_types_pipelinecallbacks_onstagecomplete",
       "community": 57,
       "community_name": "runPipeline",
-      "norm_label": ".onstagecomplete()"
+      "norm_label": ".onstagecomplete()",
+      "id": "packages_providers_src_pipeline_types_pipelinecallbacks_onstagecomplete"
     },
     {
       "label": ".onStageError()",
@@ -460,10 +460,10 @@
       "source_file": "packages/providers/src/pipeline/types.ts",
       "source_location": "L38",
       "_origin": "ast",
-      "id": "packages_providers_src_pipeline_types_pipelinecallbacks_onstageerror",
       "community": 57,
       "community_name": "runPipeline",
-      "norm_label": ".onstageerror()"
+      "norm_label": ".onstageerror()",
+      "id": "packages_providers_src_pipeline_types_pipelinecallbacks_onstageerror"
     },
     {
       "label": ".onCheckpoint()",
@@ -471,10 +471,10 @@
       "source_file": "packages/providers/src/pipeline/types.ts",
       "source_location": "L40",
       "_origin": "ast",
-      "id": "packages_providers_src_pipeline_types_pipelinecallbacks_oncheckpoint",
       "community": 57,
       "community_name": "runPipeline",
-      "norm_label": ".oncheckpoint()"
+      "norm_label": ".oncheckpoint()",
+      "id": "packages_providers_src_pipeline_types_pipelinecallbacks_oncheckpoint"
     },
     {
       "label": ".onCostEstimate()",
@@ -482,10 +482,10 @@
       "source_file": "packages/providers/src/pipeline/types.ts",
       "source_location": "L42",
       "_origin": "ast",
-      "id": "packages_providers_src_pipeline_types_pipelinecallbacks_oncostestimate",
       "community": 57,
       "community_name": "runPipeline",
-      "norm_label": ".oncostestimate()"
+      "norm_label": ".oncostestimate()",
+      "id": "packages_providers_src_pipeline_types_pipelinecallbacks_oncostestimate"
     },
     {
       "label": ".onRevision()",
@@ -493,10 +493,10 @@
       "source_file": "packages/providers/src/pipeline/types.ts",
       "source_location": "L43",
       "_origin": "ast",
-      "id": "packages_providers_src_pipeline_types_pipelinecallbacks_onrevision",
       "community": 57,
       "community_name": "runPipeline",
-      "norm_label": ".onrevision()"
+      "norm_label": ".onrevision()",
+      "id": "packages_providers_src_pipeline_types_pipelinecallbacks_onrevision"
     },
     {
       "label": ".onLog()",
@@ -504,10 +504,10 @@
       "source_file": "packages/providers/src/pipeline/types.ts",
       "source_location": "L44",
       "_origin": "ast",
-      "id": "packages_providers_src_pipeline_types_pipelinecallbacks_onlog",
       "community": 57,
       "community_name": "runPipeline",
-      "norm_label": ".onlog()"
+      "norm_label": ".onlog()",
+      "id": "packages_providers_src_pipeline_types_pipelinecallbacks_onlog"
     },
     {
       "label": ".onProgress()",
@@ -515,10 +515,10 @@
       "source_file": "packages/providers/src/pipeline/types.ts",
       "source_location": "L45",
       "_origin": "ast",
-      "id": "packages_providers_src_pipeline_types_pipelinecallbacks_onprogress",
       "community": 57,
       "community_name": "runPipeline",
-      "norm_label": ".onprogress()"
+      "norm_label": ".onprogress()",
+      "id": "packages_providers_src_pipeline_types_pipelinecallbacks_onprogress"
     },
     {
       "label": ".isCancelled()",
@@ -526,10 +526,10 @@
       "source_file": "packages/providers/src/pipeline/types.ts",
       "source_location": "L46",
       "_origin": "ast",
-      "id": "packages_providers_src_pipeline_types_pipelinecallbacks_iscancelled",
       "community": 57,
       "community_name": "runPipeline",
-      "norm_label": ".iscancelled()"
+      "norm_label": ".iscancelled()",
+      "id": "packages_providers_src_pipeline_types_pipelinecallbacks_iscancelled"
     },
     {
       "label": "PipelineOptions",
@@ -537,10 +537,10 @@
       "source_file": "packages/providers/src/pipeline/types.ts",
       "source_location": "L49",
       "_origin": "ast",
-      "id": "packages_providers_src_pipeline_types_pipelineoptions",
       "community": 55,
       "community_name": "pipeline/types.ts",
-      "norm_label": "pipelineoptions"
+      "norm_label": "pipelineoptions",
+      "id": "packages_providers_src_pipeline_types_pipelineoptions"
     },
     {
       "label": "PipelineResult",
@@ -548,10 +548,10 @@
       "source_file": "packages/providers/src/pipeline/types.ts",
       "source_location": "L78",
       "_origin": "ast",
-      "id": "packages_providers_src_pipeline_types_pipelineresult",
       "community": 55,
       "community_name": "pipeline/types.ts",
-      "norm_label": "pipelineresult"
+      "norm_label": "pipelineresult",
+      "id": "packages_providers_src_pipeline_types_pipelineresult"
     },
     {
       "label": "resolve-element.test.ts",
@@ -559,10 +559,10 @@
       "source_file": "packages/providers/src/visual/resolve-element.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "packages_providers_src_visual_resolve_element_test",
       "community": 7,
       "community_name": "resolve-element.ts",
-      "norm_label": "resolve-element.test.ts"
+      "norm_label": "resolve-element.test.ts",
+      "id": "packages_providers_src_visual_resolve_element_test"
     },
     {
       "label": "fakeImageProvider",
@@ -570,10 +570,10 @@
       "source_file": "packages/providers/src/visual/resolve-element.test.ts",
       "source_location": "L10",
       "_origin": "ast",
-      "id": "packages_providers_src_visual_resolve_element_test_fakeimageprovider",
       "community": 7,
       "community_name": "resolve-element.ts",
-      "norm_label": "fakeimageprovider"
+      "norm_label": "fakeimageprovider",
+      "id": "packages_providers_src_visual_resolve_element_test_fakeimageprovider"
     },
     {
       "label": "fakeStockProvider()",
@@ -581,10 +581,10 @@
       "source_file": "packages/providers/src/visual/resolve-element.test.ts",
       "source_location": "L14",
       "_origin": "ast",
-      "id": "packages_providers_src_visual_resolve_element_test_fakestockprovider",
       "community": 7,
       "community_name": "resolve-element.ts",
-      "norm_label": "fakestockprovider()"
+      "norm_label": "fakestockprovider()",
+      "id": "packages_providers_src_visual_resolve_element_test_fakestockprovider"
     },
     {
       "label": "CANDIDATE",
@@ -592,10 +592,10 @@
       "source_file": "packages/providers/src/visual/resolve-element.test.ts",
       "source_location": "L27",
       "_origin": "ast",
-      "id": "packages_providers_src_visual_resolve_element_test_candidate",
       "community": 7,
       "community_name": "resolve-element.ts",
-      "norm_label": "candidate"
+      "norm_label": "candidate",
+      "id": "packages_providers_src_visual_resolve_element_test_candidate"
     },
     {
       "label": "ASSET",
@@ -603,10 +603,10 @@
       "source_file": "packages/providers/src/visual/resolve-element.test.ts",
       "source_location": "L28",
       "_origin": "ast",
-      "id": "packages_providers_src_visual_resolve_element_test_asset",
       "community": 7,
       "community_name": "resolve-element.ts",
-      "norm_label": "asset"
+      "norm_label": "asset",
+      "id": "packages_providers_src_visual_resolve_element_test_asset"
     },
     {
       "label": "baseCtx()",
@@ -614,10 +614,10 @@
       "source_file": "packages/providers/src/visual/resolve-element.test.ts",
       "source_location": "L30",
       "_origin": "ast",
-      "id": "packages_providers_src_visual_resolve_element_test_basectx",
       "community": 7,
       "community_name": "resolve-element.ts",
-      "norm_label": "basectx()"
+      "norm_label": "basectx()",
+      "id": "packages_providers_src_visual_resolve_element_test_basectx"
     },
     {
       "label": "resolve-element.ts",
@@ -625,10 +625,10 @@
       "source_file": "packages/providers/src/visual/resolve-element.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "packages_providers_src_visual_resolve_element",
       "community": 7,
       "community_name": "resolve-element.ts",
-      "norm_label": "resolve-element.ts"
+      "norm_label": "resolve-element.ts",
+      "id": "packages_providers_src_visual_resolve_element"
     },
     {
       "label": "ResolveElementContext",
@@ -636,10 +636,10 @@
       "source_file": "packages/providers/src/visual/resolve-element.ts",
       "source_location": "L9",
       "_origin": "ast",
-      "id": "packages_providers_src_visual_resolve_element_resolveelementcontext",
       "community": 7,
       "community_name": "resolve-element.ts",
-      "norm_label": "resolveelementcontext"
+      "norm_label": "resolveelementcontext",
+      "id": "packages_providers_src_visual_resolve_element_resolveelementcontext"
     },
     {
       "label": ".writeAsset()",
@@ -647,10 +647,10 @@
       "source_file": "packages/providers/src/visual/resolve-element.ts",
       "source_location": "L17",
       "_origin": "ast",
-      "id": "packages_providers_src_visual_resolve_element_resolveelementcontext_writeasset",
       "community": 7,
       "community_name": "resolve-element.ts",
-      "norm_label": ".writeasset()"
+      "norm_label": ".writeasset()",
+      "id": "packages_providers_src_visual_resolve_element_resolveelementcontext_writeasset"
     },
     {
       "label": "resolveStock()",
@@ -658,10 +658,10 @@
       "source_file": "packages/providers/src/visual/resolve-element.ts",
       "source_location": "L22",
       "_origin": "ast",
-      "id": "packages_providers_src_visual_resolve_element_resolvestock",
       "community": 7,
       "community_name": "resolve-element.ts",
-      "norm_label": "resolvestock()"
+      "norm_label": "resolvestock()",
+      "id": "packages_providers_src_visual_resolve_element_resolvestock"
     },
     {
       "label": "resolveAiVideoClip()",
@@ -669,10 +669,10 @@
       "source_file": "packages/providers/src/visual/resolve-element.ts",
       "source_location": "L52",
       "_origin": "ast",
-      "id": "packages_providers_src_visual_resolve_element_resolveaivideoclip",
       "community": 7,
       "community_name": "resolve-element.ts",
-      "norm_label": "resolveaivideoclip()"
+      "norm_label": "resolveaivideoclip()",
+      "id": "packages_providers_src_visual_resolve_element_resolveaivideoclip"
     },
     {
       "label": "resolveElement()",
@@ -680,10 +680,10 @@
       "source_file": "packages/providers/src/visual/resolve-element.ts",
       "source_location": "L98",
       "_origin": "ast",
-      "id": "packages_providers_src_visual_resolve_element_resolveelement",
       "community": 7,
       "community_name": "resolve-element.ts",
-      "norm_label": "resolveelement()"
+      "norm_label": "resolveelement()",
+      "id": "packages_providers_src_visual_resolve_element_resolveelement"
     },
     {
       "label": "visual/types.ts",
@@ -691,10 +691,10 @@
       "source_file": "packages/providers/src/visual/types.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "packages_providers_src_visual_types",
       "community": 7,
       "community_name": "resolve-element.ts",
-      "norm_label": "visual/types.ts"
+      "norm_label": "visual/types.ts",
+      "id": "packages_providers_src_visual_types"
     },
     {
       "label": "ResolvedElement",
@@ -702,10 +702,10 @@
       "source_file": "packages/providers/src/visual/types.ts",
       "source_location": "L9",
       "_origin": "ast",
-      "id": "packages_providers_src_visual_types_resolvedelement",
       "community": 7,
       "community_name": "resolve-element.ts",
-      "norm_label": "resolvedelement"
+      "norm_label": "resolvedelement",
+      "id": "packages_providers_src_visual_types_resolvedelement"
     },
     {
       "label": "StockResolutionError",
@@ -713,10 +713,10 @@
       "source_file": "packages/providers/src/visual/types.ts",
       "source_location": "L19",
       "_origin": "ast",
-      "id": "packages_providers_src_visual_types_stockresolutionerror",
       "community": 7,
       "community_name": "resolve-element.ts",
-      "norm_label": "stockresolutionerror"
+      "norm_label": "stockresolutionerror",
+      "id": "packages_providers_src_visual_types_stockresolutionerror"
     },
     {
       "label": ".constructor()",
@@ -724,10 +724,10 @@
       "source_file": "packages/providers/src/visual/types.ts",
       "source_location": "L20",
       "_origin": "ast",
-      "id": "packages_providers_src_visual_types_stockresolutionerror_constructor",
       "community": 7,
       "community_name": "resolve-element.ts",
-      "norm_label": ".constructor()"
+      "norm_label": ".constructor()",
+      "id": "packages_providers_src_visual_types_stockresolutionerror_constructor"
     },
     {
       "label": "TextElement.tsx",
@@ -735,10 +735,10 @@
       "source_file": "packages/video-engine/src/render/elements/TextElement.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "packages_video_engine_src_render_elements_textelement",
       "community": 62,
       "community_name": "render/types.ts",
-      "norm_label": "textelement.tsx"
+      "norm_label": "textelement.tsx",
+      "id": "packages_video_engine_src_render_elements_textelement"
     },
     {
       "label": "JUSTIFY_BY_POSITION",
@@ -746,10 +746,10 @@
       "source_file": "packages/video-engine/src/render/elements/TextElement.tsx",
       "source_location": "L5",
       "_origin": "ast",
-      "id": "packages_video_engine_src_render_elements_textelement_justify_by_position",
       "community": 62,
       "community_name": "render/types.ts",
-      "norm_label": "justify_by_position"
+      "norm_label": "justify_by_position",
+      "id": "packages_video_engine_src_render_elements_textelement_justify_by_position"
     },
     {
       "label": "TextElement()",
@@ -757,10 +757,10 @@
       "source_file": "packages/video-engine/src/render/elements/TextElement.tsx",
       "source_location": "L12",
       "_origin": "ast",
-      "id": "packages_video_engine_src_render_elements_textelement_textelement",
       "community": 62,
       "community_name": "render/types.ts",
-      "norm_label": "textelement()"
+      "norm_label": "textelement()",
+      "id": "packages_video_engine_src_render_elements_textelement_textelement"
     },
     {
       "label": "render/types.ts",
@@ -768,10 +768,10 @@
       "source_file": "packages/video-engine/src/render/types.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "packages_video_engine_src_render_types",
       "community": 62,
       "community_name": "render/types.ts",
-      "norm_label": "render/types.ts"
+      "norm_label": "render/types.ts",
+      "id": "packages_video_engine_src_render_types"
     },
     {
       "label": "ResolvedElement",
@@ -779,10 +779,10 @@
       "source_file": "packages/video-engine/src/render/types.ts",
       "source_location": "L9",
       "_origin": "ast",
-      "id": "packages_video_engine_src_render_types_resolvedelement",
       "community": 62,
       "community_name": "render/types.ts",
-      "norm_label": "resolvedelement"
+      "norm_label": "resolvedelement",
+      "id": "packages_video_engine_src_render_types_resolvedelement"
     },
     {
       "label": "ResolvedScene",
@@ -790,10 +790,10 @@
       "source_file": "packages/video-engine/src/render/types.ts",
       "source_location": "L22",
       "_origin": "ast",
-      "id": "packages_video_engine_src_render_types_resolvedscene",
       "community": 62,
       "community_name": "render/types.ts",
-      "norm_label": "resolvedscene"
+      "norm_label": "resolvedscene",
+      "id": "packages_video_engine_src_render_types_resolvedscene"
     },
     {
       "label": "RenderInput",
@@ -801,10 +801,10 @@
       "source_file": "packages/video-engine/src/render/types.ts",
       "source_location": "L31",
       "_origin": "ast",
-      "id": "packages_video_engine_src_render_types_renderinput",
       "community": 62,
       "community_name": "render/types.ts",
-      "norm_label": "renderinput"
+      "norm_label": "renderinput",
+      "id": "packages_video_engine_src_render_types_renderinput"
     },
     {
       "label": "CompositionProps",
@@ -812,10 +812,10 @@
       "source_file": "packages/video-engine/src/render/types.ts",
       "source_location": "L47",
       "_origin": "ast",
-      "id": "packages_video_engine_src_render_types_compositionprops",
       "community": 62,
       "community_name": "render/types.ts",
-      "norm_label": "compositionprops"
+      "norm_label": "compositionprops",
+      "id": "packages_video_engine_src_render_types_compositionprops"
     },
     {
       "label": "agents-orchestrator.md",
@@ -11391,272 +11391,6 @@
   ],
   "links": [
     {
-      "relation": "re_exports",
-      "context": "export",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/domain/src/index.ts",
-      "source_location": "L8",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_domain_src_index",
-      "target": "packages_domain_src_scene"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/domain/src/scene.ts",
-      "source_location": "L14",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_domain_src_scene",
-      "target": "packages_domain_src_scene_cameramotion",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/domain/src/scene.ts",
-      "source_location": "L101",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_domain_src_scene",
-      "target": "packages_domain_src_scene_minaivideoscenes",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/domain/src/scene.ts",
-      "source_location": "L81",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_domain_src_scene",
-      "target": "packages_domain_src_scene_scene",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/domain/src/scene.ts",
-      "source_location": "L11",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_domain_src_scene",
-      "target": "packages_domain_src_scene_transitiontype",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/domain/src/scene.ts",
-      "source_location": "L31",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_domain_src_scene",
-      "target": "packages_domain_src_scene_videogenerationproviderkey",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/domain/src/scene.ts",
-      "source_location": "L28",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_domain_src_scene",
-      "target": "packages_domain_src_scene_videomode",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/domain/src/scene.ts",
-      "source_location": "L88",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_domain_src_scene",
-      "target": "packages_domain_src_scene_violatesslideshowrule",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/domain/src/scene.ts",
-      "source_location": "L108",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_domain_src_scene",
-      "target": "packages_domain_src_scene_violatesvideomoderule",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/domain/src/scene.ts",
-      "source_location": "L65",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_domain_src_scene",
-      "target": "packages_domain_src_scene_visualelement",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/domain/src/scene.ts",
-      "source_location": "L17",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_domain_src_scene",
-      "target": "packages_domain_src_scene_visualstrategy",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/domain/src/scene.test.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_domain_src_scene_test",
-      "target": "packages_domain_src_scene"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/domain/src/video-project.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_domain_src_video_project",
-      "target": "packages_domain_src_scene"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/domain/src/scene.test.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_domain_src_scene_test",
-      "target": "packages_domain_src_scene_scene"
-    },
-    {
-      "relation": "references",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "packages/domain/src/scene.test.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_domain_src_scene_test_staticscene",
-      "target": "packages_domain_src_scene_scene"
-    },
-    {
-      "relation": "references",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "packages/domain/src/scene.test.ts",
-      "source_location": "L16",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_domain_src_scene_test_videoscene",
-      "target": "packages_domain_src_scene_scene"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/domain/src/video-project.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_domain_src_video_project",
-      "target": "packages_domain_src_scene_scene"
-    },
-    {
-      "relation": "references",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "packages/providers/src/agents/creative-director.ts",
-      "source_location": "L81",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_providers_src_agents_creative_director_toscenes",
-      "target": "packages_domain_src_scene_scene"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/domain/src/scene.test.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_domain_src_scene_test",
-      "target": "packages_domain_src_scene_violatesslideshowrule"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/domain/src/video-project.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_domain_src_video_project",
-      "target": "packages_domain_src_scene_violatesslideshowrule"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/domain/src/scene.test.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_domain_src_scene_test",
-      "target": "packages_domain_src_scene_minaivideoscenes"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/domain/src/scene.ts",
-      "source_location": "L110",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_domain_src_scene_violatesvideomoderule",
-      "target": "packages_domain_src_scene_minaivideoscenes",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/domain/src/scene.test.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "packages_domain_src_scene_test",
-      "target": "packages_domain_src_scene_violatesvideomoderule"
-    },
-    {
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -11777,7 +11511,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/providers/src/agents/creative-director.ts",
-      "source_location": "L139",
+      "source_location": "L137",
       "weight": 1.0,
       "_origin": "ast",
       "source": "packages_providers_src_agents_creative_director",
@@ -11788,18 +11522,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/providers/src/agents/creative-director.ts",
-      "source_location": "L91",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_providers_src_agents_creative_director",
-      "target": "packages_providers_src_agents_creative_director_assertvideomodewithdowngradecontext",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/agents/creative-director.ts",
-      "source_location": "L221",
+      "source_location": "L219",
       "weight": 1.0,
       "_origin": "ast",
       "source": "packages_providers_src_agents_creative_director",
@@ -11810,7 +11533,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/providers/src/agents/creative-director.ts",
-      "source_location": "L250",
+      "source_location": "L248",
       "weight": 1.0,
       "_origin": "ast",
       "source": "packages_providers_src_agents_creative_director",
@@ -11821,7 +11544,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/providers/src/agents/creative-director.ts",
-      "source_location": "L123",
+      "source_location": "L121",
       "weight": 1.0,
       "_origin": "ast",
       "source": "packages_providers_src_agents_creative_director",
@@ -11865,7 +11588,18 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/providers/src/agents/creative-director.ts",
-      "source_location": "L148",
+      "source_location": "L70",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_agents_creative_director",
+      "target": "packages_providers_src_agents_creative_director_extractvisualprompt",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/agents/creative-director.ts",
+      "source_location": "L146",
       "weight": 1.0,
       "_origin": "ast",
       "source": "packages_providers_src_agents_creative_director",
@@ -11876,7 +11610,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/providers/src/agents/creative-director.ts",
-      "source_location": "L109",
+      "source_location": "L107",
       "weight": 1.0,
       "_origin": "ast",
       "source": "packages_providers_src_agents_creative_director",
@@ -11887,7 +11621,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/providers/src/agents/creative-director.ts",
-      "source_location": "L239",
+      "source_location": "L237",
       "weight": 1.0,
       "_origin": "ast",
       "source": "packages_providers_src_agents_creative_director",
@@ -11898,7 +11632,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/providers/src/agents/creative-director.ts",
-      "source_location": "L277",
+      "source_location": "L275",
       "weight": 1.0,
       "_origin": "ast",
       "source": "packages_providers_src_agents_creative_director",
@@ -11920,7 +11654,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/providers/src/agents/creative-director.ts",
-      "source_location": "L105",
+      "source_location": "L103",
       "weight": 1.0,
       "_origin": "ast",
       "source": "packages_providers_src_agents_creative_director",
@@ -11942,7 +11676,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/providers/src/agents/creative-director.ts",
-      "source_location": "L74",
+      "source_location": "L86",
       "weight": 1.0,
       "_origin": "ast",
       "source": "packages_providers_src_agents_creative_director",
@@ -12113,9 +11847,9 @@
       "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_orchestrator",
-      "target": "packages_providers_src_agents_creative_director",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_agents_creative_director"
     },
     {
       "relation": "imports_from",
@@ -12125,9 +11859,9 @@
       "source_location": "L2",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_types",
-      "target": "packages_providers_src_agents_creative_director",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_agents_creative_director"
     },
     {
       "relation": "references",
@@ -12135,7 +11869,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "packages/providers/src/agents/creative-director.ts",
-      "source_location": "L209",
+      "source_location": "L207",
       "weight": 1.0,
       "_origin": "ast",
       "source": "packages_providers_src_agents_creative_director_generatedirectorscore",
@@ -12147,7 +11881,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "packages/providers/src/agents/creative-director.ts",
-      "source_location": "L347",
+      "source_location": "L345",
       "weight": 1.0,
       "_origin": "ast",
       "source": "packages_providers_src_agents_creative_director_revisedirectorscore",
@@ -12173,9 +11907,9 @@
       "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_orchestrator",
-      "target": "packages_providers_src_agents_creative_director_directorscore",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_agents_creative_director_directorscore"
     },
     {
       "relation": "imports",
@@ -12185,9 +11919,9 @@
       "source_location": "L2",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_types",
-      "target": "packages_providers_src_agents_creative_director_directorscore",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_agents_creative_director_directorscore"
     },
     {
       "relation": "references",
@@ -12197,33 +11931,9 @@
       "source_location": "L22",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_types_pipelinecheckpoint",
-      "target": "packages_providers_src_agents_creative_director_directorscore",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/agents/creative-director.ts",
-      "source_location": "L208",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_providers_src_agents_creative_director_generatedirectorscore",
-      "target": "packages_providers_src_agents_creative_director_toscenes",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/providers/src/agents/creative-director.ts",
-      "source_location": "L346",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "packages_providers_src_agents_creative_director_revisedirectorscore",
-      "target": "packages_providers_src_agents_creative_director_toscenes",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_agents_creative_director_directorscore"
     },
     {
       "relation": "calls",
@@ -12233,8 +11943,8 @@
       "source_location": "L93",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "packages_providers_src_agents_creative_director_assertvideomodewithdowngradecontext",
-      "target": "packages_providers_src_agents_creative_director_assertvideomode",
+      "source": "packages_providers_src_agents_creative_director_toscenes",
+      "target": "packages_providers_src_agents_creative_director_extractvisualprompt",
       "confidence_score": 1.0
     },
     {
@@ -12242,11 +11952,11 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "packages/providers/src/agents/creative-director.ts",
-      "source_location": "L210",
+      "source_location": "L206",
       "weight": 1.0,
       "_origin": "ast",
       "source": "packages_providers_src_agents_creative_director_generatedirectorscore",
-      "target": "packages_providers_src_agents_creative_director_assertvideomodewithdowngradecontext",
+      "target": "packages_providers_src_agents_creative_director_toscenes",
       "confidence_score": 1.0
     },
     {
@@ -12254,11 +11964,11 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "packages/providers/src/agents/creative-director.ts",
-      "source_location": "L355",
+      "source_location": "L344",
       "weight": 1.0,
       "_origin": "ast",
       "source": "packages_providers_src_agents_creative_director_revisedirectorscore",
-      "target": "packages_providers_src_agents_creative_director_assertvideomodewithdowngradecontext",
+      "target": "packages_providers_src_agents_creative_director_toscenes",
       "confidence_score": 1.0
     },
     {
@@ -12266,7 +11976,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "packages/providers/src/agents/creative-director.ts",
-      "source_location": "L194",
+      "source_location": "L192",
       "weight": 1.0,
       "_origin": "ast",
       "source": "packages_providers_src_agents_creative_director_generatedirectorscore",
@@ -12278,7 +11988,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "packages/providers/src/agents/creative-director.ts",
-      "source_location": "L332",
+      "source_location": "L330",
       "weight": 1.0,
       "_origin": "ast",
       "source": "packages_providers_src_agents_creative_director_revisedirectorscore",
@@ -12290,7 +12000,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "packages/providers/src/agents/creative-director.ts",
-      "source_location": "L154",
+      "source_location": "L152",
       "weight": 1.0,
       "_origin": "ast",
       "source": "packages_providers_src_agents_creative_director_generatedirectorscore",
@@ -12302,7 +12012,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "packages/providers/src/agents/creative-director.ts",
-      "source_location": "L113",
+      "source_location": "L111",
       "weight": 1.0,
       "_origin": "ast",
       "source": "packages_providers_src_agents_creative_director_loaddirectorsystemprompt",
@@ -12314,7 +12024,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "packages/providers/src/agents/creative-director.ts",
-      "source_location": "L285",
+      "source_location": "L283",
       "weight": 1.0,
       "_origin": "ast",
       "source": "packages_providers_src_agents_creative_director_revisedirectorscore",
@@ -12326,7 +12036,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "packages/providers/src/agents/creative-director.ts",
-      "source_location": "L162",
+      "source_location": "L160",
       "weight": 1.0,
       "_origin": "ast",
       "source": "packages_providers_src_agents_creative_director_generatedirectorscore",
@@ -12338,7 +12048,31 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "packages/providers/src/agents/creative-director.ts",
-      "source_location": "L164",
+      "source_location": "L208",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_agents_creative_director_generatedirectorscore",
+      "target": "packages_providers_src_agents_creative_director_assertvideomode",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/agents/creative-director.ts",
+      "source_location": "L353",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_providers_src_agents_creative_director_revisedirectorscore",
+      "target": "packages_providers_src_agents_creative_director_assertvideomode",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/providers/src/agents/creative-director.ts",
+      "source_location": "L162",
       "weight": 1.0,
       "_origin": "ast",
       "source": "packages_providers_src_agents_creative_director_generatedirectorscore",
@@ -12353,9 +12087,9 @@
       "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_orchestrator",
-      "target": "packages_providers_src_agents_creative_director_generatedirectorscore",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_agents_creative_director_generatedirectorscore"
     },
     {
       "relation": "calls",
@@ -12386,7 +12120,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "packages/providers/src/agents/creative-director.ts",
-      "source_location": "L288",
+      "source_location": "L286",
       "weight": 1.0,
       "_origin": "ast",
       "source": "packages_providers_src_agents_creative_director_revisedirectorscore",
@@ -12401,9 +12135,9 @@
       "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_orchestrator",
-      "target": "packages_providers_src_agents_creative_director_revisedirectorscore",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_agents_creative_director_revisedirectorscore"
     },
     {
       "relation": "calls",
@@ -12416,6 +12150,260 @@
       "_origin": "ast",
       "source": "packages_providers_src_pipeline_orchestrator_runpipeline",
       "target": "packages_providers_src_agents_creative_director_revisedirectorscore"
+    },
+    {
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/domain/src/index.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "packages_domain_src_index",
+      "target": "packages_domain_src_scene"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/domain/src/scene.ts",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "packages_domain_src_scene",
+      "target": "packages_domain_src_scene_cameramotion"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/domain/src/scene.ts",
+      "source_location": "L101",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "packages_domain_src_scene",
+      "target": "packages_domain_src_scene_minaivideoscenes"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/domain/src/scene.ts",
+      "source_location": "L81",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "packages_domain_src_scene",
+      "target": "packages_domain_src_scene_scene"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/domain/src/scene.ts",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "packages_domain_src_scene",
+      "target": "packages_domain_src_scene_transitiontype"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/domain/src/scene.ts",
+      "source_location": "L31",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "packages_domain_src_scene",
+      "target": "packages_domain_src_scene_videogenerationproviderkey"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/domain/src/scene.ts",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "packages_domain_src_scene",
+      "target": "packages_domain_src_scene_videomode"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/domain/src/scene.ts",
+      "source_location": "L88",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "packages_domain_src_scene",
+      "target": "packages_domain_src_scene_violatesslideshowrule"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/domain/src/scene.ts",
+      "source_location": "L108",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "packages_domain_src_scene",
+      "target": "packages_domain_src_scene_violatesvideomoderule"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/domain/src/scene.ts",
+      "source_location": "L65",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "packages_domain_src_scene",
+      "target": "packages_domain_src_scene_visualelement"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/domain/src/scene.ts",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "packages_domain_src_scene",
+      "target": "packages_domain_src_scene_visualstrategy"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/domain/src/scene.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "packages_domain_src_scene_test",
+      "target": "packages_domain_src_scene"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/domain/src/video-project.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "packages_domain_src_video_project",
+      "target": "packages_domain_src_scene"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/domain/src/scene.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "packages_domain_src_scene_test",
+      "target": "packages_domain_src_scene_scene"
+    },
+    {
+      "relation": "references",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "packages/domain/src/scene.test.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_domain_src_scene_test_staticscene",
+      "target": "packages_domain_src_scene_scene"
+    },
+    {
+      "relation": "references",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "packages/domain/src/scene.test.ts",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_domain_src_scene_test_videoscene",
+      "target": "packages_domain_src_scene_scene"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/domain/src/video-project.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "packages_domain_src_video_project",
+      "target": "packages_domain_src_scene_scene"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/domain/src/scene.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "packages_domain_src_scene_test",
+      "target": "packages_domain_src_scene_violatesslideshowrule"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/domain/src/video-project.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "packages_domain_src_video_project",
+      "target": "packages_domain_src_scene_violatesslideshowrule"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/domain/src/scene.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "packages_domain_src_scene_test",
+      "target": "packages_domain_src_scene_minaivideoscenes"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/domain/src/scene.ts",
+      "source_location": "L110",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "packages_domain_src_scene_violatesvideomoderule",
+      "target": "packages_domain_src_scene_minaivideoscenes"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/domain/src/scene.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "packages_domain_src_scene_test",
+      "target": "packages_domain_src_scene_violatesvideomoderule"
     },
     {
       "relation": "imports_from",
@@ -12437,9 +12425,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_orchestrator",
-      "target": "packages_domain_src_index",
-      "confidence_score": 1.0
+      "target": "packages_domain_src_index"
     },
     {
       "relation": "imports_from",
@@ -12449,9 +12437,9 @@
       "source_location": "L7",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_orchestrator",
-      "target": "packages_providers_src_agents_critic",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_agents_critic"
     },
     {
       "relation": "imports",
@@ -12461,9 +12449,9 @@
       "source_location": "L7",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_orchestrator",
-      "target": "packages_providers_src_agents_critic_evaluate",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_agents_critic_evaluate"
     },
     {
       "relation": "imports_from",
@@ -12473,9 +12461,9 @@
       "source_location": "L8",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_orchestrator",
-      "target": "packages_providers_src_agents_research",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_agents_research"
     },
     {
       "relation": "imports",
@@ -12485,9 +12473,9 @@
       "source_location": "L8",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_orchestrator",
-      "target": "packages_providers_src_agents_research_research",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_agents_research_research"
     },
     {
       "relation": "imports_from",
@@ -12497,9 +12485,9 @@
       "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_orchestrator",
-      "target": "packages_providers_src_config_archetype_registry",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_config_archetype_registry"
     },
     {
       "relation": "imports",
@@ -12509,9 +12497,9 @@
       "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_orchestrator",
-      "target": "packages_providers_src_config_archetype_registry_getarchetype",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_config_archetype_registry_getarchetype"
     },
     {
       "relation": "imports_from",
@@ -12521,9 +12509,9 @@
       "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_orchestrator",
-      "target": "packages_providers_src_llm_types",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_llm_types"
     },
     {
       "relation": "imports",
@@ -12533,9 +12521,9 @@
       "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_orchestrator",
-      "target": "packages_providers_src_llm_types_llmusage",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_llm_types_llmusage"
     },
     {
       "relation": "contains",
@@ -12544,9 +12532,9 @@
       "source_location": "L33",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_orchestrator",
-      "target": "packages_providers_src_pipeline_orchestrator_runpipeline",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_pipeline_orchestrator_runpipeline"
     },
     {
       "relation": "imports_from",
@@ -12556,9 +12544,9 @@
       "source_location": "L15",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_orchestrator",
-      "target": "packages_providers_src_pipeline_types",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_pipeline_types"
     },
     {
       "relation": "imports",
@@ -12568,9 +12556,9 @@
       "source_location": "L15",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_orchestrator",
-      "target": "packages_providers_src_pipeline_types_pipelinecallbacks",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_pipeline_types_pipelinecallbacks"
     },
     {
       "relation": "imports",
@@ -12580,9 +12568,9 @@
       "source_location": "L15",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_orchestrator",
-      "target": "packages_providers_src_pipeline_types_pipelinecheckpoint",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_pipeline_types_pipelinecheckpoint"
     },
     {
       "relation": "imports",
@@ -12592,9 +12580,9 @@
       "source_location": "L15",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_orchestrator",
-      "target": "packages_providers_src_pipeline_types_pipelineoptions",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_pipeline_types_pipelineoptions"
     },
     {
       "relation": "imports",
@@ -12604,9 +12592,9 @@
       "source_location": "L15",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_orchestrator",
-      "target": "packages_providers_src_pipeline_types_pipelineresult",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_pipeline_types_pipelineresult"
     },
     {
       "relation": "imports",
@@ -12616,9 +12604,9 @@
       "source_location": "L15",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_orchestrator",
-      "target": "packages_providers_src_pipeline_types_pipelinestage",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_pipeline_types_pipelinestage"
     },
     {
       "relation": "imports",
@@ -12628,9 +12616,9 @@
       "source_location": "L15",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_orchestrator",
-      "target": "packages_providers_src_pipeline_types_revisionlogentry",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_pipeline_types_revisionlogentry"
     },
     {
       "relation": "imports_from",
@@ -12640,9 +12628,9 @@
       "source_location": "L4",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_orchestrator",
-      "target": "packages_video_engine_src_index",
-      "confidence_score": 1.0
+      "target": "packages_video_engine_src_index"
     },
     {
       "relation": "imports_from",
@@ -12868,9 +12856,9 @@
       "source_location": "L1",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_types",
-      "target": "packages_domain_src_index",
-      "confidence_score": 1.0
+      "target": "packages_domain_src_index"
     },
     {
       "relation": "imports_from",
@@ -12880,9 +12868,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_types",
-      "target": "packages_providers_src_agents_critic",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_agents_critic"
     },
     {
       "relation": "imports",
@@ -12892,9 +12880,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_types",
-      "target": "packages_providers_src_agents_critic_critiqueresult",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_agents_critic_critiqueresult"
     },
     {
       "relation": "imports_from",
@@ -12904,9 +12892,9 @@
       "source_location": "L4",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_types",
-      "target": "packages_providers_src_agents_research",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_agents_research"
     },
     {
       "relation": "imports",
@@ -12916,9 +12904,9 @@
       "source_location": "L4",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_types",
-      "target": "packages_providers_src_agents_research_researchresult",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_agents_research_researchresult"
     },
     {
       "relation": "imports_from",
@@ -12928,9 +12916,9 @@
       "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_types",
-      "target": "packages_providers_src_llm_types",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_llm_types"
     },
     {
       "relation": "imports",
@@ -12940,9 +12928,9 @@
       "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_types",
-      "target": "packages_providers_src_llm_types_llmprovider",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_llm_types_llmprovider"
     },
     {
       "relation": "imports",
@@ -12952,9 +12940,9 @@
       "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_types",
-      "target": "packages_providers_src_llm_types_llmusage",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_llm_types_llmusage"
     },
     {
       "relation": "contains",
@@ -12963,9 +12951,9 @@
       "source_location": "L34",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_types",
-      "target": "packages_providers_src_pipeline_types_pipelinecallbacks",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_pipeline_types_pipelinecallbacks"
     },
     {
       "relation": "contains",
@@ -12974,9 +12962,9 @@
       "source_location": "L20",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_types",
-      "target": "packages_providers_src_pipeline_types_pipelinecheckpoint",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_pipeline_types_pipelinecheckpoint"
     },
     {
       "relation": "contains",
@@ -12985,9 +12973,9 @@
       "source_location": "L49",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_types",
-      "target": "packages_providers_src_pipeline_types_pipelineoptions",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_pipeline_types_pipelineoptions"
     },
     {
       "relation": "contains",
@@ -12996,9 +12984,9 @@
       "source_location": "L78",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_types",
-      "target": "packages_providers_src_pipeline_types_pipelineresult",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_pipeline_types_pipelineresult"
     },
     {
       "relation": "contains",
@@ -13007,9 +12995,9 @@
       "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_types",
-      "target": "packages_providers_src_pipeline_types_pipelinestage",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_pipeline_types_pipelinestage"
     },
     {
       "relation": "contains",
@@ -13018,9 +13006,9 @@
       "source_location": "L27",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_types",
-      "target": "packages_providers_src_pipeline_types_revisionlogentry",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_pipeline_types_revisionlogentry"
     },
     {
       "relation": "imports_from",
@@ -13030,9 +13018,9 @@
       "source_location": "L8",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_types",
-      "target": "packages_providers_src_tts_types",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_tts_types"
     },
     {
       "relation": "imports",
@@ -13042,9 +13030,9 @@
       "source_location": "L8",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_types",
-      "target": "packages_providers_src_tts_types_ttsprovider",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_tts_types_ttsprovider"
     },
     {
       "relation": "imports_from",
@@ -13054,9 +13042,9 @@
       "source_location": "L10",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_types",
-      "target": "packages_video_engine_src_index",
-      "confidence_score": 1.0
+      "target": "packages_video_engine_src_index"
     },
     {
       "relation": "imports",
@@ -13125,9 +13113,9 @@
       "source_location": "L46",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_types_pipelinecallbacks",
-      "target": "packages_providers_src_pipeline_types_pipelinecallbacks_iscancelled",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_pipeline_types_pipelinecallbacks_iscancelled"
     },
     {
       "relation": "method",
@@ -13136,9 +13124,9 @@
       "source_location": "L40",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_types_pipelinecallbacks",
-      "target": "packages_providers_src_pipeline_types_pipelinecallbacks_oncheckpoint",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_pipeline_types_pipelinecallbacks_oncheckpoint"
     },
     {
       "relation": "method",
@@ -13147,9 +13135,9 @@
       "source_location": "L42",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_types_pipelinecallbacks",
-      "target": "packages_providers_src_pipeline_types_pipelinecallbacks_oncostestimate",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_pipeline_types_pipelinecallbacks_oncostestimate"
     },
     {
       "relation": "method",
@@ -13158,9 +13146,9 @@
       "source_location": "L44",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_types_pipelinecallbacks",
-      "target": "packages_providers_src_pipeline_types_pipelinecallbacks_onlog",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_pipeline_types_pipelinecallbacks_onlog"
     },
     {
       "relation": "method",
@@ -13169,9 +13157,9 @@
       "source_location": "L45",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_types_pipelinecallbacks",
-      "target": "packages_providers_src_pipeline_types_pipelinecallbacks_onprogress",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_pipeline_types_pipelinecallbacks_onprogress"
     },
     {
       "relation": "method",
@@ -13180,9 +13168,9 @@
       "source_location": "L43",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_types_pipelinecallbacks",
-      "target": "packages_providers_src_pipeline_types_pipelinecallbacks_onrevision",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_pipeline_types_pipelinecallbacks_onrevision"
     },
     {
       "relation": "method",
@@ -13191,9 +13179,9 @@
       "source_location": "L37",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_types_pipelinecallbacks",
-      "target": "packages_providers_src_pipeline_types_pipelinecallbacks_onstagecomplete",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_pipeline_types_pipelinecallbacks_onstagecomplete"
     },
     {
       "relation": "method",
@@ -13202,9 +13190,9 @@
       "source_location": "L38",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_types_pipelinecallbacks",
-      "target": "packages_providers_src_pipeline_types_pipelinecallbacks_onstageerror",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_pipeline_types_pipelinecallbacks_onstageerror"
     },
     {
       "relation": "method",
@@ -13213,9 +13201,9 @@
       "source_location": "L36",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_pipeline_types_pipelinecallbacks",
-      "target": "packages_providers_src_pipeline_types_pipelinecallbacks_onstagestart",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_pipeline_types_pipelinecallbacks_onstagestart"
     },
     {
       "relation": "imports",
@@ -13261,9 +13249,9 @@
       "source_location": "L1",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_visual_resolve_element_test",
-      "target": "packages_domain_src_index",
-      "confidence_score": 1.0
+      "target": "packages_domain_src_index"
     },
     {
       "relation": "imports_from",
@@ -13273,9 +13261,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_visual_resolve_element_test",
-      "target": "packages_providers_src_image_types",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_image_types"
     },
     {
       "relation": "imports",
@@ -13285,9 +13273,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_visual_resolve_element_test",
-      "target": "packages_providers_src_image_types_imageprovider",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_image_types_imageprovider"
     },
     {
       "relation": "imports_from",
@@ -13297,9 +13285,9 @@
       "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_visual_resolve_element_test",
-      "target": "packages_providers_src_video_types",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_video_types"
     },
     {
       "relation": "imports",
@@ -13309,9 +13297,9 @@
       "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_visual_resolve_element_test",
-      "target": "packages_providers_src_video_types_videogenerationprovider",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_video_types_videogenerationprovider"
     },
     {
       "relation": "imports_from",
@@ -13321,9 +13309,9 @@
       "source_location": "L7",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_visual_resolve_element_test",
-      "target": "packages_providers_src_visual_resolve_element",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_visual_resolve_element"
     },
     {
       "relation": "imports",
@@ -13333,9 +13321,9 @@
       "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_visual_resolve_element_test",
-      "target": "packages_providers_src_visual_resolve_element_resolveelement",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_visual_resolve_element_resolveelement"
     },
     {
       "relation": "imports",
@@ -13345,9 +13333,9 @@
       "source_location": "L7",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_visual_resolve_element_test",
-      "target": "packages_providers_src_visual_resolve_element_resolveelementcontext",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_visual_resolve_element_resolveelementcontext"
     },
     {
       "relation": "contains",
@@ -13356,9 +13344,9 @@
       "source_location": "L28",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_visual_resolve_element_test",
-      "target": "packages_providers_src_visual_resolve_element_test_asset",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_visual_resolve_element_test_asset"
     },
     {
       "relation": "contains",
@@ -13367,9 +13355,9 @@
       "source_location": "L30",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_visual_resolve_element_test",
-      "target": "packages_providers_src_visual_resolve_element_test_basectx",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_visual_resolve_element_test_basectx"
     },
     {
       "relation": "contains",
@@ -13378,9 +13366,9 @@
       "source_location": "L27",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_visual_resolve_element_test",
-      "target": "packages_providers_src_visual_resolve_element_test_candidate",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_visual_resolve_element_test_candidate"
     },
     {
       "relation": "contains",
@@ -13389,9 +13377,9 @@
       "source_location": "L10",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_visual_resolve_element_test",
-      "target": "packages_providers_src_visual_resolve_element_test_fakeimageprovider",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_visual_resolve_element_test_fakeimageprovider"
     },
     {
       "relation": "contains",
@@ -13400,9 +13388,9 @@
       "source_location": "L14",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_visual_resolve_element_test",
-      "target": "packages_providers_src_visual_resolve_element_test_fakestockprovider",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_visual_resolve_element_test_fakestockprovider"
     },
     {
       "relation": "imports_from",
@@ -13412,9 +13400,9 @@
       "source_location": "L8",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_visual_resolve_element_test",
-      "target": "packages_providers_src_visual_types",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_visual_types"
     },
     {
       "relation": "imports",
@@ -13424,9 +13412,9 @@
       "source_location": "L8",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_visual_resolve_element_test",
-      "target": "packages_providers_src_visual_types_stockresolutionerror",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_visual_types_stockresolutionerror"
     },
     {
       "relation": "imports_from",
@@ -13436,9 +13424,9 @@
       "source_location": "L1",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_visual_resolve_element",
-      "target": "packages_domain_src_index",
-      "confidence_score": 1.0
+      "target": "packages_domain_src_index"
     },
     {
       "relation": "imports_from",
@@ -13448,9 +13436,9 @@
       "source_location": "L2",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_visual_resolve_element",
-      "target": "packages_providers_src_image_types",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_image_types"
     },
     {
       "relation": "imports",
@@ -13460,9 +13448,9 @@
       "source_location": "L2",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_visual_resolve_element",
-      "target": "packages_providers_src_image_types_imageprovider",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_image_types_imageprovider"
     },
     {
       "relation": "imports_from",
@@ -13472,9 +13460,9 @@
       "source_location": "L4",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_visual_resolve_element",
-      "target": "packages_providers_src_video_resolve_provider",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_video_resolve_provider"
     },
     {
       "relation": "imports",
@@ -13484,9 +13472,9 @@
       "source_location": "L4",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_visual_resolve_element",
-      "target": "packages_providers_src_video_resolve_provider_resolvevideogenerationprovider",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_video_resolve_provider_resolvevideogenerationprovider"
     },
     {
       "relation": "imports_from",
@@ -13496,9 +13484,9 @@
       "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_visual_resolve_element",
-      "target": "packages_providers_src_video_types",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_video_types"
     },
     {
       "relation": "imports",
@@ -13508,9 +13496,9 @@
       "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_visual_resolve_element",
-      "target": "packages_providers_src_video_types_videogenerationprovider",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_video_types_videogenerationprovider"
     },
     {
       "relation": "imports",
@@ -13520,9 +13508,9 @@
       "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_visual_resolve_element",
-      "target": "packages_providers_src_video_types_videogenerationproviderkey",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_video_types_videogenerationproviderkey"
     },
     {
       "relation": "contains",
@@ -13531,9 +13519,9 @@
       "source_location": "L52",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_visual_resolve_element",
-      "target": "packages_providers_src_visual_resolve_element_resolveaivideoclip",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_visual_resolve_element_resolveaivideoclip"
     },
     {
       "relation": "contains",
@@ -13542,9 +13530,9 @@
       "source_location": "L98",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_visual_resolve_element",
-      "target": "packages_providers_src_visual_resolve_element_resolveelement",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_visual_resolve_element_resolveelement"
     },
     {
       "relation": "contains",
@@ -13553,9 +13541,9 @@
       "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_visual_resolve_element",
-      "target": "packages_providers_src_visual_resolve_element_resolveelementcontext",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_visual_resolve_element_resolveelementcontext"
     },
     {
       "relation": "contains",
@@ -13564,9 +13552,9 @@
       "source_location": "L22",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_visual_resolve_element",
-      "target": "packages_providers_src_visual_resolve_element_resolvestock",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_visual_resolve_element_resolvestock"
     },
     {
       "relation": "imports_from",
@@ -13576,9 +13564,9 @@
       "source_location": "L7",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_visual_resolve_element",
-      "target": "packages_providers_src_visual_types",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_visual_types"
     },
     {
       "relation": "imports",
@@ -13588,9 +13576,9 @@
       "source_location": "L7",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_visual_resolve_element",
-      "target": "packages_providers_src_visual_types_resolvedelement",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_visual_types_resolvedelement"
     },
     {
       "relation": "imports",
@@ -13600,9 +13588,9 @@
       "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_visual_resolve_element",
-      "target": "packages_providers_src_visual_types_stockresolutionerror",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_visual_types_stockresolutionerror"
     },
     {
       "relation": "method",
@@ -13611,9 +13599,9 @@
       "source_location": "L17",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_visual_resolve_element_resolveelementcontext",
-      "target": "packages_providers_src_visual_resolve_element_resolveelementcontext_writeasset",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_visual_resolve_element_resolveelementcontext_writeasset"
     },
     {
       "relation": "calls",
@@ -13623,9 +13611,9 @@
       "source_location": "L102",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_visual_resolve_element_resolveelement",
-      "target": "packages_providers_src_visual_resolve_element_resolveelementcontext_writeasset",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_visual_resolve_element_resolveelementcontext_writeasset"
     },
     {
       "relation": "calls",
@@ -13635,9 +13623,9 @@
       "source_location": "L107",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_visual_resolve_element_resolveelement",
-      "target": "packages_providers_src_visual_resolve_element_resolvestock",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_visual_resolve_element_resolvestock"
     },
     {
       "relation": "calls",
@@ -13647,9 +13635,9 @@
       "source_location": "L115",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_visual_resolve_element_resolveelement",
-      "target": "packages_providers_src_visual_resolve_element_resolveaivideoclip",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_visual_resolve_element_resolveaivideoclip"
     },
     {
       "relation": "imports_from",
@@ -13659,9 +13647,9 @@
       "source_location": "L1",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_visual_types",
-      "target": "packages_domain_src_index",
-      "confidence_score": 1.0
+      "target": "packages_domain_src_index"
     },
     {
       "relation": "contains",
@@ -13670,9 +13658,9 @@
       "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_visual_types",
-      "target": "packages_providers_src_visual_types_resolvedelement",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_visual_types_resolvedelement"
     },
     {
       "relation": "contains",
@@ -13681,9 +13669,9 @@
       "source_location": "L19",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_visual_types",
-      "target": "packages_providers_src_visual_types_stockresolutionerror",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_visual_types_stockresolutionerror"
     },
     {
       "relation": "method",
@@ -13692,9 +13680,9 @@
       "source_location": "L20",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_visual_types_stockresolutionerror",
-      "target": "packages_providers_src_visual_types_stockresolutionerror_constructor",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_visual_types_stockresolutionerror_constructor"
     },
     {
       "relation": "contains",
@@ -13703,9 +13691,9 @@
       "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_video_engine_src_render_elements_textelement",
-      "target": "packages_video_engine_src_render_elements_textelement_justify_by_position",
-      "confidence_score": 1.0
+      "target": "packages_video_engine_src_render_elements_textelement_justify_by_position"
     },
     {
       "relation": "contains",
@@ -13714,9 +13702,9 @@
       "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_video_engine_src_render_elements_textelement",
-      "target": "packages_video_engine_src_render_elements_textelement_textelement",
-      "confidence_score": 1.0
+      "target": "packages_video_engine_src_render_elements_textelement_textelement"
     },
     {
       "relation": "imports_from",
@@ -13726,9 +13714,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_video_engine_src_render_elements_textelement",
-      "target": "packages_video_engine_src_render_types",
-      "confidence_score": 1.0
+      "target": "packages_video_engine_src_render_types"
     },
     {
       "relation": "imports",
@@ -13738,9 +13726,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_video_engine_src_render_elements_textelement",
-      "target": "packages_video_engine_src_render_types_resolvedelement",
-      "confidence_score": 1.0
+      "target": "packages_video_engine_src_render_types_resolvedelement"
     },
     {
       "relation": "imports_from",
@@ -13750,9 +13738,9 @@
       "source_location": "L1",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_video_engine_src_render_types",
-      "target": "packages_domain_src_index",
-      "confidence_score": 1.0
+      "target": "packages_domain_src_index"
     },
     {
       "relation": "contains",
@@ -13761,9 +13749,9 @@
       "source_location": "L47",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_video_engine_src_render_types",
-      "target": "packages_video_engine_src_render_types_compositionprops",
-      "confidence_score": 1.0
+      "target": "packages_video_engine_src_render_types_compositionprops"
     },
     {
       "relation": "contains",
@@ -13772,9 +13760,9 @@
       "source_location": "L31",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_video_engine_src_render_types",
-      "target": "packages_video_engine_src_render_types_renderinput",
-      "confidence_score": 1.0
+      "target": "packages_video_engine_src_render_types_renderinput"
     },
     {
       "relation": "contains",
@@ -13783,9 +13771,9 @@
       "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_video_engine_src_render_types",
-      "target": "packages_video_engine_src_render_types_resolvedelement",
-      "confidence_score": 1.0
+      "target": "packages_video_engine_src_render_types_resolvedelement"
     },
     {
       "relation": "contains",
@@ -13794,9 +13782,9 @@
       "source_location": "L22",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_video_engine_src_render_types",
-      "target": "packages_video_engine_src_render_types_resolvedscene",
-      "confidence_score": 1.0
+      "target": "packages_video_engine_src_render_types_resolvedscene"
     },
     {
       "relation": "contains",
@@ -29358,5 +29346,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "0ff668b405efe8969f2fdc35a369f397d8882cdd"
+  "built_at_commit": "77cd3619efe2d5376f4288a1bd2c045da3ed839f"
 }
