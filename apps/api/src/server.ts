@@ -4,13 +4,14 @@ import rateLimit from "@fastify/rate-limit";
 import fastifyStatic from "@fastify/static";
 import Fastify from "fastify";
 import { createCostApprovalGate, type ClickPlayDb, type CostEstimateOptions, type JobRunnerDeps } from "@clickplay/providers";
+import type { QualityTier } from "@clickplay/domain";
 import { registerJobsRoutes } from "./routes/jobs.js";
 import { registerMetaRoutes } from "./routes/meta.js";
 import { registerSettingsRoutes } from "./routes/settings.js";
 
 export interface BuildServerOptions {
   db: ClickPlayDb;
-  buildJobRunnerDeps(): JobRunnerDeps;
+  buildJobRunnerDeps(tier?: QualityTier): JobRunnerDeps;
   buildCostOptions(): CostEstimateOptions;
   runsDir: string;
   envFilePath: string;

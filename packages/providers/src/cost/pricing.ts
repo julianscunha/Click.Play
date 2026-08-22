@@ -39,6 +39,38 @@ export const MUSIC_PRICING_PER_TRACK: Record<string, number> = {
   lyria: 0.08, // confirmado pago na Fase 7, upgrade manual
 };
 
+/**
+ * Modelo por categoria × QualityTier (§11A Bloco 2 item 3) — dentro do catálogo
+ * já suportado por cada provider OpenRouter, não modelo novo. Onde só existe 1
+ * modelo integrado pra categoria (image/video/tts hoje), os 3 tiers apontam pro
+ * mesmo valor — variar exigiria validar um modelo novo ao vivo, fora de escopo
+ * desta rodada; llm tem 3 modelos já testados (ver LLM_PRICING_PER_MODEL) e
+ * varia de verdade.
+ */
+export const MODEL_BY_TIER: Record<
+  "draft" | "standard" | "high",
+  { llm: string; image: string; video: string; tts: string }
+> = {
+  draft: {
+    llm: "google/gemini-2.5-flash",
+    image: "google/gemini-3.1-flash-lite-image",
+    video: "google/veo-3.1-lite",
+    tts: "google/gemini-3.1-flash-tts-preview",
+  },
+  standard: {
+    llm: "openai/gpt-4.1",
+    image: "google/gemini-3.1-flash-lite-image",
+    video: "google/veo-3.1-lite",
+    tts: "google/gemini-3.1-flash-tts-preview",
+  },
+  high: {
+    llm: "anthropic/claude-sonnet-4.6",
+    image: "google/gemini-3.1-flash-lite-image",
+    video: "google/veo-3.1-lite",
+    tts: "google/gemini-3.1-flash-tts-preview",
+  },
+};
+
 /** Duração assumida de um clipe ai_video_clip na estimativa pré-run (Scene não carrega duração explícita até o alinhamento de TTS, Fase 5). */
 export const AI_VIDEO_ESTIMATE_DURATION_SECONDS = 6;
 

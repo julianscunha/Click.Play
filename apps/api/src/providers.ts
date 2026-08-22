@@ -25,7 +25,9 @@ import {
   type StockProvider,
   type TTSProvider,
   type VideoGenerationProvider,
+  MODEL_BY_TIER,
 } from "@clickplay/providers";
+import type { QualityTier } from "@clickplay/domain";
 import { RemotionRenderer, type VideoRenderer } from "@clickplay/video-engine";
 import type { JobRunnerDeps } from "@clickplay/providers";
 import * as path from "node:path";
@@ -61,10 +63,12 @@ export function buildCostOptions(): CostEstimateOptions {
   };
 }
 
-function buildVideoProviders(): Partial<Record<"gemini" | "fal" | "openrouter", VideoGenerationProvider>> {
+function buildVideoProviders(
+  tier: QualityTier,
+): Partial<Record<"gemini" | "fal" | "openrouter", VideoGenerationProvider>> {
   const providers: Partial<Record<"gemini" | "fal" | "openrouter", VideoGenerationProvider>> = {
     openrouter: withProviderTimeout(
-      new OpenRouterVideo(process.env.VIDEO_MODEL || undefined, process.env.OPENROUTER_API_KEY),
+      new OpenRouterVideo(process.env.VIDEO_MODEL || MODEL_BY_TIER[tier].video, process.env.OPENROUTER_API_KEY),
       "video:openrouter",
       TIMEOUT_MS.video,
     ),
@@ -79,10 +83,10 @@ function buildVideoProviders(): Partial<Record<"gemini" | "fal" | "openrouter", 
  * em quota=0 sem billing habilitado). GeminiImage direto fica como fallback
  * quando GOOGLE_API_KEY existe. Construtor lança se faltar chave — adia esse
  * erro pro primeiro uso real (job), em vez de derrubar o boot do servidor. */
-function buildImageProvider(): ImageProvider {
+function buildImageProvider(tier: QualityTier): ImageProvider {
   try {
     const primary = withProviderTimeout(
-      new OpenRouterImage(process.env.IMAGE_MODEL || undefined, process.env.OPENROUTER_API_KEY),
+      new OpenRouterImage(process.env.IMAGE_MODEL || MODEL_BY_TIER[tier].image, process.env.OPENROUTER_API_KEY),
       "image:openrouter",
       TIMEOUT_MS.image,
     );
@@ -107,9 +111,9 @@ function buildImageProvider(): ImageProvider {
 /** Modelo de fallback (OPENROUTER_MODEL_FALLBACK) opcional — se setado, troca
  * pra ele quando o primário falhar (quota/erro/"No output generated", achados
  * em teste manual real). */
-function buildLLM(): LLMProvider {
+function buildLLM(tier: QualityTier): LLMProvider {
   const primary = withProviderTimeout(
-    new OpenRouterLLM(process.env.OPENROUTER_MODEL, process.env.OPENROUTER_API_KEY),
+    new OpenRouterLLM(process.env.OPENROUTER_MODEL || MODEL_BY_TIER[tier].llm, process.env.OPENROUTER_API_KEY),
     "llm:primary",
     TIMEOUT_MS.llm,
   );
@@ -129,10 +133,10 @@ function buildLLM(): LLMProvider {
  * o modo de falha do WebSocket do Edge — achado em teste manual real:
  * "Premature close"). GeminiTTS direto entra como 3º nível só se
  * GOOGLE_API_KEY existir (raramente necessário agora). */
-function buildTTS(): TTSProvider {
+function buildTTS(tier: QualityTier): TTSProvider {
   const primary = withProviderTimeout(new EdgeTTS(), "tts:edge", TIMEOUT_MS.tts);
   const openRouterFallback = withProviderTimeout(
-    new OpenRouterTTS(process.env.TTS_MODEL_FALLBACK || undefined, undefined, process.env.OPENROUTER_API_KEY),
+    new OpenRouterTTS(process.env.TTS_MODEL_FALLBACK || MODEL_BY_TIER[tier].tts, undefined, process.env.OPENROUTER_API_KEY),
     "tts:openrouter",
     TIMEOUT_MS.tts,
   );
@@ -170,11 +174,17 @@ function buildStockProviders(): StockProvider[] {
   return providers;
 }
 
-/** Monta as instâncias reais de provider a partir de env vars — único lugar do app que faz isso (job-runner/pipeline recebem só a interface). */
-export function buildJobRunnerDeps(): JobRunnerDeps {
+/**
+ * Monta as instâncias reais de provider a partir de env vars — único lugar do
+ * app que faz isso (job-runner/pipeline recebem só a interface). `tier`
+ * escolhe o modelo por categoria (§11A Bloco 2 item 3, `MODEL_BY_TIER`) — env
+ * var explícita sempre vence (operador sabe o que quer), tier só decide o
+ * default quando a env var não foi setada.
+ */
+export function buildJobRunnerDeps(tier: QualityTier = "standard"): JobRunnerDeps {
   const resolveElementCtx: Omit<ResolveElementContext, "writeAsset" | "assetId"> = {
-    imageProvider: buildImageProvider(),
-    videoProviders: buildVideoProviders(),
+    imageProvider: buildImageProvider(tier),
+    videoProviders: buildVideoProviders(tier),
     hasGoogleKey: Boolean(process.env.GOOGLE_API_KEY),
     hasFalKey: Boolean(process.env.FAL_API_KEY),
     stockProviders: buildStockProviders(),
@@ -183,8 +193,8 @@ export function buildJobRunnerDeps(): JobRunnerDeps {
   const videoRenderer: VideoRenderer = new RemotionRenderer({ entryPoint: REMOTION_ENTRY });
 
   return {
-    llm: buildLLM(),
-    ttsProvider: buildTTS(),
+    llm: buildLLM(tier),
+    ttsProvider: buildTTS(tier),
     musicProvider: buildMusicProvider(),
     resolveElementCtx,
     videoRenderer,

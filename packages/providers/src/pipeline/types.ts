@@ -1,4 +1,4 @@
-import type { CaptionStyleKey, VideoMode, WordTimestamp } from "@clickplay/domain";
+import type { CaptionStyleKey, QualityTier, VideoMode, WordTimestamp } from "@clickplay/domain";
 import type { DirectorScore } from "../agents/creative-director.js";
 import type { CritiqueResult } from "../agents/critic.js";
 import type { ResearchResult } from "../agents/research.js";
@@ -60,6 +60,8 @@ export interface PipelineOptions {
   archetype?: string;
   pacing?: string;
   videoMode?: VideoMode;
+  /** Não usado pelo orchestrator — persistido só pra retry reconstruir os providers com o mesmo tier (§11A Bloco 2 item 3, ver buildJobRunnerDeps). */
+  qualityTier?: QualityTier;
   direction?: string;
   /** Se false, instrui o Creative Director a não emitir elementos animated_text (§11A Bloco 4 item 7). Default true. */
   showTextOverlays?: boolean;

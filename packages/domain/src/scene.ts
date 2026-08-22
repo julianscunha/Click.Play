@@ -30,6 +30,10 @@ export type VideoMode = z.infer<typeof VideoMode>;
 export const VideoGenerationProviderKey = z.enum(["gemini", "fal", "openrouter", "auto"]);
 export type VideoGenerationProviderKey = z.infer<typeof VideoGenerationProviderKey>;
 
+/** Dial de qualidade por job (docs/IMPLEMENTATION-PLAN.md §11A Bloco 2 item 3) — seleciona modelo mais barato/caro dentro do catálogo já suportado por provider, não é modelo novo. Default "standard". */
+export const QualityTier = z.enum(["draft", "standard", "high"]);
+export type QualityTier = z.infer<typeof QualityTier>;
+
 /** Elemento composto dentro de uma Scene. Múltiplos podem coexistir (visualStrategy: "hybrid"). */
 export const VisualElement = z.discriminatedUnion("type", [
   z.object({

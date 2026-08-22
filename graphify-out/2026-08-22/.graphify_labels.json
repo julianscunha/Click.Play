@@ -24,7 +24,7 @@
   "22": "jobs.ts",
   "23": "copilot-instructions.md",
   "24": "bundled.ts",
-  "25": "tts/openrouter.ts",
+  "25": "providers/src/index.ts",
   "26": "llm/types.ts",
   "27": "Click.Play",
   "28": "devDependencies",
@@ -61,13 +61,5 @@
   "59": "Marketing Content Creator Agent",
   "60": "dependencies",
   "61": "plan-status",
-  "62": "render/types.ts",
-  "63": "providers/src/index.ts",
-  "64": "edge.ts",
-  "65": "video/types.ts",
-  "66": "domain/src/index.ts",
-  "67": "FallbackMusic",
-  "68": "OpenRouterImage",
-  "69": "OpenRouterTTS",
-  "70": "visual-composition-provider.ts"
+  "62": "render/types.ts"
 }
