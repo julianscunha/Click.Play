@@ -97,6 +97,10 @@ export type PipelineResult =
       fps: number;
       width: number;
       height: number;
+      /** Contagem final pra observabilidade (§11A Bloco 6 item 11) — dado já calculado no orchestrator pro custo real, só retornado também aqui. */
+      imageCount: number;
+      videoClipCount: number;
+      audioSeconds: number;
     }
   | {
       status: "cancelled_cost";

@@ -16,6 +16,7 @@ import {
   setJobOutputPath,
   setJobProgress,
   setJobQcReport,
+  setJobResultSummary,
   updateJobStatus,
 } from "./repository.js";
 import { PROGRESS_BY_STATUS } from "./job-state-machine.js";
@@ -132,6 +133,11 @@ export async function runJobOnce(
     case "completed": {
       await setJobActualCost(db, jobId, result.costActual);
       await setJobOutputPath(db, jobId, result.outputPath);
+      await setJobResultSummary(db, jobId, {
+        imageCount: result.imageCount,
+        videoClipCount: result.videoClipCount,
+        audioSeconds: result.audioSeconds,
+      });
 
       const qcReport: QcReport = await runQc({
         outputPath: result.outputPath,

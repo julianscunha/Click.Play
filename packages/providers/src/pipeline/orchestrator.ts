@@ -259,6 +259,9 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
       fps,
       width,
       height,
+      imageCount: aiImages,
+      videoClipCount: aiVideos,
+      audioSeconds: ttsWords.length > 0 ? Math.max(...ttsWords.map((w) => w.end)) : 0,
     };
   } catch (err) {
     const error = err instanceof Error ? err : new Error(String(err));

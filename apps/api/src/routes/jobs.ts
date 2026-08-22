@@ -71,6 +71,7 @@ function jobToResponse(job: NonNullable<Awaited<ReturnType<typeof getJob>>>) {
     status: job.status,
     stage: STAGE_BY_STATUS[job.status],
     stageDetail: job.stageDetail,
+    resultSummary: job.resultSummary,
     progress: job.progress,
     estimatedCost: job.estimatedCost,
     actualCost: job.actualCost,

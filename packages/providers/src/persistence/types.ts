@@ -17,6 +17,13 @@ export interface Project {
   updatedAt: Date;
 }
 
+/** Contagem final do job concluído (§11A Bloco 6 item 11) — dado já calculado pelo orchestrator, só exposto. */
+export interface ResultSummary {
+  imageCount: number;
+  videoClipCount: number;
+  audioSeconds: number;
+}
+
 export interface Job {
   id: string;
   projectId: string;
@@ -29,6 +36,7 @@ export interface Job {
   qcReport: QcReport | null;
   checkpoint: PipelineCheckpoint | null;
   stageDetail: string | null;
+  resultSummary: ResultSummary | null;
   error: string | null;
   createdAt: Date;
   updatedAt: Date;
@@ -60,6 +68,7 @@ export function jobFromRow(row: JobRow): Job {
     qcReport: (row.qcReport as QcReport | null) ?? null,
     checkpoint: (row.checkpoint as PipelineCheckpoint | null) ?? null,
     stageDetail: row.stageDetail ?? null,
+    resultSummary: (row.resultSummary as ResultSummary | null) ?? null,
     error: row.error,
     createdAt: row.createdAt,
     updatedAt: row.updatedAt,

@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS jobs (
   actual_cost TEXT,
   qc_report TEXT,
   stage_detail TEXT,
+  result_summary TEXT,
   error TEXT,
   created_at INTEGER NOT NULL,
   updated_at INTEGER NOT NULL
@@ -47,6 +48,15 @@ function addCheckpointColumnIfMissing(sqlite: DatabaseSync): void {
 function addStageDetailColumnIfMissing(sqlite: DatabaseSync): void {
   try {
     sqlite.exec("ALTER TABLE jobs ADD COLUMN stage_detail TEXT");
+  } catch {
+    // já existe
+  }
+}
+
+/** Idem, coluna de contagem final (§11A Bloco 6 item 11). */
+function addResultSummaryColumnIfMissing(sqlite: DatabaseSync): void {
+  try {
+    sqlite.exec("ALTER TABLE jobs ADD COLUMN result_summary TEXT");
   } catch {
     // já existe
   }
@@ -72,6 +82,7 @@ export function createDb(sqliteFilePath: string): ClickPlayDb {
   sqlite.exec(DDL);
   addCheckpointColumnIfMissing(sqlite);
   addStageDetailColumnIfMissing(sqlite);
+  addResultSummaryColumnIfMissing(sqlite);
 
   return drizzle(async (sqlText, params, method) => {
     const stmt = sqlite.prepare(sqlText);

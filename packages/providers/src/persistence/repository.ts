@@ -6,7 +6,7 @@ import type { QcReport } from "../qc/types.js";
 import type { ClickPlayDb } from "./client.js";
 import { PROGRESS_BY_STATUS, resumeStatusForCheckpoint } from "./job-state-machine.js";
 import { jobs, type JobStatus, projects } from "./schema.js";
-import { type Job, jobFromRow, type Project, type ProjectConfig, projectFromRow } from "./types.js";
+import { type Job, jobFromRow, type Project, type ProjectConfig, projectFromRow, type ResultSummary } from "./types.js";
 
 export async function createProject(db: ClickPlayDb, input: { topic: string; config: ProjectConfig }): Promise<Project> {
   const now = new Date();
@@ -34,6 +34,7 @@ export async function createJob(db: ClickPlayDb, input: { projectId: string; run
     qcReport: null,
     checkpoint: null,
     stageDetail: null,
+    resultSummary: null,
     error: null,
     createdAt: now,
     updatedAt: now,
@@ -99,6 +100,10 @@ export async function setJobError(db: ClickPlayDb, id: string, error: string): P
 
 export async function setJobCheckpoint(db: ClickPlayDb, id: string, checkpoint: PipelineCheckpoint): Promise<void> {
   await db.update(jobs).set({ checkpoint, updatedAt: new Date() }).where(eq(jobs.id, id));
+}
+
+export async function setJobResultSummary(db: ClickPlayDb, id: string, resultSummary: ResultSummary): Promise<void> {
+  await db.update(jobs).set({ resultSummary, updatedAt: new Date() }).where(eq(jobs.id, id));
 }
 
 const NON_TERMINAL_STATUSES: JobStatus[] = [

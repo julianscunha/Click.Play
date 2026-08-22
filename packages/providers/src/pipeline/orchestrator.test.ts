@@ -130,6 +130,10 @@ describe("runPipeline", () => {
     expect(result.outputPath).toContain("output.mp4");
     expect(fs.existsSync(path.join(runDir, "audio", "voiceover.mp3"))).toBe(true);
     expect(llm.generate).toHaveBeenCalledTimes(3);
+    // §11A Bloco 6 item 11 — contagem final: cenas só com animated_text, sem ai_image/ai_video_clip.
+    expect(result.imageCount).toBe(0);
+    expect(result.videoClipCount).toBe(0);
+    expect(result.audioSeconds).toBe(0.6); // último end de fakeTTS().words
   });
 
   it("revises the DirectorScore via the critic loop when score < 7, up to MAX_REVISION_ROUNDS", async () => {

@@ -51,6 +51,8 @@ export const jobs = sqliteTable("jobs", {
   checkpoint: text("checkpoint", { mode: "json" }).$type<unknown>(),
   /** Texto livre da sub-etapa atual (ex.: "Gerando cena 3/8 (ai_image)") — só populado durante GENERATING, null nas demais. */
   stageDetail: text("stage_detail"),
+  /** Contagem final (imageCount/videoClipCount/audioSeconds, §11A Bloco 6 item 11) — só populado quando status vira COMPLETED. */
+  resultSummary: text("result_summary", { mode: "json" }).$type<unknown>(),
   error: text("error"),
   createdAt: integer("created_at", { mode: "timestamp_ms" }).notNull(),
   updatedAt: integer("updated_at", { mode: "timestamp_ms" }).notNull(),
