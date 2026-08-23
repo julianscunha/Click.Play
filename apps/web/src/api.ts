@@ -42,6 +42,22 @@ export interface ResultSummary {
   audioSeconds: number;
 }
 
+export type QcDecision = "PASS" | "WARNING" | "BLOCK";
+
+export interface QcCheckResult {
+  id: string;
+  severity: "block" | "warning";
+  passed: boolean;
+  message: string;
+  details?: Record<string, unknown>;
+}
+
+export interface QcReport {
+  decision: QcDecision;
+  checks: QcCheckResult[];
+  generatedAt: string;
+}
+
 export interface JobView {
   id: string;
   projectId: string;
@@ -49,6 +65,7 @@ export interface JobView {
   stage: string;
   stageDetail: string | null;
   resultSummary: ResultSummary | null;
+  qcReport: QcReport | null;
   progress: number;
   estimatedCost: CostBreakdown | null;
   actualCost: CostBreakdown | null;
