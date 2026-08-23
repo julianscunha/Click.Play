@@ -9,7 +9,14 @@ const STEPS = [
   { key: "briefing", label: "Briefing" },
   { key: "roteiro", label: "Roteiro" },
   { key: "visual", label: "Visual" },
+  { key: "legendas", label: "Legendas" },
   { key: "revisao", label: "Revisão/Custo" },
+] as const;
+
+const CHUNK_SIZE_LEVELS = [
+  { level: "poucas", label: "Poucas por vez", value: 2 },
+  { level: "medias", label: "Médias", value: 4 },
+  { level: "muitas", label: "Muitas por vez", value: 6 },
 ] as const;
 
 interface FormState {
@@ -23,6 +30,8 @@ interface FormState {
   captionStyle: string;
   aspectRatio: "vertical" | "horizontal" | "square";
   qualityTier: "draft" | "standard" | "high";
+  captionChunkLevel: (typeof CHUNK_SIZE_LEVELS)[number]["level"];
+  showTextOverlays: boolean;
 }
 
 const INITIAL_STATE: FormState = {
@@ -36,6 +45,8 @@ const INITIAL_STATE: FormState = {
   captionStyle: "",
   aspectRatio: "vertical",
   qualityTier: "standard",
+  captionChunkLevel: "medias",
+  showTextOverlays: true,
 };
 
 const fieldClass =
@@ -106,6 +117,8 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
       captionStyle: form.captionStyle || undefined,
       aspectRatio: form.aspectRatio,
       qualityTier: form.qualityTier,
+      captionChunkSize: CHUNK_SIZE_LEVELS.find((l) => l.level === form.captionChunkLevel)!.value,
+      showTextOverlays: form.showTextOverlays,
     });
   }
 
@@ -274,6 +287,25 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
             </div>
 
             <div className="flex flex-col gap-1.5">
+              <span className={labelClass}>Qualidade</span>
+              <div className="flex gap-2">
+                <Chip active={form.qualityTier === "draft"} onClick={() => update("qualityTier", "draft")}>
+                  Rascunho
+                </Chip>
+                <Chip active={form.qualityTier === "standard"} onClick={() => update("qualityTier", "standard")}>
+                  Padrão
+                </Chip>
+                <Chip active={form.qualityTier === "high"} onClick={() => update("qualityTier", "high")}>
+                  Alta
+                </Chip>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {step.key === "legendas" && (
+          <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-1.5">
               <label htmlFor="captionStyle" className={labelClass}>
                 Estilo da legenda
               </label>
@@ -293,19 +325,25 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
             </div>
 
             <div className="flex flex-col gap-1.5">
-              <span className={labelClass}>Qualidade</span>
+              <span className={labelClass}>Palavras por vez</span>
               <div className="flex gap-2">
-                <Chip active={form.qualityTier === "draft"} onClick={() => update("qualityTier", "draft")}>
-                  Rascunho
-                </Chip>
-                <Chip active={form.qualityTier === "standard"} onClick={() => update("qualityTier", "standard")}>
-                  Padrão
-                </Chip>
-                <Chip active={form.qualityTier === "high"} onClick={() => update("qualityTier", "high")}>
-                  Alta
-                </Chip>
+                {CHUNK_SIZE_LEVELS.map((l) => (
+                  <Chip key={l.level} active={form.captionChunkLevel === l.level} onClick={() => update("captionChunkLevel", l.level)}>
+                    {l.label}
+                  </Chip>
+                ))}
               </div>
             </div>
+
+            <label className="flex items-center gap-2 text-sm text-neutral-200">
+              <input
+                type="checkbox"
+                checked={form.showTextOverlays}
+                onChange={(e) => update("showTextOverlays", e.target.checked)}
+                className="h-4 w-4 rounded border-neutral-700 bg-neutral-900"
+              />
+              Mostrar texto animado sobre as cenas (além da legenda de narração)
+            </label>
           </div>
         )}
 
@@ -347,6 +385,10 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
               <div>
                 <dt className="text-neutral-500">Qualidade</dt>
                 <dd className="text-neutral-100">{formatLabel(form.qualityTier)}</dd>
+              </div>
+              <div>
+                <dt className="text-neutral-500">Texto animado</dt>
+                <dd className="text-neutral-100">{form.showTextOverlays ? "Sim" : "Não"}</dd>
               </div>
             </dl>
             <p className="text-sm text-neutral-500">

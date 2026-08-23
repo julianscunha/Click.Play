@@ -1,7 +1,7 @@
-# Graph Report - Click.Play  (2026-08-23)
+# Graph Report - Click.Play  (2026-08-22)
 
 ## Corpus Check
-- 218 files · ~75,368 words
+- 218 files · ~75,016 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `6182ac12`
+- Built from commit: `e1c338c4`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -312,7 +312,7 @@ Cohesion: 0.25
 Nodes (4): sleep(), withRetry(), OpenRouterImage, VideoJobStatus
 
 ## Knowledge Gaps
-- **410 isolated node(s):** `Arquétipos novos (Click.Play)`, `TTS: múltiplos providers, default remoto grátis`, `Terminologia (não confundir)`, `As duas abstrações (substituindo "AssetProvider" como abstração principal)`, `Modelo de Scene: de "1 visual" para composição` (+405 more)
+- **410 isolated node(s):** `CostAmount`, `JobStatus`, `SecretField`, `STEPS`, `FormState` (+405 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **6 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -325,7 +325,7 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.007) - this node is a cross-community bridge._
 - **Why does `TTSProvider` connect `tts/types.ts` to `repository.ts`, `creative-director.ts`, `edge.ts`, `tts/openrouter.ts`, `orchestrator.test.ts`?**
   _High betweenness centrality (0.007) - this node is a cross-community bridge._
-- **What connects `Arquétipos novos (Click.Play)`, `TTS: múltiplos providers, default remoto grátis`, `Terminologia (não confundir)` to the rest of the system?**
+- **What connects `CostAmount`, `JobStatus`, `SecretField` to the rest of the system?**
   _410 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `scripts` be split into smaller, more focused modules?**
   _Cohesion score 0.125 - nodes in this community are weakly interconnected._

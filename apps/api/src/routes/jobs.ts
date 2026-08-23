@@ -39,6 +39,8 @@ const CreateJobBody = z.object({
   language: z.string().optional(),
   intro: IntroOutroConfig.optional(),
   outro: IntroOutroConfig.optional(),
+  captionChunkSize: z.number().int().min(1).optional(),
+  showTextOverlays: z.boolean().optional(),
 });
 
 const ApproveCostBody = z.object({ approved: z.boolean() });
@@ -105,6 +107,8 @@ export function registerJobsRoutes(app: FastifyInstance, deps: JobsRouteDeps): v
       language,
       intro,
       outro,
+      captionChunkSize,
+      showTextOverlays,
     } = parsed.data;
     if (intro?.mode === "upload" || outro?.mode === "upload") {
       return reply.status(422).send({
@@ -129,6 +133,8 @@ export function registerJobsRoutes(app: FastifyInstance, deps: JobsRouteDeps): v
         language,
         intro,
         outro,
+        captionChunkSize,
+        showTextOverlays,
       },
     });
     const runDir = path.join(deps.runsDir, project.id);

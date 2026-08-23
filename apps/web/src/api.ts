@@ -70,6 +70,8 @@ export interface CreateJobInput {
   qualityTier?: "draft" | "standard" | "high";
   targetDurationSeconds?: number;
   language?: string;
+  captionChunkSize?: number;
+  showTextOverlays?: boolean;
 }
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
