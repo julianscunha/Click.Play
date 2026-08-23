@@ -11,21 +11,41 @@ interface SecretFieldConfig {
 const SECRET_FIELDS: SecretFieldConfig[] = [
   {
     key: "OPENROUTER_API_KEY",
-    label: "OpenRouter API Key",
+    label: "OpenRouter API Key (minha chave)",
     helpUrl: "https://openrouter.ai/settings/keys",
-    usedBy: "Obrigatória. Usada por Roteiro, Imagem, Vídeo e Narração (fallback) — uma chave só para quase tudo.",
+    usedBy:
+      'Obrigatória. Usada por Roteiro, Imagem, Vídeo e Narração (fallback) — uma chave só para quase tudo. Usada quando um vídeo escolhe "usar minhas chaves" no wizard (Providers) — não debita créditos.',
+  },
+  {
+    key: "OPENROUTER_API_KEY_SYSTEM",
+    label: "OpenRouter API Key (chave do sistema)",
+    helpUrl: "https://openrouter.ai/settings/keys",
+    usedBy:
+      'Provisório — sem painel admin ainda (Fase 22), preenchida aqui pela mesma conta. Usada quando um vídeo escolhe "usar sistema" (padrão, debita créditos). Vazia = cai pra "minha chave" acima.',
   },
   {
     key: "GOOGLE_API_KEY",
-    label: "Google Gemini API Key",
+    label: "Google Gemini API Key (minha chave)",
     helpUrl: "https://aistudio.google.com/apikey",
     usedBy: "Opcional. Reforço extra de Imagem/Narração — o Gemini direto assume automaticamente se o OpenRouter falhar.",
   },
   {
+    key: "GOOGLE_API_KEY_SYSTEM",
+    label: "Google Gemini API Key (chave do sistema)",
+    helpUrl: "https://aistudio.google.com/apikey",
+    usedBy: 'Provisório, mesmo padrão da chave do sistema acima. Vazia = cai pra "minha chave".',
+  },
+  {
     key: "FAL_API_KEY",
-    label: "Fal.ai API Key",
+    label: "Fal.ai API Key (minha chave)",
     helpUrl: "https://fal.ai/dashboard/keys",
     usedBy: "Opcional. 2ª alternativa de Vídeo (Kling) — reforço extra além do OpenRouter/Gemini.",
+  },
+  {
+    key: "FAL_API_KEY_SYSTEM",
+    label: "Fal.ai API Key (chave do sistema)",
+    helpUrl: "https://fal.ai/dashboard/keys",
+    usedBy: 'Provisório, mesmo padrão da chave do sistema acima. Vazia = cai pra "minha chave".',
   },
   {
     key: "PEXELS_API_KEY",

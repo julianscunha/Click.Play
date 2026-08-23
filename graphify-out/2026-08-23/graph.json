@@ -4,391 +4,6 @@
   "graph": {},
   "nodes": [
     {
-      "label": "credits.ts",
-      "file_type": "code",
-      "source_file": "apps/api/src/routes/credits.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "apps_api_src_routes_credits",
-      "community": 58,
-      "community_name": "server.test.ts",
-      "norm_label": "credits.ts"
-    },
-    {
-      "label": "PutCreditsBody",
-      "file_type": "code",
-      "source_file": "apps/api/src/routes/credits.ts",
-      "source_location": "L5",
-      "_origin": "ast",
-      "id": "apps_api_src_routes_credits_putcreditsbody",
-      "community": 58,
-      "community_name": "server.test.ts",
-      "norm_label": "putcreditsbody"
-    },
-    {
-      "label": "CreditsRouteDeps",
-      "file_type": "code",
-      "source_file": "apps/api/src/routes/credits.ts",
-      "source_location": "L7",
-      "_origin": "ast",
-      "id": "apps_api_src_routes_credits_creditsroutedeps",
-      "community": 58,
-      "community_name": "server.test.ts",
-      "norm_label": "creditsroutedeps"
-    },
-    {
-      "label": "registerCreditsRoutes()",
-      "file_type": "code",
-      "source_file": "apps/api/src/routes/credits.ts",
-      "source_location": "L12",
-      "_origin": "ast",
-      "id": "apps_api_src_routes_credits_registercreditsroutes",
-      "community": 58,
-      "community_name": "server.test.ts",
-      "norm_label": "registercreditsroutes()"
-    },
-    {
-      "label": "jobs.ts",
-      "file_type": "code",
-      "source_file": "apps/api/src/routes/jobs.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "apps_api_src_routes_jobs",
-      "community": 58,
-      "community_name": "server.test.ts",
-      "norm_label": "jobs.ts"
-    },
-    {
-      "label": "ASPECT_RATIOS",
-      "file_type": "code",
-      "source_file": "apps/api/src/routes/jobs.ts",
-      "source_location": "L21",
-      "_origin": "ast",
-      "id": "apps_api_src_routes_jobs_aspect_ratios",
-      "community": 58,
-      "community_name": "server.test.ts",
-      "norm_label": "aspect_ratios"
-    },
-    {
-      "label": "RESOLUTION_BY_ASPECT_RATIO",
-      "file_type": "code",
-      "source_file": "apps/api/src/routes/jobs.ts",
-      "source_location": "L24",
-      "_origin": "ast",
-      "id": "apps_api_src_routes_jobs_resolution_by_aspect_ratio",
-      "community": 58,
-      "community_name": "server.test.ts",
-      "norm_label": "resolution_by_aspect_ratio"
-    },
-    {
-      "label": "CreateJobBody",
-      "file_type": "code",
-      "source_file": "apps/api/src/routes/jobs.ts",
-      "source_location": "L30",
-      "_origin": "ast",
-      "id": "apps_api_src_routes_jobs_createjobbody",
-      "community": 58,
-      "community_name": "server.test.ts",
-      "norm_label": "createjobbody"
-    },
-    {
-      "label": "ApproveCostBody",
-      "file_type": "code",
-      "source_file": "apps/api/src/routes/jobs.ts",
-      "source_location": "L47",
-      "_origin": "ast",
-      "id": "apps_api_src_routes_jobs_approvecostbody",
-      "community": 58,
-      "community_name": "server.test.ts",
-      "norm_label": "approvecostbody"
-    },
-    {
-      "label": "STAGE_BY_STATUS",
-      "file_type": "code",
-      "source_file": "apps/api/src/routes/jobs.ts",
-      "source_location": "L50",
-      "_origin": "ast",
-      "id": "apps_api_src_routes_jobs_stage_by_status",
-      "community": 58,
-      "community_name": "server.test.ts",
-      "norm_label": "stage_by_status"
-    },
-    {
-      "label": "JobsRouteDeps",
-      "file_type": "code",
-      "source_file": "apps/api/src/routes/jobs.ts",
-      "source_location": "L63",
-      "_origin": "ast",
-      "id": "apps_api_src_routes_jobs_jobsroutedeps",
-      "community": 58,
-      "community_name": "server.test.ts",
-      "norm_label": "jobsroutedeps"
-    },
-    {
-      "label": ".buildJobRunnerDeps()",
-      "file_type": "code",
-      "source_file": "apps/api/src/routes/jobs.ts",
-      "source_location": "L66",
-      "_origin": "ast",
-      "id": "apps_api_src_routes_jobs_jobsroutedeps_buildjobrunnerdeps",
-      "community": 58,
-      "community_name": "server.test.ts",
-      "norm_label": ".buildjobrunnerdeps()"
-    },
-    {
-      "label": ".buildCostOptions()",
-      "file_type": "code",
-      "source_file": "apps/api/src/routes/jobs.ts",
-      "source_location": "L67",
-      "_origin": "ast",
-      "id": "apps_api_src_routes_jobs_jobsroutedeps_buildcostoptions",
-      "community": 58,
-      "community_name": "server.test.ts",
-      "norm_label": ".buildcostoptions()"
-    },
-    {
-      "label": "jobToResponse()",
-      "file_type": "code",
-      "source_file": "apps/api/src/routes/jobs.ts",
-      "source_location": "L72",
-      "_origin": "ast",
-      "id": "apps_api_src_routes_jobs_jobtoresponse",
-      "community": 58,
-      "community_name": "server.test.ts",
-      "norm_label": "jobtoresponse()"
-    },
-    {
-      "label": "registerJobsRoutes()",
-      "file_type": "code",
-      "source_file": "apps/api/src/routes/jobs.ts",
-      "source_location": "L90",
-      "_origin": "ast",
-      "id": "apps_api_src_routes_jobs_registerjobsroutes",
-      "community": 58,
-      "community_name": "server.test.ts",
-      "norm_label": "registerjobsroutes()"
-    },
-    {
-      "label": "server.test.ts",
-      "file_type": "code",
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "apps_api_src_server_test",
-      "community": 58,
-      "community_name": "server.test.ts",
-      "norm_label": "server.test.ts"
-    },
-    {
-      "label": "execFileAsync",
-      "file_type": "code",
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L13",
-      "_origin": "ast",
-      "id": "apps_api_src_server_test_execfileasync",
-      "community": 58,
-      "community_name": "server.test.ts",
-      "norm_label": "execfileasync"
-    },
-    {
-      "label": "RESEARCH_RESULT",
-      "file_type": "code",
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L15",
-      "_origin": "ast",
-      "id": "apps_api_src_server_test_research_result",
-      "community": 58,
-      "community_name": "server.test.ts",
-      "norm_label": "research_result"
-    },
-    {
-      "label": "sceneRaw()",
-      "file_type": "code",
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L17",
-      "_origin": "ast",
-      "id": "apps_api_src_server_test_sceneraw",
-      "community": 58,
-      "community_name": "server.test.ts",
-      "norm_label": "sceneraw()"
-    },
-    {
-      "label": "directorPayload()",
-      "file_type": "code",
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L27",
-      "_origin": "ast",
-      "id": "apps_api_src_server_test_directorpayload",
-      "community": 58,
-      "community_name": "server.test.ts",
-      "norm_label": "directorpayload()"
-    },
-    {
-      "label": "critiquePayload()",
-      "file_type": "code",
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L36",
-      "_origin": "ast",
-      "id": "apps_api_src_server_test_critiquepayload",
-      "community": 58,
-      "community_name": "server.test.ts",
-      "norm_label": "critiquepayload()"
-    },
-    {
-      "label": "usage()",
-      "file_type": "code",
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L47",
-      "_origin": "ast",
-      "id": "apps_api_src_server_test_usage",
-      "community": 58,
-      "community_name": "server.test.ts",
-      "norm_label": "usage()"
-    },
-    {
-      "label": "fakeLLM()",
-      "file_type": "code",
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L51",
-      "_origin": "ast",
-      "id": "apps_api_src_server_test_fakellm",
-      "community": 58,
-      "community_name": "server.test.ts",
-      "norm_label": "fakellm()"
-    },
-    {
-      "label": "fakeTTS()",
-      "file_type": "code",
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L57",
-      "_origin": "ast",
-      "id": "apps_api_src_server_test_faketts",
-      "community": 58,
-      "community_name": "server.test.ts",
-      "norm_label": "faketts()"
-    },
-    {
-      "label": "fakeMusic()",
-      "file_type": "code",
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L69",
-      "_origin": "ast",
-      "id": "apps_api_src_server_test_fakemusic",
-      "community": 58,
-      "community_name": "server.test.ts",
-      "norm_label": "fakemusic()"
-    },
-    {
-      "label": "fakeImageProvider()",
-      "file_type": "code",
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L73",
-      "_origin": "ast",
-      "id": "apps_api_src_server_test_fakeimageprovider",
-      "community": 58,
-      "community_name": "server.test.ts",
-      "norm_label": "fakeimageprovider()"
-    },
-    {
-      "label": "fakeVideoRenderer()",
-      "file_type": "code",
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L80",
-      "_origin": "ast",
-      "id": "apps_api_src_server_test_fakevideorenderer",
-      "community": 58,
-      "community_name": "server.test.ts",
-      "norm_label": "fakevideorenderer()"
-    },
-    {
-      "label": "fakeJobRunnerDeps()",
-      "file_type": "code",
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L102",
-      "_origin": "ast",
-      "id": "apps_api_src_server_test_fakejobrunnerdeps",
-      "community": 58,
-      "community_name": "server.test.ts",
-      "norm_label": "fakejobrunnerdeps()"
-    },
-    {
-      "label": "costOptions",
-      "file_type": "code",
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L118",
-      "_origin": "ast",
-      "id": "apps_api_src_server_test_costoptions",
-      "community": 58,
-      "community_name": "server.test.ts",
-      "norm_label": "costoptions"
-    },
-    {
-      "label": "appWithToken()",
-      "file_type": "code",
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L365",
-      "_origin": "ast",
-      "id": "apps_api_src_server_test_appwithtoken",
-      "community": 58,
-      "community_name": "server.test.ts",
-      "norm_label": "appwithtoken()"
-    },
-    {
-      "label": "server.ts",
-      "file_type": "code",
-      "source_file": "apps/api/src/server.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "apps_api_src_server",
-      "community": 58,
-      "community_name": "server.test.ts",
-      "norm_label": "server.ts"
-    },
-    {
-      "label": "BuildServerOptions",
-      "file_type": "code",
-      "source_file": "apps/api/src/server.ts",
-      "source_location": "L13",
-      "_origin": "ast",
-      "id": "apps_api_src_server_buildserveroptions",
-      "community": 58,
-      "community_name": "server.test.ts",
-      "norm_label": "buildserveroptions"
-    },
-    {
-      "label": ".buildJobRunnerDeps()",
-      "file_type": "code",
-      "source_file": "apps/api/src/server.ts",
-      "source_location": "L15",
-      "_origin": "ast",
-      "id": "apps_api_src_server_buildserveroptions_buildjobrunnerdeps",
-      "community": 58,
-      "community_name": "server.test.ts",
-      "norm_label": ".buildjobrunnerdeps()"
-    },
-    {
-      "label": ".buildCostOptions()",
-      "file_type": "code",
-      "source_file": "apps/api/src/server.ts",
-      "source_location": "L16",
-      "_origin": "ast",
-      "id": "apps_api_src_server_buildserveroptions_buildcostoptions",
-      "community": 58,
-      "community_name": "server.test.ts",
-      "norm_label": ".buildcostoptions()"
-    },
-    {
-      "label": "buildServer()",
-      "file_type": "code",
-      "source_file": "apps/api/src/server.ts",
-      "source_location": "L25",
-      "_origin": "ast",
-      "id": "apps_api_src_server_buildserver",
-      "community": 58,
-      "community_name": "server.test.ts",
-      "norm_label": "buildserver()"
-    },
-    {
       "label": "App.tsx",
       "file_type": "code",
       "source_file": "apps/web/src/App.tsx",
@@ -488,10 +103,21 @@
       "norm_label": "jobstatus"
     },
     {
-      "label": "JobView",
+      "label": "ResultSummary",
       "file_type": "code",
       "source_file": "apps/web/src/api.ts",
       "source_location": "L39",
+      "_origin": "ast",
+      "id": "apps_web_src_api_resultsummary",
+      "community": 57,
+      "community_name": "api.ts",
+      "norm_label": "resultsummary"
+    },
+    {
+      "label": "JobView",
+      "file_type": "code",
+      "source_file": "apps/web/src/api.ts",
+      "source_location": "L45",
       "_origin": "ast",
       "id": "apps_web_src_api_jobview",
       "community": 69,
@@ -502,7 +128,7 @@
       "label": "FormConfig",
       "file_type": "code",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L52",
+      "source_location": "L59",
       "_origin": "ast",
       "id": "apps_web_src_api_formconfig",
       "community": 66,
@@ -513,7 +139,7 @@
       "label": "CreateJobInput",
       "file_type": "code",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L62",
+      "source_location": "L69",
       "_origin": "ast",
       "id": "apps_web_src_api_createjobinput",
       "community": 66,
@@ -524,7 +150,7 @@
       "label": "TransitionType",
       "file_type": "code",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L79",
+      "source_location": "L86",
       "_origin": "ast",
       "id": "apps_web_src_api_transitiontype",
       "community": 66,
@@ -535,7 +161,7 @@
       "label": "IntroOutroConfig",
       "file_type": "code",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L81",
+      "source_location": "L88",
       "_origin": "ast",
       "id": "apps_web_src_api_introoutroconfig",
       "community": 57,
@@ -546,7 +172,7 @@
       "label": "request()",
       "file_type": "code",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L87",
+      "source_location": "L94",
       "_origin": "ast",
       "id": "apps_web_src_api_request",
       "community": 57,
@@ -557,7 +183,7 @@
       "label": "getFormConfig()",
       "file_type": "code",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L105",
+      "source_location": "L112",
       "_origin": "ast",
       "id": "apps_web_src_api_getformconfig",
       "community": 57,
@@ -568,7 +194,7 @@
       "label": "createJob()",
       "file_type": "code",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L109",
+      "source_location": "L116",
       "_origin": "ast",
       "id": "apps_web_src_api_createjob",
       "community": 57,
@@ -579,7 +205,7 @@
       "label": "getJob()",
       "file_type": "code",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L113",
+      "source_location": "L120",
       "_origin": "ast",
       "id": "apps_web_src_api_getjob",
       "community": 57,
@@ -590,7 +216,7 @@
       "label": "approveCost()",
       "file_type": "code",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L117",
+      "source_location": "L124",
       "_origin": "ast",
       "id": "apps_web_src_api_approvecost",
       "community": 57,
@@ -601,7 +227,7 @@
       "label": "retryJob()",
       "file_type": "code",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L121",
+      "source_location": "L128",
       "_origin": "ast",
       "id": "apps_web_src_api_retryjob",
       "community": 57,
@@ -612,18 +238,18 @@
       "label": "outputUrl()",
       "file_type": "code",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L125",
+      "source_location": "L132",
       "_origin": "ast",
       "id": "apps_web_src_api_outputurl",
-      "community": 70,
-      "community_name": "ResultPlayer.tsx",
+      "community": 69,
+      "community_name": "ProgressView.tsx",
       "norm_label": "outputurl()"
     },
     {
       "label": "Credits",
       "file_type": "code",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L129",
+      "source_location": "L136",
       "_origin": "ast",
       "id": "apps_web_src_api_credits",
       "community": 57,
@@ -634,7 +260,7 @@
       "label": "getCredits()",
       "file_type": "code",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L134",
+      "source_location": "L141",
       "_origin": "ast",
       "id": "apps_web_src_api_getcredits",
       "community": 57,
@@ -645,7 +271,7 @@
       "label": "putCredits()",
       "file_type": "code",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L138",
+      "source_location": "L145",
       "_origin": "ast",
       "id": "apps_web_src_api_putcredits",
       "community": 57,
@@ -656,7 +282,7 @@
       "label": "SecretField",
       "file_type": "code",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L142",
+      "source_location": "L149",
       "_origin": "ast",
       "id": "apps_web_src_api_secretfield",
       "community": 57,
@@ -667,7 +293,7 @@
       "label": "Settings",
       "file_type": "code",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L144",
+      "source_location": "L151",
       "_origin": "ast",
       "id": "apps_web_src_api_settings",
       "community": 19,
@@ -678,7 +304,7 @@
       "label": "getSettings()",
       "file_type": "code",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L158",
+      "source_location": "L165",
       "_origin": "ast",
       "id": "apps_web_src_api_getsettings",
       "community": 57,
@@ -689,11 +315,11 @@
       "label": "putSettings()",
       "file_type": "code",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L162",
+      "source_location": "L169",
       "_origin": "ast",
       "id": "apps_web_src_api_putsettings",
-      "community": 57,
-      "community_name": "api.ts",
+      "community": 19,
+      "community_name": "SettingsView.tsx",
       "norm_label": "putsettings()"
     },
     {
@@ -785,180 +411,48 @@
       "norm_label": "progressview()"
     },
     {
-      "label": "SettingsView.tsx",
+      "label": "ResultPlayer.tsx",
       "file_type": "code",
-      "source_file": "apps/web/src/components/SettingsView.tsx",
+      "source_file": "apps/web/src/components/ResultPlayer.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "apps_web_src_components_settingsview",
-      "community": 19,
-      "community_name": "SettingsView.tsx",
-      "norm_label": "settingsview.tsx"
+      "id": "apps_web_src_components_resultplayer",
+      "community": 69,
+      "community_name": "ProgressView.tsx",
+      "norm_label": "resultplayer.tsx"
     },
     {
-      "label": "SecretFieldConfig",
+      "label": "ResultPlayerProps",
       "file_type": "code",
-      "source_file": "apps/web/src/components/SettingsView.tsx",
+      "source_file": "apps/web/src/components/ResultPlayer.tsx",
       "source_location": "L4",
       "_origin": "ast",
-      "id": "apps_web_src_components_settingsview_secretfieldconfig",
-      "community": 19,
-      "community_name": "SettingsView.tsx",
-      "norm_label": "secretfieldconfig"
+      "id": "apps_web_src_components_resultplayer_resultplayerprops",
+      "community": 69,
+      "community_name": "ProgressView.tsx",
+      "norm_label": "resultplayerprops"
     },
     {
-      "label": "SECRET_FIELDS",
+      "label": ".onCreateAnother()",
       "file_type": "code",
-      "source_file": "apps/web/src/components/SettingsView.tsx",
-      "source_location": "L11",
+      "source_file": "apps/web/src/components/ResultPlayer.tsx",
+      "source_location": "L6",
       "_origin": "ast",
-      "id": "apps_web_src_components_settingsview_secret_fields",
-      "community": 19,
-      "community_name": "SettingsView.tsx",
-      "norm_label": "secret_fields"
+      "id": "apps_web_src_components_resultplayer_resultplayerprops_oncreateanother",
+      "community": 69,
+      "community_name": "ProgressView.tsx",
+      "norm_label": ".oncreateanother()"
     },
     {
-      "label": "BadgeKind",
+      "label": "ResultPlayer()",
       "file_type": "code",
-      "source_file": "apps/web/src/components/SettingsView.tsx",
-      "source_location": "L44",
+      "source_file": "apps/web/src/components/ResultPlayer.tsx",
+      "source_location": "L9",
       "_origin": "ast",
-      "id": "apps_web_src_components_settingsview_badgekind",
-      "community": 19,
-      "community_name": "SettingsView.tsx",
-      "norm_label": "badgekind"
-    },
-    {
-      "label": "BADGE_STYLES",
-      "file_type": "code",
-      "source_file": "apps/web/src/components/SettingsView.tsx",
-      "source_location": "L46",
-      "_origin": "ast",
-      "id": "apps_web_src_components_settingsview_badge_styles",
-      "community": 19,
-      "community_name": "SettingsView.tsx",
-      "norm_label": "badge_styles"
-    },
-    {
-      "label": "Badge()",
-      "file_type": "code",
-      "source_file": "apps/web/src/components/SettingsView.tsx",
-      "source_location": "L53",
-      "_origin": "ast",
-      "id": "apps_web_src_components_settingsview_badge",
-      "community": 19,
-      "community_name": "SettingsView.tsx",
-      "norm_label": "badge()"
-    },
-    {
-      "label": "ModelSelectProps",
-      "file_type": "code",
-      "source_file": "apps/web/src/components/SettingsView.tsx",
-      "source_location": "L63",
-      "_origin": "ast",
-      "id": "apps_web_src_components_settingsview_modelselectprops",
-      "community": 19,
-      "community_name": "SettingsView.tsx",
-      "norm_label": "modelselectprops"
-    },
-    {
-      "label": ".onCustomChange()",
-      "file_type": "code",
-      "source_file": "apps/web/src/components/SettingsView.tsx",
-      "source_location": "L70",
-      "_origin": "ast",
-      "id": "apps_web_src_components_settingsview_modelselectprops_oncustomchange",
-      "community": 19,
-      "community_name": "SettingsView.tsx",
-      "norm_label": ".oncustomchange()"
-    },
-    {
-      "label": ".onChange()",
-      "file_type": "code",
-      "source_file": "apps/web/src/components/SettingsView.tsx",
-      "source_location": "L71",
-      "_origin": "ast",
-      "id": "apps_web_src_components_settingsview_modelselectprops_onchange",
-      "community": 19,
-      "community_name": "SettingsView.tsx",
-      "norm_label": ".onchange()"
-    },
-    {
-      "label": "ModelSelect()",
-      "file_type": "code",
-      "source_file": "apps/web/src/components/SettingsView.tsx",
-      "source_location": "L74",
-      "_origin": "ast",
-      "id": "apps_web_src_components_settingsview_modelselect",
-      "community": 19,
-      "community_name": "SettingsView.tsx",
-      "norm_label": "modelselect()"
-    },
-    {
-      "label": "Section()",
-      "file_type": "code",
-      "source_file": "apps/web/src/components/SettingsView.tsx",
-      "source_location": "L108",
-      "_origin": "ast",
-      "id": "apps_web_src_components_settingsview_section",
-      "community": 19,
-      "community_name": "SettingsView.tsx",
-      "norm_label": "section()"
-    },
-    {
-      "label": "Row()",
-      "file_type": "code",
-      "source_file": "apps/web/src/components/SettingsView.tsx",
-      "source_location": "L128",
-      "_origin": "ast",
-      "id": "apps_web_src_components_settingsview_row",
-      "community": 19,
-      "community_name": "SettingsView.tsx",
-      "norm_label": "row()"
-    },
-    {
-      "label": "MODEL_FIELDS",
-      "file_type": "code",
-      "source_file": "apps/web/src/components/SettingsView.tsx",
-      "source_location": "L156",
-      "_origin": "ast",
-      "id": "apps_web_src_components_settingsview_model_fields",
-      "community": 19,
-      "community_name": "SettingsView.tsx",
-      "norm_label": "model_fields"
-    },
-    {
-      "label": "SettingsViewProps",
-      "file_type": "code",
-      "source_file": "apps/web/src/components/SettingsView.tsx",
-      "source_location": "L165",
-      "_origin": "ast",
-      "id": "apps_web_src_components_settingsview_settingsviewprops",
-      "community": 19,
-      "community_name": "SettingsView.tsx",
-      "norm_label": "settingsviewprops"
-    },
-    {
-      "label": ".onClose()",
-      "file_type": "code",
-      "source_file": "apps/web/src/components/SettingsView.tsx",
-      "source_location": "L166",
-      "_origin": "ast",
-      "id": "apps_web_src_components_settingsview_settingsviewprops_onclose",
-      "community": 19,
-      "community_name": "SettingsView.tsx",
-      "norm_label": ".onclose()"
-    },
-    {
-      "label": "SettingsView()",
-      "file_type": "code",
-      "source_file": "apps/web/src/components/SettingsView.tsx",
-      "source_location": "L169",
-      "_origin": "ast",
-      "id": "apps_web_src_components_settingsview_settingsview",
-      "community": 57,
-      "community_name": "api.ts",
-      "norm_label": "settingsview()"
+      "id": "apps_web_src_components_resultplayer_resultplayer",
+      "community": 69,
+      "community_name": "ProgressView.tsx",
+      "norm_label": "resultplayer()"
     },
     {
       "label": "IMPLEMENTATION-PLAN.md",
@@ -1401,15 +895,576 @@
       "norm_label": "ordem sugerida de implementacao"
     },
     {
+      "label": "credits.ts",
+      "file_type": "code",
+      "source_file": "apps/api/src/routes/credits.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "server.test.ts",
+      "norm_label": "credits.ts",
+      "id": "apps_api_src_routes_credits"
+    },
+    {
+      "label": "PutCreditsBody",
+      "file_type": "code",
+      "source_file": "apps/api/src/routes/credits.ts",
+      "source_location": "L5",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "server.test.ts",
+      "norm_label": "putcreditsbody",
+      "id": "apps_api_src_routes_credits_putcreditsbody"
+    },
+    {
+      "label": "CreditsRouteDeps",
+      "file_type": "code",
+      "source_file": "apps/api/src/routes/credits.ts",
+      "source_location": "L7",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "server.test.ts",
+      "norm_label": "creditsroutedeps",
+      "id": "apps_api_src_routes_credits_creditsroutedeps"
+    },
+    {
+      "label": "registerCreditsRoutes()",
+      "file_type": "code",
+      "source_file": "apps/api/src/routes/credits.ts",
+      "source_location": "L12",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "server.test.ts",
+      "norm_label": "registercreditsroutes()",
+      "id": "apps_api_src_routes_credits_registercreditsroutes"
+    },
+    {
+      "label": "jobs.ts",
+      "file_type": "code",
+      "source_file": "apps/api/src/routes/jobs.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "server.test.ts",
+      "norm_label": "jobs.ts",
+      "id": "apps_api_src_routes_jobs"
+    },
+    {
+      "label": "ASPECT_RATIOS",
+      "file_type": "code",
+      "source_file": "apps/api/src/routes/jobs.ts",
+      "source_location": "L21",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "server.test.ts",
+      "norm_label": "aspect_ratios",
+      "id": "apps_api_src_routes_jobs_aspect_ratios"
+    },
+    {
+      "label": "RESOLUTION_BY_ASPECT_RATIO",
+      "file_type": "code",
+      "source_file": "apps/api/src/routes/jobs.ts",
+      "source_location": "L24",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "server.test.ts",
+      "norm_label": "resolution_by_aspect_ratio",
+      "id": "apps_api_src_routes_jobs_resolution_by_aspect_ratio"
+    },
+    {
+      "label": "CreateJobBody",
+      "file_type": "code",
+      "source_file": "apps/api/src/routes/jobs.ts",
+      "source_location": "L30",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "server.test.ts",
+      "norm_label": "createjobbody",
+      "id": "apps_api_src_routes_jobs_createjobbody"
+    },
+    {
+      "label": "ApproveCostBody",
+      "file_type": "code",
+      "source_file": "apps/api/src/routes/jobs.ts",
+      "source_location": "L47",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "server.test.ts",
+      "norm_label": "approvecostbody",
+      "id": "apps_api_src_routes_jobs_approvecostbody"
+    },
+    {
+      "label": "STAGE_BY_STATUS",
+      "file_type": "code",
+      "source_file": "apps/api/src/routes/jobs.ts",
+      "source_location": "L50",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "server.test.ts",
+      "norm_label": "stage_by_status",
+      "id": "apps_api_src_routes_jobs_stage_by_status"
+    },
+    {
+      "label": "JobsRouteDeps",
+      "file_type": "code",
+      "source_file": "apps/api/src/routes/jobs.ts",
+      "source_location": "L63",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "server.test.ts",
+      "norm_label": "jobsroutedeps",
+      "id": "apps_api_src_routes_jobs_jobsroutedeps"
+    },
+    {
+      "label": ".buildJobRunnerDeps()",
+      "file_type": "code",
+      "source_file": "apps/api/src/routes/jobs.ts",
+      "source_location": "L66",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "server.test.ts",
+      "norm_label": ".buildjobrunnerdeps()",
+      "id": "apps_api_src_routes_jobs_jobsroutedeps_buildjobrunnerdeps"
+    },
+    {
+      "label": ".buildCostOptions()",
+      "file_type": "code",
+      "source_file": "apps/api/src/routes/jobs.ts",
+      "source_location": "L67",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "server.test.ts",
+      "norm_label": ".buildcostoptions()",
+      "id": "apps_api_src_routes_jobs_jobsroutedeps_buildcostoptions"
+    },
+    {
+      "label": "jobToResponse()",
+      "file_type": "code",
+      "source_file": "apps/api/src/routes/jobs.ts",
+      "source_location": "L72",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "server.test.ts",
+      "norm_label": "jobtoresponse()",
+      "id": "apps_api_src_routes_jobs_jobtoresponse"
+    },
+    {
+      "label": "registerJobsRoutes()",
+      "file_type": "code",
+      "source_file": "apps/api/src/routes/jobs.ts",
+      "source_location": "L90",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "server.test.ts",
+      "norm_label": "registerjobsroutes()",
+      "id": "apps_api_src_routes_jobs_registerjobsroutes"
+    },
+    {
+      "label": "server.test.ts",
+      "file_type": "code",
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "server.test.ts",
+      "norm_label": "server.test.ts",
+      "id": "apps_api_src_server_test"
+    },
+    {
+      "label": "execFileAsync",
+      "file_type": "code",
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L13",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "server.test.ts",
+      "norm_label": "execfileasync",
+      "id": "apps_api_src_server_test_execfileasync"
+    },
+    {
+      "label": "RESEARCH_RESULT",
+      "file_type": "code",
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L15",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "server.test.ts",
+      "norm_label": "research_result",
+      "id": "apps_api_src_server_test_research_result"
+    },
+    {
+      "label": "sceneRaw()",
+      "file_type": "code",
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L17",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "server.test.ts",
+      "norm_label": "sceneraw()",
+      "id": "apps_api_src_server_test_sceneraw"
+    },
+    {
+      "label": "directorPayload()",
+      "file_type": "code",
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L27",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "server.test.ts",
+      "norm_label": "directorpayload()",
+      "id": "apps_api_src_server_test_directorpayload"
+    },
+    {
+      "label": "critiquePayload()",
+      "file_type": "code",
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L36",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "server.test.ts",
+      "norm_label": "critiquepayload()",
+      "id": "apps_api_src_server_test_critiquepayload"
+    },
+    {
+      "label": "usage()",
+      "file_type": "code",
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L47",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "server.test.ts",
+      "norm_label": "usage()",
+      "id": "apps_api_src_server_test_usage"
+    },
+    {
+      "label": "fakeLLM()",
+      "file_type": "code",
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L51",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "server.test.ts",
+      "norm_label": "fakellm()",
+      "id": "apps_api_src_server_test_fakellm"
+    },
+    {
+      "label": "fakeTTS()",
+      "file_type": "code",
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L57",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "server.test.ts",
+      "norm_label": "faketts()",
+      "id": "apps_api_src_server_test_faketts"
+    },
+    {
+      "label": "fakeMusic()",
+      "file_type": "code",
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L69",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "server.test.ts",
+      "norm_label": "fakemusic()",
+      "id": "apps_api_src_server_test_fakemusic"
+    },
+    {
+      "label": "fakeImageProvider()",
+      "file_type": "code",
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L73",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "server.test.ts",
+      "norm_label": "fakeimageprovider()",
+      "id": "apps_api_src_server_test_fakeimageprovider"
+    },
+    {
+      "label": "fakeVideoRenderer()",
+      "file_type": "code",
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L80",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "server.test.ts",
+      "norm_label": "fakevideorenderer()",
+      "id": "apps_api_src_server_test_fakevideorenderer"
+    },
+    {
+      "label": "fakeJobRunnerDeps()",
+      "file_type": "code",
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L102",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "server.test.ts",
+      "norm_label": "fakejobrunnerdeps()",
+      "id": "apps_api_src_server_test_fakejobrunnerdeps"
+    },
+    {
+      "label": "costOptions",
+      "file_type": "code",
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L118",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "server.test.ts",
+      "norm_label": "costoptions",
+      "id": "apps_api_src_server_test_costoptions"
+    },
+    {
+      "label": "appWithToken()",
+      "file_type": "code",
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L365",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "server.test.ts",
+      "norm_label": "appwithtoken()",
+      "id": "apps_api_src_server_test_appwithtoken"
+    },
+    {
+      "label": "server.ts",
+      "file_type": "code",
+      "source_file": "apps/api/src/server.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "server.test.ts",
+      "norm_label": "server.ts",
+      "id": "apps_api_src_server"
+    },
+    {
+      "label": "BuildServerOptions",
+      "file_type": "code",
+      "source_file": "apps/api/src/server.ts",
+      "source_location": "L13",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "server.test.ts",
+      "norm_label": "buildserveroptions",
+      "id": "apps_api_src_server_buildserveroptions"
+    },
+    {
+      "label": ".buildJobRunnerDeps()",
+      "file_type": "code",
+      "source_file": "apps/api/src/server.ts",
+      "source_location": "L15",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "server.test.ts",
+      "norm_label": ".buildjobrunnerdeps()",
+      "id": "apps_api_src_server_buildserveroptions_buildjobrunnerdeps"
+    },
+    {
+      "label": ".buildCostOptions()",
+      "file_type": "code",
+      "source_file": "apps/api/src/server.ts",
+      "source_location": "L16",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "server.test.ts",
+      "norm_label": ".buildcostoptions()",
+      "id": "apps_api_src_server_buildserveroptions_buildcostoptions"
+    },
+    {
+      "label": "buildServer()",
+      "file_type": "code",
+      "source_file": "apps/api/src/server.ts",
+      "source_location": "L25",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "server.test.ts",
+      "norm_label": "buildserver()",
+      "id": "apps_api_src_server_buildserver"
+    },
+    {
+      "label": "SettingsView.tsx",
+      "file_type": "code",
+      "source_file": "apps/web/src/components/SettingsView.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "SettingsView.tsx",
+      "norm_label": "settingsview.tsx",
+      "id": "apps_web_src_components_settingsview"
+    },
+    {
+      "label": "SecretFieldConfig",
+      "file_type": "code",
+      "source_file": "apps/web/src/components/SettingsView.tsx",
+      "source_location": "L4",
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "SettingsView.tsx",
+      "norm_label": "secretfieldconfig",
+      "id": "apps_web_src_components_settingsview_secretfieldconfig"
+    },
+    {
+      "label": "SECRET_FIELDS",
+      "file_type": "code",
+      "source_file": "apps/web/src/components/SettingsView.tsx",
+      "source_location": "L11",
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "SettingsView.tsx",
+      "norm_label": "secret_fields",
+      "id": "apps_web_src_components_settingsview_secret_fields"
+    },
+    {
+      "label": "BadgeKind",
+      "file_type": "code",
+      "source_file": "apps/web/src/components/SettingsView.tsx",
+      "source_location": "L44",
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "SettingsView.tsx",
+      "norm_label": "badgekind",
+      "id": "apps_web_src_components_settingsview_badgekind"
+    },
+    {
+      "label": "BADGE_STYLES",
+      "file_type": "code",
+      "source_file": "apps/web/src/components/SettingsView.tsx",
+      "source_location": "L46",
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "SettingsView.tsx",
+      "norm_label": "badge_styles",
+      "id": "apps_web_src_components_settingsview_badge_styles"
+    },
+    {
+      "label": "Badge()",
+      "file_type": "code",
+      "source_file": "apps/web/src/components/SettingsView.tsx",
+      "source_location": "L53",
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "SettingsView.tsx",
+      "norm_label": "badge()",
+      "id": "apps_web_src_components_settingsview_badge"
+    },
+    {
+      "label": "ModelSelectProps",
+      "file_type": "code",
+      "source_file": "apps/web/src/components/SettingsView.tsx",
+      "source_location": "L63",
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "SettingsView.tsx",
+      "norm_label": "modelselectprops",
+      "id": "apps_web_src_components_settingsview_modelselectprops"
+    },
+    {
+      "label": ".onCustomChange()",
+      "file_type": "code",
+      "source_file": "apps/web/src/components/SettingsView.tsx",
+      "source_location": "L70",
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "SettingsView.tsx",
+      "norm_label": ".oncustomchange()",
+      "id": "apps_web_src_components_settingsview_modelselectprops_oncustomchange"
+    },
+    {
+      "label": ".onChange()",
+      "file_type": "code",
+      "source_file": "apps/web/src/components/SettingsView.tsx",
+      "source_location": "L71",
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "SettingsView.tsx",
+      "norm_label": ".onchange()",
+      "id": "apps_web_src_components_settingsview_modelselectprops_onchange"
+    },
+    {
+      "label": "ModelSelect()",
+      "file_type": "code",
+      "source_file": "apps/web/src/components/SettingsView.tsx",
+      "source_location": "L74",
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "SettingsView.tsx",
+      "norm_label": "modelselect()",
+      "id": "apps_web_src_components_settingsview_modelselect"
+    },
+    {
+      "label": "Section()",
+      "file_type": "code",
+      "source_file": "apps/web/src/components/SettingsView.tsx",
+      "source_location": "L108",
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "SettingsView.tsx",
+      "norm_label": "section()",
+      "id": "apps_web_src_components_settingsview_section"
+    },
+    {
+      "label": "Row()",
+      "file_type": "code",
+      "source_file": "apps/web/src/components/SettingsView.tsx",
+      "source_location": "L128",
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "SettingsView.tsx",
+      "norm_label": "row()",
+      "id": "apps_web_src_components_settingsview_row"
+    },
+    {
+      "label": "MODEL_FIELDS",
+      "file_type": "code",
+      "source_file": "apps/web/src/components/SettingsView.tsx",
+      "source_location": "L156",
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "SettingsView.tsx",
+      "norm_label": "model_fields",
+      "id": "apps_web_src_components_settingsview_model_fields"
+    },
+    {
+      "label": "SettingsViewProps",
+      "file_type": "code",
+      "source_file": "apps/web/src/components/SettingsView.tsx",
+      "source_location": "L165",
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "SettingsView.tsx",
+      "norm_label": "settingsviewprops",
+      "id": "apps_web_src_components_settingsview_settingsviewprops"
+    },
+    {
+      "label": ".onClose()",
+      "file_type": "code",
+      "source_file": "apps/web/src/components/SettingsView.tsx",
+      "source_location": "L166",
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "SettingsView.tsx",
+      "norm_label": ".onclose()",
+      "id": "apps_web_src_components_settingsview_settingsviewprops_onclose"
+    },
+    {
+      "label": "SettingsView()",
+      "file_type": "code",
+      "source_file": "apps/web/src/components/SettingsView.tsx",
+      "source_location": "L169",
+      "_origin": "ast",
+      "community": 57,
+      "community_name": "api.ts",
+      "norm_label": "settingsview()",
+      "id": "apps_web_src_components_settingsview_settingsview"
+    },
+    {
       "label": "client.ts",
       "file_type": "code",
       "source_file": "packages/providers/src/persistence/client.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_client",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "client.ts"
+      "norm_label": "client.ts",
+      "id": "packages_providers_src_persistence_client"
     },
     {
       "label": "ClickPlayDb",
@@ -1417,10 +1472,10 @@
       "source_file": "packages/providers/src/persistence/client.ts",
       "source_location": "L5",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_client_clickplaydb",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "clickplaydb"
+      "norm_label": "clickplaydb",
+      "id": "packages_providers_src_persistence_client_clickplaydb"
     },
     {
       "label": "ensureWalletRow()",
@@ -1428,10 +1483,10 @@
       "source_file": "packages/providers/src/persistence/client.ts",
       "source_location": "L47",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_client_ensurewalletrow",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "ensurewalletrow()"
+      "norm_label": "ensurewalletrow()",
+      "id": "packages_providers_src_persistence_client_ensurewalletrow"
     },
     {
       "label": "addCheckpointColumnIfMissing()",
@@ -1439,10 +1494,10 @@
       "source_file": "packages/providers/src/persistence/client.ts",
       "source_location": "L57",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_client_addcheckpointcolumnifmissing",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "addcheckpointcolumnifmissing()"
+      "norm_label": "addcheckpointcolumnifmissing()",
+      "id": "packages_providers_src_persistence_client_addcheckpointcolumnifmissing"
     },
     {
       "label": "addStageDetailColumnIfMissing()",
@@ -1450,10 +1505,10 @@
       "source_file": "packages/providers/src/persistence/client.ts",
       "source_location": "L66",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_client_addstagedetailcolumnifmissing",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "addstagedetailcolumnifmissing()"
+      "norm_label": "addstagedetailcolumnifmissing()",
+      "id": "packages_providers_src_persistence_client_addstagedetailcolumnifmissing"
     },
     {
       "label": "addResultSummaryColumnIfMissing()",
@@ -1461,10 +1516,10 @@
       "source_file": "packages/providers/src/persistence/client.ts",
       "source_location": "L75",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_client_addresultsummarycolumnifmissing",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "addresultsummarycolumnifmissing()"
+      "norm_label": "addresultsummarycolumnifmissing()",
+      "id": "packages_providers_src_persistence_client_addresultsummarycolumnifmissing"
     },
     {
       "label": "toRow()",
@@ -1472,10 +1527,10 @@
       "source_file": "packages/providers/src/persistence/client.ts",
       "source_location": "L92",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_client_torow",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "torow()"
+      "norm_label": "torow()",
+      "id": "packages_providers_src_persistence_client_torow"
     },
     {
       "label": "createDb()",
@@ -1483,10 +1538,10 @@
       "source_file": "packages/providers/src/persistence/client.ts",
       "source_location": "L97",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_client_createdb",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "createdb()"
+      "norm_label": "createdb()",
+      "id": "packages_providers_src_persistence_client_createdb"
     },
     {
       "label": "repository.test.ts",
@@ -1494,10 +1549,10 @@
       "source_file": "packages/providers/src/persistence/repository.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_repository_test",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "repository.test.ts"
+      "norm_label": "repository.test.ts",
+      "id": "packages_providers_src_persistence_repository_test"
     },
     {
       "label": "config",
@@ -1505,10 +1560,10 @@
       "source_file": "packages/providers/src/persistence/repository.test.ts",
       "source_location": "L22",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_repository_test_config",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "config"
+      "norm_label": "config",
+      "id": "packages_providers_src_persistence_repository_test_config"
     },
     {
       "label": "repository.ts",
@@ -1516,10 +1571,10 @@
       "source_file": "packages/providers/src/persistence/repository.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_repository",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "repository.ts"
+      "norm_label": "repository.ts",
+      "id": "packages_providers_src_persistence_repository"
     },
     {
       "label": "createProject()",
@@ -1527,10 +1582,10 @@
       "source_file": "packages/providers/src/persistence/repository.ts",
       "source_location": "L11",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_repository_createproject",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "createproject()"
+      "norm_label": "createproject()",
+      "id": "packages_providers_src_persistence_repository_createproject"
     },
     {
       "label": "getProject()",
@@ -1538,10 +1593,10 @@
       "source_file": "packages/providers/src/persistence/repository.ts",
       "source_location": "L18",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_repository_getproject",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "getproject()"
+      "norm_label": "getproject()",
+      "id": "packages_providers_src_persistence_repository_getproject"
     },
     {
       "label": "createJob()",
@@ -1549,10 +1604,10 @@
       "source_file": "packages/providers/src/persistence/repository.ts",
       "source_location": "L23",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_repository_createjob",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "createjob()"
+      "norm_label": "createjob()",
+      "id": "packages_providers_src_persistence_repository_createjob"
     },
     {
       "label": "getJob()",
@@ -1560,10 +1615,10 @@
       "source_file": "packages/providers/src/persistence/repository.ts",
       "source_location": "L46",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_repository_getjob",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "getjob()"
+      "norm_label": "getjob()",
+      "id": "packages_providers_src_persistence_repository_getjob"
     },
     {
       "label": "listJobsByProject()",
@@ -1571,10 +1626,10 @@
       "source_file": "packages/providers/src/persistence/repository.ts",
       "source_location": "L51",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_repository_listjobsbyproject",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "listjobsbyproject()"
+      "norm_label": "listjobsbyproject()",
+      "id": "packages_providers_src_persistence_repository_listjobsbyproject"
     },
     {
       "label": "updateJobStatus()",
@@ -1582,10 +1637,10 @@
       "source_file": "packages/providers/src/persistence/repository.ts",
       "source_location": "L61",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_repository_updatejobstatus",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "updatejobstatus()"
+      "norm_label": "updatejobstatus()",
+      "id": "packages_providers_src_persistence_repository_updatejobstatus"
     },
     {
       "label": "setJobProgress()",
@@ -1593,10 +1648,10 @@
       "source_file": "packages/providers/src/persistence/repository.ts",
       "source_location": "L77",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_repository_setjobprogress",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "setjobprogress()"
+      "norm_label": "setjobprogress()",
+      "id": "packages_providers_src_persistence_repository_setjobprogress"
     },
     {
       "label": "setJobEstimatedCost()",
@@ -1604,10 +1659,10 @@
       "source_file": "packages/providers/src/persistence/repository.ts",
       "source_location": "L81",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_repository_setjobestimatedcost",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "setjobestimatedcost()"
+      "norm_label": "setjobestimatedcost()",
+      "id": "packages_providers_src_persistence_repository_setjobestimatedcost"
     },
     {
       "label": "setJobActualCost()",
@@ -1615,10 +1670,10 @@
       "source_file": "packages/providers/src/persistence/repository.ts",
       "source_location": "L85",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_repository_setjobactualcost",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "setjobactualcost()"
+      "norm_label": "setjobactualcost()",
+      "id": "packages_providers_src_persistence_repository_setjobactualcost"
     },
     {
       "label": "setJobQcReport()",
@@ -1626,10 +1681,10 @@
       "source_file": "packages/providers/src/persistence/repository.ts",
       "source_location": "L89",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_repository_setjobqcreport",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "setjobqcreport()"
+      "norm_label": "setjobqcreport()",
+      "id": "packages_providers_src_persistence_repository_setjobqcreport"
     },
     {
       "label": "setJobOutputPath()",
@@ -1637,10 +1692,10 @@
       "source_file": "packages/providers/src/persistence/repository.ts",
       "source_location": "L93",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_repository_setjoboutputpath",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "setjoboutputpath()"
+      "norm_label": "setjoboutputpath()",
+      "id": "packages_providers_src_persistence_repository_setjoboutputpath"
     },
     {
       "label": "setJobError()",
@@ -1648,10 +1703,10 @@
       "source_file": "packages/providers/src/persistence/repository.ts",
       "source_location": "L97",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_repository_setjoberror",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "setjoberror()"
+      "norm_label": "setjoberror()",
+      "id": "packages_providers_src_persistence_repository_setjoberror"
     },
     {
       "label": "setJobCheckpoint()",
@@ -1659,10 +1714,10 @@
       "source_file": "packages/providers/src/persistence/repository.ts",
       "source_location": "L101",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_repository_setjobcheckpoint",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "setjobcheckpoint()"
+      "norm_label": "setjobcheckpoint()",
+      "id": "packages_providers_src_persistence_repository_setjobcheckpoint"
     },
     {
       "label": "setJobResultSummary()",
@@ -1670,10 +1725,10 @@
       "source_file": "packages/providers/src/persistence/repository.ts",
       "source_location": "L105",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_repository_setjobresultsummary",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "setjobresultsummary()"
+      "norm_label": "setjobresultsummary()",
+      "id": "packages_providers_src_persistence_repository_setjobresultsummary"
     },
     {
       "label": "Wallet",
@@ -1681,10 +1736,10 @@
       "source_file": "packages/providers/src/persistence/repository.ts",
       "source_location": "L111",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_repository_wallet",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "wallet"
+      "norm_label": "wallet",
+      "id": "packages_providers_src_persistence_repository_wallet"
     },
     {
       "label": "getWallet()",
@@ -1692,10 +1747,10 @@
       "source_file": "packages/providers/src/persistence/repository.ts",
       "source_location": "L116",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_repository_getwallet",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "getwallet()"
+      "norm_label": "getwallet()",
+      "id": "packages_providers_src_persistence_repository_getwallet"
     },
     {
       "label": "setWalletBalance()",
@@ -1703,10 +1758,10 @@
       "source_file": "packages/providers/src/persistence/repository.ts",
       "source_location": "L122",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_repository_setwalletbalance",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "setwalletbalance()"
+      "norm_label": "setwalletbalance()",
+      "id": "packages_providers_src_persistence_repository_setwalletbalance"
     },
     {
       "label": "trySpend()",
@@ -1714,10 +1769,10 @@
       "source_file": "packages/providers/src/persistence/repository.ts",
       "source_location": "L127",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_repository_tryspend",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "tryspend()"
+      "norm_label": "tryspend()",
+      "id": "packages_providers_src_persistence_repository_tryspend"
     },
     {
       "label": "NON_TERMINAL_STATUSES",
@@ -1725,10 +1780,10 @@
       "source_file": "packages/providers/src/persistence/repository.ts",
       "source_location": "L137",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_repository_non_terminal_statuses",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "non_terminal_statuses"
+      "norm_label": "non_terminal_statuses",
+      "id": "packages_providers_src_persistence_repository_non_terminal_statuses"
     },
     {
       "label": "recoverOrphanedJobs()",
@@ -1736,10 +1791,10 @@
       "source_file": "packages/providers/src/persistence/repository.ts",
       "source_location": "L155",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_repository_recoverorphanedjobs",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "recoverorphanedjobs()"
+      "norm_label": "recoverorphanedjobs()",
+      "id": "packages_providers_src_persistence_repository_recoverorphanedjobs"
     },
     {
       "label": "resetJobForRetry()",
@@ -1747,10 +1802,10 @@
       "source_file": "packages/providers/src/persistence/repository.ts",
       "source_location": "L173",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_repository_resetjobforretry",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "resetjobforretry()"
+      "norm_label": "resetjobforretry()",
+      "id": "packages_providers_src_persistence_repository_resetjobforretry"
     },
     {
       "label": "schema.ts",
@@ -1758,10 +1813,10 @@
       "source_file": "packages/providers/src/persistence/schema.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_schema",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "schema.ts"
+      "norm_label": "schema.ts",
+      "id": "packages_providers_src_persistence_schema"
     },
     {
       "label": "JOB_STATUSES",
@@ -1769,10 +1824,10 @@
       "source_file": "packages/providers/src/persistence/schema.ts",
       "source_location": "L7",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_schema_job_statuses",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "job_statuses"
+      "norm_label": "job_statuses",
+      "id": "packages_providers_src_persistence_schema_job_statuses"
     },
     {
       "label": "JobStatus",
@@ -1780,10 +1835,10 @@
       "source_file": "packages/providers/src/persistence/schema.ts",
       "source_location": "L19",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_schema_jobstatus",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "jobstatus"
+      "norm_label": "jobstatus",
+      "id": "packages_providers_src_persistence_schema_jobstatus"
     },
     {
       "label": "projects",
@@ -1791,10 +1846,10 @@
       "source_file": "packages/providers/src/persistence/schema.ts",
       "source_location": "L27",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_schema_projects",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "projects"
+      "norm_label": "projects",
+      "id": "packages_providers_src_persistence_schema_projects"
     },
     {
       "label": "jobs",
@@ -1802,10 +1857,10 @@
       "source_file": "packages/providers/src/persistence/schema.ts",
       "source_location": "L36",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_schema_jobs",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "jobs"
+      "norm_label": "jobs",
+      "id": "packages_providers_src_persistence_schema_jobs"
     },
     {
       "label": "wallet",
@@ -1813,10 +1868,10 @@
       "source_file": "packages/providers/src/persistence/schema.ts",
       "source_location": "L67",
       "_origin": "ast",
-      "id": "packages_providers_src_persistence_schema_wallet",
       "community": 5,
       "community_name": "repository.ts",
-      "norm_label": "wallet"
+      "norm_label": "wallet",
+      "id": "packages_providers_src_persistence_schema_wallet"
     },
     {
       "label": "Wizard.tsx",
@@ -8655,8 +8710,8 @@
       "source_file": "packages/providers/src/qc/types.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 8,
-      "community_name": "run-qc.ts",
+      "community": 5,
+      "community_name": "repository.ts",
       "norm_label": "qc/types.ts",
       "id": "packages_providers_src_qc_types"
     },
@@ -8688,8 +8743,8 @@
       "source_file": "packages/providers/src/qc/types.ts",
       "source_location": "L18",
       "_origin": "ast",
-      "community": 8,
-      "community_name": "run-qc.ts",
+      "community": 5,
+      "community_name": "repository.ts",
       "norm_label": "qcreport",
       "id": "packages_providers_src_qc_types_qcreport"
     },
@@ -9266,50 +9321,6 @@
       "id": "apps_web_package_json_vitest"
     },
     {
-      "label": "ResultPlayer.tsx",
-      "file_type": "code",
-      "source_file": "apps/web/src/components/ResultPlayer.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 70,
-      "community_name": "ResultPlayer.tsx",
-      "norm_label": "resultplayer.tsx",
-      "id": "apps_web_src_components_resultplayer"
-    },
-    {
-      "label": "ResultPlayerProps",
-      "file_type": "code",
-      "source_file": "apps/web/src/components/ResultPlayer.tsx",
-      "source_location": "L3",
-      "_origin": "ast",
-      "community": 70,
-      "community_name": "ResultPlayer.tsx",
-      "norm_label": "resultplayerprops",
-      "id": "apps_web_src_components_resultplayer_resultplayerprops"
-    },
-    {
-      "label": ".onCreateAnother()",
-      "file_type": "code",
-      "source_file": "apps/web/src/components/ResultPlayer.tsx",
-      "source_location": "L5",
-      "_origin": "ast",
-      "community": 70,
-      "community_name": "ResultPlayer.tsx",
-      "norm_label": ".oncreateanother()",
-      "id": "apps_web_src_components_resultplayer_resultplayerprops_oncreateanother"
-    },
-    {
-      "label": "ResultPlayer()",
-      "file_type": "code",
-      "source_file": "apps/web/src/components/ResultPlayer.tsx",
-      "source_location": "L8",
-      "_origin": "ast",
-      "community": 70,
-      "community_name": "ResultPlayer.tsx",
-      "norm_label": "resultplayer()",
-      "id": "apps_web_src_components_resultplayer_resultplayer"
-    },
-    {
       "label": "main.tsx",
       "file_type": "code",
       "source_file": "apps/web/src/main.tsx",
@@ -9623,8 +9634,8 @@
       "source_file": "packages/providers/src/persistence/cost-approval-gate.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 5,
-      "community_name": "repository.ts",
+      "community": 65,
+      "community_name": "cost-approval-gate.ts",
       "norm_label": "cost-approval-gate.test.ts",
       "id": "packages_providers_src_persistence_cost_approval_gate_test"
     },
@@ -9634,8 +9645,8 @@
       "source_file": "packages/providers/src/persistence/cost-approval-gate.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 5,
-      "community_name": "repository.ts",
+      "community": 65,
+      "community_name": "cost-approval-gate.ts",
       "norm_label": "cost-approval-gate.ts",
       "id": "packages_providers_src_persistence_cost_approval_gate"
     },
@@ -9645,8 +9656,8 @@
       "source_file": "packages/providers/src/persistence/cost-approval-gate.ts",
       "source_location": "L8",
       "_origin": "ast",
-      "community": 5,
-      "community_name": "repository.ts",
+      "community": 65,
+      "community_name": "cost-approval-gate.ts",
       "norm_label": "costapprovalgate",
       "id": "packages_providers_src_persistence_cost_approval_gate_costapprovalgate"
     },
@@ -9656,8 +9667,8 @@
       "source_file": "packages/providers/src/persistence/cost-approval-gate.ts",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 5,
-      "community_name": "repository.ts",
+      "community": 65,
+      "community_name": "cost-approval-gate.ts",
       "norm_label": ".waitforapproval()",
       "id": "packages_providers_src_persistence_cost_approval_gate_costapprovalgate_waitforapproval"
     },
@@ -9667,8 +9678,8 @@
       "source_file": "packages/providers/src/persistence/cost-approval-gate.ts",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 5,
-      "community_name": "repository.ts",
+      "community": 65,
+      "community_name": "cost-approval-gate.ts",
       "norm_label": ".resolveapproval()",
       "id": "packages_providers_src_persistence_cost_approval_gate_costapprovalgate_resolveapproval"
     },
@@ -9678,8 +9689,8 @@
       "source_file": "packages/providers/src/persistence/cost-approval-gate.ts",
       "source_location": "L15",
       "_origin": "ast",
-      "community": 5,
-      "community_name": "repository.ts",
+      "community": 65,
+      "community_name": "cost-approval-gate.ts",
       "norm_label": "createcostapprovalgate()",
       "id": "packages_providers_src_persistence_cost_approval_gate_createcostapprovalgate"
     },
@@ -11886,827 +11897,6 @@
   ],
   "links": [
     {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/routes/credits.ts",
-      "source_location": "L7",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_routes_credits",
-      "target": "apps_api_src_routes_credits_creditsroutedeps",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/routes/credits.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_routes_credits",
-      "target": "apps_api_src_routes_credits_putcreditsbody",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/routes/credits.ts",
-      "source_location": "L12",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_routes_credits",
-      "target": "apps_api_src_routes_credits_registercreditsroutes",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/routes/credits.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_routes_credits",
-      "target": "packages_providers_src_index",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/server.ts",
-      "source_location": "L8",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server",
-      "target": "apps_api_src_routes_credits",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "apps/api/src/routes/credits.ts",
-      "source_location": "L16",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_routes_credits_registercreditsroutes",
-      "target": "apps_api_src_routes_credits_putcreditsbody"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/server.ts",
-      "source_location": "L8",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server",
-      "target": "apps_api_src_routes_credits_registercreditsroutes",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "apps/api/src/server.ts",
-      "source_location": "L62",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server_buildserver",
-      "target": "apps_api_src_routes_credits_registercreditsroutes"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/routes/jobs.ts",
-      "source_location": "L19",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_routes_jobs",
-      "target": "apps_api_src_config",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/routes/jobs.ts",
-      "source_location": "L19",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_routes_jobs",
-      "target": "apps_api_src_config_caption_styles",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/routes/jobs.ts",
-      "source_location": "L19",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_routes_jobs",
-      "target": "apps_api_src_config_pacing_tiers",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/routes/jobs.ts",
-      "source_location": "L47",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_routes_jobs",
-      "target": "apps_api_src_routes_jobs_approvecostbody",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/routes/jobs.ts",
-      "source_location": "L21",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_routes_jobs",
-      "target": "apps_api_src_routes_jobs_aspect_ratios",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/routes/jobs.ts",
-      "source_location": "L30",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_routes_jobs",
-      "target": "apps_api_src_routes_jobs_createjobbody",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/routes/jobs.ts",
-      "source_location": "L63",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_routes_jobs",
-      "target": "apps_api_src_routes_jobs_jobsroutedeps",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/routes/jobs.ts",
-      "source_location": "L72",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_routes_jobs",
-      "target": "apps_api_src_routes_jobs_jobtoresponse",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/routes/jobs.ts",
-      "source_location": "L90",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_routes_jobs",
-      "target": "apps_api_src_routes_jobs_registerjobsroutes",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/routes/jobs.ts",
-      "source_location": "L24",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_routes_jobs",
-      "target": "apps_api_src_routes_jobs_resolution_by_aspect_ratio",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/routes/jobs.ts",
-      "source_location": "L50",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_routes_jobs",
-      "target": "apps_api_src_routes_jobs_stage_by_status",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/routes/jobs.ts",
-      "source_location": "L4",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_routes_jobs",
-      "target": "packages_domain_src_index",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/routes/jobs.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_routes_jobs",
-      "target": "packages_providers_src_index",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/server.ts",
-      "source_location": "L9",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server",
-      "target": "apps_api_src_routes_jobs",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "apps/api/src/routes/jobs.ts",
-      "source_location": "L92",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_routes_jobs_registerjobsroutes",
-      "target": "apps_api_src_routes_jobs_createjobbody"
-    },
-    {
-      "relation": "references",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "apps/api/src/routes/jobs.ts",
-      "source_location": "L159",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_routes_jobs_registerjobsroutes",
-      "target": "apps_api_src_routes_jobs_approvecostbody"
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/routes/jobs.ts",
-      "source_location": "L67",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_routes_jobs_jobsroutedeps",
-      "target": "apps_api_src_routes_jobs_jobsroutedeps_buildcostoptions",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/routes/jobs.ts",
-      "source_location": "L66",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_routes_jobs_jobsroutedeps",
-      "target": "apps_api_src_routes_jobs_jobsroutedeps_buildjobrunnerdeps",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/routes/jobs.ts",
-      "source_location": "L144",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_routes_jobs_registerjobsroutes",
-      "target": "apps_api_src_routes_jobs_jobsroutedeps_buildjobrunnerdeps",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/routes/jobs.ts",
-      "source_location": "L124",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_routes_jobs_registerjobsroutes",
-      "target": "apps_api_src_routes_jobs_jobsroutedeps_buildcostoptions",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/routes/jobs.ts",
-      "source_location": "L155",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_routes_jobs_registerjobsroutes",
-      "target": "apps_api_src_routes_jobs_jobtoresponse",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/server.ts",
-      "source_location": "L9",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server",
-      "target": "apps_api_src_routes_jobs_registerjobsroutes",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "apps/api/src/server.ts",
-      "source_location": "L63",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server_buildserver",
-      "target": "apps_api_src_routes_jobs_registerjobsroutes"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L11",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server_test",
-      "target": "apps_api_src_server",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L11",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server_test",
-      "target": "apps_api_src_server_buildserver",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L365",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server_test",
-      "target": "apps_api_src_server_test_appwithtoken",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L118",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server_test",
-      "target": "apps_api_src_server_test_costoptions",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L36",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server_test",
-      "target": "apps_api_src_server_test_critiquepayload",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L27",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server_test",
-      "target": "apps_api_src_server_test_directorpayload",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L13",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server_test",
-      "target": "apps_api_src_server_test_execfileasync",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L73",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server_test",
-      "target": "apps_api_src_server_test_fakeimageprovider",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L102",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server_test",
-      "target": "apps_api_src_server_test_fakejobrunnerdeps",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L51",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server_test",
-      "target": "apps_api_src_server_test_fakellm",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L69",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server_test",
-      "target": "apps_api_src_server_test_fakemusic",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L57",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server_test",
-      "target": "apps_api_src_server_test_faketts",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L80",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server_test",
-      "target": "apps_api_src_server_test_fakevideorenderer",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L15",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server_test",
-      "target": "apps_api_src_server_test_research_result",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L17",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server_test",
-      "target": "apps_api_src_server_test_sceneraw",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L47",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server_test",
-      "target": "apps_api_src_server_test_usage",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L10",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server_test",
-      "target": "packages_providers_src_index",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L9",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server_test",
-      "target": "packages_video_engine_src_index",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L85",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server_test_fakevideorenderer",
-      "target": "apps_api_src_server_test_execfileasync",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L32",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server_test_directorpayload",
-      "target": "apps_api_src_server_test_sceneraw",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L53",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server_test_fakellm",
-      "target": "apps_api_src_server_test_usage",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L368",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server_test_appwithtoken",
-      "target": "apps_api_src_server_test_fakellm",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L105",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server_test_fakejobrunnerdeps",
-      "target": "apps_api_src_server_test_faketts",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L106",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server_test_fakejobrunnerdeps",
-      "target": "apps_api_src_server_test_fakemusic",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L108",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server_test_fakejobrunnerdeps",
-      "target": "apps_api_src_server_test_fakeimageprovider",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L114",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server_test_fakejobrunnerdeps",
-      "target": "apps_api_src_server_test_fakevideorenderer",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L368",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server_test_appwithtoken",
-      "target": "apps_api_src_server_test_fakejobrunnerdeps",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "apps/api/src/server.test.ts",
-      "source_location": "L366",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server_test_appwithtoken",
-      "target": "apps_api_src_server_buildserver"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/index.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "apps_api_src_index",
-      "target": "apps_api_src_server"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/server.ts",
-      "source_location": "L10",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server",
-      "target": "apps_api_src_routes_meta",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/server.ts",
-      "source_location": "L10",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server",
-      "target": "apps_api_src_routes_meta_registermetaroutes",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/server.ts",
-      "source_location": "L11",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server",
-      "target": "apps_api_src_routes_settings",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/server.ts",
-      "source_location": "L11",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server",
-      "target": "apps_api_src_routes_settings_registersettingsroutes",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/server.ts",
-      "source_location": "L25",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server",
-      "target": "apps_api_src_server_buildserver",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/server.ts",
-      "source_location": "L13",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server",
-      "target": "apps_api_src_server_buildserveroptions",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/server.ts",
-      "source_location": "L7",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server",
-      "target": "packages_domain_src_index",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/server.ts",
-      "source_location": "L6",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server",
-      "target": "packages_providers_src_index",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/server.ts",
-      "source_location": "L16",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server_buildserveroptions",
-      "target": "apps_api_src_server_buildserveroptions_buildcostoptions",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/server.ts",
-      "source_location": "L15",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_api_src_server_buildserveroptions",
-      "target": "apps_api_src_server_buildserveroptions_buildjobrunnerdeps",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/api/src/index.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "apps_api_src_index",
-      "target": "apps_api_src_server_buildserver"
-    },
-    {
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -12878,11 +12068,11 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/App.tsx",
-      "source_location": "L17",
+      "source_location": "L16",
       "weight": 1.0,
       "_origin": "ast",
       "source": "apps_web_src_app",
-      "target": "apps_web_src_components_settingsview_settingsview",
+      "target": "apps_web_src_components_resultplayer_resultplayer",
       "confidence_score": 1.0
     },
     {
@@ -12913,7 +12103,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L117",
+      "source_location": "L124",
       "weight": 1.0,
       "_origin": "ast",
       "source": "apps_web_src_api",
@@ -12946,7 +12136,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L109",
+      "source_location": "L116",
       "weight": 1.0,
       "_origin": "ast",
       "source": "apps_web_src_api",
@@ -12957,7 +12147,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L62",
+      "source_location": "L69",
       "weight": 1.0,
       "_origin": "ast",
       "source": "apps_web_src_api",
@@ -12968,7 +12158,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L129",
+      "source_location": "L136",
       "weight": 1.0,
       "_origin": "ast",
       "source": "apps_web_src_api",
@@ -12979,7 +12169,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L52",
+      "source_location": "L59",
       "weight": 1.0,
       "_origin": "ast",
       "source": "apps_web_src_api",
@@ -12990,7 +12180,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L134",
+      "source_location": "L141",
       "weight": 1.0,
       "_origin": "ast",
       "source": "apps_web_src_api",
@@ -13001,7 +12191,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L105",
+      "source_location": "L112",
       "weight": 1.0,
       "_origin": "ast",
       "source": "apps_web_src_api",
@@ -13012,7 +12202,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L113",
+      "source_location": "L120",
       "weight": 1.0,
       "_origin": "ast",
       "source": "apps_web_src_api",
@@ -13023,7 +12213,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L158",
+      "source_location": "L165",
       "weight": 1.0,
       "_origin": "ast",
       "source": "apps_web_src_api",
@@ -13045,7 +12235,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L81",
+      "source_location": "L88",
       "weight": 1.0,
       "_origin": "ast",
       "source": "apps_web_src_api",
@@ -13067,7 +12257,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L39",
+      "source_location": "L45",
       "weight": 1.0,
       "_origin": "ast",
       "source": "apps_web_src_api",
@@ -13078,7 +12268,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L125",
+      "source_location": "L132",
       "weight": 1.0,
       "_origin": "ast",
       "source": "apps_web_src_api",
@@ -13089,7 +12279,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L138",
+      "source_location": "L145",
       "weight": 1.0,
       "_origin": "ast",
       "source": "apps_web_src_api",
@@ -13100,7 +12290,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L162",
+      "source_location": "L169",
       "weight": 1.0,
       "_origin": "ast",
       "source": "apps_web_src_api",
@@ -13111,7 +12301,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L87",
+      "source_location": "L94",
       "weight": 1.0,
       "_origin": "ast",
       "source": "apps_web_src_api",
@@ -13122,7 +12312,18 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L121",
+      "source_location": "L39",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "apps_web_src_api",
+      "target": "apps_web_src_api_resultsummary",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/web/src/api.ts",
+      "source_location": "L128",
       "weight": 1.0,
       "_origin": "ast",
       "source": "apps_web_src_api",
@@ -13133,7 +12334,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L142",
+      "source_location": "L149",
       "weight": 1.0,
       "_origin": "ast",
       "source": "apps_web_src_api",
@@ -13155,7 +12356,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L144",
+      "source_location": "L151",
       "weight": 1.0,
       "_origin": "ast",
       "source": "apps_web_src_api",
@@ -13166,7 +12367,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L79",
+      "source_location": "L86",
       "weight": 1.0,
       "_origin": "ast",
       "source": "apps_web_src_api",
@@ -13204,9 +12405,9 @@
       "source_location": "L1",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "apps_web_src_components_resultplayer",
-      "target": "apps_web_src_api"
+      "target": "apps_web_src_api",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -13216,9 +12417,9 @@
       "source_location": "L2",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_web_src_components_settingsview",
-      "target": "apps_web_src_api",
-      "confidence_score": 1.0
+      "target": "apps_web_src_api"
     },
     {
       "relation": "imports_from",
@@ -13249,7 +12450,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L88",
+      "source_location": "L95",
       "weight": 1.0,
       "_origin": "ast",
       "source": "apps_web_src_api_request",
@@ -13313,6 +12514,30 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "apps_web_src_components_progressview_progressviewprops",
+      "target": "apps_web_src_api_jobview",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/web/src/components/ResultPlayer.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "apps_web_src_components_resultplayer",
+      "target": "apps_web_src_api_jobview",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "field",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/web/src/components/ResultPlayer.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "apps_web_src_components_resultplayer_resultplayerprops",
       "target": "apps_web_src_api_jobview",
       "confidence_score": 1.0
     },
@@ -13393,7 +12618,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L118",
+      "source_location": "L125",
       "weight": 1.0,
       "_origin": "ast",
       "source": "apps_web_src_api_approvecost",
@@ -13405,7 +12630,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L110",
+      "source_location": "L117",
       "weight": 1.0,
       "_origin": "ast",
       "source": "apps_web_src_api_createjob",
@@ -13417,7 +12642,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L135",
+      "source_location": "L142",
       "weight": 1.0,
       "_origin": "ast",
       "source": "apps_web_src_api_getcredits",
@@ -13429,7 +12654,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L106",
+      "source_location": "L113",
       "weight": 1.0,
       "_origin": "ast",
       "source": "apps_web_src_api_getformconfig",
@@ -13441,7 +12666,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L114",
+      "source_location": "L121",
       "weight": 1.0,
       "_origin": "ast",
       "source": "apps_web_src_api_getjob",
@@ -13453,7 +12678,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L159",
+      "source_location": "L166",
       "weight": 1.0,
       "_origin": "ast",
       "source": "apps_web_src_api_getsettings",
@@ -13465,7 +12690,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L139",
+      "source_location": "L146",
       "weight": 1.0,
       "_origin": "ast",
       "source": "apps_web_src_api_putcredits",
@@ -13477,7 +12702,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L163",
+      "source_location": "L170",
       "weight": 1.0,
       "_origin": "ast",
       "source": "apps_web_src_api_putsettings",
@@ -13489,7 +12714,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/api.ts",
-      "source_location": "L122",
+      "source_location": "L129",
       "weight": 1.0,
       "_origin": "ast",
       "source": "apps_web_src_api_retryjob",
@@ -13504,9 +12729,9 @@
       "source_location": "L2",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_web_src_components_settingsview",
-      "target": "apps_web_src_api_getformconfig",
-      "confidence_score": 1.0
+      "target": "apps_web_src_api_getformconfig"
     },
     {
       "relation": "calls",
@@ -13528,9 +12753,9 @@
       "source_location": "L1",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "apps_web_src_components_resultplayer",
-      "target": "apps_web_src_api_outputurl"
+      "target": "apps_web_src_api_outputurl",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -13538,7 +12763,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "apps/web/src/components/ResultPlayer.tsx",
-      "source_location": "L12",
+      "source_location": "L11",
       "weight": 1.0,
       "_origin": "ast",
       "source": "apps_web_src_components_resultplayer_resultplayer",
@@ -13552,9 +12777,9 @@
       "source_location": "L2",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_web_src_components_settingsview",
-      "target": "apps_web_src_api_getcredits",
-      "confidence_score": 1.0
+      "target": "apps_web_src_api_getcredits"
     },
     {
       "relation": "calls",
@@ -13576,9 +12801,9 @@
       "source_location": "L2",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_web_src_components_settingsview",
-      "target": "apps_web_src_api_putcredits",
-      "confidence_score": 1.0
+      "target": "apps_web_src_api_putcredits"
     },
     {
       "relation": "imports",
@@ -13588,9 +12813,9 @@
       "source_location": "L2",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_web_src_components_settingsview",
-      "target": "apps_web_src_api_settings",
-      "confidence_score": 1.0
+      "target": "apps_web_src_api_settings"
     },
     {
       "relation": "references",
@@ -13600,9 +12825,9 @@
       "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_web_src_components_settingsview_secretfieldconfig",
-      "target": "apps_web_src_api_settings",
-      "confidence_score": 1.0
+      "target": "apps_web_src_api_settings"
     },
     {
       "relation": "imports",
@@ -13612,9 +12837,9 @@
       "source_location": "L2",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_web_src_components_settingsview",
-      "target": "apps_web_src_api_getsettings",
-      "confidence_score": 1.0
+      "target": "apps_web_src_api_getsettings"
     },
     {
       "relation": "calls",
@@ -13636,9 +12861,9 @@
       "source_location": "L2",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_web_src_components_settingsview",
-      "target": "apps_web_src_api_putsettings",
-      "confidence_score": 1.0
+      "target": "apps_web_src_api_putsettings"
     },
     {
       "relation": "contains",
@@ -13720,6 +12945,30 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/web/src/components/ResultPlayer.tsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "apps_web_src_components_resultplayer",
+      "target": "apps_web_src_components_progressview_costline",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/web/src/components/ResultPlayer.tsx",
+      "source_location": "L38",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "apps_web_src_components_resultplayer_resultplayer",
+      "target": "apps_web_src_components_progressview_costline"
+    },
+    {
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/components/ProgressView.tsx",
@@ -13756,190 +13005,34 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "apps/web/src/components/SettingsView.tsx",
-      "source_location": "L53",
+      "source_file": "apps/web/src/components/ResultPlayer.tsx",
+      "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "apps_web_src_components_settingsview",
-      "target": "apps_web_src_components_settingsview_badge",
+      "source": "apps_web_src_components_resultplayer",
+      "target": "apps_web_src_components_resultplayer_resultplayer",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "apps/web/src/components/SettingsView.tsx",
-      "source_location": "L46",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_web_src_components_settingsview",
-      "target": "apps_web_src_components_settingsview_badge_styles",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/web/src/components/SettingsView.tsx",
-      "source_location": "L44",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_web_src_components_settingsview",
-      "target": "apps_web_src_components_settingsview_badgekind",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/web/src/components/SettingsView.tsx",
-      "source_location": "L156",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_web_src_components_settingsview",
-      "target": "apps_web_src_components_settingsview_model_fields",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/web/src/components/SettingsView.tsx",
-      "source_location": "L74",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_web_src_components_settingsview",
-      "target": "apps_web_src_components_settingsview_modelselect",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/web/src/components/SettingsView.tsx",
-      "source_location": "L63",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_web_src_components_settingsview",
-      "target": "apps_web_src_components_settingsview_modelselectprops",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/web/src/components/SettingsView.tsx",
-      "source_location": "L128",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_web_src_components_settingsview",
-      "target": "apps_web_src_components_settingsview_row",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/web/src/components/SettingsView.tsx",
-      "source_location": "L11",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_web_src_components_settingsview",
-      "target": "apps_web_src_components_settingsview_secret_fields",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/web/src/components/SettingsView.tsx",
+      "source_file": "apps/web/src/components/ResultPlayer.tsx",
       "source_location": "L4",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "apps_web_src_components_settingsview",
-      "target": "apps_web_src_components_settingsview_secretfieldconfig",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/web/src/components/SettingsView.tsx",
-      "source_location": "L108",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_web_src_components_settingsview",
-      "target": "apps_web_src_components_settingsview_section",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/web/src/components/SettingsView.tsx",
-      "source_location": "L169",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_web_src_components_settingsview",
-      "target": "apps_web_src_components_settingsview_settingsview",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/web/src/components/SettingsView.tsx",
-      "source_location": "L165",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_web_src_components_settingsview",
-      "target": "apps_web_src_components_settingsview_settingsviewprops",
+      "source": "apps_web_src_components_resultplayer",
+      "target": "apps_web_src_components_resultplayer_resultplayerprops",
       "confidence_score": 1.0
     },
     {
       "relation": "method",
       "confidence": "EXTRACTED",
-      "source_file": "apps/web/src/components/SettingsView.tsx",
-      "source_location": "L71",
+      "source_file": "apps/web/src/components/ResultPlayer.tsx",
+      "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "apps_web_src_components_settingsview_modelselectprops",
-      "target": "apps_web_src_components_settingsview_modelselectprops_onchange",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/web/src/components/SettingsView.tsx",
-      "source_location": "L70",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_web_src_components_settingsview_modelselectprops",
-      "target": "apps_web_src_components_settingsview_modelselectprops_oncustomchange",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/web/src/components/SettingsView.tsx",
-      "source_location": "L81",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_web_src_components_settingsview_modelselect",
-      "target": "apps_web_src_components_settingsview_modelselectprops_oncustomchange",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/web/src/components/SettingsView.tsx",
-      "source_location": "L82",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_web_src_components_settingsview_modelselect",
-      "target": "apps_web_src_components_settingsview_modelselectprops_onchange",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/web/src/components/SettingsView.tsx",
-      "source_location": "L166",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "apps_web_src_components_settingsview_settingsviewprops",
-      "target": "apps_web_src_components_settingsview_settingsviewprops_onclose",
+      "source": "apps_web_src_components_resultplayer_resultplayerprops",
+      "target": "apps_web_src_components_resultplayer_resultplayerprops_oncreateanother",
       "confidence_score": 1.0
     },
     {
@@ -14385,13 +13478,1023 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/routes/credits.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_routes_credits",
+      "target": "apps_api_src_routes_credits_creditsroutedeps"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/routes/credits.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_routes_credits",
+      "target": "apps_api_src_routes_credits_putcreditsbody"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/routes/credits.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_routes_credits",
+      "target": "apps_api_src_routes_credits_registercreditsroutes"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/routes/credits.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_routes_credits",
+      "target": "packages_providers_src_index"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/server.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_server",
+      "target": "apps_api_src_routes_credits"
+    },
+    {
+      "relation": "references",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/api/src/routes/credits.ts",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "apps_api_src_routes_credits_registercreditsroutes",
+      "target": "apps_api_src_routes_credits_putcreditsbody"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/server.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_server",
+      "target": "apps_api_src_routes_credits_registercreditsroutes"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/api/src/server.ts",
+      "source_location": "L62",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "apps_api_src_server_buildserver",
+      "target": "apps_api_src_routes_credits_registercreditsroutes"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/routes/jobs.ts",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_routes_jobs",
+      "target": "apps_api_src_config"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/routes/jobs.ts",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_routes_jobs",
+      "target": "apps_api_src_config_caption_styles"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/routes/jobs.ts",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_routes_jobs",
+      "target": "apps_api_src_config_pacing_tiers"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/routes/jobs.ts",
+      "source_location": "L47",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_routes_jobs",
+      "target": "apps_api_src_routes_jobs_approvecostbody"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/routes/jobs.ts",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_routes_jobs",
+      "target": "apps_api_src_routes_jobs_aspect_ratios"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/routes/jobs.ts",
+      "source_location": "L30",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_routes_jobs",
+      "target": "apps_api_src_routes_jobs_createjobbody"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/routes/jobs.ts",
+      "source_location": "L63",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_routes_jobs",
+      "target": "apps_api_src_routes_jobs_jobsroutedeps"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/routes/jobs.ts",
+      "source_location": "L72",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_routes_jobs",
+      "target": "apps_api_src_routes_jobs_jobtoresponse"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/routes/jobs.ts",
+      "source_location": "L90",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_routes_jobs",
+      "target": "apps_api_src_routes_jobs_registerjobsroutes"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/routes/jobs.ts",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_routes_jobs",
+      "target": "apps_api_src_routes_jobs_resolution_by_aspect_ratio"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/routes/jobs.ts",
+      "source_location": "L50",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_routes_jobs",
+      "target": "apps_api_src_routes_jobs_stage_by_status"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/routes/jobs.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_routes_jobs",
+      "target": "packages_domain_src_index"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/routes/jobs.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_routes_jobs",
+      "target": "packages_providers_src_index"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/server.ts",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_server",
+      "target": "apps_api_src_routes_jobs"
+    },
+    {
+      "relation": "references",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/api/src/routes/jobs.ts",
+      "source_location": "L92",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "apps_api_src_routes_jobs_registerjobsroutes",
+      "target": "apps_api_src_routes_jobs_createjobbody"
+    },
+    {
+      "relation": "references",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/api/src/routes/jobs.ts",
+      "source_location": "L159",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "apps_api_src_routes_jobs_registerjobsroutes",
+      "target": "apps_api_src_routes_jobs_approvecostbody"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/routes/jobs.ts",
+      "source_location": "L67",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_routes_jobs_jobsroutedeps",
+      "target": "apps_api_src_routes_jobs_jobsroutedeps_buildcostoptions"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/routes/jobs.ts",
+      "source_location": "L66",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_routes_jobs_jobsroutedeps",
+      "target": "apps_api_src_routes_jobs_jobsroutedeps_buildjobrunnerdeps"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/routes/jobs.ts",
+      "source_location": "L144",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_routes_jobs_registerjobsroutes",
+      "target": "apps_api_src_routes_jobs_jobsroutedeps_buildjobrunnerdeps"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/routes/jobs.ts",
+      "source_location": "L124",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_routes_jobs_registerjobsroutes",
+      "target": "apps_api_src_routes_jobs_jobsroutedeps_buildcostoptions"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/routes/jobs.ts",
+      "source_location": "L155",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_routes_jobs_registerjobsroutes",
+      "target": "apps_api_src_routes_jobs_jobtoresponse"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/server.ts",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_server",
+      "target": "apps_api_src_routes_jobs_registerjobsroutes"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/api/src/server.ts",
+      "source_location": "L63",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "apps_api_src_server_buildserver",
+      "target": "apps_api_src_routes_jobs_registerjobsroutes"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_server_test",
+      "target": "apps_api_src_server"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_server_test",
+      "target": "apps_api_src_server_buildserver"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L365",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_server_test",
+      "target": "apps_api_src_server_test_appwithtoken"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L118",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_server_test",
+      "target": "apps_api_src_server_test_costoptions"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L36",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_server_test",
+      "target": "apps_api_src_server_test_critiquepayload"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_server_test",
+      "target": "apps_api_src_server_test_directorpayload"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_server_test",
+      "target": "apps_api_src_server_test_execfileasync"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L73",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_server_test",
+      "target": "apps_api_src_server_test_fakeimageprovider"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L102",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_server_test",
+      "target": "apps_api_src_server_test_fakejobrunnerdeps"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L51",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_server_test",
+      "target": "apps_api_src_server_test_fakellm"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L69",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_server_test",
+      "target": "apps_api_src_server_test_fakemusic"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L57",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_server_test",
+      "target": "apps_api_src_server_test_faketts"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L80",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_server_test",
+      "target": "apps_api_src_server_test_fakevideorenderer"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_server_test",
+      "target": "apps_api_src_server_test_research_result"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_server_test",
+      "target": "apps_api_src_server_test_sceneraw"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L47",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_server_test",
+      "target": "apps_api_src_server_test_usage"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_server_test",
+      "target": "packages_providers_src_index"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_server_test",
+      "target": "packages_video_engine_src_index"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L85",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_server_test_fakevideorenderer",
+      "target": "apps_api_src_server_test_execfileasync"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L32",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_server_test_directorpayload",
+      "target": "apps_api_src_server_test_sceneraw"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L53",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_server_test_fakellm",
+      "target": "apps_api_src_server_test_usage"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L368",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_server_test_appwithtoken",
+      "target": "apps_api_src_server_test_fakellm"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L105",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_server_test_fakejobrunnerdeps",
+      "target": "apps_api_src_server_test_faketts"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L106",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_server_test_fakejobrunnerdeps",
+      "target": "apps_api_src_server_test_fakemusic"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L108",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_server_test_fakejobrunnerdeps",
+      "target": "apps_api_src_server_test_fakeimageprovider"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L114",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_server_test_fakejobrunnerdeps",
+      "target": "apps_api_src_server_test_fakevideorenderer"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L368",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_server_test_appwithtoken",
+      "target": "apps_api_src_server_test_fakejobrunnerdeps"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/api/src/server.test.ts",
+      "source_location": "L366",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "apps_api_src_server_test_appwithtoken",
+      "target": "apps_api_src_server_buildserver"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/index.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_index",
+      "target": "apps_api_src_server"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/server.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_server",
+      "target": "apps_api_src_routes_meta"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/server.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_server",
+      "target": "apps_api_src_routes_meta_registermetaroutes"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/server.ts",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_server",
+      "target": "apps_api_src_routes_settings"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/server.ts",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_server",
+      "target": "apps_api_src_routes_settings_registersettingsroutes"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/server.ts",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_server",
+      "target": "apps_api_src_server_buildserver"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/server.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_server",
+      "target": "apps_api_src_server_buildserveroptions"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/server.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_server",
+      "target": "packages_domain_src_index"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/server.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_server",
+      "target": "packages_providers_src_index"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/server.ts",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_server_buildserveroptions",
+      "target": "apps_api_src_server_buildserveroptions_buildcostoptions"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/server.ts",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_server_buildserveroptions",
+      "target": "apps_api_src_server_buildserveroptions_buildjobrunnerdeps"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/src/index.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_api_src_index",
+      "target": "apps_api_src_server_buildserver"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/web/src/components/SettingsView.tsx",
+      "source_location": "L53",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_web_src_components_settingsview",
+      "target": "apps_web_src_components_settingsview_badge"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/web/src/components/SettingsView.tsx",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_web_src_components_settingsview",
+      "target": "apps_web_src_components_settingsview_badge_styles"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/web/src/components/SettingsView.tsx",
+      "source_location": "L44",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_web_src_components_settingsview",
+      "target": "apps_web_src_components_settingsview_badgekind"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/web/src/components/SettingsView.tsx",
+      "source_location": "L156",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_web_src_components_settingsview",
+      "target": "apps_web_src_components_settingsview_model_fields"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/web/src/components/SettingsView.tsx",
+      "source_location": "L74",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_web_src_components_settingsview",
+      "target": "apps_web_src_components_settingsview_modelselect"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/web/src/components/SettingsView.tsx",
+      "source_location": "L63",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_web_src_components_settingsview",
+      "target": "apps_web_src_components_settingsview_modelselectprops"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/web/src/components/SettingsView.tsx",
+      "source_location": "L128",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_web_src_components_settingsview",
+      "target": "apps_web_src_components_settingsview_row"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/web/src/components/SettingsView.tsx",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_web_src_components_settingsview",
+      "target": "apps_web_src_components_settingsview_secret_fields"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/web/src/components/SettingsView.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_web_src_components_settingsview",
+      "target": "apps_web_src_components_settingsview_secretfieldconfig"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/web/src/components/SettingsView.tsx",
+      "source_location": "L108",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_web_src_components_settingsview",
+      "target": "apps_web_src_components_settingsview_section"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/web/src/components/SettingsView.tsx",
+      "source_location": "L169",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_web_src_components_settingsview",
+      "target": "apps_web_src_components_settingsview_settingsview"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/web/src/components/SettingsView.tsx",
+      "source_location": "L165",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_web_src_components_settingsview",
+      "target": "apps_web_src_components_settingsview_settingsviewprops"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/web/src/components/SettingsView.tsx",
+      "source_location": "L71",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_web_src_components_settingsview_modelselectprops",
+      "target": "apps_web_src_components_settingsview_modelselectprops_onchange"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/web/src/components/SettingsView.tsx",
+      "source_location": "L70",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_web_src_components_settingsview_modelselectprops",
+      "target": "apps_web_src_components_settingsview_modelselectprops_oncustomchange"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/web/src/components/SettingsView.tsx",
+      "source_location": "L81",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_web_src_components_settingsview_modelselect",
+      "target": "apps_web_src_components_settingsview_modelselectprops_oncustomchange"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/web/src/components/SettingsView.tsx",
+      "source_location": "L82",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_web_src_components_settingsview_modelselect",
+      "target": "apps_web_src_components_settingsview_modelselectprops_onchange"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/web/src/components/SettingsView.tsx",
+      "source_location": "L166",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "apps_web_src_components_settingsview_settingsviewprops",
+      "target": "apps_web_src_components_settingsview_settingsviewprops_onclose"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "packages/providers/src/persistence/client.ts",
       "source_location": "L57",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_client",
-      "target": "packages_providers_src_persistence_client_addcheckpointcolumnifmissing",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_client_addcheckpointcolumnifmissing"
     },
     {
       "relation": "contains",
@@ -14400,9 +14503,9 @@
       "source_location": "L75",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_client",
-      "target": "packages_providers_src_persistence_client_addresultsummarycolumnifmissing",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_client_addresultsummarycolumnifmissing"
     },
     {
       "relation": "contains",
@@ -14411,9 +14514,9 @@
       "source_location": "L66",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_client",
-      "target": "packages_providers_src_persistence_client_addstagedetailcolumnifmissing",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_client_addstagedetailcolumnifmissing"
     },
     {
       "relation": "contains",
@@ -14422,9 +14525,9 @@
       "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_client",
-      "target": "packages_providers_src_persistence_client_clickplaydb",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_client_clickplaydb"
     },
     {
       "relation": "contains",
@@ -14433,9 +14536,9 @@
       "source_location": "L97",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_client",
-      "target": "packages_providers_src_persistence_client_createdb",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_client_createdb"
     },
     {
       "relation": "contains",
@@ -14444,9 +14547,9 @@
       "source_location": "L47",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_client",
-      "target": "packages_providers_src_persistence_client_ensurewalletrow",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_client_ensurewalletrow"
     },
     {
       "relation": "contains",
@@ -14455,9 +14558,9 @@
       "source_location": "L92",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_client",
-      "target": "packages_providers_src_persistence_client_torow",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_client_torow"
     },
     {
       "relation": "imports_from",
@@ -14467,9 +14570,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_client",
-      "target": "packages_providers_src_persistence_schema",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_schema"
     },
     {
       "relation": "imports_from",
@@ -14503,9 +14606,9 @@
       "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_client",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_client"
     },
     {
       "relation": "imports_from",
@@ -14515,9 +14618,9 @@
       "source_location": "L2",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_client",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_client"
     },
     {
       "relation": "imports",
@@ -14539,9 +14642,9 @@
       "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_client_clickplaydb",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_client_clickplaydb"
     },
     {
       "relation": "references",
@@ -14779,9 +14882,9 @@
       "source_location": "L104",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_client_createdb",
-      "target": "packages_providers_src_persistence_client_ensurewalletrow",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_client_ensurewalletrow"
     },
     {
       "relation": "calls",
@@ -14791,9 +14894,9 @@
       "source_location": "L101",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_client_createdb",
-      "target": "packages_providers_src_persistence_client_addcheckpointcolumnifmissing",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_client_addcheckpointcolumnifmissing"
     },
     {
       "relation": "calls",
@@ -14803,9 +14906,9 @@
       "source_location": "L102",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_client_createdb",
-      "target": "packages_providers_src_persistence_client_addstagedetailcolumnifmissing",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_client_addstagedetailcolumnifmissing"
     },
     {
       "relation": "calls",
@@ -14815,9 +14918,9 @@
       "source_location": "L103",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_client_createdb",
-      "target": "packages_providers_src_persistence_client_addresultsummarycolumnifmissing",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_client_addresultsummarycolumnifmissing"
     },
     {
       "relation": "calls",
@@ -14827,9 +14930,9 @@
       "source_location": "L116",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_client_createdb",
-      "target": "packages_providers_src_persistence_client_torow",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_client_torow"
     },
     {
       "relation": "imports",
@@ -14851,9 +14954,9 @@
       "source_location": "L2",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_client_createdb",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_client_createdb"
     },
     {
       "relation": "imports_from",
@@ -14863,9 +14966,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository"
     },
     {
       "relation": "imports",
@@ -14875,9 +14978,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository_createjob",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_createjob"
     },
     {
       "relation": "imports",
@@ -14887,9 +14990,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository_createproject",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_createproject"
     },
     {
       "relation": "imports",
@@ -14899,9 +15002,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository_getjob",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_getjob"
     },
     {
       "relation": "imports",
@@ -14911,9 +15014,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository_getproject",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_getproject"
     },
     {
       "relation": "imports",
@@ -14923,9 +15026,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository_getwallet",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_getwallet"
     },
     {
       "relation": "imports",
@@ -14935,9 +15038,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository_listjobsbyproject",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_listjobsbyproject"
     },
     {
       "relation": "imports",
@@ -14947,9 +15050,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository_recoverorphanedjobs",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_recoverorphanedjobs"
     },
     {
       "relation": "imports",
@@ -14959,9 +15062,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository_setjobactualcost",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_setjobactualcost"
     },
     {
       "relation": "imports",
@@ -14971,9 +15074,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository_setjoberror",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_setjoberror"
     },
     {
       "relation": "imports",
@@ -14983,9 +15086,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository_setjobestimatedcost",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_setjobestimatedcost"
     },
     {
       "relation": "imports",
@@ -14995,9 +15098,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository_setjoboutputpath",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_setjoboutputpath"
     },
     {
       "relation": "imports",
@@ -15007,9 +15110,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository_setjobqcreport",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_setjobqcreport"
     },
     {
       "relation": "imports",
@@ -15019,9 +15122,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository_setwalletbalance",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_setwalletbalance"
     },
     {
       "relation": "contains",
@@ -15030,9 +15133,9 @@
       "source_location": "L22",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository_test_config",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_test_config"
     },
     {
       "relation": "imports",
@@ -15042,9 +15145,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository_tryspend",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_tryspend"
     },
     {
       "relation": "imports",
@@ -15054,9 +15157,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_repository_updatejobstatus",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_updatejobstatus"
     },
     {
       "relation": "imports_from",
@@ -15066,9 +15169,9 @@
       "source_location": "L20",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_types",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_types"
     },
     {
       "relation": "imports",
@@ -15078,9 +15181,9 @@
       "source_location": "L20",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository_test",
-      "target": "packages_providers_src_persistence_types_projectconfig",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_types_projectconfig"
     },
     {
       "relation": "imports_from",
@@ -15114,9 +15217,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_cost_index",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_cost_index"
     },
     {
       "relation": "imports_from",
@@ -15126,9 +15229,9 @@
       "source_location": "L7",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_job_state_machine",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_job_state_machine"
     },
     {
       "relation": "imports",
@@ -15138,9 +15241,9 @@
       "source_location": "L7",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_job_state_machine_progress_by_status",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_job_state_machine_progress_by_status"
     },
     {
       "relation": "imports",
@@ -15150,9 +15253,9 @@
       "source_location": "L7",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_job_state_machine_resumestatusforcheckpoint",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_job_state_machine_resumestatusforcheckpoint"
     },
     {
       "relation": "contains",
@@ -15161,9 +15264,9 @@
       "source_location": "L23",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_createjob",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_createjob"
     },
     {
       "relation": "contains",
@@ -15172,9 +15275,9 @@
       "source_location": "L11",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_createproject",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_createproject"
     },
     {
       "relation": "contains",
@@ -15183,9 +15286,9 @@
       "source_location": "L46",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_getjob",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_getjob"
     },
     {
       "relation": "contains",
@@ -15194,9 +15297,9 @@
       "source_location": "L18",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_getproject",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_getproject"
     },
     {
       "relation": "contains",
@@ -15205,9 +15308,9 @@
       "source_location": "L116",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_getwallet",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_getwallet"
     },
     {
       "relation": "contains",
@@ -15216,9 +15319,9 @@
       "source_location": "L51",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_listjobsbyproject",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_listjobsbyproject"
     },
     {
       "relation": "contains",
@@ -15227,9 +15330,9 @@
       "source_location": "L137",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_non_terminal_statuses",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_non_terminal_statuses"
     },
     {
       "relation": "contains",
@@ -15238,9 +15341,9 @@
       "source_location": "L155",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_recoverorphanedjobs",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_recoverorphanedjobs"
     },
     {
       "relation": "contains",
@@ -15249,9 +15352,9 @@
       "source_location": "L173",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_resetjobforretry",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_resetjobforretry"
     },
     {
       "relation": "contains",
@@ -15260,9 +15363,9 @@
       "source_location": "L85",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_setjobactualcost",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_setjobactualcost"
     },
     {
       "relation": "contains",
@@ -15271,9 +15374,9 @@
       "source_location": "L101",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_setjobcheckpoint",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_setjobcheckpoint"
     },
     {
       "relation": "contains",
@@ -15282,9 +15385,9 @@
       "source_location": "L97",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_setjoberror",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_setjoberror"
     },
     {
       "relation": "contains",
@@ -15293,9 +15396,9 @@
       "source_location": "L81",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_setjobestimatedcost",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_setjobestimatedcost"
     },
     {
       "relation": "contains",
@@ -15304,9 +15407,9 @@
       "source_location": "L93",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_setjoboutputpath",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_setjoboutputpath"
     },
     {
       "relation": "contains",
@@ -15315,9 +15418,9 @@
       "source_location": "L77",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_setjobprogress",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_setjobprogress"
     },
     {
       "relation": "contains",
@@ -15326,9 +15429,9 @@
       "source_location": "L89",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_setjobqcreport",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_setjobqcreport"
     },
     {
       "relation": "contains",
@@ -15337,9 +15440,9 @@
       "source_location": "L105",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_setjobresultsummary",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_setjobresultsummary"
     },
     {
       "relation": "contains",
@@ -15348,9 +15451,9 @@
       "source_location": "L122",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_setwalletbalance",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_setwalletbalance"
     },
     {
       "relation": "contains",
@@ -15359,9 +15462,9 @@
       "source_location": "L127",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_tryspend",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_tryspend"
     },
     {
       "relation": "contains",
@@ -15370,9 +15473,9 @@
       "source_location": "L61",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_updatejobstatus",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_updatejobstatus"
     },
     {
       "relation": "contains",
@@ -15381,9 +15484,9 @@
       "source_location": "L111",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_repository_wallet",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_wallet"
     },
     {
       "relation": "imports_from",
@@ -15393,9 +15496,9 @@
       "source_location": "L8",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_schema",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_schema"
     },
     {
       "relation": "imports",
@@ -15405,9 +15508,9 @@
       "source_location": "L8",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_schema_jobs",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_schema_jobs"
     },
     {
       "relation": "imports",
@@ -15417,9 +15520,9 @@
       "source_location": "L8",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_schema_jobstatus",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_schema_jobstatus"
     },
     {
       "relation": "imports",
@@ -15429,9 +15532,9 @@
       "source_location": "L8",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_schema_projects",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_schema_projects"
     },
     {
       "relation": "imports",
@@ -15441,9 +15544,9 @@
       "source_location": "L8",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_schema_wallet",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_schema_wallet"
     },
     {
       "relation": "imports_from",
@@ -15453,9 +15556,9 @@
       "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_types",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_types"
     },
     {
       "relation": "imports",
@@ -15465,9 +15568,9 @@
       "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_types_job",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_types_job"
     },
     {
       "relation": "imports",
@@ -15477,9 +15580,9 @@
       "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_types_jobfromrow",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_types_jobfromrow"
     },
     {
       "relation": "imports",
@@ -15489,9 +15592,9 @@
       "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_types_project",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_types_project"
     },
     {
       "relation": "imports",
@@ -15501,9 +15604,9 @@
       "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_types_projectconfig",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_types_projectconfig"
     },
     {
       "relation": "imports",
@@ -15513,9 +15616,9 @@
       "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_types_projectfromrow",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_types_projectfromrow"
     },
     {
       "relation": "imports",
@@ -15525,9 +15628,9 @@
       "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_persistence_types_resultsummary",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_types_resultsummary"
     },
     {
       "relation": "imports_from",
@@ -15537,9 +15640,9 @@
       "source_location": "L4",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_pipeline_types",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_pipeline_types"
     },
     {
       "relation": "imports",
@@ -15549,9 +15652,9 @@
       "source_location": "L4",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_pipeline_types_pipelinecheckpoint",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_pipeline_types_pipelinecheckpoint"
     },
     {
       "relation": "imports_from",
@@ -15561,9 +15664,9 @@
       "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_qc_types",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_qc_types"
     },
     {
       "relation": "imports",
@@ -15573,9 +15676,9 @@
       "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository",
-      "target": "packages_providers_src_qc_types_qcreport",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_qc_types_qcreport"
     },
     {
       "relation": "imports",
@@ -15681,9 +15784,9 @@
       "source_location": "L174",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository_resetjobforretry",
-      "target": "packages_providers_src_persistence_repository_getjob",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_getjob"
     },
     {
       "relation": "imports",
@@ -15885,9 +15988,9 @@
       "source_location": "L128",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_repository_tryspend",
-      "target": "packages_providers_src_persistence_repository_getwallet",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_repository_getwallet"
     },
     {
       "relation": "references",
@@ -15968,9 +16071,9 @@
       "source_location": "L7",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_schema",
-      "target": "packages_providers_src_persistence_schema_job_statuses",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_schema_job_statuses"
     },
     {
       "relation": "contains",
@@ -15979,9 +16082,9 @@
       "source_location": "L36",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_schema",
-      "target": "packages_providers_src_persistence_schema_jobs",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_schema_jobs"
     },
     {
       "relation": "contains",
@@ -15990,9 +16093,9 @@
       "source_location": "L19",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_schema",
-      "target": "packages_providers_src_persistence_schema_jobstatus",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_schema_jobstatus"
     },
     {
       "relation": "contains",
@@ -16001,9 +16104,9 @@
       "source_location": "L27",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_schema",
-      "target": "packages_providers_src_persistence_schema_projects",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_schema_projects"
     },
     {
       "relation": "contains",
@@ -16012,9 +16115,9 @@
       "source_location": "L67",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "packages_providers_src_persistence_schema",
-      "target": "packages_providers_src_persistence_schema_wallet",
-      "confidence_score": 1.0
+      "target": "packages_providers_src_persistence_schema_wallet"
     },
     {
       "relation": "imports_from",
@@ -28268,39 +28371,6 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "apps/web/src/components/ResultPlayer.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "apps_web_src_components_resultplayer",
-      "target": "apps_web_src_components_resultplayer_resultplayer"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/web/src/components/ResultPlayer.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "apps_web_src_components_resultplayer",
-      "target": "apps_web_src_components_resultplayer_resultplayerprops"
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/web/src/components/ResultPlayer.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "apps_web_src_components_resultplayer_resultplayerprops",
-      "target": "apps_web_src_components_resultplayer_resultplayerprops_oncreateanother"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
       "source_file": "apps/web/tsconfig.json",
       "source_location": "L3",
       "weight": 1.0,
@@ -31014,5 +31084,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "8b9d2073748d334ad9860d17948c7b40c7984693"
+  "built_at_commit": "aa4f58e4fe42d16f2ab59134acb97360441aa95f"
 }

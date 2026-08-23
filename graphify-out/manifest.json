@@ -125,8 +125,8 @@
     "semantic_hash": ""
   },
   "docs/IMPLEMENTATION-PLAN.md": {
-    "mtime": 1787487612.630773,
-    "ast_hash": "6e0f57093c76c1cccd887ea75b43f023",
+    "mtime": 1787501281.2551346,
+    "ast_hash": "a568cd043e9e4dd8e9b59b0741beca7a",
     "semantic_hash": ""
   },
   "pnpm-workspace.yaml": {
@@ -865,8 +865,8 @@
     "semantic_hash": ""
   },
   "apps/api/src/routes/jobs.ts": {
-    "mtime": 1787462447.2014437,
-    "ast_hash": "02a946734602c152df49785ce1c83320",
+    "mtime": 1787501039.0124645,
+    "ast_hash": "4ddf9be410b5aa34acccc344e7f86698",
     "semantic_hash": ""
   },
   "apps/api/src/routes/meta.ts": {
@@ -875,8 +875,8 @@
     "semantic_hash": ""
   },
   "apps/web/src/api.ts": {
-    "mtime": 1787487520.5161192,
-    "ast_hash": "9fa5ff140af7275643fff4c8a3fb29a0",
+    "mtime": 1787501099.363833,
+    "ast_hash": "2c2a739575ae6451dcd9594fea6faf4d",
     "semantic_hash": ""
   },
   "apps/web/src/components/ProgressView.tsx": {
@@ -1179,36 +1179,6 @@
     "ast_hash": "40bb26bb9a0fb8da25ccabe0f4e98f81",
     "semantic_hash": ""
   },
-  ".claude/agents/agents-orchestrator.md": {
-    "mtime": 1786935363.2602942,
-    "ast_hash": "a47e509bb98047195f93ae3dbae2d453",
-    "semantic_hash": ""
-  },
-  ".claude/agents/engineering-voice-ai-integration-engineer.md": {
-    "mtime": 1786935363.7848713,
-    "ast_hash": "e0b2fb51ad9f57901a04c1ab47f51362",
-    "semantic_hash": ""
-  },
-  ".claude/agents/marketing-content-creator.md": {
-    "mtime": 1786935363.3958666,
-    "ast_hash": "9e2ade728189a0685228c2a64113c864",
-    "semantic_hash": ""
-  },
-  ".claude/agents/marketing-short-video-editing-coach.md": {
-    "mtime": 1786935363.4868367,
-    "ast_hash": "b3530d252459aa424fcefc98a026eca1",
-    "semantic_hash": ""
-  },
-  ".claude/agents/marketing-social-media-strategist.md": {
-    "mtime": 1786935363.5791254,
-    "ast_hash": "681cc9869f74852d38972c106ed88b1d",
-    "semantic_hash": ""
-  },
-  ".claude/agents/marketing-video-optimization-specialist.md": {
-    "mtime": 1786935363.6880612,
-    "ast_hash": "8f703f9e970993942668c069c1c28701",
-    "semantic_hash": ""
-  },
   "packages/providers/src/qc/checks/target-duration-match.test.ts": {
     "mtime": 1787408651.7359245,
     "ast_hash": "5a6f3f76de9d30fcf226d688b849c584",
@@ -1230,8 +1200,8 @@
     "semantic_hash": ""
   },
   "apps/web/src/components/wizard/Wizard.tsx": {
-    "mtime": 1787460917.3188186,
-    "ast_hash": "7d00d644496ffa352b079389915882d8",
+    "mtime": 1787501147.5946772,
+    "ast_hash": "8c26a162b541a7f9d25a22f1ae2b22f6",
     "semantic_hash": ""
   },
   "apps/api/src/routes/credits.ts": {

@@ -12,6 +12,7 @@ const STEPS = [
   { key: "legendas", label: "Legendas" },
   { key: "abertura", label: "Abertura/Fechamento" },
   { key: "efeitos", label: "Efeitos/Transições" },
+  { key: "providers", label: "Providers" },
   { key: "revisao", label: "Revisão/Custo" },
 ] as const;
 
@@ -50,6 +51,7 @@ interface FormState {
   captionChunkLevel: (typeof CHUNK_SIZE_LEVELS)[number]["level"];
   showTextOverlays: boolean;
   transitionSpeedLevel: (typeof TRANSITION_SPEED_LEVELS)[number]["level"];
+  useOwnProviders: boolean;
   introEnabled: boolean;
   introText: string;
   introTransition: TransitionType;
@@ -72,6 +74,7 @@ const INITIAL_STATE: FormState = {
   captionChunkLevel: "medias",
   showTextOverlays: true,
   transitionSpeedLevel: "media",
+  useOwnProviders: false,
   introEnabled: false,
   introText: "",
   introTransition: "crossfade",
@@ -151,6 +154,7 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
       captionChunkSize: CHUNK_SIZE_LEVELS.find((l) => l.level === form.captionChunkLevel)!.value,
       showTextOverlays: form.showTextOverlays,
       transitionDurationFrames: TRANSITION_SPEED_LEVELS.find((l) => l.level === form.transitionSpeedLevel)!.value,
+      useOwnProviders: form.useOwnProviders,
       intro: form.introEnabled
         ? { mode: "generated", text: form.introText.trim() || undefined, transition: form.introTransition }
         : undefined,
@@ -507,6 +511,27 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
           </div>
         )}
 
+        {step.key === "providers" && (
+          <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-1.5">
+              <span className={labelClass}>Chaves usadas na geração</span>
+              <div className="flex gap-2">
+                <Chip active={!form.useOwnProviders} onClick={() => update("useOwnProviders", false)}>
+                  Usar sistema (recomendado)
+                </Chip>
+                <Chip active={form.useOwnProviders} onClick={() => update("useOwnProviders", true)}>
+                  Usar minhas próprias chaves
+                </Chip>
+              </div>
+              <p className="text-sm text-neutral-500">
+                {form.useOwnProviders
+                  ? "Este vídeo usa suas próprias chaves de API (configuradas em Configurações) — não debita do seu saldo de créditos. Sem chave própria configurada pra algum provedor, a geração falha nessa etapa."
+                  : "Este vídeo usa os modelos/chaves do sistema — debita do saldo de créditos na aprovação do custo estimado."}
+              </p>
+            </div>
+          </div>
+        )}
+
         {step.key === "revisao" && (
           <div className="flex flex-col gap-4">
             <dl className="grid grid-cols-1 gap-x-6 gap-y-3 rounded-md border border-neutral-800 bg-neutral-900/50 p-4 text-sm sm:grid-cols-2">
@@ -555,6 +580,10 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
                 <dd className="text-neutral-100">
                   {TRANSITION_SPEED_LEVELS.find((l) => l.level === form.transitionSpeedLevel)!.label}
                 </dd>
+              </div>
+              <div>
+                <dt className="text-neutral-500">Chaves</dt>
+                <dd className="text-neutral-100">{form.useOwnProviders ? "Minhas próprias" : "Sistema (debita créditos)"}</dd>
               </div>
               <div>
                 <dt className="text-neutral-500">Abertura</dt>

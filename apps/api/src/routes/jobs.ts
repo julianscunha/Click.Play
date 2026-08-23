@@ -43,6 +43,7 @@ const CreateJobBody = z.object({
   captionChunkSize: z.number().int().min(1).optional(),
   showTextOverlays: z.boolean().optional(),
   transitionDurationFrames: z.number().int().positive().optional(),
+  useOwnProviders: z.boolean().optional(),
 });
 
 const ApproveCostBody = z.object({ approved: z.boolean() });
@@ -64,7 +65,7 @@ const STAGE_BY_STATUS: Record<JobStatus, string> = {
 export interface JobsRouteDeps {
   db: ClickPlayDb;
   /** Chamado por job (não montado uma vez no boot) — reflete keys/modelo salvos via PUT /settings sem exigir restart. */
-  buildJobRunnerDeps(tier?: QualityTier, language?: string): JobRunnerDeps;
+  buildJobRunnerDeps(tier?: QualityTier, language?: string, useOwnProviders?: boolean): JobRunnerDeps;
   buildCostOptions(): CostEstimateOptions;
   runsDir: string;
   gate: ReturnType<typeof createCostApprovalGate>;
@@ -112,6 +113,7 @@ export function registerJobsRoutes(app: FastifyInstance, deps: JobsRouteDeps): v
       captionChunkSize,
       showTextOverlays,
       transitionDurationFrames,
+      useOwnProviders,
     } = parsed.data;
     if (intro?.mode === "upload" || outro?.mode === "upload") {
       return reply.status(422).send({
@@ -139,12 +141,13 @@ export function registerJobsRoutes(app: FastifyInstance, deps: JobsRouteDeps): v
         captionChunkSize,
         showTextOverlays,
         transitionDurationFrames,
+        useOwnProviders,
       },
     });
     const runDir = path.join(deps.runsDir, project.id);
     const job = await createJob(deps.db, { projectId: project.id, runDir });
 
-    startJob(deps.db, job.id, deps.buildJobRunnerDeps(qualityTier, language), {
+    startJob(deps.db, job.id, deps.buildJobRunnerDeps(qualityTier, language, useOwnProviders), {
       approveCost: (estimate) => deps.gate.waitForApproval(job.id),
       onLog: (message) => app.log.info({ jobId: job.id }, message),
     });
@@ -176,7 +179,9 @@ export function registerJobsRoutes(app: FastifyInstance, deps: JobsRouteDeps): v
 
     // Débito de créditos na aprovação (1 crédito = US$1) — só quando o custo estimado é conhecido;
     // "unknown" segue sem gate de crédito, mesma lógica que já não bloqueia hoje pra custo desconhecido.
-    if (parsed.data.approved && job.estimatedCost?.total.status === "known") {
+    // useOwnProviders (§11A Bloco 6, Providers): job rodando com chave própria não debita.
+    const project = await getProject(deps.db, job.projectId);
+    if (parsed.data.approved && job.estimatedCost?.total.status === "known" && !project?.config.useOwnProviders) {
       const spent = await trySpend(deps.db, job.estimatedCost.total.usd);
       if (!spent) {
         return reply.status(402).send({
@@ -200,7 +205,7 @@ export function registerJobsRoutes(app: FastifyInstance, deps: JobsRouteDeps): v
     const retried = await retryJob(
       deps.db,
       job.id,
-      deps.buildJobRunnerDeps(project?.config.qualityTier, project?.config.language),
+      deps.buildJobRunnerDeps(project?.config.qualityTier, project?.config.language, project?.config.useOwnProviders),
       {
         approveCost: (estimate) => deps.gate.waitForApproval(job.id),
         onLog: (message) => app.log.info({ jobId: job.id }, message),

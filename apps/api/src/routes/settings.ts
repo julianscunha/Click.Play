@@ -2,11 +2,17 @@ import type { FastifyInstance } from "fastify";
 import { z } from "zod";
 import { readEnvFile, writeEnvFile } from "../env-file.js";
 
-/** Chaves/modelo geridos pela tela de settings — resto do .env (DATABASE_URL, PORT, RUNS_DIR...) fica fora, é infra de boot, não credencial de provider. */
+/** Chaves/modelo geridos pela tela de settings — resto do .env (DATABASE_URL, PORT, RUNS_DIR...) fica fora, é infra de boot, não credencial de provider.
+ * *_SYSTEM (§11A Bloco 6, Providers): placeholder provisório pra chave "do sistema" (usada quando o job escolhe
+ * "usar sistema", debita créditos) — hoje o mesmo usuário preenche as duas, o painel admin de verdade é Fase 22.
+ * Se *_SYSTEM ficar vazio, providers.ts cai pro campo sem sufixo (continuidade com a config já existente). */
 const SECRET_FIELDS = [
   "OPENROUTER_API_KEY",
+  "OPENROUTER_API_KEY_SYSTEM",
   "GOOGLE_API_KEY",
+  "GOOGLE_API_KEY_SYSTEM",
   "FAL_API_KEY",
+  "FAL_API_KEY_SYSTEM",
   "PEXELS_API_KEY",
   "PIXABAY_API_KEY",
 ] as const;
@@ -26,6 +32,7 @@ const noNewlines = z.string().regex(/^[^\r\n]*$/, "não pode conter quebra de li
 
 const SettingsBody = z.object({
   OPENROUTER_API_KEY: noNewlines.optional(),
+  OPENROUTER_API_KEY_SYSTEM: noNewlines.optional(),
   OPENROUTER_MODEL: noNewlines.optional(),
   OPENROUTER_MODEL_FALLBACK: noNewlines.optional(),
   IMAGE_MODEL: noNewlines.optional(),
@@ -33,7 +40,9 @@ const SettingsBody = z.object({
   TTS_MODEL_FALLBACK: noNewlines.optional(),
   MUSIC_PROVIDER: noNewlines.optional(),
   GOOGLE_API_KEY: noNewlines.optional(),
+  GOOGLE_API_KEY_SYSTEM: noNewlines.optional(),
   FAL_API_KEY: noNewlines.optional(),
+  FAL_API_KEY_SYSTEM: noNewlines.optional(),
   PEXELS_API_KEY: noNewlines.optional(),
   PIXABAY_API_KEY: noNewlines.optional(),
 });

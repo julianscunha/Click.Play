@@ -66,6 +66,8 @@ export interface PipelineOptions {
   language?: string;
   /** Não usado pelo orchestrator — persistido só pra retry reconstruir os providers com o mesmo tier (§11A Bloco 2 item 3, ver buildJobRunnerDeps). */
   qualityTier?: QualityTier;
+  /** Não usado pelo orchestrator — persistido só pra retry rebuildar os providers com a mesma escolha de chave (§11A Bloco 6, Providers). true = chaves próprias do usuário (Settings), sem debitar créditos; false/undefined = chaves do sistema, debita. */
+  useOwnProviders?: boolean;
   direction?: string;
   /** Se false, instrui o Creative Director a não emitir elementos animated_text (§11A Bloco 4 item 7). Default true. */
   showTextOverlays?: boolean;

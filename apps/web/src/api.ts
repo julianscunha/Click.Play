@@ -80,6 +80,7 @@ export interface CreateJobInput {
   captionChunkSize?: number;
   showTextOverlays?: boolean;
   transitionDurationFrames?: number;
+  useOwnProviders?: boolean;
   intro?: IntroOutroConfig;
   outro?: IntroOutroConfig;
 }
@@ -151,6 +152,7 @@ export type SecretField = { set: true; masked: string } | { set: false };
 
 export interface Settings {
   OPENROUTER_API_KEY: SecretField;
+  OPENROUTER_API_KEY_SYSTEM: SecretField;
   OPENROUTER_MODEL: string;
   OPENROUTER_MODEL_FALLBACK: string;
   IMAGE_MODEL: string;
@@ -158,7 +160,9 @@ export interface Settings {
   TTS_MODEL_FALLBACK: string;
   MUSIC_PROVIDER: string;
   GOOGLE_API_KEY: SecretField;
+  GOOGLE_API_KEY_SYSTEM: SecretField;
   FAL_API_KEY: SecretField;
+  FAL_API_KEY_SYSTEM: SecretField;
   PEXELS_API_KEY: SecretField;
   PIXABAY_API_KEY: SecretField;
 }
