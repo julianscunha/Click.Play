@@ -57,3 +57,16 @@ export const jobs = sqliteTable("jobs", {
   createdAt: integer("created_at", { mode: "timestamp_ms" }).notNull(),
   updatedAt: integer("updated_at", { mode: "timestamp_ms" }).notNull(),
 });
+
+/**
+ * Saldo de créditos (1 crédito = US$1, decisão do usuário) — linha única
+ * `id="default"`, single-user hoje (sem multi-tenant, Fase 22). Debitado na
+ * aprovação do custo estimado (`POST /jobs/:id/approve-cost`), reabastecido
+ * manualmente via `PUT /credits` (tela Configurações — sem billing real ainda).
+ */
+export const wallet = sqliteTable("wallet", {
+  id: text("id").primaryKey(),
+  balanceUsd: real("balance_usd").notNull(),
+  consumedUsd: real("consumed_usd").notNull(),
+  updatedAt: integer("updated_at", { mode: "timestamp_ms" }).notNull(),
+});

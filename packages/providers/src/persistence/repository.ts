@@ -5,7 +5,7 @@ import type { PipelineCheckpoint } from "../pipeline/types.js";
 import type { QcReport } from "../qc/types.js";
 import type { ClickPlayDb } from "./client.js";
 import { PROGRESS_BY_STATUS, resumeStatusForCheckpoint } from "./job-state-machine.js";
-import { jobs, type JobStatus, projects } from "./schema.js";
+import { jobs, type JobStatus, projects, wallet } from "./schema.js";
 import { type Job, jobFromRow, type Project, type ProjectConfig, projectFromRow, type ResultSummary } from "./types.js";
 
 export async function createProject(db: ClickPlayDb, input: { topic: string; config: ProjectConfig }): Promise<Project> {
@@ -104,6 +104,34 @@ export async function setJobCheckpoint(db: ClickPlayDb, id: string, checkpoint: 
 
 export async function setJobResultSummary(db: ClickPlayDb, id: string, resultSummary: ResultSummary): Promise<void> {
   await db.update(jobs).set({ resultSummary, updatedAt: new Date() }).where(eq(jobs.id, id));
+}
+
+const WALLET_ID = "default";
+
+export interface Wallet {
+  balanceUsd: number;
+  consumedUsd: number;
+}
+
+export async function getWallet(db: ClickPlayDb): Promise<Wallet> {
+  const row = await db.select().from(wallet).where(eq(wallet.id, WALLET_ID)).get();
+  return row ? { balanceUsd: row.balanceUsd, consumedUsd: row.consumedUsd } : { balanceUsd: 0, consumedUsd: 0 };
+}
+
+/** Reabastecimento manual (tela Configurações — sem billing real ainda, ver §11 decisão de Fase 22). Define o saldo exato, não soma. */
+export async function setWalletBalance(db: ClickPlayDb, balanceUsd: number): Promise<void> {
+  await db.update(wallet).set({ balanceUsd, updatedAt: new Date() }).where(eq(wallet.id, WALLET_ID));
+}
+
+/** Debita se houver saldo suficiente (1 crédito = US$1); `false` sem debitar nada se insuficiente. Chamado na aprovação do custo estimado, não no fim real do job. */
+export async function trySpend(db: ClickPlayDb, amountUsd: number): Promise<boolean> {
+  const current = await getWallet(db);
+  if (current.balanceUsd < amountUsd) return false;
+  await db
+    .update(wallet)
+    .set({ balanceUsd: current.balanceUsd - amountUsd, consumedUsd: current.consumedUsd + amountUsd, updatedAt: new Date() })
+    .where(eq(wallet.id, WALLET_ID));
+  return true;
 }
 
 const NON_TERMINAL_STATUSES: JobStatus[] = [

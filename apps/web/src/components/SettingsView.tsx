@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getFormConfig, getSettings, putSettings, type Settings } from "../api.js";
+import { getCredits, getFormConfig, getSettings, putCredits, putSettings, type Settings } from "../api.js";
 
 interface SecretFieldConfig {
   key: keyof Settings;
@@ -177,6 +177,34 @@ export function SettingsView({ onClose }: SettingsViewProps) {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [saved, setSaved] = useState(false);
+  const [creditsBalance, setCreditsBalance] = useState("");
+  const [creditsConsumed, setCreditsConsumed] = useState<number | null>(null);
+  const [savingCredits, setSavingCredits] = useState(false);
+  const [creditsSaved, setCreditsSaved] = useState(false);
+
+  useEffect(() => {
+    getCredits().then((c) => {
+      setCreditsBalance(c.balanceUsd.toFixed(2));
+      setCreditsConsumed(c.consumedUsd);
+    });
+  }, []);
+
+  async function handleSaveCredits() {
+    const value = Number(creditsBalance);
+    if (!Number.isFinite(value) || value < 0) return;
+    setSavingCredits(true);
+    setCreditsSaved(false);
+    try {
+      const updated = await putCredits(value);
+      setCreditsBalance(updated.balanceUsd.toFixed(2));
+      setCreditsConsumed(updated.consumedUsd);
+      setCreditsSaved(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : String(err));
+    } finally {
+      setSavingCredits(false);
+    }
+  }
 
   useEffect(() => {
     Promise.all([getSettings(), getFormConfig()])
@@ -413,6 +441,40 @@ export function SettingsView({ onClose }: SettingsViewProps) {
             <option value="lyria">Gerada por IA — Lyria via OpenRouter</option>
           </select>
         </Row>
+      </Section>
+
+      <Section
+        title="Créditos"
+        description="1 crédito = US$ 1. Debitado do saldo quando você aprova o custo estimado de um vídeo. Sem billing real ainda — saldo ajustado manualmente aqui."
+      >
+        <div className="flex items-end gap-3">
+          <div className="flex flex-col gap-1.5">
+            <label htmlFor="creditsBalance" className="text-sm font-medium text-neutral-200">
+              Saldo
+            </label>
+            <input
+              id="creditsBalance"
+              type="number"
+              min={0}
+              step="0.01"
+              value={creditsBalance}
+              onChange={(e) => setCreditsBalance(e.target.value)}
+              className="w-40 rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-neutral-50 focus:border-neutral-400 focus:outline-none"
+            />
+          </div>
+          <button
+            type="button"
+            onClick={handleSaveCredits}
+            disabled={savingCredits}
+            className="rounded-md border border-neutral-600 px-3 py-2 text-sm font-medium text-neutral-200 hover:bg-neutral-800 disabled:opacity-50"
+          >
+            {savingCredits ? "Salvando..." : "Definir saldo"}
+          </button>
+          {creditsConsumed !== null && (
+            <p className="pb-2.5 text-xs text-neutral-500">Consumido até agora: US$ {creditsConsumed.toFixed(2)}</p>
+          )}
+        </div>
+        {creditsSaved && <p className="text-sm text-emerald-400">Saldo atualizado.</p>}
       </Section>
 
       <div className="flex flex-col gap-4">

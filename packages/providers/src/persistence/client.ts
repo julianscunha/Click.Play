@@ -33,7 +33,25 @@ CREATE TABLE IF NOT EXISTS jobs (
   created_at INTEGER NOT NULL,
   updated_at INTEGER NOT NULL
 );
+CREATE TABLE IF NOT EXISTS wallet (
+  id TEXT PRIMARY KEY,
+  balance_usd REAL NOT NULL,
+  consumed_usd REAL NOT NULL,
+  updated_at INTEGER NOT NULL
+);
 `;
+
+/** Saldo inicial em créditos (1 crédito = US$1) pra quem nunca configurou nada — evita bloquear o fluxo padrão logo na 1ª aprovação de custo. */
+const DEFAULT_WALLET_BALANCE_USD = 1000;
+
+function ensureWalletRow(sqlite: DatabaseSync): void {
+  const row = sqlite.prepare("SELECT id FROM wallet WHERE id = ?").get("default");
+  if (!row) {
+    sqlite
+      .prepare("INSERT INTO wallet (id, balance_usd, consumed_usd, updated_at) VALUES (?, ?, ?, ?)")
+      .run("default", DEFAULT_WALLET_BALANCE_USD, 0, Date.now());
+  }
+}
 
 /** Coluna adicionada após o deploy inicial — bancos existentes não ganham via CREATE TABLE IF NOT EXISTS. */
 function addCheckpointColumnIfMissing(sqlite: DatabaseSync): void {
@@ -83,6 +101,7 @@ export function createDb(sqliteFilePath: string): ClickPlayDb {
   addCheckpointColumnIfMissing(sqlite);
   addStageDetailColumnIfMissing(sqlite);
   addResultSummaryColumnIfMissing(sqlite);
+  ensureWalletRow(sqlite);
 
   return drizzle(async (sqlText, params, method) => {
     const stmt = sqlite.prepare(sqlText);

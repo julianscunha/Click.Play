@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import {
   approveCost,
   createJob,
+  getCredits,
   getFormConfig,
   getJob,
   retryJob,
   UnauthorizedError,
   type CreateJobInput,
+  type Credits,
   type FormConfig,
   type JobView,
 } from "./api.js";
@@ -26,9 +28,19 @@ export function App() {
   const [job, setJob] = useState<JobView | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [approving, setApproving] = useState(false);
+  const [approveError, setApproveError] = useState<string | null>(null);
   const [retrying, setRetrying] = useState(false);
   const [createError, setCreateError] = useState<string | null>(null);
   const [showSettings, setShowSettings] = useState(false);
+  const [credits, setCredits] = useState<Credits | null>(null);
+
+  function refreshCredits() {
+    getCredits()
+      .then(setCredits)
+      .catch(() => {
+        // Widget de saldo é informativo — falha de rede pontual não deve travar o resto da tela.
+      });
+  }
 
   useEffect(() => {
     getFormConfig()
@@ -37,6 +49,7 @@ export function App() {
         if (err instanceof UnauthorizedError) setNeedsToken(true);
         else setConfigError(err instanceof Error ? err.message : String(err));
       });
+    refreshCredits();
   }, []);
 
   useEffect(() => {
@@ -73,11 +86,17 @@ export function App() {
     }
   }
 
-  async function handleApprove(approved: boolean) {
-    if (!jobId) return;
+  async function handleApprove(approved: boolean): Promise<boolean> {
+    if (!jobId) return false;
     setApproving(true);
+    setApproveError(null);
     try {
       await approveCost(jobId, approved);
+      refreshCredits();
+      return true;
+    } catch (err) {
+      setApproveError(err instanceof Error ? err.message : String(err));
+      return false;
     } finally {
       setApproving(false);
     }
@@ -101,16 +120,25 @@ export function App() {
 
   return (
     <div className="min-h-screen bg-neutral-950 px-4 py-12 text-neutral-50">
-      <header className="mx-auto mb-10 flex max-w-xl items-start justify-between">
+      <header className="mx-auto mb-10 flex max-w-xl items-start justify-between gap-4">
         <div>
           <h1 className="text-xl font-semibold">Click.Play</h1>
           <p className="text-sm text-neutral-400">Descreva o vídeo, acompanhe a produção, assista o resultado.</p>
         </div>
-        {!showSettings && (
-          <button onClick={() => setShowSettings(true)} className="text-sm text-neutral-400 underline">
-            Configurações
-          </button>
-        )}
+        <div className="flex flex-col items-end gap-1.5">
+          {credits && (
+            <p className="text-xs text-neutral-400" title="1 crédito = US$ 1">
+              Saldo: <span className="font-medium text-neutral-100">{credits.balanceUsd.toFixed(2)}</span>
+              <span className="mx-1 text-neutral-600">·</span>
+              Consumido: {credits.consumedUsd.toFixed(2)}
+            </p>
+          )}
+          {!showSettings && (
+            <button onClick={() => setShowSettings(true)} className="text-sm text-neutral-400 underline">
+              Configurações
+            </button>
+          )}
+        </div>
       </header>
 
       <main>
@@ -144,6 +172,7 @@ export function App() {
             job={job}
             onApprove={handleApprove}
             approving={approving}
+            approveError={approveError}
             onRetry={handleRetry}
             retrying={retrying}
           />

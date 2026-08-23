@@ -49,13 +49,14 @@ function costLine(label: string, amount: CostBreakdown[keyof CostBreakdown]) {
 
 export interface ProgressViewProps {
   job: JobView;
-  onApprove(approved: boolean): void;
+  onApprove(approved: boolean): Promise<boolean>;
   approving: boolean;
+  approveError: string | null;
   onRetry(): void;
   retrying: boolean;
 }
 
-export function ProgressView({ job, onApprove, approving, onRetry, retrying }: ProgressViewProps) {
+export function ProgressView({ job, onApprove, approving, approveError, onRetry, retrying }: ProgressViewProps) {
   const [decided, setDecided] = useState(false);
   const percent = Math.round(job.progress * 100);
 
@@ -95,9 +96,9 @@ export function ProgressView({ job, onApprove, approving, onRetry, retrying }: P
             <button
               type="button"
               disabled={approving}
-              onClick={() => {
-                setDecided(true);
-                onApprove(true);
+              onClick={async () => {
+                const ok = await onApprove(true);
+                if (ok) setDecided(true);
               }}
               className="flex-1 rounded-md bg-neutral-50 px-3 py-2 font-medium text-neutral-900 hover:bg-neutral-200 disabled:opacity-50"
             >
@@ -106,15 +107,20 @@ export function ProgressView({ job, onApprove, approving, onRetry, retrying }: P
             <button
               type="button"
               disabled={approving}
-              onClick={() => {
-                setDecided(true);
-                onApprove(false);
+              onClick={async () => {
+                const ok = await onApprove(false);
+                if (ok) setDecided(true);
               }}
               className="flex-1 rounded-md border border-neutral-600 px-3 py-2 font-medium text-neutral-200 hover:bg-neutral-800 disabled:opacity-50"
             >
               Rejeitar
             </button>
           </div>
+          {approveError && (
+            <p role="alert" className="text-sm text-red-400">
+              {approveError}
+            </p>
+          )}
         </div>
       )}
 

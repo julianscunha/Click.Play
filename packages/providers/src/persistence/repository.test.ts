@@ -5,6 +5,7 @@ import {
   createProject,
   getJob,
   getProject,
+  getWallet,
   listJobsByProject,
   recoverOrphanedJobs,
   setJobActualCost,
@@ -12,6 +13,8 @@ import {
   setJobEstimatedCost,
   setJobOutputPath,
   setJobQcReport,
+  setWalletBalance,
+  trySpend,
   updateJobStatus,
 } from "./repository.js";
 import type { ProjectConfig } from "./types.js";
@@ -125,5 +128,40 @@ describe("persistence repository", () => {
     expect((await getJob(db, stuck.id))?.status).toBe("FAILED");
     expect((await getJob(db, stuck.id))?.error).toMatch(/reiníc/);
     expect((await getJob(db, done.id))?.status).toBe("COMPLETED");
+  });
+
+  describe("wallet", () => {
+    it("starts with a default balance and no consumption", async () => {
+      const wallet = await getWallet(db);
+      expect(wallet.balanceUsd).toBeGreaterThan(0);
+      expect(wallet.consumedUsd).toBe(0);
+    });
+
+    it("trySpend debits balance and tracks consumed when there's enough credit", async () => {
+      await setWalletBalance(db, 10);
+      const ok = await trySpend(db, 4);
+
+      expect(ok).toBe(true);
+      const wallet = await getWallet(db);
+      expect(wallet.balanceUsd).toBe(6);
+      expect(wallet.consumedUsd).toBe(4);
+    });
+
+    it("trySpend refuses and leaves balance untouched when insufficient", async () => {
+      await setWalletBalance(db, 3);
+      const ok = await trySpend(db, 4);
+
+      expect(ok).toBe(false);
+      const wallet = await getWallet(db);
+      expect(wallet.balanceUsd).toBe(3);
+      expect(wallet.consumedUsd).toBe(0);
+    });
+
+    it("setWalletBalance sets an exact value, not additive", async () => {
+      await setWalletBalance(db, 10);
+      await setWalletBalance(db, 25);
+
+      expect((await getWallet(db)).balanceUsd).toBe(25);
+    });
   });
 });

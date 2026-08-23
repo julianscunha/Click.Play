@@ -126,6 +126,19 @@ export function outputUrl(output: string): string {
   return `${API_BASE}${output}`;
 }
 
+export interface Credits {
+  balanceUsd: number;
+  consumedUsd: number;
+}
+
+export function getCredits(): Promise<Credits> {
+  return request("/credits");
+}
+
+export function putCredits(balanceUsd: number): Promise<Credits> {
+  return request("/credits", { method: "PUT", body: JSON.stringify({ balanceUsd }) });
+}
+
 export type SecretField = { set: true; masked: string } | { set: false };
 
 export interface Settings {

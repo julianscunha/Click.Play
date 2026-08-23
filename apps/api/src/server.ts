@@ -5,6 +5,7 @@ import fastifyStatic from "@fastify/static";
 import Fastify from "fastify";
 import { createCostApprovalGate, type ClickPlayDb, type CostEstimateOptions, type JobRunnerDeps } from "@clickplay/providers";
 import type { QualityTier } from "@clickplay/domain";
+import { registerCreditsRoutes } from "./routes/credits.js";
 import { registerJobsRoutes } from "./routes/jobs.js";
 import { registerMetaRoutes } from "./routes/meta.js";
 import { registerSettingsRoutes } from "./routes/settings.js";
@@ -58,6 +59,7 @@ export function buildServer(opts: BuildServerOptions) {
 
   registerMetaRoutes(app);
   registerSettingsRoutes(app, { envFilePath: opts.envFilePath });
+  registerCreditsRoutes(app, { db: opts.db });
   registerJobsRoutes(app, {
     db: opts.db,
     buildJobRunnerDeps: opts.buildJobRunnerDeps,

@@ -10,6 +10,7 @@ import {
   getProject,
   retryJob,
   startJob,
+  trySpend,
   type ClickPlayDb,
   type CostEstimateOptions,
   type JobRunnerDeps,
@@ -168,6 +169,20 @@ export function registerJobsRoutes(app: FastifyInstance, deps: JobsRouteDeps): v
     if (job.status !== "AWAITING_COST_APPROVAL") {
       // Idempotente: job já resolvido ou ainda não chegou lá — não dispara nada de novo.
       return reply.send({ jobId: job.id, status: job.status, applied: false });
+    }
+
+    // Débito de créditos na aprovação (1 crédito = US$1) — só quando o custo estimado é conhecido;
+    // "unknown" segue sem gate de crédito, mesma lógica que já não bloqueia hoje pra custo desconhecido.
+    if (parsed.data.approved && job.estimatedCost?.total.status === "known") {
+      const spent = await trySpend(deps.db, job.estimatedCost.total.usd);
+      if (!spent) {
+        return reply.status(402).send({
+          error: {
+            code: "INSUFFICIENT_CREDITS",
+            message: "Créditos insuficientes pra aprovar este vídeo. Adicione créditos em Configurações.",
+          },
+        });
+      }
     }
 
     const applied = deps.gate.resolveApproval(job.id, parsed.data.approved);

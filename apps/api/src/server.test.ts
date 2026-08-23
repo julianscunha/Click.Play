@@ -290,6 +290,48 @@ describe("server", () => {
     expect(secondApprove.json().applied).toBe(false);
   }, 30_000);
 
+  it("blocks approve-cost with 402 when the wallet has insufficient credits, without consuming approval", async () => {
+    const llm = fakeLLM(RESEARCH_RESULT, directorPayload(), critiquePayload(8));
+    const app = buildServer({
+      db,
+      buildJobRunnerDeps: () => fakeJobRunnerDeps(llm),
+      buildCostOptions: () => costOptions,
+      runsDir,
+      envFilePath,
+    });
+    await app.inject({ method: "PUT", url: "/credits", payload: { balanceUsd: 0 } });
+
+    const create = await app.inject({
+      method: "POST",
+      url: "/jobs",
+      payload: { topic: "Apollo 11", videoMode: "motion_graphics_only" },
+    });
+    const { id: jobId } = create.json();
+
+    let status = "";
+    for (let i = 0; i < 50 && status !== "AWAITING_COST_APPROVAL"; i++) {
+      await new Promise((r) => setTimeout(r, 10));
+      const res = await app.inject({ method: "GET", url: `/jobs/${jobId}` });
+      status = res.json().status;
+    }
+    expect(status).toBe("AWAITING_COST_APPROVAL");
+
+    const approve = await app.inject({
+      method: "POST",
+      url: `/jobs/${jobId}/approve-cost`,
+      payload: { approved: true },
+    });
+    expect(approve.statusCode).toBe(402);
+    expect(approve.json().error.code).toBe("INSUFFICIENT_CREDITS");
+
+    // Job segue esperando aprovação — nada foi consumido, usuário pode recarregar e tentar de novo.
+    const stillWaiting = await app.inject({ method: "GET", url: `/jobs/${jobId}` });
+    expect(stillWaiting.json().status).toBe("AWAITING_COST_APPROVAL");
+
+    const credits = await app.inject({ method: "GET", url: "/credits" });
+    expect(credits.json().balanceUsd).toBe(0);
+  }, 10_000);
+
   it("GET /settings masks secrets and reflects PUT without exposing full values", async () => {
     const app = buildServer({
       db,
