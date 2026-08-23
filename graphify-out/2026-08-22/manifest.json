@@ -125,8 +125,8 @@
     "semantic_hash": ""
   },
   "docs/IMPLEMENTATION-PLAN.md": {
-    "mtime": 1787441792.7417448,
-    "ast_hash": "b07e94ebe3993f8edbe4c1335824565b",
+    "mtime": 1787442440.0974276,
+    "ast_hash": "abedb4e396864b212e2129fb7c7cdd08",
     "semantic_hash": ""
   },
   "pnpm-workspace.yaml": {
@@ -155,8 +155,8 @@
     "semantic_hash": ""
   },
   "packages/domain/src/scene.ts": {
-    "mtime": 1787407450.3400888,
-    "ast_hash": "6c0f1c29c8b64e3b60fd32ce9855790b",
+    "mtime": 1787442165.8071945,
+    "ast_hash": "4482a3a09c69a0d7c8707df013451508",
     "semantic_hash": ""
   },
   "packages/domain/src/video-project.ts": {
@@ -520,13 +520,13 @@
     "semantic_hash": ""
   },
   "packages/providers/src/pipeline/orchestrator.test.ts": {
-    "mtime": 1787418273.452701,
-    "ast_hash": "7cc134f671ba9724b5efb5bb2e277714",
+    "mtime": 1787442319.396937,
+    "ast_hash": "05610f773ecc9822424facd20467c6f7",
     "semantic_hash": ""
   },
   "packages/providers/src/pipeline/orchestrator.ts": {
-    "mtime": 1787418195.4374297,
-    "ast_hash": "f35a0951e25c525cf918311445d357b7",
+    "mtime": 1787442219.1217906,
+    "ast_hash": "d9c10d96a3fdd17cc34864f0e3bbd97d",
     "semantic_hash": ""
   },
   "packages/providers/src/pipeline/scene-timing.ts": {
@@ -535,8 +535,8 @@
     "semantic_hash": ""
   },
   "packages/providers/src/pipeline/types.ts": {
-    "mtime": 1787418184.979329,
-    "ast_hash": "a18bd56eec6410df28125f67e39ef9c8",
+    "mtime": 1787442197.5988662,
+    "ast_hash": "f56adde493781cdaf63c9c0c901b8dae",
     "semantic_hash": ""
   },
   "packages/providers/src/stock/index.ts": {
@@ -865,8 +865,8 @@
     "semantic_hash": ""
   },
   "apps/api/src/routes/jobs.ts": {
-    "mtime": 1787418214.644658,
-    "ast_hash": "7b4ec16cf04dc93bfe2267bfd49976a4",
+    "mtime": 1787442262.8589423,
+    "ast_hash": "92893e762e5ea4976acde90d9b72fb7c",
     "semantic_hash": ""
   },
   "apps/api/src/routes/meta.ts": {
@@ -1222,6 +1222,16 @@
   "packages/providers/src/qc/checks/target-duration-match.ts": {
     "mtime": 1787408566.7307787,
     "ast_hash": "46ea23eaf785319a58c8ce256a07f20e",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/pipeline/intro-outro.test.ts": {
+    "mtime": 1787442310.2191932,
+    "ast_hash": "2fdde3c22f9656414a6c4f59e859b7b8",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/pipeline/intro-outro.ts": {
+    "mtime": 1787442206.4292567,
+    "ast_hash": "4a43b894c1d2b21a7a80d436d6f0d8ac",
     "semantic_hash": ""
   }
 }
