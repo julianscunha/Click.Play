@@ -156,8 +156,8 @@ export function App() {
           <p className="mx-auto max-w-xl text-sm text-neutral-400">Carregando...</p>
         )}
 
-        {!showSettings && config && !jobId && (
-          <div className="mx-auto flex max-w-3xl flex-col gap-3">
+        {config && !jobId && (
+          <div className={`mx-auto flex max-w-3xl flex-col gap-3 ${showSettings ? "hidden" : ""}`}>
             <Wizard config={config} onSubmit={handleCreate} submitting={submitting} />
             {createError && (
               <p role="alert" className="text-center text-sm text-red-400">

@@ -25,8 +25,8 @@
     "semantic_hash": ""
   },
   "apps/api/src/server.ts": {
-    "mtime": 1787462432.2774272,
-    "ast_hash": "50c6e396df156992d947be1f063ecb45",
+    "mtime": 1787509049.1241088,
+    "ast_hash": "fa82fe54d1f2369396d65a9b1a9c2fd2",
     "semantic_hash": ""
   },
   "apps/api/tsconfig.json": {
@@ -125,8 +125,8 @@
     "semantic_hash": ""
   },
   "docs/IMPLEMENTATION-PLAN.md": {
-    "mtime": 1787501281.2551346,
-    "ast_hash": "a568cd043e9e4dd8e9b59b0741beca7a",
+    "mtime": 1787509316.5322423,
+    "ast_hash": "ba2952987d1605eb54fd8c3590b0e2eb",
     "semantic_hash": ""
   },
   "pnpm-workspace.yaml": {
@@ -535,8 +535,8 @@
     "semantic_hash": ""
   },
   "packages/providers/src/pipeline/types.ts": {
-    "mtime": 1787442197.5988662,
-    "ast_hash": "f56adde493781cdaf63c9c0c901b8dae",
+    "mtime": 1787508833.9814777,
+    "ast_hash": "f30d836d089dbb2028dc8e9806a2530c",
     "semantic_hash": ""
   },
   "packages/providers/src/stock/index.ts": {
@@ -855,8 +855,8 @@
     "semantic_hash": ""
   },
   "apps/api/src/providers.ts": {
-    "mtime": 1787417153.0484223,
-    "ast_hash": "ec1b0e09e8a1d4d0e895059441bc79a4",
+    "mtime": 1787509040.153212,
+    "ast_hash": "4ae681ea3d7df9dbeed1788502aa1ddb",
     "semantic_hash": ""
   },
   "apps/api/src/remotion/entry.tsx": {
@@ -865,8 +865,8 @@
     "semantic_hash": ""
   },
   "apps/api/src/routes/jobs.ts": {
-    "mtime": 1787501039.0124645,
-    "ast_hash": "4ddf9be410b5aa34acccc344e7f86698",
+    "mtime": 1787509085.2339897,
+    "ast_hash": "a08b1e4514a444dae2c5a2c5717422fa",
     "semantic_hash": ""
   },
   "apps/api/src/routes/meta.ts": {
@@ -875,8 +875,8 @@
     "semantic_hash": ""
   },
   "apps/web/src/api.ts": {
-    "mtime": 1787501099.363833,
-    "ast_hash": "2c2a739575ae6451dcd9594fea6faf4d",
+    "mtime": 1787509122.5568502,
+    "ast_hash": "13a8f8e497c69bfe9471e5906a3fb722",
     "semantic_hash": ""
   },
   "apps/web/src/components/ProgressView.tsx": {
@@ -1030,13 +1030,13 @@
     "semantic_hash": ""
   },
   "apps/api/src/routes/settings.ts": {
-    "mtime": 1786847735.4606857,
-    "ast_hash": "58da5fe969249dc4d8dfd95ecd82225d",
+    "mtime": 1787508943.4936118,
+    "ast_hash": "60d95722d31237582253f444ee62ee36",
     "semantic_hash": ""
   },
   "apps/web/src/components/SettingsView.tsx": {
-    "mtime": 1787462550.2105439,
-    "ast_hash": "21a072cb1c0a7e8e38f25eb2262140d8",
+    "mtime": 1787509137.6974428,
+    "ast_hash": "fbad68a62cf3b29b5ac86ff890e36eb8",
     "semantic_hash": ""
   },
   "docker-compose.yml": {
@@ -1200,8 +1200,8 @@
     "semantic_hash": ""
   },
   "apps/web/src/components/wizard/Wizard.tsx": {
-    "mtime": 1787501147.5946772,
-    "ast_hash": "8c26a162b541a7f9d25a22f1ae2b22f6",
+    "mtime": 1787509179.7618299,
+    "ast_hash": "db63d5301965b50665837bbdc2c30afb",
     "semantic_hash": ""
   },
   "apps/api/src/routes/credits.ts": {
