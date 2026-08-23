@@ -10,11 +10,11 @@ import {
   type FormConfig,
   type JobView,
 } from "./api.js";
-import { CreateForm } from "./components/CreateForm.js";
 import { ProgressView } from "./components/ProgressView.js";
 import { ResultPlayer } from "./components/ResultPlayer.js";
 import { SettingsView } from "./components/SettingsView.js";
 import { TokenGate } from "./components/TokenGate.js";
+import { Wizard } from "./components/wizard/Wizard.js";
 
 const POLL_INTERVAL_MS = 2000;
 
@@ -129,10 +129,10 @@ export function App() {
         )}
 
         {!showSettings && config && !jobId && (
-          <div className="mx-auto flex max-w-xl flex-col gap-3">
-            <CreateForm config={config} onSubmit={handleCreate} submitting={submitting} />
+          <div className="mx-auto flex max-w-3xl flex-col gap-3">
+            <Wizard config={config} onSubmit={handleCreate} submitting={submitting} />
             {createError && (
-              <p role="alert" className="text-sm text-red-400">
+              <p role="alert" className="text-center text-sm text-red-400">
                 {createError}
               </p>
             )}

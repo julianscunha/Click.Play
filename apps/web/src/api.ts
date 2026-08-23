@@ -67,6 +67,9 @@ export interface CreateJobInput {
   videoMode?: "motion_graphics_only" | "ai_video_only" | "hybrid";
   captionStyle?: string;
   aspectRatio?: "vertical" | "horizontal" | "square";
+  qualityTier?: "draft" | "standard" | "high";
+  targetDurationSeconds?: number;
+  language?: string;
 }
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
