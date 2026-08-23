@@ -12,7 +12,12 @@ import { registerSettingsRoutes } from "./routes/settings.js";
 
 export interface BuildServerOptions {
   db: ClickPlayDb;
-  buildJobRunnerDeps(tier?: QualityTier, language?: string, useOwnProviders?: boolean): JobRunnerDeps;
+  buildJobRunnerDeps(
+    tier?: QualityTier,
+    language?: string,
+    useOwnProviders?: boolean,
+    voiceGender?: "female" | "male",
+  ): JobRunnerDeps;
   buildCostOptions(): CostEstimateOptions;
   runsDir: string;
   envFilePath: string;

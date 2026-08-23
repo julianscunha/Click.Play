@@ -15,10 +15,10 @@ export const EDGE_TTS_VOICES = {
   "en-US": { female: "en-US-AriaNeural", male: "en-US-GuyNeural" },
 } as const;
 
-/** Voz Edge pro idioma do job (§11A Bloco 3) — idioma fora do mapa (ainda só pt-BR/en-US) cai em pt-BR feminino sem erro, não trava o job por typo/idioma não coberto. */
-export function resolveEdgeVoice(language?: string): string {
+/** Voz Edge pro idioma+gênero do job (§11A Bloco 3, Fase 15 Narração) — idioma fora do mapa (ainda só pt-BR/en-US) cai em pt-BR sem erro, não trava o job por typo/idioma não coberto. */
+export function resolveEdgeVoice(language?: string, gender: "female" | "male" = "female"): string {
   const entry = language && language in EDGE_TTS_VOICES ? EDGE_TTS_VOICES[language as keyof typeof EDGE_TTS_VOICES] : undefined;
-  return (entry ?? EDGE_TTS_VOICES["pt-BR"]).female;
+  return (entry ?? EDGE_TTS_VOICES["pt-BR"])[gender];
 }
 
 function sleep(ms: number): Promise<void> {

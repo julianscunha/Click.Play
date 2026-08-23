@@ -44,6 +44,7 @@ const CreateJobBody = z.object({
   showTextOverlays: z.boolean().optional(),
   transitionDurationFrames: z.number().int().positive().optional(),
   useOwnProviders: z.boolean().optional(),
+  voiceGender: z.enum(["female", "male"]).optional(),
 });
 
 const ApproveCostBody = z.object({ approved: z.boolean() });
@@ -65,7 +66,12 @@ const STAGE_BY_STATUS: Record<JobStatus, string> = {
 export interface JobsRouteDeps {
   db: ClickPlayDb;
   /** Chamado por job (não montado uma vez no boot) — reflete keys/modelo salvos via PUT /settings sem exigir restart. */
-  buildJobRunnerDeps(tier?: QualityTier, language?: string, useOwnProviders?: boolean): JobRunnerDeps;
+  buildJobRunnerDeps(
+    tier?: QualityTier,
+    language?: string,
+    useOwnProviders?: boolean,
+    voiceGender?: "female" | "male",
+  ): JobRunnerDeps;
   buildCostOptions(): CostEstimateOptions;
   runsDir: string;
   gate: ReturnType<typeof createCostApprovalGate>;
@@ -115,6 +121,7 @@ export function registerJobsRoutes(app: FastifyInstance, deps: JobsRouteDeps): v
       showTextOverlays,
       transitionDurationFrames,
       useOwnProviders,
+      voiceGender,
     } = parsed.data;
     if (intro?.mode === "upload" || outro?.mode === "upload") {
       return reply.status(422).send({
@@ -143,12 +150,13 @@ export function registerJobsRoutes(app: FastifyInstance, deps: JobsRouteDeps): v
         showTextOverlays,
         transitionDurationFrames,
         useOwnProviders,
+        voiceGender,
       },
     });
     const runDir = path.join(deps.runsDir, project.id);
     const job = await createJob(deps.db, { projectId: project.id, runDir });
 
-    startJob(deps.db, job.id, deps.buildJobRunnerDeps(qualityTier, language, useOwnProviders), {
+    startJob(deps.db, job.id, deps.buildJobRunnerDeps(qualityTier, language, useOwnProviders, voiceGender), {
       approveCost: (estimate) => deps.gate.waitForApproval(job.id),
       onLog: (message) => app.log.info({ jobId: job.id }, message),
     });
@@ -206,7 +214,12 @@ export function registerJobsRoutes(app: FastifyInstance, deps: JobsRouteDeps): v
     const retried = await retryJob(
       deps.db,
       job.id,
-      deps.buildJobRunnerDeps(project?.config.qualityTier, project?.config.language, project?.config.useOwnProviders),
+      deps.buildJobRunnerDeps(
+        project?.config.qualityTier,
+        project?.config.language,
+        project?.config.useOwnProviders,
+        project?.config.voiceGender,
+      ),
       {
         approveCost: (estimate) => deps.gate.waitForApproval(job.id),
         onLog: (message) => app.log.info({ jobId: job.id }, message),

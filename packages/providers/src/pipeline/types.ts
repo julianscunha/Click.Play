@@ -68,6 +68,8 @@ export interface PipelineOptions {
   qualityTier?: QualityTier;
   /** Não usado pelo orchestrator — persistido só pra retry rebuildar os providers com a mesma escolha de chave (§11A Bloco 6, Providers). true = chaves próprias do usuário (Settings), sem debitar créditos; false/undefined = chaves do sistema, debita. */
   useOwnProviders?: boolean;
+  /** Escolhe a voz Edge TTS pro idioma do job (Fase 15, Narração) — default "female" (mesmo comportamento anterior a este campo). */
+  voiceGender?: "female" | "male";
   direction?: string;
   /** Se false, instrui o Creative Director a não emitir elementos animated_text (§11A Bloco 4 item 7). Default true. */
   showTextOverlays?: boolean;

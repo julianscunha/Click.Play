@@ -144,8 +144,13 @@ function buildLLM(tier: QualityTier, useOwnProviders: boolean): LLMProvider {
  * o modo de falha do WebSocket do Edge — achado em teste manual real:
  * "Premature close"). GeminiTTS direto entra como 3º nível só se
  * GOOGLE_API_KEY existir (raramente necessário agora). */
-function buildTTS(tier: QualityTier, useOwnProviders: boolean, language?: string): TTSProvider {
-  const primary = withProviderTimeout(new EdgeTTS(resolveEdgeVoice(language)), "tts:edge", TIMEOUT_MS.tts);
+function buildTTS(
+  tier: QualityTier,
+  useOwnProviders: boolean,
+  language?: string,
+  voiceGender: "female" | "male" = "female",
+): TTSProvider {
+  const primary = withProviderTimeout(new EdgeTTS(resolveEdgeVoice(language, voiceGender)), "tts:edge", TIMEOUT_MS.tts);
   const openRouterFallback = withProviderTimeout(
     new OpenRouterTTS(
       process.env.TTS_MODEL_FALLBACK || MODEL_BY_TIER[tier].tts,
@@ -201,6 +206,7 @@ export function buildJobRunnerDeps(
   tier: QualityTier = "standard",
   language?: string,
   useOwnProviders = false,
+  voiceGender: "female" | "male" = "female",
 ): JobRunnerDeps {
   const resolveElementCtx: Omit<ResolveElementContext, "writeAsset" | "assetId"> = {
     imageProvider: buildImageProvider(tier, useOwnProviders),
@@ -214,7 +220,7 @@ export function buildJobRunnerDeps(
 
   return {
     llm: buildLLM(tier, useOwnProviders),
-    ttsProvider: buildTTS(tier, useOwnProviders, language),
+    ttsProvider: buildTTS(tier, useOwnProviders, language, voiceGender),
     musicProvider: buildMusicProvider(useOwnProviders),
     resolveElementCtx,
     videoRenderer,

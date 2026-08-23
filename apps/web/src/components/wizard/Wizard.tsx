@@ -8,6 +8,7 @@ function formatLabel(id: string): string {
 const STEPS = [
   { key: "briefing", label: "Briefing" },
   { key: "roteiro", label: "Roteiro" },
+  { key: "narracao", label: "Narração" },
   { key: "visual", label: "Visual" },
   { key: "legendas", label: "Legendas" },
   { key: "abertura", label: "Abertura/Fechamento" },
@@ -43,6 +44,7 @@ interface FormState {
   archetype: string;
   pacing: string;
   language: "pt-BR" | "en-US";
+  voiceGender: "female" | "male";
   targetDurationSeconds: string;
   videoMode: "motion_graphics_only" | "ai_video_only" | "hybrid";
   captionStyle: string;
@@ -66,6 +68,7 @@ const INITIAL_STATE: FormState = {
   archetype: "",
   pacing: "",
   language: "pt-BR",
+  voiceGender: "female",
   targetDurationSeconds: "",
   videoMode: "hybrid",
   captionStyle: "",
@@ -143,6 +146,7 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
       archetype: form.archetype || undefined,
       pacing: form.pacing || undefined,
       language: form.language,
+      voiceGender: form.voiceGender,
       targetDurationSeconds:
         form.targetDurationSeconds.trim() && Number.isFinite(targetDurationSeconds) && targetDurationSeconds > 0
           ? targetDurationSeconds
@@ -290,6 +294,23 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
                   en-US
                 </Chip>
               </div>
+            </div>
+          </div>
+        )}
+
+        {step.key === "narracao" && (
+          <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-1.5">
+              <span className={labelClass}>Voz da narração</span>
+              <div className="flex gap-2">
+                <Chip active={form.voiceGender === "female"} onClick={() => update("voiceGender", "female")}>
+                  Feminina
+                </Chip>
+                <Chip active={form.voiceGender === "male"} onClick={() => update("voiceGender", "male")}>
+                  Masculina
+                </Chip>
+              </div>
+              <p className="text-sm text-neutral-500">Voz gerada automaticamente (Edge TTS) no idioma escolhido em Roteiro.</p>
             </div>
           </div>
         )}
@@ -554,6 +575,10 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
               <div>
                 <dt className="text-neutral-500">Idioma</dt>
                 <dd className="text-neutral-100">{form.language}</dd>
+              </div>
+              <div>
+                <dt className="text-neutral-500">Voz</dt>
+                <dd className="text-neutral-100">{form.voiceGender === "female" ? "Feminina" : "Masculina"}</dd>
               </div>
               <div>
                 <dt className="text-neutral-500">Vídeo</dt>
