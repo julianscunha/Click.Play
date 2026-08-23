@@ -40,8 +40,8 @@
     "semantic_hash": ""
   },
   "apps/web/src/App.tsx": {
-    "mtime": 1787462499.3298519,
-    "ast_hash": "b27c888b8068dd2bbebea15a3ca9c5b2",
+    "mtime": 1787487553.8658955,
+    "ast_hash": "cd6db34f1f496ee7b46f0e3205ea5c13",
     "semantic_hash": ""
   },
   "apps/web/src/main.tsx": {
@@ -125,8 +125,8 @@
     "semantic_hash": ""
   },
   "docs/IMPLEMENTATION-PLAN.md": {
-    "mtime": 1787462825.9096987,
-    "ast_hash": "409e9397296621296bf0f385a2fa989d",
+    "mtime": 1787487612.630773,
+    "ast_hash": "6e0f57093c76c1cccd887ea75b43f023",
     "semantic_hash": ""
   },
   "pnpm-workspace.yaml": {
@@ -875,18 +875,18 @@
     "semantic_hash": ""
   },
   "apps/web/src/api.ts": {
-    "mtime": 1787462465.9273522,
-    "ast_hash": "a4461784a5a66344c2fd628cad5ff414",
+    "mtime": 1787487520.5161192,
+    "ast_hash": "9fa5ff140af7275643fff4c8a3fb29a0",
     "semantic_hash": ""
   },
   "apps/web/src/components/ProgressView.tsx": {
-    "mtime": 1787462515.0020251,
-    "ast_hash": "f95e666914386abe3a480b7a735a2089",
+    "mtime": 1787487526.226262,
+    "ast_hash": "90dbe287634d382a74fa4ac4a49e5907",
     "semantic_hash": ""
   },
   "apps/web/src/components/ResultPlayer.tsx": {
-    "mtime": 1786734148.7917302,
-    "ast_hash": "dddc32c3f9a0afe97441b5d1250c48a5",
+    "mtime": 1787487536.705246,
+    "ast_hash": "89fef60e2a5ae282102202bfef708e04",
     "semantic_hash": ""
   },
   "packages/providers/src/persistence/cost-approval-gate.test.ts": {

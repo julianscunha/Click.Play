@@ -79,6 +79,7 @@ export interface CreateJobInput {
   language?: string;
   captionChunkSize?: number;
   showTextOverlays?: boolean;
+  transitionDurationFrames?: number;
   intro?: IntroOutroConfig;
   outro?: IntroOutroConfig;
 }

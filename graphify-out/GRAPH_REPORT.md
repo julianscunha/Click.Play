@@ -1,16 +1,16 @@
 # Graph Report - Click.Play  (2026-08-23)
 
 ## Corpus Check
-- 219 files · ~77,486 words
+- 219 files · ~77,690 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1080 nodes · 1665 edges · 71 communities (67 shown, 4 thin omitted)
+- 1081 nodes · 1670 edges · 71 communities (66 shown, 5 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 1 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `8b9d2073`
+- Built from commit: `aa4f58e4`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -73,11 +73,11 @@
 - OpenRouterVideo
 - withRetry
 - critic.ts
+- cost-approval-gate.ts
 - Wizard.tsx
 - ImageProvider
 - VideoGenerationProvider
 - ProgressView.tsx
-- ResultPlayer.tsx
 - TokenGate.tsx
 
 ## God Nodes (most connected - your core abstractions)
@@ -101,13 +101,13 @@
   packages/providers/src/pipeline/orchestrator.ts → packages/providers/src/pipeline/intro-outro.ts
 - `runJobOnce()` --calls--> `runPipeline()`  [EXTRACTED]
   packages/providers/src/persistence/job-runner.ts → packages/providers/src/pipeline/orchestrator.ts
-- `buildServer()` --calls--> `registerCreditsRoutes()`  [EXTRACTED]
-  apps/api/src/server.ts → apps/api/src/routes/credits.ts
+- `App()` --calls--> `getFormConfig()`  [EXTRACTED]
+  apps/web/src/App.tsx → apps/web/src/api.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (71 total, 4 thin omitted)
+## Communities (71 total, 5 thin omitted)
 
 ### Community 0 - "scripts"
 Cohesion: 0.12
@@ -130,8 +130,8 @@ Cohesion: 0.05
 Nodes (36): dependencies, @clickplay/domain, react, react-dom, remotion, @remotion/bundler, @remotion/google-fonts, @remotion/renderer (+28 more)
 
 ### Community 5 - "repository.ts"
-Cohesion: 0.06
-Nodes (67): addCheckpointColumnIfMissing(), addResultSummaryColumnIfMissing(), addStageDetailColumnIfMissing(), ClickPlayDb, createDb(), ensureWalletRow(), toRow(), CostApprovalGate (+59 more)
+Cohesion: 0.07
+Nodes (66): addCheckpointColumnIfMissing(), addResultSummaryColumnIfMissing(), addStageDetailColumnIfMissing(), ClickPlayDb, createDb(), ensureWalletRow(), toRow(), JobRunnerDeps (+58 more)
 
 ### Community 6 - "devDependencies"
 Cohesion: 0.06
@@ -142,8 +142,8 @@ Cohesion: 0.17
 Nodes (11): resolveVideoGenerationProvider(), VideoGenerationProviderKey, resolveAiVideoClip(), resolveElement(), ResolveElementContext, resolveStock(), ASSET, CANDIDATE (+3 more)
 
 ### Community 8 - "run-qc.ts"
-Cohesion: 0.08
-Nodes (28): RevisionLogEntry, checkBlackdetect(), checkCostDeviation(), checkCriticScore(), checkDurationMatch(), checkOutputExists(), checkResolutionMatch(), ExpectedFormat (+20 more)
+Cohesion: 0.07
+Nodes (27): RevisionLogEntry, checkBlackdetect(), checkCostDeviation(), checkCriticScore(), checkDurationMatch(), checkOutputExists(), checkResolutionMatch(), ExpectedFormat (+19 more)
 
 ### Community 9 - "compilerOptions"
 Cohesion: 0.13
@@ -186,8 +186,8 @@ Cohesion: 0.18
 Nodes (10): main, name, private, scripts, lint, test, typecheck, type (+2 more)
 
 ### Community 19 - "SettingsView.tsx"
-Cohesion: 0.15
-Nodes (9): Settings, BADGE_STYLES, BadgeKind, MODEL_FIELDS, ModelSelect(), ModelSelectProps, SECRET_FIELDS, SecretFieldConfig (+1 more)
+Cohesion: 0.14
+Nodes (10): putSettings(), Settings, BADGE_STYLES, BadgeKind, MODEL_FIELDS, ModelSelect(), ModelSelectProps, SECRET_FIELDS (+2 more)
 
 ### Community 22 - "research.ts"
 Cohesion: 0.13
@@ -298,7 +298,7 @@ Cohesion: 0.16
 Nodes (16): openDb(), app, db, envFilePath, port, runsDir, buildCostOptions(), buildImageProvider() (+8 more)
 
 ### Community 57 - "api.ts"
-Cohesion: 0.19
+Cohesion: 0.18
 Nodes (19): approveCost(), CostAmount, createJob(), Credits, getCredits(), getFormConfig(), getJob(), getSettings() (+11 more)
 
 ### Community 58 - "server.test.ts"
@@ -338,33 +338,29 @@ Cohesion: 0.27
 Nodes (4): FalVideo, GeminiVideo, VideoGenerationProvider, VideoResult
 
 ### Community 69 - "ProgressView.tsx"
-Cohesion: 0.29
-Nodes (7): CostBreakdown, JobView, costLine(), friendlyError(), ProgressView(), ProgressViewProps, STAGE_LABELS
-
-### Community 70 - "ResultPlayer.tsx"
-Cohesion: 0.50
-Nodes (3): outputUrl(), ResultPlayer(), ResultPlayerProps
+Cohesion: 0.21
+Nodes (10): CostBreakdown, JobView, outputUrl(), costLine(), friendlyError(), ProgressView(), ProgressViewProps, STAGE_LABELS (+2 more)
 
 ### Community 71 - "TokenGate.tsx"
 Cohesion: 0.60
 Nodes (3): setStoredToken(), TokenGate(), TokenGateProps
 
 ## Knowledge Gaps
-- **414 isolated node(s):** `CreditsRouteDeps`, `ASPECT_RATIOS`, `RESOLUTION_BY_ASPECT_RATIO`, `STAGE_BY_STATUS`, `RESEARCH_RESULT` (+409 more)
+- **415 isolated node(s):** `CostAmount`, `JobStatus`, `ResultSummary`, `IntroOutroConfig`, `SecretField` (+410 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **4 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **5 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `TTSProvider` connect `edge.ts` to `orchestrator.ts`, `repository.ts`, `orchestrator.test.ts`?**
-  _High betweenness centrality (0.014) - this node is a cross-community bridge._
-- **Why does `withRetry()` connect `withRetry` to `edge.ts`, `music/openrouter.ts`, `OpenRouterVideo`?**
-  _High betweenness centrality (0.014) - this node is a cross-community bridge._
 - **Why does `ImageProvider` connect `ImageProvider` to `resolve-element.ts`, `repository.ts`, `orchestrator.test.ts`, `withRetry`?**
-  _High betweenness centrality (0.009) - this node is a cross-community bridge._
-- **What connects `CreditsRouteDeps`, `ASPECT_RATIOS`, `RESOLUTION_BY_ASPECT_RATIO` to the rest of the system?**
-  _414 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _High betweenness centrality (0.010) - this node is a cross-community bridge._
+- **Why does `PipelineCallbacks` connect `orchestrator.test.ts` to `repository.ts`, `orchestrator.ts`?**
+  _High betweenness centrality (0.008) - this node is a cross-community bridge._
+- **Why does `TTSProvider` connect `edge.ts` to `orchestrator.ts`, `repository.ts`, `orchestrator.test.ts`?**
+  _High betweenness centrality (0.008) - this node is a cross-community bridge._
+- **What connects `CostAmount`, `JobStatus`, `ResultSummary` to the rest of the system?**
+  _415 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `scripts` be split into smaller, more focused modules?**
   _Cohesion score 0.125 - nodes in this community are weakly interconnected._
 - **Should `dependencies` be split into smaller, more focused modules?**

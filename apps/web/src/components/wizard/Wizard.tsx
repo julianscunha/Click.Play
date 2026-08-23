@@ -11,7 +11,14 @@ const STEPS = [
   { key: "visual", label: "Visual" },
   { key: "legendas", label: "Legendas" },
   { key: "abertura", label: "Abertura/Fechamento" },
+  { key: "efeitos", label: "Efeitos/Transições" },
   { key: "revisao", label: "Revisão/Custo" },
+] as const;
+
+const TRANSITION_SPEED_LEVELS = [
+  { level: "rapida", label: "Rápida", value: 6 },
+  { level: "media", label: "Média", value: 12 },
+  { level: "lenta", label: "Lenta", value: 24 },
 ] as const;
 
 const CHUNK_SIZE_LEVELS = [
@@ -42,6 +49,7 @@ interface FormState {
   qualityTier: "draft" | "standard" | "high";
   captionChunkLevel: (typeof CHUNK_SIZE_LEVELS)[number]["level"];
   showTextOverlays: boolean;
+  transitionSpeedLevel: (typeof TRANSITION_SPEED_LEVELS)[number]["level"];
   introEnabled: boolean;
   introText: string;
   introTransition: TransitionType;
@@ -63,6 +71,7 @@ const INITIAL_STATE: FormState = {
   qualityTier: "standard",
   captionChunkLevel: "medias",
   showTextOverlays: true,
+  transitionSpeedLevel: "media",
   introEnabled: false,
   introText: "",
   introTransition: "crossfade",
@@ -141,6 +150,7 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
       qualityTier: form.qualityTier,
       captionChunkSize: CHUNK_SIZE_LEVELS.find((l) => l.level === form.captionChunkLevel)!.value,
       showTextOverlays: form.showTextOverlays,
+      transitionDurationFrames: TRANSITION_SPEED_LEVELS.find((l) => l.level === form.transitionSpeedLevel)!.value,
       intro: form.introEnabled
         ? { mode: "generated", text: form.introText.trim() || undefined, transition: form.introTransition }
         : undefined,
@@ -474,6 +484,29 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
           </div>
         )}
 
+        {step.key === "efeitos" && (
+          <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-1.5">
+              <span className={labelClass}>Velocidade das transições entre cenas</span>
+              <div className="flex gap-2">
+                {TRANSITION_SPEED_LEVELS.map((l) => (
+                  <Chip
+                    key={l.level}
+                    active={form.transitionSpeedLevel === l.level}
+                    onClick={() => update("transitionSpeedLevel", l.level)}
+                  >
+                    {l.label}
+                  </Chip>
+                ))}
+              </div>
+              <p className="text-sm text-neutral-500">
+                O tipo de transição (dissolver, deslizar, varredura...) é escolhido automaticamente cena a cena pela
+                IA — aqui você controla só a duração.
+              </p>
+            </div>
+          </div>
+        )}
+
         {step.key === "revisao" && (
           <div className="flex flex-col gap-4">
             <dl className="grid grid-cols-1 gap-x-6 gap-y-3 rounded-md border border-neutral-800 bg-neutral-900/50 p-4 text-sm sm:grid-cols-2">
@@ -516,6 +549,12 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
               <div>
                 <dt className="text-neutral-500">Texto animado</dt>
                 <dd className="text-neutral-100">{form.showTextOverlays ? "Sim" : "Não"}</dd>
+              </div>
+              <div>
+                <dt className="text-neutral-500">Transições</dt>
+                <dd className="text-neutral-100">
+                  {TRANSITION_SPEED_LEVELS.find((l) => l.level === form.transitionSpeedLevel)!.label}
+                </dd>
               </div>
               <div>
                 <dt className="text-neutral-500">Abertura</dt>
