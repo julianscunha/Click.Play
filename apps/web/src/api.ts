@@ -72,6 +72,16 @@ export interface CreateJobInput {
   language?: string;
   captionChunkSize?: number;
   showTextOverlays?: boolean;
+  intro?: IntroOutroConfig;
+  outro?: IntroOutroConfig;
+}
+
+export type TransitionType = "none" | "crossfade" | "slide_left" | "slide_right" | "wipe" | "flip";
+
+export interface IntroOutroConfig {
+  mode: "generated" | "upload";
+  text?: string;
+  transition?: TransitionType;
 }
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {

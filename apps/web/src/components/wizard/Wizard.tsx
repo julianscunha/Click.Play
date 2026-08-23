@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { CreateJobInput, FormConfig } from "../../api.js";
+import type { CreateJobInput, FormConfig, TransitionType } from "../../api.js";
 
 function formatLabel(id: string): string {
   return id.replace(/_/g, " ");
@@ -10,6 +10,7 @@ const STEPS = [
   { key: "roteiro", label: "Roteiro" },
   { key: "visual", label: "Visual" },
   { key: "legendas", label: "Legendas" },
+  { key: "abertura", label: "Abertura/Fechamento" },
   { key: "revisao", label: "Revisão/Custo" },
 ] as const;
 
@@ -18,6 +19,15 @@ const CHUNK_SIZE_LEVELS = [
   { level: "medias", label: "Médias", value: 4 },
   { level: "muitas", label: "Muitas por vez", value: 6 },
 ] as const;
+
+const TRANSITIONS: { value: TransitionType; label: string }[] = [
+  { value: "crossfade", label: "Dissolver (crossfade)" },
+  { value: "slide_left", label: "Deslizar p/ esquerda" },
+  { value: "slide_right", label: "Deslizar p/ direita" },
+  { value: "wipe", label: "Varredura (wipe)" },
+  { value: "flip", label: "Virar (flip)" },
+  { value: "none", label: "Corte seco" },
+];
 
 interface FormState {
   topic: string;
@@ -32,6 +42,12 @@ interface FormState {
   qualityTier: "draft" | "standard" | "high";
   captionChunkLevel: (typeof CHUNK_SIZE_LEVELS)[number]["level"];
   showTextOverlays: boolean;
+  introEnabled: boolean;
+  introText: string;
+  introTransition: TransitionType;
+  outroEnabled: boolean;
+  outroText: string;
+  outroTransition: TransitionType;
 }
 
 const INITIAL_STATE: FormState = {
@@ -47,6 +63,12 @@ const INITIAL_STATE: FormState = {
   qualityTier: "standard",
   captionChunkLevel: "medias",
   showTextOverlays: true,
+  introEnabled: false,
+  introText: "",
+  introTransition: "crossfade",
+  outroEnabled: false,
+  outroText: "",
+  outroTransition: "crossfade",
 };
 
 const fieldClass =
@@ -119,6 +141,12 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
       qualityTier: form.qualityTier,
       captionChunkSize: CHUNK_SIZE_LEVELS.find((l) => l.level === form.captionChunkLevel)!.value,
       showTextOverlays: form.showTextOverlays,
+      intro: form.introEnabled
+        ? { mode: "generated", text: form.introText.trim() || undefined, transition: form.introTransition }
+        : undefined,
+      outro: form.outroEnabled
+        ? { mode: "generated", text: form.outroText.trim() || undefined, transition: form.outroTransition }
+        : undefined,
     });
   }
 
@@ -347,6 +375,105 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
           </div>
         )}
 
+        {step.key === "abertura" && (
+          <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-3">
+              <label className="flex items-center gap-2 text-sm font-medium text-neutral-200">
+                <input
+                  type="checkbox"
+                  checked={form.introEnabled}
+                  onChange={(e) => update("introEnabled", e.target.checked)}
+                  className="h-4 w-4 rounded border-neutral-700 bg-neutral-900"
+                />
+                Abertura
+              </label>
+              {form.introEnabled && (
+                <div className="flex flex-col gap-3 pl-6">
+                  <div className="flex flex-col gap-1.5">
+                    <label htmlFor="introText" className={labelClass}>
+                      Texto <span className="text-neutral-500">(vazio = IA gera a partir do tema)</span>
+                    </label>
+                    <input
+                      id="introText"
+                      value={form.introText}
+                      onChange={(e) => update("introText", e.target.value)}
+                      placeholder="Ex: Você sabia que..."
+                      className={fieldClass}
+                    />
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    <label htmlFor="introTransition" className={labelClass}>
+                      Transição
+                    </label>
+                    <select
+                      id="introTransition"
+                      value={form.introTransition}
+                      onChange={(e) => update("introTransition", e.target.value as TransitionType)}
+                      className={fieldClass}
+                    >
+                      {TRANSITIONS.map((t) => (
+                        <option key={t.value} value={t.value}>
+                          {t.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div className="flex flex-col gap-3">
+              <label className="flex items-center gap-2 text-sm font-medium text-neutral-200">
+                <input
+                  type="checkbox"
+                  checked={form.outroEnabled}
+                  onChange={(e) => update("outroEnabled", e.target.checked)}
+                  className="h-4 w-4 rounded border-neutral-700 bg-neutral-900"
+                />
+                Encerramento
+              </label>
+              {form.outroEnabled && (
+                <div className="flex flex-col gap-3 pl-6">
+                  <div className="flex flex-col gap-1.5">
+                    <label htmlFor="outroText" className={labelClass}>
+                      Texto <span className="text-neutral-500">(vazio = IA gera a partir do tema)</span>
+                    </label>
+                    <input
+                      id="outroText"
+                      value={form.outroText}
+                      onChange={(e) => update("outroText", e.target.value)}
+                      placeholder="Ex: Se inscreva pra mais!"
+                      className={fieldClass}
+                    />
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    <label htmlFor="outroTransition" className={labelClass}>
+                      Transição
+                    </label>
+                    <select
+                      id="outroTransition"
+                      value={form.outroTransition}
+                      onChange={(e) => update("outroTransition", e.target.value as TransitionType)}
+                      className={fieldClass}
+                    >
+                      {TRANSITIONS.map((t) => (
+                        <option key={t.value} value={t.value}>
+                          {t.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <p className="text-sm text-neutral-500">
+              Upload de vídeo próprio pra abertura/encerramento ainda não está disponível — só geração automática por
+              enquanto.
+            </p>
+          </div>
+        )}
+
         {step.key === "revisao" && (
           <div className="flex flex-col gap-4">
             <dl className="grid grid-cols-1 gap-x-6 gap-y-3 rounded-md border border-neutral-800 bg-neutral-900/50 p-4 text-sm sm:grid-cols-2">
@@ -389,6 +516,14 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
               <div>
                 <dt className="text-neutral-500">Texto animado</dt>
                 <dd className="text-neutral-100">{form.showTextOverlays ? "Sim" : "Não"}</dd>
+              </div>
+              <div>
+                <dt className="text-neutral-500">Abertura</dt>
+                <dd className="text-neutral-100">{form.introEnabled ? form.introText.trim() || "Gerada por IA" : "Nenhuma"}</dd>
+              </div>
+              <div>
+                <dt className="text-neutral-500">Encerramento</dt>
+                <dd className="text-neutral-100">{form.outroEnabled ? form.outroText.trim() || "Gerado por IA" : "Nenhum"}</dd>
               </div>
             </dl>
             <p className="text-sm text-neutral-500">
