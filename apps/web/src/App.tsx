@@ -179,7 +179,7 @@ export function App() {
         )}
 
         {!showSettings && job && job.status === "COMPLETED" && job.output && (
-          <ResultPlayer output={job.output} onCreateAnother={reset} />
+          <ResultPlayer job={job} onCreateAnother={reset} />
         )}
       </main>
     </div>

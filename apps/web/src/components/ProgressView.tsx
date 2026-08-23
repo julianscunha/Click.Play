@@ -38,7 +38,7 @@ function friendlyError(raw: string): { title: string; hint?: string } {
   return { title: raw.length > 200 ? `${raw.slice(0, 200)}…` : raw };
 }
 
-function costLine(label: string, amount: CostBreakdown[keyof CostBreakdown]) {
+export function costLine(label: string, amount: CostBreakdown[keyof CostBreakdown]) {
   return (
     <div key={label} className="flex justify-between text-sm text-neutral-300">
       <span>{label}</span>

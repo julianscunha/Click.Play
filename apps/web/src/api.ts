@@ -36,12 +36,19 @@ export type JobStatus =
   | "FAILED"
   | "CANCELLED";
 
+export interface ResultSummary {
+  imageCount: number;
+  videoClipCount: number;
+  audioSeconds: number;
+}
+
 export interface JobView {
   id: string;
   projectId: string;
   status: JobStatus;
   stage: string;
   stageDetail: string | null;
+  resultSummary: ResultSummary | null;
   progress: number;
   estimatedCost: CostBreakdown | null;
   actualCost: CostBreakdown | null;

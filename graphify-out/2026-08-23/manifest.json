@@ -125,8 +125,8 @@
     "semantic_hash": ""
   },
   "docs/IMPLEMENTATION-PLAN.md": {
-    "mtime": 1787460770.343685,
-    "ast_hash": "16c0b120751d3befbed223f5c1ea26cd",
+    "mtime": 1787460963.1645644,
+    "ast_hash": "3b7b0ec2a7e2aff821c755db25fc1382",
     "semantic_hash": ""
   },
   "pnpm-workspace.yaml": {
@@ -875,8 +875,8 @@
     "semantic_hash": ""
   },
   "apps/web/src/api.ts": {
-    "mtime": 1787460636.1111434,
-    "ast_hash": "7afb76c01cca82641502e7708067f195",
+    "mtime": 1787460863.2686026,
+    "ast_hash": "7eb1b0adcfca6f878b02d4b351d7a469",
     "semantic_hash": ""
   },
   "apps/web/src/components/ProgressView.tsx": {
@@ -1230,8 +1230,8 @@
     "semantic_hash": ""
   },
   "apps/web/src/components/wizard/Wizard.tsx": {
-    "mtime": 1787460689.1215985,
-    "ast_hash": "b0846fa352806ce32b9342f1a965ca54",
+    "mtime": 1787460917.3188186,
+    "ast_hash": "7d00d644496ffa352b079389915882d8",
     "semantic_hash": ""
   }
 }
