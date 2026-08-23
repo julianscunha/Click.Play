@@ -74,6 +74,14 @@ export function ResultPlayer({ job, onCreateAnother }: ResultPlayerProps) {
         </div>
       )}
 
+      <div className="flex w-full flex-col gap-1 rounded-md border border-neutral-800 bg-neutral-900/50 p-4">
+        <p className="text-sm font-medium text-neutral-100">Publicação</p>
+        <p className="text-xs text-neutral-500">
+          Publicação direta (YouTube, TikTok, Instagram) chega em breve. Por enquanto, baixe o vídeo e publique
+          manualmente.
+        </p>
+      </div>
+
       {job.resultSummary && (
         <div className="flex w-full justify-between text-xs text-neutral-500">
           <span>{job.resultSummary.imageCount} imagem(ns)</span>

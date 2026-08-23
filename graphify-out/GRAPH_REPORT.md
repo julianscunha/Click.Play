@@ -1,16 +1,16 @@
 # Graph Report - Click.Play  (2026-08-23)
 
 ## Corpus Check
-- 213 files · ~67,114 words
+- 213 files · ~67,117 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 946 nodes · 1547 edges · 58 communities (56 shown, 2 thin omitted)
+- 946 nodes · 1544 edges · 59 communities (56 shown, 3 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 1 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `8e6c284e`
+- Built from commit: `3418b8a8`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -44,6 +44,7 @@
 - scene.ts
 - orchestrator.test.ts
 - ClickPlayVideo.tsx
+- App
 - new-provider
 - verify-package
 - typecheck-on-edit.cjs
@@ -82,19 +83,19 @@
 ## Surprising Connections (you probably didn't know these)
 - `ProgressViewProps` --references--> `JobView`  [EXTRACTED]
   apps/web/src/components/ProgressView.tsx → apps/web/src/api.ts
-- `SettingsView()` --calls--> `getFormConfig()`  [EXTRACTED]
-  apps/web/src/components/SettingsView.tsx → apps/web/src/api.ts
 - `staticScene()` --references--> `Scene`  [EXTRACTED]
   packages/domain/src/scene.test.ts → packages/domain/src/scene.ts
 - `videoScene()` --references--> `Scene`  [EXTRACTED]
   packages/domain/src/scene.test.ts → packages/domain/src/scene.ts
 - `runPipeline()` --calls--> `resolveIntroOutroScene()`  [EXTRACTED]
   packages/providers/src/pipeline/orchestrator.ts → packages/providers/src/pipeline/intro-outro.ts
+- `runJobOnce()` --calls--> `runPipeline()`  [EXTRACTED]
+  packages/providers/src/persistence/job-runner.ts → packages/providers/src/pipeline/orchestrator.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (58 total, 2 thin omitted)
+## Communities (59 total, 3 thin omitted)
 
 ### Community 0 - "scripts"
 Cohesion: 0.12
@@ -173,8 +174,8 @@ Cohesion: 0.18
 Nodes (10): main, name, private, scripts, lint, test, typecheck, type (+2 more)
 
 ### Community 19 - "SettingsView.tsx"
-Cohesion: 0.13
-Nodes (12): getCredits(), getSettings(), Settings, BADGE_STYLES, BadgeKind, MODEL_FIELDS, ModelSelect(), ModelSelectProps (+4 more)
+Cohesion: 0.15
+Nodes (9): Settings, BADGE_STYLES, BadgeKind, MODEL_FIELDS, ModelSelect(), ModelSelectProps, SECRET_FIELDS, SecretFieldConfig (+1 more)
 
 ### Community 22 - "cost/index.ts"
 Cohesion: 0.39
@@ -265,8 +266,8 @@ Cohesion: 0.18
 Nodes (17): openDb(), app, db, envFilePath, port, runsDir, buildCostOptions(), buildImageProvider() (+9 more)
 
 ### Community 57 - "api.ts"
-Cohesion: 0.16
-Nodes (19): approveCost(), CostAmount, createJob(), Credits, getFormConfig(), getJob(), getStoredToken(), IntroOutroConfig (+11 more)
+Cohesion: 0.17
+Nodes (21): approveCost(), CostAmount, createJob(), Credits, getCredits(), getFormConfig(), getJob(), getSettings() (+13 more)
 
 ### Community 58 - "server.test.ts"
 Cohesion: 0.06
@@ -295,7 +296,7 @@ Nodes (3): setStoredToken(), TokenGate(), TokenGateProps
 ## Knowledge Gaps
 - **311 isolated node(s):** `ASPECT_RATIOS`, `RESOLUTION_BY_ASPECT_RATIO`, `STAGE_BY_STATUS`, `CostAmount`, `JobStatus` (+306 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **2 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **3 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
