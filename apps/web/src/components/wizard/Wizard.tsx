@@ -347,15 +347,21 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
                   className={fieldClass}
                 >
                   <option value="">Começar do zero</option>
-                  {templates.map((t) => (
-                    <option key={t.id} value={t.id}>
-                      {t.name} {t.version > 1 ? `(v${t.version})` : ""}
-                    </option>
-                  ))}
+                  {templates.map((t) => {
+                    const projectName = contentProjects.find((p) => p.id === t.contentProjectId)?.name;
+                    return (
+                      <option key={t.id} value={t.id}>
+                        {t.name}
+                        {t.version > 1 ? ` (v${t.version})` : ""}
+                        {projectName ? ` — ${projectName}` : ""}
+                      </option>
+                    );
+                  })}
                 </select>
                 <p className="text-xs text-neutral-500">
                   Preenche arquétipo, visual, música, narração, legendas etc. com as decisões salvas — tema e projeto
-                  continuam livres.
+                  continuam livres. Nome de template é único entre TODOS os projetos — salvar de novo com o mesmo
+                  nome sobrescreve, mesmo vindo de outro projeto.
                 </p>
                 {templateError && (
                   <p role="alert" className="text-xs text-red-400">

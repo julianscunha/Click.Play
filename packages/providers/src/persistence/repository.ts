@@ -68,6 +68,20 @@ export async function listProductionsByContentProject(db: ClickPlayDb, contentPr
  * Mesmo nome sobrescreve (decisão do usuário) — unicidade por nome é checada
  * aqui, não via constraint de banco, pra dar mensagem/comportamento previsível
  * ao caller em vez de estourar erro de SQL.
+ *
+ * Unicidade é GLOBAL por nome, não escopada por `contentProjectId` — decisão
+ * literal do usuário ("se for o mesmo nome, sobrescreve"), sem exceção pra
+ * projetos diferentes. Efeito real: um template "Padrão" salvo a partir de
+ * uma produção do Projeto B sobrescreve o "Padrão" do Projeto A (config e
+ * contentProjectId trocados, sem aviso a quem criou o do Projeto A) — achado
+ * em code review, aceito como comportamento válido, não bug (ver teste
+ * "overwrites across content projects" abaixo).
+ *
+ * ponytail: select-then-update sem transação — 2 requisições concorrentes
+ * salvando o MESMO nome ao mesmo tempo podem ambas ler "não existe" e ambas
+ * inserirem (duplicata) ou pisarem a version uma da outra. Risco real mas
+ * baixo (single-user, sem fila de requisições concorrentes no fluxo hoje);
+ * upgrade se um dia importar: transação SQLite ou lock otimista por nome.
  */
 export async function upsertTemplate(
   db: ClickPlayDb,

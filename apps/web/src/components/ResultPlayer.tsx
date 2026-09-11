@@ -32,7 +32,7 @@ function SaveAsTemplate({ productionId }: { productionId: string }) {
       <p className="text-sm font-medium text-neutral-100">Salvar como template</p>
       <p className="text-xs text-neutral-500">
         Reaproveita todas as decisões desta produção (arquétipo, visual, música, narração, legendas...) num template —
-        mesmo nome sobrescreve.
+        mesmo nome sobrescreve, mesmo se o template existente for de outro projeto.
       </p>
       <div className="flex gap-2">
         <input

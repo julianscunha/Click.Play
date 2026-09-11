@@ -120,6 +120,32 @@ describe("persistence repository", () => {
       expect(await listTemplates(db)).toHaveLength(1);
     });
 
+    it("overwrites across content projects — same name wins globally, not scoped by project (decisão do usuário)", async () => {
+      const projectA = await createContentProject(db, { name: "Projeto A" });
+      const projectB = await createContentProject(db, { name: "Projeto B" });
+      const productionA = await createProduction(db, { topic: "a", config, contentProjectId: projectA.id });
+      const first = await upsertTemplate(db, {
+        name: "Padrão",
+        config: productionA.config,
+        contentProjectId: projectA.id,
+        sourceProductionId: productionA.id,
+      });
+
+      const productionB = await createProduction(db, { topic: "b", config, contentProjectId: projectB.id });
+      const second = await upsertTemplate(db, {
+        name: "Padrão",
+        config: productionB.config,
+        contentProjectId: projectB.id,
+        sourceProductionId: productionB.id,
+      });
+
+      // Mesma linha (não escopado por projeto) — o template de A "virou" o de B.
+      expect(second.id).toBe(first.id);
+      expect(second.contentProjectId).toBe(projectB.id);
+      expect(second.version).toBe(2);
+      expect(await listTemplates(db)).toHaveLength(1);
+    });
+
     it("returns null for a missing template", async () => {
       expect(await getTemplate(db, "does-not-exist")).toBeNull();
     });
