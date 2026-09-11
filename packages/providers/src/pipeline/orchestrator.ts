@@ -112,6 +112,9 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
       if (introScene) score.scenes = [introScene, ...score.scenes];
       if (outroScene) score.scenes = [...score.scenes, outroScene];
 
+      // Não recebe opts.musicEnabled — mesmo com música desligada, a estimativa
+      // pré-aprovação segue somando custo de música (over-estimate conservador,
+      // nunca cobra a mais no real: computeActualCost abaixo já reflete o toggle).
       costEstimate = estimateCost(score.scenes, opts.cost);
       const approved = await callbacks.onCostEstimate(costEstimate);
       if (!approved) {

@@ -39,6 +39,11 @@ describe("mapRenderInputToProps", () => {
     expect(props.voiceoverSrc).toBe("voice.mp3");
     expect(props.musicSrc).toBe("music.mp3");
   });
+
+  it("passes through musicVolume when present", () => {
+    const props = mapRenderInputToProps({ ...baseInput, musicPath: "music.mp3", musicVolume: 0.25 });
+    expect(props.musicVolume).toBe(0.25);
+  });
 });
 
 describe("getTotalDurationInFrames", () => {

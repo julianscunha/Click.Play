@@ -125,8 +125,8 @@
     "semantic_hash": ""
   },
   "docs/IMPLEMENTATION-PLAN.md": {
-    "mtime": 1789095929.4841478,
-    "ast_hash": "46c25440c743fda0fb7a6654ee1ea1f9",
+    "mtime": 1787523652.9436512,
+    "ast_hash": "4f3d452ba17cf22b54932569991e0e1e",
     "semantic_hash": ""
   },
   "pnpm-workspace.yaml": {
@@ -525,8 +525,8 @@
     "semantic_hash": ""
   },
   "packages/providers/src/pipeline/orchestrator.ts": {
-    "mtime": 1789095695.8761349,
-    "ast_hash": "dfad56b7dc202b3d65597fded29703e7",
+    "mtime": 1787442219.1217906,
+    "ast_hash": "d9c10d96a3fdd17cc34864f0e3bbd97d",
     "semantic_hash": ""
   },
   "packages/providers/src/pipeline/scene-timing.ts": {
@@ -535,8 +535,8 @@
     "semantic_hash": ""
   },
   "packages/providers/src/pipeline/types.ts": {
-    "mtime": 1789095668.7261865,
-    "ast_hash": "b73c455f74e30757d2f46d9887c37fbd",
+    "mtime": 1787523438.4057841,
+    "ast_hash": "c106a1c0ccb9b0e64c5a1a8c4e1829b1",
     "semantic_hash": ""
   },
   "packages/providers/src/stock/index.ts": {
@@ -645,13 +645,13 @@
     "semantic_hash": ""
   },
   "packages/video-engine/src/render/ClickPlayVideo.tsx": {
-    "mtime": 1789095655.1181903,
-    "ast_hash": "695127e4116ad8cdd09ed67e4eef1500",
+    "mtime": 1786862641.0821218,
+    "ast_hash": "c874e35e6e265132ee27d4ace3f94157",
     "semantic_hash": ""
   },
   "packages/video-engine/src/render/MusicTrack.tsx": {
-    "mtime": 1789095637.0780945,
-    "ast_hash": "d23294b3840ecda0ef48a47e3fe9e6f0",
+    "mtime": 1786711534.6270504,
+    "ast_hash": "6a0e2d43864d8d084fff4977c950e24e",
     "semantic_hash": ""
   },
   "packages/video-engine/src/render/SceneLayer.tsx": {
@@ -695,8 +695,8 @@
     "semantic_hash": ""
   },
   "packages/video-engine/src/render/project-to-props.ts": {
-    "mtime": 1789095645.9210382,
-    "ast_hash": "638c277ed407622a91a14c826154e362",
+    "mtime": 1786711534.7440562,
+    "ast_hash": "bf64674f4befc836ab8a1c94478e8350",
     "semantic_hash": ""
   },
   "packages/video-engine/src/render/transitions.ts": {
@@ -705,8 +705,8 @@
     "semantic_hash": ""
   },
   "packages/video-engine/src/render/types.ts": {
-    "mtime": 1789095643.3494208,
-    "ast_hash": "cdd9ffb67fd3773b3580a790149185c9",
+    "mtime": 1787363986.277598,
+    "ast_hash": "6051b63383685725589ad234d19466ba",
     "semantic_hash": ""
   },
   "packages/video-engine/src/render/video-renderer.ts": {
@@ -865,8 +865,8 @@
     "semantic_hash": ""
   },
   "apps/api/src/routes/jobs.ts": {
-    "mtime": 1789095727.6254709,
-    "ast_hash": "29927d89eb4b92472b73592d19b95038",
+    "mtime": 1787523488.8178008,
+    "ast_hash": "a962cf23925e39757a920eba81da004c",
     "semantic_hash": ""
   },
   "apps/api/src/routes/meta.ts": {
@@ -875,8 +875,8 @@
     "semantic_hash": ""
   },
   "apps/web/src/api.ts": {
-    "mtime": 1789095731.6553588,
-    "ast_hash": "38b5479a76726c28093e81e556f90965",
+    "mtime": 1787523495.6020741,
+    "ast_hash": "3a9f85fb139a34cc578d477e5b48cee1",
     "semantic_hash": ""
   },
   "apps/web/src/components/ProgressView.tsx": {
@@ -1200,8 +1200,8 @@
     "semantic_hash": ""
   },
   "apps/web/src/components/wizard/Wizard.tsx": {
-    "mtime": 1789095759.1516716,
-    "ast_hash": "42e2013fecc8d39de9463d69530bf328",
+    "mtime": 1787523533.7281978,
+    "ast_hash": "6355ba7c3deb3d69429b370518fe2845",
     "semantic_hash": ""
   },
   "apps/api/src/routes/credits.ts": {
@@ -1237,46 +1237,6 @@
   ".claude/agents/marketing-video-optimization-specialist.md": {
     "mtime": 1788489805.104835,
     "ast_hash": "8f703f9e970993942668c069c1c28701",
-    "semantic_hash": ""
-  },
-  ".claude/agents/design-brand-guardian.md": {
-    "mtime": 1789095855.784989,
-    "ast_hash": "9d5a846a3a607e4ba48d01819996b913",
-    "semantic_hash": ""
-  },
-  ".claude/agents/design-image-prompt-engineer.md": {
-    "mtime": 1789095846.1366968,
-    "ast_hash": "f6c3c327e28da9809223f46895c17b20",
-    "semantic_hash": ""
-  },
-  ".claude/agents/design-ui-designer.md": {
-    "mtime": 1789095836.0249834,
-    "ast_hash": "baf6929043d5b7174c3340b09236e846",
-    "semantic_hash": ""
-  },
-  ".claude/agents/design-ux-architect.md": {
-    "mtime": 1789095881.6094134,
-    "ast_hash": "36c5ef151bc97e50886a2924c81f2d7d",
-    "semantic_hash": ""
-  },
-  ".claude/agents/design-visual-storyteller.md": {
-    "mtime": 1789095809.4518218,
-    "ast_hash": "505da900d7143397c2b6cc705b555195",
-    "semantic_hash": ""
-  },
-  ".claude/agents/engineering-video-streaming-engineer.md": {
-    "mtime": 1789095941.396444,
-    "ast_hash": "9cfb5764a6e647249c692ab72e8fe71f",
-    "semantic_hash": ""
-  },
-  ".claude/agents/marketing-douyin-strategist.md": {
-    "mtime": 1789095708.9372084,
-    "ast_hash": "99bf2586d877a841dd2d6f1308f78c6b",
-    "semantic_hash": ""
-  },
-  ".claude/agents/marketing-seo-specialist.md": {
-    "mtime": 1789095777.5366745,
-    "ast_hash": "350cc0e355e1aabb2acf7851fe7bbc01",
     "semantic_hash": ""
   }
 }

@@ -199,6 +199,38 @@ describe("runPipeline", () => {
     );
   });
 
+  it("skips music generation and cost when musicEnabled is false", async () => {
+    const llm = fakeLLM(RESEARCH_RESULT, directorPayload(), critiquePayload(8));
+    const options = baseOptions(runDir, llm);
+    options.musicEnabled = false;
+    const callbacks = approvingCallbacks();
+
+    const result = await runPipeline(options, callbacks);
+
+    expect(result.status).toBe("completed");
+    expect(options.musicProvider.generate).not.toHaveBeenCalled();
+    expect(options.videoRenderer.render).toHaveBeenCalledWith(
+      expect.objectContaining({ musicPath: undefined }),
+      expect.any(String),
+    );
+    if (result.status !== "completed") throw new Error("expected completed");
+    expect(result.costActual.music).toEqual({ status: "known", usd: 0 });
+  });
+
+  it("passes musicVolume through to the render input", async () => {
+    const llm = fakeLLM(RESEARCH_RESULT, directorPayload(), critiquePayload(8));
+    const options = baseOptions(runDir, llm);
+    options.musicVolume = 0.25;
+    const callbacks = approvingCallbacks();
+
+    await runPipeline(options, callbacks);
+
+    expect(options.videoRenderer.render).toHaveBeenCalledWith(
+      expect.objectContaining({ musicVolume: 0.25 }),
+      expect.any(String),
+    );
+  });
+
   it("resumes from a checkpoint, skipping stages that were already paid for", async () => {
     const llm = fakeLLM(); // nenhuma resposta — research/director não podem ser chamados de novo
     const options = baseOptions(runDir, llm);
