@@ -25,8 +25,8 @@
     "semantic_hash": ""
   },
   "apps/api/src/server.ts": {
-    "mtime": 1787509049.1241088,
-    "ast_hash": "fa82fe54d1f2369396d65a9b1a9c2fd2",
+    "mtime": 1787523462.771408,
+    "ast_hash": "4e0b0ed2049866121e3eaf6b6464f012",
     "semantic_hash": ""
   },
   "apps/api/tsconfig.json": {
@@ -125,8 +125,8 @@
     "semantic_hash": ""
   },
   "docs/IMPLEMENTATION-PLAN.md": {
-    "mtime": 1787511454.8053615,
-    "ast_hash": "b291eeac1411d0c0c1d2ac371dc0fdda",
+    "mtime": 1787523652.9436512,
+    "ast_hash": "4f3d452ba17cf22b54932569991e0e1e",
     "semantic_hash": ""
   },
   "pnpm-workspace.yaml": {
@@ -320,8 +320,8 @@
     "semantic_hash": ""
   },
   "packages/providers/src/tts/edge.ts": {
-    "mtime": 1787417072.398131,
-    "ast_hash": "758bc450c7c575d8f7a628ff55cc76fa",
+    "mtime": 1787523423.8577802,
+    "ast_hash": "43bc1488751e026af2750ad16bf92233",
     "semantic_hash": ""
   },
   "packages/providers/src/tts/types.ts": {
@@ -535,8 +535,8 @@
     "semantic_hash": ""
   },
   "packages/providers/src/pipeline/types.ts": {
-    "mtime": 1787508833.9814777,
-    "ast_hash": "f30d836d089dbb2028dc8e9806a2530c",
+    "mtime": 1787523438.4057841,
+    "ast_hash": "c106a1c0ccb9b0e64c5a1a8c4e1829b1",
     "semantic_hash": ""
   },
   "packages/providers/src/stock/index.ts": {
@@ -855,8 +855,8 @@
     "semantic_hash": ""
   },
   "apps/api/src/providers.ts": {
-    "mtime": 1787509040.153212,
-    "ast_hash": "4ae681ea3d7df9dbeed1788502aa1ddb",
+    "mtime": 1787523454.5002897,
+    "ast_hash": "3eea28aefed2d00fa610d4e6a5d717f0",
     "semantic_hash": ""
   },
   "apps/api/src/remotion/entry.tsx": {
@@ -865,8 +865,8 @@
     "semantic_hash": ""
   },
   "apps/api/src/routes/jobs.ts": {
-    "mtime": 1787509539.335749,
-    "ast_hash": "601be8722319ebbdbaada224901199a0",
+    "mtime": 1787523488.8178008,
+    "ast_hash": "a962cf23925e39757a920eba81da004c",
     "semantic_hash": ""
   },
   "apps/api/src/routes/meta.ts": {
@@ -875,8 +875,8 @@
     "semantic_hash": ""
   },
   "apps/web/src/api.ts": {
-    "mtime": 1787509561.242266,
-    "ast_hash": "bf21490728435b048cba55d7bc8b4c61",
+    "mtime": 1787523495.6020741,
+    "ast_hash": "3a9f85fb139a34cc578d477e5b48cee1",
     "semantic_hash": ""
   },
   "apps/web/src/components/ProgressView.tsx": {
@@ -1200,8 +1200,8 @@
     "semantic_hash": ""
   },
   "apps/web/src/components/wizard/Wizard.tsx": {
-    "mtime": 1787509179.7618299,
-    "ast_hash": "db63d5301965b50665837bbdc2c30afb",
+    "mtime": 1787523533.7281978,
+    "ast_hash": "6355ba7c3deb3d69429b370518fe2845",
     "semantic_hash": ""
   },
   "apps/api/src/routes/credits.ts": {

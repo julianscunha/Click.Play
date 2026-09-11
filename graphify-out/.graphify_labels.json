@@ -21,6 +21,7 @@
   "19": "SettingsView.tsx",
   "20": "AGENTS.md",
   "21": "vite.config.ts",
+  "22": "cost/index.ts",
   "23": "copilot-instructions.md",
   "24": "bundled.ts",
   "25": "domain/src/index.ts",

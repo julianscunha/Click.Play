@@ -1,16 +1,16 @@
 # Graph Report - Click.Play  (2026-08-23)
 
 ## Corpus Check
-- 213 files · ~67,215 words
+- 213 files · ~67,469 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 946 nodes · 1542 edges · 57 communities (55 shown, 2 thin omitted)
+- 946 nodes · 1541 edges · 58 communities (56 shown, 2 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 1 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `88635fb4`
+- Built from commit: `00af5a0d`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -35,6 +35,7 @@
 - video-engine/tsconfig.json
 - providers/package.json
 - SettingsView.tsx
+- cost/index.ts
 - bundled.ts
 - domain/src/index.ts
 - ResultPlayer.tsx
@@ -93,7 +94,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (57 total, 2 thin omitted)
+## Communities (58 total, 2 thin omitted)
 
 ### Community 0 - "scripts"
 Cohesion: 0.12
@@ -175,6 +176,10 @@ Nodes (10): main, name, private, scripts, lint, test, typecheck, type (+2 more)
 Cohesion: 0.13
 Nodes (13): getCredits(), getFormConfig(), getSettings(), Settings, BADGE_STYLES, BadgeKind, MODEL_FIELDS, ModelSelect() (+5 more)
 
+### Community 22 - "cost/index.ts"
+Cohesion: 0.39
+Nodes (7): IMAGE_PRICING_PER_IMAGE, LLM_CALL_TOKEN_ESTIMATES, LLM_PRICING_PER_MODEL, MODEL_BY_TIER, MUSIC_PRICING_PER_TRACK, TTS_PRICING_PER_CHAR, VIDEO_PRICING_PER_SECOND
+
 ### Community 24 - "bundled.ts"
 Cohesion: 0.21
 Nodes (10): listTracks(), loadManifest(), MANIFEST_PATH, ManifestTrack, MUSIC_DIR, MusicManifest, MusicSelection, PACKAGE_ROOT (+2 more)
@@ -200,8 +205,8 @@ Cohesion: 0.09
 Nodes (25): AudioTrack, MusicMood, MusicTrack, NarrationTrack, WordTimestamp, Caption, CaptionStyleKey, CameraMotion (+17 more)
 
 ### Community 30 - "orchestrator.test.ts"
-Cohesion: 0.10
-Nodes (17): IMAGE_PRICING_PER_IMAGE, LLM_CALL_TOKEN_ESTIMATES, LLM_PRICING_PER_MODEL, MODEL_BY_TIER, MUSIC_PRICING_PER_TRACK, TTS_PRICING_PER_CHAR, VIDEO_PRICING_PER_SECOND, runPipeline() (+9 more)
+Cohesion: 0.13
+Nodes (10): runPipeline(), baseOptions(), fakeImageProvider(), fakeLLM(), fakeMusic(), fakeTTS(), fakeVideoRenderer(), RESEARCH_RESULT (+2 more)
 
 ### Community 31 - "ClickPlayVideo.tsx"
 Cohesion: 0.18
@@ -288,7 +293,7 @@ Cohesion: 0.60
 Nodes (3): setStoredToken(), TokenGate(), TokenGateProps
 
 ## Knowledge Gaps
-- **311 isolated node(s):** `DECISION_STYLES`, `Arquétipos novos (Click.Play)`, `TTS: múltiplos providers, default remoto grátis`, `Terminologia (não confundir)`, `As duas abstrações (substituindo "AssetProvider" como abstração principal)` (+306 more)
+- **311 isolated node(s):** `REMOTION_ENTRY`, `TIMEOUT_MS`, `ASPECT_RATIOS`, `RESOLUTION_BY_ASPECT_RATIO`, `STAGE_BY_STATUS` (+306 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **2 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -301,7 +306,7 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.008) - this node is a cross-community bridge._
 - **Why does `TTSProvider` connect `domain/src/index.ts` to `repository.ts`, `orchestrator.test.ts`, `providers/src/index.ts`?**
   _High betweenness centrality (0.008) - this node is a cross-community bridge._
-- **What connects `DECISION_STYLES`, `Arquétipos novos (Click.Play)`, `TTS: múltiplos providers, default remoto grátis` to the rest of the system?**
+- **What connects `REMOTION_ENTRY`, `TIMEOUT_MS`, `ASPECT_RATIOS` to the rest of the system?**
   _311 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `scripts` be split into smaller, more focused modules?**
   _Cohesion score 0.125 - nodes in this community are weakly interconnected._
