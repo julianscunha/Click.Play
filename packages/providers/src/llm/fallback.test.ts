@@ -35,11 +35,11 @@ describe("FallbackLLM", () => {
     expect(result.data).toEqual({ x: 2 });
   });
 
-  it("propagates the fallback's error when both fail", async () => {
+  it("chains both errors when both fail, not just the fallback's", async () => {
     const primary = provider(new Error("quota exceeded"));
     const fallback = provider(new Error("fallback also down"));
     const llm = new FallbackLLM(primary, fallback);
 
-    await expect(llm.generate(opts)).rejects.toThrow("fallback also down");
+    await expect(llm.generate(opts)).rejects.toThrow("quota exceeded → fallback also down");
   });
 });

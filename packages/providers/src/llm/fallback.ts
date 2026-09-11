@@ -25,10 +25,18 @@ export class FallbackLLM implements LLMProvider {
   }): Promise<LLMResult<z.infer<T>>> {
     try {
       return await this.primary.generate(opts);
-    } catch (err) {
-      const msg = err instanceof Error ? err.message : String(err);
-      console.warn(`[llm-fallback] primary failed (${msg}), trying fallback model`);
-      return await this.fallback.generate(opts);
+    } catch (primaryErr) {
+      const primaryMsg = primaryErr instanceof Error ? primaryErr.message : String(primaryErr);
+      console.warn(`[llm-fallback] primary failed (${primaryMsg}), trying fallback model`);
+      try {
+        return await this.fallback.generate(opts);
+      } catch (fallbackErr) {
+        const fallbackMsg = fallbackErr instanceof Error ? fallbackErr.message : String(fallbackErr);
+        // Encadeia as duas mensagens (não só a última) — mesmo achado do
+        // tts/fallback.ts: só o erro do fallback escondia se o primário
+        // falhou pela mesma razão ou por outra completamente diferente.
+        throw new Error(`${primaryMsg} → ${fallbackMsg}`);
+      }
     }
   }
 }

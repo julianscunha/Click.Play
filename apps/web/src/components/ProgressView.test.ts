@@ -6,14 +6,26 @@ describe("friendlyError", () => {
     const raw =
       'Premature close → OpenRouter TTS failed (400): {"error":{"message":"...guardrail..."}} → 403 API_KEY_SERVICE_BLOCKED';
     const { title, hint } = friendlyError(raw);
-    expect(title).toMatch(/Todos os providers de narração.*Guardrails/);
+    expect(title).toMatch(/Todos os providers.*Guardrails/);
     expect(hint).toMatch(/guardrails/);
   });
 
   it("flags a chained fallback failure with no specific known cause", () => {
     const raw = "Premature close → some other unrelated error → yet another one";
     const { title } = friendlyError(raw);
-    expect(title).toMatch(/Todos os providers de narração.*3 tentativas/);
+    expect(title).toMatch(/Todos os providers configurados.*3 tentativas/);
+  });
+
+  it("flags a chained LLM fallback where both models reject structured output (research/director)", () => {
+    const raw = "Research failed after 3 attempts: quota exceeded → [Novita] model features structured outputs not support.";
+    const { title } = friendlyError(raw);
+    expect(title).toMatch(/Todos os providers configurados/);
+  });
+
+  it("recognizes a lone unsupported-structured-output error (single provider, no chain)", () => {
+    const { title, hint } = friendlyError("[Novita] model features structured outputs not support.");
+    expect(title).toMatch(/saída estruturada/);
+    expect(hint).toMatch(/OPENROUTER_MODEL/);
   });
 
   it("recognizes a lone guardrail block (single provider, no chain)", () => {
