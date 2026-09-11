@@ -16,7 +16,35 @@ const STAGE_LABELS: Record<string, string> = {
 
 /** Erros de provider (LLM/TTS) vêm crus — stack técnica, JSON de validação, URLs de doc.
  * Traduz os padrões mais comuns pra mensagem acionável; resto cai no fallback truncado. */
-function friendlyError(raw: string): { title: string; hint?: string } {
+export function friendlyError(raw: string): { title: string; hint?: string } {
+  // Cadeia de fallback (TTS: Edge → OpenRouter → Gemini, "→" entre mensagens,
+  // ver tts/fallback.ts) — mostrar que vários providers falharam evita o
+  // usuário investigar só o último erro da cadeia, que pode não ser a causa real.
+  const chained = raw.includes(" → ");
+  if (chained && /guardrail/i.test(raw)) {
+    return {
+      title: `Todos os providers de narração (TTS) falharam — um deles foi bloqueado por Guardrails do OpenRouter (${raw.split(" → ").length} tentativas).`,
+      hint: "Ajuste em https://openrouter.ai/workspaces/default/guardrails, ou veja a cadeia completa abaixo pra achar a causa real (nem sempre é a última tentativa).",
+    };
+  }
+  if (chained) {
+    return {
+      title: `Todos os providers de narração (TTS) falharam (${raw.split(" → ").length} tentativas em cascata).`,
+      hint: "Veja a cadeia completa abaixo — a causa real pode estar numa tentativa anterior à última.",
+    };
+  }
+  if (/guardrail/i.test(raw)) {
+    return {
+      title: "Provider bloqueado pelas restrições (Guardrails) da sua conta OpenRouter.",
+      hint: "Ajuste em https://openrouter.ai/workspaces/default/guardrails.",
+    };
+  }
+  if (/api_key_service_blocked|permission_denied/i.test(raw)) {
+    return {
+      title: "Chave de API bloqueada pelo provedor (Google/outro) pra este serviço.",
+      hint: "Confirme em Configurações se a API correspondente está habilitada pra essa chave.",
+    };
+  }
   if (/quota|rate.?limit|429/i.test(raw)) {
     return {
       title: "Limite de uso do provedor de IA atingido (rate limit / quota).",

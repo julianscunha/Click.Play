@@ -31,11 +31,11 @@ describe("FallbackTTS", () => {
     expect(result.audio.toString()).toBe("fallback");
   });
 
-  it("propagates the fallback's error when both fail", async () => {
+  it("chains both errors when both fail, not just the fallback's", async () => {
     const primary = provider(new Error("Premature close"));
     const fallback = provider(new Error("fallback also down"));
     const tts = new FallbackTTS(primary, fallback);
 
-    await expect(tts.generate("text")).rejects.toThrow("fallback also down");
+    await expect(tts.generate("text")).rejects.toThrow("Premature close → fallback also down");
   });
 });
