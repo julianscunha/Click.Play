@@ -12,11 +12,15 @@ const PROMPT_BY_KIND = {
 
 /**
  * Monta a Scene sintética de abertura/encerramento (docs/IMPLEMENTATION-PLAN.md
- * §11A Bloco 5) — reaproveita 100% o motor existente (animated_text +
+ * §11A Bloco 5) — reaproveita 100% o motor existente (stock_image + animated_text +
  * transition), sem componente novo de render. Texto explícito do usuário tem
  * prioridade; se vazio, 1 LLM call gera a partir do research já feito. Modo
  * "upload" não é resolvido aqui (Fase 15, precisa endpoint de upload de
  * arquivo que ainda não existe).
+ *
+ * Precisa de um elemento de fundo (stock_image) além do animated_text — achado
+ * real via QC blackdetect (packages/domain/src/scene.ts, regra de fundo):
+ * animated_text sozinho renderiza texto branco sobre tela preta.
  */
 export async function resolveIntroOutroScene(
   config: IntroOutroConfig | undefined,
@@ -43,7 +47,10 @@ export async function resolveIntroOutroScene(
   return {
     id: kind,
     visualStrategy: "motion_graphics",
-    elements: [{ type: "animated_text", text, position: "center" }],
+    elements: [
+      { type: "stock_image", prompt: topic },
+      { type: "animated_text", text, position: "center" },
+    ],
     scriptLine: text,
     transition: config.transition ?? "crossfade",
   };

@@ -32,7 +32,7 @@ describe("resolveIntroOutroScene", () => {
       RESEARCH,
     );
     expect(scene?.scriptLine).toBe("Welcome!");
-    expect(scene?.elements[0]).toMatchObject({ type: "animated_text", text: "Welcome!", position: "center" });
+    expect(scene?.elements[1]).toMatchObject({ type: "animated_text", text: "Welcome!", position: "center" });
     expect(llm.generate).not.toHaveBeenCalled();
   });
 

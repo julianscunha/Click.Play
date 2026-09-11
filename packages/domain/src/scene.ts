@@ -80,6 +80,14 @@ export const VisualElement = z.discriminatedUnion("type", [
 ]);
 export type VisualElement = z.infer<typeof VisualElement>;
 
+/** Únicos tipos de VisualElement que o renderer pinta como fundo opaco (ImageElement/VideoElement,
+ * packages/video-engine/src/render/elements) — os demais (animated_text, svg/shape/icon,
+ * particle_system, diagram/map) são transparentes ou UnsupportedElement (AbsoluteFill vazia).
+ * Uma cena sem nenhum desses vira tela preta (achado real: QC blackdetect acusou segmento
+ * preto — cena com só "animated_text" renderiza texto branco sobre o preto de fundo do
+ * Composition raiz, ClickPlayVideo.tsx). */
+const BACKGROUND_ELEMENT_TYPES = new Set(["ai_image", "stock_image", "stock_video", "ai_video_clip"]);
+
 export const Scene = z
   .object({
     id: z.string().min(1),
@@ -93,7 +101,11 @@ export const Scene = z
   .refine(
     (scene) => scene.visualStrategy !== "ai_video" || scene.elements.some((e) => e.type === "ai_video_clip"),
     { message: 'visualStrategy "ai_video" requer ao menos 1 elemento do tipo "ai_video_clip"' },
-  );
+  )
+  .refine((scene) => scene.elements.some((e) => BACKGROUND_ELEMENT_TYPES.has(e.type)), {
+    message:
+      'Scene precisa de ao menos 1 elemento de fundo (ai_image/stock_image/stock_video/ai_video_clip) — animated_text/svg/shape/icon/particle_system/diagram/map sozinhos renderizam tela preta',
+  });
 export type Scene = z.infer<typeof Scene>;
 
 /**

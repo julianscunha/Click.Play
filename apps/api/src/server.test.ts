@@ -7,7 +7,7 @@ import ffmpegPath from "ffmpeg-static";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { createDb, type ClickPlayDb, type CostEstimateOptions, type JobRunnerDeps } from "@clickplay/providers";
 import type { RenderInput, VideoRenderer } from "@clickplay/video-engine";
-import type { ImageProvider, LLMProvider, MusicProvider, TTSProvider } from "@clickplay/providers";
+import type { ImageProvider, LLMProvider, MusicProvider, StockProvider, TTSProvider } from "@clickplay/providers";
 import { buildServer } from "./server.js";
 
 const execFileAsync = promisify(execFile);
@@ -17,7 +17,7 @@ const RESEARCH_RESULT = { summary: "sum", key_facts: ["fact"], mood: "curious" }
 function sceneRaw(overrides: Record<string, unknown> = {}) {
   return {
     visualStrategy: "motion_graphics",
-    elements: [{ type: "animated_text", text: "hello" }],
+    elements: [{ type: "stock_image", prompt: "hello" }, { type: "animated_text", text: "hello" }],
     scriptLine: "Hello world this is a test scene.",
     transition: null,
     ...overrides,
@@ -74,6 +74,15 @@ function fakeImageProvider(): ImageProvider {
   return { generate: vi.fn().mockRejectedValue(new Error("not used in these tests")) };
 }
 
+function fakeStockProvider(): StockProvider {
+  return {
+    id: "pexels",
+    searchImage: vi.fn().mockResolvedValue([{ url: "https://example.com/a.jpg", width: 1080, height: 1920, id: "1" }]),
+    searchVideo: vi.fn().mockResolvedValue([]),
+    download: vi.fn().mockResolvedValue({ filePath: "/tmp/stock.jpg", width: 1080, height: 1920 }),
+  };
+}
+
 const FAKE_RENDER_DURATION_FRAMES = 90;
 
 /** Escreve um mp4 real (via ffmpeg lavfi) — QC (Fase 12) roda ffprobe/blackdetect de verdade no output. */
@@ -109,7 +118,7 @@ function fakeJobRunnerDeps(llm: LLMProvider): JobRunnerDeps {
       videoProviders: {},
       hasGoogleKey: false,
       hasFalKey: false,
-      stockProviders: [],
+      stockProviders: [fakeStockProvider()],
     },
     videoRenderer: fakeVideoRenderer(),
   };

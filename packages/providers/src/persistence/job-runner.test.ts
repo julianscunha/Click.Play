@@ -11,6 +11,7 @@ const execFileAsync = promisify(execFile);
 import type { ImageProvider } from "../image/types.js";
 import type { LLMProvider } from "../llm/types.js";
 import type { MusicProvider } from "../music/types.js";
+import type { StockProvider } from "../stock/types.js";
 import type { TTSProvider } from "../tts/types.js";
 import { createDb } from "./client.js";
 import { retryJob, runJobOnce } from "./job-runner.js";
@@ -22,7 +23,7 @@ const RESEARCH_RESULT = { summary: "sum", key_facts: ["fact"], mood: "curious" }
 function sceneRaw(overrides: Record<string, unknown> = {}) {
   return {
     visualStrategy: "motion_graphics",
-    elements: [{ type: "animated_text", text: "hello" }],
+    elements: [{ type: "stock_image", prompt: "hello" }, { type: "animated_text", text: "hello" }],
     scriptLine: "Hello world this is a test scene.",
     transition: null,
     ...overrides,
@@ -79,6 +80,15 @@ function fakeImageProvider(): ImageProvider {
   return { generate: vi.fn().mockRejectedValue(new Error("not used in these tests")) };
 }
 
+function fakeStockProvider(): StockProvider {
+  return {
+    id: "pexels",
+    searchImage: vi.fn().mockResolvedValue([{ url: "https://example.com/a.jpg", width: 1080, height: 1920, id: "1" }]),
+    searchVideo: vi.fn().mockResolvedValue([]),
+    download: vi.fn().mockResolvedValue({ filePath: "/tmp/stock.jpg", width: 1080, height: 1920 }),
+  };
+}
+
 const FAKE_RENDER_DURATION_FRAMES = 90;
 
 /** Escreve um mp4 real (via ffmpeg lavfi) — QC (Fase 12) roda ffprobe/blackdetect de verdade no output. */
@@ -114,7 +124,7 @@ function fakeDeps(llm: LLMProvider) {
       videoProviders: {},
       hasGoogleKey: false,
       hasFalKey: false,
-      stockProviders: [],
+      stockProviders: [fakeStockProvider()],
     },
     videoRenderer: fakeVideoRenderer(),
   };

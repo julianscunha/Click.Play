@@ -98,4 +98,33 @@ describe("Scene refinement", () => {
       }),
     ).toThrow();
   });
+
+  it("rejects a scene with only animated_text (no background element — renders as black screen)", () => {
+    expect(() =>
+      Scene.parse({
+        id: "1",
+        durationSeconds: 5,
+        visualStrategy: "motion_graphics",
+        elements: [{ type: "animated_text", text: "1969" }],
+        scriptLine: "line",
+        transition: null,
+      }),
+    ).toThrow(/tela preta/);
+  });
+
+  it("accepts animated_text composed over a background element", () => {
+    expect(() =>
+      Scene.parse({
+        id: "1",
+        durationSeconds: 5,
+        visualStrategy: "hybrid",
+        elements: [
+          { type: "ai_image", prompt: "x" },
+          { type: "animated_text", text: "1969" },
+        ],
+        scriptLine: "line",
+        transition: null,
+      }),
+    ).not.toThrow();
+  });
 });
