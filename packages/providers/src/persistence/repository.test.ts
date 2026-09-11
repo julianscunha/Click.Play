@@ -2,11 +2,11 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { createDb } from "./client.js";
 import {
   createJob,
-  createProject,
+  createProduction,
   getJob,
-  getProject,
+  getProduction,
   getWallet,
-  listJobsByProject,
+  listJobsByProduction,
   recoverOrphanedJobs,
   setJobActualCost,
   setJobError,
@@ -17,9 +17,9 @@ import {
   trySpend,
   updateJobStatus,
 } from "./repository.js";
-import type { ProjectConfig } from "./types.js";
+import type { ProductionConfig } from "./types.js";
 
-const config: ProjectConfig = {
+const config: ProductionConfig = {
   cost: { llmModel: "openai/gpt-4.1", ttsProvider: "edge", imageProvider: "gemini", musicProvider: "bundled" },
 };
 
@@ -30,35 +30,35 @@ describe("persistence repository", () => {
     db = createDb(":memory:");
   });
 
-  it("creates and reads back a project", async () => {
-    const project = await createProject(db, { topic: "Apollo 11", config });
-    const fetched = await getProject(db, project.id);
+  it("creates and reads back a production", async () => {
+    const production = await createProduction(db, { topic: "Apollo 11", config });
+    const fetched = await getProduction(db, production.id);
 
     expect(fetched).not.toBeNull();
     expect(fetched?.topic).toBe("Apollo 11");
     expect(fetched?.config).toEqual(config);
   });
 
-  it("returns null for a missing project", async () => {
-    expect(await getProject(db, "does-not-exist")).toBeNull();
+  it("returns null for a missing production", async () => {
+    expect(await getProduction(db, "does-not-exist")).toBeNull();
   });
 
-  it("creates a job QUEUED with progress 0, linked to its project", async () => {
-    const project = await createProject(db, { topic: "t", config });
-    const job = await createJob(db, { projectId: project.id, runDir: "/tmp/run-1" });
+  it("creates a job QUEUED with progress 0, linked to its production", async () => {
+    const production = await createProduction(db, { topic: "t", config });
+    const job = await createJob(db, { productionId: production.id, runDir: "/tmp/run-1" });
 
     expect(job.status).toBe("QUEUED");
     expect(job.progress).toBe(0);
-    expect(job.projectId).toBe(project.id);
+    expect(job.productionId).toBe(production.id);
 
-    const jobs = await listJobsByProject(db, project.id);
+    const jobs = await listJobsByProduction(db, production.id);
     expect(jobs).toHaveLength(1);
     expect(jobs[0]!.id).toBe(job.id);
   });
 
   it("updateJobStatus advances status and derives progress, but preserves progress on FAILED", async () => {
-    const project = await createProject(db, { topic: "t", config });
-    const job = await createJob(db, { projectId: project.id, runDir: "/tmp/run-2" });
+    const production = await createProduction(db, { topic: "t", config });
+    const job = await createJob(db, { productionId: production.id, runDir: "/tmp/run-2" });
 
     await updateJobStatus(db, job.id, "RESEARCHING");
     let fetched = await getJob(db, job.id);
@@ -73,8 +73,8 @@ describe("persistence repository", () => {
   });
 
   it("persists estimated cost, actual cost, output path and error independently", async () => {
-    const project = await createProject(db, { topic: "t", config });
-    const job = await createJob(db, { projectId: project.id, runDir: "/tmp/run-3" });
+    const production = await createProduction(db, { topic: "t", config });
+    const job = await createJob(db, { productionId: production.id, runDir: "/tmp/run-3" });
 
     const estimate = { llm: { status: "known" as const, usd: 1 } } as never;
     const actual = { llm: { status: "known" as const, usd: 2 } } as never;
@@ -92,8 +92,8 @@ describe("persistence repository", () => {
   });
 
   it("persists qc report", async () => {
-    const project = await createProject(db, { topic: "t", config });
-    const job = await createJob(db, { projectId: project.id, runDir: "/tmp/run-4" });
+    const production = await createProduction(db, { topic: "t", config });
+    const job = await createJob(db, { productionId: production.id, runDir: "/tmp/run-4" });
 
     expect((await getJob(db, job.id))?.qcReport).toBeNull();
 
@@ -109,11 +109,11 @@ describe("persistence repository", () => {
   });
 
   it("recoverOrphanedJobs marks non-terminal jobs FAILED and leaves terminal ones alone", async () => {
-    const project = await createProject(db, { topic: "t", config });
-    const stuck = await createJob(db, { projectId: project.id, runDir: "/tmp/run-5" });
+    const production = await createProduction(db, { topic: "t", config });
+    const stuck = await createJob(db, { productionId: production.id, runDir: "/tmp/run-5" });
     await updateJobStatus(db, stuck.id, "RENDERING");
 
-    const done = await createJob(db, { projectId: project.id, runDir: "/tmp/run-6" });
+    const done = await createJob(db, { productionId: production.id, runDir: "/tmp/run-6" });
     await updateJobStatus(db, done.id, "RESEARCHING");
     await updateJobStatus(db, done.id, "PLANNING");
     await updateJobStatus(db, done.id, "REVIEWING");

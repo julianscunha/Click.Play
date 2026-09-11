@@ -10,7 +10,7 @@ export type ClickPlayDb = ReturnType<typeof drizzle<typeof schema>>;
  * ou precisar rodar em múltiplos ambientes.
  */
 const DDL = `
-CREATE TABLE IF NOT EXISTS projects (
+CREATE TABLE IF NOT EXISTS productions (
   id TEXT PRIMARY KEY,
   topic TEXT NOT NULL,
   config TEXT NOT NULL,
@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS projects (
 );
 CREATE TABLE IF NOT EXISTS jobs (
   id TEXT PRIMARY KEY,
-  project_id TEXT NOT NULL REFERENCES projects(id),
+  production_id TEXT NOT NULL REFERENCES productions(id),
   status TEXT NOT NULL DEFAULT 'QUEUED',
   progress REAL NOT NULL DEFAULT 0,
   run_dir TEXT NOT NULL,
@@ -81,6 +81,25 @@ function addResultSummaryColumnIfMissing(sqlite: DatabaseSync): void {
 }
 
 /**
+ * Rename `projects`→`productions` / `jobs.project_id`→`jobs.production_id`
+ * (§11 decisão #1, Fase 16) — banco existente ganha o nome novo preservando
+ * dados; banco novo já nasce com `CREATE TABLE IF NOT EXISTS productions`
+ * acima, então este rename vira no-op (tabela antiga nunca existiu).
+ */
+function renameProjectsToProductionsIfNeeded(sqlite: DatabaseSync): void {
+  try {
+    sqlite.exec("ALTER TABLE projects RENAME TO productions");
+  } catch {
+    // já renomeada ou nunca existiu
+  }
+  try {
+    sqlite.exec("ALTER TABLE jobs RENAME COLUMN project_id TO production_id");
+  } catch {
+    // já renomeada ou nunca existiu
+  }
+}
+
+/**
  * `drizzle-orm/node-sqlite` ainda não existe na versão estável do pacote (só
  * em pre-release `1.0.0-beta`) — usa o adapter genérico `sqlite-proxy` com
  * `node:sqlite` (nativo do Node, sem compilação — `better-sqlite3` exige
@@ -97,6 +116,7 @@ function toRow(row: Record<string, unknown> | undefined): unknown[] {
 export function createDb(sqliteFilePath: string): ClickPlayDb {
   const sqlite = new DatabaseSync(sqliteFilePath);
   if (sqliteFilePath !== ":memory:") sqlite.exec("PRAGMA journal_mode = WAL");
+  renameProjectsToProductionsIfNeeded(sqlite);
   sqlite.exec(DDL);
   addCheckpointColumnIfMissing(sqlite);
   addStageDetailColumnIfMissing(sqlite);

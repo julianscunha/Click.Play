@@ -60,7 +60,7 @@ export interface QcReport {
 
 export interface JobView {
   id: string;
-  projectId: string;
+  productionId: string;
   status: JobStatus;
   stage: string;
   stageDetail: string | null;

@@ -19,15 +19,19 @@ export const JOB_STATUSES = [
 export type JobStatus = (typeof JOB_STATUSES)[number];
 
 /**
- * Escopo mínimo (decisão do usuário, 10D): só `projects`+`jobs`, o suficiente
+ * Escopo mínimo (decisão do usuário, 10D): só `productions`+`jobs`, o suficiente
  * pra persistir a execução do JobStateMachine/runPipeline (10C). Demais
  * tabelas do spec §31 (scenes/assets/audio_tracks/captions/render_jobs/settings)
  * ficam deferred até existir consumidor real (Fase 11 UI ou além).
+ *
+ * Renomeada de `projects` (§11 decisão #1, Fase 16) — essa entidade é uma
+ * *config de produção* 1:1 com um job, não um contêiner. "Projeto" (Fase 16)
+ * é um conceito novo e diferente (content_projects, agrupa produções/templates).
  */
-export const projects = sqliteTable("projects", {
+export const productions = sqliteTable("productions", {
   id: text("id").primaryKey(),
   topic: text("topic").notNull(),
-  /** Campos não-provider de PipelineOptions (archetype/pacing/fps/caption/cost...) — ver persistence/types.ts ProjectConfig. */
+  /** Campos não-provider de PipelineOptions (archetype/pacing/fps/caption/cost...) — ver persistence/types.ts ProductionConfig. */
   config: text("config", { mode: "json" }).notNull(),
   createdAt: integer("created_at", { mode: "timestamp_ms" }).notNull(),
   updatedAt: integer("updated_at", { mode: "timestamp_ms" }).notNull(),
@@ -35,9 +39,9 @@ export const projects = sqliteTable("projects", {
 
 export const jobs = sqliteTable("jobs", {
   id: text("id").primaryKey(),
-  projectId: text("project_id")
+  productionId: text("production_id")
     .notNull()
-    .references(() => projects.id),
+    .references(() => productions.id),
   status: text("status", { enum: JOB_STATUSES }).notNull().default("QUEUED"),
   /** 0..1, derivado do status (ver persistence/job-runner.ts PROGRESS_BY_STATUS) — não input livre. */
   progress: real("progress").notNull().default(0),

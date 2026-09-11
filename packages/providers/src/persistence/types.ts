@@ -1,18 +1,18 @@
 import type { CostBreakdown } from "../cost/index.js";
 import type { PipelineCheckpoint, PipelineOptions } from "../pipeline/types.js";
 import type { QcReport } from "../qc/types.js";
-import type { jobs, JobStatus, projects } from "./schema.js";
+import type { jobs, JobStatus, productions } from "./schema.js";
 
-/** Campos de PipelineOptions que não são instância de provider/runtime — o que sobra fica no `config` do Project. */
-export type ProjectConfig = Omit<
+/** Campos de PipelineOptions que não são instância de provider/runtime — o que sobra fica no `config` da Production. */
+export type ProductionConfig = Omit<
   PipelineOptions,
   "topic" | "runDir" | "llm" | "ttsProvider" | "musicProvider" | "resolveElementCtx" | "videoRenderer"
 >;
 
-export interface Project {
+export interface Production {
   id: string;
   topic: string;
-  config: ProjectConfig;
+  config: ProductionConfig;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -26,7 +26,7 @@ export interface ResultSummary {
 
 export interface Job {
   id: string;
-  projectId: string;
+  productionId: string;
   status: JobStatus;
   progress: number;
   runDir: string;
@@ -42,14 +42,14 @@ export interface Job {
   updatedAt: Date;
 }
 
-export type ProjectRow = typeof projects.$inferSelect;
+export type ProductionRow = typeof productions.$inferSelect;
 export type JobRow = typeof jobs.$inferSelect;
 
-export function projectFromRow(row: ProjectRow): Project {
+export function productionFromRow(row: ProductionRow): Production {
   return {
     id: row.id,
     topic: row.topic,
-    config: row.config as ProjectConfig,
+    config: row.config as ProductionConfig,
     createdAt: row.createdAt,
     updatedAt: row.updatedAt,
   };
@@ -58,7 +58,7 @@ export function projectFromRow(row: ProjectRow): Project {
 export function jobFromRow(row: JobRow): Job {
   return {
     id: row.id,
-    projectId: row.projectId,
+    productionId: row.productionId,
     status: row.status,
     progress: row.progress,
     runDir: row.runDir,

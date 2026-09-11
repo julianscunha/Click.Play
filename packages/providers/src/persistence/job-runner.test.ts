@@ -14,8 +14,8 @@ import type { MusicProvider } from "../music/types.js";
 import type { TTSProvider } from "../tts/types.js";
 import { createDb } from "./client.js";
 import { retryJob, runJobOnce } from "./job-runner.js";
-import { createJob, createProject, getJob } from "./repository.js";
-import type { ProjectConfig } from "./types.js";
+import { createJob, createProduction, getJob } from "./repository.js";
+import type { ProductionConfig } from "./types.js";
 
 const RESEARCH_RESULT = { summary: "sum", key_facts: ["fact"], mood: "curious" };
 
@@ -120,7 +120,7 @@ function fakeDeps(llm: LLMProvider) {
   };
 }
 
-const config: ProjectConfig = {
+const config: ProductionConfig = {
   cost: { llmModel: "openai/gpt-4.1", ttsProvider: "edge", imageProvider: "gemini", musicProvider: "bundled" },
   // fps/resolução pequenos — teste gera mp4 real via ffmpeg, mantém rápido.
   fps: 25,
@@ -144,8 +144,8 @@ afterEach(() => {
 describe("runJobOnce", () => {
   it("drives a job QUEUED→...→COMPLETED and persists cost/output", async () => {
     const llm = fakeLLM(RESEARCH_RESULT, directorPayload(), critiquePayload(8));
-    const project = await createProject(db, { topic: "Apollo 11", config });
-    const job = await createJob(db, { projectId: project.id, runDir });
+    const production = await createProduction(db, { topic: "Apollo 11", config });
+    const job = await createJob(db, { productionId: production.id, runDir });
 
     await runJobOnce(db, job.id, fakeDeps(llm));
 
@@ -162,8 +162,8 @@ describe("runJobOnce", () => {
 
   it("moves a job to CANCELLED and records the reason when approveCost rejects", async () => {
     const llm = fakeLLM(RESEARCH_RESULT, directorPayload(), critiquePayload(8));
-    const project = await createProject(db, { topic: "Apollo 11", config });
-    const job = await createJob(db, { projectId: project.id, runDir });
+    const production = await createProduction(db, { topic: "Apollo 11", config });
+    const job = await createJob(db, { productionId: production.id, runDir });
 
     await runJobOnce(db, job.id, fakeDeps(llm), { approveCost: () => false });
 
@@ -175,8 +175,8 @@ describe("runJobOnce", () => {
 
   it("moves a job to FAILED when QC BLOCKs (output not actually written)", async () => {
     const llm = fakeLLM(RESEARCH_RESULT, directorPayload(), critiquePayload(8));
-    const project = await createProject(db, { topic: "Apollo 11", config });
-    const job = await createJob(db, { projectId: project.id, runDir });
+    const production = await createProduction(db, { topic: "Apollo 11", config });
+    const job = await createJob(db, { productionId: production.id, runDir });
     const deps = fakeDeps(llm);
     deps.videoRenderer = {
       id: "fake-broken",
@@ -195,8 +195,8 @@ describe("runJobOnce", () => {
 
   it("moves a job to FAILED and records the stage+error when a stage throws", async () => {
     const llm = fakeLLM(RESEARCH_RESULT, directorPayload(), critiquePayload(8));
-    const project = await createProject(db, { topic: "Apollo 11", config });
-    const job = await createJob(db, { projectId: project.id, runDir });
+    const production = await createProduction(db, { topic: "Apollo 11", config });
+    const job = await createJob(db, { productionId: production.id, runDir });
     const deps = fakeDeps(llm);
     deps.ttsProvider.generate = vi.fn().mockRejectedValue(new Error("tts exploded"));
 
@@ -209,8 +209,8 @@ describe("runJobOnce", () => {
 
   it("retryJob resumes a FAILED job from its checkpoint without re-running the LLM", async () => {
     const llm = fakeLLM(RESEARCH_RESULT, directorPayload(), critiquePayload(8));
-    const project = await createProject(db, { topic: "Apollo 11", config });
-    const job = await createJob(db, { projectId: project.id, runDir });
+    const production = await createProduction(db, { topic: "Apollo 11", config });
+    const job = await createJob(db, { productionId: production.id, runDir });
     const deps = fakeDeps(llm);
     deps.ttsProvider.generate = vi.fn().mockRejectedValue(new Error("tts exploded"));
 
@@ -238,8 +238,8 @@ describe("runJobOnce", () => {
 
   it("retryJob is a no-op when the job is not FAILED", async () => {
     const llm = fakeLLM(RESEARCH_RESULT, directorPayload(), critiquePayload(8));
-    const project = await createProject(db, { topic: "Apollo 11", config });
-    const job = await createJob(db, { projectId: project.id, runDir }); // QUEUED
+    const production = await createProduction(db, { topic: "Apollo 11", config });
+    const job = await createJob(db, { productionId: production.id, runDir }); // QUEUED
 
     const retried = await retryJob(db, job.id, fakeDeps(llm));
 

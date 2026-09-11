@@ -7,7 +7,7 @@ import type { ClickPlayDb } from "./client.js";
 import { assertTransition } from "./job-state-machine.js";
 import {
   getJob,
-  getProject,
+  getProduction,
   resetJobForRetry,
   setJobActualCost,
   setJobCheckpoint,
@@ -22,7 +22,7 @@ import {
 import { PROGRESS_BY_STATUS } from "./job-state-machine.js";
 import type { JobStatus } from "./schema.js";
 
-/** Providers/runtime que não são persistidos (ver persistence/types.ts ProjectConfig). */
+/** Providers/runtime que não são persistidos (ver persistence/types.ts ProductionConfig). */
 export interface JobRunnerDeps
   extends Pick<PipelineOptions, "llm" | "ttsProvider" | "musicProvider" | "resolveElementCtx" | "videoRenderer"> {}
 
@@ -33,7 +33,7 @@ export interface StartJobOptions {
 }
 
 /**
- * Fecha o ciclo QUEUED→...→COMPLETED/FAILED/CANCELLED (10D): busca job+project
+ * Fecha o ciclo QUEUED→...→COMPLETED/FAILED/CANCELLED (10D): busca job+production
  * persistidos, roda runPipeline (10C) com callbacks que avançam a
  * JobStateMachine e persistem progresso/custo/erro a cada estágio. Roda em
  * background — não bloqueia quem chama (fire-and-forget "in-process",
@@ -75,8 +75,8 @@ export async function runJobOnce(
 ): Promise<void> {
   const job = await getJob(db, jobId);
   if (!job) throw new Error(`Job "${jobId}" não encontrado`);
-  const project = await getProject(db, job.projectId);
-  if (!project) throw new Error(`Project "${job.projectId}" não encontrado`);
+  const production = await getProduction(db, job.productionId);
+  if (!production) throw new Error(`Production "${job.productionId}" não encontrada`);
 
   let status: JobStatus = job.status;
   let lastLogMessage: string | undefined;
@@ -120,8 +120,8 @@ export async function runJobOnce(
   };
 
   const pipelineOptions: PipelineOptions = {
-    ...project.config,
-    topic: project.topic,
+    ...production.config,
+    topic: production.topic,
     runDir: job.runDir,
     resume: job.checkpoint ?? undefined,
     ...deps,

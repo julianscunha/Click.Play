@@ -5,9 +5,9 @@ import { IntroOutroConfig, QualityTier, VideoMode } from "@clickplay/domain";
 import {
   createCostApprovalGate,
   createJob,
-  createProject,
+  createProduction,
   getJob,
-  getProject,
+  getProduction,
   retryJob,
   startJob,
   trySpend,
@@ -82,7 +82,7 @@ export interface JobsRouteDeps {
 function jobToResponse(job: NonNullable<Awaited<ReturnType<typeof getJob>>>) {
   return {
     id: job.id,
-    projectId: job.projectId,
+    productionId: job.productionId,
     status: job.status,
     stage: STAGE_BY_STATUS[job.status],
     stageDetail: job.stageDetail,
@@ -92,7 +92,7 @@ function jobToResponse(job: NonNullable<Awaited<ReturnType<typeof getJob>>>) {
     estimatedCost: job.estimatedCost,
     actualCost: job.actualCost,
     error: job.error,
-    output: job.outputPath ? `/files/${job.projectId}/output/output.mp4` : null,
+    output: job.outputPath ? `/files/${job.productionId}/output/output.mp4` : null,
     createdAt: job.createdAt,
     updatedAt: job.updatedAt,
   };
@@ -134,7 +134,7 @@ export function registerJobsRoutes(app: FastifyInstance, deps: JobsRouteDeps): v
     }
     const resolution = aspectRatio ? RESOLUTION_BY_ASPECT_RATIO[aspectRatio] : undefined;
 
-    const project = await createProject(deps.db, {
+    const production = await createProduction(deps.db, {
       topic,
       config: {
         cost: deps.buildCostOptions(),
@@ -159,15 +159,15 @@ export function registerJobsRoutes(app: FastifyInstance, deps: JobsRouteDeps): v
         musicVolume,
       },
     });
-    const runDir = path.join(deps.runsDir, project.id);
-    const job = await createJob(deps.db, { projectId: project.id, runDir });
+    const runDir = path.join(deps.runsDir, production.id);
+    const job = await createJob(deps.db, { productionId: production.id, runDir });
 
     startJob(deps.db, job.id, deps.buildJobRunnerDeps(qualityTier, language, useOwnProviders, voiceGender), {
       approveCost: (estimate) => deps.gate.waitForApproval(job.id),
       onLog: (message) => app.log.info({ jobId: job.id }, message),
     });
 
-    return reply.status(201).send({ id: job.id, projectId: project.id, status: job.status });
+    return reply.status(201).send({ id: job.id, productionId: production.id, status: job.status });
   });
 
   app.get<{ Params: { id: string } }>("/jobs/:id", async (req, reply) => {
@@ -195,8 +195,8 @@ export function registerJobsRoutes(app: FastifyInstance, deps: JobsRouteDeps): v
     // Débito de créditos na aprovação (1 crédito = US$1) — só quando o custo estimado é conhecido;
     // "unknown" segue sem gate de crédito, mesma lógica que já não bloqueia hoje pra custo desconhecido.
     // useOwnProviders (§11A Bloco 6, Providers): job rodando com chave própria não debita.
-    const project = await getProject(deps.db, job.projectId);
-    if (parsed.data.approved && job.estimatedCost?.total.status === "known" && !project?.config.useOwnProviders) {
+    const production = await getProduction(deps.db, job.productionId);
+    if (parsed.data.approved && job.estimatedCost?.total.status === "known" && !production?.config.useOwnProviders) {
       const spent = await trySpend(deps.db, job.estimatedCost.total.usd);
       if (!spent) {
         return reply.status(402).send({
@@ -216,15 +216,15 @@ export function registerJobsRoutes(app: FastifyInstance, deps: JobsRouteDeps): v
     const job = await getJob(deps.db, req.params.id);
     if (!job) return reply.status(404).send({ error: { code: "NOT_FOUND", message: "Job não encontrado" } });
 
-    const project = await getProject(deps.db, job.projectId);
+    const production = await getProduction(deps.db, job.productionId);
     const retried = await retryJob(
       deps.db,
       job.id,
       deps.buildJobRunnerDeps(
-        project?.config.qualityTier,
-        project?.config.language,
-        project?.config.useOwnProviders,
-        project?.config.voiceGender,
+        production?.config.qualityTier,
+        production?.config.language,
+        production?.config.useOwnProviders,
+        production?.config.voiceGender,
       ),
       {
         approveCost: (estimate) => deps.gate.waitForApproval(job.id),
@@ -237,6 +237,6 @@ export function registerJobsRoutes(app: FastifyInstance, deps: JobsRouteDeps): v
         .send({ error: { code: "NOT_RETRYABLE", message: "Job só pode ser retomado quando está FAILED" } });
     }
 
-    return reply.send({ id: job.id, projectId: job.projectId, status: "retrying" });
+    return reply.send({ id: job.id, productionId: job.productionId, status: "retrying" });
   });
 }
