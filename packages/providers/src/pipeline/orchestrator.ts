@@ -10,7 +10,7 @@ import { getArchetype } from "../config/archetype-registry.js";
 import type { CostBreakdown } from "../cost/index.js";
 import { computeActualCost, estimateCost } from "../cost/index.js";
 import type { LLMUsage } from "../llm/types.js";
-import { resolveElement } from "../visual/index.js";
+import { inferAspectRatio, resolveElement } from "../visual/index.js";
 import { resolveIntroOutroScene } from "./intro-outro.js";
 import { splitWordsIntoScenes, synthesizeWordTimestamps } from "./scene-timing.js";
 import type {
@@ -164,6 +164,7 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
       const assetsDir = path.join(opts.runDir, "assets");
       const durationsInFrames = splitWordsIntoScenes(score.scenes, ttsWords, fps);
       const transitionDurationFrames = opts.transitionDurationFrames ?? Math.round(fps * 0.4);
+      const aspectRatio = inferAspectRatio(width, height);
 
       resolvedScenes = [];
       const totalElements = score.scenes.reduce((sum, s) => sum + s.elements.length, 0);
@@ -177,6 +178,8 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
           const resolved = await resolveElement(element, {
             ...opts.resolveElementCtx,
             assetId: `${scene.id}-${j}`,
+            sceneDurationSeconds: durationsInFrames[i]! / fps,
+            aspectRatio,
             writeAsset: async (buffer, filename) => {
               await fs.promises.mkdir(assetsDir, { recursive: true });
               const filePath = path.join(assetsDir, filename);

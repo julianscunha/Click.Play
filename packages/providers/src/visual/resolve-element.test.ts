@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from "vitest";
 import type { ImageProvider } from "../image/types";
 import type { StockAsset, StockCandidate, StockProvider } from "../stock/types";
 import type { VideoGenerationProvider } from "../video/types";
-import { resolveElement } from "./resolve-element";
+import { inferAspectRatio, pickSupportedDuration, resolveElement } from "./resolve-element";
 import type { ResolveElementContext } from "./resolve-element";
 import { StockResolutionError } from "./types";
 
@@ -91,6 +91,49 @@ describe("resolveElement — ai_video_clip", () => {
     expect(videoProvider.generate).toHaveBeenCalledWith(
       expect.objectContaining({ prompt: "rocket launch", sourceImage: expect.any(Buffer) }),
     );
+  });
+
+  it("requests the smallest supported duration >= the scene duration, plus aspectRatio and a generic negativePrompt", async () => {
+    const videoProvider: VideoGenerationProvider = {
+      supportedDurations: [4, 6, 8],
+      generate: vi.fn().mockResolvedValue({ filePath: "/out/clip.mp4", durationSeconds: 6 }),
+    };
+    const element: VisualElement = { type: "ai_video_clip", provider: "gemini", prompt: "rocket launch" };
+    await resolveElement(
+      element,
+      baseCtx({
+        videoProviders: { gemini: videoProvider },
+        hasGoogleKey: true,
+        sceneDurationSeconds: 5,
+        aspectRatio: "1:1",
+      }),
+    );
+    expect(videoProvider.generate).toHaveBeenCalledWith(
+      expect.objectContaining({ durationSeconds: 6, aspectRatio: "1:1", negativePrompt: expect.stringContaining("static") }),
+    );
+  });
+
+  it("falls back to the largest supported duration when the scene is longer than any option", async () => {
+    const videoProvider: VideoGenerationProvider = {
+      supportedDurations: [4, 6],
+      generate: vi.fn().mockResolvedValue({ filePath: "/out/clip.mp4", durationSeconds: 6 }),
+    };
+    const element: VisualElement = { type: "ai_video_clip", provider: "gemini", prompt: "rocket launch" };
+    await resolveElement(
+      element,
+      baseCtx({ videoProviders: { gemini: videoProvider }, hasGoogleKey: true, sceneDurationSeconds: 20 }),
+    );
+    expect(videoProvider.generate).toHaveBeenCalledWith(expect.objectContaining({ durationSeconds: 6 }));
+  });
+
+  it("leaves durationSeconds undefined when no sceneDurationSeconds is provided (provider falls back to its own default)", async () => {
+    const videoProvider: VideoGenerationProvider = {
+      supportedDurations: [4, 6],
+      generate: vi.fn().mockResolvedValue({ filePath: "/out/clip.mp4", durationSeconds: 6 }),
+    };
+    const element: VisualElement = { type: "ai_video_clip", provider: "gemini", prompt: "rocket launch" };
+    await resolveElement(element, baseCtx({ videoProviders: { gemini: videoProvider }, hasGoogleKey: true }));
+    expect(videoProvider.generate).toHaveBeenCalledWith(expect.objectContaining({ durationSeconds: undefined }));
   });
 
   it("throws when the requested provider isn't configured", async () => {
@@ -207,5 +250,45 @@ describe("resolveElement — stock resolution failure", () => {
         { provider: "pixabay", error: "Error: network error" },
       ]);
     }
+  });
+});
+
+describe("inferAspectRatio", () => {
+  it("maps vertical resolutions to 9:16", () => {
+    expect(inferAspectRatio(1080, 1920)).toBe("9:16");
+  });
+
+  it("maps square resolutions to 1:1", () => {
+    expect(inferAspectRatio(1080, 1080)).toBe("1:1");
+  });
+
+  it("maps horizontal resolutions to 16:9", () => {
+    expect(inferAspectRatio(1920, 1080)).toBe("16:9");
+  });
+
+  it("picks the nearest of the 3 supported ratios for an odd custom resolution", () => {
+    expect(inferAspectRatio(1000, 1500)).toBe("9:16"); // 0.667 mais perto de 9:16 (0.5625) que de 1:1
+  });
+});
+
+describe("pickSupportedDuration", () => {
+  it("rounds up to the smallest supported duration >= the scene duration", () => {
+    expect(pickSupportedDuration(5, [4, 6, 8])).toBe(6);
+  });
+
+  it("returns the exact match when the scene duration is already supported", () => {
+    expect(pickSupportedDuration(6, [4, 6, 8])).toBe(6);
+  });
+
+  it("falls back to the largest supported value when the scene is longer than any option", () => {
+    expect(pickSupportedDuration(20, [4, 6, 8])).toBe(8);
+  });
+
+  it("returns undefined when sceneDurationSeconds is not provided", () => {
+    expect(pickSupportedDuration(undefined, [4, 6, 8])).toBeUndefined();
+  });
+
+  it("returns undefined when the provider has no supported durations", () => {
+    expect(pickSupportedDuration(5, [])).toBeUndefined();
   });
 });

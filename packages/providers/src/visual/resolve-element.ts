@@ -17,6 +17,42 @@ export interface ResolveElementContext {
   writeAsset(buffer: Buffer, filename: string): Promise<string>;
   /** Prefixo único pro arquivo desta cena/elemento (ex: `${sceneIndex}-${elementIndex}`). */
   assetId: string;
+  /** Duração real da cena (segundos) — usada só por ai_video_clip, pra pedir o clipe no tamanho certo
+   * em vez do default fixo de cada provider (achado real: clipe de 6s cortado/em loop feio numa cena
+   * de duração diferente). Sem isso, `resolveAiVideoClip` cai no default do provider. */
+  sceneDurationSeconds?: number;
+  /** Aspect ratio do projeto inteiro (ex. "9:16"/"1:1"/"16:9"), de `inferAspectRatio()` — usada só por
+   * ai_video_clip. Sem isso, cada provider gera no seu default (9:16), cortado feio se o projeto for
+   * quadrado/horizontal (achado real: vídeo quadrado recebendo clipe vertical, cortado no meio). */
+  aspectRatio?: string;
+}
+
+/** Aspect ratios que os providers de vídeo (Veo/Kling) de fato suportam — nenhum aceita proporção
+ * arbitrária. Mapeia width/height pro mais próximo por proporção numérica, não string bruta de GCD
+ * (que geraria valores como "2:3" pra uma resolução custom, sem suporte em nenhum provider). */
+export function inferAspectRatio(width: number, height: number): "9:16" | "1:1" | "16:9" {
+  const ratio = width / height;
+  const candidates: ["9:16" | "1:1" | "16:9", number][] = [
+    ["9:16", 9 / 16],
+    ["1:1", 1],
+    ["16:9", 16 / 9],
+  ];
+  return candidates.reduce((best, c) => (Math.abs(ratio - c[1]) < Math.abs(ratio - best[1]) ? c : best))[0];
+}
+
+/** Evita o efeito "foto vivendo" (rosto/corpo travado, câmera parada) mais comum em Veo/Kling —
+ * único provider que hoje de fato usa isso é o Fal/Kling (fal.ts); OpenRouter/Gemini só logam aviso
+ * e ignoram, sem quebrar nada (Veo não expõe negative prompt). */
+const GENERIC_VIDEO_NEGATIVE_PROMPT =
+  "static, frozen, motionless, slideshow, still photo, stiff pose, mannequin, low motion";
+
+/** Arredonda pra CIMA pro valor suportado mais próximo — clipe mais longo que a cena só é cortado
+ * (barato, `Sequence` já corta no fim); clipe mais curto vira `<Loop>` (salto visível, pior). Sem
+ * duração suportada ≥ a pedida, usa a maior disponível (cena rara, mais longa que qualquer clipe). */
+export function pickSupportedDuration(sceneDurationSeconds: number | undefined, supported: number[]): number | undefined {
+  if (!sceneDurationSeconds || supported.length === 0) return undefined;
+  const sorted = [...supported].sort((a, b) => a - b);
+  return sorted.find((d) => d >= sceneDurationSeconds) ?? sorted[sorted.length - 1];
 }
 
 async function resolveStock(
@@ -70,8 +106,16 @@ async function resolveAiVideoClip(
       ? Object.entries(ctx.videoProviders).filter(([key]) => key !== providerKey)
       : [];
 
+  const generateOpts = (p: VideoGenerationProvider) => ({
+    sourceImage,
+    prompt: element.prompt,
+    durationSeconds: pickSupportedDuration(ctx.sceneDurationSeconds, p.supportedDurations),
+    aspectRatio: ctx.aspectRatio,
+    negativePrompt: GENERIC_VIDEO_NEGATIVE_PROMPT,
+  });
+
   try {
-    const result = await provider.generate({ sourceImage, prompt: element.prompt });
+    const result = await provider.generate(generateOpts(provider));
     return { type: "ai_video_clip", assetPath: result.filePath, sourceDurationSeconds: result.durationSeconds };
   } catch (err) {
     let lastError = err;
@@ -80,7 +124,7 @@ async function resolveAiVideoClip(
         `[ai_video_clip] provider "${providerKey}" failed (${lastError instanceof Error ? lastError.message : String(lastError)}), trying "${key}"`,
       );
       try {
-        const result = await fallbackProvider!.generate({ sourceImage, prompt: element.prompt });
+        const result = await fallbackProvider!.generate(generateOpts(fallbackProvider!));
         return { type: "ai_video_clip", assetPath: result.filePath, sourceDurationSeconds: result.durationSeconds };
       } catch (fallbackErr) {
         lastError = fallbackErr;
