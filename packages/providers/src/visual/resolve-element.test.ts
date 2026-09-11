@@ -163,6 +163,23 @@ describe("resolveElement — ai_video_clip", () => {
     expect(fal.generate).toHaveBeenCalled();
   });
 
+  it("uses the FALLBACK provider's own duration ladder, not the primary's, when falling back", async () => {
+    const openrouter: VideoGenerationProvider = {
+      supportedDurations: [4, 6, 8], // 7s de cena arredondaria pra 8 nesta escada
+      generate: vi.fn().mockRejectedValue(new Error("quota exceeded")),
+    };
+    const fal: VideoGenerationProvider = {
+      supportedDurations: [5, 10], // mesma cena arredonda pra 10 nesta escada, não 8
+      generate: vi.fn().mockResolvedValue({ filePath: "/out/fal-clip.mp4", durationSeconds: 10 }),
+    };
+    const element: VisualElement = { type: "ai_video_clip", provider: "auto", prompt: "rocket launch" };
+    await resolveElement(
+      element,
+      baseCtx({ videoProviders: { openrouter, fal }, hasFalKey: true, sceneDurationSeconds: 7 }),
+    );
+    expect(fal.generate).toHaveBeenCalledWith(expect.objectContaining({ durationSeconds: 10 }));
+  });
+
   it("does not fall back when a specific provider was explicitly requested (not 'auto')", async () => {
     const gemini: VideoGenerationProvider = {
       supportedDurations: [5],
