@@ -63,4 +63,31 @@ describe("createDb migration: projects -> productions", () => {
     void db;
     sqlite.close();
   });
+
+  it("finishes a partial migration (table already renamed, column still old) without throwing", () => {
+    // Simula um crash entre os 2 ALTER da migração — productions já existe, mas jobs.project_id ainda não foi renomeada.
+    const legacy = new DatabaseSync(dbPath);
+    legacy.exec(`
+      CREATE TABLE productions (id TEXT PRIMARY KEY, topic TEXT NOT NULL, config TEXT NOT NULL, created_at INTEGER NOT NULL, updated_at INTEGER NOT NULL);
+      CREATE TABLE jobs (id TEXT PRIMARY KEY, project_id TEXT NOT NULL REFERENCES productions(id), status TEXT NOT NULL DEFAULT 'QUEUED', progress REAL NOT NULL DEFAULT 0, run_dir TEXT NOT NULL, output_path TEXT, estimated_cost TEXT, actual_cost TEXT, qc_report TEXT, checkpoint TEXT, stage_detail TEXT, result_summary TEXT, error TEXT, created_at INTEGER NOT NULL, updated_at INTEGER NOT NULL);
+    `);
+    legacy
+      .prepare("INSERT INTO productions (id, topic, config, created_at, updated_at) VALUES (?, ?, ?, ?, ?)")
+      .run("p1", "Apollo 11", "{}", 1, 1);
+    legacy
+      .prepare(
+        "INSERT INTO jobs (id, project_id, status, progress, run_dir, created_at, updated_at) VALUES (?, ?, 'QUEUED', 0, ?, ?, ?)",
+      )
+      .run("j1", "p1", "/tmp/run", 1, 1);
+    legacy.close();
+
+    const db = createDb(dbPath);
+    const sqlite = new DatabaseSync(dbPath);
+    const job = sqlite.prepare("SELECT * FROM jobs WHERE id = ?").get("j1") as { production_id: string } | undefined;
+
+    expect(job?.production_id).toBe("p1");
+
+    void db;
+    sqlite.close();
+  });
 });

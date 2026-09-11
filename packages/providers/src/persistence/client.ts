@@ -86,17 +86,28 @@ function addResultSummaryColumnIfMissing(sqlite: DatabaseSync): void {
  * dados; banco novo já nasce com `CREATE TABLE IF NOT EXISTS productions`
  * acima, então este rename vira no-op (tabela antiga nunca existiu).
  */
+/**
+ * Só engole o erro esperado ("já renomeado/nunca existiu") — qualquer outra
+ * falha (lock de arquivo, disco cheio) tem que estourar, senão o `CREATE
+ * TABLE IF NOT EXISTS` seguinte cria uma tabela nova vazia e os dados reais
+ * ficam órfãos na tabela antiga, silenciosamente (achado de code review).
+ */
+function runIfTargetMissing(sqlite: DatabaseSync, sql: string, expectedMissing: string[]): void {
+  try {
+    sqlite.exec(sql);
+  } catch (err) {
+    if (err instanceof Error && expectedMissing.some((msg) => err.message.includes(msg))) return;
+    throw err;
+  }
+}
+
 function renameProjectsToProductionsIfNeeded(sqlite: DatabaseSync): void {
-  try {
-    sqlite.exec("ALTER TABLE projects RENAME TO productions");
-  } catch {
-    // já renomeada ou nunca existiu
-  }
-  try {
-    sqlite.exec("ALTER TABLE jobs RENAME COLUMN project_id TO production_id");
-  } catch {
-    // já renomeada ou nunca existiu
-  }
+  runIfTargetMissing(sqlite, "ALTER TABLE projects RENAME TO productions", ["no such table: projects"]);
+  // "no such table: jobs" cobre o 1º boot de sempre (nem `jobs` existe ainda, DDL roda depois).
+  runIfTargetMissing(sqlite, "ALTER TABLE jobs RENAME COLUMN project_id TO production_id", [
+    'no such column: "project_id"',
+    "no such table: jobs",
+  ]);
 }
 
 /**
