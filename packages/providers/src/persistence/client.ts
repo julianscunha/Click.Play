@@ -10,10 +10,17 @@ export type ClickPlayDb = ReturnType<typeof drizzle<typeof schema>>;
  * ou precisar rodar em múltiplos ambientes.
  */
 const DDL = `
+CREATE TABLE IF NOT EXISTS content_projects (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL,
+  created_at INTEGER NOT NULL,
+  updated_at INTEGER NOT NULL
+);
 CREATE TABLE IF NOT EXISTS productions (
   id TEXT PRIMARY KEY,
   topic TEXT NOT NULL,
   config TEXT NOT NULL,
+  content_project_id TEXT REFERENCES content_projects(id),
   created_at INTEGER NOT NULL,
   updated_at INTEGER NOT NULL
 );
@@ -80,12 +87,15 @@ function addResultSummaryColumnIfMissing(sqlite: DatabaseSync): void {
   }
 }
 
-/**
- * Rename `projects`→`productions` / `jobs.project_id`→`jobs.production_id`
- * (§11 decisão #1, Fase 16) — banco existente ganha o nome novo preservando
- * dados; banco novo já nasce com `CREATE TABLE IF NOT EXISTS productions`
- * acima, então este rename vira no-op (tabela antiga nunca existiu).
- */
+/** Idem, FK opcional pro Projeto dono da produção (Fase 16). */
+function addContentProjectIdColumnIfMissing(sqlite: DatabaseSync): void {
+  try {
+    sqlite.exec("ALTER TABLE productions ADD COLUMN content_project_id TEXT REFERENCES content_projects(id)");
+  } catch {
+    // já existe
+  }
+}
+
 /**
  * Só engole o erro esperado ("já renomeado/nunca existiu") — qualquer outra
  * falha (lock de arquivo, disco cheio) tem que estourar, senão o `CREATE
@@ -132,6 +142,7 @@ export function createDb(sqliteFilePath: string): ClickPlayDb {
   addCheckpointColumnIfMissing(sqlite);
   addStageDetailColumnIfMissing(sqlite);
   addResultSummaryColumnIfMissing(sqlite);
+  addContentProjectIdColumnIfMissing(sqlite);
   ensureWalletRow(sqlite);
 
   return drizzle(async (sqlText, params, method) => {

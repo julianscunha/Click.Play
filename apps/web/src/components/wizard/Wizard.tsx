@@ -1,5 +1,5 @@
-import { useState } from "react";
-import type { CreateJobInput, FormConfig, TransitionType } from "../../api.js";
+import { useEffect, useState } from "react";
+import { createContentProject, listContentProjects, type ContentProject, type CreateJobInput, type FormConfig, type TransitionType } from "../../api.js";
 
 function formatLabel(id: string): string {
   return id.replace(/_/g, " ");
@@ -50,6 +50,8 @@ interface FormState {
   direction: string;
   archetype: string;
   pacing: string;
+  contentProjectId: string;
+  newContentProjectName: string;
   language: "pt-BR" | "en-US";
   voiceGender: "female" | "male";
   musicEnabled: boolean;
@@ -76,6 +78,8 @@ const INITIAL_STATE: FormState = {
   direction: "",
   archetype: "",
   pacing: "",
+  contentProjectId: "",
+  newContentProjectName: "",
   language: "pt-BR",
   voiceGender: "female",
   musicEnabled: true,
@@ -134,6 +138,16 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
   const [stepIndex, setStepIndex] = useState(0);
   const [collapsed, setCollapsed] = useState(false);
   const [form, setForm] = useState<FormState>(INITIAL_STATE);
+  const [contentProjects, setContentProjects] = useState<ContentProject[]>([]);
+  const [creatingContentProject, setCreatingContentProject] = useState(false);
+
+  useEffect(() => {
+    listContentProjects()
+      .then(setContentProjects)
+      .catch(() => {
+        // Lista de projetos é opcional pro fluxo — falha de rede não deve travar o wizard.
+      });
+  }, []);
 
   const step = STEPS[stepIndex]!;
   const canLeaveBriefing = form.topic.trim().length > 0;
@@ -148,14 +162,25 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
     setStepIndex(index);
   }
 
-  function handleSubmit() {
+  async function handleSubmit() {
     if (!canLeaveBriefing || submitting) return;
+    let contentProjectId = form.contentProjectId || undefined;
+    if (form.newContentProjectName.trim()) {
+      setCreatingContentProject(true);
+      try {
+        const created = await createContentProject(form.newContentProjectName.trim());
+        contentProjectId = created.id;
+      } finally {
+        setCreatingContentProject(false);
+      }
+    }
     const targetDurationSeconds = Number(form.targetDurationSeconds);
     onSubmit({
       topic: form.topic.trim(),
       direction: form.direction.trim() || undefined,
       archetype: form.archetype || undefined,
       pacing: form.pacing || undefined,
+      contentProjectId,
       language: form.language,
       voiceGender: form.voiceGender,
       musicEnabled: form.musicEnabled,
@@ -237,6 +262,31 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
                 placeholder="Público-alvo, tom, contexto, o que não pode faltar..."
                 rows={4}
                 className={`resize-y ${fieldClass}`}
+              />
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <label htmlFor="contentProjectId" className={labelClass}>
+                Projeto <span className="text-neutral-500">(opcional — agrupa vídeos de um mesmo canal/série)</span>
+              </label>
+              <select
+                id="contentProjectId"
+                value={form.contentProjectId}
+                onChange={(e) => update("contentProjectId", e.target.value)}
+                disabled={form.newContentProjectName.trim().length > 0}
+                className={fieldClass}
+              >
+                <option value="">Nenhum</option>
+                {contentProjects.map((p) => (
+                  <option key={p.id} value={p.id}>
+                    {p.name}
+                  </option>
+                ))}
+              </select>
+              <input
+                value={form.newContentProjectName}
+                onChange={(e) => update("newContentProjectName", e.target.value)}
+                placeholder="Ou criar novo projeto..."
+                className={fieldClass}
               />
             </div>
           </div>
@@ -606,6 +656,14 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
                 <dd className="text-neutral-100">{form.topic || "—"}</dd>
               </div>
               <div>
+                <dt className="text-neutral-500">Projeto</dt>
+                <dd className="text-neutral-100">
+                  {form.newContentProjectName.trim() ||
+                    contentProjects.find((p) => p.id === form.contentProjectId)?.name ||
+                    "Nenhum"}
+                </dd>
+              </div>
+              <div>
                 <dt className="text-neutral-500">Arquétipo</dt>
                 <dd className="text-neutral-100">{form.archetype ? formatLabel(form.archetype) : "IA escolhe"}</dd>
               </div>
@@ -701,10 +759,10 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
             <button
               type="button"
               onClick={handleSubmit}
-              disabled={!canLeaveBriefing || submitting}
+              disabled={!canLeaveBriefing || submitting || creatingContentProject}
               className="rounded-md bg-orange-500 px-4 py-2 text-sm font-medium text-neutral-950 hover:bg-orange-400 disabled:cursor-not-allowed disabled:bg-neutral-700 disabled:text-neutral-400"
             >
-              {submitting ? "Criando..." : "Gerar vídeo"}
+              {submitting || creatingContentProject ? "Criando..." : "Gerar vídeo"}
             </button>
           )}
         </div>

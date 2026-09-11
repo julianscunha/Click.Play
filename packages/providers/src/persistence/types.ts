@@ -1,7 +1,7 @@
 import type { CostBreakdown } from "../cost/index.js";
 import type { PipelineCheckpoint, PipelineOptions } from "../pipeline/types.js";
 import type { QcReport } from "../qc/types.js";
-import type { jobs, JobStatus, productions } from "./schema.js";
+import type { contentProjects, jobs, JobStatus, productions } from "./schema.js";
 
 /** Campos de PipelineOptions que não são instância de provider/runtime — o que sobra fica no `config` da Production. */
 export type ProductionConfig = Omit<
@@ -13,6 +13,15 @@ export interface Production {
   id: string;
   topic: string;
   config: ProductionConfig;
+  contentProjectId: string | null;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+/** Entidade contêiner (Fase 16) — agrupa produções de um mesmo canal/série. */
+export interface ContentProject {
+  id: string;
+  name: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -44,15 +53,21 @@ export interface Job {
 
 export type ProductionRow = typeof productions.$inferSelect;
 export type JobRow = typeof jobs.$inferSelect;
+export type ContentProjectRow = typeof contentProjects.$inferSelect;
 
 export function productionFromRow(row: ProductionRow): Production {
   return {
     id: row.id,
     topic: row.topic,
     config: row.config as ProductionConfig,
+    contentProjectId: row.contentProjectId ?? null,
     createdAt: row.createdAt,
     updatedAt: row.updatedAt,
   };
+}
+
+export function contentProjectFromRow(row: ContentProjectRow): ContentProject {
+  return { id: row.id, name: row.name, createdAt: row.createdAt, updatedAt: row.updatedAt };
 }
 
 export function jobFromRow(row: JobRow): Job {

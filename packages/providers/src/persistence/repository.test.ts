@@ -1,12 +1,16 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import { createDb } from "./client.js";
 import {
+  createContentProject,
   createJob,
   createProduction,
+  getContentProject,
   getJob,
   getProduction,
   getWallet,
+  listContentProjects,
   listJobsByProduction,
+  listProductionsByContentProject,
   recoverOrphanedJobs,
   setJobActualCost,
   setJobError,
@@ -41,6 +45,33 @@ describe("persistence repository", () => {
 
   it("returns null for a missing production", async () => {
     expect(await getProduction(db, "does-not-exist")).toBeNull();
+  });
+
+  describe("content projects (Fase 16)", () => {
+    it("creates, lists and reads back a content project", async () => {
+      const created = await createContentProject(db, { name: "Histórias do Joãozinho" });
+      expect(await listContentProjects(db)).toEqual([created]);
+      expect(await getContentProject(db, created.id)).toEqual(created);
+    });
+
+    it("returns null for a missing content project", async () => {
+      expect(await getContentProject(db, "does-not-exist")).toBeNull();
+    });
+
+    it("links a production to a content project and lists it back", async () => {
+      const contentProject = await createContentProject(db, { name: "Série X" });
+      const production = await createProduction(db, { topic: "t", config, contentProjectId: contentProject.id });
+
+      expect(production.contentProjectId).toBe(contentProject.id);
+      const linked = await listProductionsByContentProject(db, contentProject.id);
+      expect(linked).toHaveLength(1);
+      expect(linked[0]!.id).toBe(production.id);
+    });
+
+    it("leaves contentProjectId null when a production has no project", async () => {
+      const production = await createProduction(db, { topic: "t", config });
+      expect(production.contentProjectId).toBeNull();
+    });
   });
 
   it("creates a job QUEUED with progress 0, linked to its production", async () => {

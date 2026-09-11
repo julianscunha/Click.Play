@@ -33,6 +33,21 @@ export const productions = sqliteTable("productions", {
   topic: text("topic").notNull(),
   /** Campos não-provider de PipelineOptions (archetype/pacing/fps/caption/cost...) — ver persistence/types.ts ProductionConfig. */
   config: text("config", { mode: "json" }).notNull(),
+  /** Projeto (Fase 16) dono desta produção — opcional, produção solta (sem projeto) continua válida. */
+  contentProjectId: text("content_project_id").references(() => contentProjects.id),
+  createdAt: integer("created_at", { mode: "timestamp_ms" }).notNull(),
+  updatedAt: integer("updated_at", { mode: "timestamp_ms" }).notNull(),
+});
+
+/**
+ * "Projeto" (Fase 16) — entidade contêiner que agrupa produções de um mesmo
+ * canal/série (ex. "Histórias do Joãozinho"). Sem coluna de config/schema
+ * própria: é só agrupamento hoje, Template (Fase 17) e Scheduler (Fase 19)
+ * pendurados nela ainda não existem como tabela.
+ */
+export const contentProjects = sqliteTable("content_projects", {
+  id: text("id").primaryKey(),
+  name: text("name").notNull(),
   createdAt: integer("created_at", { mode: "timestamp_ms" }).notNull(),
   updatedAt: integer("updated_at", { mode: "timestamp_ms" }).notNull(),
 });

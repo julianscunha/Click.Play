@@ -101,6 +101,7 @@ export interface CreateJobInput {
   voiceGender?: "female" | "male";
   musicEnabled?: boolean;
   musicVolume?: number;
+  contentProjectId?: string;
   intro?: IntroOutroConfig;
   outro?: IntroOutroConfig;
 }
@@ -133,6 +134,21 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
 
 export function getFormConfig(): Promise<FormConfig> {
   return request("/config");
+}
+
+export interface ContentProject {
+  id: string;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export function listContentProjects(): Promise<ContentProject[]> {
+  return request("/content-projects");
+}
+
+export function createContentProject(name: string): Promise<ContentProject> {
+  return request("/content-projects", { method: "POST", body: JSON.stringify({ name }) });
 }
 
 export function createJob(input: CreateJobInput): Promise<{ id: string }> {

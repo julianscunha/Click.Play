@@ -465,8 +465,8 @@
     "semantic_hash": ""
   },
   "packages/providers/src/persistence/client.ts": {
-    "mtime": 1789097009.6227021,
-    "ast_hash": "770432c6f78359b7d8c0060696ff093c",
+    "mtime": 1789097732.605702,
+    "ast_hash": "9ce728f9a5ac4785c139c424fc7aab6c",
     "semantic_hash": ""
   },
   "packages/providers/src/persistence/index.ts": {
@@ -1280,8 +1280,8 @@
     "semantic_hash": ""
   },
   "packages/providers/src/persistence/client.test.ts": {
-    "mtime": 1789097459.061859,
-    "ast_hash": "a362e544123413500e9dfc73a2b161b6",
+    "mtime": 1789097743.811476,
+    "ast_hash": "1bda657272416fd2855fa5c741425230",
     "semantic_hash": ""
   }
 }

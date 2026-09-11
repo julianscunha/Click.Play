@@ -47,6 +47,8 @@ const CreateJobBody = z.object({
   voiceGender: z.enum(["female", "male"]).optional(),
   musicEnabled: z.boolean().optional(),
   musicVolume: z.number().min(0).max(1).optional(),
+  /** Projeto (Fase 16) dono desta produção — opcional, produção solta continua válida. */
+  contentProjectId: z.string().optional(),
 });
 
 const ApproveCostBody = z.object({ approved: z.boolean() });
@@ -126,6 +128,7 @@ export function registerJobsRoutes(app: FastifyInstance, deps: JobsRouteDeps): v
       voiceGender,
       musicEnabled,
       musicVolume,
+      contentProjectId,
     } = parsed.data;
     if (intro?.mode === "upload" || outro?.mode === "upload") {
       return reply.status(422).send({
@@ -136,6 +139,7 @@ export function registerJobsRoutes(app: FastifyInstance, deps: JobsRouteDeps): v
 
     const production = await createProduction(deps.db, {
       topic,
+      contentProjectId,
       config: {
         cost: deps.buildCostOptions(),
         direction,

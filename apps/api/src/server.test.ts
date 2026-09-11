@@ -235,6 +235,61 @@ describe("server", () => {
     expect(res.statusCode).toBe(404);
   });
 
+  describe("content projects (Fase 16)", () => {
+    it("creates, lists and reads back a content project with its productions", async () => {
+      const app = buildServer({
+        db,
+        buildJobRunnerDeps: () => fakeJobRunnerDeps(fakeLLM()),
+        buildCostOptions: () => costOptions,
+        runsDir,
+        envFilePath,
+      });
+
+      const created = await app.inject({ method: "POST", url: "/content-projects", payload: { name: "Série X" } });
+      expect(created.statusCode).toBe(201);
+      const contentProjectId = created.json().id as string;
+
+      const listed = await app.inject({ method: "GET", url: "/content-projects" });
+      expect(listed.statusCode).toBe(200);
+      expect(listed.json()).toHaveLength(1);
+
+      const job = await app.inject({
+        method: "POST",
+        url: "/jobs",
+        payload: { topic: "t", contentProjectId },
+      });
+      expect(job.statusCode).toBe(201);
+
+      const fetched = await app.inject({ method: "GET", url: `/content-projects/${contentProjectId}` });
+      expect(fetched.statusCode).toBe(200);
+      expect(fetched.json().productions).toHaveLength(1);
+    });
+
+    it("rejects POST /content-projects with invalid body", async () => {
+      const app = buildServer({
+        db,
+        buildJobRunnerDeps: () => fakeJobRunnerDeps(fakeLLM()),
+        buildCostOptions: () => costOptions,
+        runsDir,
+        envFilePath,
+      });
+      const res = await app.inject({ method: "POST", url: "/content-projects", payload: {} });
+      expect(res.statusCode).toBe(422);
+    });
+
+    it("404s GET /content-projects/:id for an unknown project", async () => {
+      const app = buildServer({
+        db,
+        buildJobRunnerDeps: () => fakeJobRunnerDeps(fakeLLM()),
+        buildCostOptions: () => costOptions,
+        runsDir,
+        envFilePath,
+      });
+      const res = await app.inject({ method: "GET", url: "/content-projects/does-not-exist" });
+      expect(res.statusCode).toBe(404);
+    });
+  });
+
   it("drives a job end to end: create → awaits cost approval → approve → completed", async () => {
     const llm = fakeLLM(RESEARCH_RESULT, directorPayload(), critiquePayload(8));
     const app = buildServer({

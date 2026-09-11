@@ -125,8 +125,8 @@
     "semantic_hash": ""
   },
   "docs/IMPLEMENTATION-PLAN.md": {
-    "mtime": 1789095929.4841478,
-    "ast_hash": "46c25440c743fda0fb7a6654ee1ea1f9",
+    "mtime": 1789097551.0676916,
+    "ast_hash": "5c2e3e7c675131a825ec0c33ac3fad90",
     "semantic_hash": ""
   },
   "pnpm-workspace.yaml": {
@@ -465,8 +465,8 @@
     "semantic_hash": ""
   },
   "packages/providers/src/persistence/client.ts": {
-    "mtime": 1787462389.9223504,
-    "ast_hash": "d6bca77770c5d3ab8ce1c145b56aa8be",
+    "mtime": 1789097009.6227021,
+    "ast_hash": "770432c6f78359b7d8c0060696ff093c",
     "semantic_hash": ""
   },
   "packages/providers/src/persistence/index.ts": {
@@ -475,13 +475,13 @@
     "semantic_hash": ""
   },
   "packages/providers/src/persistence/job-runner.test.ts": {
-    "mtime": 1786889510.349003,
-    "ast_hash": "94015756f5ceb5a95ea9f05c5632f386",
+    "mtime": 1789097346.199883,
+    "ast_hash": "aa15b5f9f8be86787f81805f1af64a05",
     "semantic_hash": ""
   },
   "packages/providers/src/persistence/job-runner.ts": {
-    "mtime": 1787418209.0438986,
-    "ast_hash": "df1ff90279bb9ba5daa58cc4101ab78d",
+    "mtime": 1789097061.9874024,
+    "ast_hash": "0095042df4265c5e4c3b9ad5afcd1d7b",
     "semantic_hash": ""
   },
   "packages/providers/src/persistence/job-state-machine.test.ts": {
@@ -495,23 +495,23 @@
     "semantic_hash": ""
   },
   "packages/providers/src/persistence/repository.test.ts": {
-    "mtime": 1787462658.5288434,
-    "ast_hash": "c38ef6c1b6c40f9263f42aba1e203f06",
+    "mtime": 1789097117.5939474,
+    "ast_hash": "da14f9f1d2f889f489d9b363c9f1a365",
     "semantic_hash": ""
   },
   "packages/providers/src/persistence/repository.ts": {
-    "mtime": 1787462403.9497948,
-    "ast_hash": "f80eb62d014d7247e5115e6874e9bc01",
+    "mtime": 1789097032.408481,
+    "ast_hash": "f0aa23b6987db27f25d2e44206e81222",
     "semantic_hash": ""
   },
   "packages/providers/src/persistence/schema.ts": {
-    "mtime": 1787462377.5551424,
-    "ast_hash": "24091ee70584f47b414a0d7563a90cfe",
+    "mtime": 1789096992.0240846,
+    "ast_hash": "5136f6cfeca03afa192eb70cb4e35152",
     "semantic_hash": ""
   },
   "packages/providers/src/persistence/types.ts": {
-    "mtime": 1787418157.3102057,
-    "ast_hash": "dd035077696af2f0c19188bcdcfedf81",
+    "mtime": 1789097021.8874667,
+    "ast_hash": "43908a11e6b92e4a8942610834655632",
     "semantic_hash": ""
   },
   "packages/providers/src/pipeline/index.ts": {
@@ -865,8 +865,8 @@
     "semantic_hash": ""
   },
   "apps/api/src/routes/jobs.ts": {
-    "mtime": 1789095727.6254709,
-    "ast_hash": "29927d89eb4b92472b73592d19b95038",
+    "mtime": 1789097099.8587615,
+    "ast_hash": "3a3a9be75f80ffff3734dad4cd7c2ffb",
     "semantic_hash": ""
   },
   "apps/api/src/routes/meta.ts": {
@@ -875,8 +875,8 @@
     "semantic_hash": ""
   },
   "apps/web/src/api.ts": {
-    "mtime": 1789095731.6553588,
-    "ast_hash": "38b5479a76726c28093e81e556f90965",
+    "mtime": 1789097102.4839728,
+    "ast_hash": "bef31403fda19b2486d36b0a1933be58",
     "semantic_hash": ""
   },
   "apps/web/src/components/ProgressView.tsx": {
@@ -1277,6 +1277,11 @@
   ".claude/agents/marketing-seo-specialist.md": {
     "mtime": 1789095777.5366745,
     "ast_hash": "350cc0e355e1aabb2acf7851fe7bbc01",
+    "semantic_hash": ""
+  },
+  "packages/providers/src/persistence/client.test.ts": {
+    "mtime": 1789097459.061859,
+    "ast_hash": "a362e544123413500e9dfc73a2b161b6",
     "semantic_hash": ""
   }
 }

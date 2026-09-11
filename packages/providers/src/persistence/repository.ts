@@ -5,12 +5,31 @@ import type { PipelineCheckpoint } from "../pipeline/types.js";
 import type { QcReport } from "../qc/types.js";
 import type { ClickPlayDb } from "./client.js";
 import { PROGRESS_BY_STATUS, resumeStatusForCheckpoint } from "./job-state-machine.js";
-import { jobs, type JobStatus, productions, wallet } from "./schema.js";
-import { type Job, jobFromRow, type Production, type ProductionConfig, productionFromRow, type ResultSummary } from "./types.js";
+import { contentProjects, jobs, type JobStatus, productions, wallet } from "./schema.js";
+import {
+  type ContentProject,
+  contentProjectFromRow,
+  type Job,
+  jobFromRow,
+  type Production,
+  type ProductionConfig,
+  productionFromRow,
+  type ResultSummary,
+} from "./types.js";
 
-export async function createProduction(db: ClickPlayDb, input: { topic: string; config: ProductionConfig }): Promise<Production> {
+export async function createProduction(
+  db: ClickPlayDb,
+  input: { topic: string; config: ProductionConfig; contentProjectId?: string },
+): Promise<Production> {
   const now = new Date();
-  const row = { id: randomUUID(), topic: input.topic, config: input.config, createdAt: now, updatedAt: now };
+  const row = {
+    id: randomUUID(),
+    topic: input.topic,
+    config: input.config,
+    contentProjectId: input.contentProjectId ?? null,
+    createdAt: now,
+    updatedAt: now,
+  };
   await db.insert(productions).values(row);
   return productionFromRow(row as never);
 }
@@ -18,6 +37,28 @@ export async function createProduction(db: ClickPlayDb, input: { topic: string; 
 export async function getProduction(db: ClickPlayDb, id: string): Promise<Production | null> {
   const row = await db.select().from(productions).where(eq(productions.id, id)).get();
   return row ? productionFromRow(row) : null;
+}
+
+export async function createContentProject(db: ClickPlayDb, input: { name: string }): Promise<ContentProject> {
+  const now = new Date();
+  const row = { id: randomUUID(), name: input.name, createdAt: now, updatedAt: now };
+  await db.insert(contentProjects).values(row);
+  return contentProjectFromRow(row as never);
+}
+
+export async function listContentProjects(db: ClickPlayDb): Promise<ContentProject[]> {
+  const rows = await db.select().from(contentProjects).all();
+  return rows.map(contentProjectFromRow);
+}
+
+export async function getContentProject(db: ClickPlayDb, id: string): Promise<ContentProject | null> {
+  const row = await db.select().from(contentProjects).where(eq(contentProjects.id, id)).get();
+  return row ? contentProjectFromRow(row) : null;
+}
+
+export async function listProductionsByContentProject(db: ClickPlayDb, contentProjectId: string): Promise<Production[]> {
+  const rows = await db.select().from(productions).where(eq(productions.contentProjectId, contentProjectId)).all();
+  return rows.map(productionFromRow);
 }
 
 export async function createJob(db: ClickPlayDb, input: { productionId: string; runDir: string }): Promise<Job> {
