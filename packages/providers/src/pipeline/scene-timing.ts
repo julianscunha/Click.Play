@@ -1,5 +1,31 @@
 import type { Scene, WordTimestamp } from "@clickplay/domain";
 
+/** Velocidade média de fala (palavras/segundo) usada só quando a narração está desligada. */
+export const DEFAULT_WORDS_PER_SECOND = 2.5;
+
+/**
+ * Substitui os WordTimestamp[] do TTS quando a narração está desligada
+ * (§11A, "Narração opcional") — fabrica timing sintético a partir da
+ * velocidade média de fala, no mesmo shape que o TTS produziria. Isso deixa
+ * `splitWordsIntoScenes` (duração de cena) e a legenda (que também consome
+ * WordTimestamp[]) funcionando sem mudança nenhuma, vídeo mudo ou não.
+ */
+export function synthesizeWordTimestamps(
+  scenes: Scene[],
+  wordsPerSecond: number = DEFAULT_WORDS_PER_SECOND,
+): WordTimestamp[] {
+  const words: WordTimestamp[] = [];
+  let t = 0;
+  for (const scene of scenes) {
+    for (const word of scene.scriptLine.trim().split(/\s+/).filter(Boolean)) {
+      const end = t + 1 / wordsPerSecond;
+      words.push({ word, start: t, end });
+      t = end;
+    }
+  }
+  return words;
+}
+
 /**
  * Divide os WordTimestamp[] (narração inteira, Fase 5) entre as cenas do
  * DirectorScore, proporcional à contagem de palavras de cada scriptLine.

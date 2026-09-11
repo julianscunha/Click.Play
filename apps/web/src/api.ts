@@ -101,6 +101,8 @@ export interface CreateJobInput {
   voiceGender?: "female" | "male";
   musicEnabled?: boolean;
   musicVolume?: number;
+  narrationEnabled?: boolean;
+  captionsEnabled?: boolean;
   contentProjectId?: string;
   intro?: IntroOutroConfig;
   outro?: IntroOutroConfig;

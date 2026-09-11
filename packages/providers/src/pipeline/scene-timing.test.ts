@@ -1,6 +1,6 @@
 import { Scene, type WordTimestamp } from "@clickplay/domain";
 import { describe, expect, it } from "vitest";
-import { splitWordsIntoScenes } from "./scene-timing.js";
+import { splitWordsIntoScenes, synthesizeWordTimestamps } from "./scene-timing.js";
 
 function scene(id: string, scriptLine: string): Scene {
   return Scene.parse({
@@ -47,5 +47,24 @@ describe("splitWordsIntoScenes", () => {
     const scenes = [scene("1", "one")];
     const durations = splitWordsIntoScenes(scenes, [], FPS);
     expect(durations).toEqual([1]);
+  });
+});
+
+describe("synthesizeWordTimestamps", () => {
+  it("fabricates timestamps at the given speech rate, contiguous across scenes", () => {
+    const scenes = [scene("1", "one two"), scene("2", "three")];
+    const words = synthesizeWordTimestamps(scenes, 2);
+    expect(words).toEqual([
+      { word: "one", start: 0, end: 0.5 },
+      { word: "two", start: 0.5, end: 1 },
+      { word: "three", start: 1, end: 1.5 },
+    ]);
+  });
+
+  it("feeds splitWordsIntoScenes just like real TTS output would (duration proportional to word count)", () => {
+    const scenes = [scene("1", "one two"), scene("2", "three four five six")];
+    const words = synthesizeWordTimestamps(scenes, 2);
+    const durations = splitWordsIntoScenes(scenes, words, FPS);
+    expect(durations).toEqual([30, 60]); // 1s e 2s a 30fps
   });
 });

@@ -12,7 +12,7 @@ import { computeActualCost, estimateCost } from "../cost/index.js";
 import type { LLMUsage } from "../llm/types.js";
 import { resolveElement } from "../visual/index.js";
 import { resolveIntroOutroScene } from "./intro-outro.js";
-import { splitWordsIntoScenes } from "./scene-timing.js";
+import { splitWordsIntoScenes, synthesizeWordTimestamps } from "./scene-timing.js";
 import type {
   PipelineCallbacks,
   PipelineCheckpoint,
@@ -129,11 +129,14 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
     stage = "tts";
     const fullScript = score.scenes.map((s) => s.scriptLine).join(" ");
     let ttsWords: WordTimestamp[];
-    let voiceoverPath: string;
+    let voiceoverPath: string | undefined;
 
     if (opts.resume?.tts) {
       ttsWords = opts.resume.tts.words;
       voiceoverPath = opts.resume.tts.voiceoverPath;
+    } else if (opts.narrationEnabled === false) {
+      ttsWords = synthesizeWordTimestamps(score.scenes);
+      voiceoverPath = undefined;
     } else {
       await callbacks.onStageStart?.(stage);
       const ttsResult = await opts.ttsProvider.generate(fullScript);
@@ -220,7 +223,7 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
       voiceoverPath,
       musicPath,
       musicVolume: opts.musicVolume,
-      words: ttsWords,
+      words: opts.captionsEnabled === false ? [] : ttsWords,
       captionStyle: opts.captionStyle ?? archetypeConfig.captionStyle,
       captionAccentColor: opts.captionAccentColor ?? "#ffffff",
       captionChunkSize: opts.captionChunkSize ?? archetypeConfig.captionChunkSize ?? 3,
@@ -247,7 +250,7 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
     const costActual = computeActualCost({
       llmUsages: usages,
       llmModel: opts.cost.llmModel,
-      ttsCharacters: fullScript.length,
+      ttsCharacters: opts.narrationEnabled === false ? 0 : fullScript.length,
       ttsProvider: opts.cost.ttsProvider,
       aiImages,
       imageProvider: opts.cost.imageProvider,
@@ -273,7 +276,7 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
       height,
       imageCount: aiImages,
       videoClipCount: aiVideos,
-      audioSeconds: ttsWords.length > 0 ? Math.max(...ttsWords.map((w) => w.end)) : 0,
+      audioSeconds: voiceoverPath && ttsWords.length > 0 ? Math.max(...ttsWords.map((w) => w.end)) : 0,
     };
   } catch (err) {
     const error = err instanceof Error ? err : new Error(String(err));

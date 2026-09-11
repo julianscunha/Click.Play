@@ -20,7 +20,7 @@ export type PipelineStage = "research" | "director" | "tts" | "visuals" | "rende
 export interface PipelineCheckpoint {
   research?: { data: ResearchResult; usage: LLMUsage };
   director?: { score: DirectorScore; revisions: RevisionLogEntry[]; costEstimate: CostBreakdown };
-  tts?: { words: WordTimestamp[]; voiceoverPath: string; fullScript: string };
+  tts?: { words: WordTimestamp[]; voiceoverPath?: string; fullScript: string };
   visuals?: { resolvedScenes: ResolvedScene[]; musicPath?: string };
 }
 
@@ -72,6 +72,12 @@ export interface PipelineOptions {
   voiceGender?: "female" | "male";
   /** false = pula geração de música de fundo inteiramente (Fase 15, Música/Som). Default true (comportamento anterior a este campo). */
   musicEnabled?: boolean;
+  /** false = pula o TTS inteiramente — vídeo mudo. Duração de cena passa a vir de `synthesizeWordTimestamps`
+   * (velocidade de fala estimada, não de áudio real). Default true (comportamento anterior a este campo). */
+  narrationEnabled?: boolean;
+  /** false = não passa `words` pro render (sem legenda), independente de `narrationEnabled` — combina com
+   * narração desligada pra gerar legenda sincronizada com a duração estimada, mesmo sem áudio. Default true. */
+  captionsEnabled?: boolean;
   /** 0-1, repassado ao MusicTrack no render (Fase 15, Música/Som). Undefined = usa o default do componente (0.15). Não usado pelo orchestrator além de passar adiante. */
   musicVolume?: number;
   direction?: string;

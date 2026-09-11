@@ -140,7 +140,7 @@ describe("runPipeline", () => {
     expect(result.outputPath).toContain("output.mp4");
     expect(fs.existsSync(path.join(runDir, "audio", "voiceover.mp3"))).toBe(true);
     expect(llm.generate).toHaveBeenCalledTimes(3);
-    // §11A Bloco 6 item 11 — contagem final: cenas só com animated_text, sem ai_image/ai_video_clip.
+    // §11A Bloco 6 item 11 — contagem final: cenas usam stock_image (fundo, não conta) + animated_text, sem ai_image/ai_video_clip.
     expect(result.imageCount).toBe(0);
     expect(result.videoClipCount).toBe(0);
     expect(result.audioSeconds).toBe(0.6); // último end de fakeTTS().words
@@ -237,6 +237,56 @@ describe("runPipeline", () => {
 
     expect(options.videoRenderer.render).toHaveBeenCalledWith(
       expect.objectContaining({ musicVolume: 0.25 }),
+      expect.any(String),
+    );
+  });
+
+  it("skips TTS and estimates scene duration from speech rate when narrationEnabled is false", async () => {
+    const llm = fakeLLM(RESEARCH_RESULT, directorPayload(), critiquePayload(8));
+    const options = baseOptions(runDir, llm);
+    options.narrationEnabled = false;
+    const callbacks = approvingCallbacks();
+
+    const result = await runPipeline(options, callbacks);
+
+    expect(result.status).toBe("completed");
+    expect(options.ttsProvider.generate).not.toHaveBeenCalled();
+    expect(fs.existsSync(path.join(runDir, "audio", "voiceover.mp3"))).toBe(false);
+    expect(options.videoRenderer.render).toHaveBeenCalledWith(
+      expect.objectContaining({ voiceoverPath: undefined }),
+      expect.any(String),
+    );
+    if (result.status !== "completed") throw new Error("expected completed");
+    expect(result.costActual.tts).toEqual({ status: "known", usd: 0 });
+    expect(result.audioSeconds).toBe(0); // sem áudio real, mesmo com words[] sintéticas pra timing/legenda
+  });
+
+  it("still synthesizes caption timing when narrationEnabled is false and captionsEnabled is true", async () => {
+    const llm = fakeLLM(RESEARCH_RESULT, directorPayload(), critiquePayload(8));
+    const options = baseOptions(runDir, llm);
+    options.narrationEnabled = false;
+    const callbacks = approvingCallbacks();
+
+    await runPipeline(options, callbacks);
+
+    expect(options.videoRenderer.render).toHaveBeenCalledWith(
+      expect.objectContaining({ words: expect.arrayContaining([expect.objectContaining({ word: "Hello" })]) }),
+      expect.any(String),
+    );
+  });
+
+  it("passes no words to the render input when captionsEnabled is false, even with narration on", async () => {
+    const llm = fakeLLM(RESEARCH_RESULT, directorPayload(), critiquePayload(8));
+    const options = baseOptions(runDir, llm);
+    options.captionsEnabled = false;
+    const callbacks = approvingCallbacks();
+
+    const result = await runPipeline(options, callbacks);
+
+    expect(result.status).toBe("completed");
+    expect(options.ttsProvider.generate).toHaveBeenCalled(); // áudio real ainda é gerado, só a legenda que some
+    expect(options.videoRenderer.render).toHaveBeenCalledWith(
+      expect.objectContaining({ words: [] }),
       expect.any(String),
     );
   });

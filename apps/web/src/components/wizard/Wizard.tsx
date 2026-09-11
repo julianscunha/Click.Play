@@ -53,9 +53,11 @@ interface FormState {
   contentProjectId: string;
   newContentProjectName: string;
   language: "pt-BR" | "en-US";
+  narrationEnabled: boolean;
   voiceGender: "female" | "male";
   musicEnabled: boolean;
   musicVolumeLevel: (typeof MUSIC_VOLUME_LEVELS)[number]["level"];
+  captionsEnabled: boolean;
   targetDurationSeconds: string;
   videoMode: "motion_graphics_only" | "ai_video_only" | "hybrid";
   captionStyle: string;
@@ -81,9 +83,11 @@ const INITIAL_STATE: FormState = {
   contentProjectId: "",
   newContentProjectName: "",
   language: "pt-BR",
+  narrationEnabled: true,
   voiceGender: "female",
   musicEnabled: true,
   musicVolumeLevel: "medio",
+  captionsEnabled: true,
   targetDurationSeconds: "",
   videoMode: "hybrid",
   captionStyle: "",
@@ -190,11 +194,13 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
       pacing: form.pacing || undefined,
       contentProjectId,
       language: form.language,
+      narrationEnabled: form.narrationEnabled,
       voiceGender: form.voiceGender,
       musicEnabled: form.musicEnabled,
       musicVolume: form.musicEnabled
         ? MUSIC_VOLUME_LEVELS.find((l) => l.level === form.musicVolumeLevel)!.value
         : undefined,
+      captionsEnabled: form.captionsEnabled,
       targetDurationSeconds:
         form.targetDurationSeconds.trim() && Number.isFinite(targetDurationSeconds) && targetDurationSeconds > 0
           ? targetDurationSeconds
@@ -403,18 +409,34 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
 
         {step.key === "narracao" && (
           <div className="flex flex-col gap-6">
-            <div className="flex flex-col gap-1.5">
-              <span className={labelClass}>Voz da narração</span>
-              <div className="flex gap-2">
-                <Chip active={form.voiceGender === "female"} onClick={() => update("voiceGender", "female")}>
-                  Feminina
-                </Chip>
-                <Chip active={form.voiceGender === "male"} onClick={() => update("voiceGender", "male")}>
-                  Masculina
-                </Chip>
+            <label className="flex items-center gap-2 text-sm font-medium text-neutral-200">
+              <input
+                type="checkbox"
+                checked={form.narrationEnabled}
+                onChange={(e) => update("narrationEnabled", e.target.checked)}
+                className="h-4 w-4 rounded border-neutral-700 bg-neutral-900"
+              />
+              Narração falada
+            </label>
+            {form.narrationEnabled ? (
+              <div className="flex flex-col gap-1.5">
+                <span className={labelClass}>Voz da narração</span>
+                <div className="flex gap-2">
+                  <Chip active={form.voiceGender === "female"} onClick={() => update("voiceGender", "female")}>
+                    Feminina
+                  </Chip>
+                  <Chip active={form.voiceGender === "male"} onClick={() => update("voiceGender", "male")}>
+                    Masculina
+                  </Chip>
+                </div>
+                <p className="text-sm text-neutral-500">Voz gerada automaticamente (Edge TTS) no idioma escolhido em Roteiro.</p>
               </div>
-              <p className="text-sm text-neutral-500">Voz gerada automaticamente (Edge TTS) no idioma escolhido em Roteiro.</p>
-            </div>
+            ) : (
+              <p className="text-sm text-neutral-500">
+                Vídeo mudo (sem voz) — a duração de cada cena passa a ser estimada pelo tamanho do texto do roteiro
+                em vez do áudio. Legenda continua disponível na etapa seguinte, se quiser.
+              </p>
+            )}
           </div>
         )}
 
@@ -471,35 +493,52 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
 
         {step.key === "legendas" && (
           <div className="flex flex-col gap-6">
-            <div className="flex flex-col gap-1.5">
-              <label htmlFor="captionStyle" className={labelClass}>
-                Estilo da legenda
-              </label>
-              <select
-                id="captionStyle"
-                value={form.captionStyle}
-                onChange={(e) => update("captionStyle", e.target.value)}
-                className={fieldClass}
-              >
-                <option value="">Padrão do arquétipo</option>
-                {config.captionStyles.map((c) => (
-                  <option key={c} value={c}>
-                    {formatLabel(c)}
-                  </option>
-                ))}
-              </select>
-            </div>
+            <label className="flex items-center gap-2 text-sm font-medium text-neutral-200">
+              <input
+                type="checkbox"
+                checked={form.captionsEnabled}
+                onChange={(e) => update("captionsEnabled", e.target.checked)}
+                className="h-4 w-4 rounded border-neutral-700 bg-neutral-900"
+              />
+              Legenda de narração
+              {!form.narrationEnabled && form.captionsEnabled && (
+                <span className="font-normal text-neutral-500">(sincronizada pela duração estimada, sem narração)</span>
+              )}
+            </label>
 
-            <div className="flex flex-col gap-1.5">
-              <span className={labelClass}>Palavras por vez</span>
-              <div className="flex gap-2">
-                {CHUNK_SIZE_LEVELS.map((l) => (
-                  <Chip key={l.level} active={form.captionChunkLevel === l.level} onClick={() => update("captionChunkLevel", l.level)}>
-                    {l.label}
-                  </Chip>
-                ))}
-              </div>
-            </div>
+            {form.captionsEnabled && (
+              <>
+                <div className="flex flex-col gap-1.5">
+                  <label htmlFor="captionStyle" className={labelClass}>
+                    Estilo da legenda
+                  </label>
+                  <select
+                    id="captionStyle"
+                    value={form.captionStyle}
+                    onChange={(e) => update("captionStyle", e.target.value)}
+                    className={fieldClass}
+                  >
+                    <option value="">Padrão do arquétipo</option>
+                    {config.captionStyles.map((c) => (
+                      <option key={c} value={c}>
+                        {formatLabel(c)}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="flex flex-col gap-1.5">
+                  <span className={labelClass}>Palavras por vez</span>
+                  <div className="flex gap-2">
+                    {CHUNK_SIZE_LEVELS.map((l) => (
+                      <Chip key={l.level} active={form.captionChunkLevel === l.level} onClick={() => update("captionChunkLevel", l.level)}>
+                        {l.label}
+                      </Chip>
+                    ))}
+                  </div>
+                </div>
+              </>
+            )}
 
             <label className="flex items-center gap-2 text-sm text-neutral-200">
               <input
@@ -688,8 +727,10 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
                 <dd className="text-neutral-100">{form.language}</dd>
               </div>
               <div>
-                <dt className="text-neutral-500">Voz</dt>
-                <dd className="text-neutral-100">{form.voiceGender === "female" ? "Feminina" : "Masculina"}</dd>
+                <dt className="text-neutral-500">Narração</dt>
+                <dd className="text-neutral-100">
+                  {form.narrationEnabled ? `Ligada (voz ${form.voiceGender === "female" ? "feminina" : "masculina"})` : "Desligada (vídeo mudo)"}
+                </dd>
               </div>
               <div>
                 <dt className="text-neutral-500">Música</dt>
@@ -709,7 +750,13 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
               </div>
               <div>
                 <dt className="text-neutral-500">Legenda</dt>
-                <dd className="text-neutral-100">{form.captionStyle ? formatLabel(form.captionStyle) : "Padrão do arquétipo"}</dd>
+                <dd className="text-neutral-100">
+                  {form.captionsEnabled
+                    ? form.captionStyle
+                      ? formatLabel(form.captionStyle)
+                      : "Padrão do arquétipo"
+                    : "Desligada"}
+                </dd>
               </div>
               <div>
                 <dt className="text-neutral-500">Qualidade</dt>

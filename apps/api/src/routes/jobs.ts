@@ -47,6 +47,8 @@ const CreateJobBody = z.object({
   voiceGender: z.enum(["female", "male"]).optional(),
   musicEnabled: z.boolean().optional(),
   musicVolume: z.number().min(0).max(1).optional(),
+  narrationEnabled: z.boolean().optional(),
+  captionsEnabled: z.boolean().optional(),
   /** Projeto (Fase 16) dono desta produção — opcional, produção solta continua válida. */
   contentProjectId: z.string().optional(),
 });
@@ -128,6 +130,8 @@ export function registerJobsRoutes(app: FastifyInstance, deps: JobsRouteDeps): v
       voiceGender,
       musicEnabled,
       musicVolume,
+      narrationEnabled,
+      captionsEnabled,
       contentProjectId,
     } = parsed.data;
     if (intro?.mode === "upload" || outro?.mode === "upload") {
@@ -161,6 +165,8 @@ export function registerJobsRoutes(app: FastifyInstance, deps: JobsRouteDeps): v
         voiceGender,
         musicEnabled,
         musicVolume,
+        narrationEnabled,
+        captionsEnabled,
       },
     });
     const runDir = path.join(deps.runsDir, production.id);
