@@ -5,7 +5,7 @@ import type { PipelineCheckpoint } from "../pipeline/types.js";
 import type { QcReport } from "../qc/types.js";
 import type { ClickPlayDb } from "./client.js";
 import { PROGRESS_BY_STATUS, resumeStatusForCheckpoint } from "./job-state-machine.js";
-import { contentProjects, jobs, type JobStatus, productions, wallet } from "./schema.js";
+import { contentProjects, jobs, type JobStatus, productions, templates, wallet } from "./schema.js";
 import {
   type ContentProject,
   contentProjectFromRow,
@@ -15,6 +15,8 @@ import {
   type ProductionConfig,
   productionFromRow,
   type ResultSummary,
+  type Template,
+  templateFromRow,
 } from "./types.js";
 
 export async function createProduction(
@@ -59,6 +61,56 @@ export async function getContentProject(db: ClickPlayDb, id: string): Promise<Co
 export async function listProductionsByContentProject(db: ClickPlayDb, contentProjectId: string): Promise<Production[]> {
   const rows = await db.select().from(productions).where(eq(productions.contentProjectId, contentProjectId)).all();
   return rows.map(productionFromRow);
+}
+
+/**
+ * Salva/atualiza um Template a partir do config de uma Production (Fase 17).
+ * Mesmo nome sobrescreve (decisão do usuário) — unicidade por nome é checada
+ * aqui, não via constraint de banco, pra dar mensagem/comportamento previsível
+ * ao caller em vez de estourar erro de SQL.
+ */
+export async function upsertTemplate(
+  db: ClickPlayDb,
+  input: { name: string; config: ProductionConfig; contentProjectId: string | null; sourceProductionId: string },
+): Promise<Template> {
+  const existing = await db.select().from(templates).where(eq(templates.name, input.name)).get();
+  const now = new Date();
+
+  if (existing) {
+    const row = {
+      ...existing,
+      config: input.config,
+      contentProjectId: input.contentProjectId,
+      sourceProductionId: input.sourceProductionId,
+      version: existing.version + 1,
+      updatedAt: now,
+    };
+    await db.update(templates).set(row).where(eq(templates.id, existing.id));
+    return templateFromRow(row as never);
+  }
+
+  const row = {
+    id: randomUUID(),
+    contentProjectId: input.contentProjectId,
+    name: input.name,
+    version: 1,
+    config: input.config,
+    sourceProductionId: input.sourceProductionId,
+    createdAt: now,
+    updatedAt: now,
+  };
+  await db.insert(templates).values(row);
+  return templateFromRow(row as never);
+}
+
+export async function listTemplates(db: ClickPlayDb): Promise<Template[]> {
+  const rows = await db.select().from(templates).all();
+  return rows.map(templateFromRow);
+}
+
+export async function getTemplate(db: ClickPlayDb, id: string): Promise<Template | null> {
+  const row = await db.select().from(templates).where(eq(templates.id, id)).get();
+  return row ? templateFromRow(row) : null;
 }
 
 export async function createJob(db: ClickPlayDb, input: { productionId: string; runDir: string }): Promise<Job> {

@@ -1,5 +1,16 @@
 import { useEffect, useState } from "react";
-import { createContentProject, listContentProjects, type ContentProject, type CreateJobInput, type FormConfig, type TransitionType } from "../../api.js";
+import {
+  createContentProject,
+  getTemplate,
+  listContentProjects,
+  listTemplates,
+  type ContentProject,
+  type CreateJobInput,
+  type FormConfig,
+  type TemplateConfig,
+  type TemplateSummary,
+  type TransitionType,
+} from "../../api.js";
 
 function formatLabel(id: string): string {
   return id.replace(/_/g, " ");
@@ -105,6 +116,52 @@ const INITIAL_STATE: FormState = {
   outroTransition: "crossfade",
 };
 
+/** Reverte um valor numérico salvo em template pro "level" mais próximo (mesma direção inversa do
+ * `.find((l) => l.level === form.xLevel)!.value` usado no submit) — sem valor, cai no default atual. */
+function nearestLevel<L extends string>(levels: readonly { level: L; value: number }[], value: number | undefined, fallback: L): L {
+  if (value == null) return fallback;
+  return levels.reduce((best, l) => (Math.abs(l.value - value) < Math.abs(best.value - value) ? l : best)).level;
+}
+
+/** Reverte width/height (só isso é persistido no config, não `aspectRatio`) pro enum do wizard —
+ * mesma tabela de `RESOLUTION_BY_ASPECT_RATIO` em jobs.ts, direção inversa. */
+function aspectRatioFromDimensions(width?: number, height?: number): FormState["aspectRatio"] {
+  if (!width || !height) return "vertical";
+  if (width === height) return "square";
+  return width > height ? "horizontal" : "vertical";
+}
+
+/** Aplica um template salvo (Fase 17) sobre o form — não inclui `topic`/`contentProjectId` (não fazem
+ * parte do config salvo, o usuário preenche/escolhe de novo a cada produção). */
+function applyTemplateConfig(config: TemplateConfig): Partial<FormState> {
+  return {
+    direction: config.direction ?? "",
+    archetype: config.archetype ?? "",
+    pacing: config.pacing ?? "",
+    language: config.language === "en-US" ? "en-US" : "pt-BR",
+    narrationEnabled: config.narrationEnabled ?? true,
+    voiceGender: config.voiceGender ?? "female",
+    musicEnabled: config.musicEnabled ?? true,
+    musicVolumeLevel: nearestLevel(MUSIC_VOLUME_LEVELS, config.musicVolume, "medio"),
+    captionsEnabled: config.captionsEnabled ?? true,
+    targetDurationSeconds: config.targetDurationSeconds ? String(config.targetDurationSeconds) : "",
+    videoMode: config.videoMode ?? "hybrid",
+    captionStyle: config.captionStyle ?? "",
+    aspectRatio: aspectRatioFromDimensions(config.width, config.height),
+    qualityTier: config.qualityTier ?? "standard",
+    captionChunkLevel: nearestLevel(CHUNK_SIZE_LEVELS, config.captionChunkSize, "medias"),
+    showTextOverlays: config.showTextOverlays ?? true,
+    transitionSpeedLevel: nearestLevel(TRANSITION_SPEED_LEVELS, config.transitionDurationFrames, "media"),
+    useOwnProviders: config.useOwnProviders ?? false,
+    introEnabled: config.intro?.mode === "generated",
+    introText: config.intro?.text ?? "",
+    introTransition: config.intro?.transition ?? "crossfade",
+    outroEnabled: config.outro?.mode === "generated",
+    outroText: config.outro?.text ?? "",
+    outroTransition: config.outro?.transition ?? "crossfade",
+  };
+}
+
 const fieldClass =
   "rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-neutral-50 placeholder:text-neutral-500 focus:border-neutral-400 focus:outline-none";
 const labelClass = "text-sm font-medium text-neutral-200";
@@ -145,6 +202,10 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
   const [contentProjects, setContentProjects] = useState<ContentProject[]>([]);
   const [creatingContentProject, setCreatingContentProject] = useState(false);
   const [contentProjectError, setContentProjectError] = useState<string | null>(null);
+  const [templates, setTemplates] = useState<TemplateSummary[]>([]);
+  const [selectedTemplateId, setSelectedTemplateId] = useState("");
+  const [loadingTemplate, setLoadingTemplate] = useState(false);
+  const [templateError, setTemplateError] = useState<string | null>(null);
 
   useEffect(() => {
     listContentProjects()
@@ -152,7 +213,27 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
       .catch(() => {
         // Lista de projetos é opcional pro fluxo — falha de rede não deve travar o wizard.
       });
+    listTemplates()
+      .then(setTemplates)
+      .catch(() => {
+        // Lista de templates é opcional pro fluxo — falha de rede não deve travar o wizard.
+      });
   }, []);
+
+  async function handleSelectTemplate(id: string) {
+    setSelectedTemplateId(id);
+    setTemplateError(null);
+    if (!id) return;
+    setLoadingTemplate(true);
+    try {
+      const template = await getTemplate(id);
+      setForm((f) => ({ ...f, ...applyTemplateConfig(template.config) }));
+    } catch (err) {
+      setTemplateError(err instanceof Error ? err.message : String(err));
+    } finally {
+      setLoadingTemplate(false);
+    }
+  }
 
   const step = STEPS[stepIndex]!;
   const canLeaveBriefing = form.topic.trim().length > 0;
@@ -253,6 +334,36 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
       <div className="flex min-w-0 flex-1 flex-col gap-6">
         {step.key === "briefing" && (
           <div className="flex flex-col gap-6">
+            {templates.length > 0 && (
+              <div className="flex flex-col gap-1.5">
+                <label htmlFor="templateId" className={labelClass}>
+                  Começar de um template <span className="text-neutral-500">(opcional)</span>
+                </label>
+                <select
+                  id="templateId"
+                  value={selectedTemplateId}
+                  onChange={(e) => handleSelectTemplate(e.target.value)}
+                  disabled={loadingTemplate}
+                  className={fieldClass}
+                >
+                  <option value="">Começar do zero</option>
+                  {templates.map((t) => (
+                    <option key={t.id} value={t.id}>
+                      {t.name} {t.version > 1 ? `(v${t.version})` : ""}
+                    </option>
+                  ))}
+                </select>
+                <p className="text-xs text-neutral-500">
+                  Preenche arquétipo, visual, música, narração, legendas etc. com as decisões salvas — tema e projeto
+                  continuam livres.
+                </p>
+                {templateError && (
+                  <p role="alert" className="text-xs text-red-400">
+                    {templateError}
+                  </p>
+                )}
+              </div>
+            )}
             <div className="flex flex-col gap-1.5">
               <label htmlFor="topic" className={labelClass}>
                 Tema

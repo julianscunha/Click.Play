@@ -157,6 +157,57 @@ export function createJob(input: CreateJobInput): Promise<{ id: string }> {
   return request("/jobs", { method: "POST", body: JSON.stringify(input) });
 }
 
+/** Config de produção salvo/reaproveitável (Fase 17) — mesmo shape parcial de CreateJobInput (sem topic/contentProjectId). */
+export interface TemplateConfig {
+  direction?: string;
+  archetype?: string;
+  pacing?: string;
+  videoMode?: "motion_graphics_only" | "ai_video_only" | "hybrid";
+  captionStyle?: string;
+  width?: number;
+  height?: number;
+  qualityTier?: "draft" | "standard" | "high";
+  targetDurationSeconds?: number;
+  language?: string;
+  captionChunkSize?: number;
+  showTextOverlays?: boolean;
+  transitionDurationFrames?: number;
+  useOwnProviders?: boolean;
+  voiceGender?: "female" | "male";
+  musicEnabled?: boolean;
+  musicVolume?: number;
+  narrationEnabled?: boolean;
+  captionsEnabled?: boolean;
+  intro?: IntroOutroConfig;
+  outro?: IntroOutroConfig;
+}
+
+export interface TemplateSummary {
+  id: string;
+  contentProjectId: string | null;
+  name: string;
+  version: number;
+  sourceProductionId: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface TemplateDetail extends TemplateSummary {
+  config: TemplateConfig;
+}
+
+export function listTemplates(): Promise<TemplateSummary[]> {
+  return request("/templates");
+}
+
+export function getTemplate(id: string): Promise<TemplateDetail> {
+  return request(`/templates/${id}`);
+}
+
+export function saveTemplate(name: string, productionId: string): Promise<TemplateSummary> {
+  return request("/templates", { method: "POST", body: JSON.stringify({ name, productionId }) });
+}
+
 export function getJob(id: string): Promise<JobView> {
   return request(`/jobs/${id}`);
 }

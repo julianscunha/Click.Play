@@ -40,6 +40,16 @@ CREATE TABLE IF NOT EXISTS jobs (
   created_at INTEGER NOT NULL,
   updated_at INTEGER NOT NULL
 );
+CREATE TABLE IF NOT EXISTS templates (
+  id TEXT PRIMARY KEY,
+  content_project_id TEXT REFERENCES content_projects(id),
+  name TEXT NOT NULL,
+  version INTEGER NOT NULL DEFAULT 1,
+  config TEXT NOT NULL,
+  source_production_id TEXT REFERENCES productions(id),
+  created_at INTEGER NOT NULL,
+  updated_at INTEGER NOT NULL
+);
 CREATE TABLE IF NOT EXISTS wallet (
   id TEXT PRIMARY KEY,
   balance_usd REAL NOT NULL,

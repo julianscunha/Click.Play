@@ -52,6 +52,27 @@ export const contentProjects = sqliteTable("content_projects", {
   updatedAt: integer("updated_at", { mode: "timestamp_ms" }).notNull(),
 });
 
+/**
+ * "Template" (Fase 17) — config de produção salvo/reaproveitável, copiado de uma
+ * `production` concluída. `config` é o mesmo shape json de `productions.config`
+ * (PipelineOptions sem provider/topic/runDir) — decisão da Fase 10 de manter esse
+ * objeto serializável e livre de instância de provider paga dividendo aqui sem
+ * mudança nenhuma. `name` não é único no schema — unicidade (mesmo nome
+ * sobrescreve, decisão do usuário) é responsabilidade do repository, não de
+ * constraint de banco, pra manter a mensagem de erro amigável no caller.
+ */
+export const templates = sqliteTable("templates", {
+  id: text("id").primaryKey(),
+  contentProjectId: text("content_project_id").references(() => contentProjects.id),
+  name: text("name").notNull(),
+  /** Incrementada a cada "salvar como template" com o mesmo nome (sobrescreve o config, guarda a contagem). */
+  version: integer("version").notNull().default(1),
+  config: text("config", { mode: "json" }).notNull(),
+  sourceProductionId: text("source_production_id").references(() => productions.id),
+  createdAt: integer("created_at", { mode: "timestamp_ms" }).notNull(),
+  updatedAt: integer("updated_at", { mode: "timestamp_ms" }).notNull(),
+});
+
 export const jobs = sqliteTable("jobs", {
   id: text("id").primaryKey(),
   productionId: text("production_id")

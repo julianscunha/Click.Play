@@ -7,10 +7,12 @@ import {
   getContentProject,
   getJob,
   getProduction,
+  getTemplate,
   getWallet,
   listContentProjects,
   listJobsByProduction,
   listProductionsByContentProject,
+  listTemplates,
   recoverOrphanedJobs,
   setJobActualCost,
   setJobError,
@@ -20,6 +22,7 @@ import {
   setWalletBalance,
   trySpend,
   updateJobStatus,
+  upsertTemplate,
 } from "./repository.js";
 import type { ProductionConfig } from "./types.js";
 
@@ -71,6 +74,54 @@ describe("persistence repository", () => {
     it("leaves contentProjectId null when a production has no project", async () => {
       const production = await createProduction(db, { topic: "t", config });
       expect(production.contentProjectId).toBeNull();
+    });
+  });
+
+  describe("templates (Fase 17)", () => {
+    it("saves a new template from a production's config, version 1", async () => {
+      const production = await createProduction(db, { topic: "t", config });
+      const template = await upsertTemplate(db, {
+        name: "Contos infantis",
+        config: production.config,
+        contentProjectId: production.contentProjectId,
+        sourceProductionId: production.id,
+      });
+
+      expect(template.name).toBe("Contos infantis");
+      expect(template.version).toBe(1);
+      expect(template.config).toEqual(config);
+      expect(template.sourceProductionId).toBe(production.id);
+      expect(await getTemplate(db, template.id)).toEqual(template);
+      expect(await listTemplates(db)).toEqual([template]);
+    });
+
+    it("overwrites the existing template and bumps version when the name matches", async () => {
+      const production1 = await createProduction(db, { topic: "t1", config });
+      const first = await upsertTemplate(db, {
+        name: "Contos infantis",
+        config: production1.config,
+        contentProjectId: null,
+        sourceProductionId: production1.id,
+      });
+
+      const newConfig: ProductionConfig = { ...config, archetype: "storybook_picturebook" };
+      const production2 = await createProduction(db, { topic: "t2", config: newConfig });
+      const second = await upsertTemplate(db, {
+        name: "Contos infantis",
+        config: production2.config,
+        contentProjectId: null,
+        sourceProductionId: production2.id,
+      });
+
+      expect(second.id).toBe(first.id); // mesma linha, não duplicou
+      expect(second.version).toBe(2);
+      expect(second.config).toEqual(newConfig);
+      expect(second.sourceProductionId).toBe(production2.id);
+      expect(await listTemplates(db)).toHaveLength(1);
+    });
+
+    it("returns null for a missing template", async () => {
+      expect(await getTemplate(db, "does-not-exist")).toBeNull();
     });
   });
 

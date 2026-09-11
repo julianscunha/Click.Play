@@ -10,6 +10,7 @@ import { registerCreditsRoutes } from "./routes/credits.js";
 import { registerJobsRoutes } from "./routes/jobs.js";
 import { registerMetaRoutes } from "./routes/meta.js";
 import { registerSettingsRoutes } from "./routes/settings.js";
+import { registerTemplatesRoutes } from "./routes/templates.js";
 
 export interface BuildServerOptions {
   db: ClickPlayDb;
@@ -67,6 +68,7 @@ export function buildServer(opts: BuildServerOptions) {
   registerSettingsRoutes(app, { envFilePath: opts.envFilePath });
   registerCreditsRoutes(app, { db: opts.db });
   registerContentProjectsRoutes(app, { db: opts.db });
+  registerTemplatesRoutes(app, { db: opts.db });
   registerJobsRoutes(app, {
     db: opts.db,
     buildJobRunnerDeps: opts.buildJobRunnerDeps,

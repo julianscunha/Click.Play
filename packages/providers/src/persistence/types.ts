@@ -1,7 +1,7 @@
 import type { CostBreakdown } from "../cost/index.js";
 import type { PipelineCheckpoint, PipelineOptions } from "../pipeline/types.js";
 import type { QcReport } from "../qc/types.js";
-import type { contentProjects, jobs, JobStatus, productions } from "./schema.js";
+import type { contentProjects, jobs, JobStatus, productions, templates } from "./schema.js";
 
 /** Campos de PipelineOptions que não são instância de provider/runtime — o que sobra fica no `config` da Production. */
 export type ProductionConfig = Omit<
@@ -22,6 +22,18 @@ export interface Production {
 export interface ContentProject {
   id: string;
   name: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+/** Config de produção salvo/reaproveitável (Fase 17) — mesmo shape de `Production.config`. */
+export interface Template {
+  id: string;
+  contentProjectId: string | null;
+  name: string;
+  version: number;
+  config: ProductionConfig;
+  sourceProductionId: string | null;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -54,6 +66,7 @@ export interface Job {
 export type ProductionRow = typeof productions.$inferSelect;
 export type JobRow = typeof jobs.$inferSelect;
 export type ContentProjectRow = typeof contentProjects.$inferSelect;
+export type TemplateRow = typeof templates.$inferSelect;
 
 export function productionFromRow(row: ProductionRow): Production {
   return {
@@ -68,6 +81,19 @@ export function productionFromRow(row: ProductionRow): Production {
 
 export function contentProjectFromRow(row: ContentProjectRow): ContentProject {
   return { id: row.id, name: row.name, createdAt: row.createdAt, updatedAt: row.updatedAt };
+}
+
+export function templateFromRow(row: TemplateRow): Template {
+  return {
+    id: row.id,
+    contentProjectId: row.contentProjectId ?? null,
+    name: row.name,
+    version: row.version,
+    config: row.config as ProductionConfig,
+    sourceProductionId: row.sourceProductionId ?? null,
+    createdAt: row.createdAt,
+    updatedAt: row.updatedAt,
+  };
 }
 
 export function jobFromRow(row: JobRow): Job {

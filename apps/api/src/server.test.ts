@@ -325,6 +325,113 @@ describe("server", () => {
     });
   });
 
+  describe("templates (Fase 17)", () => {
+    async function createProductionViaJob(app: ReturnType<typeof buildServer>, payload: Record<string, unknown> = {}) {
+      const res = await app.inject({
+        method: "POST",
+        url: "/jobs",
+        payload: { topic: "Apollo 11", videoMode: "motion_graphics_only", ...payload },
+      });
+      expect(res.statusCode).toBe(201);
+      return res.json().productionId as string;
+    }
+
+    it("saves a template from a production's config, then lists and reads it back", async () => {
+      const app = buildServer({
+        db,
+        buildJobRunnerDeps: () => fakeJobRunnerDeps(fakeLLM()),
+        buildCostOptions: () => costOptions,
+        runsDir,
+        envFilePath,
+      });
+      const productionId = await createProductionViaJob(app);
+
+      const saved = await app.inject({
+        method: "POST",
+        url: "/templates",
+        payload: { name: "Contos infantis", productionId },
+      });
+      expect(saved.statusCode).toBe(201);
+      expect(saved.json().version).toBe(1);
+
+      const listed = await app.inject({ method: "GET", url: "/templates" });
+      expect(listed.statusCode).toBe(200);
+      expect(listed.json()).toHaveLength(1);
+
+      const fetched = await app.inject({ method: "GET", url: `/templates/${saved.json().id}` });
+      expect(fetched.statusCode).toBe(200);
+      expect(fetched.json().config).toBeDefined();
+    });
+
+    it("overwrites and bumps version when saving with the same name again", async () => {
+      const app = buildServer({
+        db,
+        buildJobRunnerDeps: () => fakeJobRunnerDeps(fakeLLM()),
+        buildCostOptions: () => costOptions,
+        runsDir,
+        envFilePath,
+      });
+      const productionId1 = await createProductionViaJob(app);
+      const first = await app.inject({
+        method: "POST",
+        url: "/templates",
+        payload: { name: "Contos infantis", productionId: productionId1 },
+      });
+
+      const productionId2 = await createProductionViaJob(app, { archetype: "storybook_picturebook" });
+      const second = await app.inject({
+        method: "POST",
+        url: "/templates",
+        payload: { name: "Contos infantis", productionId: productionId2 },
+      });
+
+      expect(second.json().id).toBe(first.json().id);
+      expect(second.json().version).toBe(2);
+      const listed = await app.inject({ method: "GET", url: "/templates" });
+      expect(listed.json()).toHaveLength(1);
+    });
+
+    it("rejects POST /templates with invalid body", async () => {
+      const app = buildServer({
+        db,
+        buildJobRunnerDeps: () => fakeJobRunnerDeps(fakeLLM()),
+        buildCostOptions: () => costOptions,
+        runsDir,
+        envFilePath,
+      });
+      const res = await app.inject({ method: "POST", url: "/templates", payload: { name: "x" } });
+      expect(res.statusCode).toBe(422);
+    });
+
+    it("404s POST /templates for an unknown production", async () => {
+      const app = buildServer({
+        db,
+        buildJobRunnerDeps: () => fakeJobRunnerDeps(fakeLLM()),
+        buildCostOptions: () => costOptions,
+        runsDir,
+        envFilePath,
+      });
+      const res = await app.inject({
+        method: "POST",
+        url: "/templates",
+        payload: { name: "x", productionId: "does-not-exist" },
+      });
+      expect(res.statusCode).toBe(404);
+    });
+
+    it("404s GET /templates/:id for an unknown template", async () => {
+      const app = buildServer({
+        db,
+        buildJobRunnerDeps: () => fakeJobRunnerDeps(fakeLLM()),
+        buildCostOptions: () => costOptions,
+        runsDir,
+        envFilePath,
+      });
+      const res = await app.inject({ method: "GET", url: "/templates/does-not-exist" });
+      expect(res.statusCode).toBe(404);
+    });
+  });
+
   it("drives a job end to end: create → awaits cost approval → approve → completed", async () => {
     const llm = fakeLLM(RESEARCH_RESULT, directorPayload(), critiquePayload(8));
     const app = buildServer({
