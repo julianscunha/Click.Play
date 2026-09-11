@@ -265,6 +265,20 @@ describe("server", () => {
       expect(fetched.json().productions).toHaveLength(1);
     });
 
+    it("returns an empty productions list for a project with no linked productions", async () => {
+      const app = buildServer({
+        db,
+        buildJobRunnerDeps: () => fakeJobRunnerDeps(fakeLLM()),
+        buildCostOptions: () => costOptions,
+        runsDir,
+        envFilePath,
+      });
+      const created = await app.inject({ method: "POST", url: "/content-projects", payload: { name: "Vazio" } });
+      const fetched = await app.inject({ method: "GET", url: `/content-projects/${created.json().id}` });
+      expect(fetched.statusCode).toBe(200);
+      expect(fetched.json().productions).toEqual([]);
+    });
+
     it("rejects POST /content-projects with invalid body", async () => {
       const app = buildServer({
         db,
@@ -274,6 +288,18 @@ describe("server", () => {
         envFilePath,
       });
       const res = await app.inject({ method: "POST", url: "/content-projects", payload: {} });
+      expect(res.statusCode).toBe(422);
+    });
+
+    it("rejects POST /content-projects with a whitespace-only name", async () => {
+      const app = buildServer({
+        db,
+        buildJobRunnerDeps: () => fakeJobRunnerDeps(fakeLLM()),
+        buildCostOptions: () => costOptions,
+        runsDir,
+        envFilePath,
+      });
+      const res = await app.inject({ method: "POST", url: "/content-projects", payload: { name: "   " } });
       expect(res.statusCode).toBe(422);
     });
 

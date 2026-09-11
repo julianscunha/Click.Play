@@ -140,6 +140,7 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
   const [form, setForm] = useState<FormState>(INITIAL_STATE);
   const [contentProjects, setContentProjects] = useState<ContentProject[]>([]);
   const [creatingContentProject, setCreatingContentProject] = useState(false);
+  const [contentProjectError, setContentProjectError] = useState<string | null>(null);
 
   useEffect(() => {
     listContentProjects()
@@ -167,12 +168,19 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
     let contentProjectId = form.contentProjectId || undefined;
     if (form.newContentProjectName.trim()) {
       setCreatingContentProject(true);
+      setContentProjectError(null);
       try {
         const created = await createContentProject(form.newContentProjectName.trim());
         contentProjectId = created.id;
-      } finally {
+        // Grava o id criado e limpa o nome — evita recriar o projeto duplicado se o usuário reenviar após falha do job.
+        update("contentProjectId", created.id);
+        update("newContentProjectName", "");
+      } catch (err) {
+        setContentProjectError(err instanceof Error ? err.message : String(err));
         setCreatingContentProject(false);
+        return;
       }
+      setCreatingContentProject(false);
     }
     const targetDurationSeconds = Number(form.targetDurationSeconds);
     onSubmit({
@@ -737,6 +745,11 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
           </div>
         )}
 
+        {contentProjectError && step.key === "revisao" && (
+          <p role="alert" className="text-sm text-red-400">
+            Não foi possível criar o projeto: {contentProjectError}
+          </p>
+        )}
         <div className="mt-auto flex items-center justify-between border-t border-neutral-800 pt-4">
           <button
             type="button"

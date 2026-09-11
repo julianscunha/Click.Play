@@ -90,4 +90,29 @@ describe("createDb migration: projects -> productions", () => {
     void db;
     sqlite.close();
   });
+
+  it("adds content_project_id to an existing productions table without content_projects (Fase 16)", () => {
+    // Simula um banco já migrado pra `productions` mas de antes da Fase 16 — sem content_projects, sem a coluna.
+    const legacy = new DatabaseSync(dbPath);
+    legacy.exec(`
+      CREATE TABLE productions (id TEXT PRIMARY KEY, topic TEXT NOT NULL, config TEXT NOT NULL, created_at INTEGER NOT NULL, updated_at INTEGER NOT NULL);
+    `);
+    legacy
+      .prepare("INSERT INTO productions (id, topic, config, created_at, updated_at) VALUES (?, ?, ?, ?, ?)")
+      .run("p1", "Apollo 11", "{}", 1, 1);
+    legacy.close();
+
+    const db = createDb(dbPath);
+    const sqlite = new DatabaseSync(dbPath);
+    const production = sqlite.prepare("SELECT * FROM productions WHERE id = ?").get("p1") as
+      | { topic: string; content_project_id: string | null }
+      | undefined;
+
+    expect(production?.topic).toBe("Apollo 11");
+    expect(production?.content_project_id ?? null).toBeNull();
+    expect(sqlite.prepare("SELECT * FROM content_projects").all()).toEqual([]);
+
+    void db;
+    sqlite.close();
+  });
 });

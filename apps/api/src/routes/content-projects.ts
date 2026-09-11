@@ -8,7 +8,7 @@ import {
   type ClickPlayDb,
 } from "@clickplay/providers";
 
-const CreateContentProjectBody = z.object({ name: z.string().min(1, "name é obrigatório") });
+const CreateContentProjectBody = z.object({ name: z.string().trim().min(1, "name é obrigatório") });
 
 export interface ContentProjectsRouteDeps {
   db: ClickPlayDb;

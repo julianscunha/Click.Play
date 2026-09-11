@@ -20,13 +20,13 @@
     "semantic_hash": ""
   },
   "apps/api/src/server.test.ts": {
-    "mtime": 1787462738.635084,
-    "ast_hash": "59d02ac85ea6699d317997e913efaf22",
+    "mtime": 1789098815.5883207,
+    "ast_hash": "421ef9736708dabee1c862230385cb72",
     "semantic_hash": ""
   },
   "apps/api/src/server.ts": {
-    "mtime": 1787523462.771408,
-    "ast_hash": "4e0b0ed2049866121e3eaf6b6464f012",
+    "mtime": 1789098657.2964427,
+    "ast_hash": "47ab445ac3e645fc6443a07c7396be01",
     "semantic_hash": ""
   },
   "apps/api/tsconfig.json": {
@@ -125,8 +125,8 @@
     "semantic_hash": ""
   },
   "docs/IMPLEMENTATION-PLAN.md": {
-    "mtime": 1789097551.0676916,
-    "ast_hash": "5c2e3e7c675131a825ec0c33ac3fad90",
+    "mtime": 1789098927.6463573,
+    "ast_hash": "cabbec2f628116dec1d109c6ef1cc7ec",
     "semantic_hash": ""
   },
   "pnpm-workspace.yaml": {
@@ -465,8 +465,8 @@
     "semantic_hash": ""
   },
   "packages/providers/src/persistence/client.ts": {
-    "mtime": 1789097732.605702,
-    "ast_hash": "9ce728f9a5ac4785c139c424fc7aab6c",
+    "mtime": 1789098609.7120008,
+    "ast_hash": "64f165da7d0c124c2bb63d17dc1546ac",
     "semantic_hash": ""
   },
   "packages/providers/src/persistence/index.ts": {
@@ -495,23 +495,23 @@
     "semantic_hash": ""
   },
   "packages/providers/src/persistence/repository.test.ts": {
-    "mtime": 1789097117.5939474,
-    "ast_hash": "da14f9f1d2f889f489d9b363c9f1a365",
+    "mtime": 1789098792.2777512,
+    "ast_hash": "468e684088da49a7f0689cd59e40c53b",
     "semantic_hash": ""
   },
   "packages/providers/src/persistence/repository.ts": {
-    "mtime": 1789097032.408481,
-    "ast_hash": "f0aa23b6987db27f25d2e44206e81222",
+    "mtime": 1789098642.299608,
+    "ast_hash": "0a388e3eb3b307285479286e3deba878",
     "semantic_hash": ""
   },
   "packages/providers/src/persistence/schema.ts": {
-    "mtime": 1789096992.0240846,
-    "ast_hash": "5136f6cfeca03afa192eb70cb4e35152",
+    "mtime": 1789098588.8234844,
+    "ast_hash": "88ca07d985b3cea820b28104a2b6d26f",
     "semantic_hash": ""
   },
   "packages/providers/src/persistence/types.ts": {
-    "mtime": 1789097021.8874667,
-    "ast_hash": "43908a11e6b92e4a8942610834655632",
+    "mtime": 1789098632.8678536,
+    "ast_hash": "f4e707ad09c5fd7afd15040a2b64c845",
     "semantic_hash": ""
   },
   "packages/providers/src/pipeline/index.ts": {
@@ -865,8 +865,8 @@
     "semantic_hash": ""
   },
   "apps/api/src/routes/jobs.ts": {
-    "mtime": 1789097099.8587615,
-    "ast_hash": "3a3a9be75f80ffff3734dad4cd7c2ffb",
+    "mtime": 1789098673.44708,
+    "ast_hash": "e396f4231d52a7ea3388502c2cea3811",
     "semantic_hash": ""
   },
   "apps/api/src/routes/meta.ts": {
@@ -875,8 +875,8 @@
     "semantic_hash": ""
   },
   "apps/web/src/api.ts": {
-    "mtime": 1789097102.4839728,
-    "ast_hash": "bef31403fda19b2486d36b0a1933be58",
+    "mtime": 1789098686.1251068,
+    "ast_hash": "312a69b3e3d2d69c21e772c7d110f878",
     "semantic_hash": ""
   },
   "apps/web/src/components/ProgressView.tsx": {
@@ -1200,8 +1200,8 @@
     "semantic_hash": ""
   },
   "apps/web/src/components/wizard/Wizard.tsx": {
-    "mtime": 1789095759.1516716,
-    "ast_hash": "42e2013fecc8d39de9463d69530bf328",
+    "mtime": 1789098752.6379027,
+    "ast_hash": "de01601211bb596a567394c9ab440472",
     "semantic_hash": ""
   },
   "apps/api/src/routes/credits.ts": {
@@ -1282,6 +1282,11 @@
   "packages/providers/src/persistence/client.test.ts": {
     "mtime": 1789097743.811476,
     "ast_hash": "1bda657272416fd2855fa5c741425230",
+    "semantic_hash": ""
+  },
+  "apps/api/src/routes/content-projects.ts": {
+    "mtime": 1789098649.8250015,
+    "ast_hash": "29daba7ef388ec7fb886b0fd76a089fb",
     "semantic_hash": ""
   }
 }
