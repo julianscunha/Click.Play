@@ -6,6 +6,7 @@ export function mapRenderInputToProps(input: RenderInput): CompositionProps {
     scenes: input.scenes,
     voiceoverSrc: input.voiceoverPath ?? null,
     musicSrc: input.musicPath ?? null,
+    musicVolume: input.musicVolume,
     words: input.words,
     captionStyle: input.captionStyle,
     captionAccentColor: input.captionAccentColor,

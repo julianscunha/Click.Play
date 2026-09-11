@@ -45,6 +45,8 @@ const CreateJobBody = z.object({
   transitionDurationFrames: z.number().int().positive().optional(),
   useOwnProviders: z.boolean().optional(),
   voiceGender: z.enum(["female", "male"]).optional(),
+  musicEnabled: z.boolean().optional(),
+  musicVolume: z.number().min(0).max(1).optional(),
 });
 
 const ApproveCostBody = z.object({ approved: z.boolean() });
@@ -122,6 +124,8 @@ export function registerJobsRoutes(app: FastifyInstance, deps: JobsRouteDeps): v
       transitionDurationFrames,
       useOwnProviders,
       voiceGender,
+      musicEnabled,
+      musicVolume,
     } = parsed.data;
     if (intro?.mode === "upload" || outro?.mode === "upload") {
       return reply.status(422).send({
@@ -151,6 +155,8 @@ export function registerJobsRoutes(app: FastifyInstance, deps: JobsRouteDeps): v
         transitionDurationFrames,
         useOwnProviders,
         voiceGender,
+        musicEnabled,
+        musicVolume,
       },
     });
     const runDir = path.join(deps.runsDir, project.id);

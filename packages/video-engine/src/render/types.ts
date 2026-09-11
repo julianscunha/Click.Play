@@ -35,6 +35,8 @@ export interface RenderInput {
   height: number;
   voiceoverPath?: string;
   musicPath?: string;
+  /** 0-1, aplicado sobre o volume padrão do MusicTrack (Fase 15, Música/Som). Undefined = usa o default do componente. */
+  musicVolume?: number;
   /** Timestamps absolutos da narração inteira, pra legenda seguir a timeline global. */
   words: WordTimestamp[];
   captionStyle: CaptionStyleKey;
@@ -48,6 +50,7 @@ export interface CompositionProps {
   scenes: ResolvedScene[];
   voiceoverSrc: string | null;
   musicSrc: string | null;
+  musicVolume?: number;
   words: WordTimestamp[];
   captionStyle: CaptionStyleKey;
   captionAccentColor: string;

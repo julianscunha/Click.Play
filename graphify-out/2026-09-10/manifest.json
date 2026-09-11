@@ -1208,35 +1208,5 @@
     "mtime": 1787462423.0072129,
     "ast_hash": "bdb666dcc3660d820c43818a6522ff45",
     "semantic_hash": ""
-  },
-  ".claude/agents/agents-orchestrator.md": {
-    "mtime": 1788489799.9404218,
-    "ast_hash": "a47e509bb98047195f93ae3dbae2d453",
-    "semantic_hash": ""
-  },
-  ".claude/agents/engineering-voice-ai-integration-engineer.md": {
-    "mtime": 1788489805.3056812,
-    "ast_hash": "e0b2fb51ad9f57901a04c1ab47f51362",
-    "semantic_hash": ""
-  },
-  ".claude/agents/marketing-content-creator.md": {
-    "mtime": 1788489801.038996,
-    "ast_hash": "9e2ade728189a0685228c2a64113c864",
-    "semantic_hash": ""
-  },
-  ".claude/agents/marketing-short-video-editing-coach.md": {
-    "mtime": 1788489803.5238297,
-    "ast_hash": "b3530d252459aa424fcefc98a026eca1",
-    "semantic_hash": ""
-  },
-  ".claude/agents/marketing-social-media-strategist.md": {
-    "mtime": 1788489803.696465,
-    "ast_hash": "681cc9869f74852d38972c106ed88b1d",
-    "semantic_hash": ""
-  },
-  ".claude/agents/marketing-video-optimization-specialist.md": {
-    "mtime": 1788489805.104835,
-    "ast_hash": "8f703f9e970993942668c069c1c28701",
-    "semantic_hash": ""
   }
 }

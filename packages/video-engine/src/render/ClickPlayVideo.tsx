@@ -15,6 +15,7 @@ const Main: React.FC<CompositionProps> = ({
   scenes,
   voiceoverSrc,
   musicSrc,
+  musicVolume,
   words,
   captionStyle,
   captionAccentColor,
@@ -62,7 +63,7 @@ const Main: React.FC<CompositionProps> = ({
       )}
 
       {voiceoverSrc && <Audio src={resolveAsset(voiceoverSrc)!} />}
-      {musicSrc && <MusicTrack src={resolveAsset(musicSrc)!} />}
+      {musicSrc && <MusicTrack src={resolveAsset(musicSrc)!} volume={musicVolume} />}
     </AbsoluteFill>
   );
 };
@@ -71,6 +72,7 @@ const DEFAULT_PROPS: CompositionProps = {
   scenes: [],
   voiceoverSrc: null,
   musicSrc: null,
+  musicVolume: undefined,
   words: [],
   captionStyle: "clean",
   captionAccentColor: "#38A169",

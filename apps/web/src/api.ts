@@ -99,6 +99,8 @@ export interface CreateJobInput {
   transitionDurationFrames?: number;
   useOwnProviders?: boolean;
   voiceGender?: "female" | "male";
+  musicEnabled?: boolean;
+  musicVolume?: number;
   intro?: IntroOutroConfig;
   outro?: IntroOutroConfig;
 }

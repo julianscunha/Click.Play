@@ -8,6 +8,7 @@ function formatLabel(id: string): string {
 const STEPS = [
   { key: "briefing", label: "Briefing" },
   { key: "roteiro", label: "Roteiro" },
+  { key: "musica", label: "Música/Som" },
   { key: "narracao", label: "Narração" },
   { key: "visual", label: "Visual" },
   { key: "legendas", label: "Legendas" },
@@ -21,6 +22,12 @@ const TRANSITION_SPEED_LEVELS = [
   { level: "rapida", label: "Rápida", value: 6 },
   { level: "media", label: "Média", value: 12 },
   { level: "lenta", label: "Lenta", value: 24 },
+] as const;
+
+const MUSIC_VOLUME_LEVELS = [
+  { level: "baixo", label: "Baixo", value: 0.08 },
+  { level: "medio", label: "Médio", value: 0.15 },
+  { level: "alto", label: "Alto", value: 0.25 },
 ] as const;
 
 const CHUNK_SIZE_LEVELS = [
@@ -45,6 +52,8 @@ interface FormState {
   pacing: string;
   language: "pt-BR" | "en-US";
   voiceGender: "female" | "male";
+  musicEnabled: boolean;
+  musicVolumeLevel: (typeof MUSIC_VOLUME_LEVELS)[number]["level"];
   targetDurationSeconds: string;
   videoMode: "motion_graphics_only" | "ai_video_only" | "hybrid";
   captionStyle: string;
@@ -69,6 +78,8 @@ const INITIAL_STATE: FormState = {
   pacing: "",
   language: "pt-BR",
   voiceGender: "female",
+  musicEnabled: true,
+  musicVolumeLevel: "medio",
   targetDurationSeconds: "",
   videoMode: "hybrid",
   captionStyle: "",
@@ -147,6 +158,10 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
       pacing: form.pacing || undefined,
       language: form.language,
       voiceGender: form.voiceGender,
+      musicEnabled: form.musicEnabled,
+      musicVolume: form.musicEnabled
+        ? MUSIC_VOLUME_LEVELS.find((l) => l.level === form.musicVolumeLevel)!.value
+        : undefined,
       targetDurationSeconds:
         form.targetDurationSeconds.trim() && Number.isFinite(targetDurationSeconds) && targetDurationSeconds > 0
           ? targetDurationSeconds
@@ -295,6 +310,36 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
                 </Chip>
               </div>
             </div>
+          </div>
+        )}
+
+        {step.key === "musica" && (
+          <div className="flex flex-col gap-6">
+            <label className="flex items-center gap-2 text-sm font-medium text-neutral-200">
+              <input
+                type="checkbox"
+                checked={form.musicEnabled}
+                onChange={(e) => update("musicEnabled", e.target.checked)}
+                className="h-4 w-4 rounded border-neutral-700 bg-neutral-900"
+              />
+              Música de fundo
+            </label>
+            {form.musicEnabled && (
+              <div className="flex flex-col gap-1.5">
+                <span className={labelClass}>Volume</span>
+                <div className="flex gap-2">
+                  {MUSIC_VOLUME_LEVELS.map((l) => (
+                    <Chip key={l.level} active={form.musicVolumeLevel === l.level} onClick={() => update("musicVolumeLevel", l.level)}>
+                      {l.label}
+                    </Chip>
+                  ))}
+                </div>
+              </div>
+            )}
+            <p className="text-sm text-neutral-500">
+              O clima da trilha (épico, calmo, animado...) é escolhido automaticamente pela IA a partir do roteiro —
+              aqui você só liga/desliga e ajusta o volume.
+            </p>
           </div>
         )}
 
@@ -579,6 +624,14 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
               <div>
                 <dt className="text-neutral-500">Voz</dt>
                 <dd className="text-neutral-100">{form.voiceGender === "female" ? "Feminina" : "Masculina"}</dd>
+              </div>
+              <div>
+                <dt className="text-neutral-500">Música</dt>
+                <dd className="text-neutral-100">
+                  {form.musicEnabled
+                    ? `Ligada (volume ${MUSIC_VOLUME_LEVELS.find((l) => l.level === form.musicVolumeLevel)!.label})`
+                    : "Desligada"}
+                </dd>
               </div>
               <div>
                 <dt className="text-neutral-500">Vídeo</dt>

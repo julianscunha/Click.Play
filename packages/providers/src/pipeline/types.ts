@@ -21,7 +21,7 @@ export interface PipelineCheckpoint {
   research?: { data: ResearchResult; usage: LLMUsage };
   director?: { score: DirectorScore; revisions: RevisionLogEntry[]; costEstimate: CostBreakdown };
   tts?: { words: WordTimestamp[]; voiceoverPath: string; fullScript: string };
-  visuals?: { resolvedScenes: ResolvedScene[]; musicPath: string };
+  visuals?: { resolvedScenes: ResolvedScene[]; musicPath?: string };
 }
 
 export interface RevisionLogEntry {
@@ -70,6 +70,10 @@ export interface PipelineOptions {
   useOwnProviders?: boolean;
   /** Escolhe a voz Edge TTS pro idioma do job (Fase 15, Narração) — default "female" (mesmo comportamento anterior a este campo). */
   voiceGender?: "female" | "male";
+  /** false = pula geração de música de fundo inteiramente (Fase 15, Música/Som). Default true (comportamento anterior a este campo). */
+  musicEnabled?: boolean;
+  /** 0-1, repassado ao MusicTrack no render (Fase 15, Música/Som). Undefined = usa o default do componente (0.15). Não usado pelo orchestrator além de passar adiante. */
+  musicVolume?: number;
   direction?: string;
   /** Se false, instrui o Creative Director a não emitir elementos animated_text (§11A Bloco 4 item 7). Default true. */
   showTextOverlays?: boolean;

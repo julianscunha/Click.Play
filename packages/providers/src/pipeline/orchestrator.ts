@@ -148,7 +148,7 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
 
     stage = "visuals";
     let resolvedScenes: ResolvedScene[];
-    let musicPath: string;
+    let musicPath: string | undefined;
 
     if (opts.resume?.visuals) {
       resolvedScenes = opts.resume.visuals.resolvedScenes;
@@ -192,8 +192,10 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
       }
       await callbacks.onStageComplete?.(stage);
 
-      const musicResult = await opts.musicProvider.generate(researchOut.data.mood, score.music_mood);
-      musicPath = musicResult.filePath;
+      if (opts.musicEnabled !== false) {
+        const musicResult = await opts.musicProvider.generate(researchOut.data.mood, score.music_mood);
+        musicPath = musicResult.filePath;
+      }
     }
     checkpoint.visuals = { resolvedScenes, musicPath };
     await callbacks.onCheckpoint?.(checkpoint);
@@ -214,6 +216,7 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
       height,
       voiceoverPath,
       musicPath,
+      musicVolume: opts.musicVolume,
       words: ttsWords,
       captionStyle: opts.captionStyle ?? archetypeConfig.captionStyle,
       captionAccentColor: opts.captionAccentColor ?? "#ffffff",
@@ -248,7 +251,7 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
       aiVideos,
       videoSeconds: aiVideos * 6,
       videoProvider: opts.cost.videoProvider,
-      musicGenerated: true,
+      musicGenerated: opts.musicEnabled !== false,
       musicProvider: opts.cost.musicProvider,
     });
 
