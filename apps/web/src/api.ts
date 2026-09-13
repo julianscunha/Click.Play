@@ -73,6 +73,18 @@ export interface JobView {
   output: string | null;
 }
 
+export interface ArchetypePreview {
+  mood: string;
+  artStyle: string;
+  scenePacing: string;
+  colorPalette: { background: string; accent: string; text: string };
+}
+
+export interface PacingPreview {
+  scenes: string;
+  wordsPerScene: string;
+}
+
 export interface FormConfig {
   archetypes: string[];
   pacingTiers: readonly string[];
@@ -81,6 +93,8 @@ export interface FormConfig {
   recommendedImageModels: string[];
   recommendedVideoModels: string[];
   recommendedTtsFallbackModels: string[];
+  archetypePreviews: Record<string, ArchetypePreview>;
+  pacingPreviews: Record<string, PacingPreview>;
 }
 
 export interface CreateJobInput {

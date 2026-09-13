@@ -1,7 +1,41 @@
-import { listArchetypes, LLM_PRICING_PER_MODEL } from "@clickplay/providers";
+import { getArchetype, listArchetypes, LLM_PRICING_PER_MODEL, PACING_CONFIG } from "@clickplay/providers";
 
 /** Fixo — mesmo `ScenePacing` de packages/providers/src/config/archetype.ts. */
 export const PACING_TIERS = ["fast", "moderate", "cinematic"] as const;
+
+export interface ArchetypePreview {
+  mood: string;
+  artStyle: string;
+  scenePacing: string;
+  colorPalette: { background: string; accent: string; text: string };
+}
+
+/** Preview pra tela de roteiro (§ arquétipo/ritmo) — o usuário só via o nome
+ * do arquétipo sem saber o que muda na prática. Reaproveita o mesmo
+ * ArchetypeConfig já usado pra gerar o roteiro (não duplica dado). */
+export function getArchetypePreviews(): Record<string, ArchetypePreview> {
+  const result: Record<string, ArchetypePreview> = {};
+  for (const name of listArchetypes()) {
+    const config = getArchetype(name);
+    result[name] = {
+      mood: config.mood,
+      artStyle: config.artStyle,
+      scenePacing: config.scenePacing,
+      colorPalette: config.colorPalette,
+    };
+  }
+  return result;
+}
+
+/** Mesma tabela usada pra instruir o LLM (creative-director.ts) — o usuário vê
+ * o mesmo número de cenas/palavras que o roteiro vai de fato usar. */
+export function getPacingPreviews(): Record<string, { scenes: string; wordsPerScene: string }> {
+  const result: Record<string, { scenes: string; wordsPerScene: string }> = {};
+  for (const [tier, cfg] of Object.entries(PACING_CONFIG)) {
+    result[tier] = { scenes: `${cfg.min}-${cfg.max}`, wordsPerScene: cfg.wordsPerScene };
+  }
+  return result;
+}
 
 /** Fixo — mesmas chaves de CAPTION_STYLE_COMPONENTS em packages/video-engine/src/captions/styles/index.ts. */
 export const CAPTION_STYLES = [
@@ -45,5 +79,7 @@ export function getFormConfig() {
     recommendedImageModels: RECOMMENDED_IMAGE_MODELS,
     recommendedVideoModels: RECOMMENDED_VIDEO_MODELS,
     recommendedTtsFallbackModels: RECOMMENDED_TTS_FALLBACK_MODELS,
+    archetypePreviews: getArchetypePreviews(),
+    pacingPreviews: getPacingPreviews(),
   };
 }

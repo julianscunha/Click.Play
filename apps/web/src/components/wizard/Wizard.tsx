@@ -661,6 +661,52 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
               </div>
             </div>
 
+            {(() => {
+              const archetypePreview = form.archetype ? config.archetypePreviews[form.archetype] : undefined;
+              const effectivePacing = form.pacing || archetypePreview?.scenePacing || "";
+              const pacingPreview = effectivePacing ? config.pacingPreviews[effectivePacing] : undefined;
+              if (!archetypePreview && !pacingPreview) return null;
+              return (
+                <div className="grid grid-cols-1 gap-4 rounded-md border border-border-subtle bg-surface-1 p-4 sm:grid-cols-2">
+                  {archetypePreview ? (
+                    <div className="flex flex-col gap-2">
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-medium uppercase tracking-wide text-fg-tertiary">Visual</span>
+                        <div className="flex gap-1">
+                          {[archetypePreview.colorPalette.background, archetypePreview.colorPalette.accent, archetypePreview.colorPalette.text].map(
+                            (hex, i) => (
+                              <span
+                                key={i}
+                                className="h-4 w-4 rounded-sm border border-border-subtle"
+                                style={{ backgroundColor: hex }}
+                              />
+                            ),
+                          )}
+                        </div>
+                      </div>
+                      <p className="text-sm text-fg-secondary">
+                        <span className="font-medium text-fg-primary">Clima:</span> {archetypePreview.mood}
+                      </p>
+                      <p className="text-sm text-fg-tertiary">{archetypePreview.artStyle.split(". ")[0]}.</p>
+                    </div>
+                  ) : (
+                    <div />
+                  )}
+
+                  {pacingPreview ? (
+                    <div className="flex flex-col gap-2">
+                      <span className="text-xs font-medium uppercase tracking-wide text-fg-tertiary">Ritmo do roteiro</span>
+                      <p className="text-sm text-fg-secondary">
+                        <span className="font-medium text-fg-primary">{pacingPreview.scenes} cenas</span>, ~
+                        {pacingPreview.wordsPerScene} palavras cada
+                        {!form.pacing && archetypePreview ? " (padrão do arquétipo)" : ""}
+                      </p>
+                    </div>
+                  ) : null}
+                </div>
+              );
+            })()}
+
             <div className="flex flex-col gap-1.5">
               <span className={labelClass}>Idioma</span>
               <div className="flex gap-2">
