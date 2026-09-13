@@ -538,7 +538,7 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
                 type="checkbox"
                 checked={form.musicEnabled}
                 onChange={(e) => update("musicEnabled", e.target.checked)}
-                className="h-4 w-4 rounded border-border-default bg-surface-1"
+                className="h-4 w-4 rounded border-border-default bg-surface-1 accent-accent"
               />
               Música de fundo
             </label>
@@ -568,7 +568,7 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
                 type="checkbox"
                 checked={form.narrationEnabled}
                 onChange={(e) => update("narrationEnabled", e.target.checked)}
-                className="h-4 w-4 rounded border-border-default bg-surface-1"
+                className="h-4 w-4 rounded border-border-default bg-surface-1 accent-accent"
               />
               Narração falada
             </label>
@@ -652,7 +652,7 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
                 type="checkbox"
                 checked={form.captionsEnabled}
                 onChange={(e) => update("captionsEnabled", e.target.checked)}
-                className="h-4 w-4 rounded border-border-default bg-surface-1"
+                className="h-4 w-4 rounded border-border-default bg-surface-1 accent-accent"
               />
               Legenda de narração
               {!form.narrationEnabled && form.captionsEnabled && (
@@ -699,7 +699,7 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
                 type="checkbox"
                 checked={form.showTextOverlays}
                 onChange={(e) => update("showTextOverlays", e.target.checked)}
-                className="h-4 w-4 rounded border-border-default bg-surface-1"
+                className="h-4 w-4 rounded border-border-default bg-surface-1 accent-accent"
               />
               Mostrar texto animado sobre as cenas (além da legenda de narração)
             </label>
@@ -714,7 +714,7 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
                   type="checkbox"
                   checked={form.introEnabled}
                   onChange={(e) => update("introEnabled", e.target.checked)}
-                  className="h-4 w-4 rounded border-border-default bg-surface-1"
+                  className="h-4 w-4 rounded border-border-default bg-surface-1 accent-accent"
                 />
                 Abertura
               </label>
@@ -759,7 +759,7 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
                   type="checkbox"
                   checked={form.outroEnabled}
                   onChange={(e) => update("outroEnabled", e.target.checked)}
-                  className="h-4 w-4 rounded border-border-default bg-surface-1"
+                  className="h-4 w-4 rounded border-border-default bg-surface-1 accent-accent"
                 />
                 Encerramento
               </label>

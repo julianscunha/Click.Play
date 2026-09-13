@@ -3,14 +3,27 @@
     "PreToolUse": [
       {
         "matcher": "Edit|Write",
-        "hooks": [{ "type": "command", "command": "node .claude/hooks/block-env-edit.cjs" }]
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/block-env-edit.cjs"
+          }
+        ]
       }
     ],
     "PostToolUse": [
       {
         "matcher": "Edit|Write",
-        "hooks": [{ "type": "command", "command": "node .claude/hooks/typecheck-on-edit.cjs" }]
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/typecheck-on-edit.cjs"
+          }
+        ]
       }
     ]
+  },
+  "enabledPlugins": {
+    "playwright@claude-plugins-official": true
   }
 }

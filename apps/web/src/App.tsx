@@ -182,10 +182,24 @@ export function App() {
         <RailButton label="Novo vídeo" active={!showSettings && !showSchedules} onClick={goHome}>
           <FilmIcon />
         </RailButton>
-        <RailButton label="Agendamentos" active={showSchedules} onClick={() => setShowSchedules(true)}>
+        <RailButton
+          label="Agendamentos"
+          active={showSchedules}
+          onClick={() => {
+            setShowSchedules(true);
+            setShowSettings(false);
+          }}
+        >
           <ClockIcon />
         </RailButton>
-        <RailButton label="Configurações" active={showSettings} onClick={() => setShowSettings(true)}>
+        <RailButton
+          label="Configurações"
+          active={showSettings}
+          onClick={() => {
+            setShowSettings(true);
+            setShowSchedules(false);
+          }}
+        >
           <GearIcon />
         </RailButton>
       </nav>

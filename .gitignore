@@ -9,3 +9,4 @@ apps/api/data/
 *.tsbuildinfo
 .DS_Store
 .mcp.json
+.playwright-mcp/
