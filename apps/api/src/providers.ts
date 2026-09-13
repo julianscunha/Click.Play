@@ -39,9 +39,13 @@ const REMOTION_ENTRY = path.join(path.dirname(url.fileURLToPath(import.meta.url)
 /** Timeout por tipo de chamada externa — achado em teste manual real: job travou
  * 2h em 15% sem erro (fetch pendurado, nenhum provider tinha timeout). Vídeo
  * (Veo/Kling) legitimamente demora minutos pra gerar, por isso valor bem maior
- * que os outros — um timeout único pra tudo derrubaria gerações válidas de vídeo. */
+ * que os outros — um timeout único pra tudo derrubaria gerações válidas de vídeo.
+ * `llm` é configurável via LLM_TIMEOUT_MS — achado em teste manual real: um
+ * alias-router (proxy sobre 10+ modelos) tem latência de seleção maior que um
+ * modelo único e estourava 90s com frequência mesmo funcionando, derrubando
+ * pro fallback (que podia estourar também) sem esgotar a paciência real do provider. */
 const TIMEOUT_MS = {
-  llm: 90_000,
+  llm: Number(process.env.LLM_TIMEOUT_MS) || 90_000,
   tts: 60_000,
   image: 90_000,
   video: 300_000,
