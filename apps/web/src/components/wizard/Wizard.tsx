@@ -278,7 +278,7 @@ function SummaryPanel({ form }: { form: FormState }) {
           </div>
         ))}
       </dl>
-      <p className="mt-2 text-xs text-fg-tertiary">O custo estimado real aparece na Revisão, antes de qualquer geração.</p>
+      <p className="mt-2 text-xs text-fg-tertiary">O custo estimado real aparece depois de "Gerar vídeo", antes de qualquer geração começar.</p>
     </aside>
   );
 }
