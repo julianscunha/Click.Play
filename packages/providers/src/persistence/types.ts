@@ -1,7 +1,7 @@
 import type { CostBreakdown } from "../cost/index.js";
 import type { PipelineCheckpoint, PipelineOptions } from "../pipeline/types.js";
 import type { QcReport } from "../qc/types.js";
-import type { contentProjects, jobs, JobStatus, productions, templates } from "./schema.js";
+import type { contentProjects, jobs, JobStatus, productions, ScheduleFrequency, schedules, templates } from "./schema.js";
 
 /** Campos de PipelineOptions que não são instância de provider/runtime — o que sobra fica no `config` da Production. */
 export type ProductionConfig = Omit<
@@ -45,6 +45,22 @@ export interface Template {
   updatedAt: Date;
 }
 
+/** "Agendamento" (Fase 19) — dispara um template numa cadência fixa. */
+export interface Schedule {
+  id: string;
+  templateId: string;
+  topic: string;
+  frequency: ScheduleFrequency;
+  timeOfDay: string;
+  dayOfWeek: number | null;
+  variableBindings: Record<string, string>;
+  enabled: boolean;
+  nextRunAt: Date;
+  lastRunAt: Date | null;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 /** Contagem final do job concluído (§11A Bloco 6 item 11) — dado já calculado pelo orchestrator, só exposto. */
 export interface ResultSummary {
   imageCount: number;
@@ -74,6 +90,7 @@ export type ProductionRow = typeof productions.$inferSelect;
 export type JobRow = typeof jobs.$inferSelect;
 export type ContentProjectRow = typeof contentProjects.$inferSelect;
 export type TemplateRow = typeof templates.$inferSelect;
+export type ScheduleRow = typeof schedules.$inferSelect;
 
 export function productionFromRow(row: ProductionRow): Production {
   return {
@@ -99,6 +116,23 @@ export function templateFromRow(row: TemplateRow): Template {
     config: row.config as ProductionConfig,
     sourceProductionId: row.sourceProductionId ?? null,
     variableSchema: row.variableSchema ?? [],
+    createdAt: row.createdAt,
+    updatedAt: row.updatedAt,
+  };
+}
+
+export function scheduleFromRow(row: ScheduleRow): Schedule {
+  return {
+    id: row.id,
+    templateId: row.templateId,
+    topic: row.topic,
+    frequency: row.frequency,
+    timeOfDay: row.timeOfDay,
+    dayOfWeek: row.dayOfWeek ?? null,
+    variableBindings: row.variableBindings ?? {},
+    enabled: row.enabled,
+    nextRunAt: row.nextRunAt,
+    lastRunAt: row.lastRunAt ?? null,
     createdAt: row.createdAt,
     updatedAt: row.updatedAt,
   };

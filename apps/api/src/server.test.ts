@@ -5,10 +5,18 @@ import * as path from "node:path";
 import { promisify } from "node:util";
 import ffmpegPath from "ffmpeg-static";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { createDb, type ClickPlayDb, type CostEstimateOptions, type JobRunnerDeps } from "@clickplay/providers";
+import {
+  createCostApprovalGate,
+  createDb,
+  listSchedules,
+  type ClickPlayDb,
+  type CostEstimateOptions,
+  type JobRunnerDeps,
+} from "@clickplay/providers";
 import type { RenderInput, VideoRenderer } from "@clickplay/video-engine";
 import type { ImageProvider, LLMProvider, MusicProvider, StockProvider, TTSProvider } from "@clickplay/providers";
 import { buildServer } from "./server.js";
+import { runDueSchedules } from "./scheduler.js";
 
 const execFileAsync = promisify(execFile);
 
@@ -473,6 +481,175 @@ describe("server", () => {
       });
       const res = await app.inject({ method: "GET", url: "/templates/does-not-exist" });
       expect(res.statusCode).toBe(404);
+    });
+  });
+
+  describe("schedules (Fase 19)", () => {
+    async function createTemplateViaApi(app: ReturnType<typeof buildServer>) {
+      const jobRes = await app.inject({
+        method: "POST",
+        url: "/jobs",
+        payload: { topic: "Apollo 11", videoMode: "motion_graphics_only" },
+      });
+      const productionId = jobRes.json().productionId as string;
+      const templateRes = await app.inject({
+        method: "POST",
+        url: "/templates",
+        payload: { name: "Contos infantis", productionId },
+      });
+      return templateRes.json().id as string;
+    }
+
+    it("creates a schedule with nextRunAt computed server-side, then lists and deletes it", async () => {
+      const app = buildServer({
+        db,
+        buildJobRunnerDeps: () => fakeJobRunnerDeps(fakeLLM()),
+        buildCostOptions: () => costOptions,
+        runsDir,
+        envFilePath,
+      });
+      const templateId = await createTemplateViaApi(app);
+
+      const created = await app.inject({
+        method: "POST",
+        url: "/schedules",
+        payload: { templateId, topic: "Apollo 11", frequency: "daily", timeOfDay: "09:00" },
+      });
+      expect(created.statusCode).toBe(201);
+      expect(created.json().enabled).toBe(true);
+      expect(created.json().nextRunAt).toBeDefined();
+
+      const listed = await app.inject({ method: "GET", url: "/schedules" });
+      expect(listed.json()).toHaveLength(1);
+
+      const deleted = await app.inject({ method: "DELETE", url: `/schedules/${created.json().id}` });
+      expect(deleted.statusCode).toBe(204);
+      expect((await app.inject({ method: "GET", url: "/schedules" })).json()).toHaveLength(0);
+    });
+
+    it("PATCH toggles enabled", async () => {
+      const app = buildServer({
+        db,
+        buildJobRunnerDeps: () => fakeJobRunnerDeps(fakeLLM()),
+        buildCostOptions: () => costOptions,
+        runsDir,
+        envFilePath,
+      });
+      const templateId = await createTemplateViaApi(app);
+      const created = await app.inject({
+        method: "POST",
+        url: "/schedules",
+        payload: { templateId, topic: "t", frequency: "daily", timeOfDay: "09:00" },
+      });
+
+      const patched = await app.inject({
+        method: "PATCH",
+        url: `/schedules/${created.json().id}`,
+        payload: { enabled: false },
+      });
+      expect(patched.statusCode).toBe(204);
+      const listed = await app.inject({ method: "GET", url: "/schedules" });
+      expect(listed.json()[0].enabled).toBe(false);
+    });
+
+    it("rejects weekly frequency without dayOfWeek", async () => {
+      const app = buildServer({
+        db,
+        buildJobRunnerDeps: () => fakeJobRunnerDeps(fakeLLM()),
+        buildCostOptions: () => costOptions,
+        runsDir,
+        envFilePath,
+      });
+      const templateId = await createTemplateViaApi(app);
+
+      const res = await app.inject({
+        method: "POST",
+        url: "/schedules",
+        payload: { templateId, topic: "t", frequency: "weekly", timeOfDay: "09:00" },
+      });
+      expect(res.statusCode).toBe(422);
+    });
+
+    it("404s for an unknown templateId", async () => {
+      const app = buildServer({
+        db,
+        buildJobRunnerDeps: () => fakeJobRunnerDeps(fakeLLM()),
+        buildCostOptions: () => costOptions,
+        runsDir,
+        envFilePath,
+      });
+
+      const res = await app.inject({
+        method: "POST",
+        url: "/schedules",
+        payload: { templateId: "does-not-exist", topic: "t", frequency: "daily", timeOfDay: "09:00" },
+      });
+      expect(res.statusCode).toBe(404);
+    });
+
+    it("rejects an invalid timeOfDay", async () => {
+      const app = buildServer({
+        db,
+        buildJobRunnerDeps: () => fakeJobRunnerDeps(fakeLLM()),
+        buildCostOptions: () => costOptions,
+        runsDir,
+        envFilePath,
+      });
+      const templateId = await createTemplateViaApi(app);
+
+      const res = await app.inject({
+        method: "POST",
+        url: "/schedules",
+        payload: { templateId, topic: "t", frequency: "daily", timeOfDay: "25:00" },
+      });
+      expect(res.statusCode).toBe(422);
+    });
+
+    it("runDueSchedules creates a production+job from a due schedule and reschedules nextRunAt", async () => {
+      const app = buildServer({
+        db,
+        buildJobRunnerDeps: () => fakeJobRunnerDeps(fakeLLM()),
+        buildCostOptions: () => costOptions,
+        runsDir,
+        envFilePath,
+      });
+      const templateId = await createTemplateViaApi(app);
+      const created = await app.inject({
+        method: "POST",
+        url: "/schedules",
+        payload: { templateId, topic: "Apollo 11", frequency: "daily", timeOfDay: "09:00" },
+      });
+      const originalNextRunAt = created.json().nextRunAt as string;
+
+      const gate = createCostApprovalGate();
+      await runDueSchedules(
+        {
+          db,
+          buildJobRunnerDeps: () => fakeJobRunnerDeps(fakeLLM()),
+          buildCostOptions: () => costOptions,
+          runsDir,
+          gate,
+        },
+        new Date(new Date(originalNextRunAt).getTime() + 1000),
+      );
+
+      const schedules = await listSchedules(db);
+      expect(schedules[0]!.lastRunAt).not.toBeNull();
+      expect(new Date(schedules[0]!.nextRunAt).getTime()).toBeGreaterThan(new Date(originalNextRunAt).getTime());
+
+      // Não dispara de novo antes da nova nextRunAt.
+      await runDueSchedules(
+        {
+          db,
+          buildJobRunnerDeps: () => fakeJobRunnerDeps(fakeLLM()),
+          buildCostOptions: () => costOptions,
+          runsDir,
+          gate,
+        },
+        new Date(new Date(originalNextRunAt).getTime() + 2000),
+      );
+      const schedulesAfter = await listSchedules(db);
+      expect(schedulesAfter[0]!.lastRunAt).toEqual(schedules[0]!.lastRunAt);
     });
   });
 

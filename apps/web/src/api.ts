@@ -131,6 +131,7 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
     const body = await res.json().catch(() => null);
     throw new Error(body?.error?.message ?? `Falha na requisição (${res.status})`);
   }
+  if (res.status === 204) return undefined as T;
   return res.json() as Promise<T>;
 }
 
@@ -213,6 +214,49 @@ export function getTemplate(id: string): Promise<TemplateDetail> {
 
 export function saveTemplate(name: string, productionId: string, variableSchema?: TemplateVariable[]): Promise<TemplateSummary> {
   return request("/templates", { method: "POST", body: JSON.stringify({ name, productionId, variableSchema }) });
+}
+
+export type ScheduleFrequency = "daily" | "weekly";
+
+/** "Agendamento" (Fase 19) — dispara um template numa cadência fixa (intervalo simples, não cron). */
+export interface Schedule {
+  id: string;
+  templateId: string;
+  topic: string;
+  frequency: ScheduleFrequency;
+  timeOfDay: string;
+  dayOfWeek: number | null;
+  variableBindings: Record<string, string>;
+  enabled: boolean;
+  nextRunAt: string;
+  lastRunAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CreateScheduleInput {
+  templateId: string;
+  topic: string;
+  frequency: ScheduleFrequency;
+  timeOfDay: string;
+  dayOfWeek?: number;
+  variableBindings?: Record<string, string>;
+}
+
+export function listSchedules(): Promise<Schedule[]> {
+  return request("/schedules");
+}
+
+export function createSchedule(input: CreateScheduleInput): Promise<Schedule> {
+  return request("/schedules", { method: "POST", body: JSON.stringify(input) });
+}
+
+export function setScheduleEnabled(id: string, enabled: boolean): Promise<void> {
+  return request(`/schedules/${id}`, { method: "PATCH", body: JSON.stringify({ enabled }) });
+}
+
+export function deleteSchedule(id: string): Promise<void> {
+  return request(`/schedules/${id}`, { method: "DELETE" });
 }
 
 export function getJob(id: string): Promise<JobView> {

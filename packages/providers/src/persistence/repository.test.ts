@@ -4,21 +4,28 @@ import {
   createContentProject,
   createJob,
   createProduction,
+  createSchedule,
+  deleteSchedule,
   getContentProject,
   getJob,
   getProduction,
+  getSchedule,
   getTemplate,
   getWallet,
   listContentProjects,
+  listDueSchedules,
   listJobsByProduction,
   listProductionsByContentProject,
+  listSchedules,
   listTemplates,
+  markScheduleRun,
   recoverOrphanedJobs,
   setJobActualCost,
   setJobError,
   setJobEstimatedCost,
   setJobOutputPath,
   setJobQcReport,
+  setScheduleEnabled,
   setWalletBalance,
   trySpend,
   updateJobStatus,
@@ -305,6 +312,135 @@ describe("persistence repository", () => {
       await setWalletBalance(db, 25);
 
       expect((await getWallet(db)).balanceUsd).toBe(25);
+    });
+  });
+
+  describe("schedules (Fase 19)", () => {
+    async function createTemplateFixture() {
+      const production = await createProduction(db, { topic: "t", config });
+      return upsertTemplate(db, {
+        name: "Contos infantis",
+        config: production.config,
+        contentProjectId: null,
+        sourceProductionId: production.id,
+      });
+    }
+
+    it("creates a schedule enabled by default and reads it back", async () => {
+      const template = await createTemplateFixture();
+      const nextRunAt = new Date(2026, 8, 13, 9, 0);
+      const schedule = await createSchedule(db, {
+        templateId: template.id,
+        topic: "Apollo 11",
+        frequency: "daily",
+        timeOfDay: "09:00",
+        nextRunAt,
+      });
+
+      expect(schedule.enabled).toBe(true);
+      expect(schedule.dayOfWeek).toBeNull();
+      expect(schedule.variableBindings).toEqual({});
+      expect(schedule.lastRunAt).toBeNull();
+      expect(schedule.nextRunAt).toEqual(nextRunAt);
+      expect(await getSchedule(db, schedule.id)).toEqual(schedule);
+      expect(await listSchedules(db)).toEqual([schedule]);
+    });
+
+    it("persists dayOfWeek and variableBindings for weekly schedules", async () => {
+      const template = await createTemplateFixture();
+      const schedule = await createSchedule(db, {
+        templateId: template.id,
+        topic: "t",
+        frequency: "weekly",
+        timeOfDay: "09:00",
+        dayOfWeek: 1,
+        variableBindings: { PERSONAGEM: "João" },
+        nextRunAt: new Date(2026, 8, 14, 9, 0),
+      });
+
+      expect(schedule.dayOfWeek).toBe(1);
+      expect(schedule.variableBindings).toEqual({ PERSONAGEM: "João" });
+    });
+
+    it("setScheduleEnabled toggles the flag without touching other fields", async () => {
+      const template = await createTemplateFixture();
+      const schedule = await createSchedule(db, {
+        templateId: template.id,
+        topic: "t",
+        frequency: "daily",
+        timeOfDay: "09:00",
+        nextRunAt: new Date(2026, 8, 13, 9, 0),
+      });
+
+      await setScheduleEnabled(db, schedule.id, false);
+      expect((await getSchedule(db, schedule.id))?.enabled).toBe(false);
+
+      await setScheduleEnabled(db, schedule.id, true);
+      expect((await getSchedule(db, schedule.id))?.enabled).toBe(true);
+    });
+
+    it("deleteSchedule removes the row", async () => {
+      const template = await createTemplateFixture();
+      const schedule = await createSchedule(db, {
+        templateId: template.id,
+        topic: "t",
+        frequency: "daily",
+        timeOfDay: "09:00",
+        nextRunAt: new Date(2026, 8, 13, 9, 0),
+      });
+
+      await deleteSchedule(db, schedule.id);
+      expect(await getSchedule(db, schedule.id)).toBeNull();
+    });
+
+    it("listDueSchedules returns only enabled schedules with nextRunAt <= now", async () => {
+      const template = await createTemplateFixture();
+      const now = new Date(2026, 8, 13, 9, 0);
+      const due = await createSchedule(db, {
+        templateId: template.id,
+        topic: "due",
+        frequency: "daily",
+        timeOfDay: "09:00",
+        nextRunAt: new Date(2026, 8, 13, 8, 0),
+      });
+      const future = await createSchedule(db, {
+        templateId: template.id,
+        topic: "future",
+        frequency: "daily",
+        timeOfDay: "09:00",
+        nextRunAt: new Date(2026, 8, 14, 9, 0),
+      });
+      const disabled = await createSchedule(db, {
+        templateId: template.id,
+        topic: "disabled",
+        frequency: "daily",
+        timeOfDay: "09:00",
+        nextRunAt: new Date(2026, 8, 13, 8, 0),
+      });
+      await setScheduleEnabled(db, disabled.id, false);
+
+      const dueSchedules = await listDueSchedules(db, now);
+      expect(dueSchedules.map((s) => s.id)).toEqual([due.id]);
+      expect(dueSchedules.map((s) => s.id)).not.toContain(future.id);
+    });
+
+    it("markScheduleRun updates lastRunAt/nextRunAt", async () => {
+      const template = await createTemplateFixture();
+      const schedule = await createSchedule(db, {
+        templateId: template.id,
+        topic: "t",
+        frequency: "daily",
+        timeOfDay: "09:00",
+        nextRunAt: new Date(2026, 8, 13, 9, 0),
+      });
+
+      const ranAt = new Date(2026, 8, 13, 9, 0, 5);
+      const nextRunAt = new Date(2026, 8, 14, 9, 0);
+      await markScheduleRun(db, schedule.id, { ranAt, nextRunAt });
+
+      const updated = await getSchedule(db, schedule.id);
+      expect(updated?.lastRunAt).toEqual(ranAt);
+      expect(updated?.nextRunAt).toEqual(nextRunAt);
     });
   });
 });

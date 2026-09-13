@@ -1,11 +1,11 @@
 import { randomUUID } from "node:crypto";
-import { eq } from "drizzle-orm";
+import { and, eq, lte } from "drizzle-orm";
 import type { CostBreakdown } from "../cost/index.js";
 import type { PipelineCheckpoint } from "../pipeline/types.js";
 import type { QcReport } from "../qc/types.js";
 import type { ClickPlayDb } from "./client.js";
 import { PROGRESS_BY_STATUS, resumeStatusForCheckpoint } from "./job-state-machine.js";
-import { contentProjects, jobs, type JobStatus, productions, templates, wallet } from "./schema.js";
+import { contentProjects, jobs, type JobStatus, productions, type ScheduleFrequency, schedules, templates, wallet } from "./schema.js";
 import {
   type ContentProject,
   contentProjectFromRow,
@@ -15,6 +15,8 @@ import {
   type ProductionConfig,
   productionFromRow,
   type ResultSummary,
+  type Schedule,
+  scheduleFromRow,
   type Template,
   templateFromRow,
   type TemplateVariable,
@@ -299,4 +301,70 @@ export async function resetJobForRetry(db: ClickPlayDb, id: string): Promise<Job
     .set({ status, progress, stageDetail: null, error: null, updatedAt: new Date() })
     .where(eq(jobs.id, id));
   return { ...job, status, progress, stageDetail: null, error: null };
+}
+
+export async function createSchedule(
+  db: ClickPlayDb,
+  input: {
+    templateId: string;
+    topic: string;
+    frequency: ScheduleFrequency;
+    timeOfDay: string;
+    dayOfWeek?: number;
+    variableBindings?: Record<string, string>;
+    nextRunAt: Date;
+  },
+): Promise<Schedule> {
+  const now = new Date();
+  const row = {
+    id: randomUUID(),
+    templateId: input.templateId,
+    topic: input.topic,
+    frequency: input.frequency,
+    timeOfDay: input.timeOfDay,
+    dayOfWeek: input.dayOfWeek ?? null,
+    variableBindings: input.variableBindings ?? {},
+    enabled: true,
+    nextRunAt: input.nextRunAt,
+    lastRunAt: null,
+    createdAt: now,
+    updatedAt: now,
+  };
+  await db.insert(schedules).values(row);
+  return scheduleFromRow(row as never);
+}
+
+export async function listSchedules(db: ClickPlayDb): Promise<Schedule[]> {
+  const rows = await db.select().from(schedules).all();
+  return rows.map(scheduleFromRow);
+}
+
+export async function getSchedule(db: ClickPlayDb, id: string): Promise<Schedule | null> {
+  const row = await db.select().from(schedules).where(eq(schedules.id, id)).get();
+  return row ? scheduleFromRow(row) : null;
+}
+
+export async function setScheduleEnabled(db: ClickPlayDb, id: string, enabled: boolean): Promise<void> {
+  await db.update(schedules).set({ enabled, updatedAt: new Date() }).where(eq(schedules.id, id));
+}
+
+export async function deleteSchedule(db: ClickPlayDb, id: string): Promise<void> {
+  await db.delete(schedules).where(eq(schedules.id, id));
+}
+
+/** Agendamentos vencidos (`nextRunAt <= now`, `enabled`) — consumido pelo runner in-process (Fase 19). */
+export async function listDueSchedules(db: ClickPlayDb, now: Date): Promise<Schedule[]> {
+  const rows = await db
+    .select()
+    .from(schedules)
+    .where(and(eq(schedules.enabled, true), lte(schedules.nextRunAt, now)))
+    .all();
+  return rows.map(scheduleFromRow);
+}
+
+export async function markScheduleRun(db: ClickPlayDb, id: string, input: { ranAt: Date; nextRunAt: Date }): Promise<void> {
+  await db
+    .update(schedules)
+    .set({ lastRunAt: input.ranAt, nextRunAt: input.nextRunAt, updatedAt: input.ranAt })
+    .where(eq(schedules.id, id));
 }

@@ -51,6 +51,20 @@ CREATE TABLE IF NOT EXISTS templates (
   created_at INTEGER NOT NULL,
   updated_at INTEGER NOT NULL
 );
+CREATE TABLE IF NOT EXISTS schedules (
+  id TEXT PRIMARY KEY,
+  template_id TEXT NOT NULL REFERENCES templates(id),
+  topic TEXT NOT NULL,
+  frequency TEXT NOT NULL,
+  time_of_day TEXT NOT NULL,
+  day_of_week INTEGER,
+  variable_bindings TEXT,
+  enabled INTEGER NOT NULL DEFAULT 1,
+  next_run_at INTEGER NOT NULL,
+  last_run_at INTEGER,
+  created_at INTEGER NOT NULL,
+  updated_at INTEGER NOT NULL
+);
 CREATE TABLE IF NOT EXISTS wallet (
   id TEXT PRIMARY KEY,
   balance_usd REAL NOT NULL,

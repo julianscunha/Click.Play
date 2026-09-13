@@ -14,6 +14,7 @@ import {
 } from "./api.js";
 import { ProgressView } from "./components/ProgressView.js";
 import { ResultPlayer } from "./components/ResultPlayer.js";
+import { ScheduleView } from "./components/ScheduleView.js";
 import { SettingsView } from "./components/SettingsView.js";
 import { TokenGate } from "./components/TokenGate.js";
 import { Wizard } from "./components/wizard/Wizard.js";
@@ -32,6 +33,7 @@ export function App() {
   const [retrying, setRetrying] = useState(false);
   const [createError, setCreateError] = useState<string | null>(null);
   const [showSettings, setShowSettings] = useState(false);
+  const [showSchedules, setShowSchedules] = useState(false);
   const [credits, setCredits] = useState<Credits | null>(null);
 
   function refreshCredits() {
@@ -133,11 +135,18 @@ export function App() {
               Consumido: {credits.consumedUsd.toFixed(2)}
             </p>
           )}
-          {!showSettings && (
-            <button onClick={() => setShowSettings(true)} className="text-sm text-neutral-400 underline">
-              Configurações
-            </button>
-          )}
+          <div className="flex gap-3">
+            {!showSchedules && (
+              <button onClick={() => setShowSchedules(true)} className="text-sm text-neutral-400 underline">
+                Agendamentos
+              </button>
+            )}
+            {!showSettings && (
+              <button onClick={() => setShowSettings(true)} className="text-sm text-neutral-400 underline">
+                Configurações
+              </button>
+            )}
+          </div>
         </div>
       </header>
 
@@ -146,18 +155,20 @@ export function App() {
 
         {!needsToken && showSettings && <SettingsView onClose={() => setShowSettings(false)} />}
 
-        {!needsToken && !showSettings && configError && (
+        {!needsToken && !showSettings && showSchedules && <ScheduleView onClose={() => setShowSchedules(false)} />}
+
+        {!needsToken && !showSettings && !showSchedules && configError && (
           <p role="alert" className="mx-auto max-w-xl text-sm text-red-400">
             Não foi possível carregar as opções do formulário: {configError}
           </p>
         )}
 
-        {!needsToken && !showSettings && !configError && !config && (
+        {!needsToken && !showSettings && !showSchedules && !configError && !config && (
           <p className="mx-auto max-w-xl text-sm text-neutral-400">Carregando...</p>
         )}
 
         {config && !jobId && (
-          <div className={`mx-auto flex max-w-3xl flex-col gap-3 ${showSettings ? "hidden" : ""}`}>
+          <div className={`mx-auto flex max-w-3xl flex-col gap-3 ${showSettings || showSchedules ? "hidden" : ""}`}>
             <Wizard config={config} onSubmit={handleCreate} submitting={submitting} />
             {createError && (
               <p role="alert" className="text-center text-sm text-red-400">
@@ -167,7 +178,7 @@ export function App() {
           </div>
         )}
 
-        {!showSettings && job && job.status !== "COMPLETED" && (
+        {!showSettings && !showSchedules && job && job.status !== "COMPLETED" && (
           <ProgressView
             job={job}
             onApprove={handleApprove}
@@ -178,7 +189,7 @@ export function App() {
           />
         )}
 
-        {!showSettings && job && job.status === "COMPLETED" && job.output && (
+        {!showSettings && !showSchedules && job && job.status === "COMPLETED" && job.output && (
           <ResultPlayer job={job} onCreateAnother={reset} />
         )}
       </main>

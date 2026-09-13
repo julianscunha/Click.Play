@@ -9,6 +9,7 @@ import { registerContentProjectsRoutes } from "./routes/content-projects.js";
 import { registerCreditsRoutes } from "./routes/credits.js";
 import { registerJobsRoutes } from "./routes/jobs.js";
 import { registerMetaRoutes } from "./routes/meta.js";
+import { registerSchedulesRoutes } from "./routes/schedules.js";
 import { registerSettingsRoutes } from "./routes/settings.js";
 import { registerTemplatesRoutes } from "./routes/templates.js";
 
@@ -69,6 +70,7 @@ export function buildServer(opts: BuildServerOptions) {
   registerCreditsRoutes(app, { db: opts.db });
   registerContentProjectsRoutes(app, { db: opts.db });
   registerTemplatesRoutes(app, { db: opts.db });
+  registerSchedulesRoutes(app, { db: opts.db });
   registerJobsRoutes(app, {
     db: opts.db,
     buildJobRunnerDeps: opts.buildJobRunnerDeps,

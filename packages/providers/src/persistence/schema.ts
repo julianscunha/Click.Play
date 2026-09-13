@@ -75,6 +75,35 @@ export const templates = sqliteTable("templates", {
   updatedAt: integer("updated_at", { mode: "timestamp_ms" }).notNull(),
 });
 
+export const SCHEDULE_FREQUENCIES = ["daily", "weekly"] as const;
+export type ScheduleFrequency = (typeof SCHEDULE_FREQUENCIES)[number];
+
+/**
+ * "Agendamento" (Fase 19) — dispara `template` numa cadência fixa (decisão do usuário: intervalo simples
+ * "diário"/"semanal" + horário, não cron cru — sem dependência nova, sem expor sintaxe cron na WebUI).
+ * `topic` mora aqui (não em `templates.config`, que nunca guardou topic — Fase 17) porque um agendamento
+ * precisa de tema pra cada produção disparada sem intervenção humana.
+ */
+export const schedules = sqliteTable("schedules", {
+  id: text("id").primaryKey(),
+  templateId: text("template_id")
+    .notNull()
+    .references(() => templates.id),
+  topic: text("topic").notNull(),
+  frequency: text("frequency", { enum: SCHEDULE_FREQUENCIES }).notNull(),
+  /** "HH:mm", 24h, horário local do processo (single-user/self-hosted — sem timezone por agendamento). */
+  timeOfDay: text("time_of_day").notNull(),
+  /** 0 (domingo) a 6 (sábado) — só usado/obrigatório quando `frequency === "weekly"`. */
+  dayOfWeek: integer("day_of_week"),
+  /** Valores pra interpolar `{{key}}` do `template.variableSchema` — mesmo shape de bindings do Wizard (Fase 18). */
+  variableBindings: text("variable_bindings", { mode: "json" }).$type<Record<string, string>>(),
+  enabled: integer("enabled", { mode: "boolean" }).notNull().default(true),
+  nextRunAt: integer("next_run_at", { mode: "timestamp_ms" }).notNull(),
+  lastRunAt: integer("last_run_at", { mode: "timestamp_ms" }),
+  createdAt: integer("created_at", { mode: "timestamp_ms" }).notNull(),
+  updatedAt: integer("updated_at", { mode: "timestamp_ms" }).notNull(),
+});
+
 export const jobs = sqliteTable("jobs", {
   id: text("id").primaryKey(),
   productionId: text("production_id")
