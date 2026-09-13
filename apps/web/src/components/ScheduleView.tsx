@@ -19,8 +19,8 @@ export interface ScheduleViewProps {
 const WEEKDAYS = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
 
 const fieldClass =
-  "rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-neutral-50 placeholder:text-neutral-500 focus:border-neutral-400 focus:outline-none";
-const labelClass = "text-sm font-medium text-neutral-200";
+  "rounded-md border border-border-default bg-surface-1 px-3 py-2 text-fg-primary placeholder:text-fg-tertiary focus:border-border-strong focus:outline-none";
+const labelClass = "text-sm font-medium text-fg-primary";
 
 function formatNextRun(iso: string): string {
   return new Date(iso).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" });
@@ -72,15 +72,15 @@ function NewScheduleForm({ templates, onCreated }: { templates: TemplateSummary[
 
   if (templates.length === 0) {
     return (
-      <p className="text-sm text-neutral-400">
+      <p className="text-sm text-fg-secondary">
         Nenhum template salvo ainda — salve um a partir de uma produção concluída antes de criar um agendamento.
       </p>
     );
   }
 
   return (
-    <div className="flex flex-col gap-3 rounded-md border border-neutral-800 bg-neutral-900/50 p-4">
-      <p className="text-sm font-medium text-neutral-100">Novo agendamento</p>
+    <div className="flex flex-col gap-3 rounded-md border border-border-subtle bg-surface-1 p-4">
+      <p className="text-sm font-medium text-fg-primary">Novo agendamento</p>
       <div className="flex flex-col gap-1.5">
         <label htmlFor="scheduleTemplate" className={labelClass}>
           Template
@@ -111,7 +111,7 @@ function NewScheduleForm({ templates, onCreated }: { templates: TemplateSummary[
           <p className={labelClass}>Variáveis do template</p>
           {templateVariables.map((v) => (
             <div key={v.key} className="flex flex-col gap-1.5">
-              <label htmlFor={`sched-var-${v.key}`} className="text-xs text-neutral-400">
+              <label htmlFor={`sched-var-${v.key}`} className="text-xs text-fg-secondary">
                 {v.label}
               </label>
               <input
@@ -175,12 +175,12 @@ function NewScheduleForm({ templates, onCreated }: { templates: TemplateSummary[
         type="button"
         onClick={handleCreate}
         disabled={saving || !topic.trim()}
-        className="self-start rounded-md border border-neutral-600 px-3 py-2 text-sm font-medium text-neutral-200 hover:bg-neutral-800 disabled:opacity-50"
+        className="self-start rounded-md border border-border-default px-3 py-2 text-sm font-medium text-fg-primary hover:bg-surface-2 disabled:opacity-50"
       >
         {saving ? "Criando..." : "Criar agendamento"}
       </button>
       {error && (
-        <p role="alert" className="text-xs text-red-400">
+        <p role="alert" className="text-xs text-status-error">
           {error}
         </p>
       )}
@@ -223,15 +223,15 @@ export function ScheduleView({ onClose }: ScheduleViewProps) {
   return (
     <div className="mx-auto flex max-w-2xl flex-col gap-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold text-neutral-50">Agendamentos</h2>
-        <button type="button" onClick={onClose} className="text-sm text-neutral-400 underline">
+        <h2 className="text-lg font-semibold text-fg-primary">Agendamentos</h2>
+        <button type="button" onClick={onClose} className="text-sm text-fg-secondary underline">
           Voltar
         </button>
       </div>
 
-      {loading && <p className="text-sm text-neutral-400">Carregando...</p>}
+      {loading && <p className="text-sm text-fg-secondary">Carregando...</p>}
       {error && (
-        <p role="alert" className="text-sm text-red-400">
+        <p role="alert" className="text-sm text-status-error">
           {error}
         </p>
       )}
@@ -241,15 +241,15 @@ export function ScheduleView({ onClose }: ScheduleViewProps) {
           <NewScheduleForm templates={templates} onCreated={() => refresh()} />
 
           <div className="flex flex-col gap-2">
-            {schedules.length === 0 && <p className="text-sm text-neutral-500">Nenhum agendamento criado ainda.</p>}
+            {schedules.length === 0 && <p className="text-sm text-fg-tertiary">Nenhum agendamento criado ainda.</p>}
             {schedules.map((s) => (
               <div
                 key={s.id}
-                className="flex items-center justify-between gap-3 rounded-md border border-neutral-800 bg-neutral-900/50 p-3"
+                className="flex items-center justify-between gap-3 rounded-md border border-border-subtle bg-surface-1 p-3"
               >
                 <div className="flex flex-col gap-0.5">
-                  <p className="text-sm font-medium text-neutral-100">{s.topic}</p>
-                  <p className="text-xs text-neutral-500">
+                  <p className="text-sm font-medium text-fg-primary">{s.topic}</p>
+                  <p className="text-xs text-fg-tertiary">
                     {templateName(s.templateId)} · {s.frequency === "daily" ? "diário" : `semanal (${WEEKDAYS[s.dayOfWeek ?? 0]})`}{" "}
                     às {s.timeOfDay} · próxima execução: {formatNextRun(s.nextRunAt)}
                   </p>
@@ -260,8 +260,8 @@ export function ScheduleView({ onClose }: ScheduleViewProps) {
                     onClick={() => handleToggle(s)}
                     className={`rounded-full border px-3 py-1 text-xs font-medium ${
                       s.enabled
-                        ? "border-emerald-600 bg-emerald-950 text-emerald-400"
-                        : "border-neutral-700 text-neutral-500"
+                        ? "border-status-success-border bg-status-success-bg text-status-success"
+                        : "border-border-default text-fg-tertiary"
                     }`}
                   >
                     {s.enabled ? "Ativo" : "Pausado"}
@@ -269,7 +269,7 @@ export function ScheduleView({ onClose }: ScheduleViewProps) {
                   <button
                     type="button"
                     onClick={() => handleDelete(s)}
-                    className="text-xs text-neutral-500 underline hover:text-red-400"
+                    className="text-xs text-fg-tertiary underline hover:text-status-error"
                   >
                     Apagar
                   </button>

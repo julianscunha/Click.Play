@@ -170,8 +170,8 @@ function applyTemplateConfig(config: TemplateConfig): Partial<FormState> {
 }
 
 const fieldClass =
-  "rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-neutral-50 placeholder:text-neutral-500 focus:border-neutral-400 focus:outline-none";
-const labelClass = "text-sm font-medium text-neutral-200";
+  "rounded-md border border-border-default bg-surface-2 px-3 py-2 text-fg-primary placeholder:text-fg-tertiary focus:border-border-strong focus:outline-none focus:ring-2 focus:ring-accent-wash";
+const labelClass = "text-sm font-medium text-fg-primary";
 
 function Chip({ active, onClick, children }: { active: boolean; onClick(): void; children: React.ReactNode }) {
   return (
@@ -180,8 +180,8 @@ function Chip({ active, onClick, children }: { active: boolean; onClick(): void;
       onClick={onClick}
       className={`rounded-full border px-3 py-1.5 text-sm font-medium transition-colors ${
         active
-          ? "border-orange-500 bg-orange-500/15 text-orange-400"
-          : "border-neutral-700 bg-neutral-900 text-neutral-400 hover:border-neutral-500"
+          ? "border-accent bg-accent-wash text-accent-hover"
+          : "border-border-default bg-surface-2 text-fg-secondary hover:border-border-strong"
       }`}
     >
       {children}
@@ -191,9 +191,9 @@ function Chip({ active, onClick, children }: { active: boolean; onClick(): void;
 
 function StepIcon({ done, active, index }: { done: boolean; active: boolean; index: number }) {
   const base = "flex h-6 w-6 shrink-0 items-center justify-center rounded-full border font-mono text-xs";
-  if (done) return <span className={`${base} border-emerald-600 bg-emerald-950 text-emerald-400`}>✓</span>;
-  if (active) return <span className={`${base} border-orange-500 bg-orange-500 text-neutral-950`}>{index + 1}</span>;
-  return <span className={`${base} border-neutral-700 text-neutral-500`}>{index + 1}</span>;
+  if (done) return <span className={`${base} border-status-success-border bg-status-success-bg text-status-success`}>✓</span>;
+  if (active) return <span className={`${base} border-accent bg-accent text-surface-0`}>{index + 1}</span>;
+  return <span className={`${base} border-border-default text-fg-tertiary`}>{index + 1}</span>;
 }
 
 export interface WizardProps {
@@ -318,13 +318,15 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
   }
 
   return (
-    <div className="mx-auto flex max-w-3xl gap-6">
-      <nav className={`flex shrink-0 flex-col gap-1 border-r border-neutral-800 pr-4 ${collapsed ? "w-10" : "w-40"}`}>
+    <div className="flex gap-6">
+      <nav
+        className={`flex shrink-0 flex-col gap-1 border-r border-border-subtle pr-4 ${collapsed ? "w-stepper-collapsed" : "w-stepper"}`}
+      >
         <button
           type="button"
           onClick={() => setCollapsed((c) => !c)}
           aria-label={collapsed ? "Expandir etapas" : "Recolher etapas"}
-          className="mb-2 self-end text-neutral-500 hover:text-neutral-300"
+          className="mb-2 self-end text-fg-tertiary hover:text-fg-secondary"
         >
           {collapsed ? "»" : "«"}
         </button>
@@ -336,7 +338,7 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
             disabled={i > stepIndex && !canGoNext}
             title={s.label}
             className={`flex items-center gap-2 rounded-md px-1.5 py-1.5 text-left text-sm disabled:cursor-not-allowed disabled:opacity-40 ${
-              i === stepIndex ? "bg-neutral-900 font-semibold text-neutral-50" : "text-neutral-500 hover:text-neutral-300"
+              i === stepIndex ? "bg-surface-1 font-semibold text-fg-primary" : "text-fg-tertiary hover:text-fg-secondary"
             }`}
           >
             <StepIcon done={i < stepIndex} active={i === stepIndex} index={i} />
@@ -351,7 +353,7 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
             {templates.length > 0 && (
               <div className="flex flex-col gap-1.5">
                 <label htmlFor="templateId" className={labelClass}>
-                  Começar de um template <span className="text-neutral-500">(opcional)</span>
+                  Começar de um template <span className="text-fg-tertiary">(opcional)</span>
                 </label>
                 <select
                   id="templateId"
@@ -372,22 +374,22 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
                     );
                   })}
                 </select>
-                <p className="text-xs text-neutral-500">
+                <p className="text-xs text-fg-tertiary">
                   Preenche arquétipo, visual, música, narração, legendas etc. com as decisões salvas — tema e projeto
                   continuam livres. Nome de template é único entre TODOS os projetos — salvar de novo com o mesmo
                   nome sobrescreve, mesmo vindo de outro projeto.
                 </p>
                 {templateError && (
-                  <p role="alert" className="text-xs text-red-400">
+                  <p role="alert" className="text-xs text-status-error">
                     {templateError}
                   </p>
                 )}
               </div>
             )}
             {templateVariables.length > 0 && (
-              <div className="flex flex-col gap-3 rounded-md border border-neutral-800 bg-neutral-900/50 p-4">
+              <div className="flex flex-col gap-3 rounded-md border border-border-subtle bg-surface-1 p-4">
                 <p className={labelClass}>Variáveis do template</p>
-                <p className="text-xs text-neutral-500">
+                <p className="text-xs text-fg-tertiary">
                   Preenche <code>{"{{CHAVE}}"}</code> dentro do Briefing abaixo antes de criar o vídeo.
                 </p>
                 {templateVariables.map((v) => (
@@ -419,7 +421,7 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
             </div>
             <div className="flex flex-col gap-1.5">
               <label htmlFor="direction" className={labelClass}>
-                Briefing <span className="text-neutral-500">(opcional)</span>
+                Briefing <span className="text-fg-tertiary">(opcional)</span>
               </label>
               <textarea
                 id="direction"
@@ -432,7 +434,7 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
             </div>
             <div className="flex flex-col gap-1.5">
               <label htmlFor="contentProjectId" className={labelClass}>
-                Projeto <span className="text-neutral-500">(opcional — agrupa vídeos de um mesmo canal/série)</span>
+                Projeto <span className="text-fg-tertiary">(opcional — agrupa vídeos de um mesmo canal/série)</span>
               </label>
               <select
                 id="contentProjectId"
@@ -501,7 +503,7 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
 
               <div className="flex flex-col gap-1.5">
                 <label htmlFor="targetDurationSeconds" className={labelClass}>
-                  Duração-alvo <span className="text-neutral-500">(segundos, opcional)</span>
+                  Duração-alvo <span className="text-fg-tertiary">(segundos, opcional)</span>
                 </label>
                 <input
                   id="targetDurationSeconds"
@@ -531,12 +533,12 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
 
         {step.key === "musica" && (
           <div className="flex flex-col gap-6">
-            <label className="flex items-center gap-2 text-sm font-medium text-neutral-200">
+            <label className="flex items-center gap-2 text-sm font-medium text-fg-primary">
               <input
                 type="checkbox"
                 checked={form.musicEnabled}
                 onChange={(e) => update("musicEnabled", e.target.checked)}
-                className="h-4 w-4 rounded border-neutral-700 bg-neutral-900"
+                className="h-4 w-4 rounded border-border-default bg-surface-1"
               />
               Música de fundo
             </label>
@@ -552,7 +554,7 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
                 </div>
               </div>
             )}
-            <p className="text-sm text-neutral-500">
+            <p className="text-sm text-fg-tertiary">
               O clima da trilha (épico, calmo, animado...) é escolhido automaticamente pela IA a partir do roteiro —
               aqui você só liga/desliga e ajusta o volume.
             </p>
@@ -561,12 +563,12 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
 
         {step.key === "narracao" && (
           <div className="flex flex-col gap-6">
-            <label className="flex items-center gap-2 text-sm font-medium text-neutral-200">
+            <label className="flex items-center gap-2 text-sm font-medium text-fg-primary">
               <input
                 type="checkbox"
                 checked={form.narrationEnabled}
                 onChange={(e) => update("narrationEnabled", e.target.checked)}
-                className="h-4 w-4 rounded border-neutral-700 bg-neutral-900"
+                className="h-4 w-4 rounded border-border-default bg-surface-1"
               />
               Narração falada
             </label>
@@ -581,10 +583,10 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
                     Masculina
                   </Chip>
                 </div>
-                <p className="text-sm text-neutral-500">Voz gerada automaticamente (Edge TTS) no idioma escolhido em Roteiro.</p>
+                <p className="text-sm text-fg-tertiary">Voz gerada automaticamente (Edge TTS) no idioma escolhido em Roteiro.</p>
               </div>
             ) : (
-              <p className="text-sm text-neutral-500">
+              <p className="text-sm text-fg-tertiary">
                 Vídeo mudo (sem voz) — a duração de cada cena passa a ser estimada pelo tamanho do texto do roteiro
                 em vez do áudio. Legenda continua disponível na etapa seguinte, se quiser.
               </p>
@@ -645,16 +647,16 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
 
         {step.key === "legendas" && (
           <div className="flex flex-col gap-6">
-            <label className="flex items-center gap-2 text-sm font-medium text-neutral-200">
+            <label className="flex items-center gap-2 text-sm font-medium text-fg-primary">
               <input
                 type="checkbox"
                 checked={form.captionsEnabled}
                 onChange={(e) => update("captionsEnabled", e.target.checked)}
-                className="h-4 w-4 rounded border-neutral-700 bg-neutral-900"
+                className="h-4 w-4 rounded border-border-default bg-surface-1"
               />
               Legenda de narração
               {!form.narrationEnabled && form.captionsEnabled && (
-                <span className="font-normal text-neutral-500">(sincronizada pela duração estimada, sem narração)</span>
+                <span className="font-normal text-fg-tertiary">(sincronizada pela duração estimada, sem narração)</span>
               )}
             </label>
 
@@ -692,12 +694,12 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
               </>
             )}
 
-            <label className="flex items-center gap-2 text-sm text-neutral-200">
+            <label className="flex items-center gap-2 text-sm text-fg-primary">
               <input
                 type="checkbox"
                 checked={form.showTextOverlays}
                 onChange={(e) => update("showTextOverlays", e.target.checked)}
-                className="h-4 w-4 rounded border-neutral-700 bg-neutral-900"
+                className="h-4 w-4 rounded border-border-default bg-surface-1"
               />
               Mostrar texto animado sobre as cenas (além da legenda de narração)
             </label>
@@ -707,12 +709,12 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
         {step.key === "abertura" && (
           <div className="flex flex-col gap-8">
             <div className="flex flex-col gap-3">
-              <label className="flex items-center gap-2 text-sm font-medium text-neutral-200">
+              <label className="flex items-center gap-2 text-sm font-medium text-fg-primary">
                 <input
                   type="checkbox"
                   checked={form.introEnabled}
                   onChange={(e) => update("introEnabled", e.target.checked)}
-                  className="h-4 w-4 rounded border-neutral-700 bg-neutral-900"
+                  className="h-4 w-4 rounded border-border-default bg-surface-1"
                 />
                 Abertura
               </label>
@@ -720,7 +722,7 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
                 <div className="flex flex-col gap-3 pl-6">
                   <div className="flex flex-col gap-1.5">
                     <label htmlFor="introText" className={labelClass}>
-                      Texto <span className="text-neutral-500">(vazio = IA gera a partir do tema)</span>
+                      Texto <span className="text-fg-tertiary">(vazio = IA gera a partir do tema)</span>
                     </label>
                     <input
                       id="introText"
@@ -752,12 +754,12 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
             </div>
 
             <div className="flex flex-col gap-3">
-              <label className="flex items-center gap-2 text-sm font-medium text-neutral-200">
+              <label className="flex items-center gap-2 text-sm font-medium text-fg-primary">
                 <input
                   type="checkbox"
                   checked={form.outroEnabled}
                   onChange={(e) => update("outroEnabled", e.target.checked)}
-                  className="h-4 w-4 rounded border-neutral-700 bg-neutral-900"
+                  className="h-4 w-4 rounded border-border-default bg-surface-1"
                 />
                 Encerramento
               </label>
@@ -765,7 +767,7 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
                 <div className="flex flex-col gap-3 pl-6">
                   <div className="flex flex-col gap-1.5">
                     <label htmlFor="outroText" className={labelClass}>
-                      Texto <span className="text-neutral-500">(vazio = IA gera a partir do tema)</span>
+                      Texto <span className="text-fg-tertiary">(vazio = IA gera a partir do tema)</span>
                     </label>
                     <input
                       id="outroText"
@@ -796,7 +798,7 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
               )}
             </div>
 
-            <p className="text-sm text-neutral-500">
+            <p className="text-sm text-fg-tertiary">
               Upload de vídeo próprio pra abertura/encerramento ainda não está disponível — só geração automática por
               enquanto.
             </p>
@@ -818,7 +820,7 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
                   </Chip>
                 ))}
               </div>
-              <p className="text-sm text-neutral-500">
+              <p className="text-sm text-fg-tertiary">
                 O tipo de transição (dissolver, deslizar, varredura...) é escolhido automaticamente cena a cena pela
                 IA — aqui você controla só a duração.
               </p>
@@ -838,7 +840,7 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
                   Usar minhas próprias chaves
                 </Chip>
               </div>
-              <p className="text-sm text-neutral-500">
+              <p className="text-sm text-fg-tertiary">
                 {form.useOwnProviders
                   ? "Este vídeo usa suas próprias chaves de API (configuradas em Configurações) — não debita do seu saldo de créditos. Sem chave própria configurada pra algum provedor, a geração falha nessa etapa."
                   : "Este vídeo usa os modelos/chaves do sistema — debita do saldo de créditos na aprovação do custo estimado."}
@@ -849,60 +851,60 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
 
         {step.key === "revisao" && (
           <div className="flex flex-col gap-4">
-            <dl className="grid grid-cols-1 gap-x-6 gap-y-3 rounded-md border border-neutral-800 bg-neutral-900/50 p-4 text-sm sm:grid-cols-2">
+            <dl className="grid grid-cols-1 gap-x-6 gap-y-3 rounded-md border border-border-subtle bg-surface-1 p-4 text-sm sm:grid-cols-2">
               <div>
-                <dt className="text-neutral-500">Tema</dt>
-                <dd className="text-neutral-100">{form.topic || "—"}</dd>
+                <dt className="text-fg-tertiary">Tema</dt>
+                <dd className="text-fg-primary">{form.topic || "—"}</dd>
               </div>
               <div>
-                <dt className="text-neutral-500">Projeto</dt>
-                <dd className="text-neutral-100">
+                <dt className="text-fg-tertiary">Projeto</dt>
+                <dd className="text-fg-primary">
                   {form.newContentProjectName.trim() ||
                     contentProjects.find((p) => p.id === form.contentProjectId)?.name ||
                     "Nenhum"}
                 </dd>
               </div>
               <div>
-                <dt className="text-neutral-500">Arquétipo</dt>
-                <dd className="text-neutral-100">{form.archetype ? formatLabel(form.archetype) : "IA escolhe"}</dd>
+                <dt className="text-fg-tertiary">Arquétipo</dt>
+                <dd className="text-fg-primary">{form.archetype ? formatLabel(form.archetype) : "IA escolhe"}</dd>
               </div>
               <div>
-                <dt className="text-neutral-500">Ritmo</dt>
-                <dd className="text-neutral-100">{form.pacing ? formatLabel(form.pacing) : "Padrão do arquétipo"}</dd>
+                <dt className="text-fg-tertiary">Ritmo</dt>
+                <dd className="text-fg-primary">{form.pacing ? formatLabel(form.pacing) : "Padrão do arquétipo"}</dd>
               </div>
               <div>
-                <dt className="text-neutral-500">Duração-alvo</dt>
-                <dd className="text-neutral-100">{form.targetDurationSeconds ? `${form.targetDurationSeconds}s` : "Livre"}</dd>
+                <dt className="text-fg-tertiary">Duração-alvo</dt>
+                <dd className="text-fg-primary">{form.targetDurationSeconds ? `${form.targetDurationSeconds}s` : "Livre"}</dd>
               </div>
               <div>
-                <dt className="text-neutral-500">Idioma</dt>
-                <dd className="text-neutral-100">{form.language}</dd>
+                <dt className="text-fg-tertiary">Idioma</dt>
+                <dd className="text-fg-primary">{form.language}</dd>
               </div>
               <div>
-                <dt className="text-neutral-500">Narração</dt>
-                <dd className="text-neutral-100">
+                <dt className="text-fg-tertiary">Narração</dt>
+                <dd className="text-fg-primary">
                   {form.narrationEnabled ? `Ligada (voz ${form.voiceGender === "female" ? "feminina" : "masculina"})` : "Desligada (vídeo mudo)"}
                 </dd>
               </div>
               <div>
-                <dt className="text-neutral-500">Música</dt>
-                <dd className="text-neutral-100">
+                <dt className="text-fg-tertiary">Música</dt>
+                <dd className="text-fg-primary">
                   {form.musicEnabled
                     ? `Ligada (volume ${MUSIC_VOLUME_LEVELS.find((l) => l.level === form.musicVolumeLevel)!.label})`
                     : "Desligada"}
                 </dd>
               </div>
               <div>
-                <dt className="text-neutral-500">Vídeo</dt>
-                <dd className="text-neutral-100">{formatLabel(form.videoMode)}</dd>
+                <dt className="text-fg-tertiary">Vídeo</dt>
+                <dd className="text-fg-primary">{formatLabel(form.videoMode)}</dd>
               </div>
               <div>
-                <dt className="text-neutral-500">Formato</dt>
-                <dd className="text-neutral-100">{formatLabel(form.aspectRatio)}</dd>
+                <dt className="text-fg-tertiary">Formato</dt>
+                <dd className="text-fg-primary">{formatLabel(form.aspectRatio)}</dd>
               </div>
               <div>
-                <dt className="text-neutral-500">Legenda</dt>
-                <dd className="text-neutral-100">
+                <dt className="text-fg-tertiary">Legenda</dt>
+                <dd className="text-fg-primary">
                   {form.captionsEnabled
                     ? form.captionStyle
                       ? formatLabel(form.captionStyle)
@@ -911,33 +913,33 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
                 </dd>
               </div>
               <div>
-                <dt className="text-neutral-500">Qualidade</dt>
-                <dd className="text-neutral-100">{formatLabel(form.qualityTier)}</dd>
+                <dt className="text-fg-tertiary">Qualidade</dt>
+                <dd className="text-fg-primary">{formatLabel(form.qualityTier)}</dd>
               </div>
               <div>
-                <dt className="text-neutral-500">Texto animado</dt>
-                <dd className="text-neutral-100">{form.showTextOverlays ? "Sim" : "Não"}</dd>
+                <dt className="text-fg-tertiary">Texto animado</dt>
+                <dd className="text-fg-primary">{form.showTextOverlays ? "Sim" : "Não"}</dd>
               </div>
               <div>
-                <dt className="text-neutral-500">Transições</dt>
-                <dd className="text-neutral-100">
+                <dt className="text-fg-tertiary">Transições</dt>
+                <dd className="text-fg-primary">
                   {TRANSITION_SPEED_LEVELS.find((l) => l.level === form.transitionSpeedLevel)!.label}
                 </dd>
               </div>
               <div>
-                <dt className="text-neutral-500">Chaves</dt>
-                <dd className="text-neutral-100">{form.useOwnProviders ? "Minhas próprias" : "Sistema (debita créditos)"}</dd>
+                <dt className="text-fg-tertiary">Chaves</dt>
+                <dd className="text-fg-primary">{form.useOwnProviders ? "Minhas próprias" : "Sistema (debita créditos)"}</dd>
               </div>
               <div>
-                <dt className="text-neutral-500">Abertura</dt>
-                <dd className="text-neutral-100">{form.introEnabled ? form.introText.trim() || "Gerada por IA" : "Nenhuma"}</dd>
+                <dt className="text-fg-tertiary">Abertura</dt>
+                <dd className="text-fg-primary">{form.introEnabled ? form.introText.trim() || "Gerada por IA" : "Nenhuma"}</dd>
               </div>
               <div>
-                <dt className="text-neutral-500">Encerramento</dt>
-                <dd className="text-neutral-100">{form.outroEnabled ? form.outroText.trim() || "Gerado por IA" : "Nenhum"}</dd>
+                <dt className="text-fg-tertiary">Encerramento</dt>
+                <dd className="text-fg-primary">{form.outroEnabled ? form.outroText.trim() || "Gerado por IA" : "Nenhum"}</dd>
               </div>
             </dl>
-            <p className="text-sm text-neutral-500">
+            <p className="text-sm text-fg-tertiary">
               O custo estimado real (em USD) aparece na próxima tela, antes de qualquer geração começar — você aprova
               ou cancela lá.
             </p>
@@ -945,16 +947,16 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
         )}
 
         {contentProjectError && step.key === "revisao" && (
-          <p role="alert" className="text-sm text-red-400">
+          <p role="alert" className="text-sm text-status-error">
             Não foi possível criar o projeto: {contentProjectError}
           </p>
         )}
-        <div className="mt-auto flex items-center justify-between border-t border-neutral-800 pt-4">
+        <div className="mt-auto flex items-center justify-between border-t border-border-subtle pt-4">
           <button
             type="button"
             onClick={() => goToStep(stepIndex - 1)}
             disabled={stepIndex === 0}
-            className="rounded-md border border-neutral-700 px-4 py-2 text-sm font-medium text-neutral-300 disabled:cursor-not-allowed disabled:opacity-40"
+            className="rounded-md border border-border-default px-4 py-2 text-sm font-medium text-fg-secondary disabled:cursor-not-allowed disabled:opacity-40"
           >
             Voltar
           </button>
@@ -963,7 +965,7 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
               type="button"
               onClick={() => goToStep(stepIndex + 1)}
               disabled={!canGoNext}
-              className="rounded-md bg-neutral-50 px-4 py-2 text-sm font-medium text-neutral-900 hover:bg-neutral-200 disabled:cursor-not-allowed disabled:bg-neutral-700 disabled:text-neutral-400"
+              className="rounded-md bg-fg-primary px-4 py-2 text-sm font-medium text-surface-0 hover:opacity-90 disabled:cursor-not-allowed disabled:bg-surface-3 disabled:text-fg-tertiary"
             >
               Continuar
             </button>
@@ -972,7 +974,7 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
               type="button"
               onClick={handleSubmit}
               disabled={!canLeaveBriefing || submitting || creatingContentProject}
-              className="rounded-md bg-orange-500 px-4 py-2 text-sm font-medium text-neutral-950 hover:bg-orange-400 disabled:cursor-not-allowed disabled:bg-neutral-700 disabled:text-neutral-400"
+              className="rounded-md bg-accent px-4 py-2 text-sm font-medium text-surface-0 hover:bg-accent-hover disabled:cursor-not-allowed disabled:bg-surface-3 disabled:text-fg-tertiary"
             >
               {submitting || creatingContentProject ? "Criando..." : "Gerar vídeo"}
             </button>

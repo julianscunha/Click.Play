@@ -45,9 +45,9 @@ function SaveAsTemplate({ productionId }: { productionId: string }) {
   }
 
   return (
-    <div className="flex w-full flex-col gap-2 rounded-md border border-neutral-800 bg-neutral-900/50 p-4">
-      <p className="text-sm font-medium text-neutral-100">Salvar como template</p>
-      <p className="text-xs text-neutral-500">
+    <div className="flex w-full flex-col gap-2 rounded-md border border-border-subtle bg-surface-1 p-4">
+      <p className="text-sm font-medium text-fg-primary">Salvar como template</p>
+      <p className="text-xs text-fg-tertiary">
         Reaproveita todas as decisões desta produção (arquétipo, visual, música, narração, legendas...) num template —
         mesmo nome sobrescreve, mesmo se o template existente for de outro projeto.
       </p>
@@ -59,13 +59,13 @@ function SaveAsTemplate({ productionId }: { productionId: string }) {
             setSaved(null);
           }}
           placeholder="Nome do template"
-          className="flex-1 rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-50 placeholder:text-neutral-500 focus:border-neutral-400 focus:outline-none"
+          className="flex-1 rounded-md border border-border-default bg-surface-1 px-3 py-2 text-sm text-fg-primary placeholder:text-fg-tertiary focus:border-border-strong focus:outline-none"
         />
         <button
           type="button"
           onClick={handleSave}
           disabled={saving || !name.trim()}
-          className="rounded-md border border-neutral-600 px-3 py-2 text-sm font-medium text-neutral-200 hover:bg-neutral-800 disabled:opacity-50"
+          className="rounded-md border border-border-default px-3 py-2 text-sm font-medium text-fg-primary hover:bg-surface-2 disabled:opacity-50"
         >
           {saving ? "Salvando..." : "Salvar"}
         </button>
@@ -78,27 +78,27 @@ function SaveAsTemplate({ productionId }: { productionId: string }) {
             setSaved(null);
           }}
           placeholder="Variáveis (opcional): PERSONAGEM=Nome do personagem, TEMA=Tema da história"
-          className="rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-50 placeholder:text-neutral-500 focus:border-neutral-400 focus:outline-none"
+          className="rounded-md border border-border-default bg-surface-1 px-3 py-2 text-sm text-fg-primary placeholder:text-fg-tertiary focus:border-border-strong focus:outline-none"
         />
-        <p className="text-xs text-neutral-500">
+        <p className="text-xs text-fg-tertiary">
           Use <code>{"{{CHAVE}}"}</code> no campo "Briefing" desta produção — ao reaproveitar o template, quem for
           criar um vídeo novo preenche um valor por variável declarada aqui.
         </p>
       </div>
       {error && (
-        <p role="alert" className="text-xs text-red-400">
+        <p role="alert" className="text-xs text-status-error">
           {error}
         </p>
       )}
-      {saved && <p className="text-xs text-emerald-400">{saved}</p>}
+      {saved && <p className="text-xs text-status-success">{saved}</p>}
     </div>
   );
 }
 
 const DECISION_STYLES: Record<QcDecision, string> = {
-  PASS: "border-emerald-800 bg-emerald-950 text-emerald-400",
-  WARNING: "border-amber-800 bg-amber-950 text-amber-400",
-  BLOCK: "border-red-800 bg-red-950 text-red-400",
+  PASS: "border-status-success-border bg-status-success-bg text-status-success",
+  WARNING: "border-status-warning-border bg-status-warning-bg text-status-warning",
+  BLOCK: "border-status-error-border bg-status-error-bg text-status-error",
 };
 
 export function ResultPlayer({ job, onCreateAnother }: ResultPlayerProps) {
@@ -108,34 +108,34 @@ export function ResultPlayer({ job, onCreateAnother }: ResultPlayerProps) {
   return (
     <div className="mx-auto flex max-w-xl flex-col items-center gap-4">
       {/* biome-ignore lint/a11y/useMediaCaption: legendas já são queimadas no vídeo pelo renderer */}
-      <video controls autoPlay className="w-full rounded-md border border-neutral-800" src={url} />
+      <video controls autoPlay className="w-full rounded-md border border-border-subtle" src={url} />
 
       <div className="flex w-full gap-3">
         <a
           href={url}
           download
-          className="flex-1 rounded-md bg-neutral-50 px-4 py-2 text-center font-medium text-neutral-900 hover:bg-neutral-200"
+          className="flex-1 rounded-md bg-fg-primary px-4 py-2 text-center font-medium text-surface-0 hover:opacity-90"
         >
           Baixar vídeo
         </a>
         <button
           type="button"
           onClick={onCreateAnother}
-          className="flex-1 rounded-md border border-neutral-600 px-4 py-2 font-medium text-neutral-200 hover:bg-neutral-800"
+          className="flex-1 rounded-md border border-border-default px-4 py-2 font-medium text-fg-primary hover:bg-surface-2"
         >
           Criar outro vídeo
         </button>
       </div>
 
       {job.actualCost && (
-        <div className="flex w-full flex-col gap-1 rounded-md border border-neutral-700 bg-neutral-900 p-4">
-          <p className="text-sm font-medium text-neutral-100">Custo real</p>
+        <div className="flex w-full flex-col gap-1 rounded-md border border-border-default bg-surface-1 p-4">
+          <p className="text-sm font-medium text-fg-primary">Custo real</p>
           {costLine("LLM", job.actualCost.llm)}
           {costLine("Narração", job.actualCost.tts)}
           {costLine("Imagens", job.actualCost.image)}
           {costLine("Vídeo", job.actualCost.video)}
           {costLine("Música", job.actualCost.music)}
-          <div className="mt-1 flex justify-between border-t border-neutral-700 pt-1 text-sm font-medium text-neutral-100">
+          <div className="mt-1 flex justify-between border-t border-border-default pt-1 text-sm font-medium text-fg-primary">
             <span>Total</span>
             <span>{job.actualCost.total.status === "known" ? `US$ ${job.actualCost.total.usd.toFixed(3)}` : "—"}</span>
           </div>
@@ -143,9 +143,9 @@ export function ResultPlayer({ job, onCreateAnother }: ResultPlayerProps) {
       )}
 
       {job.qcReport && (
-        <div className="flex w-full flex-col gap-2 rounded-md border border-neutral-700 bg-neutral-900 p-4">
+        <div className="flex w-full flex-col gap-2 rounded-md border border-border-default bg-surface-1 p-4">
           <div className="flex items-center justify-between">
-            <p className="text-sm font-medium text-neutral-100">Controle de qualidade</p>
+            <p className="text-sm font-medium text-fg-primary">Controle de qualidade</p>
             <span
               className={`rounded border px-2 py-0.5 text-xs font-semibold uppercase tracking-wide ${DECISION_STYLES[job.qcReport.decision]}`}
             >
@@ -154,8 +154,8 @@ export function ResultPlayer({ job, onCreateAnother }: ResultPlayerProps) {
           </div>
           <ul className="flex flex-col gap-1">
             {job.qcReport.checks.map((check) => (
-              <li key={check.id} className="flex items-start gap-2 text-xs text-neutral-400">
-                <span className={check.passed ? "text-emerald-400" : "text-red-400"}>{check.passed ? "✓" : "✗"}</span>
+              <li key={check.id} className="flex items-start gap-2 text-xs text-fg-secondary">
+                <span className={check.passed ? "text-status-success" : "text-status-error"}>{check.passed ? "✓" : "✗"}</span>
                 <span>{check.message}</span>
               </li>
             ))}
@@ -165,16 +165,16 @@ export function ResultPlayer({ job, onCreateAnother }: ResultPlayerProps) {
 
       <SaveAsTemplate productionId={job.productionId} />
 
-      <div className="flex w-full flex-col gap-1 rounded-md border border-neutral-800 bg-neutral-900/50 p-4">
-        <p className="text-sm font-medium text-neutral-100">Publicação</p>
-        <p className="text-xs text-neutral-500">
+      <div className="flex w-full flex-col gap-1 rounded-md border border-border-subtle bg-surface-1 p-4">
+        <p className="text-sm font-medium text-fg-primary">Publicação</p>
+        <p className="text-xs text-fg-tertiary">
           Publicação direta (YouTube, TikTok, Instagram) chega em breve. Por enquanto, baixe o vídeo e publique
           manualmente.
         </p>
       </div>
 
       {job.resultSummary && (
-        <div className="flex w-full justify-between text-xs text-neutral-500">
+        <div className="flex w-full justify-between text-xs text-fg-tertiary">
           <span>{job.resultSummary.imageCount} imagem(ns)</span>
           <span>{job.resultSummary.videoClipCount} clipe(s) de vídeo</span>
           <span>{job.resultSummary.audioSeconds.toFixed(1)}s de narração</span>

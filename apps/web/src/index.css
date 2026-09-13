@@ -1,1 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap");
 @import "tailwindcss";
+
+/**
+ * Sistema de tokens (redesign desktop-first, 2026-09-12) — só tema escuro por
+ * ora (decisão do usuário: toggle claro/escuro fica pra rodada seguinte,
+ * nomes semânticos já preparados pra receber um bloco `light` depois sem
+ * renomear classe nenhuma no resto do app).
+ */
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --color-surface-0: #0a0a0a;
+  --color-surface-1: #171717;
+  --color-surface-2: #262626;
+  --color-surface-3: #404040;
+
+  --color-border-subtle: #262626;
+  --color-border-default: #404040;
+  --color-border-strong: #737373;
+
+  --color-fg-primary: #fafafa;
+  --color-fg-secondary: #a3a3a3;
+  --color-fg-tertiary: #737373;
+  --color-fg-disabled: #525252;
+
+  --color-accent: #f97316;
+  --color-accent-hover: #fb923c;
+  --color-accent-wash: color-mix(in srgb, #f97316 15%, transparent);
+
+  --color-status-success: #34d399;
+  --color-status-success-bg: #022c22;
+  --color-status-success-border: #065f46;
+  --color-status-warning: #fbbf24;
+  --color-status-warning-bg: #451a03;
+  --color-status-warning-border: #92400e;
+  --color-status-error: #f87171;
+  --color-status-error-bg: #450a0a;
+  --color-status-error-border: #991b1b;
+
+  --spacing-rail: 4rem;
+  --spacing-stepper: 12.5rem;
+  --spacing-stepper-collapsed: 4rem;
+  --spacing-context-panel: 20rem;
+}
+
+body {
+  background-color: var(--color-surface-0);
+  color: var(--color-fg-primary);
+  font-family: var(--font-sans);
+}
