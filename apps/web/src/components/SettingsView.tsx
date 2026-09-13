@@ -152,7 +152,7 @@ function Row({
   hint,
   children,
 }: {
-  role: "Primário" | "Fallback";
+  role: "Primário" | "Fallback" | "Voz";
   badge: React.ReactNode;
   label: string;
   hint: string;
@@ -179,6 +179,7 @@ const MODEL_FIELDS = [
   "IMAGE_MODEL",
   "VIDEO_MODEL",
   "TTS_MODEL_FALLBACK",
+  "TTS_MODEL_FALLBACK_VOICE",
   "MUSIC_PROVIDER",
 ] as const;
 
@@ -419,7 +420,7 @@ export function SettingsView({ onClose }: SettingsViewProps) {
           role="Fallback"
           badge={<Badge kind="paid">pago por caractere</Badge>}
           label="TTS_MODEL_FALLBACK"
-          hint="Roda via OpenRouter, mesma chave do Roteiro. Restrito a modelos da família Gemini (voz e formato de áudio compatíveis)."
+          hint="Roda via OpenRouter, mesma chave do Roteiro. Os modelos sugeridos são da família Gemini (voz padrão automática); um modelo customizado pode exigir escolher a voz manualmente abaixo — cada provider tem seu próprio catálogo."
         >
           <ModelSelect
             id="TTS_MODEL_FALLBACK"
@@ -432,6 +433,23 @@ export function SettingsView({ onClose }: SettingsViewProps) {
             onChange={(v) => setField("TTS_MODEL_FALLBACK", v)}
           />
         </Row>
+        {customFlags.TTS_MODEL_FALLBACK ? (
+          <Row
+            role="Voz"
+            badge={<Badge kind="optional">só pra modelo customizado</Badge>}
+            label="TTS_MODEL_FALLBACK_VOICE"
+            hint='Achado em teste manual real: um modelo custom (ex. fish-audio) pode exigir voz explícita — "An explicit voice is required" — com nome específico do próprio catálogo dele (ex. flux-bree-en), diferente do catálogo Gemini. Vazio = deixa o provider escolher (funciona pra a maioria).'
+          >
+            <input
+              id="TTS_MODEL_FALLBACK_VOICE"
+              type="text"
+              value={inputs.TTS_MODEL_FALLBACK_VOICE ?? ""}
+              onChange={(e) => setField("TTS_MODEL_FALLBACK_VOICE", e.target.value)}
+              placeholder="Ex: flux-bree-en"
+              className="rounded-md border border-border-default bg-surface-2 px-3 py-2 text-fg-primary placeholder:text-fg-tertiary focus:border-border-strong focus:outline-none focus:ring-2 focus:ring-accent-wash"
+            />
+          </Row>
+        ) : null}
       </Section>
 
       <Section title="5. Música" description="Trilha sonora de fundo do vídeo.">

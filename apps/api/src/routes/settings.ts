@@ -23,6 +23,7 @@ const PLAIN_FIELDS = [
   "IMAGE_MODEL",
   "VIDEO_MODEL",
   "TTS_MODEL_FALLBACK",
+  "TTS_MODEL_FALLBACK_VOICE",
   "MUSIC_PROVIDER",
 ] as const;
 
@@ -38,6 +39,7 @@ const SettingsBody = z.object({
   IMAGE_MODEL: noNewlines.optional(),
   VIDEO_MODEL: noNewlines.optional(),
   TTS_MODEL_FALLBACK: noNewlines.optional(),
+  TTS_MODEL_FALLBACK_VOICE: noNewlines.optional(),
   MUSIC_PROVIDER: noNewlines.optional(),
   GOOGLE_API_KEY: noNewlines.optional(),
   GOOGLE_API_KEY_SYSTEM: noNewlines.optional(),

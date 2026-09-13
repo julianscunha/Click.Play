@@ -158,7 +158,11 @@ function buildTTS(
   const openRouterFallback = withProviderTimeout(
     new OpenRouterTTS(
       process.env.TTS_MODEL_FALLBACK || MODEL_BY_TIER[tier].tts,
-      undefined,
+      // Achado em teste manual real: modelo custom (ex. fish-audio) pode EXIGIR
+      // voz explícita (400 "An explicit voice is required") em vez de aceitar
+      // omitir como a maioria — sem forma de adivinhar o catálogo de terceiros,
+      // então isso fica configurável (TTS_MODEL_FALLBACK_VOICE).
+      process.env.TTS_MODEL_FALLBACK_VOICE || undefined,
       resolveKey("OPENROUTER_API_KEY", useOwnProviders),
     ),
     "tts:openrouter",

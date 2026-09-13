@@ -319,6 +319,7 @@ export interface Settings {
   IMAGE_MODEL: string;
   VIDEO_MODEL: string;
   TTS_MODEL_FALLBACK: string;
+  TTS_MODEL_FALLBACK_VOICE: string;
   MUSIC_PROVIDER: string;
   GOOGLE_API_KEY: SecretField;
   GOOGLE_API_KEY_SYSTEM: SecretField;
