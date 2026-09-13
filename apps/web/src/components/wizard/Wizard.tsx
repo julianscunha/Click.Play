@@ -63,6 +63,61 @@ const TRANSITIONS: { value: TransitionType; label: string }[] = [
   { value: "none", label: "Corte seco" },
 ];
 
+/** Proporção real de cada aspect ratio — geometria, não dado gerado, por isso pode ser mostrado ao vivo
+ * no Wizard mesmo antes de existir qualquer cena real (decisão UI Designer + UX Architect, 2026-09-13). */
+const ASPECT_RATIO_FRAME: Record<"vertical" | "horizontal" | "square", { ratio: string; label: string }> = {
+  vertical: { ratio: "aspect-[9/16]", label: "9:16" },
+  horizontal: { ratio: "aspect-[16/9]", label: "16:9" },
+  square: { ratio: "aspect-square", label: "1:1" },
+};
+
+const QUALITY_TIER_NOTES: Record<"draft" | "standard" | "high", string> = {
+  draft: "Mais rápido e mais barato — bom pra testar ideia antes de gerar a versão final.",
+  standard: "Equilíbrio padrão de custo x qualidade — recomendado pra maioria dos vídeos.",
+  high: "Melhor fidelidade de imagem/vídeo — custo de geração de imagem/vídeo por IA mais alto e render mais lento.",
+};
+
+/** Aproximação visual de cada estilo de legenda (não é o output real do renderer, só demonstra a
+ * diferença de peso/cor/destaque entre estilos — decisão UI Designer, 2026-09-13). */
+const CAPTION_STYLE_PREVIEW: Record<string, string> = {
+  bold_outline: "font-extrabold text-fg-primary [text-shadow:2px_2px_0_#000,-2px_-2px_0_#000,2px_-2px_0_#000,-2px_2px_0_#000]",
+  clean: "font-medium text-fg-primary",
+  gradient_rise: "font-extrabold bg-gradient-to-t from-accent to-fg-primary bg-clip-text text-transparent",
+  karaoke_sweep: "font-semibold text-fg-primary underline decoration-accent decoration-4 underline-offset-4",
+  color_highlight: "font-semibold text-surface-0 bg-accent px-1.5 py-0.5 rounded",
+  block_impact: "font-black uppercase text-fg-primary bg-surface-0/80 px-2 py-1",
+  box_highlight: "font-semibold text-fg-primary bg-surface-0/80 px-2 py-1 rounded border border-accent",
+};
+
+function FrameBox({
+  aspectRatio,
+  size = "md",
+  active = false,
+  children,
+}: {
+  aspectRatio: "vertical" | "horizontal" | "square";
+  size?: "sm" | "md";
+  active?: boolean;
+  children?: React.ReactNode;
+}) {
+  const frame = ASPECT_RATIO_FRAME[aspectRatio];
+  const width = size === "sm" ? "w-16" : "w-full max-w-56";
+  return (
+    <div
+      className={`flex ${width} flex-col items-center gap-1.5 ${size === "sm" ? "" : "mx-auto"}`}
+    >
+      <div
+        className={`relative flex w-full items-end justify-center overflow-hidden rounded-md border ${frame.ratio} ${
+          active ? "border-accent bg-accent-wash" : "border-border-default bg-surface-2"
+        }`}
+      >
+        {children}
+      </div>
+      <span className={`text-xs ${active ? "font-medium text-accent" : "text-fg-tertiary"}`}>{frame.label}</span>
+    </div>
+  );
+}
+
 interface FormState {
   topic: string;
   direction: string;
@@ -194,6 +249,38 @@ function StepIcon({ done, active, index }: { done: boolean; active: boolean; ind
   if (done) return <span className={`${base} border-status-success-border bg-status-success-bg text-status-success`}>✓</span>;
   if (active) return <span className={`${base} border-accent bg-accent text-surface-0`}>{index + 1}</span>;
   return <span className={`${base} border-border-default text-fg-tertiary`}>{index + 1}</span>;
+}
+
+/** Painel de resumo persistente (320px, ≥1280px) — feedback ao vivo das escolhas já feitas, visível em
+ * toda etapa menos Revisão (que já mostra a versão completa). Reuso do slot de contexto do shell (Fase
+ * redesign desktop-first, etapa 2) em vez de um "palco" inventado por etapa sem dado real pra mostrar. */
+function SummaryPanel({ form }: { form: FormState }) {
+  const rows: { label: string; value: string }[] = [
+    { label: "Tema", value: form.topic.trim() || "—" },
+    { label: "Formato", value: ASPECT_RATIO_FRAME[form.aspectRatio].label },
+    { label: "Qualidade", value: formatLabel(form.qualityTier) },
+    {
+      label: "Narração",
+      value: form.narrationEnabled ? (form.voiceGender === "female" ? "Voz feminina" : "Voz masculina") : "Desligada",
+    },
+    { label: "Música", value: form.musicEnabled ? "Ligada" : "Desligada" },
+    { label: "Legenda", value: form.captionsEnabled ? form.captionStyle ? formatLabel(form.captionStyle) : "Padrão" : "Desligada" },
+  ];
+
+  return (
+    <aside className="hidden w-context-panel shrink-0 flex-col gap-3 border-l border-border-subtle pl-6 xl:flex">
+      <p className={labelClass}>Resumo</p>
+      <dl className="flex flex-col gap-2.5">
+        {rows.map((r) => (
+          <div key={r.label} className="flex flex-col gap-0.5">
+            <dt className="text-xs text-fg-tertiary">{r.label}</dt>
+            <dd className="text-sm text-fg-primary">{r.value}</dd>
+          </div>
+        ))}
+      </dl>
+      <p className="mt-2 text-xs text-fg-tertiary">O custo estimado real aparece na Revisão, antes de qualquer geração.</p>
+    </aside>
+  );
 }
 
 export interface WizardProps {
@@ -595,114 +682,145 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
         )}
 
         {step.key === "visual" && (
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <div className="flex flex-col gap-1.5">
-              <label htmlFor="videoMode" className={labelClass}>
-                Vídeo
-              </label>
-              <select
-                id="videoMode"
-                value={form.videoMode}
-                onChange={(e) => update("videoMode", e.target.value as FormState["videoMode"])}
-                className={fieldClass}
-              >
-                <option value="hybrid">Híbrido (imagem + vídeo onde faz sentido)</option>
-                <option value="motion_graphics_only">Só imagem (mais barato)</option>
-                <option value="ai_video_only">Só vídeo (mais caro)</option>
-              </select>
-            </div>
-
-            <div className="flex flex-col gap-1.5">
-              <label htmlFor="aspectRatio" className={labelClass}>
-                Formato
-              </label>
-              <select
-                id="aspectRatio"
-                value={form.aspectRatio}
-                onChange={(e) => update("aspectRatio", e.target.value as FormState["aspectRatio"])}
-                className={fieldClass}
-              >
-                <option value="vertical">Vertical (9:16 — Reels/TikTok/Shorts)</option>
-                <option value="horizontal">Horizontal (16:9 — YouTube)</option>
-                <option value="square">Quadrado (1:1)</option>
-              </select>
-            </div>
-
-            <div className="flex flex-col gap-1.5">
-              <span className={labelClass}>Qualidade</span>
-              <div className="flex gap-2">
-                <Chip active={form.qualityTier === "draft"} onClick={() => update("qualityTier", "draft")}>
-                  Rascunho
-                </Chip>
-                <Chip active={form.qualityTier === "standard"} onClick={() => update("qualityTier", "standard")}>
-                  Padrão
-                </Chip>
-                <Chip active={form.qualityTier === "high"} onClick={() => update("qualityTier", "high")}>
-                  Alta
-                </Chip>
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_auto]">
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-1.5">
+                <label htmlFor="videoMode" className={labelClass}>
+                  Vídeo
+                </label>
+                <select
+                  id="videoMode"
+                  value={form.videoMode}
+                  onChange={(e) => update("videoMode", e.target.value as FormState["videoMode"])}
+                  className={fieldClass}
+                >
+                  <option value="hybrid">Híbrido (imagem + vídeo onde faz sentido)</option>
+                  <option value="motion_graphics_only">Só imagem (mais barato)</option>
+                  <option value="ai_video_only">Só vídeo (mais caro)</option>
+                </select>
               </div>
+
+              <div className="flex flex-col gap-1.5">
+                <label htmlFor="aspectRatio" className={labelClass}>
+                  Formato
+                </label>
+                <select
+                  id="aspectRatio"
+                  value={form.aspectRatio}
+                  onChange={(e) => update("aspectRatio", e.target.value as FormState["aspectRatio"])}
+                  className={fieldClass}
+                >
+                  <option value="vertical">Vertical (9:16 — Reels/TikTok/Shorts)</option>
+                  <option value="horizontal">Horizontal (16:9 — YouTube)</option>
+                  <option value="square">Quadrado (1:1)</option>
+                </select>
+              </div>
+
+              <div className="flex flex-col gap-1.5">
+                <span className={labelClass}>Qualidade</span>
+                <div className="flex gap-2">
+                  <Chip active={form.qualityTier === "draft"} onClick={() => update("qualityTier", "draft")}>
+                    Rascunho
+                  </Chip>
+                  <Chip active={form.qualityTier === "standard"} onClick={() => update("qualityTier", "standard")}>
+                    Padrão
+                  </Chip>
+                  <Chip active={form.qualityTier === "high"} onClick={() => update("qualityTier", "high")}>
+                    Alta
+                  </Chip>
+                </div>
+                <p className="text-sm text-fg-tertiary">{QUALITY_TIER_NOTES[form.qualityTier]}</p>
+              </div>
+            </div>
+
+            <div className="flex items-end gap-4">
+              {(["vertical", "horizontal", "square"] as const).map((ratio) => (
+                <button key={ratio} type="button" onClick={() => update("aspectRatio", ratio)}>
+                  <FrameBox aspectRatio={ratio} size="sm" active={form.aspectRatio === ratio} />
+                </button>
+              ))}
             </div>
           </div>
         )}
 
         {step.key === "legendas" && (
-          <div className="flex flex-col gap-6">
-            <label className="flex items-center gap-2 text-sm font-medium text-fg-primary">
-              <input
-                type="checkbox"
-                checked={form.captionsEnabled}
-                onChange={(e) => update("captionsEnabled", e.target.checked)}
-                className="h-4 w-4 rounded border-border-default bg-surface-1 accent-accent"
-              />
-              Legenda de narração
-              {!form.narrationEnabled && form.captionsEnabled && (
-                <span className="font-normal text-fg-tertiary">(sincronizada pela duração estimada, sem narração)</span>
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_auto]">
+            <div className="flex flex-col gap-6">
+              <label className="flex items-center gap-2 text-sm font-medium text-fg-primary">
+                <input
+                  type="checkbox"
+                  checked={form.captionsEnabled}
+                  onChange={(e) => update("captionsEnabled", e.target.checked)}
+                  className="h-4 w-4 rounded border-border-default bg-surface-1 accent-accent"
+                />
+                Legenda de narração
+                {!form.narrationEnabled && form.captionsEnabled && (
+                  <span className="font-normal text-fg-tertiary">(sincronizada pela duração estimada, sem narração)</span>
+                )}
+              </label>
+
+              {form.captionsEnabled && (
+                <>
+                  <div className="flex flex-col gap-1.5">
+                    <label htmlFor="captionStyle" className={labelClass}>
+                      Estilo da legenda
+                    </label>
+                    <select
+                      id="captionStyle"
+                      value={form.captionStyle}
+                      onChange={(e) => update("captionStyle", e.target.value)}
+                      className={fieldClass}
+                    >
+                      <option value="">Padrão do arquétipo</option>
+                      {config.captionStyles.map((c) => (
+                        <option key={c} value={c}>
+                          {formatLabel(c)}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="flex flex-col gap-1.5">
+                    <span className={labelClass}>Palavras por vez</span>
+                    <div className="flex gap-2">
+                      {CHUNK_SIZE_LEVELS.map((l) => (
+                        <Chip key={l.level} active={form.captionChunkLevel === l.level} onClick={() => update("captionChunkLevel", l.level)}>
+                          {l.label}
+                        </Chip>
+                      ))}
+                    </div>
+                  </div>
+                </>
               )}
-            </label>
+
+              <label className="flex items-center gap-2 text-sm text-fg-primary">
+                <input
+                  type="checkbox"
+                  checked={form.showTextOverlays}
+                  onChange={(e) => update("showTextOverlays", e.target.checked)}
+                  className="h-4 w-4 rounded border-border-default bg-surface-1 accent-accent"
+                />
+                Mostrar texto animado sobre as cenas (além da legenda de narração)
+              </label>
+            </div>
 
             {form.captionsEnabled && (
-              <>
-                <div className="flex flex-col gap-1.5">
-                  <label htmlFor="captionStyle" className={labelClass}>
-                    Estilo da legenda
-                  </label>
-                  <select
-                    id="captionStyle"
-                    value={form.captionStyle}
-                    onChange={(e) => update("captionStyle", e.target.value)}
-                    className={fieldClass}
+              <div className="flex flex-col items-center gap-1.5">
+                <FrameBox aspectRatio={form.aspectRatio}>
+                  <span
+                    className={`mb-4 max-w-[85%] text-balance text-center text-sm ${
+                      form.captionStyle ? CAPTION_STYLE_PREVIEW[form.captionStyle] : CAPTION_STYLE_PREVIEW.clean
+                    }`}
                   >
-                    <option value="">Padrão do arquétipo</option>
-                    {config.captionStyles.map((c) => (
-                      <option key={c} value={c}>
-                        {formatLabel(c)}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="flex flex-col gap-1.5">
-                  <span className={labelClass}>Palavras por vez</span>
-                  <div className="flex gap-2">
-                    {CHUNK_SIZE_LEVELS.map((l) => (
-                      <Chip key={l.level} active={form.captionChunkLevel === l.level} onClick={() => update("captionChunkLevel", l.level)}>
-                        {l.label}
-                      </Chip>
-                    ))}
-                  </div>
-                </div>
-              </>
+                    Isso é um exemplo de legenda
+                  </span>
+                </FrameBox>
+                <span className="text-xs text-fg-tertiary">
+                  {form.captionStyle ? formatLabel(form.captionStyle) : "Padrão do arquétipo"} (aproximação — o
+                  resultado real sai do renderer)
+                </span>
+              </div>
             )}
-
-            <label className="flex items-center gap-2 text-sm text-fg-primary">
-              <input
-                type="checkbox"
-                checked={form.showTextOverlays}
-                onChange={(e) => update("showTextOverlays", e.target.checked)}
-                className="h-4 w-4 rounded border-border-default bg-surface-1 accent-accent"
-              />
-              Mostrar texto animado sobre as cenas (além da legenda de narração)
-            </label>
           </div>
         )}
 
@@ -981,6 +1099,8 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
           )}
         </div>
       </div>
+
+      {step.key !== "revisao" && <SummaryPanel form={form} />}
     </div>
   );
 }
