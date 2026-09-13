@@ -1,0 +1,52 @@
+<svg width="1280" height="320" viewBox="0 0 1280 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Click.Play — do tópico ao vídeo, automaticamente">
+  <defs>
+    <radialGradient id="glow" cx="18%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#f97316" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#f97316" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="accentText" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f97316"/>
+      <stop offset="100%" stop-color="#fb923c"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1280" height="320" fill="#0a0a0a"/>
+  <rect width="1280" height="320" fill="url(#glow)"/>
+
+  <!-- ícone: play triangulo dentro de um frame vertical (aspect 9:16), remete ao formato shorts/reels -->
+  <g transform="translate(96,80)">
+    <rect x="0" y="0" width="90" height="160" rx="14" fill="none" stroke="#2a2a2a" stroke-width="3"/>
+    <path d="M34 52 L34 108 L70 80 Z" fill="#f97316"/>
+  </g>
+
+  <text x="230" y="150" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="64" font-weight="800" fill="#fafafa">
+    Click<tspan fill="url(#accentText)">.Play</tspan>
+  </text>
+  <text x="232" y="196" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="24" fill="#a3a3a3">
+    Do tópico ao MP4 — roteiro, narração, legendas e vídeo por IA, sem edição manual
+  </text>
+
+  <!-- mini "timeline" decorativa -->
+  <g transform="translate(232,232)" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="15" fill="#737373">
+    <g transform="translate(0,0)">
+      <rect width="150" height="26" rx="6" fill="#171717" stroke="#2a2a2a"/>
+      <text x="12" y="18">Research</text>
+    </g>
+    <g transform="translate(160,0)">
+      <rect width="170" height="26" rx="6" fill="#171717" stroke="#2a2a2a"/>
+      <text x="12" y="18">Roteiro + Critic</text>
+    </g>
+    <g transform="translate(340,0)">
+      <rect width="140" height="26" rx="6" fill="#171717" stroke="#2a2a2a"/>
+      <text x="12" y="18">TTS + Legendas</text>
+    </g>
+    <g transform="translate(490,0)">
+      <rect width="150" height="26" rx="6" fill="#171717" stroke="#2a2a2a"/>
+      <text x="12" y="18">Visual + Música</text>
+    </g>
+    <g transform="translate(650,0)">
+      <rect width="140" height="26" rx="6" fill="#1f1a12" stroke="#f97316"/>
+      <text x="12" y="18" fill="#fdba74">Render + QC</text>
+    </g>
+  </g>
+</svg>

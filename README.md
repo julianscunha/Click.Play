@@ -1,10 +1,18 @@
-# Click.Play
+<p align="center">
+  <img src=".github/assets/banner.svg" alt="Click.Play — do tópico ao vídeo, automaticamente" width="100%">
+</p>
 
-![status](https://img.shields.io/badge/status-em%20desenvolvimento-yellow)
-![node](https://img.shields.io/badge/node-%3E%3D22-339933?logo=node.js&logoColor=white)
-![pnpm](https://img.shields.io/badge/pnpm-workspaces-F69220?logo=pnpm&logoColor=white)
-![typescript](https://img.shields.io/badge/TypeScript-5.7-3178C6?logo=typescript&logoColor=white)
-![license](https://img.shields.io/badge/license-MIT-green)
+<p align="center">
+  <img src="https://img.shields.io/badge/status-em%20desenvolvimento-yellow" alt="status">
+  <img src="https://img.shields.io/badge/node-%3E%3D22-339933?logo=node.js&logoColor=white" alt="node">
+  <img src="https://img.shields.io/badge/pnpm-workspaces-F69220?logo=pnpm&logoColor=white" alt="pnpm">
+  <img src="https://img.shields.io/badge/TypeScript-5.7-3178C6?logo=typescript&logoColor=white" alt="typescript">
+  <img src="https://img.shields.io/badge/Remotion-render-0B84F3?logo=remotion&logoColor=white" alt="remotion">
+  <img src="https://img.shields.io/badge/license-MIT-green" alt="license">
+  <a href="https://github.com/julianscunha/Click.Play/stargazers"><img src="https://img.shields.io/github/stars/julianscunha/Click.Play?style=flat&color=f97316" alt="stars"></a>
+</p>
+
+# Click.Play
 
 Web app de produção automatizada de vídeo: você entra com um tópico (e ajustes opcionais de tom, ritmo, estilo), o sistema pesquisa, escreve o roteiro, planeja a direção visual, gera narração + legendas + trilha, e renderiza um vídeo final — do formulário ao MP4, sem edição manual.
 
