@@ -484,6 +484,53 @@ describe("server", () => {
     });
   });
 
+  describe("briefing expand (§11A Bloco 7)", () => {
+    it("expands a topic into a direction brief", async () => {
+      const app = buildServer({
+        db,
+        buildJobRunnerDeps: () => fakeJobRunnerDeps(fakeLLM({ direction: "Tom leve, público jovem." })),
+        buildCostOptions: () => costOptions,
+        runsDir,
+        envFilePath,
+      });
+
+      const res = await app.inject({
+        method: "POST",
+        url: "/briefing/expand",
+        payload: { topic: "A história da chegada à Lua", length: "compact" },
+      });
+      expect(res.statusCode).toBe(200);
+      expect(res.json()).toEqual({ direction: "Tom leve, público jovem." });
+    });
+
+    it("rejects an invalid length", async () => {
+      const app = buildServer({
+        db,
+        buildJobRunnerDeps: () => fakeJobRunnerDeps(fakeLLM()),
+        buildCostOptions: () => costOptions,
+        runsDir,
+        envFilePath,
+      });
+
+      const res = await app.inject({ method: "POST", url: "/briefing/expand", payload: { topic: "x", length: "epic" } });
+      expect(res.statusCode).toBe(422);
+    });
+
+    it("502s when the LLM call fails", async () => {
+      const failingLLM: LLMProvider = { id: "openrouter", generate: vi.fn().mockRejectedValue(new Error("quota exceeded")) };
+      const app = buildServer({
+        db,
+        buildJobRunnerDeps: () => fakeJobRunnerDeps(failingLLM),
+        buildCostOptions: () => costOptions,
+        runsDir,
+        envFilePath,
+      });
+
+      const res = await app.inject({ method: "POST", url: "/briefing/expand", payload: { topic: "x", length: "compact" } });
+      expect(res.statusCode).toBe(502);
+    });
+  });
+
   describe("schedules (Fase 19)", () => {
     async function createTemplateViaApi(app: ReturnType<typeof buildServer>) {
       const jobRes = await app.inject({

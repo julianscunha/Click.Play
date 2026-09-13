@@ -4,7 +4,7 @@ import * as url from "node:url";
 import { createCostApprovalGate, recoverOrphanedJobs } from "@clickplay/providers";
 import { buildServer } from "./server.js";
 import { openDb } from "./db.js";
-import { buildCostOptions, buildJobRunnerDeps } from "./providers.js";
+import { buildCostOptions, buildJobRunnerDeps, buildLLM } from "./providers.js";
 import { runDueSchedules } from "./scheduler.js";
 
 const runsDir = path.resolve(process.env.RUNS_DIR || "./data/runs");
@@ -19,6 +19,7 @@ const app = buildServer({
   db,
   buildJobRunnerDeps,
   buildCostOptions,
+  buildLLM: () => buildLLM("standard", false),
   runsDir,
   envFilePath,
   apiToken: process.env.API_TOKEN || undefined,

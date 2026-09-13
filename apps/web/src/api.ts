@@ -216,6 +216,13 @@ export function saveTemplate(name: string, productionId: string, variableSchema?
   return request("/templates", { method: "POST", body: JSON.stringify({ name, productionId, variableSchema }) });
 }
 
+export type BriefingLength = "compact" | "balanced" | "verbose";
+
+/** §11A Bloco 7 — expande o tema num rascunho de briefing revisável, antes de qualquer geração real. */
+export function expandBriefing(topic: string, length: BriefingLength, language?: string): Promise<{ direction: string }> {
+  return request("/briefing/expand", { method: "POST", body: JSON.stringify({ topic, length, language }) });
+}
+
 export type ScheduleFrequency = "daily" | "weekly";
 
 /** "Agendamento" (Fase 19) — dispara um template numa cadência fixa (intervalo simples, não cron). */

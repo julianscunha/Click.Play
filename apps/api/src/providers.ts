@@ -125,7 +125,7 @@ function buildImageProvider(tier: QualityTier, useOwnProviders: boolean): ImageP
 /** Modelo de fallback (OPENROUTER_MODEL_FALLBACK) opcional — se setado, troca
  * pra ele quando o primário falhar (quota/erro/"No output generated", achados
  * em teste manual real). */
-function buildLLM(tier: QualityTier, useOwnProviders: boolean): LLMProvider {
+export function buildLLM(tier: QualityTier, useOwnProviders: boolean): LLMProvider {
   const key = resolveKey("OPENROUTER_API_KEY", useOwnProviders);
   const primary = withProviderTimeout(
     new OpenRouterLLM(process.env.OPENROUTER_MODEL || MODEL_BY_TIER[tier].llm, key),

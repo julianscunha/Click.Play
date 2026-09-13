@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import {
   createContentProject,
+  expandBriefing,
   getTemplate,
   listContentProjects,
   listTemplates,
+  type BriefingLength,
   type ContentProject,
   type CreateJobInput,
   type FormConfig,
@@ -302,6 +304,9 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
   const [templateError, setTemplateError] = useState<string | null>(null);
   const [templateVariables, setTemplateVariables] = useState<TemplateVariable[]>([]);
   const [variableBindings, setVariableBindings] = useState<Record<string, string>>({});
+  const [briefingLength, setBriefingLength] = useState<BriefingLength>("balanced");
+  const [generatingBriefing, setGeneratingBriefing] = useState(false);
+  const [briefingError, setBriefingError] = useState<string | null>(null);
 
   useEffect(() => {
     listContentProjects()
@@ -331,6 +336,20 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
       setTemplateError(err instanceof Error ? err.message : String(err));
     } finally {
       setLoadingTemplate(false);
+    }
+  }
+
+  async function handleGenerateBriefing() {
+    if (!form.topic.trim() || generatingBriefing) return;
+    setGeneratingBriefing(true);
+    setBriefingError(null);
+    try {
+      const { direction } = await expandBriefing(form.topic.trim(), briefingLength, form.language);
+      update("direction", direction);
+    } catch (err) {
+      setBriefingError(err instanceof Error ? err.message : String(err));
+    } finally {
+      setGeneratingBriefing(false);
     }
   }
 
@@ -507,9 +526,34 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
               />
             </div>
             <div className="flex flex-col gap-1.5">
-              <label htmlFor="direction" className={labelClass}>
-                Briefing <span className="text-fg-tertiary">(opcional)</span>
-              </label>
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <label htmlFor="direction" className={labelClass}>
+                  Briefing <span className="text-fg-tertiary">(opcional)</span>
+                </label>
+                <div className="flex items-center gap-2">
+                  <div className="flex gap-1">
+                    {(
+                      [
+                        { value: "compact", label: "Compacto" },
+                        { value: "balanced", label: "Equilibrado" },
+                        { value: "verbose", label: "Verboso" },
+                      ] as const
+                    ).map((l) => (
+                      <Chip key={l.value} active={briefingLength === l.value} onClick={() => setBriefingLength(l.value)}>
+                        {l.label}
+                      </Chip>
+                    ))}
+                  </div>
+                  <button
+                    type="button"
+                    onClick={handleGenerateBriefing}
+                    disabled={!form.topic.trim() || generatingBriefing}
+                    className="text-sm text-fg-tertiary underline hover:text-fg-secondary disabled:cursor-not-allowed disabled:opacity-40"
+                  >
+                    {generatingBriefing ? "Gerando..." : "Gerar automaticamente"}
+                  </button>
+                </div>
+              </div>
               <textarea
                 id="direction"
                 value={form.direction}
@@ -518,6 +562,15 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
                 rows={4}
                 className={`resize-y ${fieldClass}`}
               />
+              <p className="text-xs text-fg-tertiary">
+                Rascunho gerado por IA a partir do tema — dá pra saber o que vai ser narrado antes de gerar o vídeo.
+                Revise e edite à vontade.
+              </p>
+              {briefingError && (
+                <p role="alert" className="text-xs text-status-error">
+                  {briefingError}
+                </p>
+              )}
             </div>
             <div className="flex flex-col gap-1.5">
               <label htmlFor="contentProjectId" className={labelClass}>

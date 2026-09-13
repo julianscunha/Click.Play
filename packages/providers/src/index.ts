@@ -7,6 +7,7 @@ export * from "./llm/fallback.js";
 export * from "./config/archetype.js";
 export * from "./config/archetype-registry.js";
 export * from "./agents/research.js";
+export * from "./agents/briefing.js";
 export * from "./agents/creative-director.js";
 export * from "./agents/critic.js";
 export * from "./tts/types.js";

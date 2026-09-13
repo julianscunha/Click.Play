@@ -3,8 +3,15 @@ import helmet from "@fastify/helmet";
 import rateLimit from "@fastify/rate-limit";
 import fastifyStatic from "@fastify/static";
 import Fastify from "fastify";
-import { createCostApprovalGate, type ClickPlayDb, type CostEstimateOptions, type JobRunnerDeps } from "@clickplay/providers";
+import {
+  createCostApprovalGate,
+  type ClickPlayDb,
+  type CostEstimateOptions,
+  type JobRunnerDeps,
+  type LLMProvider,
+} from "@clickplay/providers";
 import type { QualityTier } from "@clickplay/domain";
+import { registerBriefingRoutes } from "./routes/briefing.js";
 import { registerContentProjectsRoutes } from "./routes/content-projects.js";
 import { registerCreditsRoutes } from "./routes/credits.js";
 import { registerJobsRoutes } from "./routes/jobs.js";
@@ -22,6 +29,9 @@ export interface BuildServerOptions {
     voiceGender?: "female" | "male",
   ): JobRunnerDeps;
   buildCostOptions(): CostEstimateOptions;
+  /** Opcional — sem valor, deriva do `llm` já construído por `buildJobRunnerDeps` (mesmo provider,
+   * evita exigir esse parâmetro em toda chamada de `buildServer` só por causa da rota de briefing). */
+  buildLLM?(): LLMProvider;
   runsDir: string;
   envFilePath: string;
   /** Injetável pra testes reaproveitarem o mesmo gate entre chamadas HTTP simuladas. Default: novo gate por servidor. */
@@ -71,6 +81,7 @@ export function buildServer(opts: BuildServerOptions) {
   registerContentProjectsRoutes(app, { db: opts.db });
   registerTemplatesRoutes(app, { db: opts.db });
   registerSchedulesRoutes(app, { db: opts.db });
+  registerBriefingRoutes(app, { buildLLM: opts.buildLLM ?? (() => opts.buildJobRunnerDeps().llm) });
   registerJobsRoutes(app, {
     db: opts.db,
     buildJobRunnerDeps: opts.buildJobRunnerDeps,
