@@ -26,6 +26,12 @@ export interface ContentProject {
   updatedAt: Date;
 }
 
+/** Variável declarada num template (Fase 18) — `key` interpolado como `{{key}}` em `config.direction`. */
+export interface TemplateVariable {
+  key: string;
+  label: string;
+}
+
 /** Config de produção salvo/reaproveitável (Fase 17) — mesmo shape de `Production.config`. */
 export interface Template {
   id: string;
@@ -34,6 +40,7 @@ export interface Template {
   version: number;
   config: ProductionConfig;
   sourceProductionId: string | null;
+  variableSchema: TemplateVariable[];
   createdAt: Date;
   updatedAt: Date;
 }
@@ -91,6 +98,7 @@ export function templateFromRow(row: TemplateRow): Template {
     version: row.version,
     config: row.config as ProductionConfig,
     sourceProductionId: row.sourceProductionId ?? null,
+    variableSchema: row.variableSchema ?? [],
     createdAt: row.createdAt,
     updatedAt: row.updatedAt,
   };

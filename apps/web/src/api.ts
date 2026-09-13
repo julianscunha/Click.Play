@@ -182,12 +182,19 @@ export interface TemplateConfig {
   outro?: IntroOutroConfig;
 }
 
+/** Variável declarada num template (Fase 18) — `key` interpolado como `{{key}}` em `direction`. */
+export interface TemplateVariable {
+  key: string;
+  label: string;
+}
+
 export interface TemplateSummary {
   id: string;
   contentProjectId: string | null;
   name: string;
   version: number;
   sourceProductionId: string | null;
+  variableSchema: TemplateVariable[];
   createdAt: string;
   updatedAt: string;
 }
@@ -204,8 +211,8 @@ export function getTemplate(id: string): Promise<TemplateDetail> {
   return request(`/templates/${id}`);
 }
 
-export function saveTemplate(name: string, productionId: string): Promise<TemplateSummary> {
-  return request("/templates", { method: "POST", body: JSON.stringify({ name, productionId }) });
+export function saveTemplate(name: string, productionId: string, variableSchema?: TemplateVariable[]): Promise<TemplateSummary> {
+  return request("/templates", { method: "POST", body: JSON.stringify({ name, productionId, variableSchema }) });
 }
 
 export function getJob(id: string): Promise<JobView> {

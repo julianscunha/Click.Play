@@ -17,6 +17,7 @@ import {
   type ResultSummary,
   type Template,
   templateFromRow,
+  type TemplateVariable,
 } from "./types.js";
 
 export async function createProduction(
@@ -85,10 +86,17 @@ export async function listProductionsByContentProject(db: ClickPlayDb, contentPr
  */
 export async function upsertTemplate(
   db: ClickPlayDb,
-  input: { name: string; config: ProductionConfig; contentProjectId: string | null; sourceProductionId: string },
+  input: {
+    name: string;
+    config: ProductionConfig;
+    contentProjectId: string | null;
+    sourceProductionId: string;
+    variableSchema?: TemplateVariable[];
+  },
 ): Promise<Template> {
   const existing = await db.select().from(templates).where(eq(templates.name, input.name)).get();
   const now = new Date();
+  const variableSchema = input.variableSchema ?? [];
 
   if (existing) {
     const row = {
@@ -96,6 +104,7 @@ export async function upsertTemplate(
       config: input.config,
       contentProjectId: input.contentProjectId,
       sourceProductionId: input.sourceProductionId,
+      variableSchema,
       version: existing.version + 1,
       updatedAt: now,
     };
@@ -110,6 +119,7 @@ export async function upsertTemplate(
     version: 1,
     config: input.config,
     sourceProductionId: input.sourceProductionId,
+    variableSchema,
     createdAt: now,
     updatedAt: now,
   };

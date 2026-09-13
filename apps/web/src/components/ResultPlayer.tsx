@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { outputUrl, saveTemplate, type JobView, type QcDecision } from "../api.js";
+import { outputUrl, saveTemplate, type JobView, type QcDecision, type TemplateVariable } from "../api.js";
 import { costLine } from "./ProgressView.js";
 
 export interface ResultPlayerProps {
@@ -7,8 +7,24 @@ export interface ResultPlayerProps {
   onCreateAnother(): void;
 }
 
+/**
+ * Fase 18: parseia "CHAVE=Label, OUTRA=Outro label" em `TemplateVariable[]` — formato texto livre em vez
+ * de N pares de campos, decisão de manter o card de salvar template com 1 input a mais, não uma sub-UI de lista.
+ * Entradas sem "=" ou com chave vazia são ignoradas (usuário ainda digitando).
+ */
+function parseVariableSchema(raw: string): TemplateVariable[] {
+  return raw
+    .split(",")
+    .map((part) => {
+      const [key, ...rest] = part.split("=");
+      return { key: key?.trim() ?? "", label: rest.join("=").trim() };
+    })
+    .filter((v) => v.key.length > 0 && v.label.length > 0);
+}
+
 function SaveAsTemplate({ productionId }: { productionId: string }) {
   const [name, setName] = useState("");
+  const [variablesRaw, setVariablesRaw] = useState("");
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [saved, setSaved] = useState<string | null>(null);
@@ -18,7 +34,8 @@ function SaveAsTemplate({ productionId }: { productionId: string }) {
     setSaving(true);
     setError(null);
     try {
-      const template = await saveTemplate(name.trim(), productionId);
+      const variableSchema = parseVariableSchema(variablesRaw);
+      const template = await saveTemplate(name.trim(), productionId, variableSchema.length > 0 ? variableSchema : undefined);
       setSaved(template.version > 1 ? `Template "${template.name}" atualizado (v${template.version}).` : `Template "${template.name}" salvo.`);
     } catch (err) {
       setError(err instanceof Error ? err.message : String(err));
@@ -52,6 +69,21 @@ function SaveAsTemplate({ productionId }: { productionId: string }) {
         >
           {saving ? "Salvando..." : "Salvar"}
         </button>
+      </div>
+      <div className="flex flex-col gap-1">
+        <input
+          value={variablesRaw}
+          onChange={(e) => {
+            setVariablesRaw(e.target.value);
+            setSaved(null);
+          }}
+          placeholder="Variáveis (opcional): PERSONAGEM=Nome do personagem, TEMA=Tema da história"
+          className="rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-50 placeholder:text-neutral-500 focus:border-neutral-400 focus:outline-none"
+        />
+        <p className="text-xs text-neutral-500">
+          Use <code>{"{{CHAVE}}"}</code> no campo "Briefing" desta produção — ao reaproveitar o template, quem for
+          criar um vídeo novo preenche um valor por variável declarada aqui.
+        </p>
       </div>
       {error && (
         <p role="alert" className="text-xs text-red-400">

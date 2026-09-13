@@ -5,6 +5,10 @@ import { getProduction, getTemplate, listTemplates, upsertTemplate, type ClickPl
 const SaveTemplateBody = z.object({
   name: z.string().trim().min(1, "name é obrigatório"),
   productionId: z.string().min(1, "productionId é obrigatório"),
+  /** Fase 18: variáveis {{key}} interpoladas em `config.direction` ao usar o template. */
+  variableSchema: z
+    .array(z.object({ key: z.string().trim().min(1), label: z.string().trim().min(1) }))
+    .optional(),
 });
 
 export interface TemplatesRouteDeps {
@@ -32,6 +36,7 @@ export function registerTemplatesRoutes(app: FastifyInstance, deps: TemplatesRou
       config: production.config,
       contentProjectId: production.contentProjectId,
       sourceProductionId: production.id,
+      variableSchema: parsed.data.variableSchema,
     });
     return reply.status(201).send(template);
   });

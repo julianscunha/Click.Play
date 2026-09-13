@@ -419,6 +419,50 @@ describe("server", () => {
       expect(res.statusCode).toBe(404);
     });
 
+    it("saves and returns variableSchema (Fase 18)", async () => {
+      const app = buildServer({
+        db,
+        buildJobRunnerDeps: () => fakeJobRunnerDeps(fakeLLM()),
+        buildCostOptions: () => costOptions,
+        runsDir,
+        envFilePath,
+      });
+      const productionId = await createProductionViaJob(app);
+
+      const saved = await app.inject({
+        method: "POST",
+        url: "/templates",
+        payload: {
+          name: "Com variável",
+          productionId,
+          variableSchema: [{ key: "PERSONAGEM", label: "Nome do personagem" }],
+        },
+      });
+      expect(saved.statusCode).toBe(201);
+      expect(saved.json().variableSchema).toEqual([{ key: "PERSONAGEM", label: "Nome do personagem" }]);
+
+      const fetched = await app.inject({ method: "GET", url: `/templates/${saved.json().id}` });
+      expect(fetched.json().variableSchema).toEqual([{ key: "PERSONAGEM", label: "Nome do personagem" }]);
+    });
+
+    it("rejects variableSchema entries missing key or label", async () => {
+      const app = buildServer({
+        db,
+        buildJobRunnerDeps: () => fakeJobRunnerDeps(fakeLLM()),
+        buildCostOptions: () => costOptions,
+        runsDir,
+        envFilePath,
+      });
+      const productionId = await createProductionViaJob(app);
+
+      const res = await app.inject({
+        method: "POST",
+        url: "/templates",
+        payload: { name: "x", productionId, variableSchema: [{ key: "", label: "" }] },
+      });
+      expect(res.statusCode).toBe(422);
+    });
+
     it("404s GET /templates/:id for an unknown template", async () => {
       const app = buildServer({
         db,

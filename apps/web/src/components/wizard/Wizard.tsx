@@ -9,8 +9,15 @@ import {
   type FormConfig,
   type TemplateConfig,
   type TemplateSummary,
+  type TemplateVariable,
   type TransitionType,
 } from "../../api.js";
+
+/** Fase 18: substitui `{{key}}` (case-sensível, sem espaço dentro das chaves) pelo valor preenchido pelo
+ * usuário — chave sem binding preenchido fica como está (usuário ainda não terminou de preencher). */
+export function interpolateTemplateVariables(text: string, bindings: Record<string, string>): string {
+  return text.replace(/\{\{(\w+)\}\}/g, (match, key: string) => bindings[key]?.trim() || match);
+}
 
 function formatLabel(id: string): string {
   return id.replace(/_/g, " ");
@@ -206,6 +213,8 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
   const [selectedTemplateId, setSelectedTemplateId] = useState("");
   const [loadingTemplate, setLoadingTemplate] = useState(false);
   const [templateError, setTemplateError] = useState<string | null>(null);
+  const [templateVariables, setTemplateVariables] = useState<TemplateVariable[]>([]);
+  const [variableBindings, setVariableBindings] = useState<Record<string, string>>({});
 
   useEffect(() => {
     listContentProjects()
@@ -223,11 +232,14 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
   async function handleSelectTemplate(id: string) {
     setSelectedTemplateId(id);
     setTemplateError(null);
+    setTemplateVariables([]);
+    setVariableBindings({});
     if (!id) return;
     setLoadingTemplate(true);
     try {
       const template = await getTemplate(id);
       setForm((f) => ({ ...f, ...applyTemplateConfig(template.config) }));
+      setTemplateVariables(template.variableSchema);
     } catch (err) {
       setTemplateError(err instanceof Error ? err.message : String(err));
     } finally {
@@ -268,9 +280,11 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
       setCreatingContentProject(false);
     }
     const targetDurationSeconds = Number(form.targetDurationSeconds);
+    const direction =
+      templateVariables.length > 0 ? interpolateTemplateVariables(form.direction, variableBindings) : form.direction;
     onSubmit({
       topic: form.topic.trim(),
-      direction: form.direction.trim() || undefined,
+      direction: direction.trim() || undefined,
       archetype: form.archetype || undefined,
       pacing: form.pacing || undefined,
       contentProjectId,
@@ -368,6 +382,27 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
                     {templateError}
                   </p>
                 )}
+              </div>
+            )}
+            {templateVariables.length > 0 && (
+              <div className="flex flex-col gap-3 rounded-md border border-neutral-800 bg-neutral-900/50 p-4">
+                <p className={labelClass}>Variáveis do template</p>
+                <p className="text-xs text-neutral-500">
+                  Preenche <code>{"{{CHAVE}}"}</code> dentro do Briefing abaixo antes de criar o vídeo.
+                </p>
+                {templateVariables.map((v) => (
+                  <div key={v.key} className="flex flex-col gap-1.5">
+                    <label htmlFor={`var-${v.key}`} className={labelClass}>
+                      {v.label}
+                    </label>
+                    <input
+                      id={`var-${v.key}`}
+                      value={variableBindings[v.key] ?? ""}
+                      onChange={(e) => setVariableBindings((b) => ({ ...b, [v.key]: e.target.value }))}
+                      className={fieldClass}
+                    />
+                  </div>
+                ))}
               </div>
             )}
             <div className="flex flex-col gap-1.5">

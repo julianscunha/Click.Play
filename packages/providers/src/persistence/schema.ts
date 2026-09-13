@@ -69,6 +69,8 @@ export const templates = sqliteTable("templates", {
   version: integer("version").notNull().default(1),
   config: text("config", { mode: "json" }).notNull(),
   sourceProductionId: text("source_production_id").references(() => productions.id),
+  /** Fase 18: lista de {key, label} pra interpolar {{key}} em `config.direction` — null/[] = template sem variável. */
+  variableSchema: text("variable_schema", { mode: "json" }).$type<{ key: string; label: string }[]>(),
   createdAt: integer("created_at", { mode: "timestamp_ms" }).notNull(),
   updatedAt: integer("updated_at", { mode: "timestamp_ms" }).notNull(),
 });

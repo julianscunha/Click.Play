@@ -149,6 +149,41 @@ describe("persistence repository", () => {
     it("returns null for a missing template", async () => {
       expect(await getTemplate(db, "does-not-exist")).toBeNull();
     });
+
+    it("defaults variableSchema to [] when not provided", async () => {
+      const production = await createProduction(db, { topic: "t", config });
+      const template = await upsertTemplate(db, {
+        name: "Sem variável",
+        config: production.config,
+        contentProjectId: null,
+        sourceProductionId: production.id,
+      });
+
+      expect(template.variableSchema).toEqual([]);
+      expect(await getTemplate(db, template.id)).toEqual(template);
+    });
+
+    it("persists variableSchema (Fase 18) and keeps it across overwrite unless replaced", async () => {
+      const production = await createProduction(db, { topic: "t", config });
+      const withVars = await upsertTemplate(db, {
+        name: "Com variável",
+        config: production.config,
+        contentProjectId: null,
+        sourceProductionId: production.id,
+        variableSchema: [{ key: "PERSONAGEM", label: "Nome do personagem" }],
+      });
+
+      expect(withVars.variableSchema).toEqual([{ key: "PERSONAGEM", label: "Nome do personagem" }]);
+      expect(await getTemplate(db, withVars.id)).toEqual(withVars);
+
+      const overwritten = await upsertTemplate(db, {
+        name: "Com variável",
+        config: production.config,
+        contentProjectId: null,
+        sourceProductionId: production.id,
+      });
+      expect(overwritten.variableSchema).toEqual([]);
+    });
   });
 
   it("creates a job QUEUED with progress 0, linked to its production", async () => {

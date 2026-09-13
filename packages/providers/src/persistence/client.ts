@@ -47,6 +47,7 @@ CREATE TABLE IF NOT EXISTS templates (
   version INTEGER NOT NULL DEFAULT 1,
   config TEXT NOT NULL,
   source_production_id TEXT REFERENCES productions(id),
+  variable_schema TEXT,
   created_at INTEGER NOT NULL,
   updated_at INTEGER NOT NULL
 );
@@ -106,6 +107,15 @@ function addContentProjectIdColumnIfMissing(sqlite: DatabaseSync): void {
   }
 }
 
+/** Idem, schema de variáveis do template (Fase 18). */
+function addVariableSchemaColumnIfMissing(sqlite: DatabaseSync): void {
+  try {
+    sqlite.exec("ALTER TABLE templates ADD COLUMN variable_schema TEXT");
+  } catch {
+    // já existe
+  }
+}
+
 /**
  * Só engole o erro esperado ("já renomeado/nunca existiu") — qualquer outra
  * falha (lock de arquivo, disco cheio) tem que estourar, senão o `CREATE
@@ -153,6 +163,7 @@ export function createDb(sqliteFilePath: string): ClickPlayDb {
   addStageDetailColumnIfMissing(sqlite);
   addResultSummaryColumnIfMissing(sqlite);
   addContentProjectIdColumnIfMissing(sqlite);
+  addVariableSchemaColumnIfMissing(sqlite);
   ensureWalletRow(sqlite);
 
   return drizzle(async (sqlText, params, method) => {
