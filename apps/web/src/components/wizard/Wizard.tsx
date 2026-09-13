@@ -50,6 +50,10 @@ const MUSIC_VOLUME_LEVELS = [
   { level: "alto", label: "Alto", value: 0.25 },
 ] as const;
 
+/** Frase de exemplo pro preview de legenda — comprida o bastante pra "muitas por vez" (6 palavras)
+ * ainda deixar pelo menos um chunk seguinte fora, mostrando que a legenda troca ao longo do vídeo. */
+const CAPTION_PREVIEW_WORDS = "Isso é um exemplo de como a legenda vai aparecer no vídeo".split(" ");
+
 const CHUNK_SIZE_LEVELS = [
   { level: "poucas", label: "Poucas por vez", value: 2 },
   { level: "medias", label: "Médias", value: 4 },
@@ -865,12 +869,15 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
                       form.captionStyle ? CAPTION_STYLE_PREVIEW[form.captionStyle] : CAPTION_STYLE_PREVIEW.clean
                     }`}
                   >
-                    Isso é um exemplo de legenda
+                    {CAPTION_PREVIEW_WORDS.slice(0, CHUNK_SIZE_LEVELS.find((l) => l.level === form.captionChunkLevel)!.value).join(
+                      " ",
+                    )}
                   </span>
                 </FrameBox>
                 <span className="text-xs text-fg-tertiary">
-                  {form.captionStyle ? formatLabel(form.captionStyle) : "Padrão do arquétipo"} (aproximação — o
-                  resultado real sai do renderer)
+                  {form.captionStyle ? formatLabel(form.captionStyle) : "Padrão do arquétipo"} ·{" "}
+                  {CHUNK_SIZE_LEVELS.find((l) => l.level === form.captionChunkLevel)!.value} palavras por vez
+                  (aproximação — o resultado real sai do renderer)
                 </span>
               </div>
             )}
