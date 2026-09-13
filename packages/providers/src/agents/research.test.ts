@@ -33,5 +33,5 @@ describe("research", () => {
     const llm = fakeLLM(err, err, err);
     await expect(research(llm, "Apollo 11")).rejects.toThrow("Research failed after 3 attempts");
     expect(llm.generate).toHaveBeenCalledTimes(3);
-  });
+  }, 15_000);
 });

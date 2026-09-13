@@ -127,7 +127,10 @@ function preparePublicAssets(input: RenderInput, runDir: string, publicDir: stri
   const assetsLink = path.join(publicDir, "assets");
   if (fs.existsSync(assetsDir)) {
     if (fs.existsSync(assetsLink)) fs.rmSync(assetsLink, { recursive: true, force: true });
-    fs.symlinkSync(path.resolve(assetsDir), assetsLink);
+    // Windows recusa symlink sem admin/Developer Mode (EPERM, achado em teste
+    // manual real) — junction aponta pra mesma pasta sem exigir privilégio
+    // elevado. Sem efeito nos outros SOs (o 3º argumento é ignorado fora do Windows).
+    fs.symlinkSync(path.resolve(assetsDir), assetsLink, process.platform === "win32" ? "junction" : undefined);
   }
 
   const toPublicPath = (absPath: string): string => {

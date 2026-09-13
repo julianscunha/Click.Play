@@ -15,6 +15,7 @@ import {
 import { getArchetype, listArchetypes } from "../config/archetype-registry.js";
 import type { ScenePacing } from "../config/archetype.js";
 import { AI_VIDEO_ESTIMATE_DURATION_SECONDS } from "../cost/pricing.js";
+import { parseSuggestedRetryDelayMs } from "../http/retry.js";
 import type { LLMProvider, LLMUsage } from "../llm/types.js";
 import type { ResearchResult } from "./research.js";
 import type { CritiqueResult } from "./critic.js";
@@ -233,7 +234,7 @@ If over budget, cut a scene rather than cramming.`;
   const totalUsage: LLMUsage = { inputTokens: 0, outputTokens: 0 };
 
   for (let attempt = 0; attempt < maxRetries; attempt++) {
-    if (attempt > 0) await sleep(attempt * 4000);
+    if (attempt > 0) await sleep(parseSuggestedRetryDelayMs(lastError?.message ?? "") ?? attempt * 4000);
     try {
       const result = await llm.generate({
         systemPrompt,
@@ -388,7 +389,7 @@ Keep the same archetype. Maintain the GOLDEN RULE: never reduce more than 2 cons
   const totalUsage: LLMUsage = { inputTokens: 0, outputTokens: 0 };
 
   for (let attempt = 0; attempt < maxRetries; attempt++) {
-    if (attempt > 0) await sleep(attempt * 4000);
+    if (attempt > 0) await sleep(parseSuggestedRetryDelayMs(lastError?.message ?? "") ?? attempt * 4000);
     try {
       const result = await llm.generate({
         systemPrompt,

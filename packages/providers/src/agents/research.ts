@@ -1,7 +1,12 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
 import { z } from "zod";
+import { parseSuggestedRetryDelayMs } from "../http/retry.js";
 import type { LLMProvider, LLMUsage } from "../llm/types.js";
+
+function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 const SYSTEM_PROMPT_PATH = path.join(process.cwd(), "prompts", "researcher.md");
 
@@ -39,6 +44,13 @@ export async function research(llm: LLMProvider, topic: string, language?: strin
   let lastError: Error | null = null;
 
   for (let attempt = 0; attempt < maxRetries; attempt++) {
+    if (attempt > 0) {
+      // Achado em teste manual real: sem espera nenhuma entre tentativas, um
+      // 429/rate-limit transitório caía de novo na mesma janela — as 3
+      // tentativas disparavam de volta a volta. Respeita o tempo que o
+      // provider sugeriu no erro (ex. "retry in ~7s"), senão backoff fixo.
+      await sleep(parseSuggestedRetryDelayMs(lastError?.message ?? "") ?? attempt * 3000);
+    }
     try {
       const result = await llm.generate({
         systemPrompt,
