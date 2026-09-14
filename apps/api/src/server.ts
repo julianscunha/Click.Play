@@ -16,6 +16,7 @@ import { registerContentProjectsRoutes } from "./routes/content-projects.js";
 import { registerCreditsRoutes } from "./routes/credits.js";
 import { registerJobsRoutes } from "./routes/jobs.js";
 import { registerMetaRoutes } from "./routes/meta.js";
+import { registerPublishRoutes } from "./routes/publish.js";
 import { registerSchedulesRoutes } from "./routes/schedules.js";
 import { registerSettingsRoutes } from "./routes/settings.js";
 import { registerTemplatesRoutes } from "./routes/templates.js";
@@ -34,6 +35,9 @@ export interface BuildServerOptions {
   buildLLM?(): LLMProvider;
   runsDir: string;
   envFilePath: string;
+  /** Base pública da API (sem barra final) — usada como redirect_uri do OAuth do YouTube (Fase 21).
+   * Precisa bater com o que está registrado no Google Cloud Console. Default: http://localhost:<PORT>. */
+  publicApiUrl?: string;
   /** Injetável pra testes reaproveitarem o mesmo gate entre chamadas HTTP simuladas. Default: novo gate por servidor. */
   gate?: ReturnType<typeof createCostApprovalGate>;
   /** Se setado, exige `Authorization: Bearer <apiToken>` em toda rota exceto /health e /files/* (vídeo servido direto por <video src>, sem como anexar header). Sem valor: sem auth (comportamento anterior, uso localhost). */
@@ -66,7 +70,8 @@ export function buildServer(opts: BuildServerOptions) {
   if (opts.apiToken) {
     const expected = `Bearer ${opts.apiToken}`;
     app.addHook("onRequest", async (req, reply) => {
-      if (req.url === "/health" || req.url.startsWith("/files/")) return;
+      // /oauth/* é navegação direta do browser (link/redirect do Google) — nunca carrega o Bearer token.
+      if (req.url === "/health" || req.url.startsWith("/files/") || req.url.startsWith("/oauth/")) return;
       if (req.headers.authorization !== expected) {
         return reply.status(401).send({ error: { code: "UNAUTHORIZED", message: "Token inválido ou ausente" } });
       }
@@ -88,6 +93,11 @@ export function buildServer(opts: BuildServerOptions) {
     buildCostOptions: opts.buildCostOptions,
     runsDir: opts.runsDir,
     gate,
+  });
+  registerPublishRoutes(app, {
+    db: opts.db,
+    envFilePath: opts.envFilePath,
+    publicApiUrl: opts.publicApiUrl ?? "http://localhost:8787",
   });
 
   return app;

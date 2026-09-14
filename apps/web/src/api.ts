@@ -310,6 +310,38 @@ export function outputUrl(output: string): string {
   return `${API_BASE}${output}`;
 }
 
+export type PublicationStatus = "pending" | "success" | "error";
+
+export interface Publication {
+  id: string;
+  jobId: string;
+  platform: "youtube";
+  status: PublicationStatus;
+  externalUrl: string | null;
+  error: string | null;
+}
+
+export interface PublishInput {
+  title?: string;
+  description?: string;
+  tags?: string[];
+  privacyStatus: "private" | "unlisted" | "public";
+}
+
+export function getPublication(jobId: string): Promise<Publication | null> {
+  return request(`/jobs/${jobId}/publication`);
+}
+
+export function publishJob(jobId: string, input: PublishInput): Promise<Publication> {
+  return request(`/jobs/${jobId}/publish`, { method: "POST", body: JSON.stringify(input) });
+}
+
+/** Link de "Conectar com Google" (Fase 21) — navegação direta do browser (não passa por `request`, o
+ * callback do Google não carrega o Bearer token da API). */
+export function youtubeAuthorizeUrl(): string {
+  return `${API_BASE}/oauth/youtube/authorize`;
+}
+
 export interface Credits {
   balanceUsd: number;
   consumedUsd: number;
@@ -347,6 +379,9 @@ export interface Settings {
   FAL_API_KEY_SYSTEM: SecretField;
   PEXELS_API_KEY: SecretField;
   PIXABAY_API_KEY: SecretField;
+  YOUTUBE_CLIENT_ID: SecretField;
+  YOUTUBE_CLIENT_SECRET: SecretField;
+  YOUTUBE_REFRESH_TOKEN: SecretField;
 }
 
 export function getSettings(): Promise<Settings> {

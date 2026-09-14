@@ -1,11 +1,23 @@
 import { randomUUID } from "node:crypto";
-import { and, eq, lte } from "drizzle-orm";
+import { and, desc, eq, lte } from "drizzle-orm";
 import type { CostBreakdown } from "../cost/index.js";
 import type { PipelineCheckpoint } from "../pipeline/types.js";
 import type { QcReport } from "../qc/types.js";
 import type { ClickPlayDb } from "./client.js";
 import { PROGRESS_BY_STATUS, resumeStatusForCheckpoint } from "./job-state-machine.js";
-import { contentProjects, jobs, type JobStatus, productions, type ScheduleFrequency, schedules, templates, wallet } from "./schema.js";
+import {
+  contentProjects,
+  jobs,
+  type JobStatus,
+  productions,
+  publications,
+  type PublicationPlatform,
+  type PublicationStatus,
+  type ScheduleFrequency,
+  schedules,
+  templates,
+  wallet,
+} from "./schema.js";
 import {
   type ContentProject,
   contentProjectFromRow,
@@ -14,6 +26,8 @@ import {
   type Production,
   type ProductionConfig,
   productionFromRow,
+  type Publication,
+  publicationFromRow,
   type ResultSummary,
   type Schedule,
   scheduleFromRow,
@@ -367,4 +381,40 @@ export async function markScheduleRun(db: ClickPlayDb, id: string, input: { ranA
     .update(schedules)
     .set({ lastRunAt: input.ranAt, nextRunAt: input.nextRunAt, updatedAt: input.ranAt })
     .where(eq(schedules.id, id));
+}
+
+/** Nova linha "pending" pra 1 tentativa de publicação (Fase 21) — atualizada pra success/error depois do upload real. */
+export async function createPublication(
+  db: ClickPlayDb,
+  input: { jobId: string; platform: PublicationPlatform },
+): Promise<Publication> {
+  const now = new Date();
+  const row = {
+    id: randomUUID(),
+    jobId: input.jobId,
+    platform: input.platform,
+    status: "pending" as PublicationStatus,
+    externalUrl: null,
+    publishedAt: null,
+    error: null,
+    createdAt: now,
+    updatedAt: now,
+  };
+  await db.insert(publications).values(row);
+  return publicationFromRow(row as never);
+}
+
+export async function markPublicationSuccess(db: ClickPlayDb, id: string, externalUrl: string): Promise<void> {
+  const now = new Date();
+  await db.update(publications).set({ status: "success", externalUrl, publishedAt: now, updatedAt: now }).where(eq(publications.id, id));
+}
+
+export async function markPublicationError(db: ClickPlayDb, id: string, error: string): Promise<void> {
+  await db.update(publications).set({ status: "error", error, updatedAt: new Date() }).where(eq(publications.id, id));
+}
+
+/** Tentativa mais recente pra um job — um job pode ter mais de 1 linha (retry após erro). */
+export async function getLatestPublicationForJob(db: ClickPlayDb, jobId: string): Promise<Publication | null> {
+  const row = await db.select().from(publications).where(eq(publications.jobId, jobId)).orderBy(desc(publications.createdAt)).get();
+  return row ? publicationFromRow(row) : null;
 }

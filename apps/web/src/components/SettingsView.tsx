@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getCredits, getFormConfig, getSettings, putCredits, putSettings, type Settings } from "../api.js";
+import { getCredits, getFormConfig, getSettings, putCredits, putSettings, youtubeAuthorizeUrl, type Settings } from "../api.js";
 
 type BadgeKind = "free" | "paid" | "optional" | "warning";
 
@@ -226,6 +226,7 @@ const CATEGORIES = [
   { key: "narracao", label: "Narração" },
   { key: "musica", label: "Música" },
   { key: "midia", label: "Banco de mídia" },
+  { key: "publicacao", label: "Publicação" },
   { key: "creditos", label: "Créditos" },
 ] as const;
 
@@ -278,6 +279,13 @@ function CategoryIcon({ category }: { category: Category }) {
           <rect x="13" y="3" width="8" height="8" rx="1" />
           <rect x="3" y="13" width="8" height="8" rx="1" />
           <rect x="13" y="13" width="8" height="8" rx="1" />
+        </svg>
+      );
+    case "publicacao":
+      return (
+        <svg {...common}>
+          <path d="M12 3v12M12 3l4 4M12 3 8 7" />
+          <path d="M5 14v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4" />
         </svg>
       );
     case "creditos":
@@ -891,6 +899,57 @@ export function SettingsView({ onClose }: SettingsViewProps) {
                 como conseguir
               </a>
             </Step>
+          </div>
+        )}
+
+        {activeCategory === "publicacao" && (
+          <div>
+            <CategoryHeader
+              title="Publicação"
+              description="Conecta sua conta do YouTube pra publicar o vídeo direto do ResultPlayer, sem baixar e subir manualmente."
+              chained={false}
+            />
+            <div className="flex flex-col gap-3 rounded-lg border border-border-subtle bg-surface-1 p-4">
+              <div className="flex items-center gap-2">
+                <p className="text-sm font-medium text-fg-primary">YouTube</p>
+                <Badge kind={settings.YOUTUBE_REFRESH_TOKEN.set ? "free" : "optional"}>
+                  {settings.YOUTUBE_REFRESH_TOKEN.set ? "conectado" : "não conectado"}
+                </Badge>
+              </div>
+              <KeyField
+                id="YOUTUBE_CLIENT_ID"
+                label="Client ID"
+                settings={settings}
+                value={inputs.YOUTUBE_CLIENT_ID ?? ""}
+                onChange={(v) => setField("YOUTUBE_CLIENT_ID", v)}
+              />
+              <KeyField
+                id="YOUTUBE_CLIENT_SECRET"
+                label="Client Secret"
+                settings={settings}
+                value={inputs.YOUTUBE_CLIENT_SECRET ?? ""}
+                onChange={(v) => setField("YOUTUBE_CLIENT_SECRET", v)}
+              />
+              <a
+                href="https://console.cloud.google.com/apis/credentials"
+                target="_blank"
+                rel="noreferrer"
+                className="text-xs text-fg-tertiary underline"
+              >
+                como conseguir
+              </a>
+              <WarningBanner>
+                Crie uma credencial OAuth "App da Web" no Google Cloud Console, com a YouTube Data API v3 habilitada, e
+                registre <code>http://localhost:8787/oauth/youtube/callback</code> como URI de redirecionamento
+                autorizado. Salve Client ID/Secret aqui antes de conectar.
+              </WarningBanner>
+              <a
+                href={youtubeAuthorizeUrl()}
+                className="mt-1 self-start rounded-md border border-border-default px-3 py-2 text-sm font-medium text-fg-primary hover:bg-surface-2"
+              >
+                {settings.YOUTUBE_REFRESH_TOKEN.set ? "Reconectar com Google" : "Conectar com Google"}
+              </a>
+            </div>
           </div>
         )}
 

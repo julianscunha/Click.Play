@@ -15,6 +15,8 @@ const db = openDb();
 /** Mesma instância passada pro server e pro runner do Scheduler (Fase 19) — um job criado por
  * agendamento precisa resolver na MESMA fila de aprovação que `POST /jobs/:id/approve-cost` consulta. */
 const gate = createCostApprovalGate();
+const port = Number(process.env.PORT ?? 8787);
+const publicApiUrl = process.env.PUBLIC_API_URL || `http://localhost:${port}`;
 const app = buildServer({
   db,
   buildJobRunnerDeps,
@@ -24,8 +26,8 @@ const app = buildServer({
   envFilePath,
   apiToken: process.env.API_TOKEN || undefined,
   gate,
+  publicApiUrl,
 });
-const port = Number(process.env.PORT ?? 8787);
 
 recoverOrphanedJobs(db)
   .then((count) => {

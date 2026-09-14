@@ -15,6 +15,11 @@ const SECRET_FIELDS = [
   "FAL_API_KEY_SYSTEM",
   "PEXELS_API_KEY",
   "PIXABAY_API_KEY",
+  "YOUTUBE_CLIENT_ID",
+  "YOUTUBE_CLIENT_SECRET",
+  // Não editável direto pelo usuário (preenchido pelo fluxo OAuth em routes/publish.ts) — só
+  // exposto aqui como {set,masked} pra SettingsView saber se "Conectar com Google" já rodou.
+  "YOUTUBE_REFRESH_TOKEN",
 ] as const;
 
 const PLAIN_FIELDS = [
@@ -59,6 +64,9 @@ const SettingsBody = z.object({
   FAL_API_KEY_SYSTEM: noNewlines.optional(),
   PEXELS_API_KEY: noNewlines.optional(),
   PIXABAY_API_KEY: noNewlines.optional(),
+  YOUTUBE_CLIENT_ID: noNewlines.optional(),
+  YOUTUBE_CLIENT_SECRET: noNewlines.optional(),
+  // YOUTUBE_REFRESH_TOKEN de propósito fora daqui — só o fluxo OAuth (routes/publish.ts) escreve essa chave.
 });
 
 function mask(value: string): string {

@@ -1,7 +1,18 @@
 import type { CostBreakdown } from "../cost/index.js";
 import type { PipelineCheckpoint, PipelineOptions } from "../pipeline/types.js";
 import type { QcReport } from "../qc/types.js";
-import type { contentProjects, jobs, JobStatus, productions, ScheduleFrequency, schedules, templates } from "./schema.js";
+import type {
+  contentProjects,
+  jobs,
+  JobStatus,
+  productions,
+  publications,
+  PublicationPlatform,
+  PublicationStatus,
+  ScheduleFrequency,
+  schedules,
+  templates,
+} from "./schema.js";
 
 /** Campos de PipelineOptions que não são instância de provider/runtime — o que sobra fica no `config` da Production. */
 export type ProductionConfig = Omit<
@@ -88,11 +99,25 @@ export interface Job {
   updatedAt: Date;
 }
 
+/** Resultado de 1 tentativa de publicar um job (Fase 21) — ver `publications` em schema.ts. */
+export interface Publication {
+  id: string;
+  jobId: string;
+  platform: PublicationPlatform;
+  status: PublicationStatus;
+  externalUrl: string | null;
+  publishedAt: Date | null;
+  error: string | null;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export type ProductionRow = typeof productions.$inferSelect;
 export type JobRow = typeof jobs.$inferSelect;
 export type ContentProjectRow = typeof contentProjects.$inferSelect;
 export type TemplateRow = typeof templates.$inferSelect;
 export type ScheduleRow = typeof schedules.$inferSelect;
+export type PublicationRow = typeof publications.$inferSelect;
 
 export function productionFromRow(row: ProductionRow): Production {
   return {
@@ -135,6 +160,20 @@ export function scheduleFromRow(row: ScheduleRow): Schedule {
     enabled: row.enabled,
     nextRunAt: row.nextRunAt,
     lastRunAt: row.lastRunAt ?? null,
+    createdAt: row.createdAt,
+    updatedAt: row.updatedAt,
+  };
+}
+
+export function publicationFromRow(row: PublicationRow): Publication {
+  return {
+    id: row.id,
+    jobId: row.jobId,
+    platform: row.platform,
+    status: row.status,
+    externalUrl: row.externalUrl ?? null,
+    publishedAt: row.publishedAt ?? null,
+    error: row.error ?? null,
     createdAt: row.createdAt,
     updatedAt: row.updatedAt,
   };

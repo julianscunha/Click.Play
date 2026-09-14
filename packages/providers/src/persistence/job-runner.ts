@@ -96,6 +96,9 @@ export async function runJobOnce(
     async onCostEstimate(estimate) {
       await transition("REVIEWING");
       await setJobEstimatedCost(db, jobId, estimate);
+      opts.onLog?.(
+        `Custo estimado: ${estimate.total.status === "known" ? `US$ ${estimate.total.usd.toFixed(2)}` : "desconhecido"}`,
+      );
       await transition("AWAITING_COST_APPROVAL");
       const approve = opts.approveCost ?? (() => true);
       return approve(estimate);

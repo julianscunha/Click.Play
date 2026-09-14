@@ -65,6 +65,17 @@ CREATE TABLE IF NOT EXISTS schedules (
   created_at INTEGER NOT NULL,
   updated_at INTEGER NOT NULL
 );
+CREATE TABLE IF NOT EXISTS publications (
+  id TEXT PRIMARY KEY,
+  job_id TEXT NOT NULL REFERENCES jobs(id),
+  platform TEXT NOT NULL,
+  status TEXT NOT NULL DEFAULT 'pending',
+  external_url TEXT,
+  published_at INTEGER,
+  error TEXT,
+  created_at INTEGER NOT NULL,
+  updated_at INTEGER NOT NULL
+);
 CREATE TABLE IF NOT EXISTS wallet (
   id TEXT PRIMARY KEY,
   balance_usd REAL NOT NULL,

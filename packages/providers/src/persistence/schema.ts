@@ -135,6 +135,31 @@ export const jobs = sqliteTable("jobs", {
  * aprovação do custo estimado (`POST /jobs/:id/approve-cost`), reabastecido
  * manualmente via `PUT /credits` (tela Configurações — sem billing real ainda).
  */
+export const PUBLICATION_PLATFORMS = ["youtube"] as const;
+export type PublicationPlatform = (typeof PUBLICATION_PLATFORMS)[number];
+
+export const PUBLICATION_STATUSES = ["pending", "success", "error"] as const;
+export type PublicationStatus = (typeof PUBLICATION_STATUSES)[number];
+
+/**
+ * "Publicação" (Fase 21) — resultado de 1 tentativa de publicar um job num destino externo
+ * (só YouTube por ora, `PublishingProvider` §6). Um job pode ter mais de uma linha (retry após
+ * erro) — o repository/rota sempre olha a mais recente por `jobId`.
+ */
+export const publications = sqliteTable("publications", {
+  id: text("id").primaryKey(),
+  jobId: text("job_id")
+    .notNull()
+    .references(() => jobs.id),
+  platform: text("platform", { enum: PUBLICATION_PLATFORMS }).notNull(),
+  status: text("status", { enum: PUBLICATION_STATUSES }).notNull().default("pending"),
+  externalUrl: text("external_url"),
+  publishedAt: integer("published_at", { mode: "timestamp_ms" }),
+  error: text("error"),
+  createdAt: integer("created_at", { mode: "timestamp_ms" }).notNull(),
+  updatedAt: integer("updated_at", { mode: "timestamp_ms" }).notNull(),
+});
+
 export const wallet = sqliteTable("wallet", {
   id: text("id").primaryKey(),
   balanceUsd: real("balance_usd").notNull(),

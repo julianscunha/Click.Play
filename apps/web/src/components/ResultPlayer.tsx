@@ -1,5 +1,14 @@
-import { useState } from "react";
-import { outputUrl, saveTemplate, type JobView, type QcDecision, type TemplateVariable } from "../api.js";
+import { useEffect, useState } from "react";
+import {
+  getPublication,
+  outputUrl,
+  publishJob,
+  saveTemplate,
+  type JobView,
+  type Publication,
+  type QcDecision,
+  type TemplateVariable,
+} from "../api.js";
 import { costLine } from "./ProgressView.js";
 
 export interface ResultPlayerProps {
@@ -95,6 +104,106 @@ function SaveAsTemplate({ productionId }: { productionId: string }) {
   );
 }
 
+/**
+ * Fase 21 — publicação manual (decisão do usuário: sem auto-publicar quando o QC passa, o
+ * usuário revisa o vídeo e clica). Só aparece quando `job.output` existe (job COMPLETED),
+ * mesma condição já usada pro resto do ResultPlayer.
+ */
+function PublishToYoutube({ jobId }: { jobId: string }) {
+  const [publication, setPublication] = useState<Publication | null>(null);
+  const [loaded, setLoaded] = useState(false);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [privacyStatus, setPrivacyStatus] = useState<"private" | "unlisted" | "public">("private");
+  const [publishing, setPublishing] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    getPublication(jobId)
+      .then(setPublication)
+      .catch(() => setPublication(null))
+      .finally(() => setLoaded(true));
+  }, [jobId]);
+
+  async function handlePublish() {
+    setPublishing(true);
+    setError(null);
+    try {
+      const result = await publishJob(jobId, {
+        title: title.trim() || undefined,
+        description: description.trim() || undefined,
+        privacyStatus,
+      });
+      setPublication(result);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : String(err));
+    } finally {
+      setPublishing(false);
+    }
+  }
+
+  if (!loaded) return null;
+
+  return (
+    <div className="flex w-full flex-col gap-2 rounded-md border border-border-subtle bg-surface-1 p-4">
+      <p className="text-sm font-medium text-fg-primary">Publicação</p>
+
+      {publication?.status === "success" && publication.externalUrl ? (
+        <p className="text-xs text-status-success">
+          Publicado no YouTube:{" "}
+          <a href={publication.externalUrl} target="_blank" rel="noreferrer" className="underline">
+            {publication.externalUrl}
+          </a>
+        </p>
+      ) : (
+        <>
+          <p className="text-xs text-fg-tertiary">
+            Publica direto no YouTube (conta conectada em Configurações → Publicação). TikTok/Instagram chegam depois
+            — por enquanto, baixe o vídeo e publique manualmente nessas plataformas.
+          </p>
+          <input
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="Título (padrão: tema da produção)"
+            className="rounded-md border border-border-default bg-surface-1 px-3 py-2 text-sm text-fg-primary placeholder:text-fg-tertiary focus:border-border-strong focus:outline-none"
+          />
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            placeholder="Descrição (opcional)"
+            rows={2}
+            className="rounded-md border border-border-default bg-surface-1 px-3 py-2 text-sm text-fg-primary placeholder:text-fg-tertiary focus:border-border-strong focus:outline-none"
+          />
+          <div className="flex items-center gap-2">
+            <select
+              value={privacyStatus}
+              onChange={(e) => setPrivacyStatus(e.target.value as typeof privacyStatus)}
+              className="rounded-md border border-border-default bg-surface-1 px-3 py-2 text-sm text-fg-primary focus:border-border-strong focus:outline-none"
+            >
+              <option value="private">Privado</option>
+              <option value="unlisted">Não listado</option>
+              <option value="public">Público</option>
+            </select>
+            <button
+              type="button"
+              onClick={handlePublish}
+              disabled={publishing}
+              className="flex-1 rounded-md border border-border-default px-3 py-2 text-sm font-medium text-fg-primary hover:bg-surface-2 disabled:opacity-50"
+            >
+              {publishing ? "Publicando..." : "Publicar no YouTube"}
+            </button>
+          </div>
+          {(error || publication?.status === "error") && (
+            <p role="alert" className="text-xs text-status-error">
+              {error ?? publication?.error}
+            </p>
+          )}
+        </>
+      )}
+    </div>
+  );
+}
+
 const DECISION_STYLES: Record<QcDecision, string> = {
   PASS: "border-status-success-border bg-status-success-bg text-status-success",
   WARNING: "border-status-warning-border bg-status-warning-bg text-status-warning",
@@ -165,13 +274,7 @@ export function ResultPlayer({ job, onCreateAnother }: ResultPlayerProps) {
 
       <SaveAsTemplate productionId={job.productionId} />
 
-      <div className="flex w-full flex-col gap-1 rounded-md border border-border-subtle bg-surface-1 p-4">
-        <p className="text-sm font-medium text-fg-primary">Publicação</p>
-        <p className="text-xs text-fg-tertiary">
-          Publicação direta (YouTube, TikTok, Instagram) chega em breve. Por enquanto, baixe o vídeo e publique
-          manualmente.
-        </p>
-      </div>
+      <PublishToYoutube jobId={job.id} />
 
       {job.resultSummary && (
         <div className="flex w-full justify-between text-xs text-fg-tertiary">
