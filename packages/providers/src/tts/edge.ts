@@ -45,17 +45,6 @@ function escapeXml(text: string): string {
   return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
-/** Envolve as palavras de `words` (case-insensitive, cópia literal do scriptLine) em
- * `<emphasis>` dentro do texto já escapado — casamento por regex de borda de palavra. */
-function applyEmphasis(text: string, words: string[] = []): string {
-  let result = text;
-  for (const w of words) {
-    const escaped = escapeXml(w).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    result = result.replace(new RegExp(`\\b(${escaped})\\b`, "i"), `<emphasis level="strong">$1</emphasis>`);
-  }
-  return result;
-}
-
 function normalizeSegments(input: string | TTSSegment[]): TTSSegment[] {
   return typeof input === "string" ? [{ text: input }] : input;
 }
@@ -92,23 +81,34 @@ export class EdgeTTS implements TTSProvider {
     throw lastError instanceof Error ? lastError : new Error(String(lastError));
   }
 
-  /** SSML manual via `rawToStream` (sem wrapping automático da lib) — necessário pra
-   * pausas/prosódia/ênfase por segmento, que `toStream` (1 ProsodyOptions pro texto
-   * inteiro) não permite. */
+  /** SSML manual via `rawToStream` (sem wrapping automático da lib) — necessário só pra
+   * variar `rate`/`pitch`, que `toStream` (assinatura só aceita string) não permite.
+   *
+   * IMPORTANTE (achado em teste manual real contra o serviço, não simulado): este
+   * endpoint reverso do Edge TTS aceita SÓ UM elemento filho de texto dentro de
+   * `<voice>` — qualquer coisa além disso quebra a geração com "Stream closed before
+   * the synthesis completed (no turn.end received)": 2+ `<prosody>` irmãos, `<break>`
+   * (em qualquer posição, com qualquer atributo), `<emphasis>`, `<mstts:silence>`,
+   * `<mark>`, até `<prosody>` aninhado dentro de `<prosody>`. Confirmado com múltiplas
+   * chamadas reais, não é flake. Por isso: 1 único `<prosody>` envolvendo TODO o texto
+   * concatenado (mesmo formato usado pelo `toStream` original da lib), pausa maior
+   * aproximada por reticências no texto (mesma técnica já usada em `flattenSegments`,
+   * gemini.ts/openrouter.ts) em vez de `<break>` real, e SEM `<emphasis>` — não há como
+   * aplicar ênfase vocal real nesta API. `emphasisWords` continua populando a ênfase
+   * VISUAL da legenda (scene-timing.ts resolveEmphasisIndices), que não depende de SSML. */
   buildSSML(segments: TTSSegment[]): string {
-    const body = segments
+    const rate = segments[0]?.rate ?? "default";
+    const pitch = segments[0]?.pitch ?? "default";
+    const text = segments
       .map((seg, i) => {
         const isLast = i === segments.length - 1;
-        const rate = seg.rate ?? "default";
-        const pitch = seg.pitch ?? "default";
-        const text = applyEmphasis(escapeXml(seg.text), seg.emphasisWords);
-        const pause = !isLast && seg.pauseAfterMs ? `<break time="${seg.pauseAfterMs}ms"/>` : "";
-        return `<prosody rate="${rate}" pitch="${pitch}">${text}</prosody>${pause}`;
+        const body = escapeXml(seg.text);
+        return !isLast && seg.pauseAfterMs && seg.pauseAfterMs >= 500 ? `${body}...` : body;
       })
       .join(" ");
     // Locale extraído do próprio nome da voz (ex. "pt-BR-FranciscaNeural" -> "pt-BR").
     const locale = this.voice.split("-").slice(0, 2).join("-");
-    return `<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="${locale}"><voice name="${this.voice}">${body}</voice></speak>`;
+    return `<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="${locale}"><voice name="${this.voice}"><prosody rate="${rate}" pitch="${pitch}">${text}</prosody></voice></speak>`;
   }
 
   private async generateOnce(segments: TTSSegment[]): Promise<TTSResult> {

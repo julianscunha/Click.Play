@@ -70,21 +70,36 @@ describe("resolveEdgeVoice", () => {
 });
 
 describe("EdgeTTS.buildSSML", () => {
-  it("wraps each segment in <prosody> and inserts <break> between segments (not after the last)", () => {
+  // Formato único que o serviço real aceita (achado em teste manual real, não
+  // simulado): 1 só <prosody> por chamada — 2+ elementos filhos de qualquer tipo
+  // (<prosody> irmão, <break>, <emphasis>, <mstts:silence>, <mark>, <prosody>
+  // aninhado) quebram a geração com "no turn.end received". Ver comentário em
+  // buildSSML (edge.ts) pra detalhe completo.
+  it("wraps ALL segments in a single <prosody> (no sibling elements)", () => {
     const ssml = new EdgeTTS().buildSSML([
       { text: "hello", pauseAfterMs: 250 },
       { text: "world", pauseAfterMs: 700 },
       { text: "bye" },
     ]);
-    expect(ssml).toContain('<break time="250ms"/>');
-    expect(ssml).toContain('<break time="700ms"/>');
-    expect(ssml.trim().endsWith("</voice></speak>")).toBe(true);
-    expect(ssml).not.toMatch(/bye<\/prosody><break/);
+    expect(ssml.match(/<prosody/g)).toHaveLength(1);
+    expect(ssml).not.toContain("<break");
+    expect(ssml).not.toContain("<emphasis");
+    expect(ssml.trim().endsWith("</prosody></voice></speak>")).toBe(true);
   });
 
-  it("wraps emphasisWords in <emphasis>", () => {
-    const ssml = new EdgeTTS().buildSSML([{ text: "this is critical news", emphasisWords: ["critical"] }]);
-    expect(ssml).toContain('<emphasis level="strong">critical</emphasis>');
+  it("approximates a bigger pause (>=500ms) with an ellipsis in the text, not a real pause below that", () => {
+    const ssml = new EdgeTTS().buildSSML([
+      { text: "small pause after", pauseAfterMs: 200 },
+      { text: "big pause after", pauseAfterMs: 700 },
+      { text: "last" },
+    ]);
+    expect(ssml).not.toContain("small pause after...");
+    expect(ssml).toContain("big pause after...");
+  });
+
+  it("uses the first segment's rate/pitch for the single prosody block", () => {
+    const ssml = new EdgeTTS().buildSSML([{ text: "hello", rate: "+8%", pitch: "high" }]);
+    expect(ssml).toContain('<prosody rate="+8%" pitch="high">');
   });
 
   it("escapes XML special characters in segment text", () => {
