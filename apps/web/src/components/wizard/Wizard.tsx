@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import {
-  createContentProject,
-  expandBriefing,
-  getTemplate,
-  listContentProjects,
-  listTemplates,
   type BriefingLength,
   type ContentProject,
   type CreateJobInput,
+  createContentProject,
+  expandBriefing,
   type FormConfig,
+  getTemplate,
+  listContentProjects,
+  listTemplates,
   type TemplateConfig,
   type TemplateSummary,
   type TemplateVariable,
@@ -931,7 +931,7 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
             </div>
 
             {form.captionsEnabled && (
-              <div className="flex flex-col items-center gap-1.5">
+              <div className="flex w-56 shrink-0 flex-col items-center gap-1.5">
                 <FrameBox aspectRatio={form.aspectRatio}>
                   <span
                     className={`mb-4 max-w-[85%] text-balance text-center text-sm ${
@@ -943,7 +943,7 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
                     )}
                   </span>
                 </FrameBox>
-                <span className="text-xs text-fg-tertiary">
+                <span className="text-center text-xs text-fg-tertiary">
                   {form.captionStyle ? formatLabel(form.captionStyle) : "Padrão do arquétipo"} ·{" "}
                   {CHUNK_SIZE_LEVELS.find((l) => l.level === form.captionChunkLevel)!.value} palavras por vez
                   (aproximação — o resultado real sai do renderer)
