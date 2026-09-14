@@ -29,6 +29,8 @@ const PLAIN_FIELDS = [
   "TTS_MODEL_FALLBACK_2",
   "TTS_MODEL_FALLBACK_2_VOICE",
   "MUSIC_PROVIDER",
+  "MUSIC_MODEL",
+  "MUSIC_MODEL_FALLBACK",
 ] as const;
 
 // Sem \r\n: writeEnvFile grava "KEY=valor\n" cru — um valor com quebra de
@@ -49,6 +51,8 @@ const SettingsBody = z.object({
   TTS_MODEL_FALLBACK_2: noNewlines.optional(),
   TTS_MODEL_FALLBACK_2_VOICE: noNewlines.optional(),
   MUSIC_PROVIDER: noNewlines.optional(),
+  MUSIC_MODEL: noNewlines.optional(),
+  MUSIC_MODEL_FALLBACK: noNewlines.optional(),
   GOOGLE_API_KEY: noNewlines.optional(),
   GOOGLE_API_KEY_SYSTEM: noNewlines.optional(),
   FAL_API_KEY: noNewlines.optional(),

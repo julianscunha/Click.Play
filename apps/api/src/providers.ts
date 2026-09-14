@@ -217,16 +217,28 @@ function buildTTS(
 /** BundledMusic (grátis, trilhas prontas) é o default e o fallback automático.
  * MUSIC_PROVIDER=lyria liga a IA generativa via OpenRouter (mesma
  * OPENROUTER_API_KEY já obrigatória, sem exigir GOOGLE_API_KEY separada —
- * ainda não validado ao vivo, ver music/openrouter.ts). */
+ * ainda não validado ao vivo, ver music/openrouter.ts). MUSIC_MODEL/
+ * MUSIC_MODEL_FALLBACK seguem o mesmo padrão de 2º modelo OpenRouter já
+ * aplicado em Imagem/Vídeo/Narração — sem lista "recomendada" aqui, nenhum
+ * modelo Lyria alternativo foi validado ao vivo ainda. */
 function buildMusicProvider(useOwnProviders: boolean): MusicProvider {
   const bundled = new BundledMusic(); // arquivo local, sem chamada externa — não precisa de timeout
   if (process.env.MUSIC_PROVIDER !== "lyria") return bundled;
 
-  const lyria = withProviderTimeout(
-    new OpenRouterMusic(undefined, resolveKey("OPENROUTER_API_KEY", useOwnProviders)),
+  const openRouterKey = resolveKey("OPENROUTER_API_KEY", useOwnProviders);
+  let lyria: MusicProvider = withProviderTimeout(
+    new OpenRouterMusic(process.env.MUSIC_MODEL || undefined, openRouterKey),
     "music:openrouter",
     TIMEOUT_MS.music,
   );
+  if (process.env.MUSIC_MODEL_FALLBACK) {
+    const secondary = withProviderTimeout(
+      new OpenRouterMusic(process.env.MUSIC_MODEL_FALLBACK, openRouterKey),
+      "music:openrouter-fallback",
+      TIMEOUT_MS.music,
+    );
+    lyria = new FallbackMusic(lyria, secondary);
+  }
   return new FallbackMusic(lyria, bundled);
 }
 

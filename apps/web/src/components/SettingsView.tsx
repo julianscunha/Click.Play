@@ -302,6 +302,8 @@ const MODEL_FIELDS = [
   "TTS_MODEL_FALLBACK_2",
   "TTS_MODEL_FALLBACK_2_VOICE",
   "MUSIC_PROVIDER",
+  "MUSIC_MODEL",
+  "MUSIC_MODEL_FALLBACK",
 ] as const;
 
 export interface SettingsViewProps {
@@ -766,8 +768,12 @@ export function SettingsView({ onClose }: SettingsViewProps) {
 
         {activeCategory === "musica" && (
           <div>
-            <CategoryHeader title="Música" description="Trilha sonora de fundo do vídeo." chained={false} />
-            <div className="rounded-lg border border-border-subtle bg-surface-1 p-4">
+            <CategoryHeader
+              title="Música"
+              description="Trilha sonora de fundo do vídeo."
+              chained={inputs.MUSIC_PROVIDER === "lyria"}
+            />
+            <div className="mb-4 rounded-lg border border-border-subtle bg-surface-1 p-4">
               <div className="flex items-center gap-2">
                 <label htmlFor="MUSIC_PROVIDER" className="text-sm font-medium text-fg-primary">
                   Fonte
@@ -785,12 +791,67 @@ export function SettingsView({ onClose }: SettingsViewProps) {
                 <option value="">Trilhas prontas (recomendado)</option>
                 <option value="lyria">Gerada por IA — Lyria via OpenRouter</option>
               </select>
-              <p className="mt-1.5 text-xs text-fg-tertiary">
-                {inputs.MUSIC_PROVIDER === "lyria"
-                  ? "⚠ Lyria via OpenRouter ainda não foi validada em produção (limite de teste do provedor esgotado nos testes internos). Se falhar, cai automaticamente para as trilhas prontas."
-                  : "Biblioteca de faixas prontas royalty-free, escolhida pelo clima (mood) de cada cena — não é gerada por IA."}
-              </p>
+              {inputs.MUSIC_PROVIDER !== "lyria" && (
+                <p className="mt-1.5 text-xs text-fg-tertiary">
+                  Biblioteca de faixas prontas royalty-free, escolhida pelo clima (mood) de cada cena — não é gerada
+                  por IA.
+                </p>
+              )}
             </div>
+
+            {inputs.MUSIC_PROVIDER === "lyria" && (
+              <>
+                <Step index={1} total={3}>
+                  <label htmlFor="MUSIC_MODEL" className="text-sm font-medium text-fg-primary">
+                    Modelo
+                  </label>
+                  <input
+                    id="MUSIC_MODEL"
+                    type="text"
+                    value={inputs.MUSIC_MODEL ?? ""}
+                    onChange={(e) => setField("MUSIC_MODEL", e.target.value)}
+                    placeholder="google/lyria-3-pro-preview (default)"
+                    className="mt-1.5 w-full rounded-md border border-border-default bg-surface-2 px-3 py-2 text-fg-primary placeholder:text-fg-tertiary focus:border-border-strong focus:outline-none"
+                  />
+                  <p className="mt-1.5 text-xs text-fg-tertiary">
+                    Sem lista de sugeridos ainda — nenhum modelo Lyria alternativo foi validado ao vivo até agora
+                    (todo teste manual bateu quota=0 do Google, billing não habilitado no projeto do OpenRouter).
+                  </p>
+                  <OpenRouterKeyNote onGoToRoteiro={goTo("roteiro")} />
+                </Step>
+                <Step index={2} total={3}>
+                  <div className="flex items-center gap-2">
+                    <label htmlFor="MUSIC_MODEL_FALLBACK" className="text-sm font-medium text-fg-primary">
+                      Modelo
+                    </label>
+                    <Badge kind="optional">opcional</Badge>
+                  </div>
+                  <input
+                    id="MUSIC_MODEL_FALLBACK"
+                    type="text"
+                    value={inputs.MUSIC_MODEL_FALLBACK ?? ""}
+                    onChange={(e) => setField("MUSIC_MODEL_FALLBACK", e.target.value)}
+                    placeholder="Ex: outro modelo Lyria/OpenRouter"
+                    className="mt-1.5 w-full rounded-md border border-border-default bg-surface-2 px-3 py-2 text-fg-primary placeholder:text-fg-tertiary focus:border-border-strong focus:outline-none"
+                  />
+                  <p className="mt-1.5 text-xs text-fg-tertiary">
+                    2º modelo via OpenRouter (mesma chave) — tentado antes de cair pras trilhas prontas.
+                  </p>
+                  <OpenRouterKeyNote onGoToRoteiro={goTo("roteiro")} />
+                </Step>
+                <Step index={3} total={3}>
+                  <div className="flex items-center gap-2">
+                    <p className="text-sm font-medium text-fg-primary">Trilhas prontas</p>
+                    <Badge kind="free">automático, grátis</Badge>
+                  </div>
+                  <p className="mt-1.5 text-xs text-fg-tertiary">
+                    ⚠ Lyria via OpenRouter ainda não foi validada em produção (limite de teste do provedor esgotado
+                    nos testes internos). Se todos os modelos acima falharem, cai automaticamente pra biblioteca de
+                    faixas prontas royalty-free, escolhida pelo clima (mood) de cada cena.
+                  </p>
+                </Step>
+              </>
+            )}
           </div>
         )}
 

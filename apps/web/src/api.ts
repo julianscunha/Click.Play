@@ -325,6 +325,8 @@ export interface Settings {
   TTS_MODEL_FALLBACK_2: string;
   TTS_MODEL_FALLBACK_2_VOICE: string;
   MUSIC_PROVIDER: string;
+  MUSIC_MODEL: string;
+  MUSIC_MODEL_FALLBACK: string;
   GOOGLE_API_KEY: SecretField;
   GOOGLE_API_KEY_SYSTEM: SecretField;
   FAL_API_KEY: SecretField;
