@@ -35,11 +35,15 @@ export class GeminiVideo implements VideoGenerationProvider {
       console.warn(`[video] negativePrompt ignored: ${this.model} does not support it`);
     }
 
+    // Veo só libera 1080p pra 16:9 — vertical/quadrado ficam presos a 720p no próprio
+    // provider mesmo pedindo mais (achado do especialista de render/encoding).
+    const resolution = aspectRatio === "16:9" ? "1080p" : "720p";
+
     let operation = await this.client.models.generateVideos({
       model: this.model,
       prompt: opts.prompt,
       image: { imageBytes: opts.sourceImage.toString("base64"), mimeType: "image/png" },
-      config: { numberOfVideos: 1, durationSeconds, aspectRatio },
+      config: { numberOfVideos: 1, durationSeconds, aspectRatio, resolution },
     });
 
     const deadline = Date.now() + TIMEOUT_MS;

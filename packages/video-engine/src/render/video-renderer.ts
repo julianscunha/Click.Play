@@ -103,6 +103,9 @@ export class RemotionRenderer implements VideoRenderer {
       },
       serveUrl: bundleLocation,
       codec: "h264",
+      // Default do Remotion é 320k AAC — desperdício de tamanho de arquivo sem ganho
+      // perceptível pra voz+música mixadas (achado do especialista de render/encoding).
+      audioBitrate: "128k",
       outputLocation: outputPath,
       inputProps,
     });

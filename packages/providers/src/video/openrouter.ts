@@ -60,11 +60,15 @@ export class OpenRouterVideo implements VideoGenerationProvider {
       console.warn(`[video] negativePrompt ignored: ${this.model} via OpenRouter does not support it`);
     }
 
+    // Veo só libera 1080p pra 16:9 — vertical/quadrado ficam presos a 720p no próprio
+    // provider mesmo pedindo mais (achado do especialista de render/encoding).
+    const resolution = aspectRatio === "16:9" ? "1080p" : "720p";
+
     const submitRes = await this.request("POST", "https://openrouter.ai/api/v1/videos", {
       model: this.model,
       prompt: opts.prompt,
       duration: durationSeconds,
-      resolution: "720p",
+      resolution,
       aspect_ratio: aspectRatio,
       generate_audio: false,
       frame_images: [
