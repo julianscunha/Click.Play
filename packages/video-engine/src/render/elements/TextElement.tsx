@@ -11,6 +11,16 @@ const JUSTIFY_BY_POSITION: Record<NonNullable<ResolvedElement["position"]>, stri
 
 const EXIT_SECONDS = 0.35;
 
+/** 1 (totalmente visível) até framesToEnd cair abaixo de exitFrames, daí encolhe linear até 0
+ * nos últimos frames da cena. Extraída como função pura só por ter mordido uma vez: Remotion
+ * `interpolate()` exige inputRange estritamente crescente — passar [exitFrames, 0] (decrescente)
+ * quebra em runtime com "inputRange must be strictly monotonically increasing" (achado em
+ * validação visual real, não pego pelos testes existentes por não haver nenhum pra este arquivo). */
+export function computeExitProgress(framesToEnd: number, exitFrames: number): number {
+  if (framesToEnd >= exitFrames) return 1;
+  return interpolate(framesToEnd, [0, exitFrames], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+}
+
 /** animated_text: título/texto de cena, com entrada por spring e saída (encolhe+desvanece) nos
  * últimos EXIT_SECONDS da cena. Tipografia/cor vêm do arquétipo quando disponíveis (antes eram
  * fixas — branco/72px — pros 19 arquétipos, achado do especialista de composição/edição).
@@ -27,10 +37,7 @@ export const TextElement: React.FC<ResolvedElement> = ({
 
   const exitFrames = Math.round(fps * EXIT_SECONDS);
   const framesToEnd = sceneDurationInFrames !== undefined ? sceneDurationInFrames - frame : Infinity;
-  const exitProgress =
-    framesToEnd < exitFrames
-      ? interpolate(framesToEnd, [exitFrames, 0], [1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })
-      : 1;
+  const exitProgress = computeExitProgress(framesToEnd, exitFrames);
 
   if (!text) return null;
 
