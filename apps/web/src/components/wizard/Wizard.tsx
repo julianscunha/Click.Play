@@ -141,6 +141,7 @@ interface FormState {
   musicVolumeLevel: (typeof MUSIC_VOLUME_LEVELS)[number]["level"];
   captionsEnabled: boolean;
   targetDurationSeconds: string;
+  fps: string;
   videoMode: "motion_graphics_only" | "ai_video_only" | "hybrid";
   captionStyle: string;
   aspectRatio: "vertical" | "horizontal" | "square";
@@ -171,6 +172,7 @@ const INITIAL_STATE: FormState = {
   musicVolumeLevel: "medio",
   captionsEnabled: true,
   targetDurationSeconds: "",
+  fps: "",
   videoMode: "hybrid",
   captionStyle: "",
   aspectRatio: "vertical",
@@ -393,6 +395,7 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
       setCreatingContentProject(false);
     }
     const targetDurationSeconds = Number(form.targetDurationSeconds);
+    const fps = Number(form.fps);
     const direction =
       templateVariables.length > 0 ? interpolateTemplateVariables(form.direction, variableBindings) : form.direction;
     onSubmit({
@@ -413,6 +416,7 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
         form.targetDurationSeconds.trim() && Number.isFinite(targetDurationSeconds) && targetDurationSeconds > 0
           ? targetDurationSeconds
           : undefined,
+      fps: form.fps.trim() && Number.isFinite(fps) && fps > 0 ? fps : undefined,
       videoMode: form.videoMode,
       captionStyle: form.captionStyle || undefined,
       aspectRatio: form.aspectRatio,
@@ -659,6 +663,22 @@ export function Wizard({ config, onSubmit, submitting }: WizardProps) {
                   value={form.targetDurationSeconds}
                   onChange={(e) => update("targetDurationSeconds", e.target.value)}
                   placeholder="Ex: 45"
+                  className={fieldClass}
+                />
+              </div>
+
+              <div className="flex flex-col gap-1.5">
+                <label htmlFor="fps" className={labelClass}>
+                  Quadros por segundo <span className="text-fg-tertiary">(opcional)</span>
+                </label>
+                <input
+                  id="fps"
+                  type="number"
+                  min={1}
+                  max={60}
+                  value={form.fps}
+                  onChange={(e) => update("fps", e.target.value)}
+                  placeholder="Padrão: 30"
                   className={fieldClass}
                 />
               </div>

@@ -110,7 +110,7 @@ export interface CreateJobInput {
   aspectRatio?: "vertical" | "horizontal" | "square";
   qualityTier?: "draft" | "standard" | "high";
   targetDurationSeconds?: number;
-  /** Frames por segundo do render — sem campo no Wizard ainda (API-only por ora), default 30 no orchestrator. */
+  /** Frames por segundo do render — default 30 no orchestrator quando omitido. */
   fps?: number;
   language?: string;
   captionChunkSize?: number;

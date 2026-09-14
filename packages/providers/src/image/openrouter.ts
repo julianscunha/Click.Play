@@ -19,13 +19,12 @@ export class OpenRouterImage implements ImageProvider {
     this.model = model;
   }
 
-  // Resolução hoje só existe como texto solto no prompt, sem parâmetro estrutural —
-  // investigado (achado do especialista de render/encoding), mas a doc pública da
-  // OpenRouter não documenta um `size`/`image_config` estrutural pra este endpoint
-  // (/v1/images) nem confirma se google/gemini-3.1-flash-lite-image aceita algo do
-  // tipo. Não dá pra confirmar sem uma chamada de teste real contra
-  // /api/v1/images/models/{id}/endpoints — deixado como está até isso ser feito,
-  // em vez de inventar um parâmetro que pode não existir.
+  // Resolução só existe como texto solto no prompt, sem parâmetro estrutural — CONFIRMADO
+  // via GET /api/v1/models/{id}/endpoints em teste real: supported_parameters de
+  // google/gemini-3.1-flash-lite-image (nos dois endpoints, google-vertex e
+  // google-ai-studio) é só reasoning/max_tokens/temperature/top_p/seed/response_format,
+  // nenhum size/resolution/image_config. Não existe parâmetro estrutural pra usar aqui —
+  // texto no prompt é o único controle disponível nesta API, não é lacuna de implementação.
   async generate(prompt: string, style?: string): Promise<Buffer> {
     const fullPrompt = style
       ? `${prompt}. Style: ${style}. Vertical 9:16 aspect ratio, 1080x1920 pixels. No text, no watermarks.`
