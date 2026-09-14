@@ -162,6 +162,42 @@ function retryFeedback(error: Error | null): string {
   return error?.message ?? "unknown error";
 }
 
+/** Instrui o LLM a sempre setar `motion` em elementos estáticos (ai_image/stock_image/
+ * stock_video) — antes o campo existia no schema mas nunca era citado em nenhum prompt,
+ * resultando em imagens paradas mesmo quando a cena não tinha ai_video_clip (achado do
+ * especialista de composição/edição). Reforça a mesma regra anti-slideshow acima. */
+const MOTION_INSTRUCTION = `For every element of type "ai_image", "stock_image", or "stock_video", you MUST set the "motion" field to one of: "zoom_in", "zoom_out", "pan_left", "pan_right". Only use "static" (or omit motion) when the shot is intentionally still for dramatic effect (rare — at most once per video). A static image with no camera motion reads as a dead slideshow frame. Vary the motion direction across consecutive scenes — do not repeat the same motion value more than 2 scenes in a row.`;
+
+/** Critério de escolha de transição — antes o LLM só via a lista de valores do enum, sem
+ * nenhuma orientação de quando usar cada um (achado do especialista de composição/edição). */
+const TRANSITION_INSTRUCTION = `For each scene's "transition" field, default to "none" (hard cut) — hard cuts keep pacing tight and are the professional default for short-form video. Only use "crossfade" when the topic/subject changes meaningfully between scenes (a real beat change, not just a new shot of the same subject). Never use the same non-"none" transition value on more than 2 consecutive scene boundaries — vary it, or fall back to "none". Transitions with heavy visual effect ("zoom", "whip_pan", "flash", "wipe", "flip") should be rare — at most 1-2 per video, used only at a genuine emotional or narrative turn.`;
+
+/** Injeta os campos de arte do arquétipo (quando já conhecido de antemão) no prompt, pra
+ * o LLM escrever prompts de ai_image/ai_video_clip que já refletem o estilo — complementa
+ * (não substitui) o prefixo determinístico aplicado depois em resolve-element.ts, que cobre
+ * o caso do LLM esquecer de citar o estilo. */
+function buildArchetypeStyleSection(archetype?: string): string {
+  if (!archetype) {
+    return `Whichever archetype you choose, write ai_image/ai_video_clip prompts that explicitly describe art style, lighting and mood consistent with that archetype's visual identity.`;
+  }
+  try {
+    const cfg = getArchetype(archetype);
+    return `## Visual style for this archetype ("${archetype}")
+Art style: ${cfg.artStyle}
+Lighting: ${cfg.lighting}
+Mood: ${cfg.mood}
+Composition rules: ${cfg.compositionRules}
+Cultural markers: ${cfg.culturalMarkers}
+Color palette: ${cfg.visualColorPalette.join(", ")}
+Avoid: ${cfg.antiArtifactGuidance}
+
+Every "prompt" field you write for ai_image/ai_video_clip elements MUST reflect this visual style explicitly (mention lighting/mood/art style in the prompt text itself, not just rely on post-processing).`;
+  } catch {
+    // Arquétipo inválido — não quebra a geração, cai na instrução genérica.
+    return `Whichever archetype you choose, write ai_image/ai_video_clip prompts that explicitly describe art style, lighting and mood consistent with that archetype's visual identity.`;
+  }
+}
+
 /** Lança se o roteiro não atinge o piso de vídeo do VideoMode — pego pelo mesmo retry-with-feedback dos outros erros de validação. */
 function assertVideoMode(scenes: Scene[], mode: VideoMode): void {
   if (violatesVideoModeRule(scenes, mode)) {
@@ -219,6 +255,7 @@ export async function generateDirectorScore(
   const archetypeInstruction = options?.archetype
     ? `Use the "${options.archetype}" archetype.`
     : `Choose from: ${archetypes.join(", ")}`;
+  const archetypeStyleSection = buildArchetypeStyleSection(options?.archetype);
 
   const videoMode = options?.videoMode ?? "hybrid";
   const strategyGuidance = buildVideoModeGuidance(videoMode, options?.showTextOverlays);
@@ -251,7 +288,10 @@ ${pacingInstruction}
 ${durationInstruction}
 ${languageInstruction}
 ${strategyGuidance}
+${archetypeStyleSection}
 ${directionSection}CRITICAL RULE: A scene must never be reduced to a single static image/stock clip more than 2 times in a row — compose scenes with multiple elements (e.g. animated_text over an ai_image) instead of a plain image slideshow. Plan your visualStrategy sequence BEFORE writing scenes to ensure variety.
+${MOTION_INSTRUCTION}
+${TRANSITION_INSTRUCTION}
 Every scene MUST have a scriptLine (the voiceover text).
 The first scene should be a strong hook.
 If over budget, cut a scene rather than cramming.`;
@@ -289,6 +329,9 @@ If over budget, cut a scene rather than cramming.`;
   throw new Error(`Creative Director failed after ${maxRetries} attempts: ${lastError?.message}`);
 }
 
+/** Fallback usado só se prompts/creative-director.md não existir no cwd — MANTER
+ * sincronizado com esse arquivo manualmente; qualquer instrução nova (hook/CTA/
+ * motion/transição/estilo de arquétipo) entra nos dois lugares. */
 function buildDefaultPrompt(): string {
   return `You are a Creative Director for short-form video content. Your job is to create a detailed per-scene production plan (DirectorScore) that will drive the entire video creation pipeline.
 
@@ -301,6 +344,12 @@ You must output a DirectorScore with:
 - scenes: Array of scenes following the archetype's recommended pacing tier. Each scene has visualStrategy ("motion_graphics" | "ai_video" | "hybrid") and elements (1+ composed visual elements). visualStrategy "ai_video" or "hybrid" REQUIRES at least one element of type "ai_video_clip" in elements — without it, the scene is invalid.
 
 GOLDEN RULE: Never reduce more than 2 consecutive scenes to a single static image/stock clip. Compose with animated_text over ai_image/stock elements for visual variety and movement — do NOT use svg/shape/icon/particle_system/diagram, they have no renderer yet and render as blank.
+
+${MOTION_INSTRUCTION}
+
+${TRANSITION_INSTRUCTION}
+
+Whichever archetype you choose, write ai_image/ai_video_clip prompts that explicitly describe art style, lighting and mood consistent with that archetype's visual identity.
 
 Think like a YouTube Shorts producer. The hook must grab in 1-2 seconds. Every scene should move the story forward. The FINAL scene MUST be a call-to-action (e.g. "What would you have done? Comment below."), not a story conclusion.
 
@@ -363,6 +412,7 @@ export async function reviseDirectorScore(
 ): Promise<DirectorScoreOutput> {
   const systemPrompt = loadDirectorSystemPrompt();
   const videoMode = options?.videoMode ?? "hybrid";
+  const archetypeStyleSection = buildArchetypeStyleSection(options?.archetype ?? originalScore.archetype);
   const revisionGuidance = critique.revision_instructions ?? `Address these weaknesses: ${critique.weaknesses.join("; ")}`;
   const pacingInstruction = buildPacingInstruction(options?.archetype, options?.pacing);
   const durationInstruction = options?.targetDurationSeconds
@@ -393,6 +443,7 @@ Mood: ${researchContext.mood}
 ${pacingInstruction}
 ${durationInstruction}
 ${languageInstruction}
+${archetypeStyleSection}
 ${directionSection}${noTextOverlaysSection}
 ## Current Plan (score: ${critique.score}/10)
 
@@ -409,7 +460,9 @@ ${critique.weakest_scene_index != null ? `Weakest scene: Scene ${critique.weakes
 ${revisionGuidance}
 
 Revise the DirectorScore to address the weaknesses while preserving the strengths.
-Keep the same archetype. Maintain the GOLDEN RULE: never reduce more than 2 consecutive scenes to a single static image/stock clip.`;
+Keep the same archetype. Maintain the GOLDEN RULE: never reduce more than 2 consecutive scenes to a single static image/stock clip.
+${MOTION_INSTRUCTION}
+${TRANSITION_INSTRUCTION}`;
 
   // Mesma resiliência de generateDirectorScore (3 tentativas) — achado em teste
   // manual real: revisão tem prompt maior (ecoa o plano inteiro + crítica) e

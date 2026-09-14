@@ -46,6 +46,27 @@ describe("generateDirectorScore", () => {
     expect(result.data.archetype).toBe("cinematic_documentary");
   });
 
+  it("instructs the LLM to always set motion and gives a transition criterion", async () => {
+    const llm = fakeLLM([sceneRaw(), sceneRaw(), sceneRaw()]);
+    await generateDirectorScore(llm, "Apollo 11", research, { videoMode: "motion_graphics_only" });
+
+    const call = (llm.generate as ReturnType<typeof vi.fn>).mock.calls[0]![0];
+    expect(call.userMessage).toMatch(/you MUST set the "motion" field/i);
+    expect(call.userMessage).toMatch(/default to "none" \(hard cut\)/i);
+  });
+
+  it("injects the chosen archetype's art style fields into the prompt", async () => {
+    const llm = fakeLLM([sceneRaw(), sceneRaw(), sceneRaw()]);
+    await generateDirectorScore(llm, "Apollo 11", research, {
+      videoMode: "motion_graphics_only",
+      archetype: "cinematic_documentary",
+    });
+
+    const call = (llm.generate as ReturnType<typeof vi.fn>).mock.calls[0]![0];
+    expect(call.userMessage).toMatch(/Visual style for this archetype \("cinematic_documentary"\)/);
+    expect(call.userMessage).toMatch(/Art style:/);
+  });
+
   it("instructs the LLM to skip animated_text when showTextOverlays is false", async () => {
     const llm = fakeLLM([sceneRaw(), sceneRaw(), sceneRaw()]);
     await generateDirectorScore(llm, "Apollo 11", research, {
