@@ -118,6 +118,10 @@ export type PipelineResult =
       imageCount: number;
       videoClipCount: number;
       audioSeconds: number;
+      /** true = timing de legenda estimado (fallback Gemini/OpenRouter TTS sem
+       * WordBoundary real), não medido — sinaliza pro job/API pra eventual aviso
+       * na UI. false/narração desligada = não se aplica. */
+      narrationTimingEstimated: boolean;
     }
   | {
       status: "cancelled_cost";

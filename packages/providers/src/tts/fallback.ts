@@ -1,4 +1,4 @@
-import type { TTSProvider, TTSResult } from "./types.js";
+import type { TTSProvider, TTSResult, TTSSegment } from "./types.js";
 
 /** Mesma ideia de llm/fallback.ts — se o primário (já com seu próprio retry
  * interno) falhar de vez, tenta o secundário antes de propagar o erro. */
@@ -8,14 +8,14 @@ export class FallbackTTS implements TTSProvider {
     private fallback: TTSProvider,
   ) {}
 
-  async generate(text: string): Promise<TTSResult> {
+  async generate(input: string | TTSSegment[]): Promise<TTSResult> {
     try {
-      return await this.primary.generate(text);
+      return await this.primary.generate(input);
     } catch (primaryErr) {
       const primaryMsg = primaryErr instanceof Error ? primaryErr.message : String(primaryErr);
       console.warn(`[tts-fallback] primary failed (${primaryMsg}), trying fallback provider`);
       try {
-        return await this.fallback.generate(text);
+        return await this.fallback.generate(input);
       } catch (fallbackErr) {
         const fallbackMsg = fallbackErr instanceof Error ? fallbackErr.message : String(fallbackErr);
         // Encadeia as duas mensagens (não só a última) — com 3 providers em

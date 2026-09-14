@@ -9,7 +9,7 @@ vi.mock("msedge-tts", () => ({
   OUTPUT_FORMAT: { AUDIO_24KHZ_48KBITRATE_MONO_MP3: "audio-24khz-48kbitrate-mono-mp3" },
   MsEdgeTTS: class {
     async setMetadata() {}
-    toStream() {
+    rawToStream() {
       attempt++;
       if (attempt <= failuresBeforeSuccess) {
         const failing = new Readable({
@@ -66,6 +66,30 @@ describe("resolveEdgeVoice", () => {
 
   it("falls back to pt-BR when language is omitted", () => {
     expect(resolveEdgeVoice(undefined)).toBe(EDGE_TTS_VOICES["pt-BR"].female);
+  });
+});
+
+describe("EdgeTTS.buildSSML", () => {
+  it("wraps each segment in <prosody> and inserts <break> between segments (not after the last)", () => {
+    const ssml = new EdgeTTS().buildSSML([
+      { text: "hello", pauseAfterMs: 250 },
+      { text: "world", pauseAfterMs: 700 },
+      { text: "bye" },
+    ]);
+    expect(ssml).toContain('<break time="250ms"/>');
+    expect(ssml).toContain('<break time="700ms"/>');
+    expect(ssml.trim().endsWith("</voice></speak>")).toBe(true);
+    expect(ssml).not.toMatch(/bye<\/prosody><break/);
+  });
+
+  it("wraps emphasisWords in <emphasis>", () => {
+    const ssml = new EdgeTTS().buildSSML([{ text: "this is critical news", emphasisWords: ["critical"] }]);
+    expect(ssml).toContain('<emphasis level="strong">critical</emphasis>');
+  });
+
+  it("escapes XML special characters in segment text", () => {
+    const ssml = new EdgeTTS().buildSSML([{ text: "Tom & Jerry <3" }]);
+    expect(ssml).toContain("Tom &amp; Jerry &lt;3");
   });
 });
 

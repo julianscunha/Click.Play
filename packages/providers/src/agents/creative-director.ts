@@ -39,6 +39,7 @@ const SceneRaw = z.object({
   elements: z.array(VisualElement).min(1),
   scriptLine: z.string().min(1),
   transition: TransitionType.nullable(),
+  emphasisWords: z.array(z.string()).max(2).optional(),
 });
 
 const DirectorScoreRaw = z.object({
@@ -172,6 +173,10 @@ const MOTION_INSTRUCTION = `For every element of type "ai_image", "stock_image",
  * nenhuma orientação de quando usar cada um (achado do especialista de composição/edição). */
 const TRANSITION_INSTRUCTION = `For each scene's "transition" field, default to "none" (hard cut) — hard cuts keep pacing tight and are the professional default for short-form video. Only use "crossfade" when the topic/subject changes meaningfully between scenes (a real beat change, not just a new shot of the same subject). Never use the same non-"none" transition value on more than 2 consecutive scene boundaries — vary it, or fall back to "none". Transitions with heavy visual effect ("zoom", "whip_pan", "flash", "wipe", "flip") should be rare — at most 1-2 per video, used only at a genuine emotional or narrative turn.`;
 
+/** Alimenta tanto ênfase vocal (SSML) quanto a legenda (emphasisIndices, antes órfão) —
+ * ver packages/providers/src/pipeline/scene-timing.ts resolveEmphasisIndices. */
+const EMPHASIS_INSTRUCTION = `For each scene, optionally mark 1-2 key words from scriptLine that deserve vocal emphasis (the word(s) that carry the emotional/informational weight of the line) in "emphasisWords". Use the exact word as it appears in scriptLine. Skip filler scenes where nothing deserves emphasis — most scenes don't need it.`;
+
 /** Injeta os campos de arte do arquétipo (quando já conhecido de antemão) no prompt, pra
  * o LLM escrever prompts de ai_image/ai_video_clip que já refletem o estilo — complementa
  * (não substitui) o prefixo determinístico aplicado depois em resolve-element.ts, que cobre
@@ -292,6 +297,7 @@ ${archetypeStyleSection}
 ${directionSection}CRITICAL RULE: A scene must never be reduced to a single static image/stock clip more than 2 times in a row — compose scenes with multiple elements (e.g. animated_text over an ai_image) instead of a plain image slideshow. Plan your visualStrategy sequence BEFORE writing scenes to ensure variety.
 ${MOTION_INSTRUCTION}
 ${TRANSITION_INSTRUCTION}
+${EMPHASIS_INSTRUCTION}
 Every scene MUST have a scriptLine (the voiceover text).
 The first scene should be a strong hook.
 If over budget, cut a scene rather than cramming.`;
@@ -348,6 +354,8 @@ GOLDEN RULE: Never reduce more than 2 consecutive scenes to a single static imag
 ${MOTION_INSTRUCTION}
 
 ${TRANSITION_INSTRUCTION}
+
+${EMPHASIS_INSTRUCTION}
 
 Whichever archetype you choose, write ai_image/ai_video_clip prompts that explicitly describe art style, lighting and mood consistent with that archetype's visual identity.
 
@@ -462,7 +470,8 @@ ${revisionGuidance}
 Revise the DirectorScore to address the weaknesses while preserving the strengths.
 Keep the same archetype. Maintain the GOLDEN RULE: never reduce more than 2 consecutive scenes to a single static image/stock clip.
 ${MOTION_INSTRUCTION}
-${TRANSITION_INSTRUCTION}`;
+${TRANSITION_INSTRUCTION}
+${EMPHASIS_INSTRUCTION}`;
 
   // Mesma resiliência de generateDirectorScore (3 tentativas) — achado em teste
   // manual real: revisão tem prompt maior (ecoa o plano inteiro + crítica) e

@@ -66,6 +66,8 @@ export interface ResultSummary {
   imageCount: number;
   videoClipCount: number;
   audioSeconds: number;
+  /** true = legenda gerada com timing estimado (fallback TTS sem WordBoundary real). */
+  narrationTimingEstimated: boolean;
 }
 
 export interface Job {

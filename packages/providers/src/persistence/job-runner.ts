@@ -137,6 +137,7 @@ export async function runJobOnce(
         imageCount: result.imageCount,
         videoClipCount: result.videoClipCount,
         audioSeconds: result.audioSeconds,
+        narrationTimingEstimated: result.narrationTimingEstimated,
       });
 
       const qcReport: QcReport = await runQc({

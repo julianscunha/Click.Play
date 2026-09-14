@@ -1,6 +1,6 @@
 import { Scene, type WordTimestamp } from "@clickplay/domain";
 import { describe, expect, it } from "vitest";
-import { splitWordsIntoScenes, synthesizeWordTimestamps } from "./scene-timing.js";
+import { resolveEmphasisIndices, splitWordsIntoScenes, synthesizeWordTimestamps } from "./scene-timing.js";
 
 function scene(id: string, scriptLine: string): Scene {
   return Scene.parse({
@@ -66,5 +66,34 @@ describe("synthesizeWordTimestamps", () => {
     const words = synthesizeWordTimestamps(scenes, 2);
     const durations = splitWordsIntoScenes(scenes, words, FPS);
     expect(durations).toEqual([30, 60]); // 1s e 2s a 30fps
+  });
+});
+
+describe("resolveEmphasisIndices", () => {
+  function sceneWithEmphasis(scriptLine: string, emphasisWords?: string[]): Scene {
+    return Scene.parse({
+      id: "1",
+      durationSeconds: 5,
+      visualStrategy: "motion_graphics",
+      elements: [{ type: "stock_image", prompt: "x" }],
+      scriptLine,
+      transition: null,
+      emphasisWords,
+    });
+  }
+
+  it("maps emphasisWords to global word indices across scenes", () => {
+    const scenes = [sceneWithEmphasis("one two three", ["two"]), sceneWithEmphasis("four five", ["five"])];
+    expect(resolveEmphasisIndices(scenes)).toEqual(new Set([1, 4]));
+  });
+
+  it("matches case-insensitively and ignores punctuation", () => {
+    const scenes = [sceneWithEmphasis("This is Critical!", ["critical"])];
+    expect(resolveEmphasisIndices(scenes)).toEqual(new Set([2]));
+  });
+
+  it("returns an empty set when no scene has emphasisWords", () => {
+    const scenes = [sceneWithEmphasis("one two")];
+    expect(resolveEmphasisIndices(scenes)).toEqual(new Set());
   });
 });

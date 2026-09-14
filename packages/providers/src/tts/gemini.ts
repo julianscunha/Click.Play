@@ -1,7 +1,23 @@
 import { GoogleGenAI, Modality } from "@google/genai";
 import type { WordTimestamp } from "@clickplay/domain";
 import { pcmToMp3 } from "./pcm-to-mp3.js";
-import type { TTSProvider, TTSResult } from "./types.js";
+import type { TTSProvider, TTSResult, TTSSegment } from "./types.js";
+
+/** Nem Gemini nem OpenRouter TTS suportam SSML custom (Gemini aceita instrução em
+ * texto natural, OpenRouter é passthrough REST) — achata os segmentos de volta pra
+ * texto plano, aproximando a pausa maior (pré-CTA) por reticências. Sem pausa real
+ * nem prosódia real nesses dois fallbacks (ponytail: limitação conhecida, upgrade
+ * quando algum provider de fallback suportar SSML). */
+export function flattenSegments(input: string | TTSSegment[]): string {
+  if (typeof input === "string") return input;
+  return input
+    .map((seg, i) => {
+      const isLast = i === input.length - 1;
+      if (isLast || !seg.pauseAfterMs) return seg.text;
+      return seg.pauseAfterMs >= 500 ? `${seg.text}...` : seg.text;
+    })
+    .join(" ");
+}
 
 const SAMPLE_RATE = 24000;
 
@@ -29,7 +45,8 @@ export class GeminiTTS implements TTSProvider {
     this.voice = voice;
   }
 
-  async generate(text: string): Promise<TTSResult> {
+  async generate(input: string | TTSSegment[]): Promise<TTSResult> {
+    const text = flattenSegments(input);
     const response = await this.client.models.generateContent({
       model: this.model,
       contents: text,
@@ -46,7 +63,7 @@ export class GeminiTTS implements TTSProvider {
     const audio = await pcmToMp3(pcm, SAMPLE_RATE);
     const durationSeconds = pcm.length / 2 / SAMPLE_RATE;
 
-    return { audio, words: estimateWordTimestamps(text, durationSeconds) };
+    return { audio, words: estimateWordTimestamps(text, durationSeconds), estimatedTiming: true };
   }
 }
 

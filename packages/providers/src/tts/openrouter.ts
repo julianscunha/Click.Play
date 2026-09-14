@@ -1,7 +1,7 @@
 import { RateLimitedError, retryDelayMsFromHeaders, withRetry } from "../http/retry.js";
 import { pcmToMp3 } from "./pcm-to-mp3.js";
-import { estimateWordTimestamps } from "./gemini.js";
-import type { TTSProvider, TTSResult } from "./types.js";
+import { estimateWordTimestamps, flattenSegments } from "./gemini.js";
+import type { TTSProvider, TTSResult, TTSSegment } from "./types.js";
 
 const SAMPLE_RATE = 24000;
 
@@ -34,9 +34,9 @@ export class OpenRouterTTS implements TTSProvider {
     this.voice = voice ?? (model.includes("gemini") ? "Kore" : undefined);
   }
 
-  async generate(text: string): Promise<TTSResult> {
+  async generate(input: string | TTSSegment[]): Promise<TTSResult> {
     // Rate limit transitório do provider por trás (mesmo achado da imagem/vídeo).
-    return withRetry(() => this.generateOnce(text), { label: "openrouter-tts" });
+    return withRetry(() => this.generateOnce(flattenSegments(input)), { label: "openrouter-tts" });
   }
 
   private async generateOnce(text: string): Promise<TTSResult> {
@@ -59,6 +59,6 @@ export class OpenRouterTTS implements TTSProvider {
     const audio = await pcmToMp3(pcm, SAMPLE_RATE);
     const durationSeconds = pcm.length / 2 / SAMPLE_RATE;
 
-    return { audio, words: estimateWordTimestamps(text, durationSeconds) };
+    return { audio, words: estimateWordTimestamps(text, durationSeconds), estimatedTiming: true };
   }
 }

@@ -1,7 +1,7 @@
 import type { Readable } from "node:stream";
 import { MsEdgeTTS, OUTPUT_FORMAT } from "msedge-tts";
 import type { WordTimestamp } from "@clickplay/domain";
-import type { TTSProvider, TTSResult } from "./types.js";
+import type { TTSProvider, TTSResult, TTSSegment } from "./types.js";
 
 /**
  * TTS default do Click.Play (docs/IMPLEMENTATION-PLAN.md §0.1): grátis, sem
@@ -15,10 +15,49 @@ export const EDGE_TTS_VOICES = {
   "en-US": { female: "en-US-AriaNeural", male: "en-US-GuyNeural" },
 } as const;
 
-/** Voz Edge pro idioma+gênero do job (§11A Bloco 3, Fase 15 Narração) — idioma fora do mapa (ainda só pt-BR/en-US) cai em pt-BR sem erro, não trava o job por typo/idioma não coberto. */
-export function resolveEdgeVoice(language?: string, gender: "female" | "male" = "female"): string {
+/** Catálogo ampliado (nomes reais de vozes neurais Edge, por locale) — usado só quando
+ * um `voiceId` explícito é passado a `resolveEdgeVoice` (ex. escolha por arquétipo).
+ * Sem isso, o produto ficava travado nas 4 vozes fixas de EDGE_TTS_VOICES. */
+export const EDGE_VOICE_CATALOG: Record<string, { id: string; gender: "female" | "male"; style?: string }[]> = {
+  "pt-BR": [
+    { id: "pt-BR-FranciscaNeural", gender: "female", style: "warm" },
+    { id: "pt-BR-AntonioNeural", gender: "male", style: "narration" },
+    { id: "pt-BR-BrendaNeural", gender: "female", style: "energetic" },
+    { id: "pt-BR-DonatoNeural", gender: "male", style: "calm" },
+  ],
+  "en-US": [
+    { id: "en-US-AriaNeural", gender: "female", style: "warm" },
+    { id: "en-US-GuyNeural", gender: "male", style: "narration" },
+    { id: "en-US-JennyNeural", gender: "female", style: "energetic" },
+    { id: "en-US-DavisNeural", gender: "male", style: "calm" },
+  ],
+};
+
+/** Voz Edge pro idioma+gênero do job (§11A Bloco 3, Fase 15 Narração) — idioma fora do mapa (ainda só pt-BR/en-US) cai em pt-BR sem erro, não trava o job por typo/idioma não coberto.
+ * `voiceId` explícito (ex. escolha por arquétipo) vence sobre o default de gênero. */
+export function resolveEdgeVoice(language?: string, gender: "female" | "male" = "female", voiceId?: string): string {
+  if (voiceId) return voiceId;
   const entry = language && language in EDGE_TTS_VOICES ? EDGE_TTS_VOICES[language as keyof typeof EDGE_TTS_VOICES] : undefined;
   return (entry ?? EDGE_TTS_VOICES["pt-BR"])[gender];
+}
+
+function escapeXml(text: string): string {
+  return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+/** Envolve as palavras de `words` (case-insensitive, cópia literal do scriptLine) em
+ * `<emphasis>` dentro do texto já escapado — casamento por regex de borda de palavra. */
+function applyEmphasis(text: string, words: string[] = []): string {
+  let result = text;
+  for (const w of words) {
+    const escaped = escapeXml(w).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    result = result.replace(new RegExp(`\\b(${escaped})\\b`, "i"), `<emphasis level="strong">$1</emphasis>`);
+  }
+  return result;
+}
+
+function normalizeSegments(input: string | TTSSegment[]): TTSSegment[] {
+  return typeof input === "string" ? [{ text: input }] : input;
 }
 
 function sleep(ms: number): Promise<void> {
@@ -28,7 +67,8 @@ function sleep(ms: number): Promise<void> {
 export class EdgeTTS implements TTSProvider {
   constructor(private voice: string = EDGE_TTS_VOICES["pt-BR"].female) {}
 
-  async generate(text: string): Promise<TTSResult> {
+  async generate(input: string | TTSSegment[]): Promise<TTSResult> {
+    const segments = normalizeSegments(input);
     const maxAttempts = 3;
     let lastError: unknown;
 
@@ -38,7 +78,7 @@ export class EdgeTTS implements TTSProvider {
       // de rede; um pequeno backoff dá tempo dela passar (mesma lógica do LLM).
       if (attempt > 0) await sleep(attempt * 3000);
       try {
-        return await this.generateOnce(text);
+        return await this.generateOnce(segments);
       } catch (err) {
         // WebSocket do Edge TTS fecha sem aviso ocasionalmente ("Premature
         // close", achado em teste manual) — sem retry, 1 flake de rede derruba
@@ -52,12 +92,31 @@ export class EdgeTTS implements TTSProvider {
     throw lastError instanceof Error ? lastError : new Error(String(lastError));
   }
 
-  private async generateOnce(text: string): Promise<TTSResult> {
+  /** SSML manual via `rawToStream` (sem wrapping automático da lib) — necessário pra
+   * pausas/prosódia/ênfase por segmento, que `toStream` (1 ProsodyOptions pro texto
+   * inteiro) não permite. */
+  buildSSML(segments: TTSSegment[]): string {
+    const body = segments
+      .map((seg, i) => {
+        const isLast = i === segments.length - 1;
+        const rate = seg.rate ?? "default";
+        const pitch = seg.pitch ?? "default";
+        const text = applyEmphasis(escapeXml(seg.text), seg.emphasisWords);
+        const pause = !isLast && seg.pauseAfterMs ? `<break time="${seg.pauseAfterMs}ms"/>` : "";
+        return `<prosody rate="${rate}" pitch="${pitch}">${text}</prosody>${pause}`;
+      })
+      .join(" ");
+    // Locale extraído do próprio nome da voz (ex. "pt-BR-FranciscaNeural" -> "pt-BR").
+    const locale = this.voice.split("-").slice(0, 2).join("-");
+    return `<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="${locale}"><voice name="${this.voice}">${body}</voice></speak>`;
+  }
+
+  private async generateOnce(segments: TTSSegment[]): Promise<TTSResult> {
     const tts = new MsEdgeTTS();
     await tts.setMetadata(this.voice, OUTPUT_FORMAT.AUDIO_24KHZ_48KBITRATE_MONO_MP3, {
       wordBoundaryEnabled: true,
     });
-    const { audioStream, metadataStream } = tts.toStream(text);
+    const { audioStream, metadataStream } = tts.rawToStream(this.buildSSML(segments));
 
     const [audio, metadataRaw] = await Promise.all([
       streamToBuffer(audioStream),

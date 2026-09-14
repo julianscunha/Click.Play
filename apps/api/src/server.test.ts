@@ -25,7 +25,10 @@ const RESEARCH_RESULT = { summary: "sum", key_facts: ["fact"], mood: "curious" }
 function sceneRaw(overrides: Record<string, unknown> = {}) {
   return {
     visualStrategy: "motion_graphics",
-    elements: [{ type: "stock_image", prompt: "hello" }, { type: "animated_text", text: "hello" }],
+    elements: [
+      { type: "stock_image", prompt: "hello", motion: "zoom_in" },
+      { type: "animated_text", text: "hello" },
+    ],
     scriptLine: "Hello world this is a test scene.",
     transition: null,
     ...overrides,

@@ -57,6 +57,9 @@ export interface RenderInput {
   captionChunkSize: number;
   captionLingerS: number;
   archetypeVisuals?: ArchetypeVisuals;
+  /** Índices globais de palavra (mesmo espaço de `words`) que merecem ênfase visual
+   * na legenda — populado a partir de `Scene.emphasisWords` (packages/domain). */
+  emphasisIndices?: number[];
 }
 
 /** Props que chegam de fato na composição Remotion (frames em vez de segundos). */
@@ -71,4 +74,5 @@ export interface CompositionProps {
   captionChunkSize: number;
   captionLingerS: number;
   archetypeVisuals?: ArchetypeVisuals;
+  emphasisIndices?: number[];
 }

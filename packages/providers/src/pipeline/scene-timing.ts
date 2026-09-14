@@ -65,3 +65,26 @@ export function splitWordsIntoScenes(scenes: Scene[], words: WordTimestamp[], fp
 
   return durations;
 }
+
+/** Converte `Scene.emphasisWords` (strings literais por cena) pra índices GLOBAIS de
+ * palavra, na mesma convenção de contagem por scriptLine já usada por
+ * `splitWordsIntoScenes` acima (cursor avança por palavra do script, não por palavra
+ * falada pelo TTS — ambos já toleram o mesmo desalinhamento aproximado quando o TTS
+ * não bate 1:1 com o script). Casamento por palavra normalizada (lowercase, sem
+ * pontuação): se a mesma palavra aparecer 2x na cena e só 1 ocorrência devia ter
+ * ênfase, ambas marcam — heurística aceitável, upgrade pra posição exata só se algum
+ * caso real reclamar. */
+export function resolveEmphasisIndices(scenes: Scene[]): Set<number> {
+  const indices = new Set<number>();
+  let globalIndex = 0;
+  for (const scene of scenes) {
+    const words = scene.scriptLine.trim().split(/\s+/).filter(Boolean);
+    const emphasisSet = new Set((scene.emphasisWords ?? []).map((w) => w.toLowerCase().replace(/[.,!?;:"']/g, "")));
+    words.forEach((word, i) => {
+      const clean = word.toLowerCase().replace(/[.,!?;:"']/g, "");
+      if (emphasisSet.has(clean)) indices.add(globalIndex + i);
+    });
+    globalIndex += words.length;
+  }
+  return indices;
+}

@@ -180,6 +180,11 @@ export function ResultPlayer({ job, onCreateAnother }: ResultPlayerProps) {
           <span>{job.resultSummary.audioSeconds.toFixed(1)}s de narração</span>
         </div>
       )}
+      {job.resultSummary?.narrationTimingEstimated && (
+        <p className="text-xs text-status-warning">
+          Legenda com timing estimado (a voz caiu no provider de fallback) — pode haver leve dessincronia.
+        </p>
+      )}
     </div>
   );
 }

@@ -14,6 +14,8 @@ For every element of type "ai_image", "stock_image", or "stock_video", you MUST 
 
 For each scene's "transition" field, default to "none" (hard cut) — hard cuts keep pacing tight and are the professional default for short-form video. Only use "crossfade" when the topic/subject changes meaningfully between scenes (a real beat change, not just a new shot of the same subject). Never use the same non-"none" transition value on more than 2 consecutive scene boundaries — vary it, or fall back to "none". Transitions with heavy visual effect ("zoom", "whip_pan", "flash", "wipe", "flip") should be rare — at most 1-2 per video, used only at a genuine emotional or narrative turn.
 
+For each scene, optionally mark 1-2 key words from scriptLine that deserve vocal emphasis (the word(s) that carry the emotional/informational weight of the line) in "emphasisWords". Use the exact word as it appears in scriptLine. Skip filler scenes where nothing deserves emphasis — most scenes don't need it.
+
 Whichever archetype you choose, write ai_image/ai_video_clip prompts that explicitly describe art style, lighting and mood consistent with that archetype's visual identity.
 
 Think like a YouTube Shorts producer. The hook must grab in 1-2 seconds. Every scene should move the story forward. The FINAL scene MUST be a call-to-action (e.g. "What would you have done? Comment below."), not a story conclusion.

@@ -22,6 +22,7 @@ const Main: React.FC<CompositionProps> = ({
   captionChunkSize,
   captionLingerS,
   archetypeVisuals,
+  emphasisIndices,
 }) => {
   const StyleComponent = CAPTION_STYLE_COMPONENTS[captionStyle];
   const springConfig = CAPTION_STYLE_SPRING_CONFIGS[captionStyle];
@@ -60,6 +61,7 @@ const Main: React.FC<CompositionProps> = ({
           accentColor={captionAccentColor}
           springConfig={springConfig}
           StyleComponent={StyleComponent}
+          emphasisIndices={emphasisIndices}
         />
       )}
 
@@ -80,6 +82,7 @@ const DEFAULT_PROPS: CompositionProps = {
   captionChunkSize: 5,
   captionLingerS: 0.3,
   archetypeVisuals: undefined,
+  emphasisIndices: undefined,
 };
 
 export const CLICKPLAY_COMPOSITION_ID = "ClickPlayVideo";

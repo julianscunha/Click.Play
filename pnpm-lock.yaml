@@ -152,6 +152,9 @@ importers:
       msedge-tts:
         specifier: ^2.0.7
         version: 2.0.7(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
+      n2words:
+        specifier: ^6.2.0
+        version: 6.2.0
       zod:
         specifier: ^4.3.6
         version: 4.4.3
@@ -2338,6 +2341,11 @@ packages:
   msedge-tts@2.0.7:
     resolution: {integrity: sha512-hkl+iOuv78ntQ1bexsvug87+B4E0+TYPCrpI64Rr9tYfjEBWx18zv3lbJKGRrhbl2IhLLlNwsKgj0/vC8kRNMA==}
     engines: {node: '>=16.0.0'}
+
+  n2words@6.2.0:
+    resolution: {integrity: sha512-ztdgZlsmXhXcCIDz3sVJCK88Zn/2nsMYA+lV6SB7cM0tWZsTBEw6QBGI+AbewIb4u9zXnD8aJGqQkw/WBOpmnw==}
+    engines: {node: ^22 || ^24 || ^26}
+    hasBin: true
 
   nanoid@3.3.18:
     resolution: {integrity: sha512-DTg4MJbGMWkfi6VZFdNt2/caMbQy4Ou+Op/hJQvGEWcnVfoA1QA+xzRKAzw9jD6+GVOOeYr/mIcuDSdug6F6+w==}
@@ -4815,6 +4823,8 @@ snapshots:
       - debug
       - supports-color
       - utf-8-validate
+
+  n2words@6.2.0: {}
 
   nanoid@3.3.18: {}
 

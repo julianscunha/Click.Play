@@ -13,6 +13,7 @@ export function mapRenderInputToProps(input: RenderInput): CompositionProps {
     captionChunkSize: input.captionChunkSize,
     captionLingerS: input.captionLingerS,
     archetypeVisuals: input.archetypeVisuals,
+    emphasisIndices: input.emphasisIndices,
   };
 }
 

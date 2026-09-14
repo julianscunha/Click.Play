@@ -1,18 +1,21 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
-import type { WordTimestamp } from "@clickplay/domain";
+import type { Scene, WordTimestamp } from "@clickplay/domain";
 import type { RenderInput, ResolvedScene } from "@clickplay/video-engine";
 import type { DirectorScore } from "../agents/creative-director.js";
 import { generateDirectorScore, reviseDirectorScore } from "../agents/creative-director.js";
 import { evaluate } from "../agents/critic.js";
 import { research } from "../agents/research.js";
 import { getArchetype } from "../config/archetype-registry.js";
+import type { ArchetypeConfig } from "../config/archetype.js";
 import type { CostBreakdown } from "../cost/index.js";
 import { computeActualCost, estimateCost } from "../cost/index.js";
 import type { LLMUsage } from "../llm/types.js";
+import { normalizeForSpeech } from "../tts/normalize-text.js";
+import type { TTSSegment } from "../tts/types.js";
 import { inferAspectRatio, resolveElement } from "../visual/index.js";
 import { resolveIntroOutroScene } from "./intro-outro.js";
-import { splitWordsIntoScenes, synthesizeWordTimestamps } from "./scene-timing.js";
+import { resolveEmphasisIndices, splitWordsIntoScenes, synthesizeWordTimestamps } from "./scene-timing.js";
 import type {
   PipelineCallbacks,
   PipelineCheckpoint,
@@ -23,6 +26,35 @@ import type {
 } from "./types.js";
 
 const MAX_REVISION_ROUNDS = 2;
+
+const PAUSE_BETWEEN_SCENES_MS = 250;
+/** Pausa maior antes da última cena — normalmente o CTA (buildDefaultPrompt força isso). */
+const PAUSE_BEFORE_LAST_SCENE_MS = 700;
+
+/** Rate SSML por tier de pacing do arquétipo — arquétipo "fast" fala um pouco mais
+ * rápido, "cinematic" mais devagar, sem exigir um campo novo por arquétipo (o pacing
+ * já existe e já reflete a intenção de ritmo). */
+const PACING_RATE: Record<ArchetypeConfig["scenePacing"], string | undefined> = {
+  fast: "+8%",
+  moderate: undefined,
+  cinematic: "-8%",
+};
+
+/** Monta os segmentos de TTS por cena — pausas (maior antes da última/CTA), prosódia
+ * por pacing do arquétipo, ênfase vocal (emphasisWords) e texto normalizado pra fala
+ * (números/moeda por extenso, não afeta scriptLine/legenda). */
+export function buildTtsSegments(scenes: Scene[], archetypeConfig: ArchetypeConfig, language?: string): TTSSegment[] {
+  const rate = PACING_RATE[archetypeConfig.scenePacing];
+  return scenes.map((scene, i) => {
+    const isLast = i === scenes.length - 1;
+    return {
+      text: normalizeForSpeech(scene.scriptLine, language),
+      pauseAfterMs: isLast ? 0 : i === scenes.length - 2 ? PAUSE_BEFORE_LAST_SCENE_MS : PAUSE_BETWEEN_SCENES_MS,
+      rate,
+      emphasisWords: scene.emphasisWords,
+    };
+  });
+}
 
 /**
  * Orquestra research → creative director (com loop de revisão via critic) →
@@ -126,10 +158,16 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
 
     if (callbacks.isCancelled?.()) return { status: "cancelled" };
 
+    // Resolvido uma vez, usado no TTS (prosódia por pacing), na resolução de
+    // elementos (transição/prompt determinístico) e no stage "render" abaixo —
+    // mesma config vale pro vídeo inteiro, não é por cena.
+    const archetypeConfig = getArchetype(score.archetype);
+
     stage = "tts";
     const fullScript = score.scenes.map((s) => s.scriptLine).join(" ");
     let ttsWords: WordTimestamp[];
     let voiceoverPath: string | undefined;
+    let narrationTimingEstimated = false;
 
     if (opts.resume?.tts) {
       ttsWords = opts.resume.tts.words;
@@ -139,12 +177,14 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
       voiceoverPath = undefined;
     } else {
       await callbacks.onStageStart?.(stage);
-      const ttsResult = await opts.ttsProvider.generate(fullScript);
+      const ttsSegments = buildTtsSegments(score.scenes, archetypeConfig, opts.language);
+      const ttsResult = await opts.ttsProvider.generate(ttsSegments);
       const audioDir = path.join(opts.runDir, "audio");
       await fs.promises.mkdir(audioDir, { recursive: true });
       voiceoverPath = path.join(audioDir, "voiceover.mp3");
       await fs.promises.writeFile(voiceoverPath, ttsResult.audio);
       ttsWords = ttsResult.words;
+      narrationTimingEstimated = ttsResult.estimatedTiming ?? false;
       await callbacks.onStageComplete?.(stage);
     }
     checkpoint.tts = { words: ttsWords, voiceoverPath, fullScript };
@@ -155,10 +195,6 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
     stage = "visuals";
     let resolvedScenes: ResolvedScene[];
     let musicPath: string | undefined;
-    // Resolvido uma vez, usado tanto na resolução de elementos (transição/prompt
-    // determinístico) quanto no stage "render" abaixo — mesma config vale pro
-    // vídeo inteiro, não é por cena, por isso fica fora do if/else de resume.
-    const archetypeConfig = getArchetype(score.archetype);
 
     if (opts.resume?.visuals) {
       resolvedScenes = opts.resume.visuals.resolvedScenes;
@@ -222,8 +258,13 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
 
     stage = "render";
     await callbacks.onStageStart?.(stage);
-    // archetypeConfig já resolvido no stage "visuals" acima (reaproveitado aqui —
-    // mesma config vale pro vídeo inteiro, não é por cena).
+    // archetypeConfig já resolvido antes do stage "tts" (reaproveitado aqui — mesma
+    // config vale pro vídeo inteiro, não é por cena).
+    const baseCaptionChunkSize = opts.captionChunkSize ?? archetypeConfig.captionChunkSize ?? 3;
+    // Timing estimado (fallback Gemini/OpenRouter, sem WordBoundary real) erra um
+    // pouco por palavra — chunk maior deixa a TROCA de bloco (o que mais salta aos
+    // olhos) mais estável, mesmo sem corrigir o erro de timing por palavra em si.
+    const captionChunkSize = narrationTimingEstimated ? Math.max(baseCaptionChunkSize, 5) : baseCaptionChunkSize;
     const renderInput: RenderInput = {
       scenes: resolvedScenes,
       fps,
@@ -235,13 +276,14 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
       words: opts.captionsEnabled === false ? [] : ttsWords,
       captionStyle: opts.captionStyle ?? archetypeConfig.captionStyle,
       captionAccentColor: opts.captionAccentColor ?? "#ffffff",
-      captionChunkSize: opts.captionChunkSize ?? archetypeConfig.captionChunkSize ?? 3,
+      captionChunkSize,
       captionLingerS: opts.captionLingerS ?? archetypeConfig.captionLingerS ?? 0.15,
       archetypeVisuals: {
         motionIntensity: archetypeConfig.motionIntensity,
         colorPalette: archetypeConfig.colorPalette,
         textCardFont: archetypeConfig.textCardFont,
       },
+      emphasisIndices: opts.captionsEnabled === false ? undefined : Array.from(resolveEmphasisIndices(score.scenes)),
     };
     const outputDir = path.join(opts.runDir, "output");
     await fs.promises.mkdir(outputDir, { recursive: true });
@@ -291,6 +333,7 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
       imageCount: aiImages,
       videoClipCount: aiVideos,
       audioSeconds: voiceoverPath && ttsWords.length > 0 ? Math.max(...ttsWords.map((w) => w.end)) : 0,
+      narrationTimingEstimated,
     };
   } catch (err) {
     const error = err instanceof Error ? err : new Error(String(err));
