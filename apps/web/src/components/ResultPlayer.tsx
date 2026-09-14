@@ -22,12 +22,12 @@ export interface ResultPlayerProps {
  * de N pares de campos, decisão de manter o card de salvar template com 1 input a mais, não uma sub-UI de lista.
  * Entradas sem "=" ou com chave vazia são ignoradas (usuário ainda digitando).
  */
-function parseVariableSchema(raw: string): TemplateVariable[] {
+function parseVariableSchema(raw: string, kind: "literal" | "generative"): TemplateVariable[] {
   return raw
     .split(",")
     .map((part) => {
       const [key, ...rest] = part.split("=");
-      return { key: key?.trim() ?? "", label: rest.join("=").trim() };
+      return { key: key?.trim() ?? "", label: rest.join("=").trim(), kind };
     })
     .filter((v) => v.key.length > 0 && v.label.length > 0);
 }
@@ -35,6 +35,7 @@ function parseVariableSchema(raw: string): TemplateVariable[] {
 function SaveAsTemplate({ productionId }: { productionId: string }) {
   const [name, setName] = useState("");
   const [variablesRaw, setVariablesRaw] = useState("");
+  const [generativeVariablesRaw, setGenerativeVariablesRaw] = useState("");
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [saved, setSaved] = useState<string | null>(null);
@@ -44,7 +45,10 @@ function SaveAsTemplate({ productionId }: { productionId: string }) {
     setSaving(true);
     setError(null);
     try {
-      const variableSchema = parseVariableSchema(variablesRaw);
+      const variableSchema = [
+        ...parseVariableSchema(variablesRaw, "literal"),
+        ...parseVariableSchema(generativeVariablesRaw, "generative"),
+      ];
       const template = await saveTemplate(name.trim(), productionId, variableSchema.length > 0 ? variableSchema : undefined);
       setSaved(template.version > 1 ? `Template "${template.name}" atualizado (v${template.version}).` : `Template "${template.name}" salvo.`);
     } catch (err) {
@@ -93,6 +97,21 @@ function SaveAsTemplate({ productionId }: { productionId: string }) {
         <p className="text-xs text-fg-tertiary">
           Use <code>{"{{CHAVE}}"}</code> no campo "Briefing" desta produção — ao reaproveitar o template, quem for
           criar um vídeo novo preenche um valor por variável declarada aqui.
+        </p>
+      </div>
+      <div className="flex flex-col gap-1">
+        <input
+          value={generativeVariablesRaw}
+          onChange={(e) => {
+            setGenerativeVariablesRaw(e.target.value);
+            setSaved(null);
+          }}
+          placeholder="Variáveis geradas por IA (opcional): PERSONAGEM=Invente um nome de personagem curioso"
+          className="rounded-md border border-border-default bg-surface-1 px-3 py-2 text-sm text-fg-primary placeholder:text-fg-tertiary focus:border-border-strong focus:outline-none"
+        />
+        <p className="text-xs text-fg-tertiary">
+          Diferente das de cima: em vez de um humano preencher o valor, o texto aqui é a instrução — o LLM gera o
+          valor sozinho a cada disparo de um agendamento automático (Agendamentos → "aprovar custo automaticamente").
         </p>
       </div>
       {error && (

@@ -59,6 +59,8 @@ CREATE TABLE IF NOT EXISTS schedules (
   time_of_day TEXT NOT NULL,
   day_of_week INTEGER,
   variable_bindings TEXT,
+  auto_approve_cost INTEGER NOT NULL DEFAULT 0,
+  max_cost_usd REAL,
   enabled INTEGER NOT NULL DEFAULT 1,
   next_run_at INTEGER NOT NULL,
   last_run_at INTEGER,
@@ -141,6 +143,20 @@ function addVariableSchemaColumnIfMissing(sqlite: DatabaseSync): void {
   }
 }
 
+/** Idem, auto-aprovação de custo + teto por vídeo (Fase 20 — AI Content Factory). */
+function addAutoApproveColumnsIfMissing(sqlite: DatabaseSync): void {
+  try {
+    sqlite.exec("ALTER TABLE schedules ADD COLUMN auto_approve_cost INTEGER NOT NULL DEFAULT 0");
+  } catch {
+    // já existe
+  }
+  try {
+    sqlite.exec("ALTER TABLE schedules ADD COLUMN max_cost_usd REAL");
+  } catch {
+    // já existe
+  }
+}
+
 /**
  * Só engole o erro esperado ("já renomeado/nunca existiu") — qualquer outra
  * falha (lock de arquivo, disco cheio) tem que estourar, senão o `CREATE
@@ -189,6 +205,7 @@ export function createDb(sqliteFilePath: string): ClickPlayDb {
   addResultSummaryColumnIfMissing(sqlite);
   addContentProjectIdColumnIfMissing(sqlite);
   addVariableSchemaColumnIfMissing(sqlite);
+  addAutoApproveColumnsIfMissing(sqlite);
   ensureWalletRow(sqlite);
 
   return drizzle(async (sqlText, params, method) => {

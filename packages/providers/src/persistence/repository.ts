@@ -326,6 +326,8 @@ export async function createSchedule(
     timeOfDay: string;
     dayOfWeek?: number;
     variableBindings?: Record<string, string>;
+    autoApproveCost?: boolean;
+    maxCostUsd?: number;
     nextRunAt: Date;
   },
 ): Promise<Schedule> {
@@ -338,6 +340,8 @@ export async function createSchedule(
     timeOfDay: input.timeOfDay,
     dayOfWeek: input.dayOfWeek ?? null,
     variableBindings: input.variableBindings ?? {},
+    autoApproveCost: input.autoApproveCost ?? false,
+    maxCostUsd: input.maxCostUsd ?? null,
     enabled: true,
     nextRunAt: input.nextRunAt,
     lastRunAt: null,

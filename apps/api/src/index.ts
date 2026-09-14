@@ -43,6 +43,7 @@ setInterval(() => {
     db,
     buildJobRunnerDeps,
     buildCostOptions,
+    buildLLM: () => buildLLM("standard", false),
     runsDir,
     gate,
     onLog: (jobId, message) => app.log.info({ jobId }, message),

@@ -677,6 +677,7 @@ describe("server", () => {
           db,
           buildJobRunnerDeps: () => fakeJobRunnerDeps(fakeLLM()),
           buildCostOptions: () => costOptions,
+          buildLLM: () => fakeLLM(),
           runsDir,
           gate,
         },
@@ -693,6 +694,7 @@ describe("server", () => {
           db,
           buildJobRunnerDeps: () => fakeJobRunnerDeps(fakeLLM()),
           buildCostOptions: () => costOptions,
+          buildLLM: () => fakeLLM(),
           runsDir,
           gate,
         },
@@ -700,6 +702,160 @@ describe("server", () => {
       );
       const schedulesAfter = await listSchedules(db);
       expect(schedulesAfter[0]!.lastRunAt).toEqual(schedules[0]!.lastRunAt);
+    });
+
+    async function createGenerativeTemplateViaApi(app: ReturnType<typeof buildServer>) {
+      const jobRes = await app.inject({
+        method: "POST",
+        url: "/jobs",
+        payload: {
+          topic: "Apollo 11",
+          videoMode: "motion_graphics_only",
+          direction: "Uma história sobre {{PERSONAGEM}}.",
+        },
+      });
+      const productionId = jobRes.json().productionId as string;
+      const templateRes = await app.inject({
+        method: "POST",
+        url: "/templates",
+        payload: {
+          name: "Com variável generativa",
+          productionId,
+          variableSchema: [{ key: "PERSONAGEM", label: "Invente um nome de personagem curioso", kind: "generative" }],
+        },
+      });
+      return templateRes.json().id as string;
+    }
+
+    it("resolves a generative variable via the LLM and interpolates it into direction before the director stage", async () => {
+      // instância própria só pra semear o template (POST /jobs consome os 3 canned response dela) —
+      // pipelineLlm fica intocada, reservada pro job disparado pelo agendamento.
+      const seedLlm = fakeLLM(RESEARCH_RESULT, directorPayload(), critiquePayload(8));
+      const pipelineLlm = fakeLLM(RESEARCH_RESULT, directorPayload(), critiquePayload(8));
+      const variableLlm = fakeLLM({ value: "Capitão Zorbo" });
+      const app = buildServer({
+        db,
+        buildJobRunnerDeps: () => fakeJobRunnerDeps(seedLlm),
+        buildCostOptions: () => costOptions,
+        runsDir,
+        envFilePath,
+      });
+      const templateId = await createGenerativeTemplateViaApi(app);
+      await app.inject({
+        method: "POST",
+        url: "/schedules",
+        payload: { templateId, topic: "Aventuras espaciais", frequency: "daily", timeOfDay: "09:00" },
+      });
+      const nextRunAt = (await listSchedules(db))[0]!.nextRunAt;
+
+      await runDueSchedules(
+        {
+          db,
+          buildJobRunnerDeps: () => fakeJobRunnerDeps(pipelineLlm),
+          buildCostOptions: () => costOptions,
+          buildLLM: () => variableLlm,
+          runsDir,
+          gate: createCostApprovalGate(),
+        },
+        new Date(nextRunAt.getTime() + 1000),
+      );
+
+      expect(variableLlm.generate).toHaveBeenCalledTimes(1);
+      expect(variableLlm.generate).toHaveBeenCalledWith(
+        expect.objectContaining({ userMessage: "Instruction: Invente um nome de personagem curioso" }),
+      );
+
+      // 2ª chamada do LLM do pipeline é o Director — espera até acontecer (fire-and-forget).
+      const pipelineGenerate = vi.mocked(pipelineLlm.generate);
+      for (let i = 0; i < 50 && pipelineGenerate.mock.calls.length < 2; i++) {
+        await new Promise((r) => setTimeout(r, 10));
+      }
+      expect(pipelineGenerate.mock.calls[1]![0].userMessage).toContain("Uma história sobre Capitão Zorbo.");
+    });
+
+    it("auto-approves cost and completes the job with no manual approve-cost call, when autoApproveCost is on", async () => {
+      const seedLlm = fakeLLM(RESEARCH_RESULT, directorPayload(), critiquePayload(8));
+      const llm = fakeLLM(RESEARCH_RESULT, directorPayload(), critiquePayload(8));
+      const app = buildServer({
+        db,
+        buildJobRunnerDeps: () => fakeJobRunnerDeps(seedLlm),
+        buildCostOptions: () => costOptions,
+        runsDir,
+        envFilePath,
+      });
+      const templateId = await createTemplateViaApi(app);
+      await app.inject({
+        method: "POST",
+        url: "/schedules",
+        payload: { templateId, topic: "Apollo 11", frequency: "daily", timeOfDay: "09:00", autoApproveCost: true },
+      });
+      const nextRunAt = (await listSchedules(db))[0]!.nextRunAt;
+      const balanceBefore = (await app.inject({ method: "GET", url: "/credits" })).json().balanceUsd as number;
+
+      await runDueSchedules(
+        {
+          db,
+          buildJobRunnerDeps: () => fakeJobRunnerDeps(llm),
+          buildCostOptions: () => costOptions,
+          buildLLM: () => fakeLLM(),
+          runsDir,
+          gate: createCostApprovalGate(),
+        },
+        new Date(nextRunAt.getTime() + 1000),
+      );
+
+      // Débito acontece na aprovação (logo após o Director), bem antes do render terminar —
+      // poll no saldo é suficiente pra confirmar que ninguém precisou clicar em nada.
+      let balanceAfter = balanceBefore;
+      for (let i = 0; i < 100 && balanceAfter >= balanceBefore; i++) {
+        await new Promise((r) => setTimeout(r, 20));
+        balanceAfter = (await app.inject({ method: "GET", url: "/credits" })).json().balanceUsd as number;
+      }
+      expect(balanceAfter).toBeLessThan(balanceBefore);
+    }, 30_000);
+
+    it("cancels the job instead of auto-approving when the estimate exceeds maxCostUsd", async () => {
+      const seedLlm = fakeLLM(RESEARCH_RESULT, directorPayload(), critiquePayload(8));
+      const llm = fakeLLM(RESEARCH_RESULT, directorPayload(), critiquePayload(8));
+      const app = buildServer({
+        db,
+        buildJobRunnerDeps: () => fakeJobRunnerDeps(seedLlm),
+        buildCostOptions: () => costOptions,
+        runsDir,
+        envFilePath,
+      });
+      const templateId = await createTemplateViaApi(app);
+      await app.inject({
+        method: "POST",
+        url: "/schedules",
+        payload: {
+          templateId,
+          topic: "Apollo 11",
+          frequency: "daily",
+          timeOfDay: "09:00",
+          autoApproveCost: true,
+          maxCostUsd: 0.0000001,
+        },
+      });
+      const nextRunAt = (await listSchedules(db))[0]!.nextRunAt;
+      const balanceBefore = (await app.inject({ method: "GET", url: "/credits" })).json().balanceUsd as number;
+
+      await runDueSchedules(
+        {
+          db,
+          buildJobRunnerDeps: () => fakeJobRunnerDeps(llm),
+          buildCostOptions: () => costOptions,
+          buildLLM: () => fakeLLM(),
+          runsDir,
+          gate: createCostApprovalGate(),
+        },
+        new Date(nextRunAt.getTime() + 1000),
+      );
+
+      // Sem render pra esperar — custo estourou o teto logo depois do Director, cancela cedo.
+      await new Promise((r) => setTimeout(r, 200));
+      const balanceAfter = (await app.inject({ method: "GET", url: "/credits" })).json().balanceUsd as number;
+      expect(balanceAfter).toBe(balanceBefore);
     });
   });
 

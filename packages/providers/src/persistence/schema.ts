@@ -70,7 +70,12 @@ export const templates = sqliteTable("templates", {
   config: text("config", { mode: "json" }).notNull(),
   sourceProductionId: text("source_production_id").references(() => productions.id),
   /** Fase 18: lista de {key, label} pra interpolar {{key}} em `config.direction` — null/[] = template sem variável. */
-  variableSchema: text("variable_schema", { mode: "json" }).$type<{ key: string; label: string }[]>(),
+  /** `kind` (Fase 20, default "literal" quando ausente — templates antigos não têm o campo):
+   * "generative" usa `label` como instrução pro LLM gerar o valor sozinho (Scheduler, sem humano
+   * preenchendo form) em vez de um rótulo pra input manual (Wizard/ScheduleView). */
+  variableSchema: text("variable_schema", { mode: "json" }).$type<
+    { key: string; label: string; kind?: "literal" | "generative" }[]
+  >(),
   createdAt: integer("created_at", { mode: "timestamp_ms" }).notNull(),
   updatedAt: integer("updated_at", { mode: "timestamp_ms" }).notNull(),
 });
@@ -97,6 +102,14 @@ export const schedules = sqliteTable("schedules", {
   dayOfWeek: integer("day_of_week"),
   /** Valores pra interpolar `{{key}}` do `template.variableSchema` — mesmo shape de bindings do Wizard (Fase 18). */
   variableBindings: text("variable_bindings", { mode: "json" }).$type<Record<string, string>>(),
+  /** Fase 20 — "ligar o automático de verdade": pula a aprovação manual de custo (gate) quando true,
+   * aprova sozinho respeitando `maxCostUsd` (rede de segurança extra, opcional) e o saldo de créditos
+   * existente (mesma checagem do botão manual, `trySpend`). Default false — schedules antigos continuam
+   * manuais. */
+  autoApproveCost: integer("auto_approve_cost", { mode: "boolean" }).notNull().default(false),
+  /** Só usado quando `autoApproveCost` é true — custo estimado acima disso cancela a execução em vez
+   * de aprovar sozinho, mesmo com saldo suficiente. Null = sem teto além do saldo de créditos. */
+  maxCostUsd: real("max_cost_usd"),
   enabled: integer("enabled", { mode: "boolean" }).notNull().default(true),
   nextRunAt: integer("next_run_at", { mode: "timestamp_ms" }).notNull(),
   lastRunAt: integer("last_run_at", { mode: "timestamp_ms" }),

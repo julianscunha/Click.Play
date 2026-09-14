@@ -211,10 +211,13 @@ export interface TemplateConfig {
   outro?: IntroOutroConfig;
 }
 
-/** Variável declarada num template (Fase 18) — `key` interpolado como `{{key}}` em `direction`. */
+/** Variável declarada num template (Fase 18) — `key` interpolado como `{{key}}` em `direction`.
+ * `kind` (Fase 20, default "literal"): "generative" reaproveita `label` como instrução pro LLM gerar
+ * o valor sozinho a cada disparo de agendamento (sem humano preenchendo o Wizard). */
 export interface TemplateVariable {
   key: string;
   label: string;
+  kind?: "literal" | "generative";
 }
 
 export interface TemplateSummary {
@@ -262,6 +265,9 @@ export interface Schedule {
   timeOfDay: string;
   dayOfWeek: number | null;
   variableBindings: Record<string, string>;
+  /** Fase 20 — "ligar o automático de verdade": pula a aprovação manual de custo quando true. */
+  autoApproveCost: boolean;
+  maxCostUsd: number | null;
   enabled: boolean;
   nextRunAt: string;
   lastRunAt: string | null;
@@ -276,6 +282,8 @@ export interface CreateScheduleInput {
   timeOfDay: string;
   dayOfWeek?: number;
   variableBindings?: Record<string, string>;
+  autoApproveCost?: boolean;
+  maxCostUsd?: number;
 }
 
 export function listSchedules(): Promise<Schedule[]> {

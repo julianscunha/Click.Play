@@ -2,15 +2,19 @@ import * as path from "node:path";
 import type { QualityTier } from "@clickplay/domain";
 import {
   computeNextRunAt,
+  type CostBreakdown,
   type createCostApprovalGate,
   createJob,
   createProduction,
   getTemplate,
+  type LLMProvider,
   listDueSchedules,
   markScheduleRun,
+  resolveGenerativeVariables,
   resolveScheduleConfig,
   setScheduleEnabled,
   startJob,
+  trySpend,
   type ClickPlayDb,
   type CostEstimateOptions,
   type JobRunnerDeps,
@@ -26,6 +30,8 @@ export interface SchedulerDeps {
     voiceGender?: "female" | "male",
   ): JobRunnerDeps;
   buildCostOptions(): CostEstimateOptions;
+  /** Fase 20 — só usado pra resolver variável `kind: "generative"`; não é o LLM do roteiro do job em si. */
+  buildLLM(): LLMProvider;
   runsDir: string;
   gate: ReturnType<typeof createCostApprovalGate>;
   onLog?(jobId: string, message: string): void;
@@ -33,11 +39,29 @@ export interface SchedulerDeps {
 }
 
 /**
+ * Fase 20 — política de aprovação automática quando `schedule.autoApproveCost` está ligado: custo
+ * desconhecido nunca aprova sozinho (sem humano pra decidir, diferente do botão manual que deixa passar);
+ * `maxCostUsd` (opcional) é um teto extra só pras execuções automáticas, acima do saldo de créditos
+ * normal; `useOwnProviders` não debita (mesma regra do botão manual, `POST /jobs/:id/approve-cost`).
+ */
+async function autoApproveCost(
+  db: ClickPlayDb,
+  estimate: CostBreakdown,
+  maxCostUsd: number | null,
+  useOwnProviders: boolean | undefined,
+): Promise<boolean> {
+  if (estimate.total.status !== "known") return false;
+  if (maxCostUsd != null && estimate.total.usd > maxCostUsd) return false;
+  if (useOwnProviders) return true;
+  return trySpend(db, estimate.total.usd);
+}
+
+/**
  * Dispara todo agendamento vencido (Fase 19): cria `production`+`job` a partir do template resolvido
- * (Fase 18, só `direction`) e chama `startJob` — mesmo caminho de `POST /jobs`, sem pipeline paralelo
- * (decisão #6 do roadmap). Aprovação de custo continua manual (gate), agendamento só automatiza a
- * *criação* do job, não pula a aprovação — "ligar o automático de verdade" é decisão de produto da
- * Fase 20, não desta.
+ * (Fase 18, `direction` + Fase 20, variáveis `generative`) e chama `startJob` — mesmo caminho de
+ * `POST /jobs`, sem pipeline paralelo (decisão #6 do roadmap). Aprovação de custo é manual por padrão;
+ * `schedule.autoApproveCost` (Fase 20 — "ligar o automático de verdade") pula o gate e aprova sozinho
+ * via `autoApproveCost()` acima.
  */
 export async function runDueSchedules(deps: SchedulerDeps, now: Date = new Date()): Promise<void> {
   const due = await listDueSchedules(deps.db, now);
@@ -53,7 +77,8 @@ export async function runDueSchedules(deps: SchedulerDeps, now: Date = new Date(
         continue;
       }
 
-      const config = resolveScheduleConfig(template.config, schedule.variableBindings);
+      const bindings = await resolveGenerativeVariables(deps.buildLLM(), template.variableSchema, schedule.variableBindings);
+      const config = resolveScheduleConfig(template.config, bindings);
       const production = await createProduction(deps.db, {
         topic: schedule.topic,
         contentProjectId: template.contentProjectId ?? undefined,
@@ -67,7 +92,9 @@ export async function runDueSchedules(deps: SchedulerDeps, now: Date = new Date(
         job.id,
         deps.buildJobRunnerDeps(config.qualityTier, config.language, config.useOwnProviders, config.voiceGender),
         {
-          approveCost: () => deps.gate.waitForApproval(job.id),
+          approveCost: schedule.autoApproveCost
+            ? (estimate) => autoApproveCost(deps.db, estimate, schedule.maxCostUsd, config.useOwnProviders)
+            : () => deps.gate.waitForApproval(job.id),
           onLog: (message) => deps.onLog?.(job.id, message),
         },
       );

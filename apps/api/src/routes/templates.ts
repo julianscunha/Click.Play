@@ -7,7 +7,14 @@ const SaveTemplateBody = z.object({
   productionId: z.string().min(1, "productionId é obrigatório"),
   /** Fase 18: variáveis {{key}} interpoladas em `config.direction` ao usar o template. */
   variableSchema: z
-    .array(z.object({ key: z.string().trim().min(1), label: z.string().trim().min(1) }))
+    .array(
+      z.object({
+        key: z.string().trim().min(1),
+        label: z.string().trim().min(1),
+        /** Fase 20 — "generative" reaproveita `label` como instrução pro LLM gerar o valor sozinho. */
+        kind: z.enum(["literal", "generative"]).optional(),
+      }),
+    )
     .optional(),
 });
 

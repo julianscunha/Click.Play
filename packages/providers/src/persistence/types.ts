@@ -37,10 +37,18 @@ export interface ContentProject {
   updatedAt: Date;
 }
 
-/** Variável declarada num template (Fase 18) — `key` interpolado como `{{key}}` em `config.direction`. */
+export const TEMPLATE_VARIABLE_KINDS = ["literal", "generative"] as const;
+export type TemplateVariableKind = (typeof TEMPLATE_VARIABLE_KINDS)[number];
+
+/** Variável declarada num template (Fase 18) — `key` interpolado como `{{key}}` em `config.direction`.
+ * `kind` (Fase 20, default "literal"): "generative" reaproveita `label` como instrução pro LLM gerar o
+ * valor sozinho (`resolveGenerativeVariables`, scheduler/resolve-schedule.ts) — usado quando o agendamento
+ * dispara sem humano preenchendo o Wizard; Wizard/ScheduleView continuam podendo tratar "literal" com
+ * input manual normalmente. */
 export interface TemplateVariable {
   key: string;
   label: string;
+  kind?: TemplateVariableKind;
 }
 
 /** Config de produção salvo/reaproveitável (Fase 17) — mesmo shape de `Production.config`. */
@@ -65,6 +73,9 @@ export interface Schedule {
   timeOfDay: string;
   dayOfWeek: number | null;
   variableBindings: Record<string, string>;
+  /** Fase 20 — pula a aprovação manual de custo quando true (ver schema.ts pro detalhe da política). */
+  autoApproveCost: boolean;
+  maxCostUsd: number | null;
   enabled: boolean;
   nextRunAt: Date;
   lastRunAt: Date | null;
@@ -157,6 +168,8 @@ export function scheduleFromRow(row: ScheduleRow): Schedule {
     timeOfDay: row.timeOfDay,
     dayOfWeek: row.dayOfWeek ?? null,
     variableBindings: row.variableBindings ?? {},
+    autoApproveCost: row.autoApproveCost,
+    maxCostUsd: row.maxCostUsd ?? null,
     enabled: row.enabled,
     nextRunAt: row.nextRunAt,
     lastRunAt: row.lastRunAt ?? null,

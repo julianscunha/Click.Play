@@ -34,6 +34,8 @@ function NewScheduleForm({ templates, onCreated }: { templates: TemplateSummary[
   const [dayOfWeek, setDayOfWeek] = useState(1);
   const [templateVariables, setTemplateVariables] = useState<TemplateVariable[]>([]);
   const [variableBindings, setVariableBindings] = useState<Record<string, string>>({});
+  const [autoApproveCost, setAutoApproveCost] = useState(false);
+  const [maxCostUsd, setMaxCostUsd] = useState("");
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -53,6 +55,7 @@ function NewScheduleForm({ templates, onCreated }: { templates: TemplateSummary[
     setSaving(true);
     setError(null);
     try {
+      const maxCost = Number(maxCostUsd);
       const schedule = await createSchedule({
         templateId,
         topic: topic.trim(),
@@ -60,6 +63,8 @@ function NewScheduleForm({ templates, onCreated }: { templates: TemplateSummary[
         timeOfDay,
         dayOfWeek: frequency === "weekly" ? dayOfWeek : undefined,
         variableBindings: templateVariables.length > 0 ? variableBindings : undefined,
+        autoApproveCost,
+        maxCostUsd: autoApproveCost && maxCostUsd.trim() && Number.isFinite(maxCost) && maxCost > 0 ? maxCost : undefined,
       });
       onCreated(schedule);
       setTopic("");
@@ -106,24 +111,58 @@ function NewScheduleForm({ templates, onCreated }: { templates: TemplateSummary[
           className={fieldClass}
         />
       </div>
-      {templateVariables.length > 0 && (
+      {templateVariables.some((v) => v.kind !== "generative") && (
         <div className="flex flex-col gap-2">
           <p className={labelClass}>Variáveis do template</p>
-          {templateVariables.map((v) => (
-            <div key={v.key} className="flex flex-col gap-1.5">
-              <label htmlFor={`sched-var-${v.key}`} className="text-xs text-fg-secondary">
-                {v.label}
-              </label>
-              <input
-                id={`sched-var-${v.key}`}
-                value={variableBindings[v.key] ?? ""}
-                onChange={(e) => setVariableBindings((b) => ({ ...b, [v.key]: e.target.value }))}
-                className={fieldClass}
-              />
-            </div>
-          ))}
+          {templateVariables
+            .filter((v) => v.kind !== "generative")
+            .map((v) => (
+              <div key={v.key} className="flex flex-col gap-1.5">
+                <label htmlFor={`sched-var-${v.key}`} className="text-xs text-fg-secondary">
+                  {v.label}
+                </label>
+                <input
+                  id={`sched-var-${v.key}`}
+                  value={variableBindings[v.key] ?? ""}
+                  onChange={(e) => setVariableBindings((b) => ({ ...b, [v.key]: e.target.value }))}
+                  className={fieldClass}
+                />
+              </div>
+            ))}
         </div>
       )}
+      {templateVariables.some((v) => v.kind === "generative") && (
+        <p className="text-xs text-fg-tertiary">
+          Geradas por IA a cada execução (sem campo pra preencher):{" "}
+          {templateVariables
+            .filter((v) => v.kind === "generative")
+            .map((v) => v.key)
+            .join(", ")}
+        </p>
+      )}
+      <div className="flex flex-col gap-2 rounded-md border border-border-subtle bg-surface-1 p-3">
+        <label className="flex items-center gap-2 text-sm text-fg-primary">
+          <input type="checkbox" checked={autoApproveCost} onChange={(e) => setAutoApproveCost(e.target.checked)} />
+          Aprovar custo automaticamente (sem abrir a WebUI pra clicar em "Aprovar")
+        </label>
+        {autoApproveCost && (
+          <div className="flex flex-col gap-1.5">
+            <label htmlFor="scheduleMaxCost" className="text-xs text-fg-secondary">
+              Limite por vídeo em US$ (opcional — além do saldo de créditos)
+            </label>
+            <input
+              id="scheduleMaxCost"
+              type="number"
+              min={0}
+              step="0.01"
+              value={maxCostUsd}
+              onChange={(e) => setMaxCostUsd(e.target.value)}
+              placeholder="Sem limite extra"
+              className={fieldClass}
+            />
+          </div>
+        )}
+      </div>
       <div className="flex gap-3">
         <div className="flex flex-col gap-1.5">
           <label htmlFor="scheduleFrequency" className={labelClass}>
@@ -252,6 +291,14 @@ export function ScheduleView({ onClose }: ScheduleViewProps) {
                   <p className="text-xs text-fg-tertiary">
                     {templateName(s.templateId)} · {s.frequency === "daily" ? "diário" : `semanal (${WEEKDAYS[s.dayOfWeek ?? 0]})`}{" "}
                     às {s.timeOfDay} · próxima execução: {formatNextRun(s.nextRunAt)}
+                    {s.autoApproveCost && (
+                      <>
+                        {" · "}
+                        <span className="text-status-warning">
+                          custo auto-aprovado{s.maxCostUsd != null ? ` (até US$ ${s.maxCostUsd.toFixed(2)})` : ""}
+                        </span>
+                      </>
+                    )}
                   </p>
                 </div>
                 <div className="flex items-center gap-2">

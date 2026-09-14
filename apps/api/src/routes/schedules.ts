@@ -20,6 +20,10 @@ const CreateScheduleBody = z.object({
   timeOfDay: z.string().regex(TIME_OF_DAY, "timeOfDay precisa ser HH:mm"),
   dayOfWeek: z.number().int().min(0).max(6).optional(),
   variableBindings: z.record(z.string(), z.string()).optional(),
+  /** Fase 20 — "ligar o automático de verdade": pula a aprovação manual de custo quando true. */
+  autoApproveCost: z.boolean().optional(),
+  /** Teto por vídeo, só relevante com autoApproveCost — acima disso, cancela em vez de aprovar sozinho. */
+  maxCostUsd: z.number().positive().optional(),
 });
 
 const UpdateScheduleBody = z.object({ enabled: z.boolean() });
