@@ -24,6 +24,12 @@ export abstract class BaseLLM implements LLMProvider {
       system: opts.systemPrompt,
       prompt: opts.userMessage,
       output: Output.object({ schema: opts.schema }),
+      // Achado em teste manual real: "No object generated: could not parse the
+      // response" na revisão do DirectorScore — sem limite explícito, o SDK
+      // usa o default do provider/modelo, que pode truncar a saída no meio de
+      // um JSON grande (roteiro com várias cenas). Generoso o bastante pro
+      // maior schema (DirectorScore completo), barato pros schemas pequenos.
+      maxOutputTokens: 8192,
     });
 
     if (result.output == null) {

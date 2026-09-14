@@ -384,7 +384,10 @@ ${revisionGuidance}
 Revise the DirectorScore to address the weaknesses while preserving the strengths.
 Keep the same archetype. Maintain the GOLDEN RULE: never reduce more than 2 consecutive scenes to a single static image/stock clip.`;
 
-  const maxRetries = 2;
+  // Mesma resiliência de generateDirectorScore (3 tentativas) — achado em teste
+  // manual real: revisão tem prompt maior (ecoa o plano inteiro + crítica) e
+  // falhava mais fácil em "No object generated", 2 tentativas não bastavam.
+  const maxRetries = 3;
   let lastError: Error | null = null;
   const totalUsage: LLMUsage = { inputTokens: 0, outputTokens: 0 };
 

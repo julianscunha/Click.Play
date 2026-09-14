@@ -33,6 +33,16 @@ describe("BaseLLM.generate", () => {
     expect(result).toEqual({ data: { title: "hello" }, usage: { inputTokens: 10, outputTokens: 5 } });
   });
 
+  it("sets a generous maxOutputTokens to avoid truncating large structured output", async () => {
+    generateTextMock.mockResolvedValueOnce({ output: { title: "hello" }, usage: { inputTokens: 10, outputTokens: 5 } });
+
+    await new FakeLLM().generate({ systemPrompt: "sys", userMessage: "hi", schema: z.object({ title: z.string() }) });
+
+    expect(generateTextMock).toHaveBeenCalledWith(expect.objectContaining({ maxOutputTokens: expect.any(Number) }));
+    const call = generateTextMock.mock.calls[0]![0] as { maxOutputTokens: number };
+    expect(call.maxOutputTokens).toBeGreaterThanOrEqual(4096);
+  });
+
   it("throws when the model returns no structured output", async () => {
     generateTextMock.mockResolvedValueOnce({ output: null, usage: {} });
 
