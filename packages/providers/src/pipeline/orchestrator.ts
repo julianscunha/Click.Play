@@ -155,6 +155,10 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
     stage = "visuals";
     let resolvedScenes: ResolvedScene[];
     let musicPath: string | undefined;
+    // Resolvido uma vez, usado tanto na resolução de elementos (transição/prompt
+    // determinístico) quanto no stage "render" abaixo — mesma config vale pro
+    // vídeo inteiro, não é por cena, por isso fica fora do if/else de resume.
+    const archetypeConfig = getArchetype(score.archetype);
 
     if (opts.resume?.visuals) {
       resolvedScenes = opts.resume.visuals.resolvedScenes;
@@ -163,7 +167,11 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
       await callbacks.onStageStart?.(stage);
       const assetsDir = path.join(opts.runDir, "assets");
       const durationsInFrames = splitWordsIntoScenes(score.scenes, ttsWords, fps);
-      const transitionDurationFrames = opts.transitionDurationFrames ?? Math.round(fps * 0.4);
+      // override explícito do usuário sempre vence, arquétipo é o default, hardcode
+      // só entra se nem um nem outro existir — mesma convenção do captionStyle/etc
+      // no stage "render" abaixo, estendida aqui pra transição (§ achado especialista).
+      const transitionDurationFrames =
+        opts.transitionDurationFrames ?? archetypeConfig.transitionDurationFrames ?? Math.round(fps * 0.4);
       const aspectRatio = inferAspectRatio(width, height);
 
       resolvedScenes = [];
@@ -177,6 +185,7 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
           callbacks.onLog?.(`Gerando cena ${i + 1}/${score.scenes.length} (${element.type})`);
           const resolved = await resolveElement(element, {
             ...opts.resolveElementCtx,
+            archetypeConfig,
             assetId: `${scene.id}-${j}`,
             sceneDurationSeconds: durationsInFrames[i]! / fps,
             aspectRatio,
@@ -195,7 +204,7 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
           id: scene.id,
           durationInFrames: durationsInFrames[i]!,
           elements,
-          transition: scene.transition ?? "none",
+          transition: scene.transition ?? archetypeConfig.defaultTransition ?? "none",
           transitionDurationFrames,
         });
       }
@@ -213,11 +222,8 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
 
     stage = "render";
     await callbacks.onStageStart?.(stage);
-    // Fallback de legenda vinha hardcoded aqui (3 palavras/0.15s) em vez do
-    // valor curado por arquétipo (docs/IMPLEMENTATION-PLAN.md §11A Bloco 4) —
-    // override explícito do usuário (opts.*) sempre vence, arquétipo é o
-    // default, hardcode só entra se nem um nem outro existir.
-    const archetypeConfig = getArchetype(score.archetype);
+    // archetypeConfig já resolvido no stage "visuals" acima (reaproveitado aqui —
+    // mesma config vale pro vídeo inteiro, não é por cena).
     const renderInput: RenderInput = {
       scenes: resolvedScenes,
       fps,
@@ -231,6 +237,11 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
       captionAccentColor: opts.captionAccentColor ?? "#ffffff",
       captionChunkSize: opts.captionChunkSize ?? archetypeConfig.captionChunkSize ?? 3,
       captionLingerS: opts.captionLingerS ?? archetypeConfig.captionLingerS ?? 0.15,
+      archetypeVisuals: {
+        motionIntensity: archetypeConfig.motionIntensity,
+        colorPalette: archetypeConfig.colorPalette,
+        textCardFont: archetypeConfig.textCardFont,
+      },
     };
     const outputDir = path.join(opts.runDir, "output");
     await fs.promises.mkdir(outputDir, { recursive: true });

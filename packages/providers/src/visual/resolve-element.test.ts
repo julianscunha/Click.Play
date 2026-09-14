@@ -46,6 +46,30 @@ describe("resolveElement — ai_image", () => {
     const result = await resolveElement(element, baseCtx());
     expect(result).toEqual({ type: "ai_image", assetPath: "/out/asset.png", motion: "zoom_in" });
   });
+
+  it("prefixes the prompt with archetype art fields when archetypeConfig is set", async () => {
+    const element: VisualElement = { type: "ai_image", prompt: "a cat", motion: "zoom_in" };
+    await resolveElement(
+      element,
+      baseCtx({
+        archetypeConfig: {
+          artStyle: "watercolor",
+          lighting: "golden hour",
+          mood: "cozy",
+          compositionRules: "rule of thirds",
+          culturalMarkers: "",
+          antiArtifactGuidance: "no extra limbs",
+          visualColorPalette: ["#fff", "#000"],
+        },
+      }),
+    );
+    const generateMock = fakeImageProvider.generate as unknown as { mock: { calls: [string][] } };
+    const [calledPrompt] = generateMock.mock.calls.at(-1)!;
+    expect(calledPrompt).toContain("watercolor");
+    expect(calledPrompt).toContain("golden hour");
+    expect(calledPrompt).toContain("a cat");
+    expect(calledPrompt).toContain("no extra limbs");
+  });
 });
 
 describe("resolveElement — animated_text", () => {

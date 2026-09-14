@@ -21,6 +21,7 @@ const Main: React.FC<CompositionProps> = ({
   captionAccentColor,
   captionChunkSize,
   captionLingerS,
+  archetypeVisuals,
 }) => {
   const StyleComponent = CAPTION_STYLE_COMPONENTS[captionStyle];
   const springConfig = CAPTION_STYLE_SPRING_CONFIGS[captionStyle];
@@ -43,7 +44,7 @@ const Main: React.FC<CompositionProps> = ({
                 />
               )}
               <TransitionSeries.Sequence durationInFrames={scene.durationInFrames}>
-                <SceneLayer scene={scene} />
+                <SceneLayer scene={scene} archetypeVisuals={archetypeVisuals} />
               </TransitionSeries.Sequence>
             </React.Fragment>
           );
@@ -78,6 +79,7 @@ const DEFAULT_PROPS: CompositionProps = {
   captionAccentColor: "#38A169",
   captionChunkSize: 5,
   captionLingerS: 0.3,
+  archetypeVisuals: undefined,
 };
 
 export const CLICKPLAY_COMPOSITION_ID = "ClickPlayVideo";

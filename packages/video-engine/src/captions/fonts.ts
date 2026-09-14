@@ -1,3 +1,5 @@
+import { loadFont as loadBaloo2 } from "@remotion/google-fonts/Baloo2";
+import { loadFont as loadFredoka } from "@remotion/google-fonts/Fredoka";
 import { loadFont as loadInter } from "@remotion/google-fonts/Inter";
 import { loadFont as loadMerriweather } from "@remotion/google-fonts/Merriweather";
 import { loadFont as loadMontserrat } from "@remotion/google-fonts/Montserrat";
@@ -35,6 +37,16 @@ const { fontFamily: spaceGrotesk } = loadSpaceGrotesk("normal", {
   subsets: ["latin"],
 });
 
+const { fontFamily: baloo2 } = loadBaloo2("normal", {
+  weights: ["700"],
+  subsets: ["latin"],
+});
+
+const { fontFamily: fredoka } = loadFredoka("normal", {
+  weights: ["600"],
+  subsets: ["latin"],
+});
+
 export const CAPTION_FONTS = {
   montserrat,
   inter,
@@ -47,4 +59,6 @@ export const TEXT_CARD_FONTS: Record<string, string> = {
   Inter: inter,
   Merriweather: merriweather,
   "Space Grotesk": spaceGrotesk,
+  "Baloo 2": baloo2,
+  Fredoka: fredoka,
 };

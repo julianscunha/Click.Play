@@ -12,7 +12,10 @@ const research: ResearchResult = {
 function sceneRaw(overrides: Record<string, unknown> = {}) {
   return {
     visualStrategy: "motion_graphics",
-    elements: [{ type: "stock_image", prompt: "1969" }, { type: "animated_text", text: "1969" }],
+    elements: [
+      { type: "stock_image", prompt: "1969", motion: "zoom_in" },
+      { type: "animated_text", text: "1969" },
+    ],
     scriptLine: "In 1969, humanity reached the Moon.",
     transition: null,
     ...overrides,

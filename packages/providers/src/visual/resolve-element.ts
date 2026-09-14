@@ -1,4 +1,5 @@
 import type { VisualElement } from "@clickplay/domain";
+import type { ArchetypeConfig } from "../config/archetype.js";
 import type { ImageProvider } from "../image/types.js";
 import type { StockProvider } from "../stock/types.js";
 import { resolveVideoGenerationProvider } from "../video/resolve-provider.js";
@@ -25,6 +26,30 @@ export interface ResolveElementContext {
    * ai_video_clip. Sem isso, cada provider gera no seu default (9:16), cortado feio se o projeto for
    * quadrado/horizontal (achado real: vídeo quadrado recebendo clipe vertical, cortado no meio). */
   aspectRatio?: string;
+  /** Campos de arte do arquétipo escolhido — prefixados de forma determinística em
+   * prompts de geração real (ai_image/ai_video_clip), pra garantir consistência
+   * visual mesmo se o Creative Director esquecer de citar o estilo no prompt.
+   * stock_image/stock_video ficam de fora: são query de busca textual em banco de
+   * terceiros, prefixar arruinaria o match. */
+  archetypeConfig?: Pick<
+    ArchetypeConfig,
+    "artStyle" | "lighting" | "mood" | "compositionRules" | "culturalMarkers" | "antiArtifactGuidance" | "visualColorPalette"
+  >;
+}
+
+function buildStyledPrompt(prompt: string, cfg: ResolveElementContext["archetypeConfig"]): string {
+  if (!cfg) return prompt;
+  const parts = [
+    cfg.artStyle,
+    cfg.lighting,
+    cfg.mood,
+    cfg.compositionRules,
+    cfg.culturalMarkers,
+    cfg.visualColorPalette?.length ? `color palette: ${cfg.visualColorPalette.join(", ")}` : undefined,
+  ].filter(Boolean);
+  const prefix = parts.join(". ");
+  const suffix = cfg.antiArtifactGuidance ? ` Avoid: ${cfg.antiArtifactGuidance}.` : "";
+  return prefix ? `${prefix}. ${prompt}.${suffix}` : prompt;
 }
 
 /** Aspect ratios que os providers de vídeo (Veo/Kling) de fato suportam — nenhum aceita proporção
@@ -95,7 +120,10 @@ async function resolveAiVideoClip(
     throw new Error(`VideoGenerationProvider "${providerKey}" não configurado`);
   }
 
-  const sourceImage = await ctx.imageProvider.generate(element.sourceImagePrompt ?? element.prompt);
+  const styledPrompt = buildStyledPrompt(element.prompt, ctx.archetypeConfig);
+  const sourceImage = await ctx.imageProvider.generate(
+    buildStyledPrompt(element.sourceImagePrompt ?? element.prompt, ctx.archetypeConfig),
+  );
 
   // Se o provider "auto"/pedido falhar em runtime (não só indisponível), tenta
   // os demais providers de vídeo configurados antes de desistir — mesma ideia
@@ -108,7 +136,7 @@ async function resolveAiVideoClip(
 
   const generateOpts = (p: VideoGenerationProvider) => ({
     sourceImage,
-    prompt: element.prompt,
+    prompt: styledPrompt,
     durationSeconds: pickSupportedDuration(ctx.sceneDurationSeconds, p.supportedDurations),
     aspectRatio: ctx.aspectRatio,
     negativePrompt: GENERIC_VIDEO_NEGATIVE_PROMPT,
@@ -142,7 +170,7 @@ async function resolveAiVideoClip(
 export async function resolveElement(element: VisualElement, ctx: ResolveElementContext): Promise<ResolvedElement> {
   switch (element.type) {
     case "ai_image": {
-      const buffer = await ctx.imageProvider.generate(element.prompt);
+      const buffer = await ctx.imageProvider.generate(buildStyledPrompt(element.prompt, ctx.archetypeConfig));
       const assetPath = await ctx.writeAsset(buffer, `${ctx.assetId}-ai.png`);
       return { type: "ai_image", assetPath, motion: element.motion };
     }

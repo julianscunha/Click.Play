@@ -1,5 +1,6 @@
 import type React from "react";
-import { AbsoluteFill, spring, useCurrentFrame, useVideoConfig } from "remotion";
+import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
+import { TEXT_CARD_FONTS } from "../../captions/fonts";
 import type { ResolvedElement } from "../types";
 
 const JUSTIFY_BY_POSITION: Record<NonNullable<ResolvedElement["position"]>, string> = {
@@ -8,13 +9,33 @@ const JUSTIFY_BY_POSITION: Record<NonNullable<ResolvedElement["position"]>, stri
   bottom: "flex-end",
 };
 
-/** animated_text: título/texto de cena, com entrada por spring. Não confundir com legenda (Fase 8). */
-export const TextElement: React.FC<ResolvedElement> = ({ text, position = "center" }) => {
+const EXIT_SECONDS = 0.35;
+
+/** animated_text: título/texto de cena, com entrada por spring e saída (encolhe+desvanece) nos
+ * últimos EXIT_SECONDS da cena. Tipografia/cor vêm do arquétipo quando disponíveis (antes eram
+ * fixas — branco/72px — pros 19 arquétipos, achado do especialista de composição/edição).
+ * Não confundir com legenda (Fase 8). */
+export const TextElement: React.FC<ResolvedElement> = ({
+  text,
+  position = "center",
+  sceneDurationInFrames,
+  archetypeVisuals,
+}) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const scaleIn = spring({ frame, fps, config: { damping: 15, stiffness: 100 } });
 
+  const exitFrames = Math.round(fps * EXIT_SECONDS);
+  const framesToEnd = sceneDurationInFrames !== undefined ? sceneDurationInFrames - frame : Infinity;
+  const exitProgress =
+    framesToEnd < exitFrames
+      ? interpolate(framesToEnd, [exitFrames, 0], [1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })
+      : 1;
+
   if (!text) return null;
+
+  const fontFamily = archetypeVisuals?.textCardFont ? TEXT_CARD_FONTS[archetypeVisuals.textCardFont] : undefined;
+  const textColor = archetypeVisuals?.colorPalette.text ?? "#FFFFFF";
 
   return (
     <AbsoluteFill
@@ -22,9 +43,11 @@ export const TextElement: React.FC<ResolvedElement> = ({ text, position = "cente
     >
       <div
         style={{
-          transform: `scale(${scaleIn})`,
+          transform: `scale(${scaleIn * exitProgress})`,
+          opacity: exitProgress,
           textAlign: "center",
-          color: "#FFFFFF",
+          color: textColor,
+          fontFamily,
           fontSize: 72,
           fontWeight: 900,
           lineHeight: 1.2,

@@ -17,6 +17,19 @@ export interface ResolvedElement {
   text?: string;
   /** Posição pra animated_text ("random" já resolvido pro valor concreto antes de chegar aqui). */
   position?: "top" | "bottom" | "center";
+  /** Duração da CENA (não do vídeo inteiro) em frames — injetada por SceneLayer pra
+   * Ken Burns (ImageElement) e saída do texto (TextElement) escalarem pela duração
+   * real, não pela composição toda (achado: progress usava durationInFrames global,
+   * quase imperceptível em vídeos com várias cenas). */
+  sceneDurationInFrames?: number;
+  archetypeVisuals?: ArchetypeVisuals;
+}
+
+/** Config visual do arquétipo escolhido — vale pro vídeo inteiro, não varia por cena. */
+export interface ArchetypeVisuals {
+  motionIntensity: number;
+  colorPalette: { background: string; accent: string; text: string };
+  textCardFont: string;
 }
 
 export interface ResolvedScene {
@@ -43,6 +56,7 @@ export interface RenderInput {
   captionAccentColor: string;
   captionChunkSize: number;
   captionLingerS: number;
+  archetypeVisuals?: ArchetypeVisuals;
 }
 
 /** Props que chegam de fato na composição Remotion (frames em vez de segundos). */
@@ -56,4 +70,5 @@ export interface CompositionProps {
   captionAccentColor: string;
   captionChunkSize: number;
   captionLingerS: number;
+  archetypeVisuals?: ArchetypeVisuals;
 }

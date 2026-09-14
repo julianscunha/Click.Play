@@ -12,6 +12,7 @@ export function mapRenderInputToProps(input: RenderInput): CompositionProps {
     captionAccentColor: input.captionAccentColor,
     captionChunkSize: input.captionChunkSize,
     captionLingerS: input.captionLingerS,
+    archetypeVisuals: input.archetypeVisuals,
   };
 }
 
