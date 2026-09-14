@@ -122,7 +122,7 @@ function loadDirectorSystemPrompt(): string {
  * sugerido — o booleano `videoEnabled` antigo permitia 0 cenas em vídeo mesmo
  * "habilitado", porque era só texto de prompt sem validação.
  */
-function buildVideoModeGuidance(mode: VideoMode, showTextOverlays = true): string {
+function buildVideoModeGuidance(mode: VideoMode, showTextOverlays = false): string {
   const noPlaceholders =
     "do NOT use svg/shape/icon/particle_system/diagram, they have no renderer yet and render as blank";
   const noTextOverlays = showTextOverlays
