@@ -31,11 +31,13 @@ describe("FallbackMusic", () => {
     expect(result.filePath).toBe("/fallback.mp3");
   });
 
-  it("propagates the fallback's error when both fail", async () => {
+  it("chains both errors when both fail, not just the fallback's", async () => {
     const primary = provider(new Error("Lyria prompt blocked"));
     const fallback = provider(new Error("No bundled tracks available"));
     const music = new FallbackMusic(primary, fallback);
 
-    await expect(music.generate("upbeat synth", "uplifting_pop")).rejects.toThrow("No bundled tracks available");
+    await expect(music.generate("upbeat synth", "uplifting_pop")).rejects.toThrow(
+      "Lyria prompt blocked → No bundled tracks available",
+    );
   });
 });

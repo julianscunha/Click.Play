@@ -31,11 +31,11 @@ describe("FallbackImage", () => {
     expect(result.toString()).toBe("fallback");
   });
 
-  it("propagates the fallback's error when both fail", async () => {
+  it("chains both errors when both fail, not just the fallback's", async () => {
     const primary = provider(new Error("quota exceeded"));
     const fallback = provider(new Error("fallback also down"));
     const image = new FallbackImage(primary, fallback);
 
-    await expect(image.generate("a cat")).rejects.toThrow("fallback also down");
+    await expect(image.generate("a cat")).rejects.toThrow("quota exceeded → fallback also down");
   });
 });
