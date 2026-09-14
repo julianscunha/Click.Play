@@ -18,6 +18,10 @@
           {
             "type": "command",
             "command": "node .claude/hooks/typecheck-on-edit.cjs"
+          },
+          {
+            "type": "command",
+            "command": "node .claude/hooks/lint-on-edit.cjs"
           }
         ]
       }

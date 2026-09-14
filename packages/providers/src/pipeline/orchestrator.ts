@@ -6,8 +6,8 @@ import type { DirectorScore } from "../agents/creative-director.js";
 import { generateDirectorScore, reviseDirectorScore } from "../agents/creative-director.js";
 import { evaluate } from "../agents/critic.js";
 import { research } from "../agents/research.js";
-import { getArchetype } from "../config/archetype-registry.js";
 import type { ArchetypeConfig } from "../config/archetype.js";
+import { getArchetype } from "../config/archetype-registry.js";
 import type { CostBreakdown } from "../cost/index.js";
 import { computeActualCost, estimateCost } from "../cost/index.js";
 import type { LLMUsage } from "../llm/types.js";
@@ -74,7 +74,7 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
   try {
     if (callbacks.isCancelled?.()) return { status: "cancelled" };
 
-    let researchOut;
+    let researchOut: Awaited<ReturnType<typeof research>>;
     if (opts.resume?.research) {
       researchOut = opts.resume.research;
     } else {
@@ -108,7 +108,7 @@ export async function runPipeline(opts: PipelineOptions, callbacks: PipelineCall
         language: opts.language,
       };
 
-      let directorOut = await generateDirectorScore(opts.llm, opts.topic, researchOut.data, directorOpts);
+      const directorOut = await generateDirectorScore(opts.llm, opts.topic, researchOut.data, directorOpts);
       usages.push(directorOut.usage);
       score = directorOut.data;
 
