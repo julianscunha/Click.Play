@@ -32,13 +32,23 @@ Fluxo ponta a ponta pra gerar vídeos curtos (estilo shorts/reels) a partir de u
 
 Acompanhamento do job é em tempo real (polling): fila → pesquisa → planejamento → revisão → aprovação de custo → geração → renderização → concluído.
 
+## Funcionalidades
+
+- **Wizard multi-etapa** — tópico, briefing (com rascunho gerado por IA), arquétipo visual, ritmo, estilo de legenda, música, abertura/encerramento, providers e resumo de custo, com preview ao vivo do formato/legenda escolhidos.
+- **Créditos** — saldo em dólares debitado na aprovação do custo estimado (1 crédito = US$ 1); painel de configurações permite ajustar o saldo manualmente.
+- **Templates** — salva a configuração completa de uma produção concluída (arquétipo, visual, música, narração, legendas...) pra reaproveitar depois, com variáveis `{{CHAVE}}` interpoláveis no briefing (preenchidas à mão ou geradas por IA a cada uso).
+- **Agendamentos** — dispara um template numa cadência fixa (diária/semanal + horário); pode rodar com aprovação de custo automática (respeitando saldo de créditos e um teto opcional por vídeo).
+- **Publicação no YouTube** — botão de publicar direto no player de resultado, sem baixar/subir manualmente (credenciais OAuth configuráveis em Configurações → Publicação).
+- **Projetos** — agrupa produções de um mesmo canal/série.
+- **Quality Control automático** — todo vídeo passa por validação determinística pós-render antes de ser marcado como concluído.
+
 ## Stack
 
 Monorepo pnpm, TypeScript de ponta a ponta:
 
 | Pacote | Papel |
 |---|---|
-| `apps/web` | Front-end (React + Vite) — formulário, progresso do job, player do resultado |
+| `apps/web` | Front-end (React + Vite) — wizard, progresso do job, player do resultado, templates, agendamentos, configurações |
 | `apps/api` | API (Fastify) — orquestra o pipeline, expõe jobs/config/arquivos |
 | `packages/domain` | Schemas (Zod) e regras de domínio, sem dependências externas |
 | `packages/providers` | Providers (LLM, TTS, imagem, vídeo, música, banco de imagens), pipeline, persistência (SQLite), QC |
@@ -74,19 +84,23 @@ Preencha em `apps/api/.env`:
 
 | Variável | Obrigatória | Descrição |
 |---|---|---|
-| `OPENROUTER_API_KEY` | Sim | Chave da [OpenRouter](https://openrouter.ai/) — usada pelo LLM (research, Creative Director, Critic) |
-| `OPENROUTER_MODEL` | Sim | Modelo a usar (ex.: `openrouter/free` pros testes) |
-| `TTS_PROVIDER` | Sim | `edge` funciona sem chave (Edge TTS, grátis) |
-| `TTS_API_KEY` | Só se o provider exigir | — |
-| `GOOGLE_API_KEY` / `FAL_API_KEY` | Não | Habilitam geração de imagem/vídeo por IA (Gemini/Fal). Sem elas, cenas caem pro banco de imagens/vídeos (Pexels/Pixabay) |
+| `OPENROUTER_API_KEY` | Sim | Chave da [OpenRouter](https://openrouter.ai/) — usada pelo LLM (research, Creative Director, Critic) e, via `/v1/images`\|`/v1/videos`, pela geração de imagem/vídeo/música/TTS de fallback |
+| `OPENROUTER_MODEL` | Sim | Modelo de texto a usar (ex.: `openrouter/free`, sem custo) |
+| `OPENROUTER_MODEL_FALLBACK` | Não | Usado automaticamente se `OPENROUTER_MODEL` falhar (quota, erro) |
+| `IMAGE_MODEL` / `IMAGE_MODEL_FALLBACK` | Não | Modelo de imagem via OpenRouter e seu fallback. Vazio = default do código |
+| `VIDEO_MODEL` / `VIDEO_MODEL_FALLBACK` | Não | Modelo de vídeo via OpenRouter e seu fallback |
+| `TTS_MODEL_FALLBACK` / `TTS_MODEL_FALLBACK_2` | Não | Narração roda via Edge TTS por padrão (grátis, sem chave); esses entram em cascata se ele falhar |
+| `MUSIC_PROVIDER` | Não | `bundled` (default, grátis, biblioteca de faixas prontas) ou `lyria` (IA generativa via OpenRouter) |
+| `GOOGLE_API_KEY` / `FAL_API_KEY` | Não | Habilitam geração de imagem/vídeo/TTS direto via Gemini/Fal (fallback do OpenRouter). Sem elas, cenas ainda caem pro banco de imagens/vídeos (Pexels/Pixabay) |
 | `PEXELS_API_KEY` / `PIXABAY_API_KEY` | Não | Banco de imagens/vídeos de stock |
+| `YOUTUBE_CLIENT_ID` / `YOUTUBE_CLIENT_SECRET` | Não | Credencial OAuth pra publicar direto no YouTube (ver [Onde conseguir cada chave](#onde-conseguir-cada-chave)) |
 | `DATABASE_URL` | Não | Caminho do SQLite (default: `./data/clickplay.sqlite`) |
 | `RUNS_DIR` | Não | Diretório de saída dos jobs (default: `./data/runs`) |
 | `PORT` | Não | Porta da API (default: `8787`) |
 | `API_TOKEN` | Não (recomendado se expor além de localhost) | Se preenchido, toda rota (exceto `/health` e `/files/*`) exige `Authorization: Bearer <API_TOKEN>`. O WebUI pede o token na primeira vez e guarda no navegador (localStorage) |
 | `LOG_LEVEL` | Não | Nível de log do Fastify/pino (`trace`\|`debug`\|`info`\|`warn`\|`error`\|`fatal`), default `info` |
 
-Sem `GOOGLE_API_KEY`/`FAL_API_KEY`/chaves de stock, o pipeline ainda roda de ponta a ponta — só as cenas que pedem imagem/vídeo IA falham na resolução de elemento.
+Todas as chaves/modelos acima também são editáveis pela tela **Configurações** do front-end depois de rodando (grava direto em `apps/api/.env`, sem precisar reiniciar). Sem `GOOGLE_API_KEY`/`FAL_API_KEY`/chaves de stock, o pipeline ainda roda de ponta a ponta — só as cenas que pedem imagem/vídeo IA falham na resolução de elemento. Ver [`.env.example`](.env.example) pra lista completa (inclui variantes de fallback e comentários por campo).
 
 ### Onde conseguir cada chave
 
@@ -95,6 +109,7 @@ Sem `GOOGLE_API_KEY`/`FAL_API_KEY`/chaves de stock, o pipeline ainda roda de pon
 - **Fal.ai** (`FAL_API_KEY`, opcional) — crie conta em [fal.ai](https://fal.ai/), vá em [fal.ai/dashboard/keys](https://fal.ai/dashboard/keys) → **Add key**.
 - **Pexels** (`PEXELS_API_KEY`, opcional) — [pexels.com/api](https://www.pexels.com/api/) → **Get Started**, cria a chave na hora, sem cartão.
 - **Pixabay** (`PIXABAY_API_KEY`, opcional) — crie conta em [pixabay.com](https://pixabay.com/), a chave fica em [pixabay.com/api/docs](https://pixabay.com/api/docs/) (seção "Getting started", já logado).
+- **YouTube** (`YOUTUBE_CLIENT_ID`/`YOUTUBE_CLIENT_SECRET`, opcional) — crie um projeto no [Google Cloud Console](https://console.cloud.google.com/apis/credentials), habilite a **YouTube Data API v3**, crie uma credencial OAuth "App da Web" com `http://localhost:8787/oauth/youtube/callback` como URI de redirecionamento autorizado. Depois de salvar Client ID/Secret em Configurações → Publicação, clique "Conectar com Google" — o `YOUTUBE_REFRESH_TOKEN` é obtido e gravado automaticamente, não precisa preencher à mão.
 
 Nenhum desses serviços pede cartão de crédito só pra gerar a chave (planos gratuitos cobrem os testes).
 
