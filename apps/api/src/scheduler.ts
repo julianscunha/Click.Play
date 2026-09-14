@@ -9,6 +9,7 @@ import {
   listDueSchedules,
   markScheduleRun,
   resolveScheduleConfig,
+  setScheduleEnabled,
   startJob,
   type ClickPlayDb,
   type CostEstimateOptions,
@@ -45,10 +46,10 @@ export async function runDueSchedules(deps: SchedulerDeps, now: Date = new Date(
       const template = await getTemplate(deps.db, schedule.templateId);
       if (!template) {
         // Template apagado depois do agendamento criado — sem tela de gerenciar templates pra evitar
-        // isso na origem (Fase 17). Ponytail: só pula e recalcula a próxima execução, sem alertar o
-        // usuário — agendamento fica "preso" rodando pra sempre sem produzir nada; upgrade se virar
-        // reclamação real: desabilitar o agendamento automaticamente quando o template sumir.
-        await markScheduleRun(deps.db, schedule.id, { ranAt: now, nextRunAt: nextRunAtFor(schedule, now) });
+        // isso na origem (Fase 17). Desabilita o agendamento (em vez de deixar "preso" recalculando
+        // pra sempre sem produzir nada) e reporta via onError — usuário vê o motivo em Agendamentos.
+        await setScheduleEnabled(deps.db, schedule.id, false);
+        deps.onError?.(schedule.id, new Error(`Template "${schedule.templateId}" não existe mais — agendamento desabilitado`));
         continue;
       }
 
