@@ -137,12 +137,38 @@ function buildVideoModeGuidance(mode: VideoMode, showTextOverlays = false): stri
   return `Use visualStrategy "motion_graphics" for most scenes (composed elements: animated_text, ai_image, stock_image/stock_video — ${noPlaceholders}). Use "ai_video" or "hybrid" for at least 30% of scenes where MOTION is the story (explosions, flowing water, launches, transformations) — BOTH require at least one element of type "ai_video_clip" in the elements array (a scene with visualStrategy "ai_video" and no "ai_video_clip" element is INVALID and will be rejected). ai_video_clip costs ~$0.30/scene vs ~$0.04 for ai_image — use selectively, but the 30% floor is mandatory.${noTextOverlays}`;
 }
 
+/**
+ * Erro de validação com dica de correção em inglês separada da mensagem
+ * pt-BR — achado em teste manual real: a mensagem pt-BR (usada também como
+ * erro final pro usuário) virava o texto de feedback pro retry ("PREVIOUS
+ * ATTEMPT FAILED: <mensagem>"), misturando português dentro de um prompt
+ * 100% em inglês. Suspeita de que isso reduz a chance do modelo corrigir de
+ * verdade (ex. persistiu 3 tentativas estourando o teto de cenas mesmo com
+ * a contagem exata na mensagem). `retryHint` é opcional — só os validadores
+ * onde vale a pena ser mais diretivo ganham um.
+ */
+class DirectorValidationError extends Error {
+  constructor(
+    message: string,
+    public readonly retryHint?: string,
+  ) {
+    super(message);
+    this.name = "DirectorValidationError";
+  }
+}
+
+function retryFeedback(error: Error | null): string {
+  if (error instanceof DirectorValidationError && error.retryHint) return error.retryHint;
+  return error?.message ?? "unknown error";
+}
+
 /** Lança se o roteiro não atinge o piso de vídeo do VideoMode — pego pelo mesmo retry-with-feedback dos outros erros de validação. */
 function assertVideoMode(scenes: Scene[], mode: VideoMode): void {
   if (violatesVideoModeRule(scenes, mode)) {
     const needed = minAiVideoScenes(scenes.length, mode);
-    throw new Error(
+    throw new DirectorValidationError(
       `VideoMode "${mode}" requer ao menos ${needed} cena(s) com elemento "ai_video_clip" em ${scenes.length} cena(s) totais — roteiro não atinge o piso.`,
+      `CRITICAL: VideoMode "${mode}" requires AT LEAST ${needed} scene(s) with an "ai_video_clip" element. Your last response only had ${needed - 1} or fewer. Add "ai_video_clip" elements to enough scenes to satisfy this floor — do not remove scenes to work around it.`,
     );
   }
 }
@@ -166,8 +192,9 @@ export function sceneCapForDuration(targetDurationSeconds?: number): number {
 function assertSceneCountCap(scenes: Scene[], targetDurationSeconds?: number): void {
   const cap = sceneCapForDuration(targetDurationSeconds);
   if (scenes.length > cap) {
-    throw new Error(
+    throw new DirectorValidationError(
       `${scenes.length} cena(s) estoura o teto de ${cap} orçado pra duração-alvo${targetDurationSeconds ? ` de ${targetDurationSeconds}s` : ""} (~${AI_VIDEO_ESTIMATE_DURATION_SECONDS}s/cena).`,
+      `CRITICAL: your response had ${scenes.length} scenes, but the HARD LIMIT is ${cap} scenes total. You MUST cut or merge scenes down to AT MOST ${cap} — actually remove entries from the scenes array, do not just shorten scriptLine text. Prioritize keeping the hook (scene 1) and the CTA (last scene); merge or drop the least essential scenes in between.`,
     );
   }
 }
@@ -240,7 +267,7 @@ If over budget, cut a scene rather than cramming.`;
         systemPrompt,
         userMessage:
           attempt > 0
-            ? `${userMessage}\n\nPREVIOUS ATTEMPT FAILED: ${lastError?.message}. Fix the issue.`
+            ? `${userMessage}\n\nPREVIOUS ATTEMPT FAILED: ${retryFeedback(lastError)}. Fix the issue.`
             : userMessage,
         schema: DirectorScoreRaw,
       });
@@ -398,7 +425,7 @@ Keep the same archetype. Maintain the GOLDEN RULE: never reduce more than 2 cons
         systemPrompt,
         userMessage:
           attempt > 0
-            ? `${userMessage}\n\nPREVIOUS ATTEMPT FAILED: ${lastError?.message}. Fix the issue.`
+            ? `${userMessage}\n\nPREVIOUS ATTEMPT FAILED: ${retryFeedback(lastError)}. Fix the issue.`
             : userMessage,
         schema: DirectorScoreRaw,
       });

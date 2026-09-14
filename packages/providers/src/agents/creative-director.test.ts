@@ -107,6 +107,14 @@ describe("generateDirectorScore", () => {
       generateDirectorScore(llm, "Apollo 11", research, { targetDurationSeconds: 6 }),
     ).rejects.toThrow("Creative Director failed after 3 attempts");
     expect(llm.generate).toHaveBeenCalledTimes(3);
+
+    // Achado em teste manual real: o feedback de retry pro LLM deve ir em
+    // inglês (mesmo idioma do resto do prompt) mesmo a mensagem final pro
+    // usuário sendo pt-BR — retryFeedback() troca uma pela outra.
+    const generateMock = llm.generate as unknown as { mock: { calls: [{ userMessage: string }][] } };
+    const secondAttempt = generateMock.mock.calls[1]![0];
+    expect(secondAttempt.userMessage).toMatch(/CRITICAL/i);
+    expect(secondAttempt.userMessage).not.toMatch(/requer ao menos|estoura o teto/);
   }, 15_000);
 });
 
