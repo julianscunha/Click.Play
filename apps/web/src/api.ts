@@ -310,6 +310,12 @@ export function outputUrl(output: string): string {
   return `${API_BASE}${output}`;
 }
 
+/** Botão "Baixar vídeo" — rota própria com Content-Disposition: attachment (server.ts), diferente da
+ * URL de preview do `<video src>` (`outputUrl`) que aponta pro mesmo arquivo sem esse header. */
+export function downloadUrl(output: string): string {
+  return `${API_BASE}${output.replace(/\/output\.mp4$/, "/download")}`;
+}
+
 export type PublicationStatus = "pending" | "success" | "error";
 
 export interface Publication {

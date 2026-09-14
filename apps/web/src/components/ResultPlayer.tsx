@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import {
+  downloadUrl,
   getPublication,
   outputUrl,
   publishJob,
@@ -221,7 +222,7 @@ export function ResultPlayer({ job, onCreateAnother }: ResultPlayerProps) {
 
       <div className="flex w-full gap-3">
         <a
-          href={url}
+          href={downloadUrl(job.output)}
           download
           className="flex-1 rounded-md bg-fg-primary px-4 py-2 text-center font-medium text-surface-0 hover:opacity-90"
         >

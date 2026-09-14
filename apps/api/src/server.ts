@@ -1,3 +1,5 @@
+import * as fs from "node:fs";
+import * as path from "node:path";
 import cors from "@fastify/cors";
 import helmet from "@fastify/helmet";
 import rateLimit from "@fastify/rate-limit";
@@ -66,6 +68,24 @@ export function buildServer(opts: BuildServerOptions) {
   // de outra origem (web em porta diferente); o default "same-origin" do helmet bloquearia isso.
   app.register(helmet, { contentSecurityPolicy: false, crossOriginResourcePolicy: { policy: "cross-origin" } });
   app.register(fastifyStatic, { root: opts.runsDir, prefix: "/files/" });
+
+  // Rota dedicada pro botão "Baixar vídeo" (§11A item 9, gotcha registrado 2026-08-23): `<a download>`
+  // apontando pra /files/* (servido pelo fastifyStatic acima, sem Content-Disposition) é ignorado pelo
+  // browser em cross-origin dev (localhost:5173→8787) — abre o vídeo em vez de salvar. Não dá pra
+  // resolver via `setHeaders` do fastifyStatic (não recebe a request, só path/stat, sem como diferenciar
+  // "preview" de "download" na mesma URL) — por isso rota própria, só pra download, com Content-Disposition
+  // fixo; o `<video src>` de preview continua batendo em /files/* normal, sem esse header.
+  app.get<{ Params: { productionId: string } }>("/files/:productionId/output/download", async (req, reply) => {
+    if (!/^[a-zA-Z0-9-]+$/.test(req.params.productionId)) {
+      return reply.status(400).send({ error: { code: "INVALID_ID", message: "productionId inválido" } });
+    }
+    const filePath = path.join(opts.runsDir, req.params.productionId, "output", "output.mp4");
+    if (!fs.existsSync(filePath)) {
+      return reply.status(404).send({ error: { code: "NOT_FOUND", message: "Arquivo não encontrado" } });
+    }
+    reply.header("Content-Disposition", 'attachment; filename="output.mp4"').type("video/mp4");
+    return reply.send(fs.createReadStream(filePath));
+  });
 
   if (opts.apiToken) {
     const expected = `Bearer ${opts.apiToken}`;
