@@ -9,12 +9,10 @@ import {
   getContentProject,
   getJob,
   getProduction,
-  getSchedule,
   getTemplate,
   getWallet,
   listContentProjects,
   listDueSchedules,
-  listJobsByProduction,
   listProductionsByContentProject,
   listSchedules,
   listTemplates,
@@ -43,6 +41,12 @@ describe("persistence repository", () => {
   beforeEach(() => {
     db = createDb(":memory:");
   });
+
+  // getSchedule não é exportado pelo repository (achado em audit ponytail: 0 caller em produção,
+  // só era usado por estes testes) — busca local equivalente só pra manter as asserções por id.
+  async function findSchedule(id: string) {
+    return (await listSchedules(db)).find((s) => s.id === id) ?? null;
+  }
 
   it("creates and reads back a production", async () => {
     const production = await createProduction(db, { topic: "Apollo 11", config });
@@ -200,10 +204,6 @@ describe("persistence repository", () => {
     expect(job.status).toBe("QUEUED");
     expect(job.progress).toBe(0);
     expect(job.productionId).toBe(production.id);
-
-    const jobs = await listJobsByProduction(db, production.id);
-    expect(jobs).toHaveLength(1);
-    expect(jobs[0]!.id).toBe(job.id);
   });
 
   it("updateJobStatus advances status and derives progress, but preserves progress on FAILED", async () => {
@@ -342,7 +342,7 @@ describe("persistence repository", () => {
       expect(schedule.variableBindings).toEqual({});
       expect(schedule.lastRunAt).toBeNull();
       expect(schedule.nextRunAt).toEqual(nextRunAt);
-      expect(await getSchedule(db, schedule.id)).toEqual(schedule);
+      expect(await findSchedule(schedule.id)).toEqual(schedule);
       expect(await listSchedules(db)).toEqual([schedule]);
     });
 
@@ -373,10 +373,10 @@ describe("persistence repository", () => {
       });
 
       await setScheduleEnabled(db, schedule.id, false);
-      expect((await getSchedule(db, schedule.id))?.enabled).toBe(false);
+      expect((await findSchedule(schedule.id))?.enabled).toBe(false);
 
       await setScheduleEnabled(db, schedule.id, true);
-      expect((await getSchedule(db, schedule.id))?.enabled).toBe(true);
+      expect((await findSchedule(schedule.id))?.enabled).toBe(true);
     });
 
     it("deleteSchedule removes the row", async () => {
@@ -390,7 +390,7 @@ describe("persistence repository", () => {
       });
 
       await deleteSchedule(db, schedule.id);
-      expect(await getSchedule(db, schedule.id)).toBeNull();
+      expect(await findSchedule(schedule.id)).toBeNull();
     });
 
     it("listDueSchedules returns only enabled schedules with nextRunAt <= now", async () => {
@@ -438,7 +438,7 @@ describe("persistence repository", () => {
       const nextRunAt = new Date(2026, 8, 14, 9, 0);
       await markScheduleRun(db, schedule.id, { ranAt, nextRunAt });
 
-      const updated = await getSchedule(db, schedule.id);
+      const updated = await findSchedule(schedule.id);
       expect(updated?.lastRunAt).toEqual(ranAt);
       expect(updated?.nextRunAt).toEqual(nextRunAt);
     });

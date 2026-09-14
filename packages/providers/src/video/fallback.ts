@@ -1,3 +1,4 @@
+import { withFallback } from "../http/with-fallback.js";
 import type { VideoGenerationProvider, VideoResult } from "./types.js";
 
 /** Mesma ideia de llm/fallback.ts, tts/fallback.ts, image/fallback.ts e music/fallback.ts —
@@ -13,24 +14,17 @@ export class FallbackVideo implements VideoGenerationProvider {
     this.supportedDurations = primary.supportedDurations;
   }
 
-  async generate(opts: {
+  generate(opts: {
     sourceImage: Buffer;
     prompt: string;
     durationSeconds?: number;
     aspectRatio?: string;
     negativePrompt?: string;
   }): Promise<VideoResult> {
-    try {
-      return await this.primary.generate(opts);
-    } catch (primaryErr) {
-      const primaryMsg = primaryErr instanceof Error ? primaryErr.message : String(primaryErr);
-      console.warn(`[video-fallback] primary failed (${primaryMsg}), trying fallback provider`);
-      try {
-        return await this.fallback.generate(opts);
-      } catch (fallbackErr) {
-        const fallbackMsg = fallbackErr instanceof Error ? fallbackErr.message : String(fallbackErr);
-        throw new Error(`${primaryMsg} → ${fallbackMsg}`);
-      }
-    }
+    return withFallback(
+      "video-fallback",
+      () => this.primary.generate(opts),
+      () => this.fallback.generate(opts),
+    );
   }
 }

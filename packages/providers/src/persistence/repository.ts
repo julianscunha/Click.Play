@@ -181,11 +181,6 @@ export async function getJob(db: ClickPlayDb, id: string): Promise<Job | null> {
   return row ? jobFromRow(row) : null;
 }
 
-export async function listJobsByProduction(db: ClickPlayDb, productionId: string): Promise<Job[]> {
-  const rows = await db.select().from(jobs).where(eq(jobs.productionId, productionId)).all();
-  return rows.map(jobFromRow);
-}
-
 /**
  * Progresso é sempre derivado do status (PROGRESS_BY_STATUS) — não aceita
  * valor livre. FAILED/CANCELLED preservam o progresso do último estágio
@@ -355,11 +350,6 @@ export async function createSchedule(
 export async function listSchedules(db: ClickPlayDb): Promise<Schedule[]> {
   const rows = await db.select().from(schedules).all();
   return rows.map(scheduleFromRow);
-}
-
-export async function getSchedule(db: ClickPlayDb, id: string): Promise<Schedule | null> {
-  const row = await db.select().from(schedules).where(eq(schedules.id, id)).get();
-  return row ? scheduleFromRow(row) : null;
 }
 
 export async function setScheduleEnabled(db: ClickPlayDb, id: string, enabled: boolean): Promise<void> {

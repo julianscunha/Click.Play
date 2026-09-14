@@ -1,4 +1,5 @@
 import type { z } from "zod";
+import { withFallback } from "../http/with-fallback.js";
 import type { LLMProvider, LLMResult } from "./types.js";
 
 /**
@@ -18,25 +19,11 @@ export class FallbackLLM implements LLMProvider {
     this.id = primary.id;
   }
 
-  async generate<T extends z.ZodType>(opts: {
-    systemPrompt: string;
-    userMessage: string;
-    schema: T;
-  }): Promise<LLMResult<z.infer<T>>> {
-    try {
-      return await this.primary.generate(opts);
-    } catch (primaryErr) {
-      const primaryMsg = primaryErr instanceof Error ? primaryErr.message : String(primaryErr);
-      console.warn(`[llm-fallback] primary failed (${primaryMsg}), trying fallback model`);
-      try {
-        return await this.fallback.generate(opts);
-      } catch (fallbackErr) {
-        const fallbackMsg = fallbackErr instanceof Error ? fallbackErr.message : String(fallbackErr);
-        // Encadeia as duas mensagens (não só a última) — mesmo achado do
-        // tts/fallback.ts: só o erro do fallback escondia se o primário
-        // falhou pela mesma razão ou por outra completamente diferente.
-        throw new Error(`${primaryMsg} → ${fallbackMsg}`);
-      }
-    }
+  generate<T extends z.ZodType>(opts: { systemPrompt: string; userMessage: string; schema: T }): Promise<LLMResult<z.infer<T>>> {
+    return withFallback(
+      "llm-fallback",
+      () => this.primary.generate(opts),
+      () => this.fallback.generate(opts),
+    );
   }
 }
