@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap");
 @import "tailwindcss";
 
 /**
@@ -64,4 +64,29 @@ body {
 
 .animate-tip-fade {
   animation: tip-fade 450ms ease-out;
+}
+
+/* Entrada da HomeView (hero) — fade+leve subida, encadeada por atraso via
+   --stagger-delay inline em cada elemento (ver HomeView.tsx). */
+@keyframes rise-fade {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-rise-fade {
+  animation: rise-fade 550ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--stagger-delay, 0ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-tip-fade,
+  .animate-rise-fade {
+    animation: none;
+  }
 }

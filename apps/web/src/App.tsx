@@ -1,17 +1,18 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   approveCost,
+  type CreateJobInput,
+  type Credits,
   createJob,
+  type FormConfig,
   getCredits,
   getFormConfig,
   getJob,
+  type JobView,
   retryJob,
   UnauthorizedError,
-  type CreateJobInput,
-  type Credits,
-  type FormConfig,
-  type JobView,
 } from "./api.js";
+import { HomeView } from "./components/HomeView.js";
 import { ProgressView } from "./components/ProgressView.js";
 import { ResultPlayer } from "./components/ResultPlayer.js";
 import { ScheduleView } from "./components/ScheduleView.js";
@@ -23,7 +24,7 @@ const POLL_INTERVAL_MS = 2000;
 
 function FilmIcon() {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-5 w-5">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-5 w-5" aria-hidden="true">
       <rect x="3" y="4" width="18" height="16" rx="2" />
       <path d="M3 9h18M3 15h18M8 4v16M16 4v16" />
     </svg>
@@ -32,7 +33,7 @@ function FilmIcon() {
 
 function ClockIcon() {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-5 w-5">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-5 w-5" aria-hidden="true">
       <circle cx="12" cy="12" r="9" />
       <path d="M12 7v5l3.5 2" />
     </svg>
@@ -41,7 +42,7 @@ function ClockIcon() {
 
 function GearIcon() {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-5 w-5">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-5 w-5" aria-hidden="true">
       <circle cx="12" cy="12" r="3" />
       <path d="M19.4 13a7.97 7.97 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a8 8 0 0 0-1.7-1L14.9 3h-4l-.4 2.9a8 8 0 0 0-1.7 1l-2.5-1-2 3.5L6.4 11a7.97 7.97 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1a8 8 0 0 0 1.7 1l.4 2.9h4l.4-2.9a8 8 0 0 0 1.7-1l2.5 1 2-3.5L19.4 13Z" />
     </svg>
@@ -85,15 +86,16 @@ export function App() {
   const [createError, setCreateError] = useState<string | null>(null);
   const [showSettings, setShowSettings] = useState(false);
   const [showSchedules, setShowSchedules] = useState(false);
+  const [showHome, setShowHome] = useState(true);
   const [credits, setCredits] = useState<Credits | null>(null);
 
-  function refreshCredits() {
+  const refreshCredits = useCallback(() => {
     getCredits()
       .then(setCredits)
       .catch(() => {
         // Widget de saldo é informativo — falha de rede pontual não deve travar o resto da tela.
       });
-  }
+  }, []);
 
   useEffect(() => {
     getFormConfig()
@@ -103,7 +105,7 @@ export function App() {
         else setConfigError(err instanceof Error ? err.message : String(err));
       });
     refreshCredits();
-  }, []);
+  }, [refreshCredits]);
 
   useEffect(() => {
     if (!jobId) return;
@@ -174,6 +176,7 @@ export function App() {
   function goHome() {
     setShowSettings(false);
     setShowSchedules(false);
+    setShowHome(true);
   }
 
   return (
@@ -234,8 +237,12 @@ export function App() {
               <p className="text-sm text-fg-secondary">Carregando...</p>
             )}
 
+            {config && !jobId && !showSettings && !showSchedules && showHome && (
+              <HomeView credits={credits} onStart={() => setShowHome(false)} />
+            )}
+
             {config && !jobId && (
-              <div className={`flex flex-col gap-3 ${showSettings || showSchedules ? "hidden" : ""}`}>
+              <div className={`flex flex-col gap-3 ${showSettings || showSchedules || showHome ? "hidden" : ""}`}>
                 <Wizard config={config} onSubmit={handleCreate} submitting={submitting} />
                 {createError && (
                   <p role="alert" className="text-center text-sm text-status-error">
