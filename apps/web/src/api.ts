@@ -71,6 +71,7 @@ export interface JobView {
   actualCost: CostBreakdown | null;
   error: string | null;
   output: string | null;
+  logTail: string[];
 }
 
 export interface ArchetypePreview {

@@ -1,5 +1,5 @@
-import { useState } from "react";
-import type { CostBreakdown, JobView } from "../api.js";
+import { useEffect, useState } from "react";
+import type { CostBreakdown, JobStatus, JobView } from "../api.js";
 
 const STAGE_LABELS: Record<string, string> = {
   queued: "Na fila",
@@ -13,6 +13,54 @@ const STAGE_LABELS: Record<string, string> = {
   failed: "Falhou",
   cancelled: "Cancelado",
 };
+
+/** Log/tips só fazem sentido enquanto o job está de fato avançando — nesses
+ * status o pipeline está pausado (aguardando decisão) ou já terminou, então
+ * as duas peças somem (decisão UX Architect + UI Designer, 2026-09-14): não
+ * dá pra parecer que o sistema "não percebeu" que parou/quebrou. */
+const ACTIVE_STATUSES: JobStatus[] = ["QUEUED", "RESEARCHING", "PLANNING", "REVIEWING", "GENERATING", "RENDERING"];
+
+const LOG_VISIBLE_LINES = 6;
+const TIP_ROTATE_MS = 7000;
+
+/** Destaca o prefixo "[estágio]" (recuado, fg-disabled) da mensagem em si —
+ * mesma linha de log, dois tons de contraste. */
+function LogLine({ text, emphasized }: { text: string; emphasized: boolean }) {
+  const match = text.match(/^(\[[^\]]+\]\s*)(.*)$/);
+  const prefix = match?.[1];
+  const rest = match ? match[2] : text;
+  return (
+    <p className={`truncate font-mono text-xs leading-relaxed ${emphasized ? "text-fg-secondary" : "text-fg-tertiary"}`}>
+      {prefix && <span className="text-fg-disabled">{prefix}</span>}
+      {rest}
+    </p>
+  );
+}
+
+/** Dicas genéricas sobre o produto — sem contextualizar por estágio de propósito
+ * (decisão UX Architect: ganho marginal frente ao custo de manter 2 listas
+ * sincronizadas com os enums de stage). Só entretém enquanto o job roda. */
+const TIPS = [
+  "Arquétipos definem paleta de cor, ritmo e estilo visual de uma vez só — dá pra ver o preview de cada um na etapa Roteiro antes de gerar.",
+  "Salvar um vídeo como template guarda toda a configuração (arquétipo, voz, legenda...) pra reaproveitar em produções futuras.",
+  "Sem preencher chaves de imagem/vídeo por IA (Google/Fal), o sistema usa banco de imagens prontas (Pexels/Pixabay) automaticamente.",
+  "O tier de qualidade \"Rascunho\" é mais rápido e mais barato — bom pra testar uma ideia antes de gerar a versão final.",
+  "Cada etapa (Imagem, Vídeo, Narração...) tem sua própria cadeia de fallback configurável em Configurações — dá pra ver a ordem exata de tentativa.",
+  "Agendamentos disparam um template numa cadência fixa (diária/semanal) sem precisar abrir o wizard de novo.",
+  "O botão \"Gerar automaticamente\" no Briefing cria um rascunho de narração a partir só do tema, em três tamanhos (compacto/equilibrado/verboso).",
+  "Legendas e narração são independentes — dá pra gerar um vídeo mudo com legenda sincronizada pelo tempo estimado do roteiro.",
+  "O custo estimado aparece antes de qualquer geração de mídia começar — só a etapa de roteiro (texto) roda antes da sua aprovação.",
+];
+
+function useRotatingTip(active: boolean): string | null {
+  const [index, setIndex] = useState(0);
+  useEffect(() => {
+    if (!active) return;
+    const interval = setInterval(() => setIndex((i) => (i + 1) % TIPS.length), TIP_ROTATE_MS);
+    return () => clearInterval(interval);
+  }, [active]);
+  return active ? TIPS[index]! : null;
+}
 
 /** Erros de provider (LLM/TTS) vêm crus — stack técnica, JSON de validação, URLs de doc.
  * Traduz os padrões mais comuns pra mensagem acionável; resto cai no fallback truncado. */
@@ -93,6 +141,9 @@ export interface ProgressViewProps {
 export function ProgressView({ job, onApprove, approving, approveError, onRetry, retrying }: ProgressViewProps) {
   const [decided, setDecided] = useState(false);
   const percent = Math.round(job.progress * 100);
+  const isActive = ACTIVE_STATUSES.includes(job.status);
+  const tip = useRotatingTip(isActive);
+  const logLines = job.logTail.slice(-LOG_VISIBLE_LINES);
 
   return (
     <div className="mx-auto flex max-w-xl flex-col gap-6">
@@ -109,6 +160,14 @@ export function ProgressView({ job, onApprove, approving, approveError, onRetry,
           />
         </div>
       </div>
+
+      {isActive && logLines.length > 0 && (
+        <div className="flex h-36 flex-col justify-end gap-0.5 overflow-hidden rounded-lg border border-border-subtle bg-surface-1 p-3">
+          {logLines.map((line, i) => (
+            <LogLine key={i} text={line} emphasized={i === logLines.length - 1} />
+          ))}
+        </div>
+      )}
 
       {job.status === "AWAITING_COST_APPROVAL" && job.estimatedCost && !decided && (
         <div className="flex flex-col gap-3 rounded-md border border-border-default bg-surface-1 p-4">
@@ -188,6 +247,15 @@ export function ProgressView({ job, onApprove, approving, approveError, onRetry,
         <div role="status" className="rounded-md border border-border-default bg-surface-1 p-4 text-sm text-fg-secondary">
           {job.error ?? "Job cancelado."}
         </div>
+      )}
+
+      {tip && (
+        <p key={tip} className="animate-tip-fade border-t border-border-subtle pt-3 text-sm italic text-fg-secondary">
+          <span aria-hidden className="mr-1.5 not-italic text-accent">
+            ✦
+          </span>
+          {tip}
+        </p>
       )}
     </div>
   );

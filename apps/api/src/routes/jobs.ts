@@ -17,6 +17,7 @@ import {
   type JobStatus,
 } from "@clickplay/providers";
 import { CAPTION_STYLES, PACING_TIERS } from "../config.js";
+import { appendJobLog, getJobLog } from "../job-log-buffer.js";
 
 const ASPECT_RATIOS = ["vertical", "horizontal", "square"] as const;
 
@@ -97,6 +98,7 @@ function jobToResponse(job: NonNullable<Awaited<ReturnType<typeof getJob>>>) {
     actualCost: job.actualCost,
     error: job.error,
     output: job.outputPath ? `/files/${job.productionId}/output/output.mp4` : null,
+    logTail: getJobLog(job.id),
     createdAt: job.createdAt,
     updatedAt: job.updatedAt,
   };
@@ -174,7 +176,10 @@ export function registerJobsRoutes(app: FastifyInstance, deps: JobsRouteDeps): v
 
     startJob(deps.db, job.id, deps.buildJobRunnerDeps(qualityTier, language, useOwnProviders, voiceGender), {
       approveCost: (estimate) => deps.gate.waitForApproval(job.id),
-      onLog: (message) => app.log.info({ jobId: job.id }, message),
+      onLog: (message) => {
+        appendJobLog(job.id, message);
+        app.log.info({ jobId: job.id }, message);
+      },
     });
 
     return reply.status(201).send({ id: job.id, productionId: production.id, status: job.status });
@@ -238,7 +243,10 @@ export function registerJobsRoutes(app: FastifyInstance, deps: JobsRouteDeps): v
       ),
       {
         approveCost: (estimate) => deps.gate.waitForApproval(job.id),
-        onLog: (message) => app.log.info({ jobId: job.id }, message),
+        onLog: (message) => {
+          appendJobLog(job.id, message);
+          app.log.info({ jobId: job.id }, message);
+        },
       },
     );
     if (!retried) {
