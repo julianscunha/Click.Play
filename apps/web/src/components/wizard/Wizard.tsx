@@ -66,6 +66,9 @@ const TRANSITIONS: { value: TransitionType; label: string }[] = [
   { value: "slide_right", label: "Deslizar p/ direita" },
   { value: "wipe", label: "Varredura (wipe)" },
   { value: "flip", label: "Virar (flip)" },
+  { value: "zoom", label: "Zoom" },
+  { value: "whip_pan", label: "Giro rápido (whip pan)" },
+  { value: "flash", label: "Flash" },
   { value: "none", label: "Corte seco" },
 ];
 

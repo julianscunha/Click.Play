@@ -7,7 +7,17 @@ import { z } from "zod";
  * música e legenda combinados na timeline.
  */
 
-export const TransitionType = z.enum(["none", "crossfade", "slide_left", "slide_right", "wipe", "flip"]);
+export const TransitionType = z.enum([
+  "none",
+  "crossfade",
+  "slide_left",
+  "slide_right",
+  "wipe",
+  "flip",
+  "zoom",
+  "whip_pan",
+  "flash",
+]);
 export type TransitionType = z.infer<typeof TransitionType>;
 
 export const CameraMotion = z.enum(["zoom_in", "zoom_out", "pan_right", "pan_left", "static"]);
@@ -97,6 +107,11 @@ export const Scene = z
     elements: z.array(VisualElement).min(1),
     scriptLine: z.string().min(1),
     transition: TransitionType.nullable(),
+    /** 1-2 palavras literais de scriptLine que merecem ênfase vocal/visual (TTS SSML +
+     * legenda) — string, não índice: LLM erra índice de palavra com frequência, mas
+     * replica string literal de forma confiável. Casamento por texto normalizado
+     * acontece downstream (packages/providers/src/pipeline/scene-timing.ts). */
+    emphasisWords: z.array(z.string()).max(2).optional(),
   })
   .refine(
     (scene) => scene.visualStrategy !== "ai_video" || scene.elements.some((e) => e.type === "ai_video_clip"),
@@ -113,13 +128,24 @@ export type Scene = z.infer<typeof Scene>;
  * 2 cenas consecutivas usando exclusivamente o mesmo tipo de elemento estático
  * (imagem/vídeo de banco), o que reproduziria o padrão "imagem → imagem → imagem".
  */
-export function violatesSlideshowRule(scenes: Scene[]): boolean {
-  const staticTypes = new Set(["ai_image", "stock_image", "stock_video"]);
-  const isStaticOnly = (scene: Scene) => scene.elements.length === 1 && staticTypes.has(scene.elements[0]!.type);
+const STATIC_MOTION_TYPES = new Set(["ai_image", "stock_image", "stock_video"]);
 
+/** true se a cena tem movimento de câmera real: um ai_video_clip (vídeo de verdade)
+ * OU pelo menos um elemento estático com `motion` setado e diferente de "static".
+ * Cobre tanto o caso antigo (1 elemento estático sem motion) quanto o caso de cena
+ * composta com 2+ elementos onde nenhum tem motion — antes escapava da regra por
+ * não ser "elements.length === 1". */
+function hasRealMotion(scene: Scene): boolean {
+  if (scene.elements.some((e) => e.type === "ai_video_clip")) return true;
+  return scene.elements.some(
+    (e) => STATIC_MOTION_TYPES.has(e.type) && "motion" in e && e.motion !== undefined && e.motion !== "static",
+  );
+}
+
+export function violatesSlideshowRule(scenes: Scene[]): boolean {
   let streak = 0;
   for (const scene of scenes) {
-    streak = isStaticOnly(scene) ? streak + 1 : 0;
+    streak = hasRealMotion(scene) ? 0 : streak + 1;
     if (streak > 2) return true;
   }
   return false;

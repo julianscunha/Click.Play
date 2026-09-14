@@ -123,7 +123,16 @@ export interface CreateJobInput {
   outro?: IntroOutroConfig;
 }
 
-export type TransitionType = "none" | "crossfade" | "slide_left" | "slide_right" | "wipe" | "flip";
+export type TransitionType =
+  | "none"
+  | "crossfade"
+  | "slide_left"
+  | "slide_right"
+  | "wipe"
+  | "flip"
+  | "zoom"
+  | "whip_pan"
+  | "flash";
 
 export interface IntroOutroConfig {
   mode: "generated" | "upload";

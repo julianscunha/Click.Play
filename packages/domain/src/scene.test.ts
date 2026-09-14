@@ -46,6 +46,36 @@ describe("violatesSlideshowRule", () => {
     });
     expect(violatesSlideshowRule([composed, composed, composed])).toBe(false);
   });
+
+  it("flags composed scenes with no ai_video_clip and no motion set on the static element", () => {
+    const composedNoMotion = Scene.parse({
+      id: "1",
+      durationSeconds: 8,
+      visualStrategy: "hybrid",
+      elements: [
+        { type: "ai_image", prompt: "rocket launch" },
+        { type: "animated_text", text: "1969" },
+      ],
+      scriptLine: "line",
+      transition: null,
+    });
+    expect(violatesSlideshowRule([composedNoMotion, composedNoMotion, composedNoMotion])).toBe(true);
+  });
+
+  it("does not flag composed scenes when the static element has a non-static motion", () => {
+    const composedWithMotion = Scene.parse({
+      id: "1",
+      durationSeconds: 8,
+      visualStrategy: "hybrid",
+      elements: [
+        { type: "ai_image", prompt: "rocket launch", motion: "zoom_in" },
+        { type: "animated_text", text: "1969" },
+      ],
+      scriptLine: "line",
+      transition: null,
+    });
+    expect(violatesSlideshowRule([composedWithMotion, composedWithMotion, composedWithMotion])).toBe(false);
+  });
 });
 
 describe("minAiVideoScenes", () => {
