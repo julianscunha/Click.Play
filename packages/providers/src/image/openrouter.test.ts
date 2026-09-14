@@ -26,7 +26,7 @@ describe("OpenRouterImage", () => {
   it("retries on a transient error (e.g. 429 rate limit) and succeeds", async () => {
     const fetchMock = vi
       .fn()
-      .mockResolvedValueOnce({ ok: false, status: 429, text: async () => "rate limited" })
+      .mockResolvedValueOnce({ ok: false, status: 429, headers: new Headers(), text: async () => "rate limited" })
       .mockResolvedValueOnce({
         ok: true,
         json: async () => ({ data: [{ b64_json: Buffer.from("fake-image").toString("base64") }] }),
@@ -43,12 +43,30 @@ describe("OpenRouterImage", () => {
   it("gives up and throws after exhausting retries", async () => {
     vi.stubGlobal(
       "fetch",
-      vi.fn().mockResolvedValue({ ok: false, status: 429, text: async () => "quota exceeded" }),
+      vi.fn().mockResolvedValue({ ok: false, status: 429, headers: new Headers(), text: async () => "quota exceeded" }),
     );
 
     const provider = new OpenRouterImage(undefined, "key");
     await expect(provider.generate("a cat")).rejects.toThrow("429");
   }, 15_000);
+
+  it("waits the Retry-After header value instead of the fixed backoff", async () => {
+    vi.useFakeTimers();
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValueOnce({ ok: false, status: 429, headers: new Headers({ "retry-after": "9" }), text: async () => "rate limited" })
+      .mockResolvedValueOnce({ ok: true, json: async () => ({ data: [{ b64_json: Buffer.from("ok").toString("base64") }] }) });
+    vi.stubGlobal("fetch", fetchMock);
+
+    const promise = new OpenRouterImage(undefined, "key").generate("a cat");
+    await vi.advanceTimersByTimeAsync(8999);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    await vi.advanceTimersByTimeAsync(1);
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+
+    await expect(promise).resolves.toBeInstanceOf(Buffer);
+    vi.useRealTimers();
+  });
 
   it("throws when no image data is returned", async () => {
     vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ ok: true, json: async () => ({ data: [{}] }) }));

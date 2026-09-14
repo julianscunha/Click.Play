@@ -1,4 +1,4 @@
-import { withRetry } from "../http/retry.js";
+import { RateLimitedError, retryDelayMsFromHeaders, withRetry } from "../http/retry.js";
 import { pcmToMp3 } from "./pcm-to-mp3.js";
 import { estimateWordTimestamps } from "./gemini.js";
 import type { TTSProvider, TTSResult } from "./types.js";
@@ -52,7 +52,7 @@ export class OpenRouterTTS implements TTSProvider {
     });
 
     if (!res.ok) {
-      throw new Error(`OpenRouter TTS failed (${res.status}): ${await res.text()}`);
+      throw new RateLimitedError(`OpenRouter TTS failed (${res.status}): ${await res.text()}`, retryDelayMsFromHeaders(res.headers));
     }
 
     const pcm = Buffer.from(await res.arrayBuffer());

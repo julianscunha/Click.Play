@@ -19,6 +19,7 @@ export * from "./video/types.js";
 export * from "./video/gemini.js";
 export * from "./video/fal.js";
 export * from "./video/openrouter.js";
+export * from "./video/fallback.js";
 export * from "./image/types.js";
 export * from "./image/gemini.js";
 export * from "./image/openrouter.js";

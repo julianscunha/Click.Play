@@ -1,7 +1,7 @@
 import * as fs from "node:fs";
 import * as os from "node:os";
 import * as path from "node:path";
-import { withRetry } from "../http/retry.js";
+import { RateLimitedError, retryDelayMsFromHeaders, withRetry } from "../http/retry.js";
 import type { VideoGenerationProvider, VideoResult } from "./types.js";
 
 const POLL_INTERVAL_MS = 5_000;
@@ -123,7 +123,7 @@ export class OpenRouterVideo implements VideoGenerationProvider {
       body: body ? JSON.stringify(body) : undefined,
     });
     if (!res.ok) {
-      throw new Error(`OpenRouter video request failed (${res.status}): ${await res.text()}`);
+      throw new RateLimitedError(`OpenRouter video request failed (${res.status}): ${await res.text()}`, retryDelayMsFromHeaders(res.headers));
     }
     return res;
   }

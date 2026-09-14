@@ -6,6 +6,7 @@ import {
   FallbackMusic,
   FallbackTTS,
   FallbackImage,
+  FallbackVideo,
   GeminiImage,
   GeminiTTS,
   GeminiVideo,
@@ -82,12 +83,24 @@ function buildVideoProviders(
 ): Partial<Record<"gemini" | "fal" | "openrouter", VideoGenerationProvider>> {
   const googleKey = resolveKey("GOOGLE_API_KEY", useOwnProviders);
   const falKey = resolveKey("FAL_API_KEY", useOwnProviders);
-  const providers: Partial<Record<"gemini" | "fal" | "openrouter", VideoGenerationProvider>> = {
-    openrouter: withProviderTimeout(
-      new OpenRouterVideo(process.env.VIDEO_MODEL || MODEL_BY_TIER[tier].video, resolveKey("OPENROUTER_API_KEY", useOwnProviders)),
-      "video:openrouter",
+  const openRouterKey = resolveKey("OPENROUTER_API_KEY", useOwnProviders);
+  let openrouterVideo: VideoGenerationProvider = withProviderTimeout(
+    new OpenRouterVideo(process.env.VIDEO_MODEL || MODEL_BY_TIER[tier].video, openRouterKey),
+    "video:openrouter",
+    TIMEOUT_MS.video,
+  );
+  // 2º modelo OpenRouter (VIDEO_MODEL_FALLBACK) antes do fallback cross-provider
+  // (Gemini/Fal) — mesmo pedido do usuário aplicado em Imagem/Narração.
+  if (process.env.VIDEO_MODEL_FALLBACK) {
+    const secondary = withProviderTimeout(
+      new OpenRouterVideo(process.env.VIDEO_MODEL_FALLBACK, openRouterKey),
+      "video:openrouter-fallback",
       TIMEOUT_MS.video,
-    ),
+    );
+    openrouterVideo = new FallbackVideo(openrouterVideo, secondary);
+  }
+  const providers: Partial<Record<"gemini" | "fal" | "openrouter", VideoGenerationProvider>> = {
+    openrouter: openrouterVideo,
   };
   if (googleKey)
     providers.gemini = withProviderTimeout(new GeminiVideo(undefined, googleKey), "video:gemini", TIMEOUT_MS.video);
@@ -102,20 +115,31 @@ function buildVideoProviders(
  * erro pro primeiro uso real (job), em vez de derrubar o boot do servidor. */
 function buildImageProvider(tier: QualityTier, useOwnProviders: boolean): ImageProvider {
   try {
-    const primary = withProviderTimeout(
-      new OpenRouterImage(process.env.IMAGE_MODEL || MODEL_BY_TIER[tier].image, resolveKey("OPENROUTER_API_KEY", useOwnProviders)),
+    const openRouterKey = resolveKey("OPENROUTER_API_KEY", useOwnProviders);
+    let openrouterImage: ImageProvider = withProviderTimeout(
+      new OpenRouterImage(process.env.IMAGE_MODEL || MODEL_BY_TIER[tier].image, openRouterKey),
       "image:openrouter",
       TIMEOUT_MS.image,
     );
+    // 2º modelo OpenRouter (IMAGE_MODEL_FALLBACK) antes do fallback cross-provider (Gemini direto).
+    if (process.env.IMAGE_MODEL_FALLBACK) {
+      const secondary = withProviderTimeout(
+        new OpenRouterImage(process.env.IMAGE_MODEL_FALLBACK, openRouterKey),
+        "image:openrouter-fallback",
+        TIMEOUT_MS.image,
+      );
+      openrouterImage = new FallbackImage(openrouterImage, secondary);
+    }
+
     const googleKey = resolveKey("GOOGLE_API_KEY", useOwnProviders);
-    if (!googleKey) return primary;
+    if (!googleKey) return openrouterImage;
 
     const geminiFallback = withProviderTimeout(
       new GeminiImage(undefined, googleKey),
       "image:gemini",
       TIMEOUT_MS.image,
     );
-    return new FallbackImage(primary, geminiFallback);
+    return new FallbackImage(openrouterImage, geminiFallback);
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     return {
@@ -155,7 +179,8 @@ function buildTTS(
   voiceGender: "female" | "male" = "female",
 ): TTSProvider {
   const primary = withProviderTimeout(new EdgeTTS(resolveEdgeVoice(language, voiceGender)), "tts:edge", TIMEOUT_MS.tts);
-  const openRouterFallback = withProviderTimeout(
+  const openRouterKey = resolveKey("OPENROUTER_API_KEY", useOwnProviders);
+  let openRouterFallback: TTSProvider = withProviderTimeout(
     new OpenRouterTTS(
       process.env.TTS_MODEL_FALLBACK || MODEL_BY_TIER[tier].tts,
       // Achado em teste manual real: modelo custom (ex. fish-audio) pode EXIGIR
@@ -163,11 +188,20 @@ function buildTTS(
       // omitir como a maioria — sem forma de adivinhar o catálogo de terceiros,
       // então isso fica configurável (TTS_MODEL_FALLBACK_VOICE).
       process.env.TTS_MODEL_FALLBACK_VOICE || undefined,
-      resolveKey("OPENROUTER_API_KEY", useOwnProviders),
+      openRouterKey,
     ),
     "tts:openrouter",
     TIMEOUT_MS.tts,
   );
+  // 2º modelo OpenRouter (TTS_MODEL_FALLBACK_2) antes do fallback cross-provider (Gemini TTS direto).
+  if (process.env.TTS_MODEL_FALLBACK_2) {
+    const secondary = withProviderTimeout(
+      new OpenRouterTTS(process.env.TTS_MODEL_FALLBACK_2, process.env.TTS_MODEL_FALLBACK_2_VOICE || undefined, openRouterKey),
+      "tts:openrouter-fallback-2",
+      TIMEOUT_MS.tts,
+    );
+    openRouterFallback = new FallbackTTS(openRouterFallback, secondary);
+  }
 
   const googleKey = resolveKey("GOOGLE_API_KEY", useOwnProviders);
   if (!googleKey) return new FallbackTTS(primary, openRouterFallback);

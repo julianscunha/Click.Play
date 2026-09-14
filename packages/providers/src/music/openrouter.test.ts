@@ -46,7 +46,7 @@ describe("OpenRouterMusic", () => {
   it("throws when the API responds with an error status", async () => {
     vi.stubGlobal(
       "fetch",
-      vi.fn().mockResolvedValue({ ok: false, status: 429, body: null, text: async () => "quota exceeded" }),
+      vi.fn().mockResolvedValue({ ok: false, status: 429, body: null, headers: new Headers(), text: async () => "quota exceeded" }),
     );
 
     const music = new OpenRouterMusic(undefined, "key");

@@ -180,6 +180,31 @@ function Step({ index, total, children }: { index: number; total: number; childr
   );
 }
 
+/** Campo de voz condicional (só aparece pra modelo TTS customizado) — usado 2x
+ * (TTS_MODEL_FALLBACK_VOICE e TTS_MODEL_FALLBACK_2_VOICE), por isso extraído. */
+function CustomVoiceField({ id, value, onChange }: { id: string; value: string; onChange(value: string): void }) {
+  return (
+    <div className="mt-3 ml-1 flex flex-col gap-1.5 border-l-2 border-border-subtle pl-4">
+      <label htmlFor={id} className="text-xs text-fg-tertiary">
+        Voz (pode ser obrigatória pra modelo customizado)
+      </label>
+      <input
+        id={id}
+        type="text"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder="Ex: flux-bree-en"
+        className="rounded-md border border-border-default bg-surface-2 px-3 py-2 text-fg-primary placeholder:text-fg-tertiary focus:border-border-strong focus:outline-none focus:ring-2 focus:ring-accent-wash"
+      />
+      <p className="text-xs text-fg-tertiary">
+        Achado em teste manual real: um modelo custom pode exigir voz explícita ("An explicit voice is required")
+        com nome específico do catálogo dele (ex. flux-bree-en) — cada provider tem o seu. Vazio funciona pra
+        maioria (o provider escolhe a própria voz padrão).
+      </p>
+    </div>
+  );
+}
+
 function CategoryHeader({ title, description, chained }: { title: string; description: string; chained: boolean }) {
   return (
     <div className="mb-6">
@@ -269,9 +294,13 @@ const MODEL_FIELDS = [
   "OPENROUTER_MODEL",
   "OPENROUTER_MODEL_FALLBACK",
   "IMAGE_MODEL",
+  "IMAGE_MODEL_FALLBACK",
   "VIDEO_MODEL",
+  "VIDEO_MODEL_FALLBACK",
   "TTS_MODEL_FALLBACK",
   "TTS_MODEL_FALLBACK_VOICE",
+  "TTS_MODEL_FALLBACK_2",
+  "TTS_MODEL_FALLBACK_2_VOICE",
   "MUSIC_PROVIDER",
 ] as const;
 
@@ -338,9 +367,15 @@ export function SettingsView({ onClose }: SettingsViewProps) {
           OPENROUTER_MODEL_FALLBACK:
             s.OPENROUTER_MODEL_FALLBACK !== "" && !config.recommendedModels.includes(s.OPENROUTER_MODEL_FALLBACK),
           IMAGE_MODEL: s.IMAGE_MODEL !== "" && !config.recommendedImageModels.includes(s.IMAGE_MODEL),
+          IMAGE_MODEL_FALLBACK:
+            s.IMAGE_MODEL_FALLBACK !== "" && !config.recommendedImageModels.includes(s.IMAGE_MODEL_FALLBACK),
           VIDEO_MODEL: s.VIDEO_MODEL !== "" && !config.recommendedVideoModels.includes(s.VIDEO_MODEL),
+          VIDEO_MODEL_FALLBACK:
+            s.VIDEO_MODEL_FALLBACK !== "" && !config.recommendedVideoModels.includes(s.VIDEO_MODEL_FALLBACK),
           TTS_MODEL_FALLBACK:
             s.TTS_MODEL_FALLBACK !== "" && !config.recommendedTtsFallbackModels.includes(s.TTS_MODEL_FALLBACK),
+          TTS_MODEL_FALLBACK_2:
+            s.TTS_MODEL_FALLBACK_2 !== "" && !config.recommendedTtsFallbackModels.includes(s.TTS_MODEL_FALLBACK_2),
         });
       })
       .catch((err) => setError(err instanceof Error ? err.message : String(err)));
@@ -481,7 +516,7 @@ export function SettingsView({ onClose }: SettingsViewProps) {
         {activeCategory === "imagem" && (
           <div>
             <CategoryHeader title="Imagem" description="Gera as imagens de fundo de cada cena a partir do roteiro." chained />
-            <Step index={1} total={2}>
+            <Step index={1} total={3}>
               <div className="flex items-center gap-2">
                 <label htmlFor="IMAGE_MODEL" className="text-sm font-medium text-fg-primary">
                   Modelo
@@ -502,7 +537,31 @@ export function SettingsView({ onClose }: SettingsViewProps) {
               </div>
               <OpenRouterKeyNote onGoToRoteiro={goTo("roteiro")} />
             </Step>
-            <Step index={2} total={2}>
+            <Step index={2} total={3}>
+              <div className="flex items-center gap-2">
+                <label htmlFor="IMAGE_MODEL_FALLBACK" className="text-sm font-medium text-fg-primary">
+                  Modelo
+                </label>
+                <Badge kind="optional">opcional</Badge>
+              </div>
+              <div className="mt-1.5">
+                <ModelSelect
+                  id="IMAGE_MODEL_FALLBACK"
+                  value={inputs.IMAGE_MODEL_FALLBACK ?? ""}
+                  options={recommendedImageModels}
+                  allowEmpty
+                  custom={customFlags.IMAGE_MODEL_FALLBACK ?? false}
+                  onCustomChange={(c) => setCustom("IMAGE_MODEL_FALLBACK", c)}
+                  onChange={(v) => setField("IMAGE_MODEL_FALLBACK", v)}
+                />
+              </div>
+              <p className="mt-1.5 text-xs text-fg-tertiary">
+                2º modelo via OpenRouter (mesma chave) — tentado antes do Gemini direto. Útil se o modelo primário
+                bater rate limit sozinho (ex. variante ":free", teto de 20 req/min na OpenRouter).
+              </p>
+              <OpenRouterKeyNote onGoToRoteiro={goTo("roteiro")} />
+            </Step>
+            <Step index={3} total={3}>
               <div className="flex items-center gap-2">
                 <p className="text-sm font-medium text-fg-primary">Gemini direto (Google AI Studio)</p>
                 <Badge kind="optional">automático</Badge>
@@ -533,7 +592,7 @@ export function SettingsView({ onClose }: SettingsViewProps) {
               description='Gera clipes de vídeo por IA quando a cena pede movimento real. Não roda em todo vídeo — só quando o Roteiro decide usar.'
               chained
             />
-            <Step index={1} total={3}>
+            <Step index={1} total={4}>
               <div className="flex items-center gap-2">
                 <label htmlFor="VIDEO_MODEL" className="text-sm font-medium text-fg-primary">
                   Modelo
@@ -554,7 +613,30 @@ export function SettingsView({ onClose }: SettingsViewProps) {
               </div>
               <OpenRouterKeyNote onGoToRoteiro={goTo("roteiro")} />
             </Step>
-            <Step index={2} total={3}>
+            <Step index={2} total={4}>
+              <div className="flex items-center gap-2">
+                <label htmlFor="VIDEO_MODEL_FALLBACK" className="text-sm font-medium text-fg-primary">
+                  Modelo
+                </label>
+                <Badge kind="optional">opcional</Badge>
+              </div>
+              <div className="mt-1.5">
+                <ModelSelect
+                  id="VIDEO_MODEL_FALLBACK"
+                  value={inputs.VIDEO_MODEL_FALLBACK ?? ""}
+                  options={recommendedVideoModels}
+                  allowEmpty
+                  custom={customFlags.VIDEO_MODEL_FALLBACK ?? false}
+                  onCustomChange={(c) => setCustom("VIDEO_MODEL_FALLBACK", c)}
+                  onChange={(v) => setField("VIDEO_MODEL_FALLBACK", v)}
+                />
+              </div>
+              <p className="mt-1.5 text-xs text-fg-tertiary">
+                2º modelo via OpenRouter (mesma chave) — tentado antes do Gemini direto.
+              </p>
+              <OpenRouterKeyNote onGoToRoteiro={goTo("roteiro")} />
+            </Step>
+            <Step index={3} total={4}>
               <div className="flex items-center gap-2">
                 <p className="text-sm font-medium text-fg-primary">Gemini direto (Google AI Studio)</p>
                 <Badge kind="optional">automático</Badge>
@@ -571,7 +653,7 @@ export function SettingsView({ onClose }: SettingsViewProps) {
               />
               <WarningBanner>Requer billing ativado na conta Google Cloud — sem isso, a chave falha com "quota exceeded".</WarningBanner>
             </Step>
-            <Step index={3} total={3}>
+            <Step index={4} total={4}>
               <div className="flex items-center gap-2">
                 <p className="text-sm font-medium text-fg-primary">Fal.ai (Kling)</p>
                 <Badge kind="optional">automático</Badge>
@@ -592,7 +674,7 @@ export function SettingsView({ onClose }: SettingsViewProps) {
         {activeCategory === "narracao" && (
           <div>
             <CategoryHeader title="Narração" description="Transforma o roteiro em áudio narrado." chained />
-            <Step index={1} total={3}>
+            <Step index={1} total={4}>
               <div className="flex items-center gap-2">
                 <p className="text-sm font-medium text-fg-primary">Edge TTS</p>
                 <Badge kind="free">grátis, sem chave</Badge>
@@ -602,7 +684,7 @@ export function SettingsView({ onClose }: SettingsViewProps) {
                 quando isso acontece, o fallback abaixo assume sozinho.
               </p>
             </Step>
-            <Step index={2} total={3}>
+            <Step index={2} total={4}>
               <div className="flex items-center gap-2">
                 <label htmlFor="TTS_MODEL_FALLBACK" className="text-sm font-medium text-fg-primary">
                   Modelo
@@ -625,28 +707,45 @@ export function SettingsView({ onClose }: SettingsViewProps) {
                 Roda via OpenRouter. Os sugeridos são da família Gemini (voz "Kore" automática).
               </p>
               {customFlags.TTS_MODEL_FALLBACK && (
-                <div className="mt-3 ml-1 flex flex-col gap-1.5 border-l-2 border-border-subtle pl-4">
-                  <label htmlFor="TTS_MODEL_FALLBACK_VOICE" className="text-xs text-fg-tertiary">
-                    Voz (pode ser obrigatória pra modelo customizado)
-                  </label>
-                  <input
-                    id="TTS_MODEL_FALLBACK_VOICE"
-                    type="text"
-                    value={inputs.TTS_MODEL_FALLBACK_VOICE ?? ""}
-                    onChange={(e) => setField("TTS_MODEL_FALLBACK_VOICE", e.target.value)}
-                    placeholder="Ex: flux-bree-en"
-                    className="rounded-md border border-border-default bg-surface-2 px-3 py-2 text-fg-primary placeholder:text-fg-tertiary focus:border-border-strong focus:outline-none focus:ring-2 focus:ring-accent-wash"
-                  />
-                  <p className="text-xs text-fg-tertiary">
-                    Achado em teste manual real: um modelo custom pode exigir voz explícita ("An explicit voice is
-                    required") com nome específico do catálogo dele (ex. flux-bree-en) — cada provider tem o seu.
-                    Vazio funciona pra maioria (o provider escolhe a própria voz padrão).
-                  </p>
-                </div>
+                <CustomVoiceField
+                  id="TTS_MODEL_FALLBACK_VOICE"
+                  value={inputs.TTS_MODEL_FALLBACK_VOICE ?? ""}
+                  onChange={(v) => setField("TTS_MODEL_FALLBACK_VOICE", v)}
+                />
               )}
               <OpenRouterKeyNote onGoToRoteiro={goTo("roteiro")} />
             </Step>
-            <Step index={3} total={3}>
+            <Step index={3} total={4}>
+              <div className="flex items-center gap-2">
+                <label htmlFor="TTS_MODEL_FALLBACK_2" className="text-sm font-medium text-fg-primary">
+                  Modelo
+                </label>
+                <Badge kind="optional">opcional</Badge>
+              </div>
+              <div className="mt-1.5">
+                <ModelSelect
+                  id="TTS_MODEL_FALLBACK_2"
+                  value={inputs.TTS_MODEL_FALLBACK_2 ?? ""}
+                  options={recommendedTtsFallbackModels}
+                  allowEmpty
+                  custom={customFlags.TTS_MODEL_FALLBACK_2 ?? false}
+                  onCustomChange={(c) => setCustom("TTS_MODEL_FALLBACK_2", c)}
+                  onChange={(v) => setField("TTS_MODEL_FALLBACK_2", v)}
+                />
+              </div>
+              <p className="mt-1.5 text-xs text-fg-tertiary">
+                2º modelo via OpenRouter (mesma chave) — tentado antes do Gemini TTS direto.
+              </p>
+              {customFlags.TTS_MODEL_FALLBACK_2 && (
+                <CustomVoiceField
+                  id="TTS_MODEL_FALLBACK_2_VOICE"
+                  value={inputs.TTS_MODEL_FALLBACK_2_VOICE ?? ""}
+                  onChange={(v) => setField("TTS_MODEL_FALLBACK_2_VOICE", v)}
+                />
+              )}
+              <OpenRouterKeyNote onGoToRoteiro={goTo("roteiro")} />
+            </Step>
+            <Step index={4} total={4}>
               <div className="flex items-center gap-2">
                 <p className="text-sm font-medium text-fg-primary">Gemini TTS direto</p>
                 <Badge kind="optional">automático</Badge>

@@ -25,7 +25,7 @@ describe("OpenRouterTTS", () => {
   it("throws when the API responds with an error status", async () => {
     vi.stubGlobal(
       "fetch",
-      vi.fn().mockResolvedValue({ ok: false, status: 400, text: async () => "bad request" }),
+      vi.fn().mockResolvedValue({ ok: false, status: 400, headers: new Headers(), text: async () => "bad request" }),
     );
 
     const tts = new OpenRouterTTS(undefined, undefined, "key");

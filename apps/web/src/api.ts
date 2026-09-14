@@ -317,9 +317,13 @@ export interface Settings {
   OPENROUTER_MODEL: string;
   OPENROUTER_MODEL_FALLBACK: string;
   IMAGE_MODEL: string;
+  IMAGE_MODEL_FALLBACK: string;
   VIDEO_MODEL: string;
+  VIDEO_MODEL_FALLBACK: string;
   TTS_MODEL_FALLBACK: string;
   TTS_MODEL_FALLBACK_VOICE: string;
+  TTS_MODEL_FALLBACK_2: string;
+  TTS_MODEL_FALLBACK_2_VOICE: string;
   MUSIC_PROVIDER: string;
   GOOGLE_API_KEY: SecretField;
   GOOGLE_API_KEY_SYSTEM: SecretField;

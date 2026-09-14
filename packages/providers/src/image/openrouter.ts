@@ -1,4 +1,4 @@
-import { withRetry } from "../http/retry.js";
+import { RateLimitedError, retryDelayMsFromHeaders, withRetry } from "../http/retry.js";
 import type { ImageProvider } from "./types.js";
 
 /**
@@ -37,7 +37,7 @@ export class OpenRouterImage implements ImageProvider {
     });
 
     if (!res.ok) {
-      throw new Error(`OpenRouter image generation failed (${res.status}): ${await res.text()}`);
+      throw new RateLimitedError(`OpenRouter image generation failed (${res.status}): ${await res.text()}`, retryDelayMsFromHeaders(res.headers));
     }
 
     const body = (await res.json()) as { data?: Array<{ b64_json?: string }> };

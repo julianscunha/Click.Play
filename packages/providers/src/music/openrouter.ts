@@ -1,7 +1,7 @@
 import * as fsp from "node:fs/promises";
 import * as os from "node:os";
 import * as path from "node:path";
-import { withRetry } from "../http/retry.js";
+import { RateLimitedError, retryDelayMsFromHeaders, withRetry } from "../http/retry.js";
 import type { MusicMood, MusicProvider, MusicResult } from "./types.js";
 
 /**
@@ -47,7 +47,7 @@ export class OpenRouterMusic implements MusicProvider {
     });
 
     if (!res.ok || !res.body) {
-      throw new Error(`OpenRouter music generation failed (${res.status}): ${await res.text()}`);
+      throw new RateLimitedError(`OpenRouter music generation failed (${res.status}): ${await res.text()}`, retryDelayMsFromHeaders(res.headers));
     }
 
     const audioChunks: string[] = [];
